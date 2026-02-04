@@ -20,22 +20,68 @@ namespace BipedalLocomotion
 
 static const std::string treeDelim = "::";
 
+/**
+ * @brief Extract metadata from a HumanState message and populate a VectorsCollectionMetadata object.
+ * 
+ * @param message The input HumanState message containing the metadata.
+ * @param prefix A string prefix to be added to the metadata keys.
+ * @param metadata The VectorsCollectionMetadata object to populate with extracted metadata.
+ */
 void extractMetadata(const trintrin::msgs::HumanState& message,
                      const std::string& prefix,
                      BipedalLocomotion::YarpUtilities::VectorsCollectionMetadata& metadata);
+
+/**
+ * @brief Extract metadata from a WearableTargets message and populate a VectorsCollectionMetadata object.
+ * 
+ * @param message The input WearableTargets message containing the metadata.
+ * @param prefix A string prefix to be added to the metadata keys.
+ * @param metadata The VectorsCollectionMetadata object to populate with extracted metadata.
+ */
 void extractMetadata(const trintrin::msgs::WearableTargets& message,
                      const std::string& prefix,
                      BipedalLocomotion::YarpUtilities::VectorsCollectionMetadata& metadata);
+
+/**
+ * @brief Extract metadata from a WearableData message and populate a VectorsCollectionMetadata object.
+ * 
+ * @param message The input WearableData message containing the metadata.
+ * @param prefix A string prefix to be added to the metadata keys.
+ * @param metadata The VectorsCollectionMetadata object to populate with extracted metadata.
+ */
 void extractMetadata(const trintrin::msgs::WearableData& message,
                      const std::string& prefix,
                      BipedalLocomotion::YarpUtilities::VectorsCollectionMetadata& metadata);
 
+/**
+ * @brief Convert a HumanState message to a VectorsCollection object.
+ * 
+ * @param message The input HumanState message to be converted.
+ * @param prefix A string prefix to be added to the collection keys.
+ * @param collection The VectorsCollection object to populate with the converted data.
+ */
 void convertToVectorsCollection(const trintrin::msgs::HumanState& message,
                                 const std::string& prefix,
                                 BipedalLocomotion::YarpUtilities::VectorsCollection& collection);
+
+/**
+ * @brief Convert a WearableTargets message to a VectorsCollection object.
+ * 
+ * @param message The input WearableTargets message to be converted.
+ * @param prefix A string prefix to be added to the collection keys.
+ * @param collection The VectorsCollection object to populate with the converted data.
+ */
 void convertToVectorsCollection(const trintrin::msgs::WearableTargets& message,
                                 const std::string& prefix,
                                 BipedalLocomotion::YarpUtilities::VectorsCollection& collection);
+
+/**
+ * @brief Convert a WearableData message to a VectorsCollection object.
+ * 
+ * @param message The input WearableData message to be converted.
+ * @param prefix A string prefix to be added to the collection keys.
+ * @param collection The VectorsCollection object to populate with the converted data.
+ */
 void convertToVectorsCollection(const trintrin::msgs::WearableData& message,
                                 const std::string& prefix,
                                 BipedalLocomotion::YarpUtilities::VectorsCollection& collection);
