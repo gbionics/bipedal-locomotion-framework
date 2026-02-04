@@ -428,3 +428,12 @@ void BipedalLocomotion::convertToVectorsCollection(
                                                            vsjoint.data.acceleration.z};
     }
 }
+
+Eigen::Vector3d BipedalLocomotion::trintrinVectorXYZToVector3(const trintrin::msgs::VectorXYZ& vec)
+{
+    Eigen::Vector3d eigenVec;
+    eigenVec(0) = vec.x;
+    eigenVec(1) = vec.y;
+    eigenVec(2) = vec.z;
+    return eigenVec;
+}

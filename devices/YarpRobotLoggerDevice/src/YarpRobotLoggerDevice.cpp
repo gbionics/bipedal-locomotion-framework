@@ -82,15 +82,6 @@ void findAndReplaceAll(std::string& data,
     }
 }
 
-Eigen::Vector3d trintrinVectorXYZToVector3(const trintrin::msgs::VectorXYZ& vec)
-{
-    Eigen::Vector3d eigenVec;
-    eigenVec(0) = vec.x;
-    eigenVec(1) = vec.y;
-    eigenVec(2) = vec.z;
-    return eigenVec;
-}
-
 bool YarpRobotLoggerDevice::VectorsCollectionSignal::connect()
 {
     return client.connect();

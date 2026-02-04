@@ -13,6 +13,8 @@
 #include <trintrin/msgs/WearableTargets.h>
 #include <trintrin/msgs/WearableData.h>
 
+#include <Eigen/Core>
+
 #include <string>
 
 namespace BipedalLocomotion
@@ -85,6 +87,14 @@ void convertToVectorsCollection(const trintrin::msgs::WearableTargets& message,
 void convertToVectorsCollection(const trintrin::msgs::WearableData& message,
                                 const std::string& prefix,
                                 BipedalLocomotion::YarpUtilities::VectorsCollection& collection);
+
+/**
+ * @brief Convert a trintrin VectorXYZ message to an Eigen::Vector3d.
+ *
+ * @param vec The input VectorXYZ message to be converted.
+ * @return Eigen::Vector3d The converted 3D vector.
+ */
+Eigen::Vector3d trintrinVectorXYZToVector3(const trintrin::msgs::VectorXYZ& vec);
 
 }
 
