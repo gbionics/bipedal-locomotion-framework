@@ -29,6 +29,10 @@
 
 #include <robometry/BufferManager.h>
 
+#include <trintrin/msgs/HumanState.h>
+#include <trintrin/msgs/WearableTargets.h>
+#include <trintrin/msgs/WearableData.h>
+
 #include <BipedalLocomotion/ParametersHandler/IParametersHandler.h>
 #include <BipedalLocomotion/RobotInterface/YarpCameraBridge.h>
 #include <BipedalLocomotion/RobotInterface/YarpSensorBridge.h>
@@ -117,11 +121,23 @@ private:
         void disconnect();
     };
 
+    template <typename T> struct ExogenousSignalWithMetadata : ExogenousSignal<T>
+    {
+        BipedalLocomotion::YarpUtilities::VectorsCollectionMetadata metadata;
+        BipedalLocomotion::YarpUtilities::VectorsCollection convertedSignal;
+    };
+
     std::unordered_map<std::string, VectorsCollectionSignal> m_vectorsCollectionSignals;
     std::unordered_map<std::string, ExogenousSignal<yarp::sig::Vector>> m_vectorSignals;
     std::unordered_map<std::string, ExogenousSignal<yarp::os::Bottle>> m_stringSignals;
     std::unordered_map<std::string, ExogenousSignal<yarp::sig::ImageOf<yarp::sig::PixelRgb>>>
         m_imageSignals;
+    std::unordered_map<std::string, ExogenousSignalWithMetadata<trintrin::msgs::HumanState>>
+        m_humanStateSignals;
+    std::unordered_map<std::string, ExogenousSignalWithMetadata<trintrin::msgs::WearableTargets>>
+        m_wearableTargetsSignals;
+    std::unordered_map<std::string, ExogenousSignalWithMetadata<trintrin::msgs::WearableData>>
+        m_wearableDataSignals;
 
     std::atomic<bool> m_lookForNewExogenousSignalIsRunning{false};
     std::thread m_lookForNewExogenousSignalThread;
@@ -268,7 +284,6 @@ private:
     bool prepareRTStreaming();
 
     const std::string defaultFilePrefix = "robot_logger_device";
-    const std::string treeDelim = "::";
 
     const std::string robotRtRootName = "robot_realtime";
 

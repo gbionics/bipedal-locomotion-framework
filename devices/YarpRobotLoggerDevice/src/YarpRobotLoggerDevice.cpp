@@ -26,6 +26,7 @@
 #include <BipedalLocomotion/YarpTextLoggingUtilities.h>
 #include <BipedalLocomotion/YarpUtilities/Helper.h>
 #include <BipedalLocomotion/YarpUtilities/VectorsCollection.h>
+#include <BipedalLocomotion/MessageConversionUtilities.h>
 
 #include <Eigen/Core>
 
@@ -500,6 +501,38 @@ bool YarpRobotLoggerDevice::setupExogenousInputs(
     if (!prepareExogenousImageLogging())
     {
         log()->error("{} Unable to prepare the exogenous image logging.", logPrefix);
+        return false;
+    }
+
+    inputs.clear();
+    if (!ptr->getParameter("human_state_exogenous_inputs", inputs))
+    {
+        log()->warn("{} Unable to get the human state exogenous inputs. Assuming none.", logPrefix);
+    }
+    if (!openExogenousSignals(ptr, inputs, m_humanStateSignals))
+    {
+        return false;
+    }
+
+    inputs.clear();
+    if (!ptr->getParameter("wearable_targets_exogenous_inputs", inputs))
+    {
+        log()->warn("{} Unable to get the wearable targets exogenous inputs. Assuming none.",
+                    logPrefix);
+    }
+    if (!openExogenousSignals(ptr, inputs, m_wearableTargetsSignals))
+    {
+        return false;
+    }
+
+    inputs.clear();
+    if (!ptr->getParameter("wearable_data_exogenous_inputs", inputs))
+    {
+        log()->warn("{} Unable to get the wearable data exogenous inputs. Assuming none.",
+                    logPrefix);
+    }
+    if (!openExogenousSignals(ptr, inputs, m_wearableDataSignals))
+    {
         return false;
     }
 
@@ -1665,6 +1698,9 @@ void YarpRobotLoggerDevice::lookForExogenousSignals()
         connectToExogeneous(m_vectorsCollectionSignals);
         connectToExogeneous(m_vectorSignals);
         connectToExogeneous(m_stringSignals);
+        connectToExogeneous(m_humanStateSignals);
+        connectToExogeneous(m_wearableTargetsSignals);
+        connectToExogeneous(m_wearableDataSignals);
         connectToExogeneous(m_imageSignals);
 
         // TODO check for updated metadata from already connected signals
@@ -2415,6 +2451,46 @@ void YarpRobotLoggerDevice::run()
             m_bufferManager.push_back(bottle->toString(), time, signalFullName);
         }
     }
+
+    auto handleExogenousWithMetadata = [this, logData](auto& list, double time) {
+        for (auto& [name, signal] : list)
+        {
+            if (!signal.connected)
+            {
+                continue;
+            }
+
+            std::lock_guard<std::mutex> lock(signal.mutex);
+            auto* message = signal.port.read(false);
+
+            if (message != nullptr)
+            {
+                if (!signal.dataArrived)
+                {
+                    extractMetadata(*message, signal.signalName, signal.metadata);
+                    bool channelAdded = true;
+                    for (const auto& [key, vector] : signal.metadata.vectors)
+                    {
+                        channelAdded &= addChannel(key, vector.size(), vector);
+                    }
+                    signal.dataArrived = channelAdded;
+                }
+
+                if (signal.dataArrived)
+                {
+                    convertToVectorsCollection(*message, signal.signalName, signal.convertedSignal);
+                    for (const auto& [key, vector] : signal.convertedSignal.vectors)
+                    {
+                        logData(key, vector, time);
+                    }
+                }
+            }
+        }
+    };
+
+    handleExogenousWithMetadata(m_humanStateSignals, time);
+    handleExogenousWithMetadata(m_wearableTargetsSignals, time);
+    handleExogenousWithMetadata(m_wearableDataSignals, time);
 
     if (m_logText)
     {

@@ -37,8 +37,11 @@ BSD-3-Clause license. -->
     <param name="vectors_exogenous_inputs">()</param>
     <param name="string_exogenous_inputs">()</param>
     <param name="image_exogenous_inputs">()</param>
+    <param name="human_state_exogenous_inputs">()</param>
+    <param name="wearable_targets_exogenous_inputs">()</param>
+    <param name="wearable_data_exogenous_inputs">()</param>
 
-    <!--group name="Balancing">
+      <!--group name="Balancing">
       <param name="local">"/yarp-robot-logger/exogenous_signals/balancing:i"</param>
       <param name="remote">"/balancing_controller/logger/data:o"</param>
       <param name="signal_name">"balancing"</param>

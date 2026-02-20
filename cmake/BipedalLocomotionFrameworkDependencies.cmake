@@ -118,6 +118,9 @@ checkandset_dependency(UnicyclePlanner)
 blf_optional_find_package(onnxruntime QUIET)
 checkandset_dependency(onnxruntime)
 
+blf_optional_find_package(trintrin QUIET)
+checkandset_dependency(trintrin)
+
 ##########################      Test-related options       ##############################
 
 # MemoryAllocationMonitor require glibc >= 2.35
@@ -279,7 +282,7 @@ framework_dependent_option(FRAMEWORK_COMPILE_BalancingPositionControlApplication
 
 framework_dependent_option(FRAMEWORK_COMPILE_YarpRobotLoggerDevice
   "Do you want to generate and compile the YarpRobotLoggerDevice?" ON
-  "FRAMEWORK_COMPILE_RobotInterface;FRAMEWORK_COMPILE_YarpImplementation;FRAMEWORK_COMPILE_Perception;FRAMEWORK_COMPILE_YarpUtilities;FRAMEWORK_USE_robometry" OFF)
+  "FRAMEWORK_COMPILE_RobotInterface;FRAMEWORK_COMPILE_YarpImplementation;FRAMEWORK_COMPILE_Perception;FRAMEWORK_COMPILE_YarpUtilities;FRAMEWORK_USE_robometry;FRAMEWORK_USE_trintrin" OFF)
 
 framework_dependent_option(FRAMEWORK_COMPILE_JointTorqueControlDevice
   "Do you want to generate and compile the YarpRobotLoggerDevice?" ON

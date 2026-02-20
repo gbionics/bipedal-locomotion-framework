@@ -59,6 +59,10 @@ repositories:
     type: git
     url: https://github.com/robotology/robometry.git
     version: v1.2.6
+  trintrin:
+    type: git
+    url: https://github.com/ami-iit/trintrin.git
+    version: v0.0.1
   bayes-filters-lib:
     type: git
     url: https://github.com/robotology/bayes-filters-lib.git

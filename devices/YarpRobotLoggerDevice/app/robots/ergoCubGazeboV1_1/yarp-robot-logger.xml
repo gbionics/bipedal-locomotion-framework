@@ -36,6 +36,9 @@ BSD-3-Clause license. -->
     <param name="vectors_exogenous_inputs">()</param>
     <param name="string_exogenous_inputs">()</param>
     <param name="image_exogenous_inputs">()</param>
+    <param name="human_state_exogenous_inputs">()</param>
+    <param name="wearable_targets_exogenous_inputs">()</param>
+    <param name="wearable_data_exogenous_inputs">()</param>
 
     <group name="Walking">
       <param name="local">"/yarp-robot-logger/exogenous_signals/walking"</param>
