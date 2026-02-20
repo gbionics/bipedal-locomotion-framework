@@ -40,12 +40,13 @@ jobs:
       shell: bash -l {0}
       run: |
         # Dependencies
+        # ros2-distro-mutex=0.13.* is a workaround for https://github.com/gbionics/bipedal-locomotion-framework/pull/1013#issuecomment-3932062597
         conda install cmake compilers make ninja pkg-config \
                       "idyntree>=12.2.1" "yarp>=3.5.0" libmatio libmatio-cpp librobometry \
                       liblie-group-controllers eigen qhull "casadi>=3.5.5" cppad "spdlog>=1.15.1" \
                       nlohmann_json manif manifpy pybind11 numpy pytest scipy opencv pcl \
                       tomlplusplus libunicycle-footstep-planner "icub-models>=1.23.4" libtrintrin \
-                      ros-jazzy-rclcpp onnxruntime-cpp libbayes-filters-lib cmake-package-check catch2
+                      ros2-distro-mutex=0.13.* ros-jazzy-rclcpp onnxruntime-cpp libbayes-filters-lib cmake-package-check catch2
 
     - name: Linux-only Dependencies [Linux]
       if: contains(matrix.os, 'ubuntu')
