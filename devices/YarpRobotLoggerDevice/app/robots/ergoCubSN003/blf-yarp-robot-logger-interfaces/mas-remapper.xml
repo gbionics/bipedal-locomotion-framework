@@ -1,0 +1,45 @@
+<!-- Copyright (C) 2019-2021 Istituto Italiano di Tecnologia (IIT). All rights reserved.
+     This software may be modified and distributed under the terms of the
+     BSD-3-Clause license. -->
+
+<?xml version="1.0" encoding="UTF-8" ?>
+<device  xmlns:xi="http://www.w3.org/2001/XInclude" name="mas-remapper" type="multipleanalogsensorsremapper">
+  <param name="period">10</param>
+  <param name="ThreeAxisGyroscopesNames">
+    (waist_imu_0, l_foot_front_ft_imu, l_foot_rear_ft_imu, r_foot_front_ft_imu, r_foot_rear_ft_imu, l_leg_ft_imu, r_leg_ft_imu)
+  </param>
+  <param name="ThreeAxisLinearAccelerometersNames">
+    (waist_imu_0, l_foot_front_ft_imu, l_foot_rear_ft_imu, r_foot_front_ft_imu, r_foot_rear_ft_imu, l_leg_ft_imu, r_leg_ft_imu)
+  </param>
+  <param name="ThreeAxisMagnetometersNames">
+    (waist_imu_0, l_foot_front_ft_imu, l_foot_rear_ft_imu, r_foot_front_ft_imu, r_foot_rear_ft_imu, l_leg_ft_imu, r_leg_ft_imu)
+  </param>
+  <param name="OrientationSensorsNames">
+    (waist_imu_0, l_foot_front_ft_imu, l_foot_rear_ft_imu, r_foot_front_ft_imu, r_foot_rear_ft_imu, l_leg_ft_imu, r_leg_ft_imu)
+  </param>
+  <param name="SixAxisForceTorqueSensorsNames">
+    (l_foot_front_ft, l_foot_rear_ft, r_foot_front_ft, r_foot_rear_ft, l_leg_ft, r_leg_ft, l_arm_ft, r_arm_ft)
+  </param>
+  <param name="TemperatureSensorsNames">
+    (l_foot_front_ft, l_foot_rear_ft, r_foot_front_ft, r_foot_rear_ft, l_leg_ft, r_leg_ft, l_arm_ft, r_arm_ft)
+  </param>
+
+  <action phase="startup" level="5" type="attach">
+    <paramlist name="networks">
+      <elem name="left_arm_ft_client">left_arm_ft_client</elem>
+      <elem name="right_arm_ft_client">right_arm_ft_client</elem>
+      <elem name="left_leg_ft_client">left_leg_ft_client</elem>
+      <elem name="right_leg_ft_client">right_leg_ft_client</elem>
+      <!--elem name="head_imu_imu">head_imu_imu</elem-->
+      <elem name="waist_imu_client">waist_imu_client</elem>
+      <!--elem name="left_arm_imu_client">left_arm_imu_client</elem>
+      <elem name="right_arm_imu_client">right_arm_imu_client</elem-->
+      <elem name="left_foot_imu_client">left_foot_imu_client</elem>
+      <elem name="right_foot_imu_client">right_foot_imu_client</elem>
+      <elem name="left_leg_imu_client">left_leg_imu_client</elem>
+      <elem name="right_leg_imu_client">right_leg_imu_client</elem>
+    </paramlist>
+  </action>
+
+  <action phase="shutdown" level="5" type="detach" />
+</device>

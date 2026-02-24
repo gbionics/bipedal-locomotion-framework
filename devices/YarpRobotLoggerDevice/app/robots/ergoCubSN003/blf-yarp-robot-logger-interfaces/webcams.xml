@@ -1,0 +1,40 @@
+<!-- Copyright (C) 2019 Istituto Italiano di Tecnologia (IIT). All rights reserved.
+This software may be modified and distributed under the terms of the
+BSD-3-Clause license. -->
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<devices>
+
+  <device xmlns:xi="http://www.w3.org/2001/XInclude" name="jabra" type="openCVGrabber">
+      <param name="camera">0</param>
+      <param name="width">1920</param>
+      <param name="height">1080</param>
+  </device>
+
+  <!-- Enable the following block if you want to collect retrieve the cameras of the robot -->
+
+  <!-- <device xmlns:xi="http://www.w3.org/2001/XInclude" name="left_eye" type="remote_grabber"> -->
+  <!--   <param name="local">/yarp_robot_logger/cam/left</param> -->
+  <!--   <param name="remote">/icub/cam/left</param> -->
+  <!--   <param name="stream">mjpeg</param> -->
+  <!-- </device> -->
+
+  <!-- <device xmlns:xi="http://www.w3.org/2001/XInclude" name="right_eye" type="remote_grabber"> -->
+  <!--   <param name="local">/yarp_robot_logger/cam/right</param> -->
+  <!--   <param name="remote">/icub/cam/right</param> -->
+  <!--   <param name="stream">mjpeg</param> -->
+  <!-- </device> -->
+
+
+  <!-- <device xmlns:xi="http://www.w3.org/2001/XInclude" name="realsense" type="RGBDSensorClient">
+    <param name="localImagePort">/yarp_robot_logger/depthCamera/rgbImage:i</param>
+    <param name="localDepthPort">/yarp_robot_logger/depthCamera/depthImage:i</param>
+    <param name="localRpcPort">/yarp_robot_logger/depthCamera/rpc:o</param>
+    <param name="remoteImagePort">/depthCamera/rgbImage:o</param>
+    <param name="remoteDepthPort">/depthCamera/depthImage:o</param>
+    <param name="remoteRpcPort">/depthCamera/rpc:i</param>
+    <param name="ImageCarrier">mjpeg</param>
+    <param name="DepthCarrier">tcp+send.portmonitor+file.depthimage_compression_zlib+recv.portmonitor+file.depthimage_compression_zlib+type.dll</param>
+  </device> -->
+
+</devices>
