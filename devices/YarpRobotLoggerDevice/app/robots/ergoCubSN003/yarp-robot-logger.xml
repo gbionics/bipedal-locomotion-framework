@@ -26,7 +26,7 @@ BSD-3-Clause license. -->
     <param name="remote">"/yarp-robot-logger/rt_logging"</param>
   </group>
 
-  <group name="Telemetry">  
+  <group name="Telemetry">
     <param name="save_period">1800.0</param>
   </group>
 
