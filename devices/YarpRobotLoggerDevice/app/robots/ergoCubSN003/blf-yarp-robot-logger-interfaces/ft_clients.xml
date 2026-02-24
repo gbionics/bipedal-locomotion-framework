@@ -1,0 +1,35 @@
+<!-- Copyright (C) 2022 Istituto Italiano di Tecnologia (IIT). All rights reserved.
+     This software may be modified and distributed under the terms of the
+     BSD-3-Clause license. -->
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<devices>
+  <device xmlns:xi="http://www.w3.org/2001/XInclude" name="left_arm_ft_client" type="multipleanalogsensorsclient">
+    <param name="remote">/ergocub/left_arm/FT</param>
+    <param name="local">/yarp_robot_logger/left_arm</param>
+    <param name="timeout">0.5</param>
+    <param name="carrier">fast_tcp</param>
+  </device>
+
+  <device xmlns:xi="http://www.w3.org/2001/XInclude" name="right_arm_ft_client" type="multipleanalogsensorsclient">
+    <param name="remote">/ergocub/right_arm/FT</param>
+    <param name="local">/yarp_robot_logger/right_arm</param>
+    <param name="timeout">0.5</param>
+    <param name="carrier">fast_tcp</param>
+  </device>
+
+  <device xmlns:xi="http://www.w3.org/2001/XInclude" name="left_leg_ft_client" type="multipleanalogsensorsclient">
+    <param name="remote">/ergocub/left_leg/FT</param>
+    <param name="local">/yarp_robot_logger/left_leg</param>
+    <param name="timeout">0.5</param>
+    <param name="carrier">fast_tcp</param>
+  </device>
+
+  <device xmlns:xi="http://www.w3.org/2001/XInclude" name="right_leg_ft_client" type="multipleanalogsensorsclient">
+    <param name="remote">/ergocub/right_leg/FT</param>
+    <param name="local">/yarp_robot_logger/right_leg</param>
+    <param name="timeout">0.5</param>
+    <param name="carrier">fast_tcp</param>
+  </device>
+
+</devices>

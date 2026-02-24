@@ -1,0 +1,66 @@
+<!-- Copyright (C) 2019 Istituto Italiano di Tecnologia (IIT). All rights reserved.
+     This software may be modified and distributed under the terms of the
+     GNU Lesser General Public License v2.1 or any later version. -->
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<devices>
+
+  <!--device xmlns:xi="http://www.w3.org/2001/XInclude" name="head_imu_acc" type="multipleanalogsensorsclient">
+    <param name="remote">/ergocub/head/inertials</param>
+    <param name="local">/yarp_robot_logger/head/inertials</param>
+    <param name="timeout">0.5</param>
+    <param name="carrier">fast_tcp</param>
+  </device-->
+
+
+  <device xmlns:xi="http://www.w3.org/2001/XInclude" name="waist_imu_client" type="multipleanalogsensorsclient">
+    <param name="remote">/ergocub/waist/inertials</param>
+    <param name="local">/yarp_robot_logger/waist/inertials</param>
+    <param name="timeout">0.5</param>
+    <param name="carrier">fast_tcp</param>
+  </device>
+
+
+  <!--device xmlns:xi="http://www.w3.org/2001/XInclude" name="left_arm_imu_client" type="multipleanalogsensorsclient">
+    <param name="remote">/ergocub/left_arm/imu</param>
+    <param name="local">/yarp_robot_logger/left_arm/imu</param>
+    <param name="timeout">0.5</param>
+    <param name="carrier">fast_tcp</param>
+  </device>
+
+  <device xmlns:xi="http://www.w3.org/2001/XInclude" name="right_arm_imu_client" type="multipleanalogsensorsclient">
+    <param name="remote">/ergocub/right_arm/imu</param>
+    <param name="local">/yarp_robot_logger/right_arm/imu</param>
+    <param name="timeout">0.5</param>
+    <param name="carrier">fast_tcp</param>
+  </device-->
+
+  <device xmlns:xi="http://www.w3.org/2001/XInclude" name="left_foot_imu_client" type="multipleanalogsensorsclient">
+    <param name="remote">/ergocub/left_foot_heel_tiptoe/imu</param>
+    <param name="local">/yarp_robot_logger/left_foot_heel_tiptoe/imu</param>
+    <param name="timeout">0.5</param>
+    <param name="carrier">fast_tcp</param>
+  </device>
+
+  <device xmlns:xi="http://www.w3.org/2001/XInclude" name="right_foot_imu_client" type="multipleanalogsensorsclient">
+    <param name="remote">/ergocub/right_foot_heel_tiptoe/imu</param>
+    <param name="local">/yarp_robot_logger/right_foot_heel_tiptoe/imu</param>
+    <param name="timeout">0.5</param>
+    <param name="carrier">fast_tcp</param>
+  </device>
+
+  <device xmlns:xi="http://www.w3.org/2001/XInclude" name="left_leg_imu_client" type="multipleanalogsensorsclient">
+    <param name="remote">/ergocub/left_leg/imu</param>
+    <param name="local">/yarp_robot_logger/left_leg/imu</param>
+    <param name="timeout">0.5</param>
+    <param name="carrier">fast_tcp</param>
+  </device>
+
+  <device xmlns:xi="http://www.w3.org/2001/XInclude" name="right_leg_imu_client" type="multipleanalogsensorsclient">
+    <param name="remote">/ergocub/right_leg/imu</param>
+    <param name="local">/yarp_robot_logger/right_leg/imu</param>
+    <param name="timeout">0.5</param>
+    <param name="carrier">fast_tcp</param>
+  </device>
+
+</devices>

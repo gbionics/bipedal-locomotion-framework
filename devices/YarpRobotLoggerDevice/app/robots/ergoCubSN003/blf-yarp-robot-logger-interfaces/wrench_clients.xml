@@ -1,0 +1,44 @@
+<!-- Copyright (C) 2022 Istituto Italiano di Tecnologia (IIT). All rights reserved.
+     This software may be modified and distributed under the terms of the
+     BSD-3-Clause license. -->
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<devices>
+
+  <!-- <device xmlns:xi="http://www.w3.org/2001/XInclude" name="left_arm_wrench_client" type="genericSensorClient"> -->
+  <!--   <param name="remote">/wholeBodyDynamics/left_arm/cartesianEndEffectorWrench:o</param> -->
+  <!--   <param name="local">/yarp_robot_logger/left_arm_wrench</param> -->
+  <!--   <param name="carrier">udp</param> -->
+  <!-- </device> -->
+
+  <!-- <device xmlns:xi="http://www.w3.org/2001/XInclude" name="right_arm_wrench_client" type="genericSensorClient"> -->
+  <!--   <param name="remote">/wholeBodyDynamics/right_arm/cartesianEndEffectorWrench:o</param> -->
+  <!--   <param name="local">/yarp_robot_logger/right_arm_wrench</param> -->
+  <!--   <param name="carrier">udp</param> -->
+  <!-- </device> -->
+
+  <device xmlns:xi="http://www.w3.org/2001/XInclude" name="left_front_wrench_client" type="genericSensorClient">
+    <param name="remote">/wholeBodyDynamics/left_foot_front/cartesianEndEffectorWrench:o</param>
+    <param name="local">/yarp_robot_logger/left_front_wrench</param>
+    <param name="carrier">udp</param>
+  </device>
+
+  <device xmlns:xi="http://www.w3.org/2001/XInclude" name="left_rear_wrench_client" type="genericSensorClient">
+    <param name="remote">/wholeBodyDynamics/left_foot_rear/cartesianEndEffectorWrench:o</param>
+    <param name="local">/yarp_robot_logger/left_rear_wrench</param>
+    <param name="carrier">udp</param>
+  </device>
+
+  <device xmlns:xi="http://www.w3.org/2001/XInclude" name="right_front_wrench_client" type="genericSensorClient">
+    <param name="remote">/wholeBodyDynamics/right_foot_front/cartesianEndEffectorWrench:o</param>
+    <param name="local">/yarp_robot_logger/right_front_wrench</param>
+    <param name="carrier">udp</param>
+  </device>
+
+  <device xmlns:xi="http://www.w3.org/2001/XInclude" name="right_rear_wrench_client" type="genericSensorClient">
+    <param name="remote">/wholeBodyDynamics/right_foot_rear/cartesianEndEffectorWrench:o</param>
+    <param name="local">/yarp_robot_logger/right_rear_wrench</param>
+    <param name="carrier">udp</param>
+  </device>
+
+</devices>
