@@ -90,7 +90,7 @@ TEST_CASE("GenericContainer::Vector")
 
         iDynTree::VectorFixSize<3> fixedVector;
         GenericContainer::Vector container2 = GenericContainer::make_vector(fixedVector, GenericContainer::VectorResizeMode::Resizable);
-        REQUIRE_FALSE(container.resizeVector(2));
+        REQUIRE_FALSE(container2.resizeVector(2));
     }
 
     SECTION("Resize")
