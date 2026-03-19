@@ -6,6 +6,13 @@ if(TARGET BipedalLocomotion::System)
 
   set(H_PREFIX include/BipedalLocomotion/bindings/System)
 
+  add_bipedal_locomotion_library(
+    NAME BindingsSystem
+    IS_INTERFACE
+    PUBLIC_HEADERS ${H_PREFIX}/Advanceable.h
+    PUBLIC_LINK_LIBRARIES BipedalLocomotion::System
+    INSTALLATION_FOLDER bindings/System)
+
   add_bipedal_locomotion_python_module(
     NAME SystemBindings
     SOURCES src/Advanceable.cpp src/VariablesHandler.cpp src/LinearTask.cpp src/Module.cpp src/ITaskControllerManager.cpp src/IClock.cpp src/Clock.cpp src/WeightProvider.cpp
