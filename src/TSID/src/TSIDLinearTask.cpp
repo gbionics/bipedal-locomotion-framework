@@ -13,3 +13,9 @@ bool TSIDLinearTask::setKinDyn(std::shared_ptr<iDynTree::KinDynComputations> kin
 {
     return true;
 }
+
+// Explicit instantiation of the factory template to ensure proper singleton behavior
+// across shared library boundaries. This ensures that all libraries using TSIDLinearTaskFactory
+// share the same registry of task builders.
+template class BipedalLocomotion::System::Factory<TSIDLinearTask>;
+template class BipedalLocomotion::System::ILinearTaskFactory<TSIDLinearTask>;
