@@ -3,6 +3,11 @@
 # BSD-3-Clause license.
 
 function(add_bipedal_locomotion_python_module)
+  # If bindings support is not enabled, add_bipedal_locomotion_python_module
+  # is a no operation
+  if(NOT FRAMEWORK_COMPILE_PYTHON_BINDINGS)
+    return()
+  endif()
 
   set(options )
   set(oneValueArgs NAME)
