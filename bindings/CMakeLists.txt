@@ -102,4 +102,34 @@ if(FRAMEWORK_COMPILE_PYTHON_BINDINGS)
         DESTINATION ${FRAMEWORK_PYTHON_INSTALL_DIR}/bipedal_locomotion_framework-${BipedalLocomotionFramework_VERSION}.dist-info)
     endif()
 
+    # In standalone mode, the C++ INTERFACE targets defined by add_bipedal_locomotion_library
+    # (e.g. BindingsSystem) are exported to the "BipedalLocomotionFrameworkBindings" export set,
+    # but nothing installs that export set. We install it here into the same directory as
+    # BipedalLocomotionFrameworkConfig.cmake and append an include() to that config so that
+    # downstream consumers find these targets via find_package(BipedalLocomotionFramework).
+    if(FRAMEWORK_PYTHON_BINDINGS_BUILD_STANDALONE)
+      # Find the directory where BipedalLocomotionFrameworkConfig.cmake is installed
+      get_filename_component(_blf_config_dir "${BipedalLocomotionFramework_CONFIG}" DIRECTORY)
+      # Compute the install destination relative to CMAKE_INSTALL_PREFIX
+      file(RELATIVE_PATH _blf_config_install_dir "${CMAKE_INSTALL_PREFIX}" "${_blf_config_dir}")
+
+      install(EXPORT BipedalLocomotionFrameworkBindings
+              NAMESPACE BipedalLocomotion::
+              DESTINATION "${_blf_config_install_dir}"
+              FILE BipedalLocomotionFrameworkBindingsTargets.cmake)
+
+      # Append an include() to the installed BipedalLocomotionFrameworkConfig.cmake so that
+      # the bindings targets are automatically available after find_package(BipedalLocomotionFramework)
+      install(CODE "
+        set(_config_file \"${_blf_config_dir}/BipedalLocomotionFrameworkConfig.cmake\")
+        file(READ \"\${_config_file}\" _config_contents)
+        string(FIND \"\${_config_contents}\" \"BipedalLocomotionFrameworkBindingsTargets.cmake\" _already_included)
+        if(_already_included EQUAL -1)
+          file(APPEND \"\${_config_file}\"
+            \"\\n# Include bindings targets if available (installed by the standalone Python bindings build)\\n\"
+            \"include(\\\"\\\${CMAKE_CURRENT_LIST_DIR}/BipedalLocomotionFrameworkBindingsTargets.cmake\\\" OPTIONAL)\\n\")
+        endif()
+      ")
+    endif()
+
 endif()
