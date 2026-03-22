@@ -48,9 +48,6 @@ if(FRAMEWORK_COMPILE_PYTHON_BINDINGS)
     # It is used for the Python tests.
     set(BLF_PYTHON_PACKAGE "${CMAKE_BINARY_DIR}/bipedal_locomotion_framework")
 
-    # Add the bindings directory
-    add_subdirectory(python)
-
     # Create the __init__.py file
     file(WRITE ${BLF_PYTHON_PACKAGE}/__init__.py "")
 
@@ -103,3 +100,7 @@ if(FRAMEWORK_COMPILE_PYTHON_BINDINGS)
     endif()
 
 endif()
+
+# Add the bindings directory, this is done even if FRAMEWORK_COMPILE_PYTHON_BINDINGS is OFF
+# to ensure that the header-only bindings C++ library as installed nevertheless
+add_subdirectory(python)
