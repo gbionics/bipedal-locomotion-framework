@@ -1,5 +1,6 @@
 # build folders
 build*
+.build*
 
 # emacs
 *~
