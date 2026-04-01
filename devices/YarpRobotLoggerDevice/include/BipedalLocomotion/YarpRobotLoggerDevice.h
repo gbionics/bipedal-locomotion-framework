@@ -7,6 +7,8 @@
 #define BIPEDAL_LOCOMOTION_FRAMEWORK_YARP_ROBOT_LOGGER_DEVICE_H
 
 #include <atomic>
+#include <condition_variable>
+#include <deque>
 #include <memory>
 #include <mutex>
 #include <string>
@@ -161,17 +163,36 @@ private:
             std::filesystem::path framesPath;
         };
 
+        struct FrameBundle
+        {
+            unsigned int frameIndex{0};
+            double timestamp{0.0};
+            cv::Mat rgbFrame;
+            cv::Mat depthFrame;
+            bool hasRgb{false};
+            bool hasDepth{false};
+        };
+
         std::shared_ptr<ImageSaver> rgb;
         std::shared_ptr<ImageSaver> depth;
         int depthScale{1};
 
         std::thread videoThread;
+        std::thread flushThread;
         std::atomic<bool> recordVideoIsRunning{false};
         int fps{-1};
         std::atomic<unsigned int> frameIndex{0};
         std::atomic<bool> resetIndex{false};
         std::atomic<bool> paused{false};
         std::atomic<bool> requestPause{false};
+
+        std::condition_variable frameQueueCv;
+        std::mutex frameQueueMutex;
+        std::deque<FrameBundle> frameQueue;
+        std::size_t maxBufferedBundles{0};
+        std::atomic<bool> flushThreadShouldRun{false};
+        std::atomic<bool> flushPaused{false};
+        std::atomic<bool> queueOverflowNotified{false};
     };
 
     std::string m_videoCodecCode{"mp4v"};
@@ -253,6 +274,7 @@ private:
 
     bool hasSubstring(const std::string& str, const std::vector<std::string>& substrings) const;
     void recordVideo(const std::string& cameraName, VideoWriter& writer);
+    void flushVideoQueue(const std::string& cameraName, VideoWriter& writer);
     void saveExogenousImages(const std::string& signalName,
                              VideoWriter& writer,
                              ExogenousSignal<yarp::sig::ImageOf<yarp::sig::PixelRgb>>& signal);
