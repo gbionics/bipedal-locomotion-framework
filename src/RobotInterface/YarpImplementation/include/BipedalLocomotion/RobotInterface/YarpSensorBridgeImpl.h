@@ -200,7 +200,7 @@ struct YarpSensorBridge::Impl
                             const std::string& query,
                             int& index)
     {
-        auto iter{std::lower_bound(vec.begin(), vec.end(), query)};
+        auto iter{std::find(vec.begin(), vec.end(), query)};
         if (iter == vec.end())
         {
             return false;
@@ -737,61 +737,12 @@ struct YarpSensorBridge::Impl
         }
 
         std::vector<std::string> availableSensorNames;
-        if constexpr (std::is_same_v<MASSensorType, yarp::dev::IThreeAxisGyroscopes>)
+        auto nrSensors = getNumberOfMASSensors(sensorInterface);
+        for (std::size_t sensIdx = 0; sensIdx < nrSensors; sensIdx++)
         {
-            auto nrSensors = sensorInterface->getNrOfThreeAxisGyroscopes();
-            for (std::size_t sensIdx = 0; sensIdx < nrSensors; sensIdx++)
-            {
-                std::string sensName;
-                sensorInterface->getThreeAxisGyroscopeName(sensIdx, sensName);
-                availableSensorNames.push_back(sensName);
-            }
-        } else if constexpr (std::is_same_v<MASSensorType,
-                                            yarp::dev::IThreeAxisLinearAccelerometers>)
-        {
-            auto nrSensors = sensorInterface->getNrOfThreeAxisLinearAccelerometers();
-            for (std::size_t sensIdx = 0; sensIdx < nrSensors; sensIdx++)
-            {
-                std::string sensName;
-                sensorInterface->getThreeAxisLinearAccelerometerName(sensIdx, sensName);
-                availableSensorNames.push_back(sensName);
-            }
-        } else if constexpr (std::is_same_v<MASSensorType, yarp::dev::IThreeAxisMagnetometers>)
-        {
-            auto nrSensors = sensorInterface->getNrOfThreeAxisMagnetometers();
-            for (std::size_t sensIdx = 0; sensIdx < nrSensors; sensIdx++)
-            {
-                std::string sensName;
-                sensorInterface->getThreeAxisMagnetometerName(sensIdx, sensName);
-                availableSensorNames.push_back(sensName);
-            }
-        } else if constexpr (std::is_same_v<MASSensorType, yarp::dev::IOrientationSensors>)
-        {
-            auto nrSensors = sensorInterface->getNrOfOrientationSensors();
-            for (std::size_t sensIdx = 0; sensIdx < nrSensors; sensIdx++)
-            {
-                std::string sensName;
-                sensorInterface->getOrientationSensorName(sensIdx, sensName);
-                availableSensorNames.push_back(sensName);
-            }
-        } else if constexpr (std::is_same_v<MASSensorType, yarp::dev::ISixAxisForceTorqueSensors>)
-        {
-            auto nrSensors = sensorInterface->getNrOfSixAxisForceTorqueSensors();
-            for (std::size_t sensIdx = 0; sensIdx < nrSensors; sensIdx++)
-            {
-                std::string sensName;
-                sensorInterface->getSixAxisForceTorqueSensorName(sensIdx, sensName);
-                availableSensorNames.push_back(sensName);
-            }
-        } else if constexpr (std::is_same_v<MASSensorType, yarp::dev::ITemperatureSensors>)
-        {
-            auto nrSensors = sensorInterface->getNrOfTemperatureSensors();
-            for (std::size_t sensIdx = 0; sensIdx < nrSensors; sensIdx++)
-            {
-                std::string sensName;
-                sensorInterface->getTemperatureSensorName(sensIdx, sensName);
-                availableSensorNames.push_back(sensName);
-            }
+            std::string sensName;
+            getMASSensorName(sensorInterface, sensIdx, sensName);
+            availableSensorNames.push_back(sensName);
         }
         return availableSensorNames;
     }
@@ -2135,7 +2086,7 @@ struct YarpSensorBridge::Impl
         failedReadAllSensors.clear();
         std::vector<std::string> failedReads;
 
-        if (readControlBoardInterface(checkForNAN))
+        if (!readControlBoardInterface(checkForNAN))
         {
             failedReadAllSensors.emplace_back(std::string("RemoteControlBoardRemapper"));
         }
