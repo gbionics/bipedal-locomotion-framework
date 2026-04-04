@@ -226,6 +226,7 @@ private:
     bool m_logFrames{false};
     bool m_logRobot{true};
     bool m_autoStartLogging{true};
+    bool m_recordingPrepared{false};
     std::vector<std::string> m_textLoggingSubnames;
     std::vector<std::string> m_codeStatusCmds;
 
@@ -263,8 +264,10 @@ private:
                    Eigen::Ref<gyro_t> gyro,
                    Eigen::Ref<orientation_t> orientation);
 
+    virtual bool record() override;
     virtual bool saveData(const std::string& tag = "") override;
-    virtual bool startLogging() override;
+    virtual bool stopRecording() override;
+    void stopRecordingThreads();
     bool setupRobotSensorBridge(std::weak_ptr<const ParametersHandler::IParametersHandler> params);
     bool setupRobotCameraBridge(std::weak_ptr<const ParametersHandler::IParametersHandler> params);
     bool setupTelemetry(std::weak_ptr<const ParametersHandler::IParametersHandler> params,

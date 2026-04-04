@@ -367,10 +367,10 @@ bool YarpRobotLoggerDevice::open(yarp::os::Searchable& config)
     {
         if (m_autoStartLogging)
         {
-            return startLogging();
+            return record();
         }
         log()->info("{} auto_start_logging is disabled. Logging will not start automatically. "
-                    "Use the RPC command 'startLogging' to start.",
+                    "Use the RPC command 'record' to start.",
                     logPrefix);
     }
 
@@ -796,6 +796,12 @@ bool YarpRobotLoggerDevice::addChannel(const std::string& nameKey,
                                        std::size_t vectorSize,
                                        const std::vector<std::string>& metadataNames)
 {
+    // Skip adding channels if they were already registered in a previous recording session
+    if (m_recordingPrepared)
+    {
+        return true;
+    }
+
     if (metadataNames.empty() || vectorSize != metadataNames.size())
     {
         log()->warn("The metadata names for channel {} are empty or the size of the metadata names "
@@ -1046,19 +1052,19 @@ bool YarpRobotLoggerDevice::attachAll(const yarp::dev::PolyDriverList& poly)
     {
         if (m_autoStartLogging)
         {
-            return startLogging();
+            return record();
         }
         log()->info("{} auto_start_logging is disabled. Logging will not start automatically. "
-                    "Use the RPC command 'startLogging' to start.",
+                    "Use the RPC command 'record' to start.",
                     logPrefix);
     }
 
     return true;
 }
 
-bool BipedalLocomotion::YarpRobotLoggerDevice::startLogging()
+bool BipedalLocomotion::YarpRobotLoggerDevice::record()
 {
-    constexpr auto logPrefix = "[YarpRobotLoggerDevice::startLogging]";
+    constexpr auto logPrefix = "[YarpRobotLoggerDevice::record]";
 
     if (this->isRunning())
     {
@@ -1124,7 +1130,9 @@ bool BipedalLocomotion::YarpRobotLoggerDevice::startLogging()
         return false;
     }
 
-    log()->info("{} The logger has started.", logPrefix);
+    m_recordingPrepared = true;
+
+    log()->info("{} Recording started.", logPrefix);
     return true;
 }
 
@@ -1322,9 +1330,11 @@ bool BipedalLocomotion::YarpRobotLoggerDevice::prepareCameraLogging()
                 return false;
             }
         }
-        ok = m_bufferManager.addChannel({"camera::" + camera + "::rgb",
-                                         {1, 1}, //
-                                         {"frame_index"}});
+        ok = !m_recordingPrepared
+             ? m_bufferManager.addChannel({"camera::" + camera + "::rgb",
+                                           {1, 1}, //
+                                           {"frame_index"}})
+             : true;
         if (!ok)
         {
             log()->error("{} Unable to add the channel for the camera named {}.",
@@ -1391,14 +1401,17 @@ bool BipedalLocomotion::YarpRobotLoggerDevice::prepareCameraLogging()
             }
         }
 
-        ok = m_bufferManager.addChannel({"camera::" + camera + "::rgb",
-                                         {1, 1}, //
-                                         {"frame_index"}});
+        if (!m_recordingPrepared)
+        {
+            ok = m_bufferManager.addChannel({"camera::" + camera + "::rgb",
+                                             {1, 1}, //
+                                             {"frame_index"}});
 
-        ok = ok
-             && m_bufferManager.addChannel({"camera::" + camera + "::depth",
-                                            {1, 1}, //
-                                            {"frame_index"}});
+            ok = ok
+                 && m_bufferManager.addChannel({"camera::" + camera + "::depth",
+                                                {1, 1}, //
+                                                {"frame_index"}});
+        }
 
         if (!ok)
         {
@@ -1455,9 +1468,12 @@ bool BipedalLocomotion::YarpRobotLoggerDevice::prepareExogenousImageLogging()
                          signal.signalName);
             ok = false;
         }
-        ok = m_bufferManager.addChannel({"exogenous_images::" + signal.signalName + "::rgb",
-                                         {1, 1}, //
-                                         {"frame_index"}});
+        if (!m_recordingPrepared)
+        {
+            ok = m_bufferManager.addChannel({"exogenous_images::" + signal.signalName + "::rgb",
+                                             {1, 1}, //
+                                             {"frame_index"}});
+        }
 
         if (!ok)
         {
@@ -2751,21 +2767,22 @@ bool YarpRobotLoggerDevice::detachAll()
     return true;
 }
 
-bool YarpRobotLoggerDevice::close()
+void YarpRobotLoggerDevice::stopRecordingThreads()
 {
-    // Wait for the run method to finish
-    stop();
+    constexpr auto logPrefix = "[YarpRobotLoggerDevice::stopRecordingThreads]";
 
-    m_rpcPort.close();
-    m_statusPort.close();
+    // Stop the periodic thread
+    if (this->isRunning())
+    {
+        this->stop();
+    }
 
-    // stop all the video thread
+    // stop all the video threads
     for (auto& [cameraName, writer] : m_videoWriters)
     {
         writer.recordVideoIsRunning = false;
     }
 
-    // close all the thread associated to the video logging
     for (auto& [cameraName, writer] : m_videoWriters)
     {
         if (writer.videoThread.joinable())
@@ -2775,10 +2792,9 @@ bool YarpRobotLoggerDevice::close()
         }
     }
 
-    // close all the thread associated to the exogenous image logging
+    // stop all the exogenous image logging threads
     for (auto& [name, signal] : m_imageSignals)
     {
-
         m_exogenousImageWriters[signal.signalName].recordVideoIsRunning = false;
         signal.port.interrupt();
         if (m_exogenousImageWriters[signal.signalName].videoThread.joinable())
@@ -2788,7 +2804,7 @@ bool YarpRobotLoggerDevice::close()
         }
     }
 
-    // close the thread associated to the text logging polling
+    // stop the text logging polling thread
     m_lookForNewLogsIsRunning = false;
     if (m_lookForNewLogsThread.joinable())
     {
@@ -2796,12 +2812,62 @@ bool YarpRobotLoggerDevice::close()
         m_lookForNewLogsThread = std::thread();
     }
 
+    // close the text logging port so it can be reopened on next record() call
+    m_textLoggingPort.close();
+
+    // stop the exogenous signal polling thread
     m_lookForNewExogenousSignalIsRunning = false;
     if (m_lookForNewExogenousSignalThread.joinable())
     {
         m_lookForNewExogenousSignalThread.join();
         m_lookForNewExogenousSignalThread = std::thread();
     }
+
+    // Reset pause state so next record() starts cleanly
+    m_requestPause = false;
+    m_paused = false;
+    m_firstRun = true;
+
+    log()->info("{} All recording threads stopped.", logPrefix);
+}
+
+bool BipedalLocomotion::YarpRobotLoggerDevice::stopRecording()
+{
+    constexpr auto logPrefix = "[YarpRobotLoggerDevice::stopRecording]";
+
+    if (!this->isRunning())
+    {
+        log()->warn("{} Recording is not running.", logPrefix);
+        return false;
+    }
+
+    log()->info("{} Stopping recording without saving...", logPrefix);
+
+    stopRecordingThreads();
+
+    log()->info("{} Recording stopped. Data was not saved. "
+                "Use the RPC command 'record' to start a new recording.",
+                logPrefix);
+
+    return true;
+}
+
+bool YarpRobotLoggerDevice::close()
+{
+    constexpr auto logPrefix = "[YarpRobotLoggerDevice::close]";
+
+    // If recording is active, auto-save the data before shutting down
+    if (this->isRunning())
+    {
+        log()->info("{} Recording is active. Auto-saving episode before closing...", logPrefix);
+        this->saveData("");
+    } else
+    {
+        stopRecordingThreads();
+    }
+
+    m_rpcPort.close();
+    m_statusPort.close();
 
     return true;
 }
@@ -2879,7 +2945,7 @@ bool BipedalLocomotion::YarpRobotLoggerDevice::saveData(const std::string& tag)
     constexpr auto logPrefix = "[YarpRobotLoggerDevice::saveData]";
 
     std::string actualFileName;
-    log()->info("{} Saving data to .mat file...", logPrefix);
+    log()->info("{} Saving episode to .mat file...", logPrefix);
     auto start = BipedalLocomotion::clock().now();
     std::string inputFileName = defaultFilePrefix;
     bool output = false;
@@ -2938,8 +3004,8 @@ bool BipedalLocomotion::YarpRobotLoggerDevice::saveData(const std::string& tag)
                     logPrefix,
                     actualFileName,
                     std::chrono::duration<double>(BipedalLocomotion::clock().now() - start));
-        // Calling callback manually since it is called only when the saving is automatic
-        output = this->saveCallback(actualFileName, robometry::SaveCallbackSaveMethod::periodic);
+        // Use last_call since we are stopping recording after saving
+        output = this->saveCallback(actualFileName, robometry::SaveCallbackSaveMethod::last_call);
     }
 
     // If it lasted less than 1 second we wait a bit to avoid that
@@ -2951,7 +3017,14 @@ bool BipedalLocomotion::YarpRobotLoggerDevice::saveData(const std::string& tag)
         BipedalLocomotion::clock().sleepFor(1s - duration);
     }
 
-    log()->info("{} Saving data took {}.", logPrefix, std::chrono::duration<double>(duration));
+    log()->info("{} Episode saved in {}.", logPrefix, std::chrono::duration<double>(duration));
+
+    // Stop recording and bring device to idle mode
+    stopRecordingThreads();
+
+    log()->info("{} Recording stopped. Device is now idle. "
+                "Use the RPC command 'record' to start a new recording.",
+                logPrefix);
 
     return output;
 }

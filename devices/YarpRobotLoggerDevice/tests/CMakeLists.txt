@@ -5,7 +5,7 @@
 add_bipedal_test(
   NAME YarpRobotLoggerDevice
   SOURCES YarpRobotLoggerDeviceTest.cpp
-  LINKS YARP::YARP_robotinterface matioCpp::matioCpp BipedalLocomotion::TextLogging)
+  LINKS YARP::YARP_robotinterface matioCpp::matioCpp BipedalLocomotion::TextLogging BipedalLocomotion::YarpRobotLoggerDeviceCommands)
 
 if(TARGET YarpRobotLoggerDeviceUnitTests)
   target_compile_definitions(YarpRobotLoggerDeviceUnitTests PRIVATE CMAKE_CURRENT_SOURCE_DIR="${CMAKE_CURRENT_SOURCE_DIR}")

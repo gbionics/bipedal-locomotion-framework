@@ -1,140 +1,150 @@
 # YARPRobotLoggerDevice
 
-The **YARPRobotLoggerDevice** is a YARP device based on `YarpSensorBridge` and [`robometry`](https://github.com/robotology/robometry) that allows logging data from robot sensors and actuators in a mat file.
+The **YARPRobotLoggerDevice** is a YARP device based on `YarpSensorBridge` and [`robometry`](https://github.com/robotology/robometry) that logs data from robot sensors and actuators into `.mat` files. It also supports logging cameras (as `.mp4` videos or image frames), exogenous signals streamed over YARP ports, text logs, and frame transforms.
 
-## Configuration Parameters
-The logger is currently supported only for the robots listed in the [application folder](./app/robots). Each robot folder contains:
+## Quick start
 
-- `launch-yarp-robot-logger.xml`: Configuration parameters for the `yarprobotinterface` to launch the logger device and associated devices.
-- `yarp-robot-logger.xml`: Configuration parameters for the logger device.
-- `blf-yarp-robot-logger-interfaces`: Folder containing all interfaces used by the logger device to log data.
-
-## How to Use the Logger
-To use the logger, launch the `yarprobotinterface` with the `launch-yarp-robot-logger.xml` configuration file:
+Launch the logger with `yarprobotinterface`:
 
 ```console
 yarprobotinterface --config launch-yarp-robot-logger.xml
 ```
-When you close the yarprobotinterface, the logger will save the logged data in a mat file. Additionally, a md file will contain information about the software version in the robot setup. If video recording is enabled, a mp4 file with the video recording will also be generated. All these files will be saved in the working directory in which `yarprobotinterface` has been launched.
 
-## How to log exogenous data
-The `YarpRobotLoggerDevice` can also log exogenous data, i.e., data not directly provided by the robot sensors and actuators. To do this:
-1. modify the `yarp-robot-logger.xml` file to specify the exogenous data to log
-2. modify the application that streams the exogenous data
+By default (`auto_start_logging: true`) the logger starts recording immediately. When you close `yarprobotinterface` (e.g. with `Ctrl+C`), the recorded data is **automatically saved** before the device shuts down. All output files (`.mat`, `.mp4`, `.md`) are written to the working directory.
 
-### Modification `yarp-robot-logger.xml` configuration file
-Modify the [`ExogenousSignalGroup` in the `yarp-robot-logger.xml` file](https://github.com/ami-iit/bipedal-locomotion-framework/blob/a3a8e9cb8a0c3532db81d814d4851009f8134195/devices/YarpRobotLoggerDevice/app/robots/ergoCubSN000/yarp-robot-logger.xml#L27-L37) to log the data streamed by an application that allows the robot to balance:
-   ```xml
-   <group name="ExogenousSignals">
-     <!-- List containing the names of exogenous signals. Each name should be associated to a sub-group -->
-     <param name="vectors_collection_exogenous_inputs">("balancing")</param>
-     <param name="vectors_exogenous_inputs">()</param>
+## RPC commands
 
-      <!-- Sub-group containing the information about the exogenous signal "balancing" -->
-     <group name="balancing">
-        <!-- Name of the port opened by the logger used to retrieve the exogenous signal data -->
-        <param name="local">"/yarp-robot-logger/exogenous_signals/balancing"</param>
+The logger exposes an RPC port at `<port_prefix>/commands/rpc:i` (default: `/yarp-robot-logger/commands/rpc:i`). You can control recording with the following commands using `yarp rpc`:
 
-        <!-- Name of the port opened by the application used to stream the exogenous signal data -->
-        <param name="remote">"/balancing-controller/logger"</param>
+```console
+yarp rpc /yarp-robot-logger/commands/rpc:i
+```
 
-        <!-- Name of the exogenous signal (this will be the name of the matlab struct containing all the data associated to the exogenous signal) -->
-        <param name="signal_name">"balancing"</param>
+| Command | Description |
+|---|---|
+| `record` | Start recording. Initializes sensor bridge, cameras, telemetry buffers and begins the periodic acquisition loop. |
+| `saveData` | Save the recorded data to a `.mat` file and **stop recording**. The device returns to idle mode. Accepts an optional `tag` string that is appended to the filename (e.g. `saveData "walking_test"`). |
+| `saveData "<tag>"` | Same as above, with the tag included in the output filename: `robot_logger_device_<tag>_<timestamp>.mat`. |
+| `stopRecording` | Stop recording **without saving**. All buffered data is discarded and the device returns to idle mode. |
 
-        <!-- Carrier used in the port connection -->
-        <param name="carrier">"udp"</param>
-    </group>
-   </group>
-   ```
+After `saveData` or `stopRecording`, you can call `record` again to start a new recording session.
 
-### Stream exogenous data
-You need to modify the application that streams the exogenous data to open a port with the name specified in the `remote` parameter of the `balancing` sub-group. For example, if you want to stream the data from the your `balancing` application you need to use `BipedalLocomotion::YarpUtilities::VectorsCollectionServer` class as follows
-#### C++
-If your application is written in C++ you can use the `BipedalLocomotion::YarpUtilities::VectorsCollectionServer` class as follows
+### Example session
 
-```c++
+```console
+$ yarp rpc /yarp-robot-logger/commands/rpc:i
+>> record
+Response: [ok]
+# ... robot performs some task ...
+>> saveData "walking_trial_1"
+Response: [ok]
+# data saved to robot_logger_device_walking_trial_1_<timestamp>.mat
+# logger is now idle
+>> record
+Response: [ok]
+# ... another trial ...
+>> stopRecording
+Response: [ok]
+# data discarded, no file saved
+```
+
+### Auto-start mode
+
+When `auto_start_logging` is set to `true` (the default), `record` is called automatically at device startup. If set to `false`, the device starts in idle mode and waits for an explicit `record` RPC command.
+
+## Configuration
+
+The logger is currently supported for the robots listed in the [application folder](./app/robots). Each robot folder contains:
+
+- `launch-yarp-robot-logger.xml`: `yarprobotinterface` configuration that launches the logger and associated devices.
+- `yarp-robot-logger.xml`: Logger device parameters.
+- `blf-yarp-robot-logger-interfaces/`: Interface configuration files for the sensor bridge.
+
+### Key parameters
+
+| Parameter | Default | Description |
+|---|---|---|
+| `sampling_period_in_s` | `0.01` | Logging period in seconds. |
+| `port_prefix` | `/yarp-robot-logger` | Prefix for all YARP ports opened by the logger. |
+| `auto_start_logging` | `true` | Start recording automatically on device startup. |
+| `log_robot_data` | `true` | Log joint states, motor states, FT sensors, IMUs, etc. |
+| `log_cameras` | `true` | Log camera images as video or frames. |
+| `log_text` | `true` | Log YARP text logging messages. |
+| `maximum_admissible_time_step` | - | Max time step between samples (skip logging on clock resets). |
+
+## Logging exogenous data
+
+The logger can also record exogenous data, i.e., signals not directly from robot sensors. To do this:
+
+1. Configure the `ExogenousSignals` group in `yarp-robot-logger.xml`.
+2. Stream data from your application using `VectorsCollectionServer`.
+
+### Configuration
+
+Add an `ExogenousSignals` group to `yarp-robot-logger.xml`:
+
+```xml
+<group name="ExogenousSignals">
+  <param name="vectors_collection_exogenous_inputs">("balancing")</param>
+  <param name="vectors_exogenous_inputs">()</param>
+
+  <group name="balancing">
+    <param name="local">"/yarp-robot-logger/exogenous_signals/balancing"</param>
+    <param name="remote">"/balancing-controller/logger"</param>
+    <param name="signal_name">"balancing"</param>
+    <param name="carrier">"udp"</param>
+  </group>
+</group>
+```
+
+### Streaming from C++
+
+```cpp
 #include <BipedalLocomotion/YarpUtilities/VectorsCollectionServer.h>
 
-class Module
-{
-    BipedalLocomotion::YarpUtilities::VectorsCollectionServer m_vectorsCollectionServer; /**< Logger server. */
-public:
-    // all the other functions you need
-}
-```
-The `m_vectorsCollectionServer` helps you to handle the data you want to send and to populate the metadata. To use this functionality, call `BipedalLocomotion::YarpUtilities::VectorsCollectionServer::populateMetadata` during the configuration phase. Once you have finished populating the metadata you should call `BipedalLocomotion::YarpUtilities::VectorsCollectionServer::finalizeMetadata`
-```c++
-//This code should go into the configuration phase
-auto loggerOption = std::make_shared<BipedalLocomotion::ParametersHandler::YarpImplementation>(rf);
-if (!m_vectorsCollectionServer.initialize(loggerOption->getGroup("LOGGER")))
-{
-    log()->error("[BalancingController::configure] Unable to configure the server.");
-    return false;
-}
+// Configuration phase
+BipedalLocomotion::YarpUtilities::VectorsCollectionServer server;
+server.initialize(loggerOption->getGroup("LOGGER"));
+server.populateMetadata("dcm::position::measured", {"x", "y"});
+server.populateMetadata("dcm::position::desired", {"x", "y"});
+server.finalizeMetadata();
 
-m_vectorsCollectionServer.populateMetadata("dcm::position::measured", {"x", "y"});
-m_vectorsCollectionServer.populateMetadata("dcm::position::desired", {"x", "y"});
-
-m_vectorsCollectionServer.finalizeMetadata(); // this should be called only once
-```
-In the main loop, add the following code to prepare and populate the data:
-
-```c++
-m_vectorsCollectionServer.prepareData(); // required to prepare the data to be sent
-m_vectorsCollectionServer.clearData(); // optional see the documentation
-
-// DCM
-m_vectorsCollectionServer.populateData("dcm::position::measured", <signal>);
-m_vectorsCollectionServer.populateData("dcm::position::desired", <signal>);
-
-m_vectorsCollectionServer.sendData();
+// Main loop
+server.prepareData();
+server.clearData();
+server.populateData("dcm::position::measured", measuredSignal);
+server.populateData("dcm::position::desired", desiredSignal);
+server.sendData();
 ```
 
-**Note:** Replace `<signal>` with the actual data you want to log.
+### Streaming from Python
 
-
-#### Python
-If your application is written in Python you can use the `BipedalLocomotion.yarp_utilities.VectorsCollectionServer` class as follows
 ```python
 import bipedal_locomotion_framework as blf
 
-class Module:
-    def __init__(self):
-        self.vectors_collection_server = blf.yarp_utilities.VectorsCollectionServer() # Logger server.
-        # all the other functions you need
+# Configuration phase
+server = blf.yarp_utilities.VectorsCollectionServer()
+handler = blf.parameters_handler.StdParametersHandler()
+handler.set_parameter_string("remote", "/balancing-controller/logger")
+server.initialize(handler)
+server.populate_metadata("dcm::position::measured", ["x", "y"])
+server.populate_metadata("dcm::position::desired", ["x", "y"])
+server.finalize_metadata()
+
+# Main loop
+server.prepare_data()
+server.clear_data()
+server.populate_data("dcm::position::measured", measured_signal)
+server.populate_data("dcm::position::desired", desired_signal)
+server.send_data()
 ```
-The `vectors_collection_server` helps you to handle the data you want to send and to populate the metadata. To use this functionality, call `BipedalLocomotion.yarp_utilities.VectorsCollectionServer.populate_metadata` during the configuration phase. Once you have finished populating the metadata you should call `BipedalLocomotion.yarp_utilities.VectorsCollectionServer.finalize_metadata`
-```python
-#This code should go into the configuration phase
-logger_option = blf.parameters_handler.StdParametersHandler()
-logger_option.set_parameter_string("remote", "/test/log")
-if not self.vectors_collection_server.initialize(logger_option):
-    blf.log().error("[BalancingController::configure] Unable to configure the server.")
-    raise RuntimeError("Unable to configure the server.")
 
-# populate the metadata
-self.vectors_collection_server.populate_metadata("dcm::position::measured", ["x", "y"])
-self.vectors_collection_server.populate_metadata("dcm::position::desired", ["x", "y"])
+## Visualizing logged data
 
-self.vectors_collection_server.finalize_metadata() # this should be called only once when the metadata are ready
-```
-In the main loop, add the following code to prepare and populate the data:
-```python
-self.vectors_collection_server.prepare_data() # required to prepare the data to be sent
-self.vectors_collection_server.clear_data() # optional see the documentation
-self.vectors_collection_server.populate_data("dcm::position::measured", <signal>)
-self.vectors_collection_server.populate_data("dcm::position::desired", <signal>)
-self.vectors_collection_server.send_data()
-```
-**Note:** Replace `<signal>` with the actual data you want to log.
+Use [robot-log-visualizer](https://github.com/ami-iit/robot-log-visualizer) to explore the `.mat` files:
 
-## How to visualize the logged data
-To visualize the logged data you can use [robot-log-visualizer](https://github.com/ami-iit/robot-log-visualizer). To use the `robot-log-visualizer` you can follow the instructions in the [README](https://github.com/ami-iit/robot-log-visualizer/blob/main/README.md) file.
-
-Once you have installed the `robot-log-visualizer` you can open it from the command line with the following command:
 ```console
 robot-log-visualizer
 ```
-Then, you can open the mat file generated by the logger and explore the logged data as in the following video:
 
-[robot-log-visualizer.webm](https://github.com/ami-iit/robot-log-visualizer/assets/16744101/3fd5c516-da17-4efa-b83b-392b5ce1383b)
+Then open the `.mat` file generated by the logger. See the [robot-log-visualizer README](https://github.com/ami-iit/robot-log-visualizer/blob/main/README.md) for details.

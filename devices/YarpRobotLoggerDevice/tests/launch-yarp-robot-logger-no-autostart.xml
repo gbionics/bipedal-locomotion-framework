@@ -1,0 +1,27 @@
+<!-- Copyright (C) 2024 Istituto Italiano di Tecnologia (IIT). All rights reserved.
+This software may be modified and distributed under the terms of the
+BSD-3-Clause license. -->
+
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE robot PUBLIC "-//YARP//DTD yarprobotinterface 3.0//EN" "http://www.yarp.it/DTD/yarprobotinterfaceV3.0.dtd">
+
+<robot name="iCubGazeboV3" portprefix="icubSim" build="1" xmlns:xi="http://www.w3.org/2001/XInclude">
+    <devices>
+        <!-- A 4-axis controlboard -->
+        <device xmlns:xi="http://www.w3.org/2001/XInclude" name="sim_controlboard" type="fakeMotionControl">
+	        <group name="GENERAL">
+                <param name="AxisName">("sim_joint_1","sim_joint_2","sim_joint_3","sim_joint_4")</param>
+		        <param name="Joints">4</param>
+	        </group>
+        </device>
+
+        <!-- A IMU that streams constant values -->
+        <device xmlns:xi="http://www.w3.org/2001/XInclude" name="sim_imu" type="fakeIMU">
+            <param name="sensorName">sim_imu_sensor</param>
+		    <param name="constantValue">true</param>
+        </device>
+
+        <!-- YARPRobotLoggerDevice (no autostart) -->
+        <xi:include href="./yarp-robot-logger-no-autostart.xml" />
+    </devices>
+</robot>

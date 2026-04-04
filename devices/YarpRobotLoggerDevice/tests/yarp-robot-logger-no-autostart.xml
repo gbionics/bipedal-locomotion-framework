@@ -1,0 +1,59 @@
+<!-- Copyright (C) 2024 Istituto Italiano di Tecnologia (IIT). All rights reserved.
+This software may be modified and distributed under the terms of the
+BSD-3-Clause license. -->
+
+<?xml version="1.0" encoding="UTF-8" ?>
+<device  xmlns:xi="http://www.w3.org/2001/XInclude" name="yarp-robot-logger" type="YarpRobotLoggerDevice">
+  <param name="sampling_period_in_s">0.01</param>
+
+  <param name="port_prefix">/yarp-robot-logger</param>
+  <param name="log_text">true</param>
+  <param name="text_logging_subnames">("ergocub-torso/yarprobotinterface")</param>
+  <param name="code_status_cmds">("bash ${ROBOTOLOGY_SUPERBUILD_SOURCE_DIR}/scripts/robotologyGitStatus.sh > {filename}_robotology.txt" "apt list --installed > {filename}_apt.txt")</param>
+  <param name="maximum_admissible_time_step">1.0</param>
+  <param name="log_cameras">true</param>
+  <param name="log_robot_data">true</param>
+
+  <param name="auto_start_logging">false</param>
+
+  <param name="enable_real_time_logging" extern-name="enable_real_time_logging">false</param>
+  <group name="REAL_TIME_STREAMING">
+    <param name="remote">"/yarp-robot-logger/rt_logging"</param>
+  </group>
+
+  <group name="Telemetry">
+    <param name="save_period">20.0</param>
+  </group>
+
+  <group name="RobotSensorBridge">
+    <param name="check_for_nan">false</param>
+    <param name="stream_joint_states">true</param>
+    <param name="stream_motor_states">true</param>
+    <param name="stream_inertials">true</param>
+    <param name="stream_cartesian_wrenches">false</param>
+    <param name="stream_forcetorque_sensors">false</param>
+    <param name="stream_pids">false</param>
+    <param name="stream_motor_PWM">false</param>
+    <param name="stream_temperatures">false</param>
+
+    <group name="InertialSensors">
+      <param name="accelerometers_list">(sim_imu_sensor)</param>
+      <param name="gyroscopes_list">(sim_imu_sensor)</param>
+      <param name="magnetometers_list">(sim_imu_sensor)</param>
+      <param name="orientation_sensors_list">(sim_imu_sensor)</param>
+    </group>
+
+  </group>
+
+  <!-- ATTACH -->
+  <action phase="startup" level="15" type="attach">
+    <paramlist name="networks">
+      <elem name="sim_controlboard">sim_controlboard</elem>
+      <elem name="sim_imu">sim_imu</elem>
+    </paramlist>
+  </action>
+
+  <action phase="shutdown" level="2" type="detach" />
+  <!-- FINISH ATTACH-->
+
+</device>

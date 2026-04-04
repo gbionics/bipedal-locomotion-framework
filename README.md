@@ -101,6 +101,13 @@ cmake --build . --config Release --target install
 # :computer: Some utilities
 The **bipedal-locomotion-framework** ships also some utilities that can help you in the everyday tests on a real robot. You can find them in the [`utilities` folder](./utilities). Each utility contains a well-documented` README` where you can find further details.
 
+# :robot: Devices
+The **bipedal-locomotion-framework** also provides YARP devices in the [`devices` folder](./devices).
+
+|                    Device                   |                         Description                          |
+| :--------------------------------------------: | :----------------------------------------------------------: |
+| [`YarpRobotLoggerDevice`](./devices/YarpRobotLoggerDevice) | Logs robot sensor/actuator data, cameras, and exogenous signals to `.mat` files. Controllable via RPC (`record`, `saveData`, `stopRecording`). |
+
 # :snake: Python
 **bipedal-locomotion-framework** also provides Python bindings. Only a small set of the components implemented in the library have the corresponding Python bindings.
 
