@@ -46,6 +46,11 @@ jobs:
       run: |
         pixi info
 
+    # Workaround for https://github.com/gbionics/bipedal-locomotion-framework/issues/1021#issuecomment-4187263310
+    - name: Install pixi git as global
+      run: |
+        pixi global install git
+
     - name: Configure
       run: pixi run configure
 
