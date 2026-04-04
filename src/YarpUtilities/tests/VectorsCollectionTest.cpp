@@ -406,7 +406,36 @@ TEST_CASE_METHOD(VectorsCollectionFixture, "VectorsCollectionClient - Connection
 
     REQUIRE(client.initialize(clientHandler));
 
+    SECTION("isConnected returns false before connect") {
+        // Test: Client should report disconnected state before connect
+        REQUIRE_FALSE(client.isConnected());
+    }
+
+    SECTION("checkConnection returns false before connect") {
+        // Test: checkConnection should return false when not connected
+        REQUIRE_FALSE(client.checkConnection());
+    }
+
     SECTION("Successful connection to available server") {
+        // Test: Client should connect when server is available
+        // Behavior: Establishes both data and RPC port connections
+
+        // Allow server ports to fully open
+        std::this_thread::sleep_for(std::chrono::milliseconds(100));
+
+        REQUIRE(client.connect());
+        REQUIRE(client.isConnected());
+    }
+
+    SECTION("checkConnection returns true when connected") {
+        // Test: checkConnection should return true when both ports are alive
+        std::this_thread::sleep_for(std::chrono::milliseconds(100));
+        REQUIRE(client.connect());
+        REQUIRE(client.checkConnection());
+        REQUIRE(client.isConnected());
+    }
+
+    SECTION("Graceful connection failure when server unavailable") {
         // Test: Client should connect when server is available
         // Behavior: Establishes both data and RPC port connections
 
@@ -858,4 +887,89 @@ TEST_CASE_METHOD(VectorsCollectionFixture,
 
     BipedalLocomotion::YarpUtilities::VectorsCollectionMetadata meta;
     REQUIRE_FALSE(client.getMetadata(meta));
+}
+
+TEST_CASE_METHOD(VectorsCollectionFixture,
+                 "VectorsCollectionClient - checkConnection detects server shutdown")
+{
+    // Use a heap-allocated server so we can destroy it mid-test
+    auto server = std::make_unique<VectorsCollectionServer>();
+    REQUIRE(server->initialize(serverHandler));
+    server->populateMetadata("sig", {"a", "b"});
+    REQUIRE(server->finalizeMetadata());
+
+    VectorsCollectionClient client;
+    REQUIRE(client.initialize(clientHandler));
+
+    std::this_thread::sleep_for(std::chrono::milliseconds(100));
+    REQUIRE(client.connect());
+    REQUIRE(client.isConnected());
+    REQUIRE(client.checkConnection());
+
+    // Destroy the server, which closes its ports
+    server.reset();
+    std::this_thread::sleep_for(std::chrono::milliseconds(200));
+
+    // checkConnection should detect the broken connections
+    REQUIRE_FALSE(client.checkConnection());
+    REQUIRE_FALSE(client.isConnected());
+
+    // After detecting disconnection, connect should fail (no server)
+    REQUIRE_FALSE(client.connect());
+}
+
+TEST_CASE_METHOD(VectorsCollectionFixture,
+                 "VectorsCollectionClient - reconnect after server restart")
+{
+    // Start a server, connect, then destroy and recreate it
+    auto server = std::make_unique<VectorsCollectionServer>();
+    REQUIRE(server->initialize(serverHandler));
+    server->populateMetadata("sig", {"x"});
+    REQUIRE(server->finalizeMetadata());
+
+    VectorsCollectionClient client;
+    REQUIRE(client.initialize(clientHandler));
+
+    std::this_thread::sleep_for(std::chrono::milliseconds(100));
+    REQUIRE(client.connect());
+    REQUIRE(client.checkConnection());
+
+    // Send some data
+    server->prepareData();
+    REQUIRE(server->populateData("sig", std::vector<double>{1.0}));
+    server->sendData();
+    std::this_thread::sleep_for(std::chrono::milliseconds(50));
+
+    auto* data = client.readData(false);
+    REQUIRE(data != nullptr);
+    REQUIRE(data->vectors.at("sig")[0] == Catch::Approx(1.0));
+
+    // Destroy the server
+    server.reset();
+    std::this_thread::sleep_for(std::chrono::milliseconds(200));
+    REQUIRE_FALSE(client.checkConnection());
+
+    // Create a new server on the same ports
+    server = std::make_unique<VectorsCollectionServer>();
+    REQUIRE(server->initialize(serverHandler));
+    server->populateMetadata("sig", {"x"});
+    REQUIRE(server->finalizeMetadata());
+    std::this_thread::sleep_for(std::chrono::milliseconds(100));
+
+    // Reconnect
+    REQUIRE(client.connect());
+    REQUIRE(client.isConnected());
+    REQUIRE(client.checkConnection());
+
+    // Verify data flows again
+    server->prepareData();
+    REQUIRE(server->populateData("sig", std::vector<double>{42.0}));
+    server->sendData();
+    std::this_thread::sleep_for(std::chrono::milliseconds(50));
+
+    data = client.readData(false);
+    if (data != nullptr)
+    {
+        REQUIRE(data->vectors.at("sig")[0] == Catch::Approx(42.0));
+    }
 }

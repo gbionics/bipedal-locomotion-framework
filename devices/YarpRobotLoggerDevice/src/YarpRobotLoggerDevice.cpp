@@ -1088,6 +1088,29 @@ bool BipedalLocomotion::YarpRobotLoggerDevice::record()
         m_lookForNewLogsThread = std::thread([this] { this->lookForNewLogs(); });
     }
 
+    // Refresh all exogenous signal connections so they are re-established cleanly
+    auto refreshExogenousConnections = [](auto& signals) {
+        for (auto& [name, signal] : signals)
+        {
+            signal.disconnect();
+            signal.connected = false;
+            signal.dataArrived = false;
+        }
+    };
+    refreshExogenousConnections(m_vectorsCollectionSignals);
+    refreshExogenousConnections(m_vectorSignals);
+    refreshExogenousConnections(m_stringSignals);
+    refreshExogenousConnections(m_humanStateSignals);
+    refreshExogenousConnections(m_wearableTargetsSignals);
+    refreshExogenousConnections(m_wearableDataSignals);
+    refreshExogenousConnections(m_imageSignals);
+
+    // Also clear cached metadata for VectorsCollection signals
+    for (auto& [name, signal] : m_vectorsCollectionSignals)
+    {
+        signal.metadata.vectors.clear();
+    }
+
     // run the thread for reading the exogenous signals
     m_lookForNewExogenousSignalThread = std::thread([this] { this->lookForExogenousSignals(); });
 
@@ -1625,6 +1648,29 @@ void YarpRobotLoggerDevice::lookForExogenousSignals()
         }
     };
 
+    auto checkExogeneousConnections
+        = [this](
+              std::unordered_map<std::string, VectorsCollectionSignal>& signals) -> void {
+        for (auto& [name, signal] : signals)
+        {
+            if (!signal.connected)
+            {
+                continue;
+            }
+
+            std::lock_guard<std::mutex> lock(signal.mutex);
+            if (!signal.client.checkConnection())
+            {
+                log()->warn("[YarpRobotLoggerDevice::lookForExogenousSignals] Connection lost "
+                            "for exogenous signal '{}'. Will attempt to reconnect.",
+                            name);
+                signal.connected = false;
+                signal.dataArrived = false;
+                signal.metadata.vectors.clear();
+            }
+        }
+    };
+
     while (m_lookForNewExogenousSignalIsRunning)
     {
         // detect if a clock has been reset
@@ -1647,7 +1693,8 @@ void YarpRobotLoggerDevice::lookForExogenousSignals()
         connectToExogeneous(m_wearableDataSignals);
         connectToExogeneous(m_imageSignals);
 
-        // TODO check for updated metadata from already connected signals
+        // check if already connected VectorsCollection signals are still alive
+        checkExogeneousConnections(m_vectorsCollectionSignals);
 
         // Start the logging for exogenous images
         for (auto& [name, signal] : m_imageSignals)

@@ -123,6 +123,37 @@ bool VectorsCollectionClient::disconnect()
     return true;
 }
 
+bool VectorsCollectionClient::isConnected() const
+{
+    return m_pimpl->isConnected;
+}
+
+bool VectorsCollectionClient::checkConnection()
+{
+    if (!m_pimpl->isConnected)
+    {
+        return false;
+    }
+
+    // Actively verify that both YARP connections (data and RPC) are still alive
+    const bool dataConnected
+        = yarp::os::Network::isConnected(m_pimpl->remotePortName, m_pimpl->localPortName);
+    const bool rpcConnected
+        = yarp::os::Network::isConnected(m_pimpl->localRpcPortName, m_pimpl->remoteRpcPortName);
+
+    if (!dataConnected || !rpcConnected)
+    {
+        log()->warn("[VectorsCollectionClient::checkConnection] Connection lost. Data port "
+                    "connected: {}, RPC port connected: {}.",
+                    dataConnected,
+                    rpcConnected);
+        m_pimpl->isConnected = false;
+        return false;
+    }
+
+    return true;
+}
+
 bool VectorsCollectionClient::connect()
 {
     constexpr auto rpcCarrier = "tcp";

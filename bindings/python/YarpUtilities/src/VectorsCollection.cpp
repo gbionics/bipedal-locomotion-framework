@@ -69,6 +69,8 @@ void CreateVectorsCollectionClient(pybind11::module& module)
             py::arg("handler"))
         .def("connect", &VectorsCollectionClient::connect)
         .def("disconnect", &VectorsCollectionClient::disconnect)
+        .def("is_connected", &VectorsCollectionClient::isConnected)
+        .def("check_connection", &VectorsCollectionClient::checkConnection)
         .def("get_metadata",
              [](VectorsCollectionClient& impl)
                  -> BipedalLocomotion::YarpUtilities::VectorsCollectionMetadata {

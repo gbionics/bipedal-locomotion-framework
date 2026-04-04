@@ -66,6 +66,23 @@ public:
     bool disconnect();
 
     /**
+     * Check if the client is currently connected (cached state).
+     * @return true if the client believes it is connected, false otherwise.
+     * @note This returns the cached connection state. Use checkConnection() to actively verify
+     * YARP port connectivity.
+     */
+    bool isConnected() const;
+
+    /**
+     * Actively verify that the YARP port connections are still alive.
+     * If any connection (data or RPC) is found to be broken, the internal state is updated to
+     * disconnected.
+     * @return true if all connections are still alive, false otherwise.
+     * @note After this method returns false, call connect() to re-establish the connections.
+     */
+    bool checkConnection();
+
+    /**
      * Check if new metadata is available.
      * @return true if new metadata is available, false otherwise.
      * @note it requires that the client is connected and that at least one data or metadata has
