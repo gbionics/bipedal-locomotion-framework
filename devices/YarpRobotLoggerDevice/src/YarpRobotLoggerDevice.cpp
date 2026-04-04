@@ -1302,22 +1302,6 @@ bool BipedalLocomotion::YarpRobotLoggerDevice::prepareRobotLogging()
                                magnetometerElementNames);
         }
 
-        // an IMU contains a gyro accelerometer and an orientation sensor
-        for (const auto& sensorName : m_robotSensorBridge->getIMUsList())
-        {
-            std::string fullAccelerometerSensorName = accelerometersName + treeDelim + sensorName;
-            std::string fullGyroSensorName = gyrosName + treeDelim + sensorName;
-            std::string fullOrientationsSensorName = orientationsName + treeDelim + sensorName;
-            ok = ok
-                 && addChannel(fullAccelerometerSensorName,
-                               accelerometerElementNames.size(), //
-                               accelerometerElementNames);
-            ok = ok && addChannel(fullGyroSensorName, gyroElementNames.size(), gyroElementNames);
-            ok = ok
-                 && addChannel(fullOrientationsSensorName,
-                               orientationElementNames.size(), //
-                               orientationElementNames);
-        }
     }
 
     if (m_streamCartesianWrenches)
@@ -1631,22 +1615,6 @@ bool YarpRobotLoggerDevice::createFramesFolder(std::shared_ptr<VideoWriter::Imag
     std::lock_guard guard(imageSaver->mutex);
     std::filesystem::create_directory(imageSaver->framesPath);
     return true;
-}
-
-void YarpRobotLoggerDevice::unpackIMU(Eigen::Ref<const analog_sensor_t> signal,
-                                      Eigen::Ref<accelerometer_t> accelerometer,
-                                      Eigen::Ref<gyro_t> gyro,
-                                      Eigen::Ref<orientation_t> orientation)
-{
-    // the output consists 12 double, organized as follows:
-    //  euler angles [3]
-    // linear acceleration [3]
-    // angular speed [3]
-    // magnetic field [3]
-    // http://wiki.icub.org/wiki/Inertial_Sensor
-    orientation = signal.segment<3>(0);
-    accelerometer = signal.segment<3>(3);
-    gyro = signal.segment<3>(6);
 }
 
 void YarpRobotLoggerDevice::lookForExogenousSignals()
@@ -2303,28 +2271,6 @@ void YarpRobotLoggerDevice::run()
             }
         }
 
-        // an IMU contains a gyro accelerometer and an orientation sensor
-        for (const auto& sensorName : m_robotSensorBridge->getIMUsList())
-        {
-            if (m_robotSensorBridge->getIMUMeasurement(sensorName, m_analogSensorBuffer))
-            {
-                // it will return a tuple containing the Accelerometer, the gyro and the
-                // orientation
-                this->unpackIMU(m_analogSensorBuffer,
-                                m_acceloremeterBuffer,
-                                m_gyroBuffer,
-                                m_orientationBuffer);
-
-                signalFullName = accelerometersName + treeDelim + sensorName;
-                logData(signalFullName, m_acceloremeterBuffer, time);
-
-                signalFullName = gyrosName + treeDelim + sensorName;
-                logData(signalFullName, m_gyroBuffer, time);
-
-                signalFullName = orientationsName + treeDelim + sensorName;
-                logData(signalFullName, m_orientationBuffer, time);
-            }
-        }
     }
 
     if (m_streamCartesianWrenches)

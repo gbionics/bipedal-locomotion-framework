@@ -60,12 +60,6 @@ void CreateYarpSensorBridge(pybind11::module& module)
                  bool ok = impl.getJointsList(list);
                  return std::make_tuple(ok, list);
              })
-        .def("get_imus_list",
-             [](YarpSensorBridge& impl) {
-                 std::vector<std::string> list;
-                 bool ok = impl.getIMUsList(list);
-                 return std::make_tuple(ok, list);
-             })
         .def("get_gyroscopes_list",
              [](YarpSensorBridge& impl) {
                  std::vector<std::string> list;
@@ -135,15 +129,6 @@ void CreateYarpSensorBridge(pybind11::module& module)
                  bool ok = impl.getJointAccelerations(joints, receiveTimeInSeconds);
                  return std::make_tuple(ok, joints, receiveTimeInSeconds);
              })
-        .def(
-            "get_imu_measurement",
-            [](YarpSensorBridge& impl, const std::string& name) {
-                Eigen::Matrix<double, 12, 1> measurement;
-                double receiveTimeInSeconds;
-                bool ok = impl.getIMUMeasurement(name, measurement, receiveTimeInSeconds);
-                return std::make_tuple(ok, measurement, receiveTimeInSeconds);
-            },
-            py::arg("sensor_name"))
         .def(
             "get_linear_accelerometer_measurement",
             [](YarpSensorBridge& impl, const std::string& name) {

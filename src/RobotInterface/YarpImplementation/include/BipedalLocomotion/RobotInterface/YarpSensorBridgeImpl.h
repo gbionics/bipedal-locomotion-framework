@@ -22,7 +22,6 @@
 
 // YARP Sensor Interfaces
 #include <yarp/dev/IAmplifierControl.h>
-#include <yarp/dev/IAnalogSensor.h>
 #include <yarp/dev/ICurrentControl.h>
 #include <yarp/dev/IGenericSensor.h>
 #include <yarp/dev/IMotor.h>
@@ -145,17 +144,8 @@ struct YarpSensorBridge::Impl
 
     ControlBoardRemapperMeasures controlBoardRemapperMeasures;
 
-    /**< map of IMU sensors attached through generic sensor interfaces */
-    std::unordered_map<std::string, yarp::dev::IGenericSensor*> analogIMUInterface;
-
     /**< map of cartesian wrench streams attached through generic sensor interfaces */
     std::unordered_map<std::string, yarp::dev::IGenericSensor*> cartesianWrenchInterface;
-
-    /**< map of six axis force torque sensors attached through analog sensor interfaces */
-    std::unordered_map<std::string, yarp::dev::IAnalogSensor*> analogSixAxisFTSensorsInterface;
-
-    /** < map holding analog IMU sensor measurements (Used only for analog sensor interfaces) */
-    std::unordered_map<std::string, StampedYARPVector> IMUMeasures;
 
     /**< map holding six axis force torque measures */
     std::unordered_map<std::string, StampedYARPVector> FTMeasures;
@@ -172,9 +162,7 @@ struct YarpSensorBridge::Impl
     /**< map holding temperature measures */
     std::unordered_map<std::string, StampedYARPVector> temperatureMeasures;
 
-    const int nrChannelsInYARPGenericIMUSensor{12};
     const int nrChannelsInYARPGenericCartesianWrench{6};
-    const int nrChannelsInYARPAnalogSixAxisFTSensor{6};
 
     std::vector<std::string> failedSensorReads;
     SensorBridgeMetaData metaData; /**< struct holding meta data **/
@@ -322,11 +310,6 @@ struct YarpSensorBridge::Impl
             return false;
         }
 
-        if (ptr->getParameter("imu_list", metaData.sensorsList.IMUsList))
-        {
-            metaData.bridgeOptions.isIMUEnabled = true;
-        }
-
         if (ptr->getParameter("accelerometers_list", metaData.sensorsList.linearAccelerometersList))
         {
             metaData.bridgeOptions.isLinearAccelerometerEnabled = true;
@@ -459,13 +442,7 @@ struct YarpSensorBridge::Impl
                 }
 
                 int nrChannels;
-                if constexpr (std::is_same_v<SensorType, yarp::dev::IAnalogSensor>)
-                {
-                    nrChannels = sensorInterface->getChannels();
-                } else if constexpr (std::is_same_v<SensorType, yarp::dev::IGenericSensor>)
-                {
-                    sensorInterface->getChannels(&nrChannels);
-                }
+                sensorInterface->getChannels(&nrChannels);
 
                 if (nrChannels != nrChannelsInSensor)
                 {
@@ -840,23 +817,6 @@ struct YarpSensorBridge::Impl
     bool attachAllInertials(const yarp::dev::PolyDriverList& devList)
     {
         constexpr auto logPrefix = "[YarpSensorBridge::Impl::attachAllInertials]";
-        if (metaData.bridgeOptions.isIMUEnabled)
-        {
-            // check if a generic sensor has 12 channels implying it is a IMU sensor through a
-            // GenericSensor Interfaces
-            std::string_view interfaceType{"Generic IMU Interface"};
-            if (!attachAllGenericOrAnalogSensors(devList,
-                                                 analogIMUInterface,
-                                                 nrChannelsInYARPGenericIMUSensor,
-                                                 metaData.sensorsList.IMUsList,
-                                                 interfaceType))
-            {
-                log()->error("{} Unable to attach the imus as generic or analog sensors.",
-                             logPrefix);
-                return false;
-            }
-        }
-
         if (metaData.bridgeOptions.isLinearAccelerometerEnabled)
         {
             std::string_view interfaceType{"IThreeAxisLinearAccelerometers"};
@@ -1219,49 +1179,13 @@ struct YarpSensorBridge::Impl
 
         constexpr auto logPrefix = "[YarpSensorBridge::Impl::attachAllSixAxisForceTorqueSensors]";
 
-        std::vector<std::string> analogFTSensors;
-        std::vector<std::string> masFTSensors;
-        // attach MAS sensors
-        if (attachRemappedMASSensor(devList, masForceTorquesInterface.sixAxisFTSensors))
+        std::string_view interfaceType{"ISixAxisForceTorqueSensors"};
+        if (!attachAndCheckMASSensors(devList,
+                                      masForceTorquesInterface.sixAxisFTSensors,
+                                      metaData.sensorsList.sixAxisForceTorqueSensorsList,
+                                      interfaceType))
         {
-            // get MAS FT sensor names
-            masFTSensors = getAllSensorsInMASInterface(masForceTorquesInterface.sixAxisFTSensors);
-            auto allFTsInMetaData = metaData.sensorsList.sixAxisForceTorqueSensorsList;
-
-            // compare with sensorList - those not available in the MAS interface list
-            // are assumed to be analog FT sensors
-            std::sort(masFTSensors.begin(), masFTSensors.end());
-            std::sort(allFTsInMetaData.begin(), allFTsInMetaData.end());
-            std::set_difference(allFTsInMetaData.begin(),
-                                allFTsInMetaData.end(),
-                                masFTSensors.begin(),
-                                masFTSensors.end(),
-                                std::back_inserter(analogFTSensors));
-        } else
-        {
-            // if there are no MAS FT sensors then all the FT sensors in the configuration
-            // are analog FT sensors
-            analogFTSensors = metaData.sensorsList.sixAxisForceTorqueSensorsList;
-        }
-
-        if (!checkAttachedMASSensors(devList,
-                                     masForceTorquesInterface.sixAxisFTSensors,
-                                     masFTSensors))
-        {
-            log()->error("{} Could not find atleast one of the required MAS FT sensors.",
-                         logPrefix);
-            return false;
-        }
-
-        // check if a generic sensor has 12 channels implying it is a IMU sensor through a
-        // GenericSensor Interfaces
-        std::string_view interfaceType{"Analog Six Axis FT Interface"};
-        if (!attachAllGenericOrAnalogSensors(devList,
-                                             analogSixAxisFTSensorsInterface,
-                                             nrChannelsInYARPAnalogSixAxisFTSensor,
-                                             analogFTSensors,
-                                             interfaceType))
-        {
+            log()->error("{} Could not find all required MAS FT sensors.", logPrefix);
             return false;
         }
 
@@ -1320,18 +1244,17 @@ struct YarpSensorBridge::Impl
     }
 
     /**
-     * Read generic or analog sensor stream and update internal measurement buffer
+     * Read a generic sensor stream and update internal measurement buffer
      */
-    template <typename SensorType>
-    bool
-    readAnalogOrGenericSensor(const std::string& sensorName,
-                              const int& nrChannelsInYARPSensor,
-                              std::unordered_map<std::string, SensorType*>& interfaceMap,
-                              std::unordered_map<std::string, StampedYARPVector>& measurementMap,
-                              bool checkForNan = false)
+    bool readGenericSensor(
+        const std::string& sensorName,
+        const int& nrChannelsInYARPSensor,
+        std::unordered_map<std::string, yarp::dev::IGenericSensor*>& interfaceMap,
+        std::unordered_map<std::string, StampedYARPVector>& measurementMap,
+        bool checkForNan = false)
     {
         bool ok{true};
-        constexpr auto logPrefix = "[YarpSensorBridge::Impl::readAnalogOrGenericSensor]";
+        constexpr auto logPrefix = "[YarpSensorBridge::Impl::readGenericSensor]";
         if (!checkSensor(interfaceMap, sensorName))
         {
             return false;
@@ -1343,14 +1266,7 @@ struct YarpSensorBridge::Impl
         yarp::sig::Vector sensorMeasure;
         sensorMeasure.resize(nrChannelsInYARPSensor);
 
-        if constexpr (std::is_same_v<SensorType, yarp::dev::IAnalogSensor>)
-        {
-            auto retValue = interface->read(sensorMeasure);
-            ok = ok && (retValue == yarp::dev::IAnalogSensor::AS_OK);
-        } else if constexpr (std::is_same_v<SensorType, yarp::dev::IGenericSensor>)
-        {
-            ok = ok && interface->read(sensorMeasure);
-        }
+        ok = ok && interface->read(sensorMeasure);
 
         if (!ok)
         {
@@ -1366,23 +1282,6 @@ struct YarpSensorBridge::Impl
             {
                 return false;
             }
-        }
-
-        // for IMU measurements convert angular velocity  measurements to radians per s
-        // and convert orientation measurements to radians
-        // enforcing the assumption that if dimensions of sensor channel is 12 then its an IMU
-        // sensor
-        if (nrChannelsInYARPSensor == nrChannelsInYARPGenericIMUSensor)
-        {
-            // See http://wiki.icub.org/wiki/Inertial_Sensor
-            // 0, 1 and 2 indices correspond to orientation measurements
-            sensorMeasure[0] = deg2rad(sensorMeasure[0]);
-            sensorMeasure[1] = deg2rad(sensorMeasure[1]);
-            sensorMeasure[2] = deg2rad(sensorMeasure[2]);
-            // 6, 7 and 8 indices correspond to angular velocity measurements
-            sensorMeasure[6] = deg2rad(sensorMeasure[6]);
-            sensorMeasure[7] = deg2rad(sensorMeasure[7]);
-            sensorMeasure[8] = deg2rad(sensorMeasure[8]);
         }
 
         measurementMap[sensorName].first = sensorMeasure;
@@ -1898,36 +1797,6 @@ struct YarpSensorBridge::Impl
         return true;
     }
 
-    bool readAllIMUs(std::vector<std::string>& failedSensorReads)
-    {
-        if (!metaData.bridgeOptions.isIMUEnabled)
-        {
-            // do nothing
-            return true;
-        }
-
-        constexpr auto logPrefix = "[YarpSensorBridge::Impl::readAllIMUs]";
-        bool allIMUsReadCorrectly{true};
-        failedSensorReads.clear();
-        for (auto const& imu : analogIMUInterface)
-        {
-            const auto& imuName = imu.first;
-            bool ok = readAnalogOrGenericSensor(imuName,
-                                                nrChannelsInYARPGenericIMUSensor,
-                                                analogIMUInterface,
-                                                IMUMeasures,
-                                                checkForNAN);
-            if (!ok)
-            {
-                log()->error("{} Read IMU failed for {}.", logPrefix, imuName);
-                failedSensorReads.emplace_back(imuName);
-            }
-            allIMUsReadCorrectly = ok && allIMUsReadCorrectly;
-        }
-
-        return allIMUsReadCorrectly;
-    }
-
     bool readAllCartesianWrenches(std::vector<std::string>& failedSensorReads)
     {
         if (!metaData.bridgeOptions.isCartesianWrenchEnabled)
@@ -1943,7 +1812,7 @@ struct YarpSensorBridge::Impl
         for (auto const& wrenchUnit : cartesianWrenchInterface)
         {
             const auto& wrenchName = wrenchUnit.first;
-            bool ok = readAnalogOrGenericSensor(wrenchName,
+            bool ok = readGenericSensor(wrenchName,
                                                 nrChannelsInYARPGenericCartesianWrench,
                                                 cartesianWrenchInterface,
                                                 cartesianWrenchMeasures,
@@ -2034,38 +1903,6 @@ struct YarpSensorBridge::Impl
                                  checkForNAN);
     }
 
-    bool readAllAnalogSixAxisForceTorqueSensors(std::vector<std::string>& failedSensorReads)
-    {
-        if (!metaData.bridgeOptions.isSixAxisForceTorqueSensorEnabled)
-        {
-            // do nothing
-            return true;
-        }
-
-        constexpr auto logPrefix = "[YarpSensorBridge::Impl::"
-                                   "readAllAnalogSixAxisForceTorqueSensors]";
-
-        bool allFTsReadCorrectly{true};
-        failedSensorReads.clear();
-        for (auto const& FTUnit : analogSixAxisFTSensorsInterface)
-        {
-            const auto& FTName = FTUnit.first;
-            bool ok = readAnalogOrGenericSensor(FTName,
-                                                nrChannelsInYARPAnalogSixAxisFTSensor,
-                                                analogSixAxisFTSensorsInterface,
-                                                FTMeasures,
-                                                checkForNAN);
-            if (!ok)
-            {
-                log()->error("{} Read FT sensor failed for {}.", logPrefix, FTName);
-                failedSensorReads.emplace_back(FTName);
-            }
-            allFTsReadCorrectly = ok && allFTsReadCorrectly;
-        }
-
-        return allFTsReadCorrectly;
-    }
-
     bool readAllMASTemperatures(std::vector<std::string>& failedSensorReads)
     {
         if (!metaData.bridgeOptions.isTemperatureSensorEnabled)
@@ -2089,13 +1926,6 @@ struct YarpSensorBridge::Impl
         if (!readControlBoardInterface(checkForNAN))
         {
             failedReadAllSensors.emplace_back(std::string("RemoteControlBoardRemapper"));
-        }
-
-        if (!readAllIMUs(failedReads))
-        {
-            failedReadAllSensors.insert(failedReadAllSensors.end(),
-                                        failedReads.begin(),
-                                        failedReads.end());
         }
 
         if (!readAllCartesianWrenches(failedReads))
@@ -2134,13 +1964,6 @@ struct YarpSensorBridge::Impl
         }
 
         if (!readAllMASSixAxisForceTorqueSensors(failedReads))
-        {
-            failedReadAllSensors.insert(failedReadAllSensors.end(),
-                                        failedReads.begin(),
-                                        failedReads.end());
-        }
-
-        if (!readAllAnalogSixAxisForceTorqueSensors(failedReads))
         {
             failedReadAllSensors.insert(failedReadAllSensors.end(),
                                         failedReads.begin(),

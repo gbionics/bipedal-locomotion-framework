@@ -31,7 +31,6 @@ namespace RobotInterface
 struct SensorBridgeOptions
 {
     bool isJointSensorsEnabled{false}; /**< flag to connect joint measurement sources */
-    bool isIMUEnabled{false}; /**< flag to connect IMU measurement sources */
     bool isLinearAccelerometerEnabled{false}; /**< flag to connect linear accelerometer measurement
                                                  sources */
     bool isGyroscopeEnabled{false}; /**< flag to connect gyroscope measurement sources */
@@ -61,7 +60,6 @@ struct SensorLists
 {
     std::vector<std::string> jointsList; /**< list of joints attached to the bridge */
     std::vector<JointType> jointsTypeList; /**< list of joint types */
-    std::vector<std::string> IMUsList; /**< list of IMUs attached to the bridge */
     std::vector<std::string> linearAccelerometersList; /**< list of linear accelerometers attached
                                                           to the bridge */
     std::vector<std::string> gyroscopesList; /**< list of gyroscopes attached to the bridge */
@@ -110,16 +108,6 @@ public:
      * @return  true/false in case of success/failure
      */
     virtual bool getJointsList(std::vector<std::string>& jointsList)
-    {
-        return false;
-    };
-
-    /**
-     * Get imu sensors
-     * @param[out] IMUsList list of IMUs attached to the bridge
-     * @return  true/false in case of success/failure
-     */
-    virtual bool getIMUsList(std::vector<std::string>& IMUsList)
     {
         return false;
     };
@@ -291,26 +279,6 @@ public:
      */
     virtual bool getJointAccelerations(Eigen::Ref<Eigen::VectorXd> jointAccelerations,
                                        OptionalDoubleRef receiveTimeInSeconds = {})
-    {
-        return false;
-    };
-
-    /**
-     * Get IMU measurement
-     * The serialization of measurments is as follows,
-     *   (rpy acc omega mag)
-     *  - rpy in radians Roll-Pitch-Yaw Euler angles
-     *  - acc in m/s^2 linear accelerometer measurements
-     *  - omega in rad/s gyroscope measurements
-     *  - mag in tesla magnetometer measurements
-     * @param[in] imuName name of the IMU
-     * @param[out] imuMeasurement imu measurement of size 12
-     * @param[out] receiveTimeInSeconds time at which the measurement was received
-     * @return true/false in case of success/failure
-     */
-    virtual bool getIMUMeasurement(const std::string& imuName,
-                                   Eigen::Ref<Vector12d> imuMeasurement,
-                                   OptionalDoubleRef receiveTimeInSeconds = {})
     {
         return false;
     };

@@ -298,15 +298,15 @@ bool FloatingBaseEstimatorDevice::updateMeasurements()
 
 bool FloatingBaseEstimatorDevice::updateInertialBuffers()
 {
-    Eigen::Matrix<double, 12, 1> imuMeasure;
-    if (!m_robotSensorBridge->getIMUMeasurement(m_baseLinkImuName, imuMeasure))
+    Eigen::Vector3d accMeasure;
+    Eigen::Vector3d gyroMeasure;
+    if (!m_robotSensorBridge->getLinearAccelerometerMeasurement(m_baseLinkImuName, accMeasure)
+        || !m_robotSensorBridge->getGyroscopeMeasure(m_baseLinkImuName, gyroMeasure))
     {
         return false;
     }
 
-    const int accOffset{3};
-    const int gyroOffset{6};
-    if (!m_estimator->setIMUMeasurement(imuMeasure.segment<3>(accOffset), imuMeasure.segment<3>(gyroOffset)))
+    if (!m_estimator->setIMUMeasurement(accMeasure, gyroMeasure))
     {
         return false;
     }
