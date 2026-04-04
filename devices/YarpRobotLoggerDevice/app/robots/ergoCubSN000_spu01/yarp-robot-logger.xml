@@ -22,7 +22,7 @@ BSD-3-Clause license. -->
   <param name="port_prefix">/yarp-robot-logger</param>
   <param name="log_text">true</param>
   <param name="text_logging_subnames">("ergocub-torso/yarprobotinterface")</param>
-  <!-- <param name="code_status_cmd_prefixes">("ssh ergocub@10.0.2.2" "ssh ergocub@10.0.2.3")</param> -->
+  <param name="code_status_cmds">("bash ${ROBOTOLOGY_SUPERBUILD_SOURCE_DIR}/scripts/robotologyGitStatus.sh > {filename}_robotology.txt" "apt list --installed > {filename}_apt.txt")</param>
 
   <param name="enable_real_time_logging" extern-name="enable_real_time_logging">false</param>
   <group name="REAL_TIME_STREAMING">
