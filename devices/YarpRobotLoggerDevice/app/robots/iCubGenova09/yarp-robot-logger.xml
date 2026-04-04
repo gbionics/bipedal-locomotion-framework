@@ -10,8 +10,7 @@ BSD-3-Clause license. -->
   <param name="port_prefix">/yarp-robot-logger</param>
   <param name="log_text">true</param>
   <param name="text_logging_subnames">("icub-head/yarprobotinterface")</param>
-  <param name="log_code_status">true</param>
-  <param name="code_status_cmd_prefixes">("ssh icub@10.0.0.2" "ssh icub@10.0.0.150")</param>
+  <param name="code_status_cmds">("ssh icub@10.0.0.2 'bash ${ROBOTOLOGY_SUPERBUILD_SOURCE_DIR}/scripts/robotologyGitStatus.sh' > {filename}_robotology_10_0_0_2.txt" "ssh icub@10.0.0.2 'apt list --installed' > {filename}_apt_10_0_0_2.txt" "ssh icub@10.0.0.150 'bash ${ROBOTOLOGY_SUPERBUILD_SOURCE_DIR}/scripts/robotologyGitStatus.sh' > {filename}_robotology_10_0_0_150.txt" "ssh icub@10.0.0.150 'apt list --installed' > {filename}_apt_10_0_0_150.txt")</param>
   <param name="log_cameras">true</param>
   <param name="log_frames">false</param>
   <param name="log_robot_data">true</param>
