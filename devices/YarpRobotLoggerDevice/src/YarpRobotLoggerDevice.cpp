@@ -111,19 +111,8 @@ YarpRobotLoggerDevice::YarpRobotLoggerDevice(double period,
 }
 
 YarpRobotLoggerDevice::YarpRobotLoggerDevice()
-    : yarp::os::PeriodicThread(0.01,
-                               yarp::os::ShouldUseSystemClock::No,
-                               yarp::os::PeriodicThreadClock::Absolute)
+    : YarpRobotLoggerDevice(0.01, yarp::os::ShouldUseSystemClock::No)
 {
-    // Use the yarp clock in blf
-    BipedalLocomotion::System::ClockBuilder::setFactory(
-        std::make_shared<BipedalLocomotion::System::YarpClockFactory>());
-
-    // the logging message are streamed using yarp
-    BipedalLocomotion::TextLogging::LoggerBuilder::setFactory(
-        std::make_shared<BipedalLocomotion::TextLogging::YarpLoggerFactory>());
-
-    m_sendDataRT = false;
 }
 
 YarpRobotLoggerDevice::~YarpRobotLoggerDevice() = default;
@@ -212,6 +201,13 @@ bool YarpRobotLoggerDevice::open(yarp::os::Searchable& config)
                     m_acceptableStep);
     }
 
+    if (!params->getParameter("auto_start_logging", m_autoStartLogging))
+    {
+        log()->info("{} Unable to get the 'auto_start_logging' parameter. Default value: {}.",
+                    logPrefix,
+                    m_autoStartLogging);
+    }
+
     if (!params->getParameter("log_robot_data", m_logRobot))
     {
         log()->info("{} Unable to get the 'log_robot_data' parameter for the telemetry. Default "
@@ -281,7 +277,7 @@ bool YarpRobotLoggerDevice::open(yarp::os::Searchable& config)
                             fourccCodecUrl);
             } else if (m_videoCodecCode.size() != 4)
             {
-                constexpr auto fourccCodecUrl = "https://abcavi.kibi.ru/fourcc.php";
+                constexpr auto fourccCodecUrl = "https://fourcc.org/codecs.php";
                 log()->error("{} The parameter 'video_codec_code' must be a string with 4 "
                              "characters. You can find the list of supported parameters at: {}.",
                              logPrefix,
@@ -369,7 +365,13 @@ bool YarpRobotLoggerDevice::open(yarp::os::Searchable& config)
         log()->info("{} Waiting for the attach phases before starting the logging.", logPrefix);
     } else
     {
-        return startLogging();
+        if (m_autoStartLogging)
+        {
+            return startLogging();
+        }
+        log()->info("{} auto_start_logging is disabled. Logging will not start automatically. "
+                    "Use the RPC command 'startLogging' to start.",
+                    logPrefix);
     }
 
     return true;
@@ -463,36 +465,36 @@ bool YarpRobotLoggerDevice::setupExogenousInputs(
         return true;
     };
 
-    inputs.clear();
-    if (!ptr->getParameter("vectors_exogenous_inputs", inputs))
+    // Helper to open a group of exogenous signal ports.
+    // If 'required' is true, failure to find the parameter returns false.
+    // Otherwise, the missing parameter is just a warning and we continue.
+    auto openExogenousGroup = [&](const std::string& paramName,
+                                  auto& signalsMap,
+                                  bool required) -> bool {
+        inputs.clear();
+        if (!ptr->getParameter(paramName, inputs))
+        {
+            if (required)
+            {
+                log()->error("{} Unable to get the '{}'.", logPrefix, paramName);
+                return false;
+            }
+            log()->warn("{} Unable to get the '{}'. Assuming none.", logPrefix, paramName);
+        }
+        return openExogenousSignals(ptr, inputs, signalsMap);
+    };
+
+    if (!openExogenousGroup("vectors_exogenous_inputs", m_vectorSignals, true))
     {
-        log()->error("{} Unable to get the exogenous inputs.", logPrefix);
         return false;
     }
 
-    if (!openExogenousSignals(ptr, inputs, m_vectorSignals))
+    if (!openExogenousGroup("string_exogenous_inputs", m_stringSignals, false))
     {
         return false;
     }
 
-    inputs.clear();
-    if (!ptr->getParameter("string_exogenous_inputs", inputs))
-    {
-        log()->warn("{} Unable to get the string exogenous inputs. Assuming none.", logPrefix);
-    }
-
-    if (!openExogenousSignals(ptr, inputs, m_stringSignals))
-    {
-        return false;
-    }
-
-    inputs.clear();
-    if (!ptr->getParameter("image_exogenous_inputs", inputs))
-    {
-        log()->warn("{} Unable to get the image exogenous inputs. Assuming none.", logPrefix);
-    }
-
-    if (!openExogenousSignals(ptr, inputs, m_imageSignals))
+    if (!openExogenousGroup("image_exogenous_inputs", m_imageSignals, false))
     {
         return false;
     }
@@ -503,34 +505,17 @@ bool YarpRobotLoggerDevice::setupExogenousInputs(
         return false;
     }
 
-    inputs.clear();
-    if (!ptr->getParameter("human_state_exogenous_inputs", inputs))
-    {
-        log()->warn("{} Unable to get the human state exogenous inputs. Assuming none.", logPrefix);
-    }
-    if (!openExogenousSignals(ptr, inputs, m_humanStateSignals))
+    if (!openExogenousGroup("human_state_exogenous_inputs", m_humanStateSignals, false))
     {
         return false;
     }
 
-    inputs.clear();
-    if (!ptr->getParameter("wearable_targets_exogenous_inputs", inputs))
-    {
-        log()->warn("{} Unable to get the wearable targets exogenous inputs. Assuming none.",
-                    logPrefix);
-    }
-    if (!openExogenousSignals(ptr, inputs, m_wearableTargetsSignals))
+    if (!openExogenousGroup("wearable_targets_exogenous_inputs", m_wearableTargetsSignals, false))
     {
         return false;
     }
 
-    inputs.clear();
-    if (!ptr->getParameter("wearable_data_exogenous_inputs", inputs))
-    {
-        log()->warn("{} Unable to get the wearable data exogenous inputs. Assuming none.",
-                    logPrefix);
-    }
-    if (!openExogenousSignals(ptr, inputs, m_wearableDataSignals))
+    if (!openExogenousGroup("wearable_data_exogenous_inputs", m_wearableDataSignals, false))
     {
         return false;
     }
@@ -763,85 +748,23 @@ bool YarpRobotLoggerDevice::setupRobotSensorBridge(
     }
 
     // Get additional flags required by the device
-    if (!ptr->getParameter("stream_joint_states", m_streamJointStates))
-    {
-        log()->info("{} The 'stream_joint_states' parameter is not found. The joint states is not "
-                    "logged",
-                    logPrefix);
-    }
+    auto getStreamFlag = [&](const std::string& paramName, bool& flag) {
+        if (!ptr->getParameter(paramName, flag))
+        {
+            log()->info("{} The '{}' parameter is not found. Not logged.", logPrefix, paramName);
+        }
+    };
 
-    if (!ptr->getParameter("stream_joint_accelerations", m_streamJointAccelerations))
-    {
-        log()->info("{} The 'stream_joint_accelerations' parameter is not found. Set to true by "
-                    "default",
-                    logPrefix);
-    }
-    if (!m_streamJointAccelerations)
-    {
-        log()->info("{} The joint accelerations is not logged", logPrefix);
-    }
-
-    if (!ptr->getParameter("stream_motor_temperature", m_streamMotorTemperature))
-    {
-        log()->info("{} The 'stream_motor_temperature' parameter is not found. The motor "
-                    "temperature is not logged",
-                    logPrefix);
-    }
-    if (!m_streamMotorTemperature)
-    {
-        log()->info("{} The motor temperature is not logged", logPrefix);
-    }
-
-    if (!ptr->getParameter("stream_motor_states", m_streamMotorStates))
-    {
-        log()->info("{} The 'stream_motor_states' parameter is not found. The motor states is not "
-                    "logged",
-                    logPrefix);
-    }
-
-    if (!ptr->getParameter("stream_motor_PWM", m_streamMotorPWM))
-    {
-        log()->info("{} The 'stream_motor_PWM' parameter is not found. The motor PWM is not logged",
-                    logPrefix);
-    }
-
-    if (!ptr->getParameter("stream_pids", m_streamPIDs))
-    {
-        log()->info("{} The 'stream_pids' parameter is not found. The motor pid values are not "
-                    "logged",
-                    logPrefix);
-    }
-
-    if (!ptr->getParameter("stream_inertials", m_streamInertials))
-    {
-        log()->info("{} The 'stream_inertials' parameter is not found. The IMU values are not "
-                    "logged",
-                    logPrefix);
-    }
-
-    if (!ptr->getParameter("stream_cartesian_wrenches", m_streamCartesianWrenches))
-    {
-        log()->info("{} The 'stream_cartesian_wrenches' parameter is not found. The cartesian "
-                    "wrench values are not "
-                    "logged",
-                    logPrefix);
-    }
-
-    if (!ptr->getParameter("stream_forcetorque_sensors", m_streamFTSensors))
-    {
-        log()->info("{} The 'stream_forcetorque_sensors' parameter is not found. The FT values are "
-                    "not "
-                    "logged",
-                    logPrefix);
-    }
-
-    if (!ptr->getParameter("stream_temperatures", m_streamTemperatureSensors))
-    {
-        log()->info("{} The 'stream_temperatures' parameter is not found. The temperature sensor "
-                    "values are not "
-                    "logged",
-                    logPrefix);
-    }
+    getStreamFlag("stream_joint_states", m_streamJointStates);
+    getStreamFlag("stream_joint_accelerations", m_streamJointAccelerations);
+    getStreamFlag("stream_motor_temperature", m_streamMotorTemperature);
+    getStreamFlag("stream_motor_states", m_streamMotorStates);
+    getStreamFlag("stream_motor_PWM", m_streamMotorPWM);
+    getStreamFlag("stream_pids", m_streamPIDs);
+    getStreamFlag("stream_inertials", m_streamInertials);
+    getStreamFlag("stream_cartesian_wrenches", m_streamCartesianWrenches);
+    getStreamFlag("stream_forcetorque_sensors", m_streamFTSensors);
+    getStreamFlag("stream_temperatures", m_streamTemperatureSensors);
 
     return true;
 }
@@ -1121,7 +1044,13 @@ bool YarpRobotLoggerDevice::attachAll(const yarp::dev::PolyDriverList& poly)
     log()->info("{} Attach completed. Starting logger.", logPrefix);
     if (!this->isRunning())
     {
-        return startLogging();
+        if (m_autoStartLogging)
+        {
+            return startLogging();
+        }
+        log()->info("{} auto_start_logging is disabled. Logging will not start automatically. "
+                    "Use the RPC command 'startLogging' to start.",
+                    logPrefix);
     }
 
     return true;

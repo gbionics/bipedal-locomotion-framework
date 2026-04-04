@@ -225,6 +225,7 @@ private:
     bool m_logCameras{true};
     bool m_logFrames{false};
     bool m_logRobot{true};
+    bool m_autoStartLogging{true};
     std::vector<std::string> m_textLoggingSubnames;
     std::vector<std::string> m_codeStatusCmds;
 
@@ -261,6 +262,9 @@ private:
                    Eigen::Ref<accelerometer_t> accelerometer,
                    Eigen::Ref<gyro_t> gyro,
                    Eigen::Ref<orientation_t> orientation);
+
+    virtual bool saveData(const std::string& tag = "") override;
+    virtual bool startLogging() override;
     bool setupRobotSensorBridge(std::weak_ptr<const ParametersHandler::IParametersHandler> params);
     bool setupRobotCameraBridge(std::weak_ptr<const ParametersHandler::IParametersHandler> params);
     bool setupTelemetry(std::weak_ptr<const ParametersHandler::IParametersHandler> params,
@@ -277,7 +281,6 @@ private:
     bool createFramesFolder(std::shared_ptr<VideoWriter::ImageSaver> imageSaver,
                             const std::string& camera,
                             const std::string& imageType);
-    bool startLogging();
     bool prepareRobotLogging();
     bool prepareCameraLogging();
     bool prepareExogenousImageLogging();
@@ -337,8 +340,6 @@ private:
     void waitForAcquisitionThreadsToPause();
 
     void resumeAcquisitionThreads();
-
-    virtual bool saveData(const std::string& tag = "") override;
 };
 
 } // namespace BipedalLocomotion

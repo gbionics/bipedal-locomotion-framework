@@ -21,6 +21,8 @@ BSD-3-Clause license. -->
   <param name="text_logging_subnames">("ergocub-torso/yarprobotinterface")</param>
   <param name="code_status_cmds">("ssh ergocub@10.0.0.2 'bash ${ROBOTOLOGY_SUPERBUILD_SOURCE_DIR}/scripts/robotologyGitStatus.sh' > {filename}_robotology_10_0_0_2.txt" "ssh ergocub@10.0.0.2 'apt list --installed' > {filename}_apt_10_0_0_2.txt" "ssh ergocub@10.0.0.3 'bash ${ROBOTOLOGY_SUPERBUILD_SOURCE_DIR}/scripts/robotologyGitStatus.sh' > {filename}_robotology_10_0_0_3.txt" "ssh ergocub@10.0.0.3 'apt list --installed' > {filename}_apt_10_0_0_3.txt")</param>
 
+  <param name="auto_start_logging">true</param>
+
   <param name="enable_real_time_logging" extern-name="enable_real_time_logging">false</param>
   <group name="REAL_TIME_STREAMING">
     <param name="remote">"/yarp-robot-logger/rt_logging"</param>
