@@ -29,9 +29,9 @@ namespace RobotInterface
  * YarpSensorBridge Yarp implementation of the ISensorBridge interface
  * Currently available interfaces
  * - Remapped Remote Control Board for joint states
- * - Inertial Measurement Units through generic sensor interface and remapped multiple analog sensor interface
+ * - MAS-based inertials (gyroscopes, accelerometers, orientation sensors, magnetometers)
  * - Whole Body Dynamics Estimated end effector wrenches through a generic sensor interface
- * - Force Torque Sensors through analog sensor interface and remapped multiple analog sensor interface
+ * - Force Torque Sensors through remapped multiple analog sensor interface
  * - Depth Cameras through RGBD sensor interface
  * - Camera images through OpenCV Grabber interface
  *
@@ -64,16 +64,15 @@ namespace RobotInterface
  * |                            |stream_motor_temperature         | boolean           |Flag to activate the attachment to motor temperature sensors      |
  * |RemoteControlBoardRemapper  |                                 |                   |Expects only one remapped remotecontrolboard device attached to it, if there multiple remote control boards, then  use a remapper to create a single remotecontrolboard |
  * |                            |joints_list                      | vector of strings |This parameter is **optional**. The joints list used to open the remote control board remapper. If the list is not passed, the order of the joint stored in the PolyDriver is used       |
- * |InertialSensors             |                                 |                   |Expects IMU to be opened as genericSensorClient devices communicating through the inertial server and other inertials as a part multiple analog sensors remapper ("multipleanalogsensorsremapper") |
- * |                            |imu_list                         | vector of strings |list of the names of devices opened as genericSensorClient device and having a channel dimension of 12      |
+ * |InertialSensors             |                                 |                   |Expects inertials to be opened as a part of the multiple analog sensors remapper ("multipleanalogsensorsremapper") |
  * |                            |gyroscopes_list                  | vector of strings |list of the names of devices opened with ThreeAxisGyroscope interface remapped through the "multipleanalogsensorsremapper" interfaces and having a channel dimension of 3  |
  * |                            |accelerometers_list              | vector of strings |list of the names of devices opened with ThreeAxisLinearAccelerometers interface remapped through the "multipleanalogsensorsremapper" interfaces and having a channel dimension of 3 |
  * |                            |orientation_sensors_list         | vector of strings |list of the names of devices opened with OrientationSensors interface remapped through the "multipleanalogsensorsremapper" interfaces and having a channel dimension of 3 |
  * |                            |magnetometers_list               | vector of strings |list of the names of devices opened with ThreeAxisMagnetometer interface remapped through the "multipleanalogsensorsremapper" interfaces and having a channel dimension of 3 |
  * |CartesianWrenches           |                                 |                   |Expects the devices wrapping the cartesian wrenches ports to be opened as "genericSensorClient" device and have a channel dimension of 6                      |
  * |                            |cartesian_wrenches_list          | vector of strings |list of the names of devices opened as genericSensorClient device and having a channel dimension of 6      |
- * |SixAxisForceTorqueSensors   |                                 |                   |Expects the Six axis FT sensors to be opened with SixAxisForceTorqueSensors interface remapped through multiple analog sensors remapper ("multipleanalogsensorsremapper") or to be opened as analog sensor ("analogsensorclient") device having channel dimensions as 6|
- * |                            |sixaxis_forcetorque_sensors_list | vector of strings |list of six axis FT sensors (the difference between a MAS FT and an analog FT is done internally assuming that the names are distinct form each other)|
+ * |SixAxisForceTorqueSensors   |                                 |                   |Expects the Six axis FT sensors to be opened with SixAxisForceTorqueSensors interface remapped through multiple analog sensors remapper ("multipleanalogsensorsremapper")|
+ * |                            |sixaxis_forcetorque_sensors_list | vector of strings |list of six axis FT sensors |
  * |TemperatureSensors          |                                 |                   |Expects the temperature sensors to be opened with TemperatureSensors interface remapped through multiple analog sensors remapper|
  * |                            |temperature_sensors_list         | vector of strings |list containing the devices opened with TemperatureSensors interface      |
  */
@@ -137,18 +136,6 @@ public:
      */
     bool getJointsList(std::vector<std::string>& jointsList) final;
 
-    /**
-     * Get imu sensors
-     * @param[out] IMUsList list of IMUs attached to the bridge
-     * @return  true/false in case of success/failure
-     */
-    bool getIMUsList(std::vector<std::string>& IMUsList) final;
-
-    /**
-     * Get linear accelerometers
-     * @param[out] linearAccelerometersList list of linear accelerometers attached to the bridge
-     * @return  true/false in case of success/failure
-     */
     bool getLinearAccelerometersList(std::vector<std::string>& linearAccelerometersList) final;
 
     /**
@@ -205,8 +192,6 @@ public:
     bool getTemperatureSensorsList(std::vector<std::string>& temperatureSensorsList) final;
 
     const std::vector<std::string>& getJointsList() const;
-
-    const std::vector<std::string>& getIMUsList() const;
 
     const std::vector<std::string>& getLinearAccelerometersList() const;
 
@@ -291,30 +276,6 @@ public:
     bool getJointAccelerations(Eigen::Ref<Eigen::VectorXd> jointAccelerations,
                                OptionalDoubleRef receiveTimeInSeconds = {}) final;
 
-    /**
-     * Get IMU measurement
-     * The serialization of measurments is as follows,
-     *   (rpy acc omega mag)
-     *  - rpy in radians Roll-Pitch-Yaw Euler angles
-     *  - acc in m/s^2 linear accelerometer measurements
-     *  - omega in rad/s gyroscope measurements
-     *  - mag in tesla magnetometer measurements
-     * @param[in] imuName name of the IMU
-     * @param[out] imuMeasurement imu measurement of size 12
-     * @param[out] receiveTimeInSeconds time at which the measurement was received
-     * @return true/false in case of success/failure
-     */
-    bool getIMUMeasurement(const std::string& imuName,
-                           Eigen::Ref<Vector12d> imuMeasurement,
-                           OptionalDoubleRef receiveTimeInSeconds = {}) final;
-
-    /**
-     * Get linear accelerometer measurement in m/s^2
-     * @param[in] accName name of the linear accelerometer
-     * @param[out] accMeasurement linear accelerometer measurements of size 3
-     * @param[out] receiveTimeInSeconds time at which the measurement was received
-     * @return true/false in case of success/failure
-     */
     bool getLinearAccelerometerMeasurement(const std::string& accName,
                                            Eigen::Ref<Eigen::Vector3d> accMeasurement,
                                            OptionalDoubleRef receiveTimeInSeconds = {}) final;

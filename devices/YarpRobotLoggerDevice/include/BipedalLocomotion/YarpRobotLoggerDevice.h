@@ -75,7 +75,6 @@ private:
     using accelerometer_t = Eigen::Matrix<double, 3, 1>;
     using orientation_t = Eigen::Matrix<double, 3, 1>;
     using magnemetometer_t = Eigen::Matrix<double, 3, 1>;
-    using analog_sensor_t = Eigen::Matrix<double, 12, 1>;
 
     std::unique_ptr<BipedalLocomotion::RobotInterface::YarpSensorBridge> m_robotSensorBridge;
     std::unique_ptr<BipedalLocomotion::RobotInterface::YarpCameraBridge> m_cameraBridge;
@@ -207,7 +206,6 @@ private:
     accelerometer_t m_acceloremeterBuffer;
     orientation_t m_orientationBuffer;
     magnemetometer_t m_magnemetometerBuffer;
-    analog_sensor_t m_analogSensorBuffer;
     double m_ftTemperatureBuffer;
 
     bool m_streamMotorStates{false};
@@ -257,10 +255,6 @@ private:
                              VideoWriter& writer,
                              ExogenousSignal<yarp::sig::ImageOf<yarp::sig::PixelRgb>>& signal);
     void saveCodeStatus(const std::string& logPrefix, const std::string& fileName) const;
-    void unpackIMU(Eigen::Ref<const analog_sensor_t> signal,
-                   Eigen::Ref<accelerometer_t> accelerometer,
-                   Eigen::Ref<gyro_t> gyro,
-                   Eigen::Ref<orientation_t> orientation);
     bool setupRobotSensorBridge(std::weak_ptr<const ParametersHandler::IParametersHandler> params);
     bool setupRobotCameraBridge(std::weak_ptr<const ParametersHandler::IParametersHandler> params);
     bool setupTelemetry(std::weak_ptr<const ParametersHandler::IParametersHandler> params,

@@ -44,12 +44,6 @@ public:
         return true;
     };
 
-    virtual bool getIMUsList(std::vector<std::string>& IMUsList) override
-    {
-        IMUsList = std::vector<std::string>{""};
-        return true;
-    };
-
     virtual bool getLinearAccelerometersList(std::vector<std::string>& linearAccelerometersList) override
     {
         linearAccelerometersList = std::vector<std::string>{""};
@@ -103,10 +97,6 @@ public:
                                   OptionalDoubleRef receiveTimeInSeconds = {}) override { return true; };
     virtual bool getJointVelocities(Eigen::Ref<Eigen::VectorXd> jointVelocties,
                                     OptionalDoubleRef receiveTimeInSeconds = {}) override { return true; };
-    virtual bool getIMUMeasurement(const std::string& imuName,
-                                   Eigen::Ref<Vector12d> imuMeasurement,
-                                   OptionalDoubleRef receiveTimeInSeconds = {}) override { return true; };
-
     virtual bool getLinearAccelerometerMeasurement(const std::string& accName,
                                                    Eigen::Ref<Eigen::Vector3d> accMeasurement,
                                                    OptionalDoubleRef receiveTimeInSeconds = {}) override

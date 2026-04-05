@@ -238,16 +238,6 @@ bool YarpSensorBridge::getJointsList(std::vector<std::string>& jointsList)
     return true;
 }
 
-bool YarpSensorBridge::getIMUsList(std::vector<std::string>& IMUsList)
-{
-    if (!m_pimpl->checkValid("[YarpSensorBridge::getIMUsList]"))
-    {
-        return false;
-    }
-    IMUsList = m_pimpl->metaData.sensorsList.IMUsList;
-    return true;
-}
-
 bool YarpSensorBridge::getLinearAccelerometersList(
     std::vector<std::string>& linearAccelerometersList)
 {
@@ -323,11 +313,6 @@ bool YarpSensorBridge::getTemperatureSensorsList(std::vector<std::string>& tempe
 const std::vector<std::string>& YarpSensorBridge::getJointsList() const
 {
     return m_pimpl->metaData.sensorsList.jointsList;
-}
-
-const std::vector<std::string>& YarpSensorBridge::getIMUsList() const
-{
-    return m_pimpl->metaData.sensorsList.IMUsList;
 }
 
 const std::vector<std::string>& YarpSensorBridge::getLinearAccelerometersList() const
@@ -531,26 +516,6 @@ bool YarpSensorBridge::getJointAccelerations(Eigen::Ref<Eigen::VectorXd> jointAc
     {
         receiveTimeInSeconds.value().get()
             = m_pimpl->controlBoardRemapperMeasures.receivedTimeInSeconds;
-    }
-    return true;
-}
-
-bool YarpSensorBridge::getIMUMeasurement(const std::string& imuName,
-                                         Eigen::Ref<Vector12d> imuMeasurement,
-                                         OptionalDoubleRef receiveTimeInSeconds)
-{
-    if (!m_pimpl->checkValidSensorMeasure("YarpSensorBridge::getIMUMeasurement ",
-                                          m_pimpl->IMUMeasures,
-                                          imuName))
-    {
-        return false;
-    }
-
-    auto iter = m_pimpl->IMUMeasures.find(imuName);
-    imuMeasurement = yarp::eigen::toEigen(iter->second.first);
-    if (receiveTimeInSeconds)
-    {
-        receiveTimeInSeconds.value().get() = iter->second.second;
     }
     return true;
 }
