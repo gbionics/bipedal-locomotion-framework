@@ -135,9 +135,13 @@ bool VectorsCollectionClient::checkConnection()
         return false;
     }
 
-    // Actively verify that both YARP connections (data and RPC) are still alive
+    // Actively verify that both YARP connections (data and RPC) are still alive.
+    // The carrier must be specified because Network::isConnected() without a carrier
+    // defaults to checking for "tcp". If the data connection uses a different carrier
+    // (e.g. "udp"), the check would incorrectly report the connection as lost,
+    // causing a continuous disconnect/reconnect cycle.
     const bool dataConnected
-        = yarp::os::Network::isConnected(m_pimpl->remotePortName, m_pimpl->localPortName);
+        = yarp::os::Network::isConnected(m_pimpl->remotePortName, m_pimpl->localPortName, m_pimpl->carrier);
     const bool rpcConnected
         = yarp::os::Network::isConnected(m_pimpl->localRpcPortName, m_pimpl->remoteRpcPortName);
 
