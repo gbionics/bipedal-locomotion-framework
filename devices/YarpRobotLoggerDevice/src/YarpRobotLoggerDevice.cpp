@@ -111,8 +111,19 @@ YarpRobotLoggerDevice::YarpRobotLoggerDevice(double period,
 }
 
 YarpRobotLoggerDevice::YarpRobotLoggerDevice()
-    : YarpRobotLoggerDevice(0.01, yarp::os::ShouldUseSystemClock::No)
+    : yarp::os::PeriodicThread(0.01,
+                               yarp::os::ShouldUseSystemClock::No,
+                               yarp::os::PeriodicThreadClock::Absolute)
 {
+    // Use the yarp clock in blf
+    BipedalLocomotion::System::ClockBuilder::setFactory(
+        std::make_shared<BipedalLocomotion::System::YarpClockFactory>());
+
+    // the logging message are streamed using yarp
+    BipedalLocomotion::TextLogging::LoggerBuilder::setFactory(
+        std::make_shared<BipedalLocomotion::TextLogging::YarpLoggerFactory>());
+
+    m_sendDataRT = false;
 }
 
 YarpRobotLoggerDevice::~YarpRobotLoggerDevice() = default;
@@ -1068,8 +1079,7 @@ bool BipedalLocomotion::YarpRobotLoggerDevice::record()
 
     if (this->isRunning())
     {
-        log()->error("{} The logger has already started. This should not have happened.",
-                     logPrefix);
+        log()->warn("{} Recording is already in progress.", logPrefix);
         return false;
     }
 
@@ -2936,6 +2946,12 @@ void BipedalLocomotion::YarpRobotLoggerDevice::resumeAcquisitionThreads()
 bool BipedalLocomotion::YarpRobotLoggerDevice::saveData(const std::string& tag)
 {
     constexpr auto logPrefix = "[YarpRobotLoggerDevice::saveData]";
+
+    if (!this->isRunning())
+    {
+        log()->warn("{} Recording is not running. Nothing to save.", logPrefix);
+        return false;
+    }
 
     std::string actualFileName;
     log()->info("{} Saving episode to .mat file...", logPrefix);
