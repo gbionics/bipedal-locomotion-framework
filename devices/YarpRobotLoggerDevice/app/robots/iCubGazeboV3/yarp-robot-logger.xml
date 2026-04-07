@@ -8,6 +8,7 @@ BSD-3-Clause license. -->
   <param name="port_prefix">/yarp-robot-logger</param>
   <param name="maximum_admissible_time_step">1.0</param>
   <param name="log_text">true</param>
+  <param name="log_code_status">true</param>
   <param name="code_status_cmds">("bash ${ROBOTOLOGY_SUPERBUILD_SOURCE_DIR}/scripts/robotologyGitStatus.sh > {filename}_robotology.txt" "apt list --installed > {filename}_apt.txt")</param>
   <param name="log_cameras">true</param>
   <param name="log_frames">false</param>
