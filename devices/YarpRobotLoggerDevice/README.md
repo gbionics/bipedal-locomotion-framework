@@ -23,11 +23,11 @@ yarp rpc /yarp-robot-logger/commands/rpc:i
 | Command | Description |
 |---|---|
 | `record` | Start recording. Initializes sensor bridge, cameras, telemetry buffers and begins the periodic acquisition loop. |
-| `saveData` | Save the recorded data to a `.mat` file and **stop recording**. The device returns to idle mode. Accepts an optional `tag` string that is appended to the filename (e.g. `saveData "walking_test"`). |
+| `saveData` | Save the recorded data to a `.mat` file. Recording **continues** after the save completes. Accepts an optional `tag` string that is appended to the filename (e.g. `saveData "walking_test"`). Can be called multiple times during a single recording session. |
 | `saveData "<tag>"` | Same as above, with the tag included in the output filename: `robot_logger_device_<tag>_<timestamp>.mat`. |
 | `stopRecording` | Stop recording **without saving**. All buffered data is discarded and the device returns to idle mode. |
 
-After `saveData` or `stopRecording`, you can call `record` again to start a new recording session.
+After `stopRecording`, you can call `record` again to start a new recording session.
 
 ### Example session
 
@@ -39,13 +39,14 @@ Response: [ok]
 >> saveData "walking_trial_1"
 Response: [ok]
 # data saved to robot_logger_device_walking_trial_1_<timestamp>.mat
-# logger is now idle
->> record
+# recording continues
+>> saveData "walking_trial_2"
 Response: [ok]
-# ... another trial ...
+# data saved to robot_logger_device_walking_trial_2_<timestamp>.mat
+# recording still continues
 >> stopRecording
 Response: [ok]
-# data discarded, no file saved
+# recording stopped, no additional data saved
 ```
 
 ### Auto-start mode

@@ -2864,10 +2864,10 @@ bool YarpRobotLoggerDevice::close()
     {
         log()->info("{} Recording is active. Auto-saving episode before closing...", logPrefix);
         this->saveData("");
-    } else
-    {
-        stopRecordingThreads();
     }
+
+    // Always stop recording threads on close (saveData no longer stops them)
+    stopRecordingThreads();
 
     m_rpcPort.close();
     m_statusPort.close();
@@ -3013,8 +3013,9 @@ bool BipedalLocomotion::YarpRobotLoggerDevice::saveData(const std::string& tag)
                     logPrefix,
                     actualFileName,
                     std::chrono::duration<double>(BipedalLocomotion::clock().now() - start));
-        // Use last_call since we are stopping recording after saving
-        output = this->saveCallback(actualFileName, robometry::SaveCallbackSaveMethod::last_call);
+        // Use periodic since recording continues after saving
+        output = this->saveCallback(actualFileName,
+                                    robometry::SaveCallbackSaveMethod::periodic);
     }
 
     // If it lasted less than 1 second we wait a bit to avoid that
@@ -3026,14 +3027,9 @@ bool BipedalLocomotion::YarpRobotLoggerDevice::saveData(const std::string& tag)
         BipedalLocomotion::clock().sleepFor(1s - duration);
     }
 
-    log()->info("{} Episode saved in {}.", logPrefix, std::chrono::duration<double>(duration));
-
-    // Stop recording and bring device to idle mode
-    stopRecordingThreads();
-
-    log()->info("{} Recording stopped. Device is now idle. "
-                "Use the RPC command 'record' to start a new recording.",
-                logPrefix);
+    log()->info("{} Episode saved in {}. Recording continues.",
+                logPrefix,
+                std::chrono::duration<double>(duration));
 
     return output;
 }

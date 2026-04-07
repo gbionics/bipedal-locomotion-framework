@@ -163,18 +163,27 @@ void shutdownRobotInterface(yarp::robotinterface::XMLReaderResult& instance)
 // Helper: validate joint positions in the .mat file match the expected values
 void validateJointPositions(const std::string& matFile,
                             const Eigen::VectorXd& expected,
-                            size_t nrOfJoints)
+                            size_t nrOfJoints,
+                            const std::string& rootVarName = "robot_logger_device")
 {
     matioCpp::File savedLog(matFile);
     REQUIRE(savedLog.isOpen());
 
-    matioCpp::Struct robotLoggerDeviceStruct = savedLog.read("robot_logger_device").asStruct();
+    auto robotVar = savedLog.read(rootVarName);
+    REQUIRE(robotVar.isValid());
+    matioCpp::Struct robotLoggerDeviceStruct = robotVar.asStruct();
+    REQUIRE(robotLoggerDeviceStruct.isValid());
+
+    auto jointsStateVar = robotLoggerDeviceStruct["joints_state"];
+    REQUIRE(jointsStateVar.isValid());
+    auto positionsVar = jointsStateVar.asStruct()["positions"];
+    REQUIRE(positionsVar.isValid());
+    auto dataVar = positionsVar.asStruct()["data"];
+    REQUIRE(dataVar.isValid());
 
     matioCpp::MultiDimensionalArray<double> jointPosLoggedData
-        = robotLoggerDeviceStruct["joints_state"]
-              .asStruct()["positions"]
-              .asStruct()["data"]
-              .asMultiDimensionalArray<double>();
+        = dataVar.asMultiDimensionalArray<double>();
+    REQUIRE(jointPosLoggedData.isValid());
 
     Eigen::VectorXd jointPosLogged;
     jointPosLogged.resize(nrOfJoints);
@@ -189,18 +198,27 @@ void validateJointPositions(const std::string& matFile,
 // Helper: validate accelerometer data in the .mat file
 void validateAccelerometer(const std::string& matFile,
                            const Eigen::VectorXd& expected,
-                           size_t nrOfDirections)
+                           size_t nrOfDirections,
+                           const std::string& rootVarName = "robot_logger_device")
 {
     matioCpp::File savedLog(matFile);
     REQUIRE(savedLog.isOpen());
 
-    matioCpp::Struct robotLoggerDeviceStruct = savedLog.read("robot_logger_device").asStruct();
+    auto robotVar = savedLog.read(rootVarName);
+    REQUIRE(robotVar.isValid());
+    matioCpp::Struct robotLoggerDeviceStruct = robotVar.asStruct();
+    REQUIRE(robotLoggerDeviceStruct.isValid());
+
+    auto accelerometersVar = robotLoggerDeviceStruct["accelerometers"];
+    REQUIRE(accelerometersVar.isValid());
+    auto sensorVar = accelerometersVar.asStruct()["sim_imu_sensor"];
+    REQUIRE(sensorVar.isValid());
+    auto dataVar = sensorVar.asStruct()["data"];
+    REQUIRE(dataVar.isValid());
 
     matioCpp::MultiDimensionalArray<double> accelerometerLoggedData
-        = robotLoggerDeviceStruct["accelerometers"]
-              .asStruct()["sim_imu_sensor"]
-              .asStruct()["data"]
-              .asMultiDimensionalArray<double>();
+        = dataVar.asMultiDimensionalArray<double>();
+    REQUIRE(accelerometerLoggedData.isValid());
 
     Eigen::VectorXd accelerometerLogged;
     accelerometerLogged.resize(nrOfDirections);
@@ -292,8 +310,9 @@ TEST_CASE("RPC record and saveData")
     // 1. Start with auto_start_logging=false → device is idle
     // 2. Call record() via RPC → recording starts
     // 3. Collect some data
-    // 4. Call saveData("test_tag") → data saved and recording stops
+    // 4. Call saveData("test_tag") → data saved, recording continues
     // 5. Verify the .mat file is created with correct data
+    // 6. Call stopRecording() to stop before shutdown
     backupExistingFiles();
 
     yarp::os::Network network;
@@ -328,7 +347,7 @@ TEST_CASE("RPC record and saveData")
     // Read sensor values for comparison
     auto readings = readSensorValues(instance);
 
-    // Save episode with a tag via RPC (this saves and stops recording)
+    // Save episode with a tag via RPC (recording continues after save)
     bool saveOk = rpcInterface.saveData("test_tag");
     CHECK(saveOk);
 
@@ -339,8 +358,13 @@ TEST_CASE("RPC record and saveData")
     // The filename should contain the tag
     CHECK(matFile.find("test_tag") != std::string::npos);
 
-    validateJointPositions(matFile, readings.jointPositions, readings.nrOfJoints);
-    validateAccelerometer(matFile, readings.accelerometer, readings.nrOfAccelDirs);
+    validateJointPositions(matFile, readings.jointPositions, readings.nrOfJoints,
+                           "robot_logger_device_test_tag");
+    validateAccelerometer(matFile, readings.accelerometer, readings.nrOfAccelDirs,
+                          "robot_logger_device_test_tag");
+
+    // Stop recording before shutdown to avoid an extra auto-save
+    CHECK(rpcInterface.stopRecording());
 
     rpcClient.close();
     shutdownRobotInterface(instance);
@@ -387,11 +411,13 @@ TEST_CASE("RPC record and stopRecording discards data")
     shutdownRobotInterface(instance);
 }
 
-TEST_CASE("RPC record, saveData, then record again")
+TEST_CASE("RPC record, saveData multiple times")
 {
-    // This test verifies that after saveData the device can record() again:
-    // 1. record() → collect data → saveData() → .mat created
-    // 2. record() again → collect data → saveData("second") → second .mat created
+    // This test verifies that saveData can be called multiple times during
+    // a single recording session (recording continues after each save):
+    // 1. record() → collect data → saveData("first") → .mat created, recording continues
+    // 2. collect more data → saveData("second") → second .mat created, recording continues
+    // 3. stopRecording() to end the session
     backupExistingFiles();
 
     yarp::os::Network network;
@@ -411,17 +437,21 @@ TEST_CASE("RPC record, saveData, then record again")
     YarpRobotLoggerDeviceCommands rpcInterface;
     rpcInterface.yarp().attachAsClient(rpcClient);
 
-    // First recording session
+    // Start recording
     CHECK(rpcInterface.record());
     std::this_thread::sleep_for(std::chrono::milliseconds(200));
+
+    // First save (recording continues)
     CHECK(rpcInterface.saveData("first"));
     CHECK(countMatFiles() == 1);
 
-    // Second recording session
-    CHECK(rpcInterface.record());
+    // Collect more data and save again (recording still continues)
     std::this_thread::sleep_for(std::chrono::milliseconds(200));
     CHECK(rpcInterface.saveData("second"));
     CHECK(countMatFiles() == 2);
+
+    // Stop recording before shutdown
+    CHECK(rpcInterface.stopRecording());
 
     rpcClient.close();
     shutdownRobotInterface(instance);
