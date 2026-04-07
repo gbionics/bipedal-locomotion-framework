@@ -224,7 +224,7 @@ private:
     bool m_logFrames{false};
     bool m_logRobot{true};
     std::vector<std::string> m_textLoggingSubnames;
-    std::vector<std::string> m_codeStatusCmdPrefixes;
+    std::vector<std::string> m_codeStatusCmds;
 
     std::mutex m_bufferManagerMutex;
     robometry::BufferManager m_bufferManager;
