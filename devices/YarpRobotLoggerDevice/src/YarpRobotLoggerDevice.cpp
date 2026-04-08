@@ -1075,6 +1075,7 @@ bool YarpRobotLoggerDevice::attachAll(const yarp::dev::PolyDriverList& poly)
 
 bool BipedalLocomotion::YarpRobotLoggerDevice::record()
 {
+    std::lock_guard<std::mutex> lock(m_rpcMutex);
     constexpr auto logPrefix = "[YarpRobotLoggerDevice::record]";
 
     if (this->isRunning())
@@ -1098,24 +1099,24 @@ bool BipedalLocomotion::YarpRobotLoggerDevice::record()
         m_lookForNewLogsThread = std::thread([this] { this->lookForNewLogs(); });
     }
 
-    // Refresh all exogenous signal connections so they are re-established cleanly
-    auto refreshExogenousConnections = [](auto& signals) {
+    // Reset data arrival flags so fresh data is collected in this recording session.
+    // Existing YARP connections are preserved — they were either never established
+    // (first record()) or cleaned up by stopRecordingThreads() on a previous stop.
+    auto resetExogenousFlags = [](auto& signals) {
         for (auto& [name, signal] : signals)
         {
-            signal.disconnect();
-            signal.connected = false;
             signal.dataArrived = false;
         }
     };
-    refreshExogenousConnections(m_vectorsCollectionSignals);
-    refreshExogenousConnections(m_vectorSignals);
-    refreshExogenousConnections(m_stringSignals);
-    refreshExogenousConnections(m_humanStateSignals);
-    refreshExogenousConnections(m_wearableTargetsSignals);
-    refreshExogenousConnections(m_wearableDataSignals);
-    refreshExogenousConnections(m_imageSignals);
+    resetExogenousFlags(m_vectorsCollectionSignals);
+    resetExogenousFlags(m_vectorSignals);
+    resetExogenousFlags(m_stringSignals);
+    resetExogenousFlags(m_humanStateSignals);
+    resetExogenousFlags(m_wearableTargetsSignals);
+    resetExogenousFlags(m_wearableDataSignals);
+    resetExogenousFlags(m_imageSignals);
 
-    // Also clear cached metadata for VectorsCollection signals
+    // Clear cached metadata for VectorsCollection signals so it is re-fetched
     for (auto& [name, signal] : m_vectorsCollectionSignals)
     {
         signal.metadata.vectors.clear();
@@ -2826,6 +2827,22 @@ void YarpRobotLoggerDevice::stopRecordingThreads()
         m_lookForNewExogenousSignalThread = std::thread();
     }
 
+    // Disconnect all exogenous signals so they can be cleanly reconnected on next record()
+    auto disconnectExogenousSignals = [](auto& signals) {
+        for (auto& [name, signal] : signals)
+        {
+            signal.disconnect();
+            signal.connected = false;
+        }
+    };
+    disconnectExogenousSignals(m_vectorsCollectionSignals);
+    disconnectExogenousSignals(m_vectorSignals);
+    disconnectExogenousSignals(m_stringSignals);
+    disconnectExogenousSignals(m_humanStateSignals);
+    disconnectExogenousSignals(m_wearableTargetsSignals);
+    disconnectExogenousSignals(m_wearableDataSignals);
+    disconnectExogenousSignals(m_imageSignals);
+
     // Reset pause state so next record() starts cleanly
     m_requestPause = false;
     m_paused = false;
@@ -2834,8 +2851,15 @@ void YarpRobotLoggerDevice::stopRecordingThreads()
     log()->info("{} All recording threads stopped.", logPrefix);
 }
 
+bool BipedalLocomotion::YarpRobotLoggerDevice::isRecording()
+{
+    std::lock_guard<std::mutex> lock(m_rpcMutex);
+    return this->isRunning();
+}
+
 bool BipedalLocomotion::YarpRobotLoggerDevice::stopRecording()
 {
+    std::lock_guard<std::mutex> lock(m_rpcMutex);
     constexpr auto logPrefix = "[YarpRobotLoggerDevice::stopRecording]";
 
     if (!this->isRunning())
@@ -2945,6 +2969,7 @@ void BipedalLocomotion::YarpRobotLoggerDevice::resumeAcquisitionThreads()
 
 bool BipedalLocomotion::YarpRobotLoggerDevice::saveData(const std::string& tag)
 {
+    std::lock_guard<std::mutex> lock(m_rpcMutex);
     constexpr auto logPrefix = "[YarpRobotLoggerDevice::saveData]";
 
     if (!this->isRunning())

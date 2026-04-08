@@ -229,6 +229,7 @@ private:
     std::vector<std::string> m_codeStatusCmds;
 
     std::mutex m_bufferManagerMutex;
+    std::mutex m_rpcMutex; /**< Mutex to serialize concurrent RPC command calls. */
     robometry::BufferManager m_bufferManager;
 
     const std::string m_rpcPortName{"/commands/rpc:i"}; /**< name of Remote
@@ -258,6 +259,7 @@ private:
                              ExogenousSignal<yarp::sig::ImageOf<yarp::sig::PixelRgb>>& signal);
     void saveCodeStatus(const std::string& logPrefix, const std::string& fileName) const;
     virtual bool record() override;
+    virtual bool isRecording() override;
     virtual bool saveData(const std::string& tag = "") override;
     virtual bool stopRecording() override;
     void stopRecordingThreads();

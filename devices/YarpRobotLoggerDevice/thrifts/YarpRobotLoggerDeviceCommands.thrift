@@ -9,6 +9,7 @@
 service YarpRobotLoggerDeviceCommands
 {
     bool record();
+    bool isRecording();
     bool saveData(1: string tag = "");
     bool stopRecording();
 }
