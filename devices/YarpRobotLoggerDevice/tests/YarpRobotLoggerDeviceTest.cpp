@@ -122,6 +122,19 @@ int countMatFiles()
     return count;
 }
 
+// Ensure YARP is initialized exactly once across all tests.
+// Avoids repeated init/fini cycles that cause port address conflicts and SIGSEGV.
+void ensureYarpNetworkInitialized()
+{
+    static bool initialized = false;
+    if (!initialized)
+    {
+        yarp::os::Network::init();
+        yarp::os::NetworkBase::setLocalMode(true);
+        initialized = true;
+    }
+}
+
 // Helper: start yarprobotinterface from a given XML file
 yarp::robotinterface::XMLReaderResult launchRobotInterface(const std::string& xmlFileName)
 {
@@ -276,8 +289,7 @@ TEST_CASE("Auto-start logger saves on close (Ctrl+C)")
     // the data is auto-saved to a .mat file.
     backupExistingFiles();
 
-    yarp::os::Network network;
-    yarp::os::NetworkBase::setLocalMode(true);
+    ensureYarpNetworkInitialized();
 
     REQUIRE(ensureYARPAndBLFYARPDevicesCanBeFound());
 
@@ -295,6 +307,9 @@ TEST_CASE("Auto-start logger saves on close (Ctrl+C)")
 
     // Shut down (triggers auto-save in close())
     shutdownRobotInterface(instance);
+
+    // Wait for YARP port threads to fully terminate before the next test
+    std::this_thread::sleep_for(std::chrono::milliseconds(500));
 
     // Verify .mat file was created
     std::string matFile = findMatFile();
@@ -315,8 +330,7 @@ TEST_CASE("RPC record and saveData")
     // 6. Call stopRecording() to stop before shutdown
     backupExistingFiles();
 
-    yarp::os::Network network;
-    yarp::os::NetworkBase::setLocalMode(true);
+    ensureYarpNetworkInitialized();
 
     REQUIRE(ensureYARPAndBLFYARPDevicesCanBeFound());
 
@@ -366,8 +380,13 @@ TEST_CASE("RPC record and saveData")
     // Stop recording before shutdown to avoid an extra auto-save
     CHECK(rpcInterface.stopRecording());
 
+    // Disconnect and close the RPC client before shutting down the device
+    yarp::os::Network::disconnect("/test/rpc:o", "/yarp-robot-logger/commands/rpc:i");
     rpcClient.close();
     shutdownRobotInterface(instance);
+
+    // Wait for YARP port threads to fully terminate before the next test
+    std::this_thread::sleep_for(std::chrono::milliseconds(500));
 }
 
 TEST_CASE("RPC record and stopRecording discards data")
@@ -380,8 +399,7 @@ TEST_CASE("RPC record and stopRecording discards data")
     // 5. Verify no .mat file was created
     backupExistingFiles();
 
-    yarp::os::Network network;
-    yarp::os::NetworkBase::setLocalMode(true);
+    ensureYarpNetworkInitialized();
 
     REQUIRE(ensureYARPAndBLFYARPDevicesCanBeFound());
 
@@ -407,8 +425,13 @@ TEST_CASE("RPC record and stopRecording discards data")
     // No .mat file should be produced
     CHECK(countMatFiles() == 0);
 
+    // Disconnect and close the RPC client before shutting down the device
+    yarp::os::Network::disconnect("/test/rpc:o", "/yarp-robot-logger/commands/rpc:i");
     rpcClient.close();
     shutdownRobotInterface(instance);
+
+    // Wait for YARP port threads to fully terminate before the next test
+    std::this_thread::sleep_for(std::chrono::milliseconds(500));
 }
 
 TEST_CASE("RPC record, saveData multiple times")
@@ -420,8 +443,7 @@ TEST_CASE("RPC record, saveData multiple times")
     // 3. stopRecording() to end the session
     backupExistingFiles();
 
-    yarp::os::Network network;
-    yarp::os::NetworkBase::setLocalMode(true);
+    ensureYarpNetworkInitialized();
 
     REQUIRE(ensureYARPAndBLFYARPDevicesCanBeFound());
 
@@ -453,6 +475,11 @@ TEST_CASE("RPC record, saveData multiple times")
     // Stop recording before shutdown
     CHECK(rpcInterface.stopRecording());
 
+    // Disconnect and close the RPC client before shutting down the device
+    yarp::os::Network::disconnect("/test/rpc:o", "/yarp-robot-logger/commands/rpc:i");
     rpcClient.close();
     shutdownRobotInterface(instance);
+
+    // Wait for YARP port threads to fully terminate before the next test
+    std::this_thread::sleep_for(std::chrono::milliseconds(500));
 }
