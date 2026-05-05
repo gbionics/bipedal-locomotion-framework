@@ -2440,7 +2440,7 @@ void YarpRobotLoggerDevice::logExogenousSignals(double time)
         }
     }
 
-    auto handleExogenousWithMetadata = [this, logData](auto& list, double time) {
+    auto handleExogenousWithMetadata = [this](auto& list, double time) {
         for (auto& [name, signal] : list)
         {
             if (!signal.connected)
@@ -2469,7 +2469,7 @@ void YarpRobotLoggerDevice::logExogenousSignals(double time)
                     convertToVectorsCollection(*message, signal.signalName, signal.convertedSignal);
                     for (const auto& [key, vector] : signal.convertedSignal.vectors)
                     {
-                        logData(key, vector, time);
+                        this->logData(key, vector, time);
                     }
                 }
             }
