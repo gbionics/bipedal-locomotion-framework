@@ -15,6 +15,7 @@ BSD-3-Clause license. -->
   <param name="log_cameras">true</param>
   <param name="log_frames">false</param>
   <param name="log_robot_data">true</param>
+  <param name="auto_start_logging">true</param>
 
   <param name="enable_real_time_logging" extern-name="enable_real_time_logging">false</param>
   <group name="REAL_TIME_STREAMING">

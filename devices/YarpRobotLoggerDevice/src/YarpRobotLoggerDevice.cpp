@@ -168,6 +168,13 @@ bool YarpRobotLoggerDevice::open(yarp::os::Searchable& config)
         this->setPeriod(devicePeriod);
     }
 
+    if (!params->getParameter("auto_start_logging", m_autoStartLogging))
+    {
+        log()->info("{} Unable to get the 'auto_start_logging' parameter. Default value: {}.",
+                    logPrefix,
+                    m_autoStartLogging);
+    }
+
     if (!params->getParameter("log_text", m_logText))
     {
         log()->info("{} Unable to get the 'log_text' parameter for the telemetry. Default value: "
@@ -367,9 +374,19 @@ bool YarpRobotLoggerDevice::open(yarp::os::Searchable& config)
     if (needsAttach)
     {
         log()->info("{} Waiting for the attach phases before starting the logging.", logPrefix);
-    } else
+    } else if (m_autoStartLogging)
     {
         return startLogging();
+    } else
+    {
+        // Start the periodic thread in Idle state so it's ready for RPC commands
+        m_state = DeviceState::Idle;
+        if (!this->start())
+        {
+            log()->error("{} Unable to start the periodic thread.", logPrefix);
+            return false;
+        }
+        log()->info("{} Device started in Idle state. Use 'startRecording' to begin.", logPrefix);
     }
 
     return true;
@@ -494,12 +511,6 @@ bool YarpRobotLoggerDevice::setupExogenousInputs(
 
     if (!openExogenousSignals(ptr, inputs, m_imageSignals))
     {
-        return false;
-    }
-
-    if (!prepareExogenousImageLogging())
-    {
-        log()->error("{} Unable to prepare the exogenous image logging.", logPrefix);
         return false;
     }
 
@@ -1118,10 +1129,24 @@ bool YarpRobotLoggerDevice::attachAll(const yarp::dev::PolyDriverList& poly)
         }
     }
 
-    log()->info("{} Attach completed. Starting logger.", logPrefix);
+    log()->info("{} Attach completed.", logPrefix);
     if (!this->isRunning())
     {
-        return startLogging();
+        if (m_autoStartLogging)
+        {
+            return startLogging();
+        } else
+        {
+            // Start the periodic thread in Idle state
+            m_state = DeviceState::Idle;
+            if (!this->start())
+            {
+                log()->error("{} Unable to start the periodic thread.", logPrefix);
+                return false;
+            }
+            log()->info("{} Device started in Idle state. Use 'startRecording' to begin.",
+                        logPrefix);
+        }
     }
 
     return true;
@@ -1131,10 +1156,9 @@ bool BipedalLocomotion::YarpRobotLoggerDevice::startLogging()
 {
     constexpr auto logPrefix = "[YarpRobotLoggerDevice::startLogging]";
 
-    if (this->isRunning())
+    if (m_state == DeviceState::Recording)
     {
-        log()->error("{} The logger has already started. This should not have happened.",
-                     logPrefix);
+        log()->error("{} The logger is already recording.", logPrefix);
         return false;
     }
 
@@ -1181,6 +1205,13 @@ bool BipedalLocomotion::YarpRobotLoggerDevice::startLogging()
         return false;
     }
 
+    // prepare the exogenous image logging (re-create frame folders for new session)
+    if (!this->prepareExogenousImageLogging())
+    {
+        log()->error("{} Unable to prepare the exogenous image logging.", logPrefix);
+        return false;
+    }
+
     // prepare real time streaming
     if (!this->prepareRTStreaming())
     {
@@ -1188,14 +1219,19 @@ bool BipedalLocomotion::YarpRobotLoggerDevice::startLogging()
         return false;
     }
 
-    // start the thread
-    if (!this->start())
+    m_state = DeviceState::Recording;
+
+    // start the periodic thread if not already running (auto_start_logging=true path)
+    if (!this->isRunning())
     {
-        log()->error("{} Unable to start the device.", logPrefix);
-        return false;
+        if (!this->start())
+        {
+            log()->error("{} Unable to start the device.", logPrefix);
+            return false;
+        }
     }
 
-    log()->info("{} The logger has started.", logPrefix);
+    log()->info("{} The logger has started recording.", logPrefix);
     return true;
 }
 
@@ -2042,24 +2078,19 @@ void BipedalLocomotion::YarpRobotLoggerDevice::saveCodeStatus(const std::string&
 
 void YarpRobotLoggerDevice::run()
 {
-    auto logData = [this](const std::string& name, const auto& data, const double time) {
-        m_bufferManager.push_back(data, time, name);
-        std::string rtName = robotRtRootName + treeDelim + name;
-        if (m_sendDataRT)
-        {
-            m_vectorCollectionRTDataServer.populateData(rtName, data);
-        }
-    };
-
     constexpr auto logPrefix = "[YarpRobotLoggerDevice::run]";
     const std::chrono::nanoseconds t = BipedalLocomotion::clock().now();
 
+    // In Idle state, just update timestamp and return
+    if (m_state != DeviceState::Recording)
+    {
+        m_previousTimestamp = t;
+        m_firstRun = true;
+        return;
+    }
+
     if (!m_firstRun)
     {
-        // This is to check if something happened with the clock.
-        // When the clock is reset, especially in simulation, the time difference
-        // between two consecutive run could be very big.
-        // This effectively stops the logging until the next valid timestamp
         if (t - m_previousTimestamp > m_acceptableStep)
         {
             log()->warn("{} The time step is too big. The previous timestamp is {} and the "
@@ -2085,8 +2116,6 @@ void YarpRobotLoggerDevice::run()
     }
 
     const double time = std::chrono::duration<double>(t).count();
-    std::string signalFullName = "";
-    std::string rtSignalFullName = "";
 
     std::lock_guard lock(m_bufferManagerMutex);
     if (m_sendDataRT)
@@ -2095,18 +2124,55 @@ void YarpRobotLoggerDevice::run()
         m_vectorCollectionRTDataServer.clearData();
         Eigen::Matrix<double, 1, 1> timeData;
         timeData << time;
-        rtSignalFullName = robotRtRootName + treeDelim + timestampsName;
+        std::string rtSignalFullName = robotRtRootName + treeDelim + timestampsName;
         m_vectorCollectionRTDataServer.populateData(rtSignalFullName, timeData);
     }
 
     if (m_robotSensorBridge != nullptr)
     {
-        // get the data
         if (!m_robotSensorBridge->advance())
         {
             log()->error("{} Could not advance sensor bridge.", logPrefix);
         }
     }
+
+    logRobotData(time);
+    logExogenousSignals(time);
+    logTextMessages(time);
+    logFrameTransforms(time);
+
+    if (m_sendDataRT)
+    {
+        m_vectorCollectionRTDataServer.sendData();
+    }
+
+    // We send the current timestamp in the status port
+    yarp::os::Bottle& status = m_statusPort.prepare();
+    status.clear();
+    status.addFloat64(time);
+    m_statusPort.write();
+
+    m_previousTimestamp = t;
+    m_firstRun = false;
+
+    // Check the duration of the run
+    double runDuration
+        = std::chrono::duration<double>(BipedalLocomotion::clock().now() - t).count();
+    if (runDuration > getPeriod())
+    {
+        log()->warn("{} The run method took {} seconds which is more than the "
+                    "configured period of {} seconds.",
+                    logPrefix,
+                    runDuration,
+                    getPeriod());
+    }
+
+    yInfoThrottle(5) << logPrefix << " Logging data...";
+}
+
+void YarpRobotLoggerDevice::logRobotData(double time)
+{
+    std::string signalFullName;
 
     if (m_streamJointStates)
     {
@@ -2213,7 +2279,6 @@ void YarpRobotLoggerDevice::run()
             }
         }
 
-        // pack the data for the accelerometer
         for (const auto& sensorName : m_robotSensorBridge->getLinearAccelerometersList())
         {
             if (m_robotSensorBridge->getLinearAccelerometerMeasurement(sensorName,
@@ -2224,7 +2289,6 @@ void YarpRobotLoggerDevice::run()
             }
         }
 
-        // pack the data for the orientations
         for (const auto& sensorName : m_robotSensorBridge->getOrientationSensorsList())
         {
             if (m_robotSensorBridge->getOrientationSensorMeasurement(sensorName,
@@ -2243,7 +2307,6 @@ void YarpRobotLoggerDevice::run()
                 logData(signalFullName, m_magnemetometerBuffer, time);
             }
         }
-
     }
 
     if (m_streamCartesianWrenches)
@@ -2257,6 +2320,13 @@ void YarpRobotLoggerDevice::run()
             }
         }
     }
+}
+
+void YarpRobotLoggerDevice::logExogenousSignals(double time)
+{
+    constexpr auto logPrefix = "[YarpRobotLoggerDevice::logExogenousSignals]";
+
+    std::string signalFullName;
 
     for (auto& [name, signal] : m_vectorsCollectionSignals)
     {
@@ -2274,7 +2344,6 @@ void YarpRobotLoggerDevice::run()
             if (!signal.dataArrived)
             {
                 bool channelAdded = true;
-                // Fetch metadata on-demand if not yet available
                 if (signal.metadata.vectors.empty())
                 {
                     if (signal.client.getMetadata(signal.metadata))
@@ -2290,7 +2359,6 @@ void YarpRobotLoggerDevice::run()
                     const auto& metadata = signal.metadata.vectors.find(key);
                     if (metadata == signal.metadata.vectors.cend())
                     {
-                        // Metadata not available yet, skip adding channel for now
                         log()->warn("{} Metadata not available yet for signal {}. Skipping channel "
                                     "addition.",
                                     logPrefix,
@@ -2367,7 +2435,8 @@ void YarpRobotLoggerDevice::run()
                 }
                 signal.dataArrived = true;
             }
-            m_bufferManager.push_back(bottle->toString(), time, signalFullName);
+            std::string bottleStr = bottle->toString();
+            m_bufferManager.push_back(std::move(bottleStr), time, signalFullName);
         }
     }
 
@@ -2410,97 +2479,77 @@ void YarpRobotLoggerDevice::run()
     handleExogenousWithMetadata(m_humanStateSignals, time);
     handleExogenousWithMetadata(m_wearableTargetsSignals, time);
     handleExogenousWithMetadata(m_wearableDataSignals, time);
+}
 
-    if (m_logText)
+void YarpRobotLoggerDevice::logTextMessages(double time)
+{
+    if (!m_logText)
     {
-        int bufferportSize = m_textLoggingPort.getPendingReads();
-        BipedalLocomotion::TextLoggingEntry msg;
+        return;
+    }
 
-        while (bufferportSize > 0)
+    std::string signalFullName;
+    int bufferportSize = m_textLoggingPort.getPendingReads();
+    BipedalLocomotion::TextLoggingEntry msg;
+
+    while (bufferportSize > 0)
+    {
+        yarp::os::Bottle* b = m_textLoggingPort.read(false);
+        if (b != nullptr)
         {
-            yarp::os::Bottle* b = m_textLoggingPort.read(false);
-            if (b != nullptr)
+            msg = BipedalLocomotion::TextLoggingEntry::deserializeMessage(
+                *b, std::to_string(time));
+            if (msg.isValid)
             {
-                msg = BipedalLocomotion::TextLoggingEntry::deserializeMessage(*b,
-                                                                              std::to_string(time));
-                if (msg.isValid)
+                signalFullName = msg.portSystem + "::" + msg.portPrefix + "::" + msg.processName
+                                 + "::p" + msg.processPID;
+
+                // matlab does not support the character - as a key of a struct
+                findAndReplaceAll(signalFullName, "-", "_");
+
+                if (m_textLogsStoredInManager.find(signalFullName)
+                    == m_textLogsStoredInManager.end())
                 {
-                    signalFullName = msg.portSystem + "::" + msg.portPrefix + "::" + msg.processName
-                                     + "::p" + msg.processPID;
-
-                    // matlab does not support the character - as a key of a struct
-                    findAndReplaceAll(signalFullName, "-", "_");
-
-                    // if it is the first time this signal is seen by the device the channel
-                    // is added
-                    if (m_textLogsStoredInManager.find(signalFullName)
-                        == m_textLogsStoredInManager.end())
-                    {
-                        m_bufferManager.addChannel({signalFullName, {1, 1}});
-                        m_textLogsStoredInManager.insert(signalFullName);
-                    }
-                    // Not using logData here because we don't want to stream the data to RT
-                    m_bufferManager.push_back(msg, time, signalFullName);
+                    m_bufferManager.addChannel({signalFullName, {1, 1}});
+                    m_textLogsStoredInManager.insert(signalFullName);
                 }
-                bufferportSize = m_textLoggingPort.getPendingReads();
-            } else
+                m_bufferManager.push_back(msg, time, signalFullName);
+            }
+            bufferportSize = m_textLoggingPort.getPendingReads();
+        } else
+        {
+            break;
+        }
+    }
+}
+
+void YarpRobotLoggerDevice::logFrameTransforms(double time)
+{
+    if (!m_logFrames)
+    {
+        return;
+    }
+
+    if (updateChildTransformList())
+    {
+        for (const auto& frame : m_tfChildFrames)
+        {
+            if (!frame.second.active)
             {
-                break;
+                continue;
+            }
+            if (m_tf->getTransform(frame.first, frame.second.parent, m_tfMatrix))
+            {
+                Eigen::Matrix4d eigenMatrix = yarp::eigen::toEigen(m_tfMatrix);
+                Eigen::Vector3d position = eigenMatrix.block<3, 1>(0, 3);
+                Eigen::Quaterniond quat(eigenMatrix.block<3, 3>(0, 0));
+                Eigen::Vector4d orientationVec;
+                orientationVec << quat.x(), quat.y(), quat.z(), quat.w();
+                logData(frame.second.positionChannelName, position, time);
+                logData(frame.second.orientationChannelName, orientationVec, time);
             }
         }
     }
-
-    if (m_logFrames)
-    {
-        if (updateChildTransformList())
-        {
-            for (const auto& frame : m_tfChildFrames)
-            {
-                if (!frame.second.active)
-                {
-                    continue;
-                }
-                if (m_tf->getTransform(frame.first, frame.second.parent, m_tfMatrix))
-                {
-                    Eigen::Matrix4d eigenMatrix = yarp::eigen::toEigen(m_tfMatrix);
-                    Eigen::Vector3d position = eigenMatrix.block<3, 1>(0, 3);
-                    Eigen::Quaterniond quat(eigenMatrix.block<3, 3>(0, 0));
-                    Eigen::Vector4d orientationVec;
-                    orientationVec << quat.x(), quat.y(), quat.z(), quat.w();
-                    logData(frame.second.positionChannelName, position, time);
-                    logData(frame.second.orientationChannelName, orientationVec, time);
-                }
-            }
-        }
-    }
-
-    if (m_sendDataRT)
-    {
-        m_vectorCollectionRTDataServer.sendData();
-    }
-
-    // We send the current timestamp in the status port
-    yarp::os::Bottle& status = m_statusPort.prepare();
-    status.clear();
-    status.addFloat64(time);
-    m_statusPort.write();
-
-    m_previousTimestamp = t;
-    m_firstRun = false;
-
-    // Check the duration of the run
-    double runDuration
-        = std::chrono::duration<double>(BipedalLocomotion::clock().now() - t).count();
-    if (runDuration > getPeriod())
-    {
-        log()->warn("{} The run method took {} seconds which is more than the "
-                    "configured period of {} seconds.",
-                    logPrefix,
-                    runDuration,
-                    getPeriod());
-    }
-
-    yInfoThrottle(5) << "Logging data..";
 }
 
 bool YarpRobotLoggerDevice::saveCallback(const std::string& fileName,
@@ -2773,53 +2822,17 @@ bool YarpRobotLoggerDevice::close()
     // Wait for the run method to finish
     stop();
 
+    // If still recording, stop threads
+    if (m_state == DeviceState::Recording)
+    {
+        stopAllThreads();
+        disconnectAllExogenousSignals();
+    }
+
     m_rpcPort.close();
     m_statusPort.close();
 
-    // stop all the video thread
-    for (auto& [cameraName, writer] : m_videoWriters)
-    {
-        writer.recordVideoIsRunning = false;
-    }
-
-    // close all the thread associated to the video logging
-    for (auto& [cameraName, writer] : m_videoWriters)
-    {
-        if (writer.videoThread.joinable())
-        {
-            writer.videoThread.join();
-            writer.videoThread = std::thread();
-        }
-    }
-
-    // close all the thread associated to the exogenous image logging
-    for (auto& [name, signal] : m_imageSignals)
-    {
-
-        m_exogenousImageWriters[signal.signalName].recordVideoIsRunning = false;
-        signal.port.interrupt();
-        if (m_exogenousImageWriters[signal.signalName].videoThread.joinable())
-        {
-            m_exogenousImageWriters[signal.signalName].videoThread.join();
-            m_exogenousImageWriters[signal.signalName].videoThread = std::thread();
-        }
-    }
-
-    // close the thread associated to the text logging polling
-    m_lookForNewLogsIsRunning = false;
-    if (m_lookForNewLogsThread.joinable())
-    {
-        m_lookForNewLogsThread.join();
-        m_lookForNewLogsThread = std::thread();
-    }
-
-    m_lookForNewExogenousSignalIsRunning = false;
-    if (m_lookForNewExogenousSignalThread.joinable())
-    {
-        m_lookForNewExogenousSignalThread.join();
-        m_lookForNewExogenousSignalThread = std::thread();
-    }
-
+    m_state = DeviceState::Idle;
     return true;
 }
 
@@ -2891,52 +2904,27 @@ void BipedalLocomotion::YarpRobotLoggerDevice::resumeAcquisitionThreads()
     log()->info("[YarpRobotLoggerDevice::resumeAcquisitionThreads] Resumed acquisition threads.");
 }
 
-bool BipedalLocomotion::YarpRobotLoggerDevice::saveData(const std::string& tag)
+bool BipedalLocomotion::YarpRobotLoggerDevice::saveRecording(const std::string& tag)
 {
-    constexpr auto logPrefix = "[YarpRobotLoggerDevice::saveData]";
+    constexpr auto logPrefix = "[YarpRobotLoggerDevice::saveRecording]";
+
+    if (m_state != DeviceState::Recording)
+    {
+        log()->error("{} Cannot save: device is not in Recording state.", logPrefix);
+        return false;
+    }
 
     std::string actualFileName;
-    log()->info("{} Saving data to .mat file...", logPrefix);
+    log()->info("{} Saving data checkpoint to .mat file...", logPrefix);
     auto start = BipedalLocomotion::clock().now();
-    std::string inputFileName = defaultFilePrefix;
+    std::string inputFileName;
     bool output = false;
     std::chrono::nanoseconds duration;
     auto startTime = BipedalLocomotion::clock().now();
 
-    if (!tag.empty())
+    if (!sanitizeTag(tag, inputFileName))
     {
-        std::string edited_tag = tag;
-
-        // Check if the tag is valid
-        for (size_t i = 1; i < edited_tag.size(); ++i)
-        {
-            if (!isalnum(edited_tag[i]) && (edited_tag[i] != '_') && (edited_tag[i] != ' '))
-            {
-                log()->error("{} The tag can contain only alphanumeric characters or "
-                             "underscores (tag = \"{}\").",
-                             logPrefix,
-                             inputFileName);
-                return false;
-            }
-        }
-
-        // Check if the tag contains spaces. Trigger a warning if this is the case
-        // and replace the spaces with underscores
-        if (edited_tag.find(' ') != std::string::npos)
-        {
-            log()->warn("{} The tag \"{}\" contains spaces."
-                        "They will be replaced with underscores.",
-                        logPrefix,
-                        edited_tag);
-            size_t start_pos = 0;
-            while ((start_pos = edited_tag.find(" ", start_pos)) != std::string::npos)
-            {
-                edited_tag.replace(start_pos, std::string(" ").length(), "_");
-                start_pos += std::string("_").length();
-            }
-        }
-
-        inputFileName = defaultFilePrefix + "_" + edited_tag;
+        return false;
     }
 
     waitForAcquisitionThreadsToPause();
@@ -2968,7 +2956,382 @@ bool BipedalLocomotion::YarpRobotLoggerDevice::saveData(const std::string& tag)
         BipedalLocomotion::clock().sleepFor(1s - duration);
     }
 
-    log()->info("{} Saving data took {}.", logPrefix, std::chrono::duration<double>(duration));
+    log()->info("{} Checkpoint save took {}.", logPrefix, std::chrono::duration<double>(duration));
 
     return output;
+}
+
+bool BipedalLocomotion::YarpRobotLoggerDevice::startRecording()
+{
+    constexpr auto logPrefix = "[YarpRobotLoggerDevice::startRecording]";
+
+    if (m_state != DeviceState::Idle)
+    {
+        log()->error("{} Cannot start recording: device is not in Idle state. Current state: {}.",
+                     logPrefix,
+                     getState());
+        return false;
+    }
+
+    log()->info("{} Transitioning to Recording state...", logPrefix);
+    return transitionToRecording();
+}
+
+bool BipedalLocomotion::YarpRobotLoggerDevice::saveAndStopRecording(const std::string& tag)
+{
+    constexpr auto logPrefix = "[YarpRobotLoggerDevice::saveAndStopRecording]";
+
+    if (m_state != DeviceState::Recording)
+    {
+        log()->error("{} Cannot save and stop: device is not in Recording state.", logPrefix);
+        return false;
+    }
+
+    log()->info("{} Saving data and stopping recording...", logPrefix);
+    return transitionToIdle(true, tag);
+}
+
+bool BipedalLocomotion::YarpRobotLoggerDevice::discardRecording()
+{
+    constexpr auto logPrefix = "[YarpRobotLoggerDevice::discardRecording]";
+
+    if (m_state != DeviceState::Recording)
+    {
+        log()->error("{} Cannot discard: device is not in Recording state.", logPrefix);
+        return false;
+    }
+
+    log()->info("{} Discarding recording data and stopping...", logPrefix);
+    return transitionToIdle(false, "");
+}
+
+std::string BipedalLocomotion::YarpRobotLoggerDevice::getState()
+{
+    switch (m_state.load())
+    {
+    case DeviceState::Idle:
+        return "Idle";
+    case DeviceState::Recording:
+        return "Recording";
+    case DeviceState::Saving:
+        return "Saving";
+    default:
+        return "Unknown";
+    }
+}
+
+bool BipedalLocomotion::YarpRobotLoggerDevice::transitionToRecording()
+{
+    constexpr auto logPrefix = "[YarpRobotLoggerDevice::transitionToRecording]";
+
+    // Reset the buffer manager for a fresh recording session
+    resetBufferManager();
+
+    // Start logging (connects exogenous signals, starts threads, prepares buffers)
+    if (!startLogging())
+    {
+        log()->error("{} Failed to start logging.", logPrefix);
+        return false;
+    }
+
+    return true;
+}
+
+bool BipedalLocomotion::YarpRobotLoggerDevice::transitionToIdle(bool save, const std::string& tag)
+{
+    constexpr auto logPrefix = "[YarpRobotLoggerDevice::transitionToIdle]";
+
+    m_state = DeviceState::Saving;
+
+    if (save)
+    {
+        std::string actualFileName;
+        std::string inputFileName;
+
+        if (!sanitizeTag(tag, inputFileName))
+        {
+            m_state = DeviceState::Recording;
+            return false;
+        }
+
+        waitForAcquisitionThreadsToPause();
+
+        {
+            std::lock_guard<std::mutex> lockBuffer(m_bufferManagerMutex);
+            m_bufferManager.setFileName(inputFileName);
+            m_bufferManager.saveToFile(actualFileName);
+            m_bufferManager.setFileName(defaultFilePrefix);
+
+            log()->info("{} Data saved to file {}.mat.", logPrefix, actualFileName);
+            this->saveCallback(actualFileName, robometry::SaveCallbackSaveMethod::last_call);
+        }
+    } else
+    {
+        waitForAcquisitionThreadsToPause();
+        log()->info("{} Recording discarded (no data saved).", logPrefix);
+
+        discardVideoFiles();
+    }
+
+    // Stop all threads and disconnect signals
+    stopAllThreads();
+    disconnectAllExogenousSignals();
+
+    // Reset the first run flag so next recording starts fresh
+    m_firstRun = true;
+
+    m_state = DeviceState::Idle;
+    log()->info("{} Device is now in Idle state.", logPrefix);
+    return true;
+}
+
+void BipedalLocomotion::YarpRobotLoggerDevice::disconnectAllExogenousSignals()
+{
+    constexpr auto logPrefix = "[YarpRobotLoggerDevice::disconnectAllExogenousSignals]";
+    log()->info("{} Disconnecting all exogenous signals...", logPrefix);
+
+    // Helper to disconnect a map of signals and optionally clear metadata
+    auto disconnectSignals = [](auto& signalMap, bool clearMetadata = false) {
+        for (auto& [name, signal] : signalMap)
+        {
+            std::lock_guard<std::mutex> lock(signal.mutex);
+            signal.disconnect();
+            signal.connected = false;
+            signal.dataArrived = false;
+            if constexpr (requires { signal.metadata.vectors; })
+            {
+                if (clearMetadata)
+                {
+                    signal.metadata.vectors.clear();
+                }
+            }
+        }
+    };
+
+    disconnectSignals(m_vectorsCollectionSignals, true);
+    disconnectSignals(m_vectorSignals);
+    disconnectSignals(m_stringSignals);
+    disconnectSignals(m_imageSignals);
+    disconnectSignals(m_humanStateSignals, true);
+    disconnectSignals(m_wearableTargetsSignals, true);
+    disconnectSignals(m_wearableDataSignals, true);
+
+    // Disconnect text logging connections
+    if (m_logText)
+    {
+        for (const auto& portName : m_textLoggingPortNames)
+        {
+            yarp::os::Network::disconnect(portName, m_textLoggingPortName);
+        }
+        m_textLoggingPortNames.clear();
+        m_textLogsStoredInManager.clear();
+        m_textLoggingPort.close();
+    }
+
+    log()->info("{} All exogenous signals disconnected.", logPrefix);
+}
+
+void BipedalLocomotion::YarpRobotLoggerDevice::stopAllThreads()
+{
+    constexpr auto logPrefix = "[YarpRobotLoggerDevice::stopAllThreads]";
+    log()->info("{} Stopping all acquisition threads...", logPrefix);
+
+    // Stop video recording threads
+    for (auto& [cameraName, writer] : m_videoWriters)
+    {
+        writer.recordVideoIsRunning = false;
+    }
+    for (auto& [cameraName, writer] : m_videoWriters)
+    {
+        if (writer.videoThread.joinable())
+        {
+            writer.videoThread.join();
+            writer.videoThread = std::thread();
+        }
+    }
+
+    // Stop exogenous image threads
+    for (auto& [name, signal] : m_imageSignals)
+    {
+        m_exogenousImageWriters[signal.signalName].recordVideoIsRunning = false;
+        signal.port.interrupt();
+    }
+    for (auto& [name, signal] : m_imageSignals)
+    {
+        if (m_exogenousImageWriters[signal.signalName].videoThread.joinable())
+        {
+            m_exogenousImageWriters[signal.signalName].videoThread.join();
+            m_exogenousImageWriters[signal.signalName].videoThread = std::thread();
+        }
+    }
+
+    // Stop text logging thread
+    m_lookForNewLogsIsRunning = false;
+    if (m_lookForNewLogsThread.joinable())
+    {
+        m_lookForNewLogsThread.join();
+        m_lookForNewLogsThread = std::thread();
+    }
+
+    // Stop exogenous signal polling thread
+    m_lookForNewExogenousSignalIsRunning = false;
+    if (m_lookForNewExogenousSignalThread.joinable())
+    {
+        m_lookForNewExogenousSignalThread.join();
+        m_lookForNewExogenousSignalThread = std::thread();
+    }
+
+    // Reset pause state and frame indices
+    m_requestPause = false;
+    m_paused = false;
+    for (auto& [cameraName, writer] : m_videoWriters)
+    {
+        writer.requestPause = false;
+        writer.paused = false;
+        writer.frameIndex = 0;
+    }
+    for (auto& [name, writer] : m_exogenousImageWriters)
+    {
+        writer.requestPause = false;
+        writer.paused = false;
+        writer.frameIndex = 0;
+    }
+
+    log()->info("{} All acquisition threads stopped.", logPrefix);
+}
+
+void BipedalLocomotion::YarpRobotLoggerDevice::resetBufferManager()
+{
+    constexpr auto logPrefix = "[YarpRobotLoggerDevice::resetBufferManager]";
+    log()->info("{} Resetting buffer manager for new recording session...", logPrefix);
+
+    std::lock_guard<std::mutex> lockBuffer(m_bufferManagerMutex);
+
+    // Reconfigure the buffer manager with the same config
+    // This clears all channels and data
+    robometry::BufferConfig config;
+    char* tmp = std::getenv("YARP_ROBOT_NAME");
+    if (tmp != NULL)
+    {
+        config.yarp_robot_name = tmp;
+    }
+    config.filename = defaultFilePrefix;
+    config.auto_save = true;
+    config.file_indexing = "%Y_%m_%d_%H_%M_%S";
+    config.mat_file_version = matioCpp::FileVersion::MAT7_3;
+
+    // Use the same period-based calculation as in setupTelemetry
+    double devicePeriod = getPeriod();
+    double savePeriod = 1800.0; // 30 minutes default (same as setupTelemetry)
+    constexpr double percentage = 0.1;
+    config.n_samples = static_cast<int>(std::ceil((1 + percentage) * (savePeriod / devicePeriod)));
+    config.save_period = savePeriod;
+    config.save_periodically = true;
+
+    m_bufferManager.configure(config);
+
+    // Clear frame tracking state
+    m_tfChildFrames.clear();
+
+    log()->info("{} Buffer manager reset complete.", logPrefix);
+}
+
+bool BipedalLocomotion::YarpRobotLoggerDevice::sanitizeTag(const std::string& tag,
+                                                           std::string& outputFileName) const
+{
+    constexpr auto logPrefix = "[YarpRobotLoggerDevice::sanitizeTag]";
+    outputFileName = defaultFilePrefix;
+
+    if (tag.empty())
+    {
+        return true;
+    }
+
+    std::string edited_tag = tag;
+
+    // Validate characters
+    for (size_t i = 0; i < edited_tag.size(); ++i)
+    {
+        if (!isalnum(edited_tag[i]) && (edited_tag[i] != '_') && (edited_tag[i] != ' '))
+        {
+            log()->error("{} The tag can contain only alphanumeric characters or "
+                         "underscores (tag = \"{}\").",
+                         logPrefix,
+                         edited_tag);
+            return false;
+        }
+    }
+
+    // Replace spaces with underscores
+    if (edited_tag.find(' ') != std::string::npos)
+    {
+        log()->warn("{} The tag \"{}\" contains spaces. "
+                    "They will be replaced with underscores.",
+                    logPrefix,
+                    edited_tag);
+        size_t start_pos = 0;
+        while ((start_pos = edited_tag.find(" ", start_pos)) != std::string::npos)
+        {
+            edited_tag.replace(start_pos, std::string(" ").length(), "_");
+            start_pos += std::string("_").length();
+        }
+    }
+
+    outputFileName = defaultFilePrefix + "_" + edited_tag;
+    return true;
+}
+
+template <typename T>
+void BipedalLocomotion::YarpRobotLoggerDevice::logData(const std::string& name,
+                                                       const T& data,
+                                                       double time)
+{
+    m_bufferManager.push_back(data, time, name);
+    if (m_sendDataRT)
+    {
+        std::string rtName = robotRtRootName + treeDelim + name;
+        m_vectorCollectionRTDataServer.populateData(rtName, data);
+    }
+}
+
+void BipedalLocomotion::YarpRobotLoggerDevice::discardVideoFiles()
+{
+    // Release video writers and clean up temp files since we're not saving
+    for (auto& [cameraName, writer] : m_videoWriters)
+    {
+        if (writer.rgb != nullptr)
+        {
+            std::lock_guard<std::mutex> lock(writer.rgb->mutex);
+            if (writer.rgb->saveMode == VideoWriter::SaveMode::Video && writer.rgb->writer)
+            {
+                writer.rgb->writer->release();
+                std::filesystem::remove("output_" + cameraName + "_rgb.mp4");
+            } else if (writer.rgb->saveMode == VideoWriter::SaveMode::Frame)
+            {
+                std::filesystem::remove_all(writer.rgb->framesPath);
+            }
+        }
+        if (writer.depth != nullptr)
+        {
+            std::lock_guard<std::mutex> lock(writer.depth->mutex);
+            if (writer.depth->saveMode == VideoWriter::SaveMode::Video && writer.depth->writer)
+            {
+                writer.depth->writer->release();
+                std::filesystem::remove("output_" + cameraName + "_depth.mp4");
+            } else if (writer.depth->saveMode == VideoWriter::SaveMode::Frame)
+            {
+                std::filesystem::remove_all(writer.depth->framesPath);
+            }
+        }
+    }
+
+    // Clean up exogenous image temp folders
+    for (auto& [signalName, writer] : m_exogenousImageWriters)
+    {
+        if (writer.rgb != nullptr)
+        {
+            std::lock_guard<std::mutex> lock(writer.rgb->mutex);
+            std::filesystem::remove_all(writer.rgb->framesPath);
+        }
+    }
 }
