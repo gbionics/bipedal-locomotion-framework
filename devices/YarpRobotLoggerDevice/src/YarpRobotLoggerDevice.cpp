@@ -3090,31 +3090,36 @@ void BipedalLocomotion::YarpRobotLoggerDevice::disconnectAllExogenousSignals()
     constexpr auto logPrefix = "[YarpRobotLoggerDevice::disconnectAllExogenousSignals]";
     log()->info("{} Disconnecting all exogenous signals...", logPrefix);
 
-    // Helper to disconnect a map of signals and optionally clear metadata
-    auto disconnectSignals = [](auto& signalMap, bool clearMetadata = false) {
+    // Helper to disconnect a map of signals
+    auto disconnectSignals = [](auto& signalMap) {
         for (auto& [name, signal] : signalMap)
         {
             std::lock_guard<std::mutex> lock(signal.mutex);
             signal.disconnect();
             signal.connected = false;
             signal.dataArrived = false;
-            if constexpr (requires { signal.metadata.vectors; })
-            {
-                if (clearMetadata)
-                {
-                    signal.metadata.vectors.clear();
-                }
-            }
         }
     };
 
-    disconnectSignals(m_vectorsCollectionSignals, true);
+    // Helper to disconnect a map of signals and clear metadata
+    auto disconnectSignalsWithMetadata = [](auto& signalMap) {
+        for (auto& [name, signal] : signalMap)
+        {
+            std::lock_guard<std::mutex> lock(signal.mutex);
+            signal.disconnect();
+            signal.connected = false;
+            signal.dataArrived = false;
+            signal.metadata.vectors.clear();
+        }
+    };
+
+    disconnectSignalsWithMetadata(m_vectorsCollectionSignals);
     disconnectSignals(m_vectorSignals);
     disconnectSignals(m_stringSignals);
     disconnectSignals(m_imageSignals);
-    disconnectSignals(m_humanStateSignals, true);
-    disconnectSignals(m_wearableTargetsSignals, true);
-    disconnectSignals(m_wearableDataSignals, true);
+    disconnectSignalsWithMetadata(m_humanStateSignals);
+    disconnectSignalsWithMetadata(m_wearableTargetsSignals);
+    disconnectSignalsWithMetadata(m_wearableDataSignals);
 
     // Disconnect text logging connections
     if (m_logText)
