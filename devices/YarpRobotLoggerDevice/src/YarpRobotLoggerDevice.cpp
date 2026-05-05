@@ -2081,7 +2081,18 @@ void YarpRobotLoggerDevice::run()
     constexpr auto logPrefix = "[YarpRobotLoggerDevice::run]";
     const std::chrono::nanoseconds t = BipedalLocomotion::clock().now();
 
-    // In Idle state, just update timestamp and return
+    // Handle pause request regardless of state (needed for saveAndStopRecording)
+    if (m_requestPause)
+    {
+        m_paused = true;
+    }
+    if (m_paused)
+    {
+        m_previousTimestamp = t;
+        return;
+    }
+
+    // In Idle/Saving state, just update timestamp and return
     if (m_state != DeviceState::Recording)
     {
         m_previousTimestamp = t;
@@ -2102,17 +2113,6 @@ void YarpRobotLoggerDevice::run()
                         std::chrono::duration<double>(t - m_previousTimestamp));
             return;
         }
-    }
-
-    if (m_requestPause)
-    {
-        m_paused = true;
-    }
-    if (m_paused)
-    {
-        m_previousTimestamp = t;
-        m_firstRun = false;
-        return;
     }
 
     const double time = std::chrono::duration<double>(t).count();
@@ -3077,6 +3077,12 @@ bool BipedalLocomotion::YarpRobotLoggerDevice::transitionToIdle(bool save, const
     stopAllThreads();
     disconnectAllExogenousSignals();
 
+    // Clear the buffer manager so the destructor won't produce a spurious .mat file on shutdown
+    {
+        std::lock_guard<std::mutex> lockBuffer(m_bufferManagerMutex);
+        m_bufferManager.clear();
+    }
+
     // Reset the first run flag so next recording starts fresh
     m_firstRun = true;
 
@@ -3212,8 +3218,9 @@ void BipedalLocomotion::YarpRobotLoggerDevice::resetBufferManager()
 
     std::lock_guard<std::mutex> lockBuffer(m_bufferManagerMutex);
 
-    // Reconfigure the buffer manager with the same config
-    // This clears all channels and data
+    // Clear all existing channels, data, and stop the periodic save thread
+    m_bufferManager.clear();
+
     robometry::BufferConfig config;
     char* tmp = std::getenv("YARP_ROBOT_NAME");
     if (tmp != NULL)
