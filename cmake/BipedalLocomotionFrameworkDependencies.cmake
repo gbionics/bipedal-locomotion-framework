@@ -97,9 +97,9 @@ blf_optional_find_package(tomlplusplus 3.0.1 QUIET)
 checkandset_dependency(tomlplusplus MINIMUM_VERSION 3.0.1)
 dependency_classifier(tomlplusplus MINIMUM_VERSION 3.0.1 IS_USED ${FRAMEWORK_USE_tomlplusplus} PUBLIC)
 
-blf_optional_find_package(robometry 1.1.0 QUIET)
-checkandset_dependency(robometry MINIMUM_VERSION 1.1.0)
-dependency_classifier(robometry MINIMUM_VERSION 1.1.0 IS_USED ${FRAMEWORK_USE_robometry})
+blf_optional_find_package(robometry 1.4.1 QUIET)
+checkandset_dependency(robometry MINIMUM_VERSION 1.4.1)
+dependency_classifier(robometry MINIMUM_VERSION 1.4.1 IS_USED ${FRAMEWORK_USE_robometry})
 
 blf_optional_find_package(BayesFilters QUIET)
 checkandset_dependency(BayesFilters)

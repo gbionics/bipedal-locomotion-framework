@@ -61,7 +61,7 @@ idyntree = ">=12.2.1"
 yarp = ">=3.7.0"
 libmatio = "*"
 libmatio-cpp = "*"
-librobometry = "*"
+librobometry = ">=1.4.1"
 liblie-group-controllers = "*"
 # Eigen is temporary pinned to 3.* until the eigen 5.* migration is completed
 eigen = "3.*"
