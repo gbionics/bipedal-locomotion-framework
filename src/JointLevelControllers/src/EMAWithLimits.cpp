@@ -120,6 +120,13 @@ bool EMAWithLimits::initialize(
         return false;
     }
 
+    // check the upper limits are greater than the lower limits
+    if ((m_pimpl->upperLimit.array() <= m_pimpl->lowerLimit.array()).any())
+    {
+        log()->error("{} Each upper limit must be greater than the corresponding lower limit.", logPrefix);
+        return false;
+    }
+
     if ((m_pimpl->scale.array() <= 0.0).any())
     {
         log()->error("{} The scale must be greater than zero for all joints.", logPrefix);
