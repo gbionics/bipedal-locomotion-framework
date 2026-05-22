@@ -160,7 +160,7 @@ FULL_PATH_NAMES        = YES
 # will be relative from the directory where doxygen is started.
 # This tag requires that the tag FULL_PATH_NAMES is set to YES.
 
-STRIP_FROM_PATH        = @BLF_INCLUDE_FOLDERS@
+STRIP_FROM_PATH        = ../src
 
 # The STRIP_FROM_INC_PATH tag can be used to strip a user-defined part of the
 # path mentioned in the documentation of a class, which tells the reader which
@@ -169,7 +169,7 @@ STRIP_FROM_PATH        = @BLF_INCLUDE_FOLDERS@
 # specify the list of include paths that are normally passed to the compiler
 # using the -I flag.
 
-STRIP_FROM_INC_PATH    = @BLF_INCLUDE_FOLDERS@
+STRIP_FROM_INC_PATH    = ../src
 
 # If the SHORT_NAMES tag is set to YES, doxygen will generate much shorter (but
 # less readable) file names. This can be useful is your file systems doesn't
@@ -855,7 +855,10 @@ WARN_LOGFILE           =
 # spaces. See also FILE_PATTERNS and EXTENSION_MAPPING
 # Note: If this tag is empty the current directory is searched.
 
-INPUT                  = "@BLF_MAIN_PAGE@" @BLF_ADDITIONAL_FILES@ @BLF_INCLUDE_FOLDERS@
+INPUT                  = pages/main-page.dox \
+                         pages/python-additional-info.md \
+                         pages/so3-minjerk.md \
+                         ../src
 
 # This tag can be used to specify the character encoding of the source files
 # that doxygen parses. Internally doxygen uses the UTF-8 encoding. Doxygen uses
@@ -1194,9 +1197,9 @@ HTML_STYLESHEET        =
 # list). For an example see the documentation.
 # This tag requires that the tag GENERATE_HTML is set to YES.
 
-HTML_EXTRA_STYLESHEET  = @BLF_DOXYGEN_AWESOME_PATH@/doxygen-awesome.css \
-                         @BLF_DOXYGEN_AWESOME_PATH@/doxygen-awesome-sidebar-only.css \
-                         @BLF_DOXYGEN_AWESOME_PATH@/doxygen-awesome-sidebar-only-darkmode-toggle.css
+HTML_EXTRA_STYLESHEET  = ../doxygen-awesome-css/doxygen-awesome.css \
+                         ../doxygen-awesome-css/doxygen-awesome-sidebar-only.css \
+                         ../doxygen-awesome-css/doxygen-awesome-sidebar-only-darkmode-toggle.css
 
 # The HTML_EXTRA_FILES tag can be used to specify one or more extra images or
 # other source files which should be copied to the HTML output directory. Note
@@ -1206,11 +1209,11 @@ HTML_EXTRA_STYLESHEET  = @BLF_DOXYGEN_AWESOME_PATH@/doxygen-awesome.css \
 # files will be copied as-is; there are no commands or markers available.
 # This tag requires that the tag GENERATE_HTML is set to YES.
 
-HTML_EXTRA_FILES       = @BLF_DOXYGEN_AWESOME_PATH@/doxygen-awesome-darkmode-toggle.js \
-                         @BLF_DOXYGEN_AWESOME_PATH@/doxygen-awesome-fragment-copy-button.js \
-                         @BLF_DOXYGEN_AWESOME_PATH@/doxygen-awesome-interactive-toc.js \
-                         @BLF_DOXYGEN_AWESOME_PATH@/doxygen-awesome-paragraph-link.js \
-                         @BLF_DOXYGEN_AWESOME_PATH@/doxygen-awesome-tabs.js
+HTML_EXTRA_FILES       = ../doxygen-awesome-css/doxygen-awesome-darkmode-toggle.js \
+                         ../doxygen-awesome-css/doxygen-awesome-fragment-copy-button.js \
+                         ../doxygen-awesome-css/doxygen-awesome-interactive-toc.js \
+                         ../doxygen-awesome-css/doxygen-awesome-paragraph-link.js \
+                         ../doxygen-awesome-css/doxygen-awesome-tabs.js
 
 # The HTML_COLORSTYLE_HUE tag controls the color of the HTML output. Doxygen
 # will adjust the colors in the style sheet and background images according to
@@ -2153,7 +2156,7 @@ SEARCH_INCLUDES        = YES
 # preprocessor.
 # This tag requires that the tag SEARCH_INCLUDES is set to YES.
 
-INCLUDE_PATH           = @BLF_INCLUDE_FOLDERS@
+INCLUDE_PATH           = ../src
 
 # You can use the INCLUDE_FILE_PATTERNS tag to specify one or more wildcard
 # patterns (like *.h and *.hpp) to filter out the header-files in the

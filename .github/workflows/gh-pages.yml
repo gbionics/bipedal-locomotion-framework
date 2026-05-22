@@ -22,21 +22,13 @@ jobs:
       - name: Dependencies
         shell: bash -l {0}
         run: |
-          conda install doxygen=1.9.1 graphviz
-
-      - name: Fetch doxygen-awesome-css
-        shell: bash -l {0}
-        run: |
-          cd ${GITHUB_WORKSPACE}
-          git clone https://github.com/jothepro/doxygen-awesome-css.git
-          cd doxygen-awesome-css
-          git checkout v2.4.2
+          conda install doxygen=1.9.1 graphviz gitpython
 
       - name: Build docs
         shell: bash -l {0}
         run: |
           cd docs
-          python3 ./generate_website.py --doxygen_awesome_path ${GITHUB_WORKSPACE}/doxygen-awesome-css
+          python3 ./build_docs.py
 
       - name: Archive artifacts
         uses: actions/upload-artifact@v4
