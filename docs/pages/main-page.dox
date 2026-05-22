@@ -69,7 +69,7 @@ The **bipedal-locomotion-framework**  can be built on Windows, macOS, and Linux.
 If you do not want to use the `robotology-superbuild` you can manually compile the code in the repository running the following command in the terminal
 
 ~~~~~~~~~~~~~{.sh}
-git clone https://github.com/ami-iit/bipedal-locomotion-framework.git
+git clone https://github.com/gbionics/bipedal-locomotion-framework.git
 cd bipedal-locomotion-framework
 mkdir build && cd build
 cmake -DCMAKE_INSTALL_PREFIX=<path/where/you/want/to/install> \
@@ -81,7 +81,7 @@ cmake --build . --config Release --target install
 
 \section some-utilities 🖥️  Some utilities
 
-The **bipedal-locomotion-framework** ships also some utilities that can help you in the everyday tests on a real robot. You can find them in the [`utilities` folder](https://github.com/ami-iit/bipedal-locomotion-framework/tree/v0.19.0/utilities). Each utility contains a well-documented `README` where you can find further details.
+The **bipedal-locomotion-framework** ships also some utilities that can help you in the everyday tests on a real robot. You can find them in the [`utilities` folder](https://github.com/gbionics/bipedal-locomotion-framework/tree/master/utilities). Each utility contains a well-documented `README` where you can find further details.
 
 \section python 🐍 Python
 
