@@ -15,7 +15,7 @@ using namespace BipedalLocomotion::JointLevelControllers;
 struct EMAWithLimits::Impl
 {
     double alpha{0.9}; /**< Exponential weighting factor for the EMA */
-    Eigen::VectorXd scale; /**< Scaling factor for the input actions */    
+    Eigen::VectorXd scale; /**< Scaling factor for the input actions */
     Eigen::VectorXd lowerLimit;
     Eigen::VectorXd upperLimit;
     Eigen::VectorXd softLowerLimit;
