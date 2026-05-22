@@ -55,7 +55,7 @@ public:
      * |          `alpha`            |      `double`    |                    Weighting factor or coefficient for adjustments                              |    Yes    |
      * |      `lower_limit`          |      `vector`    |            Array specifying the lower limits for the joints                                     |    Yes    |
      * |      `upper_limit`          |      `vector`    |            Array specifying the upper limits for the joints                                     |    Yes    |
-     * |   `soft_limit_factor`       |      `vector`    |       Factor to soften or scale the limits (default is 1.0)                                     |     No    |
+     * |   `soft_limit_factor`       |      `double`    |       Factor to soften or scale the limits (default is 1.0)                                     |     No    |
      * @return True in case of success, false otherwise.
      */
     bool initialize(std::weak_ptr<const BipedalLocomotion::ParametersHandler::IParametersHandler> paramHandler) override;
