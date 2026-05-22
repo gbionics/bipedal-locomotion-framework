@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 
-# Copyright (C) 2026 Istituto Italiano di Tecnologia (IIT)
+# Copyright (C) 2026 Generative Bionics S.R.L.
 # This software may be modified and distributed under the terms of the
-# LGPL-2.1+ license. See the accompanying LICENSE file for details.
+# BSD 3-Clause "New" or "Revised" License. See the accompanying LICENSE file for details.
 
 import argparse
 import subprocess
