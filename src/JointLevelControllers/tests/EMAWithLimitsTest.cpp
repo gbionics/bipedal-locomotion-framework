@@ -18,7 +18,7 @@ using Catch::Approx;
 
 // Helper function to create parameter handler with basic configuration
 std::shared_ptr<StdImplementation>
-createBasicParameterHandler(double scale = 0.5,
+createBasicParameterHandler(const Eigen::Ref<const Eigen::VectorXd>& scale,
                             double alpha = 0.8,
                             const Eigen::VectorXd& lowerLimit = Eigen::Vector3d(-1.0, -2.0, -3.0),
                             const Eigen::VectorXd& upperLimit = Eigen::Vector3d(1.0, 2.0, 3.0),
@@ -31,6 +31,17 @@ createBasicParameterHandler(double scale = 0.5,
     handler->setParameter("upper_limit", upperLimit);
     handler->setParameter("soft_limit_factor", softLimitFactor);
     return handler;
+}
+
+std::shared_ptr<StdImplementation>
+createBasicParameterHandler(double scale = 0.5,
+                            double alpha = 0.8,
+                            const Eigen::VectorXd& lowerLimit = Eigen::Vector3d(-1.0, -2.0, -3.0),
+                            const Eigen::VectorXd& upperLimit = Eigen::Vector3d(1.0, 2.0, 3.0),
+                            double softLimitFactor = 0.9)
+{
+    return createBasicParameterHandler(
+        Eigen::VectorXd::Constant(lowerLimit.size(), scale), alpha, lowerLimit, upperLimit, softLimitFactor);
 }
 
 TEST_CASE("EMAWithLimits - Constructor and Destructor")
@@ -81,7 +92,7 @@ TEST_CASE("EMAWithLimits - Initialization Parameter Validation")
     SECTION("Missing alpha parameter")
     {
         auto handler = std::make_shared<StdImplementation>();
-        handler->setParameter("scale", 0.5);
+        handler->setParameter("scale", Eigen::Vector2d(0.5, 0.5));
         handler->setParameter("lower_limit", Eigen::Vector2d(-1.0, -2.0));
         handler->setParameter("upper_limit", Eigen::Vector2d(1.0, 2.0));
         REQUIRE_FALSE(controller.initialize(handler));
@@ -90,7 +101,7 @@ TEST_CASE("EMAWithLimits - Initialization Parameter Validation")
     SECTION("Missing lower_limit parameter")
     {
         auto handler = std::make_shared<StdImplementation>();
-        handler->setParameter("scale", 0.5);
+        handler->setParameter("scale", Eigen::Vector2d(0.5, 0.5));
         handler->setParameter("alpha", 0.8);
         handler->setParameter("upper_limit", Eigen::Vector2d(1.0, 2.0));
         REQUIRE_FALSE(controller.initialize(handler));
@@ -99,7 +110,7 @@ TEST_CASE("EMAWithLimits - Initialization Parameter Validation")
     SECTION("Missing upper_limit parameter")
     {
         auto handler = std::make_shared<StdImplementation>();
-        handler->setParameter("scale", 0.5);
+        handler->setParameter("scale", Eigen::Vector2d(0.5, 0.5));
         handler->setParameter("alpha", 0.8);
         handler->setParameter("lower_limit", Eigen::Vector2d(-1.0, -2.0));
         REQUIRE_FALSE(controller.initialize(handler));
@@ -108,7 +119,7 @@ TEST_CASE("EMAWithLimits - Initialization Parameter Validation")
     SECTION("Size mismatch between lower and upper limits")
     {
         auto handler = std::make_shared<StdImplementation>();
-        handler->setParameter("scale", 0.5);
+        handler->setParameter("scale", Eigen::Vector2d(0.5, 0.5));
         handler->setParameter("alpha", 0.8);
         handler->setParameter("lower_limit", Eigen::Vector2d(-1.0, -2.0)); // Size 2
         handler->setParameter("upper_limit", Eigen::Vector3d(1.0, 2.0, 3.0)); // Size 3
@@ -152,7 +163,7 @@ TEST_CASE("EMAWithLimits - Initialization Parameter Validation")
     SECTION("Valid initialization without soft limit factor (uses default)")
     {
         auto handler = std::make_shared<StdImplementation>();
-        handler->setParameter("scale", 0.5);
+        handler->setParameter("scale", Eigen::Vector2d(0.5, 0.5));
         handler->setParameter("alpha", 0.8);
         handler->setParameter("lower_limit", Eigen::Vector2d(-1.0, -2.0));
         handler->setParameter("upper_limit", Eigen::Vector2d(1.0, 2.0));
@@ -384,6 +395,31 @@ TEST_CASE("EMAWithLimits - Algorithm Correctness")
         const auto& output = controller.getOutput();
         // Should be at upper limit
         REQUIRE(output(0) == Approx(1.0).epsilon(1e-6));
+    }
+
+    SECTION("Different scale per joint")
+    {
+        const double alpha = 1.0;
+        Eigen::Vector3d lowerLimit(-2.0, -2.0, -2.0);
+        Eigen::Vector3d upperLimit(2.0, 2.0, 2.0);
+        Eigen::Vector3d scale(0.5, 1.0, 3.0);
+
+        auto handler = createBasicParameterHandler(scale, alpha, lowerLimit, upperLimit, 1.0);
+        EMAWithLimits controller;
+        REQUIRE(controller.initialize(handler));
+        REQUIRE(controller.reset(Eigen::Vector3d::Zero()));
+
+        Eigen::Vector3d input(0.5, 0.5, 0.5);
+        REQUIRE(controller.setInput(input));
+        REQUIRE(controller.advance());
+
+        const auto& output = controller.getOutput();
+
+        // scaled input: [0.25, 0.5, 1.5] -> clipped: [0.25, 0.5, 1.0]
+        // unscaled to [-2, 2]: [0.5, 1.0, 2.0]
+        REQUIRE(output(0) == Approx(0.5).epsilon(1e-6));
+        REQUIRE(output(1) == Approx(1.0).epsilon(1e-6));
+        REQUIRE(output(2) == Approx(2.0).epsilon(1e-6));
     }
 
     SECTION("EMA behavior with different alpha values")
