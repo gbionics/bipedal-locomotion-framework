@@ -19,34 +19,24 @@ jobs:
           channel-priority: true
           conda-remove-defaults: true
 
-      - name: Dependencies [apt]
-        shell: bash -l {0}
-        run: |
-          # The following dependencies are not available in conda
-          # See: https://github.com/conda-forge/texlive-core-feedstock/issues/19
-          sudo apt update
-          sudo apt install -y xsltproc texlive ghostscript graphviz texlive-base texlive-latex-extra texlive-fonts-extra texlive-fonts-recommended flex bison
-
       - name: Dependencies
         shell: bash -l {0}
         run: |
-          # Dependencies
-          conda install doxygen=1.9.1 toml pygments docutils jinja2
+          conda install doxygen=1.9.1 graphviz
 
-      - name: Fetch m.css
+      - name: Fetch doxygen-awesome-css
         shell: bash -l {0}
         run: |
           cd ${GITHUB_WORKSPACE}
-          git clone https://github.com/mosra/m.css.git
-          cd m.css
-          git checkout 4bf4ddade48717ffabbdc6a1fd7ed15a75f9bec3
+          git clone https://github.com/jothepro/doxygen-awesome-css.git
+          cd doxygen-awesome-css
+          git checkout v2.4.2
 
       - name: Build docs
         shell: bash -l {0}
         run: |
           cd docs
-          git clone https://github.com/ami-iit/bipedal-locomotion-framework.git
-          python3 ./generate_website.py --mcss_path ${GITHUB_WORKSPACE}/m.css/documentation/doxygen.py
+          python3 ./generate_website.py --doxygen_awesome_path ${GITHUB_WORKSPACE}/doxygen-awesome-css
 
       - name: Archive artifacts
         uses: actions/upload-artifact@v4
