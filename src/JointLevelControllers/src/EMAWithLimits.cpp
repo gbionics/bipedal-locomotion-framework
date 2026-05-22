@@ -14,8 +14,8 @@ using namespace BipedalLocomotion::JointLevelControllers;
 
 struct EMAWithLimits::Impl
 {
-    double scale{1.0}; /**< Scaling factor for the input actions */
     double alpha{0.9}; /**< Exponential weighting factor for the EMA */
+    Eigen::VectorXd scale; /**< Scaling factor for the input actions */    
     Eigen::VectorXd lowerLimit;
     Eigen::VectorXd upperLimit;
     Eigen::VectorXd softLowerLimit;
@@ -114,9 +114,15 @@ bool EMAWithLimits::initialize(
         return false;
     }
 
-    if (m_pimpl->scale <= 0.0)
+    if (m_pimpl->scale.size() != m_pimpl->lowerLimit.size())
     {
-        log()->error("{} The scale must be greater than zero.", logPrefix);
+        log()->error("{} Size mismatch between scale and limits.", logPrefix);
+        return false;
+    }
+
+    if ((m_pimpl->scale.array() <= 0.0).any())
+    {
+        log()->error("{} The scale must be greater than zero for all joints.", logPrefix);
         return false;
     }
 
@@ -152,7 +158,7 @@ bool EMAWithLimits::advance()
     }
 
     // 1. the policy is scaled
-    m_pimpl->processedActions = m_pimpl->input * m_pimpl->scale;
+    m_pimpl->processedActions = m_pimpl->scale.cwiseProduct(m_pimpl->input);
 
     // 2. clip the policy between [-1, 1]
     m_pimpl->processedActions = m_pimpl->clip(m_pimpl->processedActions,
