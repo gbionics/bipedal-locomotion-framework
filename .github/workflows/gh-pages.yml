@@ -28,7 +28,7 @@ jobs:
         shell: bash -l {0}
         run: |
           cd docs
-          python3 ./build_docs.py
+          python3 ./generate_docs.py
 
       - name: Archive artifacts
         uses: actions/upload-artifact@v4
