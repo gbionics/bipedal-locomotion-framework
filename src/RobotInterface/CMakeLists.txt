@@ -15,12 +15,22 @@ add_bipedal_locomotion_library(
     SUBDIRECTORIES         YarpImplementation tests)
 endif()
 
-if (FRAMEWORK_COMPILE_Perception)
+if (FRAMEWORK_COMPILE_Camera)
 
 add_bipedal_locomotion_library(
-    NAME                   PerceptionInterface
+    NAME                   CameraInterface
     IS_INTERFACE
-    PUBLIC_HEADERS         ${H_PREFIX}/ICameraBridge.h ${H_PREFIX}/IPointCloudBridge.h
-    PUBLIC_LINK_LIBRARIES  BipedalLocomotion::ParametersHandler BipedalLocomotion::System ${OpenCV_LIBS} pcl_common
+    PUBLIC_HEADERS         ${H_PREFIX}/ICameraBridge.h
+    PUBLIC_LINK_LIBRARIES  BipedalLocomotion::ParametersHandler BipedalLocomotion::System ${OpenCV_LIBS}
+    INSTALLATION_FOLDER    RobotInterface)
+endif()
+
+if (FRAMEWORK_COMPILE_Pointcloud)
+
+add_bipedal_locomotion_library(
+    NAME                   PointCloudInterface
+    IS_INTERFACE
+    PUBLIC_HEADERS         ${H_PREFIX}/IPointCloudBridge.h
+    PUBLIC_LINK_LIBRARIES  BipedalLocomotion::ParametersHandler BipedalLocomotion::System pcl_common
     INSTALLATION_FOLDER    RobotInterface)
 endif()

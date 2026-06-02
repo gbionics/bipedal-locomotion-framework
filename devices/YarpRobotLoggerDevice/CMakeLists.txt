@@ -58,7 +58,7 @@ if(FRAMEWORK_COMPILE_YarpRobotLoggerDevice)
       BipedalLocomotion::VectorsCollection
       BipedalLocomotion::ParametersHandlerYarpImplementation
       BipedalLocomotion::RobotInterfaceYarpImplementation
-      BipedalLocomotion::PerceptionInterfaceYarpImplementation
+      BipedalLocomotion::CameraInterfaceYarpImplementation
       BipedalLocomotion::TextLoggingYarpImplementation
       BipedalLocomotion::SystemYarpImplementation
       BipedalLocomotion::YarpRobotLoggerDeviceCommands
