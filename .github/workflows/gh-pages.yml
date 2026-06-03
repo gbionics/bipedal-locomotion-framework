@@ -7,12 +7,10 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
-  pages: write
-  id-token: write
+  contents: write
 
 jobs:
-  build:
+  build-and-deploy:
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
@@ -36,19 +34,10 @@ jobs:
           cd docs
           python3 ./generate_docs.py
 
-      - name: Upload pages artifact
-        uses: actions/upload-pages-artifact@v3
+      - name: Publish docs to gh-pages
+        if: github.ref == 'refs/heads/master'
+        uses: peaceiris/actions-gh-pages@v4
         with:
-          path: docs/site
-
-  deploy:
-    runs-on: ubuntu-24.04
-    needs: [build]
-    if: github.ref == 'refs/heads/master'
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    steps:
-      - name: Deploy
-        id: deployment
-        uses: actions/deploy-pages@v4
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: docs/site
+          publish_branch: gh-pages
