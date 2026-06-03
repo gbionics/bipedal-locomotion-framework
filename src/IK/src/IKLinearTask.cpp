@@ -12,3 +12,9 @@ bool IKLinearTask::setKinDyn(std::shared_ptr<iDynTree::KinDynComputations> kinDy
 {
     return true;
 }
+
+// Explicit instantiation of the factory template to ensure proper singleton behavior
+// across shared library boundaries. This ensures that all libraries using IKLinearTaskFactory
+// share the same registry of task builders.
+template class BipedalLocomotion::System::Factory<IKLinearTask>;
+template class BipedalLocomotion::System::ILinearTaskFactory<IKLinearTask>;
