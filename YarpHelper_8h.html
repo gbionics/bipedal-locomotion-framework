@@ -1,364 +1,519 @@
-<!DOCTYPE html>
-<html lang="en">
+<!-- HTML header for doxygen 1.9.1 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-  <meta charset="UTF-8" />
-  <title>BipedalLocomotion/RobotInterface/YarpHelper.h file | bipedal locomotion framework master</title>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
-  <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
-  <link rel="icon" href="favicon-dark.png" type="image/png" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#22272e" />
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>bipedal locomotion framework: RobotInterface/YarpImplementation/include/BipedalLocomotion/RobotInterface/YarpHelper.h File Reference</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js", "TeX/AMSmath.js", "TeX/AMSsymbols.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+});
+</script>
+<script type="text/javascript" async="async" src="https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only-darkmode-toggle.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="doxygen-awesome-darkmode-toggle.js"></script>
+<script type="text/javascript" src="doxygen-awesome-fragment-copy-button.js"></script>
+<script type="text/javascript" src="doxygen-awesome-interactive-toc.js"></script>
+<script type="text/javascript" src="doxygen-awesome-paragraph-link.js"></script>
+<script type="text/javascript" src="doxygen-awesome-tabs.js"></script>
+<script type="text/javascript">
+    DoxygenAwesomeDarkModeToggle.init()
+    DoxygenAwesomeFragmentCopyButton.init()
+    DoxygenAwesomeInteractiveToc.init()
+    DoxygenAwesomeParagraphLink.init()
+    DoxygenAwesomeTabs.init()
+</script>
 </head>
 <body>
-<header><nav id="navigation">
-  <div class="m-container">
-    <div class="m-row">
-      <span id="m-navbar-brand" class="m-col-t-8 m-col-m-none m-left-m">
-        <a href="./index.html">bipedal locomotion framework</a> <span class="m-breadcrumb">|</span> <a href="index.html" class="m-thin">master</a>
-      </span>
-      <div class="m-col-t-4 m-hide-m m-text-right m-nopadr">
-        <a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
-          <path id="m-doc-search-icon-path" d="m6 0c-3.31 0-6 2.69-6 6 0 3.31 2.69 6 6 6 1.49 0 2.85-0.541 3.89-1.44-0.0164 0.338 0.147 0.759 0.5 1.15l3.22 3.79c0.552 0.614 1.45 0.665 2 0.115 0.55-0.55 0.499-1.45-0.115-2l-3.79-3.22c-0.392-0.353-0.812-0.515-1.15-0.5 0.895-1.05 1.44-2.41 1.44-3.89 0-3.31-2.69-6-6-6zm0 1.56a4.44 4.44 0 0 1 4.44 4.44 4.44 4.44 0 0 1-4.44 4.44 4.44 4.44 0 0 1-4.44-4.44 4.44 4.44 0 0 1 4.44-4.44z"/>
-        </svg></a>
-        <a id="m-navbar-show" href="#navigation" title="Show navigation"></a>
-        <a id="m-navbar-hide" href="#" title="Hide navigation"></a>
-      </div>
-      <div id="m-navbar-collapse" class="m-col-t-12 m-show-m m-col-m-none m-right-m">
-        <div class="m-row">
-          <ol class="m-col-t-6 m-col-m-none">
-            <li><a href="pages.html">Pages</a></li>
-            <li><a href="annotated.html">Classes</a></li>
-            <li><a href="files.html">Files</a></li>
-          </ol>
-          <ol class="m-col-t-6 m-col-m-none" start="4">
-            <li>
-              <a href="pages.html">Versions</a>
-              <ol>
-                <li><a href="./index.html">Master</a></li>
-                <li><a href="./v0.19.0/index.html">v0.19.0</a></li>
-                <li><a href="./v0.21.1/index.html">v0.21.1</a></li>
-                <li><a href="./v0.18.0/index.html">v0.18.0</a></li>
-              </ol>
-            </li>
-            <li>
-              <a href="pages.html">Contacts</a>
-              <ol>
-                <li><a href="https://github.com/ami-iit/bipedal-locomotion-framework">GitHub</a></li>
-                <li><a href="https://www.iit.it/web/ami/">Lab website</a></li>
-              </ol>
-            </li>
-            <li class="m-show-m"><a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
-              <use href="#m-doc-search-icon-path" />
-            </svg></a></li>
-          </ol>
-        </div>
-      </div>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">bipedal locomotion framework
+   </div>
+   <div id="projectbrief">A suite of libraries for achieving bipedal locomotion on humanoid robots</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.9.1 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "search",false,'Search','.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',true,false,'search.php','Search');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
     </div>
   </div>
-</nav></header>
-<main><article>
-  <div class="m-container m-container-inflatable">
-    <div class="m-row">
-      <div class="m-col-l-10 m-push-l-1">
-        <h1>
-          <span class="m-breadcrumb"><a href="dir_6d7a1fbb1996e04a5d9e5687233f00d1.html">BipedalLocomotion</a>/</span><span class="m-breadcrumb"><a href="dir_c3a15aafaca1b50380f5f9f32b075f72.html">RobotInterface</a>/</span>YarpHelper.h <span class="m-thin">file</span>
-        </h1>
-        <nav class="m-block m-default">
-          <h3>Contents</h3>
-          <ul>
-            <li>
-              Reference
-              <ul>
-                <li><a href="#namespaces">Namespaces</a></li>
-                <li><a href="#nested-classes">Classes</a></li>
-                <li><a href="#func-members">Functions</a></li>
-              </ul>
-            </li>
-          </ul>
-        </nav>
-<aside class="m-note m-default"><h4>Authors</h4><p>Giulio Romualdi</p></aside><aside class="m-note m-default"><h4>Copyright</h4><p>2020 Istituto Italiano di Tecnologia (IIT). This software may be modified and distributed under the terms of the BSD-3-Clause license.</p></aside>
-        <section id="namespaces">
-          <h2><a href="#namespaces">Namespaces</a></h2>
-          <dl class="m-doc">
-            <dt>namespace <a href="namespaceBipedalLocomotion.html" class="m-doc">BipedalLocomotion</a></dt>
-            <dd></dd>
-            <dt>namespace <a href="namespaceBipedalLocomotion_1_1RobotInterface.html" class="m-doc">BipedalLocomotion::RobotInterface</a></dt>
-            <dd><span></span></dd>
-          </dl>
-        </section>
-        <section id="nested-classes">
-          <h2><a href="#nested-classes">Classes</a></h2>
-          <dl class="m-doc">
-            <dt>
-              struct <a href="structBipedalLocomotion_1_1RobotInterface_1_1PolyDriverDescriptor.html" class="m-doc">BipedalLocomotion::RobotInterface::PolyDriverDescriptor</a>
-            </dt>
-            <dd><a href="structBipedalLocomotion_1_1RobotInterface_1_1PolyDriverDescriptor.html" class="m-doc">PolyDriverDescriptor</a> describes a PolyDriver.</dd>
-          </dl>
-        </section>
-        <section id="func-members">
-          <h2><a href="#func-members">Functions</a></h2>
-          <dl class="m-doc">
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a2c07f5099140671abde506a8a316e130" class="m-doc">constructRemoteControlBoardRemapper</a>(</span><span class="m-doc-wrap">std::weak_ptr&lt;const <a href="classBipedalLocomotion_1_1ParametersHandler_1_1IParametersHandler.html" class="m-doc">BipedalLocomotion::<wbr />ParametersHandler::<wbr />IParametersHandler</a>&gt; handler) -&gt; PolyDriverDescriptor</span>
-            </dt>
-            <dd>Helper function that can be used to build a RemoteControlBoardRemapper device.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a63b15535972c13dedb0459a66321432b" class="m-doc">constructGenericSensorClient</a>(</span><span class="m-doc-wrap">std::weak_ptr&lt;const <a href="classBipedalLocomotion_1_1ParametersHandler_1_1IParametersHandler.html" class="m-doc">BipedalLocomotion::<wbr />ParametersHandler::<wbr />IParametersHandler</a>&gt; handler) -&gt; PolyDriverDescriptor</span>
-            </dt>
-            <dd>Helper function that can be used to build a GenericSensorClient device.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a4929526a47c0815e98b10ae7fbd44c2d" class="m-doc">constructMultipleAnalogSensorsClient</a>(</span><span class="m-doc-wrap">std::weak_ptr&lt;const <a href="classBipedalLocomotion_1_1ParametersHandler_1_1IParametersHandler.html" class="m-doc">BipedalLocomotion::<wbr />ParametersHandler::<wbr />IParametersHandler</a>&gt; handler) -&gt; PolyDriverDescriptor</span>
-            </dt>
-            <dd>Helper function that can be used to build a <code>MultipleAnalogSensorsClient</code> device.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a3428753b80de7ab5cd7b5a38f1feba18" class="m-doc">constructMultipleAnalogSensorsRemapper</a>(</span><span class="m-doc-wrap">std::weak_ptr&lt;const <a href="classBipedalLocomotion_1_1ParametersHandler_1_1IParametersHandler.html" class="m-doc">BipedalLocomotion::<wbr />ParametersHandler::<wbr />IParametersHandler</a>&gt; handler) -&gt; PolyDriverDescriptor</span>
-            </dt>
-            <dd>Helper function that can be used to build a <code>MultipleAnalogSensorsRemapper</code> device.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#abc32625d98993ca36028defbabe9dc62" class="m-doc">constructMultipleAnalogSensorsRemapper</a>(</span><span class="m-doc-wrap">std::weak_ptr&lt;const <a href="classBipedalLocomotion_1_1ParametersHandler_1_1IParametersHandler.html" class="m-doc">BipedalLocomotion::<wbr />ParametersHandler::<wbr />IParametersHandler</a>&gt; handler,
-              const std::vector&lt;PolyDriverDescriptor&gt;&amp; polydriverList) -&gt; PolyDriverDescriptor</span>
-            </dt>
-            <dd>Helper function that can be used to build a <code>MultipleAnalogSensorsRemapper</code> device.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#ad992949f2120fc211c0af9d296631ec5" class="m-doc">constructMultipleAnalogSensorsRemapper</a>(</span><span class="m-doc-wrap">std::weak_ptr&lt;const <a href="classBipedalLocomotion_1_1ParametersHandler_1_1IParametersHandler.html" class="m-doc">BipedalLocomotion::<wbr />ParametersHandler::<wbr />IParametersHandler</a>&gt; handler,
-              const yarp::dev::PolyDriverList&amp; polydriverList) -&gt; PolyDriverDescriptor</span>
-            </dt>
-            <dd>Helper function that can be used to build a <code>MultipleAnalogSensorsRemapper</code> device.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a90efd8763c28720edded7499b94b9753" class="m-doc">constructRDGBSensorClient</a>(</span><span class="m-doc-wrap">std::weak_ptr&lt;const <a href="classBipedalLocomotion_1_1ParametersHandler_1_1IParametersHandler.html" class="m-doc">BipedalLocomotion::<wbr />ParametersHandler::<wbr />IParametersHandler</a>&gt; handler) -&gt; PolyDriverDescriptor</span>
-            </dt>
-            <dd>Helper function that can be used to build a <code>RGBDSensorClient</code> device.</dd>
-          </dl>
-        </section>
-        <section>
-          <h2>Function documentation</h2>
-          <section class="m-doc-details" id="a2c07f5099140671abde506a8a316e130"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">PolyDriverDescriptor </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a2c07f5099140671abde506a8a316e130" class="m-doc-self">constructRemoteControlBoardRemapper</a>(</span><span class="m-doc-wrap">std::weak_ptr&lt;const <a href="classBipedalLocomotion_1_1ParametersHandler_1_1IParametersHandler.html" class="m-doc">BipedalLocomotion::<wbr />ParametersHandler::<wbr />IParametersHandler</a>&gt; handler)</span></span>
-            </h3>
-            <p>Helper function that can be used to build a RemoteControlBoardRemapper device.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">handler</td>
-                  <td>pointer to a parameter handler interface.</td>
-                </tr>
-              </tbody>
-              <tfoot>
-                <tr>
-                  <th>Returns</th>
-                  <td>A <a href="structBipedalLocomotion_1_1RobotInterface_1_1PolyDriverDescriptor.html" class="m-doc">PolyDriverDescriptor</a>. If one of the parameters is missing an invalid <a href="structBipedalLocomotion_1_1RobotInterface_1_1PolyDriverDescriptor.html" class="m-doc">PolyDriverDescriptor</a> is returned.</td>
-                </tr>
-              </tfoot>
-            </table>
-<aside class="m-note m-info"><h4>Note</h4><p>the following parameters are required by the function</p><table class="m-table"><thead><tr><th>Parameter Name</th><th>Type</th><th>Description</th><th>Mandatory</th></tr></thead><tbody><tr><td><code>joints_list</code></td><td><code>vector&lt;string&gt;</code></td><td>List of the controlled joints</td><td>Yes</td></tr><tr><td><code>remote_control_boards</code></td><td><code>vector&lt;string&gt;</code></td><td>List of the remote control boards associated to the joints</td><td>Yes</td></tr><tr><td><code>robot_name</code></td><td><code>string</code></td><td>Name of the robot</td><td>Yes</td></tr><tr><td><code>local_prefix</code></td><td><code>string</code></td><td>Prefix of the local port (e.g. the application name)</td><td>Yes</td></tr></tbody></table></aside>
-          </div></section>
-          <section class="m-doc-details" id="a63b15535972c13dedb0459a66321432b"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">PolyDriverDescriptor </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a63b15535972c13dedb0459a66321432b" class="m-doc-self">constructGenericSensorClient</a>(</span><span class="m-doc-wrap">std::weak_ptr&lt;const <a href="classBipedalLocomotion_1_1ParametersHandler_1_1IParametersHandler.html" class="m-doc">BipedalLocomotion::<wbr />ParametersHandler::<wbr />IParametersHandler</a>&gt; handler)</span></span>
-            </h3>
-            <p>Helper function that can be used to build a GenericSensorClient device.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">handler</td>
-                  <td>pointer to a parameter handler interface.</td>
-                </tr>
-              </tbody>
-              <tfoot>
-                <tr>
-                  <th>Returns</th>
-                  <td>A <a href="structBipedalLocomotion_1_1RobotInterface_1_1PolyDriverDescriptor.html" class="m-doc">PolyDriverDescriptor</a>. If one of the parameters is missing an invalid <a href="structBipedalLocomotion_1_1RobotInterface_1_1PolyDriverDescriptor.html" class="m-doc">PolyDriverDescriptor</a> is returned.</td>
-                </tr>
-              </tfoot>
-            </table>
-<aside class="m-note m-info"><h4>Note</h4><p>the following parameters are required by the function</p><table class="m-table"><thead><tr><th>Parameter Name</th><th>Type</th><th>Description</th><th>Mandatory</th></tr></thead><tbody><tr><td><code>description</code></td><td><code>string</code></td><td>Description of the genericSensorClient. It is the device name</td><td>Yes</td></tr><tr><td><code>remote_port_name</code></td><td><code>string</code></td><td>Name of the port associate to the remote</td><td>Yes</td></tr><tr><td><code>local_prefix</code></td><td><code>string</code></td><td>Prefix of the local port (e.g. the application name)</td><td>Yes</td></tr><tr><td><code>local_port_name_postfix</code></td><td><code>string</code></td><td>Postfix of the local port. The local port name is <code>/&lt;local_prefix&gt;&lt;local_port_name_postfix&gt;</code></td><td>Yes</td></tr></tbody></table><p>The genericSensorClient device is implement in <a href="https://github.com/robotology/whole-body-estimators/tree/cc8ffb83375a2d410b225f4fa67aee4a29074b42/devices/genericSensorClient">whole-body-estimators</a>.</p></aside>
-          </div></section>
-          <section class="m-doc-details" id="a4929526a47c0815e98b10ae7fbd44c2d"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">PolyDriverDescriptor </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a4929526a47c0815e98b10ae7fbd44c2d" class="m-doc-self">constructMultipleAnalogSensorsClient</a>(</span><span class="m-doc-wrap">std::weak_ptr&lt;const <a href="classBipedalLocomotion_1_1ParametersHandler_1_1IParametersHandler.html" class="m-doc">BipedalLocomotion::<wbr />ParametersHandler::<wbr />IParametersHandler</a>&gt; handler)</span></span>
-            </h3>
-            <p>Helper function that can be used to build a <code>MultipleAnalogSensorsClient</code> device.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">handler</td>
-                  <td>pointer to a parameter handler interface.</td>
-                </tr>
-              </tbody>
-              <tfoot>
-                <tr>
-                  <th>Returns</th>
-                  <td>A <code><a href="structBipedalLocomotion_1_1RobotInterface_1_1PolyDriverDescriptor.html" class="m-doc">PolyDriverDescriptor</a></code>. In case of error an invalid <code><a href="structBipedalLocomotion_1_1RobotInterface_1_1PolyDriverDescriptor.html" class="m-doc">PolyDriverDescriptor</a></code> is returned.</td>
-                </tr>
-              </tfoot>
-            </table>
-<aside class="m-note m-info"><h4>Note</h4><p>The following parameters are taken into consideration</p><table class="m-table"><thead><tr><th>Parameter Name</th><th>Type</th><th>Description</th><th>Mandatory</th></tr></thead><tbody><tr><td><code>description</code></td><td><code>string</code></td><td>Description of the multiple analog sensor client. It is the device name</td><td>Yes</td></tr><tr><td><code>remote_port_name</code></td><td><code>string</code></td><td>Name of the port associate to the remote</td><td>Yes</td></tr><tr><td><code>local_prefix</code></td><td><code>string</code></td><td>Prefix of the local port (e.g. the application name)</td><td>Yes</td></tr><tr><td><code>local_port_name_postfix</code></td><td><code>string</code></td><td>Postfix of the local port. The local port name is <code>/&lt;local_prefix&gt;&lt;local_port_name_postfix&gt;</code></td><td>Yes</td></tr><tr><td><code>timeout</code></td><td><code>double</code></td><td>Timeout in seconds after which the device reports an error if no measurement was received. (Default value 0.01)</td><td>No</td></tr><tr><td><code>external_connection</code></td><td><code>bool</code></td><td>If set to true, the connection to the rpc port of the MAS server is skipped and it is possible to connect to the data source externally after being opened. (Default value <code>false</code>)</td><td>No</td></tr><tr><td><code>carrier</code></td><td><code>string</code></td><td>The carrier used for the connection with the server. (Default value <code>tcp</code>)</td><td>No</td></tr></tbody></table><p>The <code>MultipleAnalogSensorsClient</code> device is implement in <a href="https://www.yarp.it/git-master/classMultipleAnalogSensorsClient.html">yarp</a>.</p></aside>
-          </div></section>
-          <section class="m-doc-details" id="a3428753b80de7ab5cd7b5a38f1feba18"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">PolyDriverDescriptor </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a3428753b80de7ab5cd7b5a38f1feba18" class="m-doc-self">constructMultipleAnalogSensorsRemapper</a>(</span><span class="m-doc-wrap">std::weak_ptr&lt;const <a href="classBipedalLocomotion_1_1ParametersHandler_1_1IParametersHandler.html" class="m-doc">BipedalLocomotion::<wbr />ParametersHandler::<wbr />IParametersHandler</a>&gt; handler)</span></span>
-            </h3>
-            <p>Helper function that can be used to build a <code>MultipleAnalogSensorsRemapper</code> device.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">handler</td>
-                  <td>pointer to a parameter handler interface.</td>
-                </tr>
-              </tbody>
-              <tfoot>
-                <tr>
-                  <th>Returns</th>
-                  <td>A <a href="structBipedalLocomotion_1_1RobotInterface_1_1PolyDriverDescriptor.html" class="m-doc">PolyDriverDescriptor</a>. In case of error an invalid <code><a href="structBipedalLocomotion_1_1RobotInterface_1_1PolyDriverDescriptor.html" class="m-doc">PolyDriverDescriptor</a></code> is returned.</td>
-                </tr>
-              </tfoot>
-            </table>
-<aside class="m-note m-info"><h4>Note</h4><p>The following parameters are taken into consideration</p><table class="m-table"><thead><tr><th>Parameter Name</th><th>Type</th><th>Description</th><th>Mandatory</th></tr></thead><tbody><tr><td><code>three_axis_gyroscopes_names</code></td><td><code>vector&lt;string&gt;</code></td><td>Vector containing the names of the gyroscopes (Default empty vector)</td><td>No</td></tr><tr><td><code>three_axis_linear_accelerometers_names</code></td><td><code>vector&lt;string&gt;</code></td><td>Vector containing the names of the accelerometers (Default empty vector)</td><td>No</td></tr><tr><td><code>three_axis_magnetometers_names</code></td><td><code>vector&lt;string&gt;</code></td><td>Vector containing the names of the magnetometers (Default empty vector)</td><td>No</td></tr><tr><td><code>orientation_sensors_names</code></td><td><code>vector&lt;string&gt;</code></td><td>Vector containing the names of the orientation sensors (Default empty vector)</td><td>No</td></tr><tr><td><code>six_axis_force_torque_sensors_names</code></td><td><code>vector&lt;string&gt;</code></td><td>Vector containing the names of the FT sensors (Default empty vector)</td><td>No</td></tr><tr><td><code>temperature_sensors_names</code></td><td><code>vector&lt;string&gt;</code></td><td>Vector containing the names of the temperature sensors (Default empty vector)</td><td>No</td></tr></tbody></table><p>The <code>MultipleAnalogSensorsRemapper</code> device is implement in <a href="https://www.yarp.it/git-master/classMultipleAnalogSensorsRemapper.html">yarp</a>.</p></aside>
-          </div></section>
-          <section class="m-doc-details" id="abc32625d98993ca36028defbabe9dc62"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">PolyDriverDescriptor </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#abc32625d98993ca36028defbabe9dc62" class="m-doc-self">constructMultipleAnalogSensorsRemapper</a>(</span><span class="m-doc-wrap">std::weak_ptr&lt;const <a href="classBipedalLocomotion_1_1ParametersHandler_1_1IParametersHandler.html" class="m-doc">BipedalLocomotion::<wbr />ParametersHandler::<wbr />IParametersHandler</a>&gt; handler,
-              const std::vector&lt;PolyDriverDescriptor&gt;&amp; polydriverList)</span></span>
-            </h3>
-            <p>Helper function that can be used to build a <code>MultipleAnalogSensorsRemapper</code> device.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">handler</td>
-                  <td>pointer to a parameter handler interface.</td>
-                </tr>
-                <tr>
-                  <td>polydriverList</td>
-                  <td>a list of the polydriver that will be attached to the multiple analog sensor remapper</td>
-                </tr>
-              </tbody>
-              <tfoot>
-                <tr>
-                  <th>Returns</th>
-                  <td>A <a href="structBipedalLocomotion_1_1RobotInterface_1_1PolyDriverDescriptor.html" class="m-doc">PolyDriverDescriptor</a>. In case of error an invalid <code><a href="structBipedalLocomotion_1_1RobotInterface_1_1PolyDriverDescriptor.html" class="m-doc">PolyDriverDescriptor</a></code> is returned.</td>
-                </tr>
-              </tfoot>
-            </table>
-<aside class="m-note m-info"><h4>Note</h4><p>The following parameters are taken into consideration</p><table class="m-table"><thead><tr><th>Parameter Name</th><th>Type</th><th>Description</th><th>Mandatory</th></tr></thead><tbody><tr><td><code>three_axis_gyroscopes_names</code></td><td><code>vector&lt;string&gt;</code></td><td>Vector containing the names of the gyroscopes (Default empty vector)</td><td>No</td></tr><tr><td><code>three_axis_linear_accelerometers_names</code></td><td><code>vector&lt;string&gt;</code></td><td>Vector containing the names of the accelerometers (Default empty vector)</td><td>No</td></tr><tr><td><code>three_axis_magnetometers_names</code></td><td><code>vector&lt;string&gt;</code></td><td>Vector containing the names of the magnetometers (Default empty vector)</td><td>No</td></tr><tr><td><code>orientation_sensors_names</code></td><td><code>vector&lt;string&gt;</code></td><td>Vector containing the names of the orientation sensors (Default empty vector)</td><td>No</td></tr><tr><td><code>six_axis_force_torque_sensors_names</code></td><td><code>vector&lt;string&gt;</code></td><td>Vector containing the names of the FT sensors (Default empty vector)</td><td>No</td></tr><tr><td><code>temperature_sensors_names</code></td><td><code>vector&lt;string&gt;</code></td><td>Vector containing the names of the temperature sensors (Default empty vector)</td><td>No</td></tr></tbody></table><p>The <code>MultipleAnalogSensorsRemapper</code> device is implement in <a href="https://www.yarp.it/git-master/classMultipleAnalogSensorsRemapper.html">yarp</a>.</p></aside>
-          </div></section>
-          <section class="m-doc-details" id="ad992949f2120fc211c0af9d296631ec5"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">PolyDriverDescriptor </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ad992949f2120fc211c0af9d296631ec5" class="m-doc-self">constructMultipleAnalogSensorsRemapper</a>(</span><span class="m-doc-wrap">std::weak_ptr&lt;const <a href="classBipedalLocomotion_1_1ParametersHandler_1_1IParametersHandler.html" class="m-doc">BipedalLocomotion::<wbr />ParametersHandler::<wbr />IParametersHandler</a>&gt; handler,
-              const yarp::dev::PolyDriverList&amp; polydriverList)</span></span>
-            </h3>
-            <p>Helper function that can be used to build a <code>MultipleAnalogSensorsRemapper</code> device.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">handler</td>
-                  <td>pointer to a parameter handler interface.</td>
-                </tr>
-                <tr>
-                  <td>polydriverList</td>
-                  <td>a list of the polydriver that will be attached to the multiple analog sensor remapper.</td>
-                </tr>
-              </tbody>
-              <tfoot>
-                <tr>
-                  <th>Returns</th>
-                  <td>A <a href="structBipedalLocomotion_1_1RobotInterface_1_1PolyDriverDescriptor.html" class="m-doc">PolyDriverDescriptor</a>. In case of error an invalid <code><a href="structBipedalLocomotion_1_1RobotInterface_1_1PolyDriverDescriptor.html" class="m-doc">PolyDriverDescriptor</a></code> is returned.</td>
-                </tr>
-              </tfoot>
-            </table>
-<aside class="m-note m-info"><h4>Note</h4><p>The following parameters are taken into consideration</p><table class="m-table"><thead><tr><th>Parameter Name</th><th>Type</th><th>Description</th><th>Mandatory</th></tr></thead><tbody><tr><td><code>three_axis_gyroscopes_names</code></td><td><code>vector&lt;string&gt;</code></td><td>Vector containing the names of the gyroscopes (Default empty vector)</td><td>No</td></tr><tr><td><code>three_axis_linear_accelerometers_names</code></td><td><code>vector&lt;string&gt;</code></td><td>Vector containing the names of the accelerometers (Default empty vector)</td><td>No</td></tr><tr><td><code>three_axis_magnetometers_names</code></td><td><code>vector&lt;string&gt;</code></td><td>Vector containing the names of the magnetometers (Default empty vector)</td><td>No</td></tr><tr><td><code>orientation_sensors_names</code></td><td><code>vector&lt;string&gt;</code></td><td>Vector containing the names of the orientation sensors (Default empty vector)</td><td>No</td></tr><tr><td><code>six_axis_force_torque_sensors_names</code></td><td><code>vector&lt;string&gt;</code></td><td>Vector containing the names of the FT sensors (Default empty vector)</td><td>No</td></tr><tr><td><code>temperature_sensors_names</code></td><td><code>vector&lt;string&gt;</code></td><td>Vector containing the names of the temperature sensors (Default empty vector)</td><td>No</td></tr></tbody></table><p>The <code>MultipleAnalogSensorsRemapper</code> device is implement in <a href="https://www.yarp.it/git-master/classMultipleAnalogSensorsRemapper.html">yarp</a>.</p></aside>
-          </div></section>
-          <section class="m-doc-details" id="a90efd8763c28720edded7499b94b9753"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">PolyDriverDescriptor </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a90efd8763c28720edded7499b94b9753" class="m-doc-self">constructRDGBSensorClient</a>(</span><span class="m-doc-wrap">std::weak_ptr&lt;const <a href="classBipedalLocomotion_1_1ParametersHandler_1_1IParametersHandler.html" class="m-doc">BipedalLocomotion::<wbr />ParametersHandler::<wbr />IParametersHandler</a>&gt; handler)</span></span>
-            </h3>
-            <p>Helper function that can be used to build a <code>RGBDSensorClient</code> device.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">handler</td>
-                  <td>pointer to a parameter handler interface.</td>
-                </tr>
-              </tbody>
-              <tfoot>
-                <tr>
-                  <th>Returns</th>
-                  <td>A <a href="structBipedalLocomotion_1_1RobotInterface_1_1PolyDriverDescriptor.html" class="m-doc">PolyDriverDescriptor</a>. In case of error an invalid <code><a href="structBipedalLocomotion_1_1RobotInterface_1_1PolyDriverDescriptor.html" class="m-doc">PolyDriverDescriptor</a></code> is returned.</td>
-                </tr>
-              </tfoot>
-            </table>
-<aside class="m-note m-info"><h4>Note</h4><p>The following parameters are taken into consideration</p><table class="m-table"><thead><tr><th>Parameter Name</th><th>Type</th><th>Description</th><th>Mandatory</th></tr></thead><tbody><tr><td><code>name</code></td><td><code>string</code></td><td>Name of the camera client</td><td>Yes</td></tr><tr><td><code>local_prefix</code></td><td><code>string</code></td><td>Prefix of the local port (e.g. the application name)</td><td>Yes</td></tr><tr><td><code>local_image_port_postfix</code></td><td><code>string</code></td><td>Postfix of the local image port. The local port name is <code>/&lt;local_prefix&gt;&lt;local_image_port_postfix&gt;</code></td><td>Yes</td></tr><tr><td><code>local_depth_port_postfix</code></td><td><code>string</code></td><td>Postfix of the local depth port. The local port name is <code>/&lt;local_prefix&gt;&lt;local_depth_port_postfix&gt;</code></td><td>Yes</td></tr><tr><td><code>local_rpc_port_postfix</code></td><td><code>string</code></td><td>Postfix of the local rpc port. The local port name is <code>/&lt;local_prefix&gt;&lt;local_rpc_port_postfix&gt;</code></td><td>Yes</td></tr><tr><td><code>remote_image_port</code></td><td><code>string</code></td><td>Name of the port associate to the RGB image.</td><td>Yes</td></tr><tr><td><code>remote_depth_port</code></td><td><code>string</code></td><td>Name of the port associate to the depth image.</td><td>Yes</td></tr><tr><td><code>remote_rpc_port</code></td><td><code>string</code></td><td>Name of the port associate to the rpc port.</td><td>Yes</td></tr><tr><td><code>image_carrier</code></td><td><code>string</code></td><td>Carrier for the RGB image.</td><td>Yes</td></tr><tr><td><code>depth_carrier</code></td><td><code>string</code></td><td>Carrier for the depth image.</td><td>Yes</td></tr></tbody></table><p>The <code>RGBDSensorClient</code> device is implement in <a href="https://yarp.it/git-master/classRGBDSensorClient.html">yarp</a>.</p></aside>
-          </div></section>
-        </section>
-      </div>
-    </div>
-  </div>
-</article></main>
-<div class="m-doc-search" id="search">
-  <a href="#!" onclick="return hideSearch()"></a>
-  <div class="m-container">
-    <div class="m-row">
-      <div class="m-col-m-8 m-push-m-2">
-        <div class="m-doc-search-header m-text m-small">
-          <div><span class="m-label m-default">Tab</span> / <span class="m-label m-default">T</span> to search, <span class="m-label m-default">Esc</span> to close</div>
-          <div id="search-symbolcount">&hellip;</div>
-        </div>
-        <div class="m-doc-search-content">
-          <form>
-            <input type="search" name="q" id="search-input" placeholder="Loading &hellip;" disabled="disabled" autofocus="autofocus" autocomplete="off" spellcheck="false" />
-          </form>
-          <noscript class="m-text m-danger m-text-center">Unlike everything else in the docs, the search functionality <em>requires</em> JavaScript.</noscript>
-          <div id="search-help" class="m-text m-dim m-text-center">
-            <p class="m-noindent">Search for symbols, directories, files, pages or
-            modules. You can omit any prefix from the symbol or file path; adding a
-            <code>:</code> or <code>/</code> suffix lists all members of given symbol or
-            directory.</p>
-            <p class="m-noindent">Use <span class="m-label m-dim">&darr;</span>
-            / <span class="m-label m-dim">&uarr;</span> to navigate through the list,
-            <span class="m-label m-dim">Enter</span> to go.
-            <span class="m-label m-dim">Tab</span> autocompletes common prefix, you can
-            copy a link to the result using <span class="m-label m-dim">⌘</span>
-            <span class="m-label m-dim">L</span> while <span class="m-label m-dim">⌘</span>
-            <span class="m-label m-dim">M</span> produces a Markdown link.</p>
-          </div>
-          <div id="search-notfound" class="m-text m-warning m-text-center">Sorry, nothing was found.</div>
-          <ul id="search-results"></ul>
-        </div>
-      </div>
-    </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
   </div>
 </div>
-<script src="search-v2.js"></script>
-<script src="searchdata-v2.js" async="async"></script>
-<footer><nav>
-  <div class="m-container">
-    <div class="m-row">
-      <div class="m-col-l-10 m-push-l-1">
-        <p>bipedal-locomotion-framework documentation. Licensed under the <a href="https://www.gnu.org/licenses/lgpl-3.0.en.html">GNU Lesser General Public License v3.0</a>. Project maintained by the <a href="https://www.iit.it/web/ami/">Artificial and Mechanical Intelligence Lab</a>. Contact the team via <a href="https://github.com/ami-iit/bipedal-locomotion-framework/issues/new">GitHub</a>.<br />Generated by <a href="https://doxygen.org/">Doxygen</a> 1.9.1 and <a href="https://mcss.mosra.cz/">m.css</a>.
-      </div>
-    </div>
-  </div>
-</nav></footer>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(document).ready(function(){initNavTree('YarpHelper_8h.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#nested-classes">Classes</a> &#124;
+<a href="#namespaces">Namespaces</a> &#124;
+<a href="#func-members">Functions</a>  </div>
+  <div class="headertitle">
+<div class="title">YarpHelper.h File Reference</div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><code>#include &lt;memory&gt;</code><br />
+<code>#include &lt;string&gt;</code><br />
+<code>#include &lt;yarp/dev/PolyDriver.h&gt;</code><br />
+<code>#include &lt;<a class="el" href="IParametersHandler_8h.html">BipedalLocomotion/ParametersHandler/IParametersHandler.h</a>&gt;</code><br />
+<code>#include &lt;yarp/dev/PolyDriverList.h&gt;</code><br />
+</div><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structBipedalLocomotion_1_1RobotInterface_1_1PolyDriverDescriptor.html">BipedalLocomotion::RobotInterface::PolyDriverDescriptor</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="structBipedalLocomotion_1_1RobotInterface_1_1PolyDriverDescriptor.html" title="PolyDriverDescriptor describes a PolyDriver.">PolyDriverDescriptor</a> describes a PolyDriver.  <a href="structBipedalLocomotion_1_1RobotInterface_1_1PolyDriverDescriptor.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
+Namespaces</h2></td></tr>
+<tr class="memitem:namespaceBipedalLocomotion"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceBipedalLocomotion.html">BipedalLocomotion</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:a2c07f5099140671abde506a8a316e130"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structBipedalLocomotion_1_1RobotInterface_1_1PolyDriverDescriptor.html">PolyDriverDescriptor</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="YarpHelper_8h.html#a2c07f5099140671abde506a8a316e130">BipedalLocomotion::RobotInterface::constructRemoteControlBoardRemapper</a> (std::weak_ptr&lt; const <a class="el" href="classBipedalLocomotion_1_1ParametersHandler_1_1IParametersHandler.html">BipedalLocomotion::ParametersHandler::IParametersHandler</a> &gt; handler)</td></tr>
+<tr class="memdesc:a2c07f5099140671abde506a8a316e130"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function that can be used to build a RemoteControlBoardRemapper device.  <a href="YarpHelper_8h.html#a2c07f5099140671abde506a8a316e130">More...</a><br /></td></tr>
+<tr class="separator:a2c07f5099140671abde506a8a316e130"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a63b15535972c13dedb0459a66321432b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structBipedalLocomotion_1_1RobotInterface_1_1PolyDriverDescriptor.html">PolyDriverDescriptor</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="YarpHelper_8h.html#a63b15535972c13dedb0459a66321432b">BipedalLocomotion::RobotInterface::constructGenericSensorClient</a> (std::weak_ptr&lt; const <a class="el" href="classBipedalLocomotion_1_1ParametersHandler_1_1IParametersHandler.html">BipedalLocomotion::ParametersHandler::IParametersHandler</a> &gt; handler)</td></tr>
+<tr class="memdesc:a63b15535972c13dedb0459a66321432b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function that can be used to build a GenericSensorClient device.  <a href="YarpHelper_8h.html#a63b15535972c13dedb0459a66321432b">More...</a><br /></td></tr>
+<tr class="separator:a63b15535972c13dedb0459a66321432b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4929526a47c0815e98b10ae7fbd44c2d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structBipedalLocomotion_1_1RobotInterface_1_1PolyDriverDescriptor.html">PolyDriverDescriptor</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="YarpHelper_8h.html#a4929526a47c0815e98b10ae7fbd44c2d">BipedalLocomotion::RobotInterface::constructMultipleAnalogSensorsClient</a> (std::weak_ptr&lt; const <a class="el" href="classBipedalLocomotion_1_1ParametersHandler_1_1IParametersHandler.html">BipedalLocomotion::ParametersHandler::IParametersHandler</a> &gt; handler)</td></tr>
+<tr class="memdesc:a4929526a47c0815e98b10ae7fbd44c2d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function that can be used to build a <code>MultipleAnalogSensorsClient</code> device.  <a href="YarpHelper_8h.html#a4929526a47c0815e98b10ae7fbd44c2d">More...</a><br /></td></tr>
+<tr class="separator:a4929526a47c0815e98b10ae7fbd44c2d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3428753b80de7ab5cd7b5a38f1feba18"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structBipedalLocomotion_1_1RobotInterface_1_1PolyDriverDescriptor.html">PolyDriverDescriptor</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="YarpHelper_8h.html#a3428753b80de7ab5cd7b5a38f1feba18">BipedalLocomotion::RobotInterface::constructMultipleAnalogSensorsRemapper</a> (std::weak_ptr&lt; const <a class="el" href="classBipedalLocomotion_1_1ParametersHandler_1_1IParametersHandler.html">BipedalLocomotion::ParametersHandler::IParametersHandler</a> &gt; handler)</td></tr>
+<tr class="memdesc:a3428753b80de7ab5cd7b5a38f1feba18"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function that can be used to build a <code>MultipleAnalogSensorsRemapper</code> device.  <a href="YarpHelper_8h.html#a3428753b80de7ab5cd7b5a38f1feba18">More...</a><br /></td></tr>
+<tr class="separator:a3428753b80de7ab5cd7b5a38f1feba18"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abc32625d98993ca36028defbabe9dc62"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structBipedalLocomotion_1_1RobotInterface_1_1PolyDriverDescriptor.html">PolyDriverDescriptor</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="YarpHelper_8h.html#abc32625d98993ca36028defbabe9dc62">BipedalLocomotion::RobotInterface::constructMultipleAnalogSensorsRemapper</a> (std::weak_ptr&lt; const <a class="el" href="classBipedalLocomotion_1_1ParametersHandler_1_1IParametersHandler.html">BipedalLocomotion::ParametersHandler::IParametersHandler</a> &gt; handler, const std::vector&lt; <a class="el" href="structBipedalLocomotion_1_1RobotInterface_1_1PolyDriverDescriptor.html">PolyDriverDescriptor</a> &gt; &amp;polydriverList)</td></tr>
+<tr class="memdesc:abc32625d98993ca36028defbabe9dc62"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function that can be used to build a <code>MultipleAnalogSensorsRemapper</code> device.  <a href="YarpHelper_8h.html#abc32625d98993ca36028defbabe9dc62">More...</a><br /></td></tr>
+<tr class="separator:abc32625d98993ca36028defbabe9dc62"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad992949f2120fc211c0af9d296631ec5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structBipedalLocomotion_1_1RobotInterface_1_1PolyDriverDescriptor.html">PolyDriverDescriptor</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="YarpHelper_8h.html#ad992949f2120fc211c0af9d296631ec5">BipedalLocomotion::RobotInterface::constructMultipleAnalogSensorsRemapper</a> (std::weak_ptr&lt; const <a class="el" href="classBipedalLocomotion_1_1ParametersHandler_1_1IParametersHandler.html">BipedalLocomotion::ParametersHandler::IParametersHandler</a> &gt; handler, const yarp::dev::PolyDriverList &amp;polydriverList)</td></tr>
+<tr class="memdesc:ad992949f2120fc211c0af9d296631ec5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function that can be used to build a <code>MultipleAnalogSensorsRemapper</code> device.  <a href="YarpHelper_8h.html#ad992949f2120fc211c0af9d296631ec5">More...</a><br /></td></tr>
+<tr class="separator:ad992949f2120fc211c0af9d296631ec5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a90efd8763c28720edded7499b94b9753"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structBipedalLocomotion_1_1RobotInterface_1_1PolyDriverDescriptor.html">PolyDriverDescriptor</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="YarpHelper_8h.html#a90efd8763c28720edded7499b94b9753">BipedalLocomotion::RobotInterface::constructRDGBSensorClient</a> (std::weak_ptr&lt; const <a class="el" href="classBipedalLocomotion_1_1ParametersHandler_1_1IParametersHandler.html">BipedalLocomotion::ParametersHandler::IParametersHandler</a> &gt; handler)</td></tr>
+<tr class="memdesc:a90efd8763c28720edded7499b94b9753"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function that can be used to build a <code>RGBDSensorClient</code> device.  <a href="YarpHelper_8h.html#a90efd8763c28720edded7499b94b9753">More...</a><br /></td></tr>
+<tr class="separator:a90efd8763c28720edded7499b94b9753"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><dl class="section author"><dt>Authors</dt><dd>Giulio Romualdi </dd></dl>
+<dl class="section copyright"><dt>Copyright</dt><dd>2020 Istituto Italiano di Tecnologia (IIT). This software may be modified and distributed under the terms of the BSD-3-Clause license. </dd></dl>
+</div><h2 class="groupheader">Function Documentation</h2>
+<a id="a2c07f5099140671abde506a8a316e130"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2c07f5099140671abde506a8a316e130">&#9670;&nbsp;</a></span>constructRemoteControlBoardRemapper()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structBipedalLocomotion_1_1RobotInterface_1_1PolyDriverDescriptor.html">PolyDriverDescriptor</a> BipedalLocomotion::RobotInterface::constructRemoteControlBoardRemapper </td>
+          <td>(</td>
+          <td class="paramtype">std::weak_ptr&lt; const <a class="el" href="classBipedalLocomotion_1_1ParametersHandler_1_1IParametersHandler.html">BipedalLocomotion::ParametersHandler::IParametersHandler</a> &gt;&#160;</td>
+          <td class="paramname"><em>handler</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Helper function that can be used to build a RemoteControlBoardRemapper device. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">handler</td><td>pointer to a parameter handler interface. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section note"><dt>Note</dt><dd>the following parameters are required by the function <table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadCenter">Parameter Name   </th><th class="markdownTableHeadCenter">Type   </th><th class="markdownTableHeadCenter">Description   </th><th class="markdownTableHeadCenter">Mandatory    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyCenter"><code>joints_list</code>   </td><td class="markdownTableBodyCenter"><code>vector&lt;string&gt;</code>   </td><td class="markdownTableBodyCenter">List of the controlled joints   </td><td class="markdownTableBodyCenter">Yes    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyCenter"><code>remote_control_boards</code>   </td><td class="markdownTableBodyCenter"><code>vector&lt;string&gt;</code>   </td><td class="markdownTableBodyCenter">List of the remote control boards associated to the joints   </td><td class="markdownTableBodyCenter">Yes    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyCenter"><code>robot_name</code>   </td><td class="markdownTableBodyCenter"><code>string</code>   </td><td class="markdownTableBodyCenter">Name of the robot   </td><td class="markdownTableBodyCenter">Yes    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyCenter"><code>local_prefix</code>   </td><td class="markdownTableBodyCenter"><code>string</code>   </td><td class="markdownTableBodyCenter">Prefix of the local port (e.g. the application name)   </td><td class="markdownTableBodyCenter">Yes   </td></tr>
+</table>
+</dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>A PolyDriverDescriptor. If one of the parameters is missing an invalid PolyDriverDescriptor is returned. </dd></dl>
+
+</div>
+</div>
+<a id="a63b15535972c13dedb0459a66321432b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a63b15535972c13dedb0459a66321432b">&#9670;&nbsp;</a></span>constructGenericSensorClient()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structBipedalLocomotion_1_1RobotInterface_1_1PolyDriverDescriptor.html">PolyDriverDescriptor</a> BipedalLocomotion::RobotInterface::constructGenericSensorClient </td>
+          <td>(</td>
+          <td class="paramtype">std::weak_ptr&lt; const <a class="el" href="classBipedalLocomotion_1_1ParametersHandler_1_1IParametersHandler.html">BipedalLocomotion::ParametersHandler::IParametersHandler</a> &gt;&#160;</td>
+          <td class="paramname"><em>handler</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Helper function that can be used to build a GenericSensorClient device. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">handler</td><td>pointer to a parameter handler interface. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section note"><dt>Note</dt><dd>the following parameters are required by the function <table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadCenter">Parameter Name   </th><th class="markdownTableHeadCenter">Type   </th><th class="markdownTableHeadCenter">Description   </th><th class="markdownTableHeadCenter">Mandatory    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyCenter"><code>description</code>   </td><td class="markdownTableBodyCenter"><code>string</code>   </td><td class="markdownTableBodyCenter">Description of the genericSensorClient. It is the device name   </td><td class="markdownTableBodyCenter">Yes    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyCenter"><code>remote_port_name</code>   </td><td class="markdownTableBodyCenter"><code>string</code>   </td><td class="markdownTableBodyCenter">Name of the port associate to the remote   </td><td class="markdownTableBodyCenter">Yes    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyCenter"><code>local_prefix</code>   </td><td class="markdownTableBodyCenter"><code>string</code>   </td><td class="markdownTableBodyCenter">Prefix of the local port (e.g. the application name)   </td><td class="markdownTableBodyCenter">Yes    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyCenter"><code>local_port_name_postfix</code>   </td><td class="markdownTableBodyCenter"><code>string</code>   </td><td class="markdownTableBodyCenter">Postfix of the local port. The local port name is <code>/&lt;local_prefix&gt;&lt;local_port_name_postfix&gt;</code>   </td><td class="markdownTableBodyCenter">Yes   </td></tr>
+</table>
+</dd>
+<dd>
+The genericSensorClient device is implement in <a href="https://github.com/robotology/whole-body-estimators/tree/cc8ffb83375a2d410b225f4fa67aee4a29074b42/devices/genericSensorClient">whole-body-estimators</a>. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>A PolyDriverDescriptor. If one of the parameters is missing an invalid PolyDriverDescriptor is returned. </dd></dl>
+
+</div>
+</div>
+<a id="a4929526a47c0815e98b10ae7fbd44c2d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4929526a47c0815e98b10ae7fbd44c2d">&#9670;&nbsp;</a></span>constructMultipleAnalogSensorsClient()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structBipedalLocomotion_1_1RobotInterface_1_1PolyDriverDescriptor.html">PolyDriverDescriptor</a> BipedalLocomotion::RobotInterface::constructMultipleAnalogSensorsClient </td>
+          <td>(</td>
+          <td class="paramtype">std::weak_ptr&lt; const <a class="el" href="classBipedalLocomotion_1_1ParametersHandler_1_1IParametersHandler.html">BipedalLocomotion::ParametersHandler::IParametersHandler</a> &gt;&#160;</td>
+          <td class="paramname"><em>handler</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Helper function that can be used to build a <code>MultipleAnalogSensorsClient</code> device. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">handler</td><td>pointer to a parameter handler interface. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section note"><dt>Note</dt><dd>The following parameters are taken into consideration <table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadCenter">Parameter Name   </th><th class="markdownTableHeadCenter">Type   </th><th class="markdownTableHeadCenter">Description   </th><th class="markdownTableHeadCenter">Mandatory    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyCenter"><code>description</code>   </td><td class="markdownTableBodyCenter"><code>string</code>   </td><td class="markdownTableBodyCenter">Description of the multiple analog sensor client. It is the device name   </td><td class="markdownTableBodyCenter">Yes    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyCenter"><code>remote_port_name</code>   </td><td class="markdownTableBodyCenter"><code>string</code>   </td><td class="markdownTableBodyCenter">Name of the port associate to the remote   </td><td class="markdownTableBodyCenter">Yes    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyCenter"><code>local_prefix</code>   </td><td class="markdownTableBodyCenter"><code>string</code>   </td><td class="markdownTableBodyCenter">Prefix of the local port (e.g. the application name)   </td><td class="markdownTableBodyCenter">Yes    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyCenter"><code>local_port_name_postfix</code>   </td><td class="markdownTableBodyCenter"><code>string</code>   </td><td class="markdownTableBodyCenter">Postfix of the local port. The local port name is <code>/&lt;local_prefix&gt;&lt;local_port_name_postfix&gt;</code>   </td><td class="markdownTableBodyCenter">Yes    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyCenter"><code>timeout</code>   </td><td class="markdownTableBodyCenter"><code>double</code>   </td><td class="markdownTableBodyCenter">Timeout in seconds after which the device reports an error if no measurement was received. (Default value 0.01)   </td><td class="markdownTableBodyCenter">No    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyCenter"><code>external_connection</code>   </td><td class="markdownTableBodyCenter"><code>bool</code>   </td><td class="markdownTableBodyCenter">If set to true, the connection to the rpc port of the MAS server is skipped and it is possible to connect to the data source externally after being opened. (Default value <code>false</code>)   </td><td class="markdownTableBodyCenter">No    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyCenter"><code>carrier</code>   </td><td class="markdownTableBodyCenter"><code>string</code>   </td><td class="markdownTableBodyCenter">The carrier used for the connection with the server. (Default value <code>tcp</code>)   </td><td class="markdownTableBodyCenter">No   </td></tr>
+</table>
+</dd>
+<dd>
+The <code>MultipleAnalogSensorsClient</code> device is implement in <a href="https://www.yarp.it/git-master/classMultipleAnalogSensorsClient.html">yarp</a>. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>A <code>PolyDriverDescriptor</code>. In case of error an invalid <code>PolyDriverDescriptor</code> is returned. </dd></dl>
+
+</div>
+</div>
+<a id="a3428753b80de7ab5cd7b5a38f1feba18"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3428753b80de7ab5cd7b5a38f1feba18">&#9670;&nbsp;</a></span>constructMultipleAnalogSensorsRemapper() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structBipedalLocomotion_1_1RobotInterface_1_1PolyDriverDescriptor.html">PolyDriverDescriptor</a> BipedalLocomotion::RobotInterface::constructMultipleAnalogSensorsRemapper </td>
+          <td>(</td>
+          <td class="paramtype">std::weak_ptr&lt; const <a class="el" href="classBipedalLocomotion_1_1ParametersHandler_1_1IParametersHandler.html">BipedalLocomotion::ParametersHandler::IParametersHandler</a> &gt;&#160;</td>
+          <td class="paramname"><em>handler</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Helper function that can be used to build a <code>MultipleAnalogSensorsRemapper</code> device. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">handler</td><td>pointer to a parameter handler interface. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section note"><dt>Note</dt><dd>The following parameters are taken into consideration <table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadCenter">Parameter Name   </th><th class="markdownTableHeadCenter">Type   </th><th class="markdownTableHeadCenter">Description   </th><th class="markdownTableHeadCenter">Mandatory    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyCenter"><code>three_axis_gyroscopes_names</code>   </td><td class="markdownTableBodyCenter"><code>vector&lt;string&gt;</code>   </td><td class="markdownTableBodyCenter">Vector containing the names of the gyroscopes (Default empty vector)   </td><td class="markdownTableBodyCenter">No    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyCenter"><code>three_axis_linear_accelerometers_names</code>   </td><td class="markdownTableBodyCenter"><code>vector&lt;string&gt;</code>   </td><td class="markdownTableBodyCenter">Vector containing the names of the accelerometers (Default empty vector)   </td><td class="markdownTableBodyCenter">No    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyCenter"><code>three_axis_magnetometers_names</code>   </td><td class="markdownTableBodyCenter"><code>vector&lt;string&gt;</code>   </td><td class="markdownTableBodyCenter">Vector containing the names of the magnetometers (Default empty vector)   </td><td class="markdownTableBodyCenter">No    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyCenter"><code>orientation_sensors_names</code>   </td><td class="markdownTableBodyCenter"><code>vector&lt;string&gt;</code>   </td><td class="markdownTableBodyCenter">Vector containing the names of the orientation sensors (Default empty vector)   </td><td class="markdownTableBodyCenter">No    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyCenter"><code>six_axis_force_torque_sensors_names</code>   </td><td class="markdownTableBodyCenter"><code>vector&lt;string&gt;</code>   </td><td class="markdownTableBodyCenter">Vector containing the names of the FT sensors (Default empty vector)   </td><td class="markdownTableBodyCenter">No    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyCenter"><code>temperature_sensors_names</code>   </td><td class="markdownTableBodyCenter"><code>vector&lt;string&gt;</code>   </td><td class="markdownTableBodyCenter">Vector containing the names of the temperature sensors (Default empty vector)   </td><td class="markdownTableBodyCenter">No   </td></tr>
+</table>
+</dd>
+<dd>
+The <code>MultipleAnalogSensorsRemapper</code> device is implement in <a href="https://www.yarp.it/git-master/classMultipleAnalogSensorsRemapper.html">yarp</a>. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>A PolyDriverDescriptor. In case of error an invalid <code>PolyDriverDescriptor</code> is returned. </dd></dl>
+
+</div>
+</div>
+<a id="abc32625d98993ca36028defbabe9dc62"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abc32625d98993ca36028defbabe9dc62">&#9670;&nbsp;</a></span>constructMultipleAnalogSensorsRemapper() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structBipedalLocomotion_1_1RobotInterface_1_1PolyDriverDescriptor.html">PolyDriverDescriptor</a> BipedalLocomotion::RobotInterface::constructMultipleAnalogSensorsRemapper </td>
+          <td>(</td>
+          <td class="paramtype">std::weak_ptr&lt; const <a class="el" href="classBipedalLocomotion_1_1ParametersHandler_1_1IParametersHandler.html">BipedalLocomotion::ParametersHandler::IParametersHandler</a> &gt;&#160;</td>
+          <td class="paramname"><em>handler</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::vector&lt; <a class="el" href="structBipedalLocomotion_1_1RobotInterface_1_1PolyDriverDescriptor.html">PolyDriverDescriptor</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>polydriverList</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Helper function that can be used to build a <code>MultipleAnalogSensorsRemapper</code> device. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">handler</td><td>pointer to a parameter handler interface. </td></tr>
+    <tr><td class="paramname">polydriverList</td><td>a list of the polydriver that will be attached to the multiple analog sensor remapper </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section note"><dt>Note</dt><dd>The following parameters are taken into consideration <table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadCenter">Parameter Name   </th><th class="markdownTableHeadCenter">Type   </th><th class="markdownTableHeadCenter">Description   </th><th class="markdownTableHeadCenter">Mandatory    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyCenter"><code>three_axis_gyroscopes_names</code>   </td><td class="markdownTableBodyCenter"><code>vector&lt;string&gt;</code>   </td><td class="markdownTableBodyCenter">Vector containing the names of the gyroscopes (Default empty vector)   </td><td class="markdownTableBodyCenter">No    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyCenter"><code>three_axis_linear_accelerometers_names</code>   </td><td class="markdownTableBodyCenter"><code>vector&lt;string&gt;</code>   </td><td class="markdownTableBodyCenter">Vector containing the names of the accelerometers (Default empty vector)   </td><td class="markdownTableBodyCenter">No    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyCenter"><code>three_axis_magnetometers_names</code>   </td><td class="markdownTableBodyCenter"><code>vector&lt;string&gt;</code>   </td><td class="markdownTableBodyCenter">Vector containing the names of the magnetometers (Default empty vector)   </td><td class="markdownTableBodyCenter">No    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyCenter"><code>orientation_sensors_names</code>   </td><td class="markdownTableBodyCenter"><code>vector&lt;string&gt;</code>   </td><td class="markdownTableBodyCenter">Vector containing the names of the orientation sensors (Default empty vector)   </td><td class="markdownTableBodyCenter">No    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyCenter"><code>six_axis_force_torque_sensors_names</code>   </td><td class="markdownTableBodyCenter"><code>vector&lt;string&gt;</code>   </td><td class="markdownTableBodyCenter">Vector containing the names of the FT sensors (Default empty vector)   </td><td class="markdownTableBodyCenter">No    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyCenter"><code>temperature_sensors_names</code>   </td><td class="markdownTableBodyCenter"><code>vector&lt;string&gt;</code>   </td><td class="markdownTableBodyCenter">Vector containing the names of the temperature sensors (Default empty vector)   </td><td class="markdownTableBodyCenter">No   </td></tr>
+</table>
+</dd>
+<dd>
+The <code>MultipleAnalogSensorsRemapper</code> device is implement in <a href="https://www.yarp.it/git-master/classMultipleAnalogSensorsRemapper.html">yarp</a>. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>A PolyDriverDescriptor. In case of error an invalid <code>PolyDriverDescriptor</code> is returned. </dd></dl>
+
+</div>
+</div>
+<a id="ad992949f2120fc211c0af9d296631ec5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad992949f2120fc211c0af9d296631ec5">&#9670;&nbsp;</a></span>constructMultipleAnalogSensorsRemapper() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structBipedalLocomotion_1_1RobotInterface_1_1PolyDriverDescriptor.html">PolyDriverDescriptor</a> BipedalLocomotion::RobotInterface::constructMultipleAnalogSensorsRemapper </td>
+          <td>(</td>
+          <td class="paramtype">std::weak_ptr&lt; const <a class="el" href="classBipedalLocomotion_1_1ParametersHandler_1_1IParametersHandler.html">BipedalLocomotion::ParametersHandler::IParametersHandler</a> &gt;&#160;</td>
+          <td class="paramname"><em>handler</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const yarp::dev::PolyDriverList &amp;&#160;</td>
+          <td class="paramname"><em>polydriverList</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Helper function that can be used to build a <code>MultipleAnalogSensorsRemapper</code> device. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">handler</td><td>pointer to a parameter handler interface. </td></tr>
+    <tr><td class="paramname">polydriverList</td><td>a list of the polydriver that will be attached to the multiple analog sensor remapper. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section note"><dt>Note</dt><dd>The following parameters are taken into consideration <table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadCenter">Parameter Name   </th><th class="markdownTableHeadCenter">Type   </th><th class="markdownTableHeadCenter">Description   </th><th class="markdownTableHeadCenter">Mandatory    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyCenter"><code>three_axis_gyroscopes_names</code>   </td><td class="markdownTableBodyCenter"><code>vector&lt;string&gt;</code>   </td><td class="markdownTableBodyCenter">Vector containing the names of the gyroscopes (Default empty vector)   </td><td class="markdownTableBodyCenter">No    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyCenter"><code>three_axis_linear_accelerometers_names</code>   </td><td class="markdownTableBodyCenter"><code>vector&lt;string&gt;</code>   </td><td class="markdownTableBodyCenter">Vector containing the names of the accelerometers (Default empty vector)   </td><td class="markdownTableBodyCenter">No    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyCenter"><code>three_axis_magnetometers_names</code>   </td><td class="markdownTableBodyCenter"><code>vector&lt;string&gt;</code>   </td><td class="markdownTableBodyCenter">Vector containing the names of the magnetometers (Default empty vector)   </td><td class="markdownTableBodyCenter">No    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyCenter"><code>orientation_sensors_names</code>   </td><td class="markdownTableBodyCenter"><code>vector&lt;string&gt;</code>   </td><td class="markdownTableBodyCenter">Vector containing the names of the orientation sensors (Default empty vector)   </td><td class="markdownTableBodyCenter">No    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyCenter"><code>six_axis_force_torque_sensors_names</code>   </td><td class="markdownTableBodyCenter"><code>vector&lt;string&gt;</code>   </td><td class="markdownTableBodyCenter">Vector containing the names of the FT sensors (Default empty vector)   </td><td class="markdownTableBodyCenter">No    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyCenter"><code>temperature_sensors_names</code>   </td><td class="markdownTableBodyCenter"><code>vector&lt;string&gt;</code>   </td><td class="markdownTableBodyCenter">Vector containing the names of the temperature sensors (Default empty vector)   </td><td class="markdownTableBodyCenter">No   </td></tr>
+</table>
+</dd>
+<dd>
+The <code>MultipleAnalogSensorsRemapper</code> device is implement in <a href="https://www.yarp.it/git-master/classMultipleAnalogSensorsRemapper.html">yarp</a>. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>A PolyDriverDescriptor. In case of error an invalid <code>PolyDriverDescriptor</code> is returned. </dd></dl>
+
+</div>
+</div>
+<a id="a90efd8763c28720edded7499b94b9753"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a90efd8763c28720edded7499b94b9753">&#9670;&nbsp;</a></span>constructRDGBSensorClient()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structBipedalLocomotion_1_1RobotInterface_1_1PolyDriverDescriptor.html">PolyDriverDescriptor</a> BipedalLocomotion::RobotInterface::constructRDGBSensorClient </td>
+          <td>(</td>
+          <td class="paramtype">std::weak_ptr&lt; const <a class="el" href="classBipedalLocomotion_1_1ParametersHandler_1_1IParametersHandler.html">BipedalLocomotion::ParametersHandler::IParametersHandler</a> &gt;&#160;</td>
+          <td class="paramname"><em>handler</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Helper function that can be used to build a <code>RGBDSensorClient</code> device. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">handler</td><td>pointer to a parameter handler interface. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section note"><dt>Note</dt><dd>The following parameters are taken into consideration <table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadCenter">Parameter Name   </th><th class="markdownTableHeadCenter">Type   </th><th class="markdownTableHeadCenter">Description   </th><th class="markdownTableHeadCenter">Mandatory    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyCenter"><code>name</code>   </td><td class="markdownTableBodyCenter"><code>string</code>   </td><td class="markdownTableBodyCenter">Name of the camera client   </td><td class="markdownTableBodyCenter">Yes    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyCenter"><code>local_prefix</code>   </td><td class="markdownTableBodyCenter"><code>string</code>   </td><td class="markdownTableBodyCenter">Prefix of the local port (e.g. the application name)   </td><td class="markdownTableBodyCenter">Yes    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyCenter"><code>local_image_port_postfix</code>   </td><td class="markdownTableBodyCenter"><code>string</code>   </td><td class="markdownTableBodyCenter">Postfix of the local image port. The local port name is <code>/&lt;local_prefix&gt;&lt;local_image_port_postfix&gt;</code>   </td><td class="markdownTableBodyCenter">Yes    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyCenter"><code>local_depth_port_postfix</code>   </td><td class="markdownTableBodyCenter"><code>string</code>   </td><td class="markdownTableBodyCenter">Postfix of the local depth port. The local port name is <code>/&lt;local_prefix&gt;&lt;local_depth_port_postfix&gt;</code>   </td><td class="markdownTableBodyCenter">Yes    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyCenter"><code>local_rpc_port_postfix</code>   </td><td class="markdownTableBodyCenter"><code>string</code>   </td><td class="markdownTableBodyCenter">Postfix of the local rpc port. The local port name is <code>/&lt;local_prefix&gt;&lt;local_rpc_port_postfix&gt;</code>   </td><td class="markdownTableBodyCenter">Yes    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyCenter"><code>remote_image_port</code>   </td><td class="markdownTableBodyCenter"><code>string</code>   </td><td class="markdownTableBodyCenter">Name of the port associate to the RGB image.   </td><td class="markdownTableBodyCenter">Yes    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyCenter"><code>remote_depth_port</code>   </td><td class="markdownTableBodyCenter"><code>string</code>   </td><td class="markdownTableBodyCenter">Name of the port associate to the depth image.   </td><td class="markdownTableBodyCenter">Yes    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyCenter"><code>remote_rpc_port</code>   </td><td class="markdownTableBodyCenter"><code>string</code>   </td><td class="markdownTableBodyCenter">Name of the port associate to the rpc port.   </td><td class="markdownTableBodyCenter">Yes    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyCenter"><code>image_carrier</code>   </td><td class="markdownTableBodyCenter"><code>string</code>   </td><td class="markdownTableBodyCenter">Carrier for the RGB image.   </td><td class="markdownTableBodyCenter">Yes    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyCenter"><code>depth_carrier</code>   </td><td class="markdownTableBodyCenter"><code>string</code>   </td><td class="markdownTableBodyCenter">Carrier for the depth image.   </td><td class="markdownTableBodyCenter">Yes   </td></tr>
+</table>
+</dd>
+<dd>
+The <code>RGBDSensorClient</code> device is implement in <a href="https://yarp.it/git-master/classRGBDSensorClient.html">yarp</a>. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>A PolyDriverDescriptor. In case of error an invalid <code>PolyDriverDescriptor</code> is returned. </dd></dl>
+
+</div>
+</div>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- Doxygen custom footer -->
+<div id="nav-path" class="navpath">
+  <ul>
+    <li class="footer">
+      <a href="https://github.com/gbionics/bipedal-locomotion-framework">GitHub</a> &bull;
+      <a href="https://gbionics.ai/">Generative Bionics</a> &bull;
+      Licensed under <a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause "New" or "Revised" License</a> &bull;
+      Generated by <a href="https://www.doxygen.org/index.html">Doxygen</a> 1.9.1
+    </li>
+  </ul>
+</div>
 </body>
 </html>

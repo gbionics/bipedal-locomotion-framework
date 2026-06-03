@@ -1,0 +1,8 @@
+var structBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1internal_1_1traits_3_01FloatingBaseSystemVelocityKinematics_01_4 =
+[
+    [ "Twist", "structBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1internal_1_1traits_3_01FloatingBaseSystemVelocityKinematics_01_4.html#a4c74ccead575c5401ff13de44dce1127", null ],
+    [ "State", "structBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1internal_1_1traits_3_01FloatingBaseSystemVelocityKinematics_01_4.html#a08d068a2681c632c1c9002fdfd13cce3", null ],
+    [ "StateDerivative", "structBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1internal_1_1traits_3_01FloatingBaseSystemVelocityKinematics_01_4.html#a8f6a48b965b8fc857cc9a07cf0eb4990", null ],
+    [ "Input", "structBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1internal_1_1traits_3_01FloatingBaseSystemVelocityKinematics_01_4.html#a7ea185044b2a6177924e7eaa93c225be", null ],
+    [ "DynamicalSystem", "structBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1internal_1_1traits_3_01FloatingBaseSystemVelocityKinematics_01_4.html#aeb72cf226fdb978ad64a1ee1cb222471", null ]
+];

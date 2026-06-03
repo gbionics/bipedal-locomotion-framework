@@ -1,391 +1,717 @@
-<!DOCTYPE html>
-<html lang="en">
+<!-- HTML header for doxygen 1.9.1 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-  <meta charset="UTF-8" />
-  <title>BipedalLocomotion::Estimators::LeggedOdometry class | bipedal locomotion framework master</title>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
-  <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
-  <link rel="icon" href="favicon-dark.png" type="image/png" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#22272e" />
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>bipedal locomotion framework: BipedalLocomotion::Estimators::LeggedOdometry Class Reference</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js", "TeX/AMSmath.js", "TeX/AMSsymbols.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+});
+</script>
+<script type="text/javascript" async="async" src="https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only-darkmode-toggle.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="doxygen-awesome-darkmode-toggle.js"></script>
+<script type="text/javascript" src="doxygen-awesome-fragment-copy-button.js"></script>
+<script type="text/javascript" src="doxygen-awesome-interactive-toc.js"></script>
+<script type="text/javascript" src="doxygen-awesome-paragraph-link.js"></script>
+<script type="text/javascript" src="doxygen-awesome-tabs.js"></script>
+<script type="text/javascript">
+    DoxygenAwesomeDarkModeToggle.init()
+    DoxygenAwesomeFragmentCopyButton.init()
+    DoxygenAwesomeInteractiveToc.init()
+    DoxygenAwesomeParagraphLink.init()
+    DoxygenAwesomeTabs.init()
+</script>
 </head>
 <body>
-<header><nav id="navigation">
-  <div class="m-container">
-    <div class="m-row">
-      <span id="m-navbar-brand" class="m-col-t-8 m-col-m-none m-left-m">
-        <a href="./index.html">bipedal locomotion framework</a> <span class="m-breadcrumb">|</span> <a href="index.html" class="m-thin">master</a>
-      </span>
-      <div class="m-col-t-4 m-hide-m m-text-right m-nopadr">
-        <a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
-          <path id="m-doc-search-icon-path" d="m6 0c-3.31 0-6 2.69-6 6 0 3.31 2.69 6 6 6 1.49 0 2.85-0.541 3.89-1.44-0.0164 0.338 0.147 0.759 0.5 1.15l3.22 3.79c0.552 0.614 1.45 0.665 2 0.115 0.55-0.55 0.499-1.45-0.115-2l-3.79-3.22c-0.392-0.353-0.812-0.515-1.15-0.5 0.895-1.05 1.44-2.41 1.44-3.89 0-3.31-2.69-6-6-6zm0 1.56a4.44 4.44 0 0 1 4.44 4.44 4.44 4.44 0 0 1-4.44 4.44 4.44 4.44 0 0 1-4.44-4.44 4.44 4.44 0 0 1 4.44-4.44z"/>
-        </svg></a>
-        <a id="m-navbar-show" href="#navigation" title="Show navigation"></a>
-        <a id="m-navbar-hide" href="#" title="Hide navigation"></a>
-      </div>
-      <div id="m-navbar-collapse" class="m-col-t-12 m-show-m m-col-m-none m-right-m">
-        <div class="m-row">
-          <ol class="m-col-t-6 m-col-m-none">
-            <li><a href="pages.html">Pages</a></li>
-            <li><a href="annotated.html">Classes</a></li>
-            <li><a href="files.html">Files</a></li>
-          </ol>
-          <ol class="m-col-t-6 m-col-m-none" start="4">
-            <li>
-              <a href="pages.html">Versions</a>
-              <ol>
-                <li><a href="./index.html">Master</a></li>
-                <li><a href="./v0.19.0/index.html">v0.19.0</a></li>
-                <li><a href="./v0.21.1/index.html">v0.21.1</a></li>
-                <li><a href="./v0.18.0/index.html">v0.18.0</a></li>
-              </ol>
-            </li>
-            <li>
-              <a href="pages.html">Contacts</a>
-              <ol>
-                <li><a href="https://github.com/ami-iit/bipedal-locomotion-framework">GitHub</a></li>
-                <li><a href="https://www.iit.it/web/ami/">Lab website</a></li>
-              </ol>
-            </li>
-            <li class="m-show-m"><a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
-              <use href="#m-doc-search-icon-path" />
-            </svg></a></li>
-          </ol>
-        </div>
-      </div>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">bipedal locomotion framework
+   </div>
+   <div id="projectbrief">A suite of libraries for achieving bipedal locomotion on humanoid robots</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.9.1 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "search",false,'Search','.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',true,false,'search.php','Search');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
     </div>
   </div>
-</nav></header>
-<main><article>
-  <div class="m-container m-container-inflatable">
-    <div class="m-row">
-      <div class="m-col-l-10 m-push-l-1">
-        <h1>
-          <span class="m-breadcrumb"><a href="namespaceBipedalLocomotion.html">BipedalLocomotion</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespaceBipedalLocomotion_1_1Estimators.html">Estimators</a>::<wbr/></span>LeggedOdometry <span class="m-thin">class</span>
-          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="LeggedOdometry_8h.html">&lt;BipedalLocomotion/FloatingBaseEstimators/LeggedOdometry.h&gt;</a></div>
-        </h1>
-        <p>Floating base estimation algorithm using only kinematic measurements by assuming atleast one frame on the robot is in contact with the environment.</p>
-        <nav class="m-block m-default">
-          <h3>Contents</h3>
-          <ul>
-            <li>
-              Reference
-              <ul>
-                <li><a href="#base-classes">Base classes</a></li>
-                <li><a href="#typeless-methods">Constructors, destructors, conversion operators</a></li>
-                <li><a href="#pub-methods">Public functions</a></li>
-                <li><a href="#pro-methods">Protected functions</a></li>
-              </ul>
-            </li>
-          </ul>
-        </nav>
-<p>Configuration parameters,</p><table class="m-table"><thead><tr><th>Group</th><th>Parameter</th><th>Type</th><th>Required</th><th>Description</th></tr></thead><tbody><tr><td>LeggedOdom</td><td>-</td><td>group</td><td>Yes</td><td>Configuration group for initializing the legged odometry block</td></tr><tr><td></td><td>initial_fixed_frame</td><td>string</td><td>Yes</td><td>Frame on the URDF model of the robot assumed to be fixed (in contact) during the initialization phase</td></tr><tr><td></td><td>initial_ref_frame_for_world</td><td>string</td><td>No</td><td>Frame on the URDF model of the robot to be used as a reference to initialize the inertial frame for the estimation. If not present, the initial fixed frame is assumed as the reference</td></tr><tr><td></td><td>initial_world_orientation_in_ref_frame</td><td>vector of 4 doubles</td><td>No</td><td>Orientation of the inertial frame wrt the the reference frame as quaternion wxyz. If not present, assumed to be unit quaternion.</td></tr><tr><td></td><td>initial_world_position_in_ref_frame</td><td>vector of 3 doubles</td><td>No</td><td>Position of the inertial frame wrt the reference frame as xyz. If not present,assumed to be zero position</td></tr><tr><td></td><td>switching_pattern</td><td>string</td><td>No</td><td>Options: latest, lastActive, useExternal. Switching pattern to decide the fixed frame from the set of all frames in contact. latest chooses the recently switched contact frame, lastActive chooses the earliest switched contact frame. Default is latest</td></tr><tr><td></td><td>vel_computation_method</td><td>string</td><td>No</td><td>Options: single, multiAvg, multiLS, multLSJvel. Method used for computing the floating base velocity using the fixed frame constraints. single uses only the fixed frame, multiAvg computes a simple average from all the contact frames, multLS uses a least square solution and multLSJVel regualrizes the least square solution by augmenting joint velocities in the computation. Default is multiLS.</td></tr><tr><td></td><td>wLin</td><td>double</td><td>No</td><td>weight used for linear velocity in the least square computation of base velocity. If not present, set to 1.0</td></tr><tr><td></td><td>wAng</td><td>double</td><td>No</td><td>weight used for angular velocity in the least square computation of base velocity. If not present, set to 0.5</td></tr><tr><td></td><td>wJVel</td><td>double</td><td>No</td><td>weight used for linear velocity in the least square (with joint velocities) computation of base velocity. If not present, set to 10.0</td></tr><tr><td></td><td>reg</td><td>double</td><td>No</td><td>regularization used for matrix inversion operation in least square. If not present, set to 1e-6</td></tr></tbody></table>
-        <section id="base-classes">
-          <h2><a href="#base-classes">Base classes</a></h2>
-          <dl class="m-doc">
-            <dt>
-              class <a href="classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator.html" class="m-doc">FloatingBaseEstimator</a>
-            </dt>
-            <dd><a href="classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator.html" class="m-doc">FloatingBaseEstimator</a> class contains the bare-bones implementation for a <a href="classBipedalLocomotion_1_1Estimators_1_1LeggedOdometry.html" class="m-doc">LeggedOdometry</a> based or Extended Kalman Filter based floating base estimation algorithms for bipedal robots.</dd>
-          </dl>
-        </section>
-        <section id="typeless-methods">
-          <h2><a href="#typeless-methods">Constructors, destructors, conversion operators</a></h2>
-          <dl class="m-doc">
-            <dt id="ad382e28d11a12dadc7a957d7b8ea312f">
-              <span class="m-doc-wrap-bumper"><a href="#ad382e28d11a12dadc7a957d7b8ea312f" class="m-doc-self">LeggedOdometry</a>(</span><span class="m-doc-wrap">)</span>
-            </dt>
-            <dd>Constructor.</dd>
-            <dt id="aa55f03f2372f5cfb7bc9da1b8ebbb5be">
-              <span class="m-doc-wrap-bumper"><a href="#aa55f03f2372f5cfb7bc9da1b8ebbb5be" class="m-doc-self">~LeggedOdometry</a>(</span><span class="m-doc-wrap">)</span>
-            </dt>
-            <dd>Destructor (necessary for PIMPL idiom)</dd>
-          </dl>
-        </section>
-        <section id="pub-methods">
-          <h2><a href="#pub-methods">Public functions</a></h2>
-          <dl class="m-doc">
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a3e2b8f537e7b55bef6144bac8bd0aea3" class="m-doc">resetEstimator</a>(</span><span class="m-doc-wrap">) -&gt; bool</span>
-            </dt>
-            <dd>Reset the internal state of the estimator using the initialized parameters.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a85792e42834a47505612f568866b4a1c" class="m-doc">resetEstimator</a>(</span><span class="m-doc-wrap">const std::string&amp; refFramForWorld,
-              const Eigen::Quaterniond&amp; worldOrientationInRefFrame,
-              const Eigen::Vector3d&amp; worldPositionInRefFrame) -&gt; bool</span>
-            </dt>
-            <dd>Reset the internal state of the estimator by setting a new reference for the inertial frame.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#ac46a1432cf6e1d35dbf82c1473df6d0b" class="m-doc">changeFixedFrame</a>(</span><span class="m-doc-wrap">const std::ptrdiff_t&amp; frameIndex) -&gt; bool</span>
-            </dt>
-            <dd>Change fixed frame externally.</dd>
-            <dt id="a9b511a34575999941438520f4b4df828">
-              <span class="m-doc-wrap-bumper">auto <a href="#a9b511a34575999941438520f4b4df828" class="m-doc-self">changeFixedFrame</a>(</span><span class="m-doc-wrap">const std::string&amp; frameName) -&gt; bool</span>
-            </dt>
-            <dd>Change fixed frame externally.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a4b5ddc4e91a757b0ef4176db28db678d" class="m-doc">changeFixedFrame</a>(</span><span class="m-doc-wrap">const std::ptrdiff_t&amp; frameIndex,
-              const Eigen::Quaterniond&amp; frameOrientationInWorld,
-              const Eigen::Vector3d&amp; framePositionInWorld) -&gt; bool</span>
-            </dt>
-            <dd>Change fixed frame externally by mentioning the world_H_frame transform.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a2d4cb9c9c22c4bbe545da34d55eb74d5" class="m-doc">getFixedFrameIdx</a>(</span><span class="m-doc-wrap">) -&gt; int</span>
-            </dt>
-            <dd>Get the index of the frame currently in contact used for the legged odometry computations.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#aa0e5b518365609f11198cff351a5f563" class="m-doc">getFixedFramePose</a>(</span><span class="m-doc-wrap">) const -&gt; manif::SE3d&amp;</span>
-            </dt>
-            <dd>Get the psoe of the current fixed frame in the inertial frame.</dd>
-            <dt id="afaa96d18ba685b1cb5cb9a56f4d862cb">
-              <span class="m-doc-wrap-bumper">auto <a href="#afaa96d18ba685b1cb5cb9a56f4d862cb" class="m-doc-self">resetEstimator</a>(</span><span class="m-doc-wrap">const <a href="structBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimators_1_1InternalState.html" class="m-doc">FloatingBaseEstimators::<wbr />InternalState</a>&amp; newState) -&gt; bool</span>
-            </dt>
-            <dd>To prevent function hiding due to overloading of virtual methods.</dd>
-            <dt id="a3b6896ce5674651e673761bbce201154">
-              <span class="m-doc-wrap-bumper">auto <a href="#a3b6896ce5674651e673761bbce201154" class="m-doc-self">resetEstimator</a>(</span><span class="m-doc-wrap">const Eigen::Quaterniond&amp; newBaseOrientation,
-              const Eigen::Vector3d&amp; newBasePosition) -&gt; bool</span>
-            </dt>
-            <dd>To prevent function hiding due to overloading of virtual methods.</dd>
-          </dl>
-        </section>
-        <section id="pro-methods">
-          <h2><a href="#pro-methods">Protected functions</a></h2>
-          <dl class="m-doc">
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a3e622dbc8c0559b2ed5cb5048fc620f9" class="m-doc">customInitialization</a>(</span><span class="m-doc-wrap">std::weak_ptr&lt;<a href="classBipedalLocomotion_1_1ParametersHandler_1_1IParametersHandler.html" class="m-doc">BipedalLocomotion::<wbr />ParametersHandler::<wbr />IParametersHandler</a>&gt; handler) -&gt; bool <span class="m-label m-flat m-warning">override</span></span>
-            </dt>
-            <dd>These custom parameter specifications should be specified by the derived class.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a1a123da1d1e7a8bf3401dbcaa44fa93b" class="m-doc">updateKinematics</a>(</span><span class="m-doc-wrap"><a href="structBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimators_1_1Measurements.html" class="m-doc">FloatingBaseEstimators::<wbr />Measurements</a>&amp; meas,
-              const double&amp; dt) -&gt; bool <span class="m-label m-flat m-warning">override</span></span>
-            </dt>
-            <dd>Update the base state estimate using kinematics and contact measurements.</dd>
-          </dl>
-        </section>
-        <section>
-          <h2>Function documentation</h2>
-          <section class="m-doc-details" id="a3e2b8f537e7b55bef6144bac8bd0aea3"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">bool BipedalLocomotion::<wbr />Estimators::<wbr />LeggedOdometry::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a3e2b8f537e7b55bef6144bac8bd0aea3" class="m-doc-self">resetEstimator</a>(</span><span class="m-doc-wrap">)</span></span>
-            </h3>
-            <p>Reset the internal state of the estimator using the initialized parameters.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <tfoot>
-                <tr>
-                  <th style="width: 1%">Returns</th>
-                  <td>True in case of success, false otherwise.</td>
-                </tr>
-              </tfoot>
-            </table>
-<aside class="m-note m-info"><h4>Note</h4><p>reset and advance estimator to get updated estimator output</p></aside>
-          </div></section>
-          <section class="m-doc-details" id="a85792e42834a47505612f568866b4a1c"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">bool BipedalLocomotion::<wbr />Estimators::<wbr />LeggedOdometry::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a85792e42834a47505612f568866b4a1c" class="m-doc-self">resetEstimator</a>(</span><span class="m-doc-wrap">const std::string&amp; refFramForWorld,
-              const Eigen::Quaterniond&amp; worldOrientationInRefFrame,
-              const Eigen::Vector3d&amp; worldPositionInRefFrame)</span></span>
-            </h3>
-            <p>Reset the internal state of the estimator by setting a new reference for the inertial frame.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">refFramForWorld&nbsp;<span class="m-label m-flat m-info">in</span></td>
-                  <td>frame from the model as a reference to set the new inertial frame</td>
-                </tr>
-                <tr>
-                  <td>worldOrientationInRefFrame&nbsp;<span class="m-label m-flat m-info">in</span></td>
-                  <td>orientation of the inertial frame wrt to the reference frame</td>
-                </tr>
-                <tr>
-                  <td>worldPositionInRefFrame&nbsp;<span class="m-label m-flat m-info">in</span></td>
-                  <td>position of the inertial frame wrt to the reference frame</td>
-                </tr>
-              </tbody>
-              <tfoot>
-                <tr>
-                  <th>Returns</th>
-                  <td>True in case of success, false otherwise.</td>
-                </tr>
-              </tfoot>
-            </table>
-<aside class="m-note m-info"><h4>Note</h4><p>reset and advance estimator to get updated estimator output</p></aside>
-          </div></section>
-          <section class="m-doc-details" id="ac46a1432cf6e1d35dbf82c1473df6d0b"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">bool BipedalLocomotion::<wbr />Estimators::<wbr />LeggedOdometry::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ac46a1432cf6e1d35dbf82c1473df6d0b" class="m-doc-self">changeFixedFrame</a>(</span><span class="m-doc-wrap">const std::ptrdiff_t&amp; frameIndex)</span></span>
-            </h3>
-            <p>Change fixed frame externally.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">frameIndex&nbsp;<span class="m-label m-flat m-info">in</span></td>
-                  <td>valid frame index from the model</td>
-                </tr>
-              </tbody>
-            </table>
-          </div></section>
-          <section class="m-doc-details" id="a4b5ddc4e91a757b0ef4176db28db678d"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">bool BipedalLocomotion::<wbr />Estimators::<wbr />LeggedOdometry::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a4b5ddc4e91a757b0ef4176db28db678d" class="m-doc-self">changeFixedFrame</a>(</span><span class="m-doc-wrap">const std::ptrdiff_t&amp; frameIndex,
-              const Eigen::Quaterniond&amp; frameOrientationInWorld,
-              const Eigen::Vector3d&amp; framePositionInWorld)</span></span>
-            </h3>
-            <p>Change fixed frame externally by mentioning the world_H_frame transform.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">frameIndex&nbsp;<span class="m-label m-flat m-info">in</span></td>
-                  <td>valid frame from the model</td>
-                </tr>
-                <tr>
-                  <td>frameOrientationInWorld&nbsp;<span class="m-label m-flat m-info">in</span></td>
-                  <td>orientation of the fixed frame wrt the inertial frame</td>
-                </tr>
-                <tr>
-                  <td>framePositionInWorld&nbsp;<span class="m-label m-flat m-info">in</span></td>
-                  <td>position of the fixed frame wrt the inertial frame</td>
-                </tr>
-              </tbody>
-            </table>
-<aside class="m-note m-info"><h4>Note</h4><p>ensure to pass unit quaternion</p></aside>
-          </div></section>
-          <section class="m-doc-details" id="a2d4cb9c9c22c4bbe545da34d55eb74d5"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">int BipedalLocomotion::<wbr />Estimators::<wbr />LeggedOdometry::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a2d4cb9c9c22c4bbe545da34d55eb74d5" class="m-doc-self">getFixedFrameIdx</a>(</span><span class="m-doc-wrap">)</span></span>
-            </h3>
-            <p>Get the index of the frame currently in contact used for the legged odometry computations.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <tfoot>
-                <tr>
-                  <th style="width: 1%">Returns</th>
-                  <td>Index of the frame in contact, invalid frame index if no contact.</td>
-                </tr>
-              </tfoot>
-            </table>
-          </div></section>
-          <section class="m-doc-details" id="aa0e5b518365609f11198cff351a5f563"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">manif::SE3d&amp; BipedalLocomotion::<wbr />Estimators::<wbr />LeggedOdometry::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aa0e5b518365609f11198cff351a5f563" class="m-doc-self">getFixedFramePose</a>(</span><span class="m-doc-wrap">) const</span></span>
-            </h3>
-            <p>Get the psoe of the current fixed frame in the inertial frame.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <tfoot>
-                <tr>
-                  <th style="width: 1%">Returns</th>
-                  <td>const ref of pose of the fixed frame</td>
-                </tr>
-              </tfoot>
-            </table>
-          </div></section>
-          <section class="m-doc-details" id="a3e622dbc8c0559b2ed5cb5048fc620f9"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">bool BipedalLocomotion::<wbr />Estimators::<wbr />LeggedOdometry::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a3e622dbc8c0559b2ed5cb5048fc620f9" class="m-doc-self">customInitialization</a>(</span><span class="m-doc-wrap">std::weak_ptr&lt;<a href="classBipedalLocomotion_1_1ParametersHandler_1_1IParametersHandler.html" class="m-doc">BipedalLocomotion::<wbr />ParametersHandler::<wbr />IParametersHandler</a>&gt; handler) <span class="m-label m-warning">override</span> <span class="m-label m-warning">protected</span></span></span>
-            </h3>
-            <p>These custom parameter specifications should be specified by the derived class.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">handler&nbsp;<span class="m-label m-flat m-info">in</span></td>
-                  <td>configure the custom parameters for the estimator</td>
-                </tr>
-              </tbody>
-              <tfoot>
-                <tr>
-                  <th>Returns</th>
-                  <td>bool</td>
-                </tr>
-              </tfoot>
-            </table>
-          </div></section>
-          <section class="m-doc-details" id="a1a123da1d1e7a8bf3401dbcaa44fa93b"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">bool BipedalLocomotion::<wbr />Estimators::<wbr />LeggedOdometry::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a1a123da1d1e7a8bf3401dbcaa44fa93b" class="m-doc-self">updateKinematics</a>(</span><span class="m-doc-wrap"><a href="structBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimators_1_1Measurements.html" class="m-doc">FloatingBaseEstimators::<wbr />Measurements</a>&amp; meas,
-              const double&amp; dt) <span class="m-label m-warning">override</span> <span class="m-label m-warning">protected</span></span></span>
-            </h3>
-            <p>Update the base state estimate using kinematics and contact measurements.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">meas&nbsp;<span class="m-label m-flat m-info">in</span></td>
-                  <td>measurements to update states</td>
-                </tr>
-                <tr>
-                  <td>dt&nbsp;<span class="m-label m-flat m-info">in</span></td>
-                  <td>sampling period in seconds</td>
-                </tr>
-              </tbody>
-              <tfoot>
-                <tr>
-                  <th>Returns</th>
-                  <td>True in case of success, false otherwise.</td>
-                </tr>
-              </tfoot>
-            </table>
-          </div></section>
-        </section>
-      </div>
-    </div>
-  </div>
-</article></main>
-<div class="m-doc-search" id="search">
-  <a href="#!" onclick="return hideSearch()"></a>
-  <div class="m-container">
-    <div class="m-row">
-      <div class="m-col-m-8 m-push-m-2">
-        <div class="m-doc-search-header m-text m-small">
-          <div><span class="m-label m-default">Tab</span> / <span class="m-label m-default">T</span> to search, <span class="m-label m-default">Esc</span> to close</div>
-          <div id="search-symbolcount">&hellip;</div>
-        </div>
-        <div class="m-doc-search-content">
-          <form>
-            <input type="search" name="q" id="search-input" placeholder="Loading &hellip;" disabled="disabled" autofocus="autofocus" autocomplete="off" spellcheck="false" />
-          </form>
-          <noscript class="m-text m-danger m-text-center">Unlike everything else in the docs, the search functionality <em>requires</em> JavaScript.</noscript>
-          <div id="search-help" class="m-text m-dim m-text-center">
-            <p class="m-noindent">Search for symbols, directories, files, pages or
-            modules. You can omit any prefix from the symbol or file path; adding a
-            <code>:</code> or <code>/</code> suffix lists all members of given symbol or
-            directory.</p>
-            <p class="m-noindent">Use <span class="m-label m-dim">&darr;</span>
-            / <span class="m-label m-dim">&uarr;</span> to navigate through the list,
-            <span class="m-label m-dim">Enter</span> to go.
-            <span class="m-label m-dim">Tab</span> autocompletes common prefix, you can
-            copy a link to the result using <span class="m-label m-dim">⌘</span>
-            <span class="m-label m-dim">L</span> while <span class="m-label m-dim">⌘</span>
-            <span class="m-label m-dim">M</span> produces a Markdown link.</p>
-          </div>
-          <div id="search-notfound" class="m-text m-warning m-text-center">Sorry, nothing was found.</div>
-          <ul id="search-results"></ul>
-        </div>
-      </div>
-    </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
   </div>
 </div>
-<script src="search-v2.js"></script>
-<script src="searchdata-v2.js" async="async"></script>
-<footer><nav>
-  <div class="m-container">
-    <div class="m-row">
-      <div class="m-col-l-10 m-push-l-1">
-        <p>bipedal-locomotion-framework documentation. Licensed under the <a href="https://www.gnu.org/licenses/lgpl-3.0.en.html">GNU Lesser General Public License v3.0</a>. Project maintained by the <a href="https://www.iit.it/web/ami/">Artificial and Mechanical Intelligence Lab</a>. Contact the team via <a href="https://github.com/ami-iit/bipedal-locomotion-framework/issues/new">GitHub</a>.<br />Generated by <a href="https://doxygen.org/">Doxygen</a> 1.9.1 and <a href="https://mcss.mosra.cz/">m.css</a>.
-      </div>
-    </div>
-  </div>
-</nav></footer>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(document).ready(function(){initNavTree('classBipedalLocomotion_1_1Estimators_1_1LeggedOdometry.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pro-methods">Protected Member Functions</a> &#124;
+<a href="classBipedalLocomotion_1_1Estimators_1_1LeggedOdometry-members.html">List of all members</a>  </div>
+  <div class="headertitle">
+<div class="title">BipedalLocomotion::Estimators::LeggedOdometry Class Reference</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p>Floating base estimation algorithm using only kinematic measurements by assuming atleast one frame on the robot is in contact with the environment.  
+ <a href="classBipedalLocomotion_1_1Estimators_1_1LeggedOdometry.html#details">More...</a></p>
+
+<p><code>#include &lt;Estimators/include/BipedalLocomotion/FloatingBaseEstimators/LeggedOdometry.h&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:aadcb9c89edcdb3115636a4d7e722a4cd"><td class="memItemLeft" align="right" valign="top"><a id="aadcb9c89edcdb3115636a4d7e722a4cd"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1Estimators_1_1LeggedOdometry.html#aadcb9c89edcdb3115636a4d7e722a4cd">LeggedOdometry</a> ()</td></tr>
+<tr class="memdesc:aadcb9c89edcdb3115636a4d7e722a4cd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor. <br /></td></tr>
+<tr class="separator:aadcb9c89edcdb3115636a4d7e722a4cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a06e74cdde37f3e4e89b658f28be91968"><td class="memItemLeft" align="right" valign="top"><a id="a06e74cdde37f3e4e89b658f28be91968"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1Estimators_1_1LeggedOdometry.html#a06e74cdde37f3e4e89b658f28be91968">~LeggedOdometry</a> ()</td></tr>
+<tr class="memdesc:a06e74cdde37f3e4e89b658f28be91968"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor (necessary for PIMPL idiom) <br /></td></tr>
+<tr class="separator:a06e74cdde37f3e4e89b658f28be91968"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5fd586cec8115fb0be9bccaf17ebb231"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1Estimators_1_1LeggedOdometry.html#a5fd586cec8115fb0be9bccaf17ebb231">resetEstimator</a> ()</td></tr>
+<tr class="memdesc:a5fd586cec8115fb0be9bccaf17ebb231"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reset the internal state of the estimator using the initialized parameters.  <a href="classBipedalLocomotion_1_1Estimators_1_1LeggedOdometry.html#a5fd586cec8115fb0be9bccaf17ebb231">More...</a><br /></td></tr>
+<tr class="separator:a5fd586cec8115fb0be9bccaf17ebb231"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a51b667809fac185ce2a90729beb37609"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1Estimators_1_1LeggedOdometry.html#a51b667809fac185ce2a90729beb37609">resetEstimator</a> (const std::string &amp;refFramForWorld, const Eigen::Quaterniond &amp;worldOrientationInRefFrame, const Eigen::Vector3d &amp;worldPositionInRefFrame)</td></tr>
+<tr class="memdesc:a51b667809fac185ce2a90729beb37609"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reset the internal state of the estimator by setting a new reference for the inertial frame.  <a href="classBipedalLocomotion_1_1Estimators_1_1LeggedOdometry.html#a51b667809fac185ce2a90729beb37609">More...</a><br /></td></tr>
+<tr class="separator:a51b667809fac185ce2a90729beb37609"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1b6c59af937488d84bae8cbb85252588"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1Estimators_1_1LeggedOdometry.html#a1b6c59af937488d84bae8cbb85252588">changeFixedFrame</a> (const std::ptrdiff_t &amp;frameIndex)</td></tr>
+<tr class="memdesc:a1b6c59af937488d84bae8cbb85252588"><td class="mdescLeft">&#160;</td><td class="mdescRight">Change fixed frame externally.  <a href="classBipedalLocomotion_1_1Estimators_1_1LeggedOdometry.html#a1b6c59af937488d84bae8cbb85252588">More...</a><br /></td></tr>
+<tr class="separator:a1b6c59af937488d84bae8cbb85252588"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5708ac98f4a36902acf5186fbe9c82b2"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1Estimators_1_1LeggedOdometry.html#a5708ac98f4a36902acf5186fbe9c82b2">changeFixedFrame</a> (const std::string &amp;frameName)</td></tr>
+<tr class="memdesc:a5708ac98f4a36902acf5186fbe9c82b2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Change fixed frame externally.  <a href="classBipedalLocomotion_1_1Estimators_1_1LeggedOdometry.html#a5708ac98f4a36902acf5186fbe9c82b2">More...</a><br /></td></tr>
+<tr class="separator:a5708ac98f4a36902acf5186fbe9c82b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0cb8161646417b31220b5e22763f0afe"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1Estimators_1_1LeggedOdometry.html#a0cb8161646417b31220b5e22763f0afe">changeFixedFrame</a> (const std::ptrdiff_t &amp;frameIndex, const Eigen::Quaterniond &amp;frameOrientationInWorld, const Eigen::Vector3d &amp;framePositionInWorld)</td></tr>
+<tr class="memdesc:a0cb8161646417b31220b5e22763f0afe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Change fixed frame externally by mentioning the world_H_frame transform.  <a href="classBipedalLocomotion_1_1Estimators_1_1LeggedOdometry.html#a0cb8161646417b31220b5e22763f0afe">More...</a><br /></td></tr>
+<tr class="separator:a0cb8161646417b31220b5e22763f0afe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a62c15399975ae54e345d7caece736c9b"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1Estimators_1_1LeggedOdometry.html#a62c15399975ae54e345d7caece736c9b">getFixedFrameIdx</a> ()</td></tr>
+<tr class="memdesc:a62c15399975ae54e345d7caece736c9b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the index of the frame currently in contact used for the legged odometry computations.  <a href="classBipedalLocomotion_1_1Estimators_1_1LeggedOdometry.html#a62c15399975ae54e345d7caece736c9b">More...</a><br /></td></tr>
+<tr class="separator:a62c15399975ae54e345d7caece736c9b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a63b3fba25caf6130433598b87ef74398"><td class="memItemLeft" align="right" valign="top">manif::SE3d &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1Estimators_1_1LeggedOdometry.html#a63b3fba25caf6130433598b87ef74398">getFixedFramePose</a> () const</td></tr>
+<tr class="memdesc:a63b3fba25caf6130433598b87ef74398"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the psoe of the current fixed frame in the inertial frame.  <a href="classBipedalLocomotion_1_1Estimators_1_1LeggedOdometry.html#a63b3fba25caf6130433598b87ef74398">More...</a><br /></td></tr>
+<tr class="separator:a63b3fba25caf6130433598b87ef74398"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad42e0e0af3a16f6725b224ec953784a2"><td class="memItemLeft" align="right" valign="top"><a id="ad42e0e0af3a16f6725b224ec953784a2"></a>
+virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1Estimators_1_1LeggedOdometry.html#ad42e0e0af3a16f6725b224ec953784a2">resetEstimator</a> (const <a class="el" href="structBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimators_1_1InternalState.html">FloatingBaseEstimators::InternalState</a> &amp;newState)</td></tr>
+<tr class="memdesc:ad42e0e0af3a16f6725b224ec953784a2"><td class="mdescLeft">&#160;</td><td class="mdescRight">To prevent function hiding due to overloading of virtual methods. <br /></td></tr>
+<tr class="separator:ad42e0e0af3a16f6725b224ec953784a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3d621aca8e9a86f3d836a7e1ee4d4ded"><td class="memItemLeft" align="right" valign="top"><a id="a3d621aca8e9a86f3d836a7e1ee4d4ded"></a>
+virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1Estimators_1_1LeggedOdometry.html#a3d621aca8e9a86f3d836a7e1ee4d4ded">resetEstimator</a> (const Eigen::Quaterniond &amp;newBaseOrientation, const Eigen::Vector3d &amp;newBasePosition)</td></tr>
+<tr class="memdesc:a3d621aca8e9a86f3d836a7e1ee4d4ded"><td class="mdescLeft">&#160;</td><td class="mdescRight">To prevent function hiding due to overloading of virtual methods. <br /></td></tr>
+<tr class="separator:a3d621aca8e9a86f3d836a7e1ee4d4ded"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator.html">BipedalLocomotion::Estimators::FloatingBaseEstimator</a></td></tr>
+<tr class="memitem:aef276053616e6f7e1ce8aec61d37d875 inherit pub_methods_classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator.html#aef276053616e6f7e1ce8aec61d37d875">initialize</a> (std::weak_ptr&lt; <a class="el" href="classBipedalLocomotion_1_1ParametersHandler_1_1IParametersHandler.html">BipedalLocomotion::ParametersHandler::IParametersHandler</a> &gt; handler, std::shared_ptr&lt; iDynTree::KinDynComputations &gt; kindyn)</td></tr>
+<tr class="memdesc:aef276053616e6f7e1ce8aec61d37d875 inherit pub_methods_classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator"><td class="mdescLeft">&#160;</td><td class="mdescRight">Configure generic parameters and the model.  <a href="classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator.html#aef276053616e6f7e1ce8aec61d37d875">More...</a><br /></td></tr>
+<tr class="separator:aef276053616e6f7e1ce8aec61d37d875 inherit pub_methods_classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a81f284ea06fee50c98ebdea30376c600 inherit pub_methods_classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator.html#a81f284ea06fee50c98ebdea30376c600">initialize</a> (std::weak_ptr&lt; <a class="el" href="classBipedalLocomotion_1_1ParametersHandler_1_1IParametersHandler.html">BipedalLocomotion::ParametersHandler::IParametersHandler</a> &gt; handler)</td></tr>
+<tr class="memdesc:a81f284ea06fee50c98ebdea30376c600 inherit pub_methods_classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator"><td class="mdescLeft">&#160;</td><td class="mdescRight">Configure generic parameters, calling this overloaded method assumes model information is not going to be used.  <a href="classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator.html#a81f284ea06fee50c98ebdea30376c600">More...</a><br /></td></tr>
+<tr class="separator:a81f284ea06fee50c98ebdea30376c600 inherit pub_methods_classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af605ef780a7d77dee38b8ea5b46d4d3a inherit pub_methods_classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator.html#af605ef780a7d77dee38b8ea5b46d4d3a">setIMUMeasurement</a> (const Eigen::Vector3d &amp;accMeas, const Eigen::Vector3d &amp;gyroMeas)</td></tr>
+<tr class="memdesc:af605ef780a7d77dee38b8ea5b46d4d3a inherit pub_methods_classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the polled IMU measurement.  <a href="classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator.html#af605ef780a7d77dee38b8ea5b46d4d3a">More...</a><br /></td></tr>
+<tr class="separator:af605ef780a7d77dee38b8ea5b46d4d3a inherit pub_methods_classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2e172868cef6a6704d0468bfa5ad7d2f inherit pub_methods_classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator.html#a2e172868cef6a6704d0468bfa5ad7d2f">setContacts</a> (const bool &amp;lfInContact, const bool &amp;rfInContact)</td></tr>
+<tr class="memdesc:a2e172868cef6a6704d0468bfa5ad7d2f inherit pub_methods_classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set feet contact states.  <a href="classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator.html#a2e172868cef6a6704d0468bfa5ad7d2f">More...</a><br /></td></tr>
+<tr class="separator:a2e172868cef6a6704d0468bfa5ad7d2f inherit pub_methods_classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2fc2a7c69c28c2cf50f6f209a9b0a054 inherit pub_methods_classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator.html#a2fc2a7c69c28c2cf50f6f209a9b0a054">setContactStatus</a> (const std::string &amp;name, const bool &amp;contactStatus, const std::chrono::nanoseconds &amp;switchTime, const std::chrono::nanoseconds &amp;=std::chrono::nanoseconds::zero())</td></tr>
+<tr class="memdesc:a2fc2a7c69c28c2cf50f6f209a9b0a054 inherit pub_methods_classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set contact status.  <a href="classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator.html#a2fc2a7c69c28c2cf50f6f209a9b0a054">More...</a><br /></td></tr>
+<tr class="separator:a2fc2a7c69c28c2cf50f6f209a9b0a054 inherit pub_methods_classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a73e1c0a8066489163c352c1864cdeab7 inherit pub_methods_classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator.html#a73e1c0a8066489163c352c1864cdeab7">setKinematics</a> (const Eigen::VectorXd &amp;encoders, const Eigen::VectorXd &amp;encoderSpeeds)</td></tr>
+<tr class="memdesc:a73e1c0a8066489163c352c1864cdeab7 inherit pub_methods_classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set kinematic measurements.  <a href="classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator.html#a73e1c0a8066489163c352c1864cdeab7">More...</a><br /></td></tr>
+<tr class="separator:a73e1c0a8066489163c352c1864cdeab7 inherit pub_methods_classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a72667eabfafc92b009f38dd4112c35f9 inherit pub_methods_classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator.html#a72667eabfafc92b009f38dd4112c35f9">setLandmarkRelativePose</a> (const int &amp;landmarkID, const Eigen::Quaterniond &amp;quat, const Eigen::Vector3d &amp;pos, const std::chrono::nanoseconds &amp;timeNow)</td></tr>
+<tr class="memdesc:a72667eabfafc92b009f38dd4112c35f9 inherit pub_methods_classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the relative pose of a landmark relative to the base link.  <a href="classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator.html#a72667eabfafc92b009f38dd4112c35f9">More...</a><br /></td></tr>
+<tr class="separator:a72667eabfafc92b009f38dd4112c35f9 inherit pub_methods_classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae374c4fb0efe63582663b2d392b76079 inherit pub_methods_classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator.html#ae374c4fb0efe63582663b2d392b76079">advance</a> () final</td></tr>
+<tr class="memdesc:ae374c4fb0efe63582663b2d392b76079 inherit pub_methods_classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute one step of the estimator.  <a href="classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator.html#ae374c4fb0efe63582663b2d392b76079">More...</a><br /></td></tr>
+<tr class="separator:ae374c4fb0efe63582663b2d392b76079 inherit pub_methods_classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad42e0e0af3a16f6725b224ec953784a2 inherit pub_methods_classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator.html#ad42e0e0af3a16f6725b224ec953784a2">resetEstimator</a> (const <a class="el" href="structBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimators_1_1InternalState.html">FloatingBaseEstimators::InternalState</a> &amp;newState)</td></tr>
+<tr class="memdesc:ad42e0e0af3a16f6725b224ec953784a2 inherit pub_methods_classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reset the internal state of the estimator.  <a href="classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator.html#ad42e0e0af3a16f6725b224ec953784a2">More...</a><br /></td></tr>
+<tr class="separator:ad42e0e0af3a16f6725b224ec953784a2 inherit pub_methods_classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3d621aca8e9a86f3d836a7e1ee4d4ded inherit pub_methods_classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator.html#a3d621aca8e9a86f3d836a7e1ee4d4ded">resetEstimator</a> (const Eigen::Quaterniond &amp;newBaseOrientation, const Eigen::Vector3d &amp;newBasePosition)</td></tr>
+<tr class="memdesc:a3d621aca8e9a86f3d836a7e1ee4d4ded inherit pub_methods_classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reset the base pose estimate and consequently the internal state of the estimator.  <a href="classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator.html#a3d621aca8e9a86f3d836a7e1ee4d4ded">More...</a><br /></td></tr>
+<tr class="separator:a3d621aca8e9a86f3d836a7e1ee4d4ded inherit pub_methods_classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2f24f1b30cafac67e32fc793b9e223c7 inherit pub_methods_classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator"><td class="memItemLeft" align="right" valign="top">virtual const <a class="el" href="structBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimators_1_1Output.html">FloatingBaseEstimators::Output</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator.html#a2f24f1b30cafac67e32fc793b9e223c7">getOutput</a> () const final</td></tr>
+<tr class="memdesc:a2f24f1b30cafac67e32fc793b9e223c7 inherit pub_methods_classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get estimator outputs.  <a href="classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator.html#a2f24f1b30cafac67e32fc793b9e223c7">More...</a><br /></td></tr>
+<tr class="separator:a2f24f1b30cafac67e32fc793b9e223c7 inherit pub_methods_classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0baf4a4877c4c790c35be575f63ea2d2 inherit pub_methods_classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator.html#a0baf4a4877c4c790c35be575f63ea2d2">isOutputValid</a> () const final</td></tr>
+<tr class="memdesc:a0baf4a4877c4c790c35be575f63ea2d2 inherit pub_methods_classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator"><td class="mdescLeft">&#160;</td><td class="mdescRight">Determines the validity of the object retrieved with <a class="el" href="NamedTuple_8h.html#ab70c8bf5efee8eb732d3dfa7d05efa58" title="Extracts the Ith element from the named_tuple.">get()</a>  <a href="classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator.html#a0baf4a4877c4c790c35be575f63ea2d2">More...</a><br /></td></tr>
+<tr class="separator:a0baf4a4877c4c790c35be575f63ea2d2 inherit pub_methods_classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afa41e3bef4710738e3c0ede449af66b6 inherit pub_methods_classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator_1_1ModelComputations.html">ModelComputations</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator.html#afa41e3bef4710738e3c0ede449af66b6">modelComputations</a> ()</td></tr>
+<tr class="memdesc:afa41e3bef4710738e3c0ede449af66b6 inherit pub_methods_classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get <a class="el" href="classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator_1_1ModelComputations.html" title="iDynTree based model-specific computations class This is class is used in a required configuration st...">ModelComputations</a> object by reference.  <a href="classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator.html#afa41e3bef4710738e3c0ede449af66b6">More...</a><br /></td></tr>
+<tr class="separator:afa41e3bef4710738e3c0ede449af66b6 inherit pub_methods_classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_classBipedalLocomotion_1_1System_1_1Source"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classBipedalLocomotion_1_1System_1_1Source')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classBipedalLocomotion_1_1System_1_1Source.html">BipedalLocomotion::System::Source&lt; FloatingBaseEstimators::Output &gt;</a></td></tr>
+<tr class="memitem:a472624c76d5e02e8ae16991cd77016ce inherit pub_methods_classBipedalLocomotion_1_1System_1_1Source"><td class="memItemLeft" align="right" valign="top"><a id="a472624c76d5e02e8ae16991cd77016ce"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>setInput</b> (const <a class="el" href="Advanceable_8h.html#a1558f6843cd1a0f40215a6364b0af652">EmptySignal</a> &amp;input) final</td></tr>
+<tr class="separator:a472624c76d5e02e8ae16991cd77016ce inherit pub_methods_classBipedalLocomotion_1_1System_1_1Source"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1c126531af21d485f09f297cb162c30a inherit pub_methods_classBipedalLocomotion_1_1System_1_1Source"><td class="memItemLeft" align="right" valign="top"><a id="a1c126531af21d485f09f297cb162c30a"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>Source</b> (const <a class="el" href="classBipedalLocomotion_1_1System_1_1Source.html">Source</a> &amp;)=delete</td></tr>
+<tr class="separator:a1c126531af21d485f09f297cb162c30a inherit pub_methods_classBipedalLocomotion_1_1System_1_1Source"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af0cf2abdf10e6594372a0b062fe4a8af inherit pub_methods_classBipedalLocomotion_1_1System_1_1Source"><td class="memItemLeft" align="right" valign="top"><a id="af0cf2abdf10e6594372a0b062fe4a8af"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>Source</b> (<a class="el" href="classBipedalLocomotion_1_1System_1_1Source.html">Source</a> &amp;&amp;)=delete</td></tr>
+<tr class="separator:af0cf2abdf10e6594372a0b062fe4a8af inherit pub_methods_classBipedalLocomotion_1_1System_1_1Source"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a922e6eec2f74620c49f9fcd1ddf709ae inherit pub_methods_classBipedalLocomotion_1_1System_1_1Source"><td class="memItemLeft" align="right" valign="top"><a id="a922e6eec2f74620c49f9fcd1ddf709ae"></a>
+<a class="el" href="classBipedalLocomotion_1_1System_1_1Source.html">Source</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator=</b> (const <a class="el" href="classBipedalLocomotion_1_1System_1_1Source.html">Source</a> &amp;)=delete</td></tr>
+<tr class="separator:a922e6eec2f74620c49f9fcd1ddf709ae inherit pub_methods_classBipedalLocomotion_1_1System_1_1Source"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad63e64dcad4c269263ecd20b2c81352b inherit pub_methods_classBipedalLocomotion_1_1System_1_1Source"><td class="memItemLeft" align="right" valign="top"><a id="ad63e64dcad4c269263ecd20b2c81352b"></a>
+<a class="el" href="classBipedalLocomotion_1_1System_1_1Source.html">Source</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator=</b> (<a class="el" href="classBipedalLocomotion_1_1System_1_1Source.html">Source</a> &amp;&amp;)=delete</td></tr>
+<tr class="separator:ad63e64dcad4c269263ecd20b2c81352b inherit pub_methods_classBipedalLocomotion_1_1System_1_1Source"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_classBipedalLocomotion_1_1System_1_1Advanceable"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classBipedalLocomotion_1_1System_1_1Advanceable')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classBipedalLocomotion_1_1System_1_1Advanceable.html">BipedalLocomotion::System::Advanceable&lt; _Input, _Output &gt;</a></td></tr>
+<tr class="memitem:aaeb3eba3073fbc844dea1eba4c9b68f3 inherit pub_methods_classBipedalLocomotion_1_1System_1_1Advanceable"><td class="memItemLeft" align="right" valign="top"><a id="aaeb3eba3073fbc844dea1eba4c9b68f3"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>Advanceable</b> (const <a class="el" href="classBipedalLocomotion_1_1System_1_1Advanceable.html">Advanceable</a> &amp;)=delete</td></tr>
+<tr class="separator:aaeb3eba3073fbc844dea1eba4c9b68f3 inherit pub_methods_classBipedalLocomotion_1_1System_1_1Advanceable"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac1549cb26bd896e27370e97b0795ba3f inherit pub_methods_classBipedalLocomotion_1_1System_1_1Advanceable"><td class="memItemLeft" align="right" valign="top"><a id="ac1549cb26bd896e27370e97b0795ba3f"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>Advanceable</b> (<a class="el" href="classBipedalLocomotion_1_1System_1_1Advanceable.html">Advanceable</a> &amp;&amp;)=delete</td></tr>
+<tr class="separator:ac1549cb26bd896e27370e97b0795ba3f inherit pub_methods_classBipedalLocomotion_1_1System_1_1Advanceable"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae147cdee9ff9160a9dfe0d3e349a9aad inherit pub_methods_classBipedalLocomotion_1_1System_1_1Advanceable"><td class="memItemLeft" align="right" valign="top"><a id="ae147cdee9ff9160a9dfe0d3e349a9aad"></a>
+<a class="el" href="classBipedalLocomotion_1_1System_1_1Advanceable.html">Advanceable</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator=</b> (const <a class="el" href="classBipedalLocomotion_1_1System_1_1Advanceable.html">Advanceable</a> &amp;)=delete</td></tr>
+<tr class="separator:ae147cdee9ff9160a9dfe0d3e349a9aad inherit pub_methods_classBipedalLocomotion_1_1System_1_1Advanceable"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adf0d9fc07bab0ec5d4db7f3a35816bf2 inherit pub_methods_classBipedalLocomotion_1_1System_1_1Advanceable"><td class="memItemLeft" align="right" valign="top"><a id="adf0d9fc07bab0ec5d4db7f3a35816bf2"></a>
+<a class="el" href="classBipedalLocomotion_1_1System_1_1Advanceable.html">Advanceable</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator=</b> (<a class="el" href="classBipedalLocomotion_1_1System_1_1Advanceable.html">Advanceable</a> &amp;&amp;)=delete</td></tr>
+<tr class="separator:adf0d9fc07bab0ec5d4db7f3a35816bf2 inherit pub_methods_classBipedalLocomotion_1_1System_1_1Advanceable"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a618ab786bb43814b3b3012b843fce93b inherit pub_methods_classBipedalLocomotion_1_1System_1_1Advanceable"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1System_1_1Advanceable.html#a618ab786bb43814b3b3012b843fce93b">close</a> ()</td></tr>
+<tr class="memdesc:a618ab786bb43814b3b3012b843fce93b inherit pub_methods_classBipedalLocomotion_1_1System_1_1Advanceable"><td class="mdescLeft">&#160;</td><td class="mdescRight">Close the <a class="el" href="classBipedalLocomotion_1_1System_1_1Advanceable.html" title="Basic class that represents a discrete system.">Advanceable</a>.  <a href="classBipedalLocomotion_1_1System_1_1Advanceable.html#a618ab786bb43814b3b3012b843fce93b">More...</a><br /></td></tr>
+<tr class="separator:a618ab786bb43814b3b3012b843fce93b inherit pub_methods_classBipedalLocomotion_1_1System_1_1Advanceable"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_classBipedalLocomotion_1_1System_1_1InputPort"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classBipedalLocomotion_1_1System_1_1InputPort')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classBipedalLocomotion_1_1System_1_1InputPort.html">BipedalLocomotion::System::InputPort&lt; _Input &gt;</a></td></tr>
+<tr class="memitem:a74d1418613e89a7f2993ea936228a44a inherit pub_methods_classBipedalLocomotion_1_1System_1_1InputPort"><td class="memItemLeft" align="right" valign="top"><a id="a74d1418613e89a7f2993ea936228a44a"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>InputPort</b> (const <a class="el" href="classBipedalLocomotion_1_1System_1_1InputPort.html">InputPort</a> &amp;)=delete</td></tr>
+<tr class="separator:a74d1418613e89a7f2993ea936228a44a inherit pub_methods_classBipedalLocomotion_1_1System_1_1InputPort"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a02ec5c947f1d2d83d2952c3b899cc58f inherit pub_methods_classBipedalLocomotion_1_1System_1_1InputPort"><td class="memItemLeft" align="right" valign="top"><a id="a02ec5c947f1d2d83d2952c3b899cc58f"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>InputPort</b> (<a class="el" href="classBipedalLocomotion_1_1System_1_1InputPort.html">InputPort</a> &amp;&amp;)=delete</td></tr>
+<tr class="separator:a02ec5c947f1d2d83d2952c3b899cc58f inherit pub_methods_classBipedalLocomotion_1_1System_1_1InputPort"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a54f476d3c8d6d003fb714309ea6272aa inherit pub_methods_classBipedalLocomotion_1_1System_1_1InputPort"><td class="memItemLeft" align="right" valign="top"><a id="a54f476d3c8d6d003fb714309ea6272aa"></a>
+<a class="el" href="classBipedalLocomotion_1_1System_1_1InputPort.html">InputPort</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator=</b> (const <a class="el" href="classBipedalLocomotion_1_1System_1_1InputPort.html">InputPort</a> &amp;)=delete</td></tr>
+<tr class="separator:a54f476d3c8d6d003fb714309ea6272aa inherit pub_methods_classBipedalLocomotion_1_1System_1_1InputPort"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adb341b37472241b6da8b552166308d7b inherit pub_methods_classBipedalLocomotion_1_1System_1_1InputPort"><td class="memItemLeft" align="right" valign="top"><a id="adb341b37472241b6da8b552166308d7b"></a>
+<a class="el" href="classBipedalLocomotion_1_1System_1_1InputPort.html">InputPort</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator=</b> (<a class="el" href="classBipedalLocomotion_1_1System_1_1InputPort.html">InputPort</a> &amp;&amp;)=delete</td></tr>
+<tr class="separator:adb341b37472241b6da8b552166308d7b inherit pub_methods_classBipedalLocomotion_1_1System_1_1InputPort"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad2637be5c9075a2d8f09fedc6a42d808 inherit pub_methods_classBipedalLocomotion_1_1System_1_1InputPort"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1System_1_1InputPort.html#ad2637be5c9075a2d8f09fedc6a42d808">setInput</a> (const Input &amp;input)=0</td></tr>
+<tr class="memdesc:ad2637be5c9075a2d8f09fedc6a42d808 inherit pub_methods_classBipedalLocomotion_1_1System_1_1InputPort"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the input of the port.  <a href="classBipedalLocomotion_1_1System_1_1InputPort.html#ad2637be5c9075a2d8f09fedc6a42d808">More...</a><br /></td></tr>
+<tr class="separator:ad2637be5c9075a2d8f09fedc6a42d808 inherit pub_methods_classBipedalLocomotion_1_1System_1_1InputPort"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_classBipedalLocomotion_1_1System_1_1OutputPort"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classBipedalLocomotion_1_1System_1_1OutputPort')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classBipedalLocomotion_1_1System_1_1OutputPort.html">BipedalLocomotion::System::OutputPort&lt; _Output &gt;</a></td></tr>
+<tr class="memitem:a0a39b891749961d34507b4b591886741 inherit pub_methods_classBipedalLocomotion_1_1System_1_1OutputPort"><td class="memItemLeft" align="right" valign="top"><a id="a0a39b891749961d34507b4b591886741"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>OutputPort</b> (const <a class="el" href="classBipedalLocomotion_1_1System_1_1OutputPort.html">OutputPort</a> &amp;)=delete</td></tr>
+<tr class="separator:a0a39b891749961d34507b4b591886741 inherit pub_methods_classBipedalLocomotion_1_1System_1_1OutputPort"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a581340f280eca1890a8a7b2331761b57 inherit pub_methods_classBipedalLocomotion_1_1System_1_1OutputPort"><td class="memItemLeft" align="right" valign="top"><a id="a581340f280eca1890a8a7b2331761b57"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>OutputPort</b> (<a class="el" href="classBipedalLocomotion_1_1System_1_1OutputPort.html">OutputPort</a> &amp;&amp;)=delete</td></tr>
+<tr class="separator:a581340f280eca1890a8a7b2331761b57 inherit pub_methods_classBipedalLocomotion_1_1System_1_1OutputPort"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af5e15f5e4962a5c8e0f0c0a49adb9ca1 inherit pub_methods_classBipedalLocomotion_1_1System_1_1OutputPort"><td class="memItemLeft" align="right" valign="top"><a id="af5e15f5e4962a5c8e0f0c0a49adb9ca1"></a>
+<a class="el" href="classBipedalLocomotion_1_1System_1_1OutputPort.html">OutputPort</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator=</b> (const <a class="el" href="classBipedalLocomotion_1_1System_1_1OutputPort.html">OutputPort</a> &amp;)=delete</td></tr>
+<tr class="separator:af5e15f5e4962a5c8e0f0c0a49adb9ca1 inherit pub_methods_classBipedalLocomotion_1_1System_1_1OutputPort"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad5c6ce3ad7d2a064d7bb512fe0bc489e inherit pub_methods_classBipedalLocomotion_1_1System_1_1OutputPort"><td class="memItemLeft" align="right" valign="top"><a id="ad5c6ce3ad7d2a064d7bb512fe0bc489e"></a>
+<a class="el" href="classBipedalLocomotion_1_1System_1_1OutputPort.html">OutputPort</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator=</b> (<a class="el" href="classBipedalLocomotion_1_1System_1_1OutputPort.html">OutputPort</a> &amp;&amp;)=delete</td></tr>
+<tr class="separator:ad5c6ce3ad7d2a064d7bb512fe0bc489e inherit pub_methods_classBipedalLocomotion_1_1System_1_1OutputPort"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
+Protected Member Functions</h2></td></tr>
+<tr class="memitem:a22379bc0d1f63b8dfe4589ea50c0b689"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1Estimators_1_1LeggedOdometry.html#a22379bc0d1f63b8dfe4589ea50c0b689">customInitialization</a> (std::weak_ptr&lt; <a class="el" href="classBipedalLocomotion_1_1ParametersHandler_1_1IParametersHandler.html">BipedalLocomotion::ParametersHandler::IParametersHandler</a> &gt; handler) override</td></tr>
+<tr class="memdesc:a22379bc0d1f63b8dfe4589ea50c0b689"><td class="mdescLeft">&#160;</td><td class="mdescRight">These custom parameter specifications should be specified by the derived class.  <a href="classBipedalLocomotion_1_1Estimators_1_1LeggedOdometry.html#a22379bc0d1f63b8dfe4589ea50c0b689">More...</a><br /></td></tr>
+<tr class="separator:a22379bc0d1f63b8dfe4589ea50c0b689"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a45dd1f234e1e34ee1026a902aed29be0"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1Estimators_1_1LeggedOdometry.html#a45dd1f234e1e34ee1026a902aed29be0">updateKinematics</a> (<a class="el" href="structBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimators_1_1Measurements.html">FloatingBaseEstimators::Measurements</a> &amp;meas, const double &amp;dt) override</td></tr>
+<tr class="memdesc:a45dd1f234e1e34ee1026a902aed29be0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update the base state estimate using kinematics and contact measurements.  <a href="classBipedalLocomotion_1_1Estimators_1_1LeggedOdometry.html#a45dd1f234e1e34ee1026a902aed29be0">More...</a><br /></td></tr>
+<tr class="separator:a45dd1f234e1e34ee1026a902aed29be0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pro_methods_classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator.html">BipedalLocomotion::Estimators::FloatingBaseEstimator</a></td></tr>
+<tr class="memitem:a26c64914587b18e5eaa2f8b8df321446 inherit pro_methods_classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator.html#a26c64914587b18e5eaa2f8b8df321446">predictState</a> (const <a class="el" href="structBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimators_1_1Measurements.html">FloatingBaseEstimators::Measurements</a> &amp;meas, const double &amp;dt)</td></tr>
+<tr class="memdesc:a26c64914587b18e5eaa2f8b8df321446 inherit pro_methods_classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator"><td class="mdescLeft">&#160;</td><td class="mdescRight">Propagate the states through the prediction model, if there exists any (eg.  <a href="classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator.html#a26c64914587b18e5eaa2f8b8df321446">More...</a><br /></td></tr>
+<tr class="separator:a26c64914587b18e5eaa2f8b8df321446 inherit pro_methods_classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acca7d1580a8085caedfdecbe08e89d9f inherit pro_methods_classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator.html#acca7d1580a8085caedfdecbe08e89d9f">updateLandmarkRelativePoses</a> (<a class="el" href="structBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimators_1_1Measurements.html">FloatingBaseEstimators::Measurements</a> &amp;meas, const double &amp;dt)</td></tr>
+<tr class="memdesc:acca7d1580a8085caedfdecbe08e89d9f inherit pro_methods_classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update the predicted state estimates using relative pose measurements of static landmarks in the environment.  <a href="classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator.html#acca7d1580a8085caedfdecbe08e89d9f">More...</a><br /></td></tr>
+<tr class="separator:acca7d1580a8085caedfdecbe08e89d9f inherit pro_methods_classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae83097daceb4cb9cf660637260135f1f inherit pro_methods_classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator.html#ae83097daceb4cb9cf660637260135f1f">updateBaseStateFromIMUState</a> (const <a class="el" href="structBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimators_1_1InternalState.html">FloatingBaseEstimators::InternalState</a> &amp;state, const <a class="el" href="structBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimators_1_1Measurements.html">FloatingBaseEstimators::Measurements</a> &amp;meas, manif::SE3d &amp;basePose, Eigen::Ref&lt; Eigen::Matrix&lt; double, 6, 1 &gt;&gt; baseTwist)</td></tr>
+<tr class="memdesc:ae83097daceb4cb9cf660637260135f1f inherit pro_methods_classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator"><td class="mdescLeft">&#160;</td><td class="mdescRight">Wrapper method for getting base state from internal IMU state.  <a href="classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator.html#ae83097daceb4cb9cf660637260135f1f">More...</a><br /></td></tr>
+<tr class="separator:ae83097daceb4cb9cf660637260135f1f inherit pro_methods_classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abcc251a0054dd0e06a17289bdf98403f inherit pro_methods_classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator.html#abcc251a0054dd0e06a17289bdf98403f">setupOptions</a> (std::weak_ptr&lt; <a class="el" href="classBipedalLocomotion_1_1ParametersHandler_1_1IParametersHandler.html">BipedalLocomotion::ParametersHandler::IParametersHandler</a> &gt; handler)</td></tr>
+<tr class="memdesc:abcc251a0054dd0e06a17289bdf98403f inherit pro_methods_classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator"><td class="mdescLeft">&#160;</td><td class="mdescRight">Setup estimator options.  <a href="classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator.html#abcc251a0054dd0e06a17289bdf98403f">More...</a><br /></td></tr>
+<tr class="separator:abcc251a0054dd0e06a17289bdf98403f inherit pro_methods_classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad8adb049628f1796542a1a4dbdab32da inherit pro_methods_classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator.html#ad8adb049628f1796542a1a4dbdab32da">setupSensorDevs</a> (std::weak_ptr&lt; <a class="el" href="classBipedalLocomotion_1_1ParametersHandler_1_1IParametersHandler.html">BipedalLocomotion::ParametersHandler::IParametersHandler</a> &gt; handler)</td></tr>
+<tr class="memdesc:ad8adb049628f1796542a1a4dbdab32da inherit pro_methods_classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator"><td class="mdescLeft">&#160;</td><td class="mdescRight">Setup measurement noise standard deviations The parameters in the SensorsStdDev group are,.  <a href="classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator.html#ad8adb049628f1796542a1a4dbdab32da">More...</a><br /></td></tr>
+<tr class="separator:ad8adb049628f1796542a1a4dbdab32da inherit pro_methods_classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6def9c34b3ad8ecd6e4861e3e0da9474 inherit pro_methods_classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator.html#a6def9c34b3ad8ecd6e4861e3e0da9474">setupInitialStates</a> (std::weak_ptr&lt; <a class="el" href="classBipedalLocomotion_1_1ParametersHandler_1_1IParametersHandler.html">BipedalLocomotion::ParametersHandler::IParametersHandler</a> &gt; handler)</td></tr>
+<tr class="memdesc:a6def9c34b3ad8ecd6e4861e3e0da9474 inherit pro_methods_classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator"><td class="mdescLeft">&#160;</td><td class="mdescRight">Setup initial states.  <a href="classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator.html#a6def9c34b3ad8ecd6e4861e3e0da9474">More...</a><br /></td></tr>
+<tr class="separator:a6def9c34b3ad8ecd6e4861e3e0da9474 inherit pro_methods_classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac2aaae41e8395b6a7904fb39b31f64d9 inherit pro_methods_classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator.html#ac2aaae41e8395b6a7904fb39b31f64d9">setupPriorDevs</a> (std::weak_ptr&lt; <a class="el" href="classBipedalLocomotion_1_1ParametersHandler_1_1IParametersHandler.html">BipedalLocomotion::ParametersHandler::IParametersHandler</a> &gt; handler)</td></tr>
+<tr class="memdesc:ac2aaae41e8395b6a7904fb39b31f64d9 inherit pro_methods_classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator"><td class="mdescLeft">&#160;</td><td class="mdescRight">Setup initial state standard deviations.  <a href="classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator.html#ac2aaae41e8395b6a7904fb39b31f64d9">More...</a><br /></td></tr>
+<tr class="separator:ac2aaae41e8395b6a7904fb39b31f64d9 inherit pro_methods_classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
+Additional Inherited Members</h2></td></tr>
+<tr class="inherit_header pub_types_classBipedalLocomotion_1_1System_1_1Advanceable"><td colspan="2" onclick="javascript:toggleInherit('pub_types_classBipedalLocomotion_1_1System_1_1Advanceable')"><img src="closed.png" alt="-"/>&#160;Public Types inherited from <a class="el" href="classBipedalLocomotion_1_1System_1_1Advanceable.html">BipedalLocomotion::System::Advanceable&lt; _Input, _Output &gt;</a></td></tr>
+<tr class="memitem:a975a7ecbf38c917c7b72519581fc7dba inherit pub_types_classBipedalLocomotion_1_1System_1_1Advanceable"><td class="memItemLeft" align="right" valign="top"><a id="a975a7ecbf38c917c7b72519581fc7dba"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>Input</b> = typename <a class="el" href="classBipedalLocomotion_1_1System_1_1InputPort.html">BipedalLocomotion::System::InputPort</a>&lt; _Input &gt;::Input</td></tr>
+<tr class="separator:a975a7ecbf38c917c7b72519581fc7dba inherit pub_types_classBipedalLocomotion_1_1System_1_1Advanceable"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a69603f2c9c608815908425b5b8c2005c inherit pub_types_classBipedalLocomotion_1_1System_1_1Advanceable"><td class="memItemLeft" align="right" valign="top"><a id="a69603f2c9c608815908425b5b8c2005c"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>Output</b> = typename <a class="el" href="classBipedalLocomotion_1_1System_1_1OutputPort.html">BipedalLocomotion::System::OutputPort</a>&lt; _Output &gt;::Output</td></tr>
+<tr class="separator:a69603f2c9c608815908425b5b8c2005c inherit pub_types_classBipedalLocomotion_1_1System_1_1Advanceable"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_types_classBipedalLocomotion_1_1System_1_1InputPort"><td colspan="2" onclick="javascript:toggleInherit('pub_types_classBipedalLocomotion_1_1System_1_1InputPort')"><img src="closed.png" alt="-"/>&#160;Public Types inherited from <a class="el" href="classBipedalLocomotion_1_1System_1_1InputPort.html">BipedalLocomotion::System::InputPort&lt; _Input &gt;</a></td></tr>
+<tr class="memitem:adc7e6f59dd13c49f34ec04c1a4550a5a inherit pub_types_classBipedalLocomotion_1_1System_1_1InputPort"><td class="memItemLeft" align="right" valign="top"><a id="adc7e6f59dd13c49f34ec04c1a4550a5a"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>Input</b> = _Input</td></tr>
+<tr class="separator:adc7e6f59dd13c49f34ec04c1a4550a5a inherit pub_types_classBipedalLocomotion_1_1System_1_1InputPort"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_types_classBipedalLocomotion_1_1System_1_1OutputPort"><td colspan="2" onclick="javascript:toggleInherit('pub_types_classBipedalLocomotion_1_1System_1_1OutputPort')"><img src="closed.png" alt="-"/>&#160;Public Types inherited from <a class="el" href="classBipedalLocomotion_1_1System_1_1OutputPort.html">BipedalLocomotion::System::OutputPort&lt; _Output &gt;</a></td></tr>
+<tr class="memitem:ab9150fecab94a5c4e06bc0579277d8c3 inherit pub_types_classBipedalLocomotion_1_1System_1_1OutputPort"><td class="memItemLeft" align="right" valign="top"><a id="ab9150fecab94a5c4e06bc0579277d8c3"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>Output</b> = _Output</td></tr>
+<tr class="separator:ab9150fecab94a5c4e06bc0579277d8c3 inherit pub_types_classBipedalLocomotion_1_1System_1_1OutputPort"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pro_types_classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator"><td colspan="2" onclick="javascript:toggleInherit('pro_types_classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator')"><img src="closed.png" alt="-"/>&#160;Protected Types inherited from <a class="el" href="classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator.html">BipedalLocomotion::Estimators::FloatingBaseEstimator</a></td></tr>
+<tr class="memitem:ac94d11332538be5c0ae96761645b74f1 inherit pro_types_classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator"><td class="memItemLeft" align="right" valign="top">enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator.html#ac94d11332538be5c0ae96761645b74f1">State</a> { <a class="el" href="classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator.html#ac94d11332538be5c0ae96761645b74f1a9646ad3a1c3e708b4fa8b4b4270fbab6">NotInitialized</a>
+, <a class="el" href="classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator.html#ac94d11332538be5c0ae96761645b74f1a59d87a4758a9d35fbaf6b204341bb399">Initialized</a>
+, <a class="el" href="classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator.html#ac94d11332538be5c0ae96761645b74f1a5bda814c4aedb126839228f1a3d92f09">Running</a>
+ }</td></tr>
+<tr class="memdesc:ac94d11332538be5c0ae96761645b74f1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enumerator used to determine the running state of the estimator.  <a href="classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator.html#ac94d11332538be5c0ae96761645b74f1">More...</a><br /></td></tr>
+<tr class="separator:ac94d11332538be5c0ae96761645b74f1 inherit pro_types_classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pro_attribs_classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator.html">BipedalLocomotion::Estimators::FloatingBaseEstimator</a></td></tr>
+<tr class="memitem:a1e23695506ec5bd1b3bccc32fe2ac75a inherit pro_attribs_classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator"><td class="memItemLeft" align="right" valign="top"><a id="a1e23695506ec5bd1b3bccc32fe2ac75a"></a>
+<a class="el" href="classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator_1_1ModelComputations.html">ModelComputations</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator.html#a1e23695506ec5bd1b3bccc32fe2ac75a">m_modelComp</a></td></tr>
+<tr class="memdesc:a1e23695506ec5bd1b3bccc32fe2ac75a inherit pro_attribs_classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator"><td class="mdescLeft">&#160;</td><td class="mdescRight">Model computations object. <br /></td></tr>
+<tr class="separator:a1e23695506ec5bd1b3bccc32fe2ac75a inherit pro_attribs_classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a620d1da852a07960e55a6dd8a53fd1a5 inherit pro_attribs_classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator"><td class="memItemLeft" align="right" valign="top"><a id="a620d1da852a07960e55a6dd8a53fd1a5"></a>
+<a class="el" href="structBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimators_1_1Options.html">FloatingBaseEstimators::Options</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator.html#a620d1da852a07960e55a6dd8a53fd1a5">m_options</a></td></tr>
+<tr class="memdesc:a620d1da852a07960e55a6dd8a53fd1a5 inherit pro_attribs_classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator"><td class="mdescLeft">&#160;</td><td class="mdescRight">Struct holding estimator options. <br /></td></tr>
+<tr class="separator:a620d1da852a07960e55a6dd8a53fd1a5 inherit pro_attribs_classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a39e4591671b56359f28884caa4a0a5cf inherit pro_attribs_classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator"><td class="memItemLeft" align="right" valign="top"><a id="a39e4591671b56359f28884caa4a0a5cf"></a>
+<a class="el" href="structBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimators_1_1Measurements.html">FloatingBaseEstimators::Measurements</a>&#160;</td><td class="memItemRight" valign="bottom"><b>m_meas</b></td></tr>
+<tr class="separator:a39e4591671b56359f28884caa4a0a5cf inherit pro_attribs_classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a17e146652bf36d8a62bae4f217a26294 inherit pro_attribs_classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator"><td class="memItemLeft" align="right" valign="top"><a id="a17e146652bf36d8a62bae4f217a26294"></a>
+<a class="el" href="structBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimators_1_1Measurements.html">FloatingBaseEstimators::Measurements</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator.html#a17e146652bf36d8a62bae4f217a26294">m_measPrev</a></td></tr>
+<tr class="memdesc:a17e146652bf36d8a62bae4f217a26294 inherit pro_attribs_classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator"><td class="mdescLeft">&#160;</td><td class="mdescRight">Struct holding the latest measurements that were set to the estimator. <br /></td></tr>
+<tr class="separator:a17e146652bf36d8a62bae4f217a26294 inherit pro_attribs_classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6c98bb1f972363c0f1b795bdcd50f5fd inherit pro_attribs_classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator"><td class="memItemLeft" align="right" valign="top"><a id="a6c98bb1f972363c0f1b795bdcd50f5fd"></a>
+<a class="el" href="structBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimators_1_1InternalState.html">FloatingBaseEstimators::InternalState</a>&#160;</td><td class="memItemRight" valign="bottom"><b>m_state</b></td></tr>
+<tr class="separator:a6c98bb1f972363c0f1b795bdcd50f5fd inherit pro_attribs_classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac13379b400e3a5448370d62a60495c48 inherit pro_attribs_classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator"><td class="memItemLeft" align="right" valign="top"><a id="ac13379b400e3a5448370d62a60495c48"></a>
+<a class="el" href="structBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimators_1_1InternalState.html">FloatingBaseEstimators::InternalState</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator.html#ac13379b400e3a5448370d62a60495c48">m_statePrev</a></td></tr>
+<tr class="memdesc:ac13379b400e3a5448370d62a60495c48 inherit pro_attribs_classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator"><td class="mdescLeft">&#160;</td><td class="mdescRight">Structs holding the curent and previous internal states of the estimation algorithm. <br /></td></tr>
+<tr class="separator:ac13379b400e3a5448370d62a60495c48 inherit pro_attribs_classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7a69586c1a993d3abc61c786d25b88c1 inherit pro_attribs_classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator"><td class="memItemLeft" align="right" valign="top"><a id="a7a69586c1a993d3abc61c786d25b88c1"></a>
+<a class="el" href="structBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimators_1_1Output.html">FloatingBaseEstimators::Output</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator.html#a7a69586c1a993d3abc61c786d25b88c1">m_estimatorOut</a></td></tr>
+<tr class="memdesc:a7a69586c1a993d3abc61c786d25b88c1 inherit pro_attribs_classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator"><td class="mdescLeft">&#160;</td><td class="mdescRight">Struct holding outputs of the estimator. <br /></td></tr>
+<tr class="separator:a7a69586c1a993d3abc61c786d25b88c1 inherit pro_attribs_classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4a9a0355d4b8a11e747d2180c55cba64 inherit pro_attribs_classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator"><td class="memItemLeft" align="right" valign="top"><a id="a4a9a0355d4b8a11e747d2180c55cba64"></a>
+<a class="el" href="structBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimators_1_1StateStdDev.html">FloatingBaseEstimators::StateStdDev</a>&#160;</td><td class="memItemRight" valign="bottom"><b>m_priors</b></td></tr>
+<tr class="separator:a4a9a0355d4b8a11e747d2180c55cba64 inherit pro_attribs_classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad3c4555ded287bb1450dd9b664705c7c inherit pro_attribs_classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator"><td class="memItemLeft" align="right" valign="top"><a id="ad3c4555ded287bb1450dd9b664705c7c"></a>
+<a class="el" href="structBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimators_1_1StateStdDev.html">FloatingBaseEstimators::StateStdDev</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator.html#ad3c4555ded287bb1450dd9b664705c7c">m_stateStdDev</a></td></tr>
+<tr class="memdesc:ad3c4555ded287bb1450dd9b664705c7c inherit pro_attribs_classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator"><td class="mdescLeft">&#160;</td><td class="mdescRight">Struct holding standard deviations associated to prior state estimates. <br /></td></tr>
+<tr class="separator:ad3c4555ded287bb1450dd9b664705c7c inherit pro_attribs_classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4a762098fd8fe1158f163209402db0d1 inherit pro_attribs_classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator"><td class="memItemLeft" align="right" valign="top"><a id="a4a762098fd8fe1158f163209402db0d1"></a>
+<a class="el" href="structBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimators_1_1SensorsStdDev.html">FloatingBaseEstimators::SensorsStdDev</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator.html#a4a762098fd8fe1158f163209402db0d1">m_sensorsDev</a></td></tr>
+<tr class="memdesc:a4a762098fd8fe1158f163209402db0d1 inherit pro_attribs_classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator"><td class="mdescLeft">&#160;</td><td class="mdescRight">Struct holding standard deviations associated to sensor measurements. <br /></td></tr>
+<tr class="separator:a4a762098fd8fe1158f163209402db0d1 inherit pro_attribs_classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a67d83d2880b0c9e7e279410081138bd7 inherit pro_attribs_classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator"><td class="memItemLeft" align="right" valign="top"><a id="a67d83d2880b0c9e7e279410081138bd7"></a>
+<a class="el" href="classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator.html#ac94d11332538be5c0ae96761645b74f1">State</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator.html#a67d83d2880b0c9e7e279410081138bd7">m_estimatorState</a> {<a class="el" href="classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator.html#ac94d11332538be5c0ae96761645b74f1a9646ad3a1c3e708b4fa8b4b4270fbab6">State::NotInitialized</a>}</td></tr>
+<tr class="memdesc:a67d83d2880b0c9e7e279410081138bd7 inherit pro_attribs_classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator"><td class="mdescLeft">&#160;</td><td class="mdescRight">State of the estimator. <br /></td></tr>
+<tr class="separator:a67d83d2880b0c9e7e279410081138bd7 inherit pro_attribs_classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a73f6c5a571246a976c534dbf0c8485c9 inherit pro_attribs_classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator"><td class="memItemLeft" align="right" valign="top"><a id="a73f6c5a571246a976c534dbf0c8485c9"></a>
+double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator.html#a73f6c5a571246a976c534dbf0c8485c9">m_dt</a> {0.01}</td></tr>
+<tr class="memdesc:a73f6c5a571246a976c534dbf0c8485c9 inherit pro_attribs_classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fixed time step of the estimator, in seconds. <br /></td></tr>
+<tr class="separator:a73f6c5a571246a976c534dbf0c8485c9 inherit pro_attribs_classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a85d6ac77a6ccc37ef659e3378593fd07 inherit pro_attribs_classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator"><td class="memItemLeft" align="right" valign="top"><a id="a85d6ac77a6ccc37ef659e3378593fd07"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator.html#a85d6ac77a6ccc37ef659e3378593fd07">m_useIMUForAngVelEstimate</a> {true}</td></tr>
+<tr class="memdesc:a85d6ac77a6ccc37ef659e3378593fd07 inherit pro_attribs_classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator"><td class="mdescLeft">&#160;</td><td class="mdescRight">Use IMU measurements as internal state imu angular velocity by default set to true for strap down IMU based EKF implementations, if IMU measurements not used, corresponding impl can set to false. <br /></td></tr>
+<tr class="separator:a85d6ac77a6ccc37ef659e3378593fd07 inherit pro_attribs_classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5e5751df76b701e6d0ef3d54fba70e0c inherit pro_attribs_classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator.html#a5e5751df76b701e6d0ef3d54fba70e0c">m_useIMUVelForBaseVelComputation</a> {true}</td></tr>
+<tr class="memdesc:a5e5751df76b701e6d0ef3d54fba70e0c inherit pro_attribs_classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute base velocity using inertnal state IMU velocity.  <a href="classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator.html#a5e5751df76b701e6d0ef3d54fba70e0c">More...</a><br /></td></tr>
+<tr class="separator:a5e5751df76b701e6d0ef3d54fba70e0c inherit pro_attribs_classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad58879a3431ccf1a250419f79c54377c inherit pro_attribs_classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator"><td class="memItemLeft" align="right" valign="top"><a id="ad58879a3431ccf1a250419f79c54377c"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator.html#ad58879a3431ccf1a250419f79c54377c">m_useModelInfo</a> {true}</td></tr>
+<tr class="memdesc:ad58879a3431ccf1a250419f79c54377c inherit pro_attribs_classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator"><td class="mdescLeft">&#160;</td><td class="mdescRight">Flag to enable running the estimator without using the URDF model information. <br /></td></tr>
+<tr class="separator:ad58879a3431ccf1a250419f79c54377c inherit pro_attribs_classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a25aecb934450c5584c292b0573880efc inherit pro_attribs_classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator"><td class="memItemLeft" align="right" valign="top"><a id="a25aecb934450c5584c292b0573880efc"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator.html#a25aecb934450c5584c292b0573880efc">m_isInvEKF</a> {false}</td></tr>
+<tr class="memdesc:a25aecb934450c5584c292b0573880efc inherit pro_attribs_classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator"><td class="mdescLeft">&#160;</td><td class="mdescRight">Flag to maintain soon to be deprecated functionalities currently existing only in InvEKFBaseEstimator. <br /></td></tr>
+<tr class="separator:a25aecb934450c5584c292b0573880efc inherit pro_attribs_classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Floating base estimation algorithm using only kinematic measurements by assuming atleast one frame on the robot is in contact with the environment. </p>
+<p>Configuration parameters,</p>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadCenter">Group   </th><th class="markdownTableHeadCenter">Parameter   </th><th class="markdownTableHeadCenter">Type   </th><th class="markdownTableHeadCenter">Required   </th><th class="markdownTableHeadCenter">Description    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyCenter">LeggedOdom   </td><td class="markdownTableBodyCenter">-   </td><td class="markdownTableBodyCenter">group   </td><td class="markdownTableBodyCenter">Yes   </td><td class="markdownTableBodyCenter">Configuration group for initializing the legged odometry block    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter">initial_fixed_frame   </td><td class="markdownTableBodyCenter">string   </td><td class="markdownTableBodyCenter">Yes   </td><td class="markdownTableBodyCenter">Frame on the URDF model of the robot assumed to be fixed (in contact) during the initialization phase    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter">initial_ref_frame_for_world   </td><td class="markdownTableBodyCenter">string   </td><td class="markdownTableBodyCenter">No   </td><td class="markdownTableBodyCenter">Frame on the URDF model of the robot to be used as a reference to initialize the inertial frame for the estimation. If not present, the initial fixed frame is assumed as the reference    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter">initial_world_orientation_in_ref_frame   </td><td class="markdownTableBodyCenter">vector of 4 doubles   </td><td class="markdownTableBodyCenter">No   </td><td class="markdownTableBodyCenter">Orientation of the inertial frame wrt the the reference frame as quaternion wxyz. If not present, assumed to be unit quaternion.    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter">initial_world_position_in_ref_frame   </td><td class="markdownTableBodyCenter">vector of 3 doubles   </td><td class="markdownTableBodyCenter">No   </td><td class="markdownTableBodyCenter">Position of the inertial frame wrt the reference frame as xyz. If not present,assumed to be zero position    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter">switching_pattern   </td><td class="markdownTableBodyCenter">string   </td><td class="markdownTableBodyCenter">No   </td><td class="markdownTableBodyCenter">Options: latest, lastActive, useExternal. Switching pattern to decide the fixed frame from the set of all frames in contact. latest chooses the recently switched contact frame, lastActive chooses the earliest switched contact frame. Default is latest    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter">vel_computation_method   </td><td class="markdownTableBodyCenter">string   </td><td class="markdownTableBodyCenter">No   </td><td class="markdownTableBodyCenter">Options: single, multiAvg, multiLS, multLSJvel. Method used for computing the floating base velocity using the fixed frame constraints. single uses only the fixed frame, multiAvg computes a simple average from all the contact frames, multLS uses a least square solution and multLSJVel regualrizes the least square solution by augmenting joint velocities in the computation. Default is multiLS.    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter">wLin   </td><td class="markdownTableBodyCenter">double   </td><td class="markdownTableBodyCenter">No   </td><td class="markdownTableBodyCenter">weight used for linear velocity in the least square computation of base velocity. If not present, set to 1.0    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter">wAng   </td><td class="markdownTableBodyCenter">double   </td><td class="markdownTableBodyCenter">No   </td><td class="markdownTableBodyCenter">weight used for angular velocity in the least square computation of base velocity. If not present, set to 0.5    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter">wJVel   </td><td class="markdownTableBodyCenter">double   </td><td class="markdownTableBodyCenter">No   </td><td class="markdownTableBodyCenter">weight used for linear velocity in the least square (with joint velocities) computation of base velocity. If not present, set to 10.0    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter">reg   </td><td class="markdownTableBodyCenter">double   </td><td class="markdownTableBodyCenter">No   </td><td class="markdownTableBodyCenter">regularization used for matrix inversion operation in least square. If not present, set to 1e-6   </td></tr>
+</table>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="a5fd586cec8115fb0be9bccaf17ebb231"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5fd586cec8115fb0be9bccaf17ebb231">&#9670;&nbsp;</a></span>resetEstimator() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool LeggedOdometry::resetEstimator </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Reset the internal state of the estimator using the initialized parameters. </p>
+<dl class="section return"><dt>Returns</dt><dd>True in case of success, false otherwise.</dd></dl>
+<dl class="section note"><dt>Note</dt><dd>reset and advance estimator to get updated estimator output </dd></dl>
+
+</div>
+</div>
+<a id="a51b667809fac185ce2a90729beb37609"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a51b667809fac185ce2a90729beb37609">&#9670;&nbsp;</a></span>resetEstimator() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool LeggedOdometry::resetEstimator </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>refFramForWorld</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const Eigen::Quaterniond &amp;&#160;</td>
+          <td class="paramname"><em>worldOrientationInRefFrame</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const Eigen::Vector3d &amp;&#160;</td>
+          <td class="paramname"><em>worldPositionInRefFrame</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Reset the internal state of the estimator by setting a new reference for the inertial frame. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">refFramForWorld</td><td>frame from the model as a reference to set the new inertial frame </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">worldOrientationInRefFrame</td><td>orientation of the inertial frame wrt to the reference frame </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">worldPositionInRefFrame</td><td>position of the inertial frame wrt to the reference frame </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>True in case of success, false otherwise.</dd></dl>
+<dl class="section note"><dt>Note</dt><dd>reset and advance estimator to get updated estimator output </dd></dl>
+
+</div>
+</div>
+<a id="a1b6c59af937488d84bae8cbb85252588"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1b6c59af937488d84bae8cbb85252588">&#9670;&nbsp;</a></span>changeFixedFrame() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool LeggedOdometry::changeFixedFrame </td>
+          <td>(</td>
+          <td class="paramtype">const std::ptrdiff_t &amp;&#160;</td>
+          <td class="paramname"><em>frameIndex</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Change fixed frame externally. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">frameIndex</td><td>valid frame index from the model </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a5708ac98f4a36902acf5186fbe9c82b2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5708ac98f4a36902acf5186fbe9c82b2">&#9670;&nbsp;</a></span>changeFixedFrame() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool LeggedOdometry::changeFixedFrame </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>frameName</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Change fixed frame externally. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">frameIndex</td><td>valid frame name from the model </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a0cb8161646417b31220b5e22763f0afe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0cb8161646417b31220b5e22763f0afe">&#9670;&nbsp;</a></span>changeFixedFrame() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool LeggedOdometry::changeFixedFrame </td>
+          <td>(</td>
+          <td class="paramtype">const std::ptrdiff_t &amp;&#160;</td>
+          <td class="paramname"><em>frameIndex</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const Eigen::Quaterniond &amp;&#160;</td>
+          <td class="paramname"><em>frameOrientationInWorld</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const Eigen::Vector3d &amp;&#160;</td>
+          <td class="paramname"><em>framePositionInWorld</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Change fixed frame externally by mentioning the world_H_frame transform. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">frameIndex</td><td>valid frame from the model </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">frameOrientationInWorld</td><td>orientation of the fixed frame wrt the inertial frame </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">framePositionInWorld</td><td>position of the fixed frame wrt the inertial frame </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section note"><dt>Note</dt><dd>ensure to pass unit quaternion </dd></dl>
+
+</div>
+</div>
+<a id="a62c15399975ae54e345d7caece736c9b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a62c15399975ae54e345d7caece736c9b">&#9670;&nbsp;</a></span>getFixedFrameIdx()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int LeggedOdometry::getFixedFrameIdx </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get the index of the frame currently in contact used for the legged odometry computations. </p>
+<dl class="section return"><dt>Returns</dt><dd>Index of the frame in contact, invalid frame index if no contact. </dd></dl>
+
+</div>
+</div>
+<a id="a63b3fba25caf6130433598b87ef74398"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a63b3fba25caf6130433598b87ef74398">&#9670;&nbsp;</a></span>getFixedFramePose()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">manif::SE3d &amp; LeggedOdometry::getFixedFramePose </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get the psoe of the current fixed frame in the inertial frame. </p>
+<dl class="section return"><dt>Returns</dt><dd>const ref of pose of the fixed frame </dd></dl>
+
+</div>
+</div>
+<a id="a22379bc0d1f63b8dfe4589ea50c0b689"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a22379bc0d1f63b8dfe4589ea50c0b689">&#9670;&nbsp;</a></span>customInitialization()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool LeggedOdometry::customInitialization </td>
+          <td>(</td>
+          <td class="paramtype">std::weak_ptr&lt; <a class="el" href="classBipedalLocomotion_1_1ParametersHandler_1_1IParametersHandler.html">BipedalLocomotion::ParametersHandler::IParametersHandler</a> &gt;&#160;</td>
+          <td class="paramname"><em>handler</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">protected</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>These custom parameter specifications should be specified by the derived class. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">handler</td><td>configure the custom parameters for the estimator </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>bool </dd></dl>
+
+<p>Reimplemented from <a class="el" href="classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator.html#a462a1ca838fc97062d93395f2ecb52e9">BipedalLocomotion::Estimators::FloatingBaseEstimator</a>.</p>
+
+</div>
+</div>
+<a id="a45dd1f234e1e34ee1026a902aed29be0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a45dd1f234e1e34ee1026a902aed29be0">&#9670;&nbsp;</a></span>updateKinematics()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool LeggedOdometry::updateKinematics </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimators_1_1Measurements.html">FloatingBaseEstimators::Measurements</a> &amp;&#160;</td>
+          <td class="paramname"><em>meas</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>dt</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">protected</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Update the base state estimate using kinematics and contact measurements. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">meas</td><td>measurements to update states </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">dt</td><td>sampling period in seconds </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>True in case of success, false otherwise. </dd></dl>
+
+<p>Reimplemented from <a class="el" href="classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator.html#a22dfe34e6bba688d4e00f6c97c47bd0c">BipedalLocomotion::Estimators::FloatingBaseEstimator</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following files:<ul>
+<li>Estimators/include/BipedalLocomotion/FloatingBaseEstimators/<a class="el" href="LeggedOdometry_8h.html">LeggedOdometry.h</a></li>
+<li>Estimators/src/<a class="el" href="LeggedOdometry_8cpp.html">LeggedOdometry.cpp</a></li>
+</ul>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- Doxygen custom footer -->
+<div id="nav-path" class="navpath">
+  <ul>
+    <li class="footer">
+      <a href="https://github.com/gbionics/bipedal-locomotion-framework">GitHub</a> &bull;
+      <a href="https://gbionics.ai/">Generative Bionics</a> &bull;
+      Licensed under <a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause "New" or "Revised" License</a> &bull;
+      Generated by <a href="https://www.doxygen.org/index.html">Doxygen</a> 1.9.1
+    </li>
+  </ul>
+</div>
 </body>
 </html>

@@ -1,714 +1,879 @@
-<!DOCTYPE html>
-<html lang="en">
+<!-- HTML header for doxygen 1.9.1 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-  <meta charset="UTF-8" />
-  <title>BipedalLocomotion::Contacts::ContactList class | bipedal locomotion framework master</title>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
-  <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
-  <link rel="icon" href="favicon-dark.png" type="image/png" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#22272e" />
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>bipedal locomotion framework: BipedalLocomotion::Contacts::ContactList Class Reference</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js", "TeX/AMSmath.js", "TeX/AMSsymbols.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+});
+</script>
+<script type="text/javascript" async="async" src="https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only-darkmode-toggle.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="doxygen-awesome-darkmode-toggle.js"></script>
+<script type="text/javascript" src="doxygen-awesome-fragment-copy-button.js"></script>
+<script type="text/javascript" src="doxygen-awesome-interactive-toc.js"></script>
+<script type="text/javascript" src="doxygen-awesome-paragraph-link.js"></script>
+<script type="text/javascript" src="doxygen-awesome-tabs.js"></script>
+<script type="text/javascript">
+    DoxygenAwesomeDarkModeToggle.init()
+    DoxygenAwesomeFragmentCopyButton.init()
+    DoxygenAwesomeInteractiveToc.init()
+    DoxygenAwesomeParagraphLink.init()
+    DoxygenAwesomeTabs.init()
+</script>
 </head>
 <body>
-<header><nav id="navigation">
-  <div class="m-container">
-    <div class="m-row">
-      <span id="m-navbar-brand" class="m-col-t-8 m-col-m-none m-left-m">
-        <a href="./index.html">bipedal locomotion framework</a> <span class="m-breadcrumb">|</span> <a href="index.html" class="m-thin">master</a>
-      </span>
-      <div class="m-col-t-4 m-hide-m m-text-right m-nopadr">
-        <a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
-          <path id="m-doc-search-icon-path" d="m6 0c-3.31 0-6 2.69-6 6 0 3.31 2.69 6 6 6 1.49 0 2.85-0.541 3.89-1.44-0.0164 0.338 0.147 0.759 0.5 1.15l3.22 3.79c0.552 0.614 1.45 0.665 2 0.115 0.55-0.55 0.499-1.45-0.115-2l-3.79-3.22c-0.392-0.353-0.812-0.515-1.15-0.5 0.895-1.05 1.44-2.41 1.44-3.89 0-3.31-2.69-6-6-6zm0 1.56a4.44 4.44 0 0 1 4.44 4.44 4.44 4.44 0 0 1-4.44 4.44 4.44 4.44 0 0 1-4.44-4.44 4.44 4.44 0 0 1 4.44-4.44z"/>
-        </svg></a>
-        <a id="m-navbar-show" href="#navigation" title="Show navigation"></a>
-        <a id="m-navbar-hide" href="#" title="Hide navigation"></a>
-      </div>
-      <div id="m-navbar-collapse" class="m-col-t-12 m-show-m m-col-m-none m-right-m">
-        <div class="m-row">
-          <ol class="m-col-t-6 m-col-m-none">
-            <li><a href="pages.html">Pages</a></li>
-            <li><a href="annotated.html">Classes</a></li>
-            <li><a href="files.html">Files</a></li>
-          </ol>
-          <ol class="m-col-t-6 m-col-m-none" start="4">
-            <li>
-              <a href="pages.html">Versions</a>
-              <ol>
-                <li><a href="./index.html">Master</a></li>
-                <li><a href="./v0.19.0/index.html">v0.19.0</a></li>
-                <li><a href="./v0.21.1/index.html">v0.21.1</a></li>
-                <li><a href="./v0.18.0/index.html">v0.18.0</a></li>
-              </ol>
-            </li>
-            <li>
-              <a href="pages.html">Contacts</a>
-              <ol>
-                <li><a href="https://github.com/ami-iit/bipedal-locomotion-framework">GitHub</a></li>
-                <li><a href="https://www.iit.it/web/ami/">Lab website</a></li>
-              </ol>
-            </li>
-            <li class="m-show-m"><a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
-              <use href="#m-doc-search-icon-path" />
-            </svg></a></li>
-          </ol>
-        </div>
-      </div>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">bipedal locomotion framework
+   </div>
+   <div id="projectbrief">A suite of libraries for achieving bipedal locomotion on humanoid robots</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.9.1 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "search",false,'Search','.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',true,false,'search.php','Search');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
     </div>
   </div>
-</nav></header>
-<main><article>
-  <div class="m-container m-container-inflatable">
-    <div class="m-row">
-      <div class="m-col-l-10 m-push-l-1">
-        <h1>
-          <span class="m-breadcrumb"><a href="namespaceBipedalLocomotion.html">BipedalLocomotion</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespaceBipedalLocomotion_1_1Contacts.html">Contacts</a>::<wbr/></span>ContactList <span class="m-thin">class</span>
-          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="ContactList_8h.html">&lt;BipedalLocomotion/Contacts/ContactList.h&gt;</a></div>
-        </h1>
-        <p>Class containing a list of contacts.</p>
-        <nav class="m-block m-default">
-          <h3>Contents</h3>
-          <ul>
-            <li>
-              Reference
-              <ul>
-                <li><a href="#pub-types">Public types</a></li>
-                <li><a href="#pub-methods">Public functions</a></li>
-              </ul>
-            </li>
-          </ul>
-        </nav>
-<p>The contact are added such that the activation time is strictly growing. In addition, contacts cannot be overlapping. It represents a series of contact activations and deactivations of a single entity.</p>
-        <section id="pub-types">
-          <h2><a href="#pub-types">Public types</a></h2>
-          <dl class="m-doc">
-            <dt id="ab38a18dc96aec031256776d03d381c21">
-              using <a href="#ab38a18dc96aec031256776d03d381c21" class="m-doc-self">const_iterator</a> = std::set&lt;<a href="structBipedalLocomotion_1_1Contacts_1_1PlannedContact.html" class="m-doc">BipedalLocomotion::<wbr />Contacts::<wbr />PlannedContact</a>, ContactCompare&gt;::const_iterator
-            </dt>
-            <dd><span></span></dd>
-            <dt id="a9e6e4e7ec16cb0555372607be0446b03">
-              using <a href="#a9e6e4e7ec16cb0555372607be0446b03" class="m-doc-self">const_reverse_iterator</a> = std::set&lt;<a href="structBipedalLocomotion_1_1Contacts_1_1PlannedContact.html" class="m-doc">BipedalLocomotion::<wbr />Contacts::<wbr />PlannedContact</a>, ContactCompare&gt;::const_reverse_iterator
-            </dt>
-            <dd><span></span></dd>
-          </dl>
-        </section>
-        <section id="pub-methods">
-          <h2><a href="#pub-methods">Public functions</a></h2>
-          <dl class="m-doc">
-            <dt>
-              <span class="m-doc-wrap-bumper">void <a href="#a763a0f4ce300b834b9972008fe2858d7" class="m-doc">setDefaultName</a>(</span><span class="m-doc-wrap">const std::string&amp; defaultName)</span>
-            </dt>
-            <dd>Set the default name.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a4c7349af0eeb90d147342a3cfdbd95a3" class="m-doc">defaultName</a>(</span><span class="m-doc-wrap">) const -&gt; const std::string&amp;</span>
-            </dt>
-            <dd>Get the default name.</dd>
-            <dt id="a0f6c9177ead1c0edf999693371ea4365">
-              <span class="m-doc-wrap-bumper">void <a href="#a0f6c9177ead1c0edf999693371ea4365" class="m-doc-self">setDefaultContactType</a>(</span><span class="m-doc-wrap">const <a href="Contact_8h.html#a34ae1b101a919e7e1b42ddf2193c51b0" class="m-doc">BipedalLocomotion::<wbr />Contacts::<wbr />ContactType</a>&amp; type)</span>
-            </dt>
-            <dd>Set the default contact type.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">void <a href="#afe083245f09cdf581d93b4c43adcc3cb" class="m-doc">setDefaultIndex</a>(</span><span class="m-doc-wrap">int defaultIndex)</span>
-            </dt>
-            <dd>Set the default frame index of the contact.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#ac74016d057feec7c884aff7f4b726396" class="m-doc">defaultIndex</a>(</span><span class="m-doc-wrap">) const -&gt; int</span>
-            </dt>
-            <dd>Get the default frame index of the contact.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#ae46e41130807480653ec39dba6cd576e" class="m-doc">defaultContactType</a>(</span><span class="m-doc-wrap">) const -&gt; const <a href="Contact_8h.html#a34ae1b101a919e7e1b42ddf2193c51b0" class="m-doc">BipedalLocomotion::<wbr />Contacts::<wbr />ContactType</a>&amp;</span>
-            </dt>
-            <dd>Get the default contact type.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#ae3ed40a1a38d8878bfc30ea6fbb7ae7e" class="m-doc">addContact</a>(</span><span class="m-doc-wrap">const <a href="structBipedalLocomotion_1_1Contacts_1_1PlannedContact.html" class="m-doc">BipedalLocomotion::<wbr />Contacts::<wbr />PlannedContact</a>&amp; newContact) -&gt; bool</span>
-            </dt>
-            <dd>Add a new contact to the list.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a18ac03b2121f9a9a432914d3c329776b" class="m-doc">addContact</a>(</span><span class="m-doc-wrap">const manif::SE3d&amp; newTransform,
-              const std::chrono::nanoseconds&amp; activationTime,
-              const std::chrono::nanoseconds&amp; deactivationTime) -&gt; bool</span>
-            </dt>
-            <dd>Add a new contact to the list.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a8a5b2fe4dc34c6241440ecbda2113336" class="m-doc">erase</a>(</span><span class="m-doc-wrap">const_iterator iterator) -&gt; const_iterator</span>
-            </dt>
-            <dd>Erase a contact.</dd>
-            <dt id="a9e8cda2df67a75c09a0bff7b8c265070">
-              <span class="m-doc-wrap-bumper">auto <a href="#a9e8cda2df67a75c09a0bff7b8c265070" class="m-doc-self">begin</a>(</span><span class="m-doc-wrap">) const -&gt; const_iterator</span>
-            </dt>
-            <dd>Return a const iterator to the begin of the contacts.</dd>
-            <dt id="a0dbf3384cf7cd47f383181642e8abe22">
-              <span class="m-doc-wrap-bumper">auto <a href="#a0dbf3384cf7cd47f383181642e8abe22" class="m-doc-self">cbegin</a>(</span><span class="m-doc-wrap">) const -&gt; const_iterator</span>
-            </dt>
-            <dd>Return a const iterator to the begin of the contacts.</dd>
-            <dt id="aad29463b9e1731b5ac744855ccf732ea">
-              <span class="m-doc-wrap-bumper">auto <a href="#aad29463b9e1731b5ac744855ccf732ea" class="m-doc-self">rbegin</a>(</span><span class="m-doc-wrap">) const -&gt; const_reverse_iterator</span>
-            </dt>
-            <dd>Return a const reverse iterator to the contacts (basically starting from the last contact going backward).</dd>
-            <dt id="a6f059f21cd8202bfecda88a6f9277cc1">
-              <span class="m-doc-wrap-bumper">auto <a href="#a6f059f21cd8202bfecda88a6f9277cc1" class="m-doc-self">crbegin</a>(</span><span class="m-doc-wrap">) const -&gt; const_reverse_iterator</span>
-            </dt>
-            <dd>Return a const reverse iterator to the contacts (basically starting from the last contact going backward).</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a45dbd1687bf2ce59e16618e6fed455c7" class="m-doc">end</a>(</span><span class="m-doc-wrap">) const -&gt; const_iterator</span>
-            </dt>
-            <dd>Return a const iterator to the end of the list.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a9114e79fc750c2f0b5df006c24760937" class="m-doc">cend</a>(</span><span class="m-doc-wrap">) const -&gt; const_iterator</span>
-            </dt>
-            <dd>Return a const iterator to the end of the list.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a4f21ea4ece874b68db0501572403e53d" class="m-doc">rend</a>(</span><span class="m-doc-wrap">) const -&gt; const_reverse_iterator</span>
-            </dt>
-            <dd>Return a const reverse iterator to the end of the list.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a99518bded02dd9e7224a4aa59460ee35" class="m-doc">crend</a>(</span><span class="m-doc-wrap">) const -&gt; const_reverse_iterator</span>
-            </dt>
-            <dd>Return a const reverse iterator to the end of the list.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a941b59a10e2f753cac46994b772252af" class="m-doc">operator[]</a>(</span><span class="m-doc-wrap">size_t index) const -&gt; const <a href="structBipedalLocomotion_1_1Contacts_1_1PlannedContact.html" class="m-doc">BipedalLocomotion::<wbr />Contacts::<wbr />PlannedContact</a>&amp;</span>
-            </dt>
-            <dd>Access contacts by index.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a0455d9dad6976ca0cc5238992cefd9f3" class="m-doc">size</a>(</span><span class="m-doc-wrap">) const -&gt; size_t</span>
-            </dt>
-            <dd>Get the size of the list.</dd>
-            <dt id="afd8a456aecdff7cad92a4a502117b0e5">
-              <span class="m-doc-wrap-bumper">auto <a href="#afd8a456aecdff7cad92a4a502117b0e5" class="m-doc-self">firstContact</a>(</span><span class="m-doc-wrap">) const -&gt; const_iterator</span>
-            </dt>
-            <dd>Iterator pointing to the first contact.</dd>
-            <dt id="a09ce629f873b5aa12cab37d563f71e4c">
-              <span class="m-doc-wrap-bumper">auto <a href="#a09ce629f873b5aa12cab37d563f71e4c" class="m-doc-self">lastContact</a>(</span><span class="m-doc-wrap">) const -&gt; const_iterator</span>
-            </dt>
-            <dd>Iterator pointing to the last contact.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a84461637e0570046ef937728593f2d7c" class="m-doc">editContact</a>(</span><span class="m-doc-wrap">const_iterator element,
-              const <a href="structBipedalLocomotion_1_1Contacts_1_1PlannedContact.html" class="m-doc">BipedalLocomotion::<wbr />Contacts::<wbr />PlannedContact</a>&amp; newContact) -&gt; bool</span>
-            </dt>
-            <dd>Edit an existing contact.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a92a52526b36a5eb032dd5d4e893a32fc" class="m-doc">getActiveContact</a>(</span><span class="m-doc-wrap">const std::chrono::nanoseconds&amp; time) const -&gt; const_iterator</span>
-            </dt>
-            <dd>Get the active contact given the time.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a3515fa9e57884ab8e1a122495ae3ed66" class="m-doc">getNextContact</a>(</span><span class="m-doc-wrap">const std::chrono::nanoseconds&amp; time) const -&gt; const_iterator</span>
-            </dt>
-            <dd>Get the next contact given the time.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#ad1a6136e4c7f01886a379dc359c6b5f1" class="m-doc">getPresentContact</a>(</span><span class="m-doc-wrap">const std::chrono::nanoseconds&amp; time) const -&gt; const_iterator</span>
-            </dt>
-            <dd>Get the contact given the time.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a0d6362b1ea2e7803216040724c8f58b0" class="m-doc">getPreviousContact</a>(</span><span class="m-doc-wrap">const std::chrono::nanoseconds&amp; time) const -&gt; const_iterator</span>
-            </dt>
-            <dd>Get the contact given the time.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#ab44bbf63b56a9ddc25d70a69da354312" class="m-doc">keepOnlyPresentContact</a>(</span><span class="m-doc-wrap">const std::chrono::nanoseconds&amp; time) -&gt; bool</span>
-            </dt>
-            <dd>Clear all the steps, except the one returned by getPresentContact.</dd>
-            <dt id="a56e370cad1add2f78dc27ec49d51b009">
-              <span class="m-doc-wrap-bumper">void <a href="#a56e370cad1add2f78dc27ec49d51b009" class="m-doc-self">clear</a>(</span><span class="m-doc-wrap">)</span>
-            </dt>
-            <dd>Clear the contacts.</dd>
-            <dt id="a16ec57481a746a75d30e0c52f9a136c2">
-              <span class="m-doc-wrap-bumper">void <a href="#a16ec57481a746a75d30e0c52f9a136c2" class="m-doc-self">removeLastContact</a>(</span><span class="m-doc-wrap">)</span>
-            </dt>
-            <dd>Remove only the last contact.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a13a4c42fbe20c34faf9f6a26c8ab36f8" class="m-doc">toString</a>(</span><span class="m-doc-wrap">) const -&gt; std::string</span>
-            </dt>
-            <dd>Convert the contact list to a string.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a1691307ffb0ae3c94207aee13a60fa01" class="m-doc">forceSampleTime</a>(</span><span class="m-doc-wrap">const std::chrono::nanoseconds&amp; dt) -&gt; bool</span>
-            </dt>
-            <dd>Force the sample time of the contact list.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#aa24bdf169370a93b39ab8a1e939c4e68" class="m-doc">areContactsSampled</a>(</span><span class="m-doc-wrap">const std::chrono::nanoseconds&amp; dt) const -&gt; bool</span>
-            </dt>
-            <dd>Check if the contacts are sampled with the given sample time.</dd>
-          </dl>
-        </section>
-        <section>
-          <h2>Function documentation</h2>
-          <section class="m-doc-details" id="a763a0f4ce300b834b9972008fe2858d7"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">void BipedalLocomotion::<wbr />Contacts::<wbr />ContactList::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a763a0f4ce300b834b9972008fe2858d7" class="m-doc-self">setDefaultName</a>(</span><span class="m-doc-wrap">const std::string&amp; defaultName)</span></span>
-            </h3>
-            <p>Set the default name.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">defaultName</td>
-                  <td>the default name.</td>
-                </tr>
-              </tbody>
-            </table>
-          </div></section>
-          <section class="m-doc-details" id="a4c7349af0eeb90d147342a3cfdbd95a3"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">const std::string&amp; BipedalLocomotion::<wbr />Contacts::<wbr />ContactList::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a4c7349af0eeb90d147342a3cfdbd95a3" class="m-doc-self">defaultName</a>(</span><span class="m-doc-wrap">) const</span></span>
-            </h3>
-            <p>Get the default name.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <tfoot>
-                <tr>
-                  <th style="width: 1%">Returns</th>
-                  <td>the default name.</td>
-                </tr>
-              </tfoot>
-            </table>
-          </div></section>
-          <section class="m-doc-details" id="afe083245f09cdf581d93b4c43adcc3cb"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">void BipedalLocomotion::<wbr />Contacts::<wbr />ContactList::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#afe083245f09cdf581d93b4c43adcc3cb" class="m-doc-self">setDefaultIndex</a>(</span><span class="m-doc-wrap">int defaultIndex)</span></span>
-            </h3>
-            <p>Set the default frame index of the contact.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">defaultIndex</td>
-                  <td>the default index.</td>
-                </tr>
-              </tbody>
-            </table>
-          </div></section>
-          <section class="m-doc-details" id="ac74016d057feec7c884aff7f4b726396"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">int BipedalLocomotion::<wbr />Contacts::<wbr />ContactList::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ac74016d057feec7c884aff7f4b726396" class="m-doc-self">defaultIndex</a>(</span><span class="m-doc-wrap">) const</span></span>
-            </h3>
-            <p>Get the default frame index of the contact.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <tfoot>
-                <tr>
-                  <th style="width: 1%">Returns</th>
-                  <td>the default index.</td>
-                </tr>
-              </tfoot>
-            </table>
-          </div></section>
-          <section class="m-doc-details" id="ae46e41130807480653ec39dba6cd576e"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">const <a href="Contact_8h.html#a34ae1b101a919e7e1b42ddf2193c51b0" class="m-doc">BipedalLocomotion::<wbr />Contacts::<wbr />ContactType</a>&amp; BipedalLocomotion::<wbr />Contacts::<wbr />ContactList::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ae46e41130807480653ec39dba6cd576e" class="m-doc-self">defaultContactType</a>(</span><span class="m-doc-wrap">) const</span></span>
-            </h3>
-            <p>Get the default contact type.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <tfoot>
-                <tr>
-                  <th style="width: 1%">Returns</th>
-                  <td>the default contact type.</td>
-                </tr>
-              </tfoot>
-            </table>
-          </div></section>
-          <section class="m-doc-details" id="ae3ed40a1a38d8878bfc30ea6fbb7ae7e"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">bool BipedalLocomotion::<wbr />Contacts::<wbr />ContactList::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ae3ed40a1a38d8878bfc30ea6fbb7ae7e" class="m-doc-self">addContact</a>(</span><span class="m-doc-wrap">const <a href="structBipedalLocomotion_1_1Contacts_1_1PlannedContact.html" class="m-doc">BipedalLocomotion::<wbr />Contacts::<wbr />PlannedContact</a>&amp; newContact)</span></span>
-            </h3>
-            <p>Add a new contact to the list.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">newContact</td>
-                  <td>The new contact</td>
-                </tr>
-              </tbody>
-              <tfoot>
-                <tr>
-                  <th>Returns</th>
-                  <td>false if it was not possible to insert the contact. Possible failures: the activation time is greater than the deactivation time, or the new contact overlaps with an existing contact.</td>
-                </tr>
-              </tfoot>
-            </table>
-          </div></section>
-          <section class="m-doc-details" id="a18ac03b2121f9a9a432914d3c329776b"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">bool BipedalLocomotion::<wbr />Contacts::<wbr />ContactList::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a18ac03b2121f9a9a432914d3c329776b" class="m-doc-self">addContact</a>(</span><span class="m-doc-wrap">const manif::SE3d&amp; newTransform,
-              const std::chrono::nanoseconds&amp; activationTime,
-              const std::chrono::nanoseconds&amp; deactivationTime)</span></span>
-            </h3>
-            <p>Add a new contact to the list.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">newTransform</td>
-                  <td>The contact pose.</td>
-                </tr>
-                <tr>
-                  <td>activationTime</td>
-                  <td>The activation time.</td>
-                </tr>
-                <tr>
-                  <td>deactivationTime</td>
-                  <td>The deactivation time.</td>
-                </tr>
-              </tbody>
-              <tfoot>
-                <tr>
-                  <th>Returns</th>
-                  <td>false if it was not possible to insert the contact. Possible failures: the activation time is greater than the deactivation time, or the new contact overlaps with an existing contact.</td>
-                </tr>
-              </tfoot>
-            </table>
-<p>It uses the defaultName and the defaultContactType for the missing informations.</p>
-          </div></section>
-          <section class="m-doc-details" id="a8a5b2fe4dc34c6241440ecbda2113336"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">const_iterator BipedalLocomotion::<wbr />Contacts::<wbr />ContactList::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a8a5b2fe4dc34c6241440ecbda2113336" class="m-doc-self">erase</a>(</span><span class="m-doc-wrap">const_iterator iterator)</span></span>
-            </h3>
-            <p>Erase a contact.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">iterator</td>
-                  <td>to the contact to erase.</td>
-                </tr>
-              </tbody>
-              <tfoot>
-                <tr>
-                  <th>Returns</th>
-                  <td>an iterator to the contact that follows the one removed.</td>
-                </tr>
-              </tfoot>
-            </table>
-          </div></section>
-          <section class="m-doc-details" id="a45dbd1687bf2ce59e16618e6fed455c7"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">const_iterator BipedalLocomotion::<wbr />Contacts::<wbr />ContactList::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a45dbd1687bf2ce59e16618e6fed455c7" class="m-doc-self">end</a>(</span><span class="m-doc-wrap">) const</span></span>
-            </h3>
-            <p>Return a const iterator to the end of the list.</p>
-<p>This is only a placeholder, it does not reference any contact.</p>
-          </div></section>
-          <section class="m-doc-details" id="a9114e79fc750c2f0b5df006c24760937"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">const_iterator BipedalLocomotion::<wbr />Contacts::<wbr />ContactList::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a9114e79fc750c2f0b5df006c24760937" class="m-doc-self">cend</a>(</span><span class="m-doc-wrap">) const</span></span>
-            </h3>
-            <p>Return a const iterator to the end of the list.</p>
-<p>This is only a placeholder, it does not reference any contact.</p>
-          </div></section>
-          <section class="m-doc-details" id="a4f21ea4ece874b68db0501572403e53d"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">const_reverse_iterator BipedalLocomotion::<wbr />Contacts::<wbr />ContactList::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a4f21ea4ece874b68db0501572403e53d" class="m-doc-self">rend</a>(</span><span class="m-doc-wrap">) const</span></span>
-            </h3>
-            <p>Return a const reverse iterator to the end of the list.</p>
-<p>This is only a placeholder, it does not reference any contact.</p>
-          </div></section>
-          <section class="m-doc-details" id="a99518bded02dd9e7224a4aa59460ee35"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">const_reverse_iterator BipedalLocomotion::<wbr />Contacts::<wbr />ContactList::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a99518bded02dd9e7224a4aa59460ee35" class="m-doc-self">crend</a>(</span><span class="m-doc-wrap">) const</span></span>
-            </h3>
-            <p>Return a const reverse iterator to the end of the list.</p>
-<p>This is only a placeholder, it does not reference any contact.</p>
-          </div></section>
-          <section class="m-doc-details" id="a941b59a10e2f753cac46994b772252af"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">const <a href="structBipedalLocomotion_1_1Contacts_1_1PlannedContact.html" class="m-doc">BipedalLocomotion::<wbr />Contacts::<wbr />PlannedContact</a>&amp; BipedalLocomotion::<wbr />Contacts::<wbr />ContactList::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a941b59a10e2f753cac46994b772252af" class="m-doc-self">operator[]</a>(</span><span class="m-doc-wrap">size_t index) const</span></span>
-            </h3>
-            <p>Access contacts by index.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">index</td>
-                  <td>of the phase to be accessed.</td>
-                </tr>
-              </tbody>
-              <tfoot>
-                <tr>
-                  <th>Returns</th>
-                  <td>A const reference to the desired contact.</td>
-                </tr>
-              </tfoot>
-            </table>
-<aside class="m-note m-danger"><h4>Warning</h4><p>This method in a for loop is much less efficient than using iterators.</p></aside>
-          </div></section>
-          <section class="m-doc-details" id="a0455d9dad6976ca0cc5238992cefd9f3"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">size_t BipedalLocomotion::<wbr />Contacts::<wbr />ContactList::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a0455d9dad6976ca0cc5238992cefd9f3" class="m-doc-self">size</a>(</span><span class="m-doc-wrap">) const</span></span>
-            </h3>
-            <p>Get the size of the list.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <tfoot>
-                <tr>
-                  <th style="width: 1%">Returns</th>
-                  <td>The number of contacts.</td>
-                </tr>
-              </tfoot>
-            </table>
-          </div></section>
-          <section class="m-doc-details" id="a84461637e0570046ef937728593f2d7c"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">bool BipedalLocomotion::<wbr />Contacts::<wbr />ContactList::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a84461637e0570046ef937728593f2d7c" class="m-doc-self">editContact</a>(</span><span class="m-doc-wrap">const_iterator element,
-              const <a href="structBipedalLocomotion_1_1Contacts_1_1PlannedContact.html" class="m-doc">BipedalLocomotion::<wbr />Contacts::<wbr />PlannedContact</a>&amp; newContact)</span></span>
-            </h3>
-            <p>Edit an existing contact.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">element</td>
-                  <td>Iterator to the element to edit.</td>
-                </tr>
-                <tr>
-                  <td>newContact</td>
-                  <td>The new contact</td>
-                </tr>
-              </tbody>
-              <tfoot>
-                <tr>
-                  <th>Returns</th>
-                  <td>false if the element is not valid or if the new contact timing would require a reordering of the list.</td>
-                </tr>
-              </tfoot>
-            </table>
-          </div></section>
-          <section class="m-doc-details" id="a92a52526b36a5eb032dd5d4e893a32fc"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">const_iterator BipedalLocomotion::<wbr />Contacts::<wbr />ContactList::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a92a52526b36a5eb032dd5d4e893a32fc" class="m-doc-self">getActiveContact</a>(</span><span class="m-doc-wrap">const std::chrono::nanoseconds&amp; time) const</span></span>
-            </h3>
-            <p>Get the active contact given the time.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">time</td>
-                  <td>The present time.</td>
-                </tr>
-              </tbody>
-              <tfoot>
-                <tr>
-                  <th>Returns</th>
-                  <td>an iterator to the last contact having an activation time lower than time. If no contact satisfies this condition, it returns a pointer to the end.</td>
-                </tr>
-              </tfoot>
-            </table>
-<p>It returns the active contact (i.e., the highest activation time lower than time and the deactivation time strictly higher than time). If no contacts are active at the given time, it returns an iterator to the end.</p><aside class="m-note m-info"><h4>Note</h4><p>Differently from getPresentContact the contact needs to be active.</p></aside>
-          </div></section>
-          <section class="m-doc-details" id="a3515fa9e57884ab8e1a122495ae3ed66"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">const_iterator BipedalLocomotion::<wbr />Contacts::<wbr />ContactList::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a3515fa9e57884ab8e1a122495ae3ed66" class="m-doc-self">getNextContact</a>(</span><span class="m-doc-wrap">const std::chrono::nanoseconds&amp; time) const</span></span>
-            </h3>
-            <p>Get the next contact given the time.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">time</td>
-                  <td>The present time.</td>
-                </tr>
-              </tbody>
-              <tfoot>
-                <tr>
-                  <th>Returns</th>
-                  <td>an iterator to the first contact having an activation time higher than time. If no contact satisfies this condition, it returns a pointer to the end.</td>
-                </tr>
-              </tfoot>
-            </table>
-<p>It returns the contact with the lowest activation time higher than time. If no contacts have an activation time higher than time, it returns an iterator to the end.</p>
-          </div></section>
-          <section class="m-doc-details" id="ad1a6136e4c7f01886a379dc359c6b5f1"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">const_iterator BipedalLocomotion::<wbr />Contacts::<wbr />ContactList::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ad1a6136e4c7f01886a379dc359c6b5f1" class="m-doc-self">getPresentContact</a>(</span><span class="m-doc-wrap">const std::chrono::nanoseconds&amp; time) const</span></span>
-            </h3>
-            <p>Get the contact given the time.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">time</td>
-                  <td>The present time.</td>
-                </tr>
-              </tbody>
-              <tfoot>
-                <tr>
-                  <th>Returns</th>
-                  <td>an iterator to the last contact having an activation time lower than time. If no contact satisfies this condition, it returns a pointer to the end.</td>
-                </tr>
-              </tfoot>
-            </table>
-<p>It returns the contact with the highest activation time lower than time. If no contacts have an activation time lower than time, it returns an iterator to the end. Notice that the contact may not be active, i.e. the deactivationTime may be lower than time.</p>
-          </div></section>
-          <section class="m-doc-details" id="a0d6362b1ea2e7803216040724c8f58b0"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">const_iterator BipedalLocomotion::<wbr />Contacts::<wbr />ContactList::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a0d6362b1ea2e7803216040724c8f58b0" class="m-doc-self">getPreviousContact</a>(</span><span class="m-doc-wrap">const std::chrono::nanoseconds&amp; time) const</span></span>
-            </h3>
-            <p>Get the contact given the time.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">time</td>
-                  <td>The present time.</td>
-                </tr>
-              </tbody>
-              <tfoot>
-                <tr>
-                  <th>Returns</th>
-                  <td>an iterator to the last contact having an activation time lower than time. If no contact satisfies this condition, it returns a pointer to the end.</td>
-                </tr>
-              </tfoot>
-            </table>
-<p>It returns the contact with the highest deactivation time lower than time. If no contacts have a deactivation time lower than time, it returns an iterator to the end.</p>
-          </div></section>
-          <section class="m-doc-details" id="ab44bbf63b56a9ddc25d70a69da354312"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">bool BipedalLocomotion::<wbr />Contacts::<wbr />ContactList::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ab44bbf63b56a9ddc25d70a69da354312" class="m-doc-self">keepOnlyPresentContact</a>(</span><span class="m-doc-wrap">const std::chrono::nanoseconds&amp; time)</span></span>
-            </h3>
-            <p>Clear all the steps, except the one returned by getPresentContact.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">time</td>
-                  <td>The present time.</td>
-                </tr>
-              </tbody>
-              <tfoot>
-                <tr>
-                  <th>Returns</th>
-                  <td>false if no contact is available at this time.</td>
-                </tr>
-              </tfoot>
-            </table>
-          </div></section>
-          <section class="m-doc-details" id="a13a4c42fbe20c34faf9f6a26c8ab36f8"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">std::string BipedalLocomotion::<wbr />Contacts::<wbr />ContactList::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a13a4c42fbe20c34faf9f6a26c8ab36f8" class="m-doc-self">toString</a>(</span><span class="m-doc-wrap">) const</span></span>
-            </h3>
-            <p>Convert the contact list to a string.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <tfoot>
-                <tr>
-                  <th style="width: 1%">Returns</th>
-                  <td>A string containing the information of the contact list.</td>
-                </tr>
-              </tfoot>
-            </table>
-          </div></section>
-          <section class="m-doc-details" id="a1691307ffb0ae3c94207aee13a60fa01"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">bool BipedalLocomotion::<wbr />Contacts::<wbr />ContactList::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a1691307ffb0ae3c94207aee13a60fa01" class="m-doc-self">forceSampleTime</a>(</span><span class="m-doc-wrap">const std::chrono::nanoseconds&amp; dt)</span></span>
-            </h3>
-            <p>Force the sample time of the contact list.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">dt</td>
-                  <td>The new sample time.</td>
-                </tr>
-              </tbody>
-              <tfoot>
-                <tr>
-                  <th>Returns</th>
-                  <td>true if the contact list has been correctly resampled.</td>
-                </tr>
-              </tfoot>
-            </table>
-<aside class="m-note m-info"><h4>Note</h4><p>the activation time is rounded down to the nearest multiple of dt, while the deactivation time is rounded up to the nearest multiple of dt.</p><p>If the deactivation time of a contact in the list is equal to <code>std::chrono::nanoseconds::max()</code> it will not be rounded up.</p></aside><aside class="m-note m-danger"><h4>Warning</h4><p>This will change the sample time of all the contacts in the list. All the iterators to the contacts will be invalidated.</p></aside>
-          </div></section>
-          <section class="m-doc-details" id="aa24bdf169370a93b39ab8a1e939c4e68"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">bool BipedalLocomotion::<wbr />Contacts::<wbr />ContactList::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aa24bdf169370a93b39ab8a1e939c4e68" class="m-doc-self">areContactsSampled</a>(</span><span class="m-doc-wrap">const std::chrono::nanoseconds&amp; dt) const</span></span>
-            </h3>
-            <p>Check if the contacts are sampled with the given sample time.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">dt</td>
-                  <td>The sample time.</td>
-                </tr>
-              </tbody>
-              <tfoot>
-                <tr>
-                  <th>Returns</th>
-                  <td>true if the contacts are sampled with the given sample time.</td>
-                </tr>
-              </tfoot>
-            </table>
-<aside class="m-note m-info"><h4>Note</h4><p>If the deactivation time of a contact in the list is equal to <code>std::chrono::nanoseconds::max()</code> it will consider it as sampled with the given sample time.</p></aside>
-          </div></section>
-        </section>
-      </div>
-    </div>
-  </div>
-</article></main>
-<div class="m-doc-search" id="search">
-  <a href="#!" onclick="return hideSearch()"></a>
-  <div class="m-container">
-    <div class="m-row">
-      <div class="m-col-m-8 m-push-m-2">
-        <div class="m-doc-search-header m-text m-small">
-          <div><span class="m-label m-default">Tab</span> / <span class="m-label m-default">T</span> to search, <span class="m-label m-default">Esc</span> to close</div>
-          <div id="search-symbolcount">&hellip;</div>
-        </div>
-        <div class="m-doc-search-content">
-          <form>
-            <input type="search" name="q" id="search-input" placeholder="Loading &hellip;" disabled="disabled" autofocus="autofocus" autocomplete="off" spellcheck="false" />
-          </form>
-          <noscript class="m-text m-danger m-text-center">Unlike everything else in the docs, the search functionality <em>requires</em> JavaScript.</noscript>
-          <div id="search-help" class="m-text m-dim m-text-center">
-            <p class="m-noindent">Search for symbols, directories, files, pages or
-            modules. You can omit any prefix from the symbol or file path; adding a
-            <code>:</code> or <code>/</code> suffix lists all members of given symbol or
-            directory.</p>
-            <p class="m-noindent">Use <span class="m-label m-dim">&darr;</span>
-            / <span class="m-label m-dim">&uarr;</span> to navigate through the list,
-            <span class="m-label m-dim">Enter</span> to go.
-            <span class="m-label m-dim">Tab</span> autocompletes common prefix, you can
-            copy a link to the result using <span class="m-label m-dim">⌘</span>
-            <span class="m-label m-dim">L</span> while <span class="m-label m-dim">⌘</span>
-            <span class="m-label m-dim">M</span> produces a Markdown link.</p>
-          </div>
-          <div id="search-notfound" class="m-text m-warning m-text-center">Sorry, nothing was found.</div>
-          <ul id="search-results"></ul>
-        </div>
-      </div>
-    </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
   </div>
 </div>
-<script src="search-v2.js"></script>
-<script src="searchdata-v2.js" async="async"></script>
-<footer><nav>
-  <div class="m-container">
-    <div class="m-row">
-      <div class="m-col-l-10 m-push-l-1">
-        <p>bipedal-locomotion-framework documentation. Licensed under the <a href="https://www.gnu.org/licenses/lgpl-3.0.en.html">GNU Lesser General Public License v3.0</a>. Project maintained by the <a href="https://www.iit.it/web/ami/">Artificial and Mechanical Intelligence Lab</a>. Contact the team via <a href="https://github.com/ami-iit/bipedal-locomotion-framework/issues/new">GitHub</a>.<br />Generated by <a href="https://doxygen.org/">Doxygen</a> 1.9.1 and <a href="https://mcss.mosra.cz/">m.css</a>.
-      </div>
-    </div>
-  </div>
-</nav></footer>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(document).ready(function(){initNavTree('classBipedalLocomotion_1_1Contacts_1_1ContactList.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#nested-classes">Classes</a> &#124;
+<a href="#pub-types">Public Types</a> &#124;
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="classBipedalLocomotion_1_1Contacts_1_1ContactList-members.html">List of all members</a>  </div>
+  <div class="headertitle">
+<div class="title">BipedalLocomotion::Contacts::ContactList Class Reference</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p>Class containing a list of contacts.  
+ <a href="classBipedalLocomotion_1_1Contacts_1_1ContactList.html#details">More...</a></p>
+
+<p><code>#include &lt;Contacts/include/BipedalLocomotion/Contacts/ContactList.h&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
+Public Types</h2></td></tr>
+<tr class="memitem:ab38a18dc96aec031256776d03d381c21"><td class="memItemLeft" align="right" valign="top"><a id="ab38a18dc96aec031256776d03d381c21"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>const_iterator</b> = std::set&lt; <a class="el" href="structBipedalLocomotion_1_1Contacts_1_1PlannedContact.html">BipedalLocomotion::Contacts::PlannedContact</a>, ContactCompare &gt;::const_iterator</td></tr>
+<tr class="separator:ab38a18dc96aec031256776d03d381c21"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9e6e4e7ec16cb0555372607be0446b03"><td class="memItemLeft" align="right" valign="top"><a id="a9e6e4e7ec16cb0555372607be0446b03"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>const_reverse_iterator</b> = std::set&lt; <a class="el" href="structBipedalLocomotion_1_1Contacts_1_1PlannedContact.html">BipedalLocomotion::Contacts::PlannedContact</a>, ContactCompare &gt;::const_reverse_iterator</td></tr>
+<tr class="separator:a9e6e4e7ec16cb0555372607be0446b03"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:ade62df89c2fdb4d22da2bce2e54bac31"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1Contacts_1_1ContactList.html#ade62df89c2fdb4d22da2bce2e54bac31">setDefaultName</a> (const std::string &amp;<a class="el" href="classBipedalLocomotion_1_1Contacts_1_1ContactList.html#a3b5942b8c7e1bcec604599d8e9d6f792">defaultName</a>)</td></tr>
+<tr class="memdesc:ade62df89c2fdb4d22da2bce2e54bac31"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the default name.  <a href="classBipedalLocomotion_1_1Contacts_1_1ContactList.html#ade62df89c2fdb4d22da2bce2e54bac31">More...</a><br /></td></tr>
+<tr class="separator:ade62df89c2fdb4d22da2bce2e54bac31"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3b5942b8c7e1bcec604599d8e9d6f792"><td class="memItemLeft" align="right" valign="top">const std::string &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1Contacts_1_1ContactList.html#a3b5942b8c7e1bcec604599d8e9d6f792">defaultName</a> () const</td></tr>
+<tr class="memdesc:a3b5942b8c7e1bcec604599d8e9d6f792"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the default name.  <a href="classBipedalLocomotion_1_1Contacts_1_1ContactList.html#a3b5942b8c7e1bcec604599d8e9d6f792">More...</a><br /></td></tr>
+<tr class="separator:a3b5942b8c7e1bcec604599d8e9d6f792"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5aab14ffd9e9c4891d7889389550ccf9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1Contacts_1_1ContactList.html#a5aab14ffd9e9c4891d7889389550ccf9">setDefaultContactType</a> (const <a class="el" href="Contact_8h.html#a34ae1b101a919e7e1b42ddf2193c51b0">BipedalLocomotion::Contacts::ContactType</a> &amp;type)</td></tr>
+<tr class="memdesc:a5aab14ffd9e9c4891d7889389550ccf9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the default contact type.  <a href="classBipedalLocomotion_1_1Contacts_1_1ContactList.html#a5aab14ffd9e9c4891d7889389550ccf9">More...</a><br /></td></tr>
+<tr class="separator:a5aab14ffd9e9c4891d7889389550ccf9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae15a9cd73f76dae0a4b365a728a543c8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1Contacts_1_1ContactList.html#ae15a9cd73f76dae0a4b365a728a543c8">setDefaultIndex</a> (int <a class="el" href="classBipedalLocomotion_1_1Contacts_1_1ContactList.html#aaf581b40eab843c690227f45455315fd">defaultIndex</a>)</td></tr>
+<tr class="memdesc:ae15a9cd73f76dae0a4b365a728a543c8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the default frame index of the contact.  <a href="classBipedalLocomotion_1_1Contacts_1_1ContactList.html#ae15a9cd73f76dae0a4b365a728a543c8">More...</a><br /></td></tr>
+<tr class="separator:ae15a9cd73f76dae0a4b365a728a543c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaf581b40eab843c690227f45455315fd"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1Contacts_1_1ContactList.html#aaf581b40eab843c690227f45455315fd">defaultIndex</a> () const</td></tr>
+<tr class="memdesc:aaf581b40eab843c690227f45455315fd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the default frame index of the contact.  <a href="classBipedalLocomotion_1_1Contacts_1_1ContactList.html#aaf581b40eab843c690227f45455315fd">More...</a><br /></td></tr>
+<tr class="separator:aaf581b40eab843c690227f45455315fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afc9f6946085c1a9575e9e5c7cedd7a73"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="Contact_8h.html#a34ae1b101a919e7e1b42ddf2193c51b0">BipedalLocomotion::Contacts::ContactType</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1Contacts_1_1ContactList.html#afc9f6946085c1a9575e9e5c7cedd7a73">defaultContactType</a> () const</td></tr>
+<tr class="memdesc:afc9f6946085c1a9575e9e5c7cedd7a73"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the default contact type.  <a href="classBipedalLocomotion_1_1Contacts_1_1ContactList.html#afc9f6946085c1a9575e9e5c7cedd7a73">More...</a><br /></td></tr>
+<tr class="separator:afc9f6946085c1a9575e9e5c7cedd7a73"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab687b4981eeba23019270eab7762670f"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1Contacts_1_1ContactList.html#ab687b4981eeba23019270eab7762670f">addContact</a> (const <a class="el" href="structBipedalLocomotion_1_1Contacts_1_1PlannedContact.html">BipedalLocomotion::Contacts::PlannedContact</a> &amp;newContact)</td></tr>
+<tr class="memdesc:ab687b4981eeba23019270eab7762670f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a new contact to the list.  <a href="classBipedalLocomotion_1_1Contacts_1_1ContactList.html#ab687b4981eeba23019270eab7762670f">More...</a><br /></td></tr>
+<tr class="separator:ab687b4981eeba23019270eab7762670f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa192015b900b3248fd94e20d78d0bb51"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1Contacts_1_1ContactList.html#aa192015b900b3248fd94e20d78d0bb51">addContact</a> (const manif::SE3d &amp;newTransform, const std::chrono::nanoseconds &amp;activationTime, const std::chrono::nanoseconds &amp;deactivationTime)</td></tr>
+<tr class="memdesc:aa192015b900b3248fd94e20d78d0bb51"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a new contact to the list.  <a href="classBipedalLocomotion_1_1Contacts_1_1ContactList.html#aa192015b900b3248fd94e20d78d0bb51">More...</a><br /></td></tr>
+<tr class="separator:aa192015b900b3248fd94e20d78d0bb51"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1af98c9a10f855824a9e1eab6170f1a4"><td class="memItemLeft" align="right" valign="top">const_iterator&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1Contacts_1_1ContactList.html#a1af98c9a10f855824a9e1eab6170f1a4">erase</a> (const_iterator iterator)</td></tr>
+<tr class="memdesc:a1af98c9a10f855824a9e1eab6170f1a4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Erase a contact.  <a href="classBipedalLocomotion_1_1Contacts_1_1ContactList.html#a1af98c9a10f855824a9e1eab6170f1a4">More...</a><br /></td></tr>
+<tr class="separator:a1af98c9a10f855824a9e1eab6170f1a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6f37f149f09c9460be3a85841086e2a2"><td class="memItemLeft" align="right" valign="top"><a id="a6f37f149f09c9460be3a85841086e2a2"></a>
+const_iterator&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1Contacts_1_1ContactList.html#a6f37f149f09c9460be3a85841086e2a2">begin</a> () const</td></tr>
+<tr class="memdesc:a6f37f149f09c9460be3a85841086e2a2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return a const iterator to the begin of the contacts. <br /></td></tr>
+<tr class="separator:a6f37f149f09c9460be3a85841086e2a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aac7ce1a4b29f79062de07228c7dabbf5"><td class="memItemLeft" align="right" valign="top"><a id="aac7ce1a4b29f79062de07228c7dabbf5"></a>
+const_iterator&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1Contacts_1_1ContactList.html#aac7ce1a4b29f79062de07228c7dabbf5">cbegin</a> () const</td></tr>
+<tr class="memdesc:aac7ce1a4b29f79062de07228c7dabbf5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return a const iterator to the begin of the contacts. <br /></td></tr>
+<tr class="separator:aac7ce1a4b29f79062de07228c7dabbf5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a74e9c909e5b12bc353883d760618bc72"><td class="memItemLeft" align="right" valign="top"><a id="a74e9c909e5b12bc353883d760618bc72"></a>
+const_reverse_iterator&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1Contacts_1_1ContactList.html#a74e9c909e5b12bc353883d760618bc72">rbegin</a> () const</td></tr>
+<tr class="memdesc:a74e9c909e5b12bc353883d760618bc72"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return a const reverse iterator to the contacts (basically starting from the last contact going backward). <br /></td></tr>
+<tr class="separator:a74e9c909e5b12bc353883d760618bc72"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abba8e6230d62f31a4d8ca471977b7c32"><td class="memItemLeft" align="right" valign="top"><a id="abba8e6230d62f31a4d8ca471977b7c32"></a>
+const_reverse_iterator&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1Contacts_1_1ContactList.html#abba8e6230d62f31a4d8ca471977b7c32">crbegin</a> () const</td></tr>
+<tr class="memdesc:abba8e6230d62f31a4d8ca471977b7c32"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return a const reverse iterator to the contacts (basically starting from the last contact going backward). <br /></td></tr>
+<tr class="separator:abba8e6230d62f31a4d8ca471977b7c32"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad7fa6c6d9d909e628490b0144937de7e"><td class="memItemLeft" align="right" valign="top">const_iterator&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1Contacts_1_1ContactList.html#ad7fa6c6d9d909e628490b0144937de7e">end</a> () const</td></tr>
+<tr class="memdesc:ad7fa6c6d9d909e628490b0144937de7e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return a const iterator to the end of the list.  <a href="classBipedalLocomotion_1_1Contacts_1_1ContactList.html#ad7fa6c6d9d909e628490b0144937de7e">More...</a><br /></td></tr>
+<tr class="separator:ad7fa6c6d9d909e628490b0144937de7e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9b4dfe39769c0f27e401b789d93d99fc"><td class="memItemLeft" align="right" valign="top">const_iterator&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1Contacts_1_1ContactList.html#a9b4dfe39769c0f27e401b789d93d99fc">cend</a> () const</td></tr>
+<tr class="memdesc:a9b4dfe39769c0f27e401b789d93d99fc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return a const iterator to the end of the list.  <a href="classBipedalLocomotion_1_1Contacts_1_1ContactList.html#a9b4dfe39769c0f27e401b789d93d99fc">More...</a><br /></td></tr>
+<tr class="separator:a9b4dfe39769c0f27e401b789d93d99fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a771b6beae4a36c179abcb6bedcba7d95"><td class="memItemLeft" align="right" valign="top">const_reverse_iterator&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1Contacts_1_1ContactList.html#a771b6beae4a36c179abcb6bedcba7d95">rend</a> () const</td></tr>
+<tr class="memdesc:a771b6beae4a36c179abcb6bedcba7d95"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return a const reverse iterator to the end of the list.  <a href="classBipedalLocomotion_1_1Contacts_1_1ContactList.html#a771b6beae4a36c179abcb6bedcba7d95">More...</a><br /></td></tr>
+<tr class="separator:a771b6beae4a36c179abcb6bedcba7d95"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a14c2836d2023ddc433fea21c6da219c2"><td class="memItemLeft" align="right" valign="top">const_reverse_iterator&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1Contacts_1_1ContactList.html#a14c2836d2023ddc433fea21c6da219c2">crend</a> () const</td></tr>
+<tr class="memdesc:a14c2836d2023ddc433fea21c6da219c2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return a const reverse iterator to the end of the list.  <a href="classBipedalLocomotion_1_1Contacts_1_1ContactList.html#a14c2836d2023ddc433fea21c6da219c2">More...</a><br /></td></tr>
+<tr class="separator:a14c2836d2023ddc433fea21c6da219c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad68e1336529cc8bd70ee434a1e5579cb"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="structBipedalLocomotion_1_1Contacts_1_1PlannedContact.html">BipedalLocomotion::Contacts::PlannedContact</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1Contacts_1_1ContactList.html#ad68e1336529cc8bd70ee434a1e5579cb">operator[]</a> (size_t index) const</td></tr>
+<tr class="memdesc:ad68e1336529cc8bd70ee434a1e5579cb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access contacts by index.  <a href="classBipedalLocomotion_1_1Contacts_1_1ContactList.html#ad68e1336529cc8bd70ee434a1e5579cb">More...</a><br /></td></tr>
+<tr class="separator:ad68e1336529cc8bd70ee434a1e5579cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a554f89ca45507c4ade05fcbfbd18bce0"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1Contacts_1_1ContactList.html#a554f89ca45507c4ade05fcbfbd18bce0">size</a> () const</td></tr>
+<tr class="memdesc:a554f89ca45507c4ade05fcbfbd18bce0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the size of the list.  <a href="classBipedalLocomotion_1_1Contacts_1_1ContactList.html#a554f89ca45507c4ade05fcbfbd18bce0">More...</a><br /></td></tr>
+<tr class="separator:a554f89ca45507c4ade05fcbfbd18bce0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2973735fa50a74e9567df147f8d27712"><td class="memItemLeft" align="right" valign="top"><a id="a2973735fa50a74e9567df147f8d27712"></a>
+const_iterator&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1Contacts_1_1ContactList.html#a2973735fa50a74e9567df147f8d27712">firstContact</a> () const</td></tr>
+<tr class="memdesc:a2973735fa50a74e9567df147f8d27712"><td class="mdescLeft">&#160;</td><td class="mdescRight">Iterator pointing to the first contact. <br /></td></tr>
+<tr class="separator:a2973735fa50a74e9567df147f8d27712"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a82792bf5120ef8c6c2aae56bf40fe81b"><td class="memItemLeft" align="right" valign="top"><a id="a82792bf5120ef8c6c2aae56bf40fe81b"></a>
+const_iterator&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1Contacts_1_1ContactList.html#a82792bf5120ef8c6c2aae56bf40fe81b">lastContact</a> () const</td></tr>
+<tr class="memdesc:a82792bf5120ef8c6c2aae56bf40fe81b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Iterator pointing to the last contact. <br /></td></tr>
+<tr class="separator:a82792bf5120ef8c6c2aae56bf40fe81b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a774ddbeb856a760515af9ea6112ddd19"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1Contacts_1_1ContactList.html#a774ddbeb856a760515af9ea6112ddd19">editContact</a> (const_iterator element, const <a class="el" href="structBipedalLocomotion_1_1Contacts_1_1PlannedContact.html">BipedalLocomotion::Contacts::PlannedContact</a> &amp;newContact)</td></tr>
+<tr class="memdesc:a774ddbeb856a760515af9ea6112ddd19"><td class="mdescLeft">&#160;</td><td class="mdescRight">Edit an existing contact.  <a href="classBipedalLocomotion_1_1Contacts_1_1ContactList.html#a774ddbeb856a760515af9ea6112ddd19">More...</a><br /></td></tr>
+<tr class="separator:a774ddbeb856a760515af9ea6112ddd19"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a62802f8588c7613e9b4e576e2bb477a3"><td class="memItemLeft" align="right" valign="top">const_iterator&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1Contacts_1_1ContactList.html#a62802f8588c7613e9b4e576e2bb477a3">getActiveContact</a> (const std::chrono::nanoseconds &amp;time) const</td></tr>
+<tr class="memdesc:a62802f8588c7613e9b4e576e2bb477a3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the active contact given the time.  <a href="classBipedalLocomotion_1_1Contacts_1_1ContactList.html#a62802f8588c7613e9b4e576e2bb477a3">More...</a><br /></td></tr>
+<tr class="separator:a62802f8588c7613e9b4e576e2bb477a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a162030ddbbe3b87315954aed49375c5e"><td class="memItemLeft" align="right" valign="top">const_iterator&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1Contacts_1_1ContactList.html#a162030ddbbe3b87315954aed49375c5e">getNextContact</a> (const std::chrono::nanoseconds &amp;time) const</td></tr>
+<tr class="memdesc:a162030ddbbe3b87315954aed49375c5e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the next contact given the time.  <a href="classBipedalLocomotion_1_1Contacts_1_1ContactList.html#a162030ddbbe3b87315954aed49375c5e">More...</a><br /></td></tr>
+<tr class="separator:a162030ddbbe3b87315954aed49375c5e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0e4d8399526b025e92c6bc464e697a9b"><td class="memItemLeft" align="right" valign="top">const_iterator&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1Contacts_1_1ContactList.html#a0e4d8399526b025e92c6bc464e697a9b">getPresentContact</a> (const std::chrono::nanoseconds &amp;time) const</td></tr>
+<tr class="memdesc:a0e4d8399526b025e92c6bc464e697a9b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the contact given the time.  <a href="classBipedalLocomotion_1_1Contacts_1_1ContactList.html#a0e4d8399526b025e92c6bc464e697a9b">More...</a><br /></td></tr>
+<tr class="separator:a0e4d8399526b025e92c6bc464e697a9b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a43734dd9bf9e882efe7364c4ea8ad100"><td class="memItemLeft" align="right" valign="top">const_iterator&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1Contacts_1_1ContactList.html#a43734dd9bf9e882efe7364c4ea8ad100">getPreviousContact</a> (const std::chrono::nanoseconds &amp;time) const</td></tr>
+<tr class="memdesc:a43734dd9bf9e882efe7364c4ea8ad100"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the contact given the time.  <a href="classBipedalLocomotion_1_1Contacts_1_1ContactList.html#a43734dd9bf9e882efe7364c4ea8ad100">More...</a><br /></td></tr>
+<tr class="separator:a43734dd9bf9e882efe7364c4ea8ad100"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a18765146a60f14f3160d2ed25aba12de"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1Contacts_1_1ContactList.html#a18765146a60f14f3160d2ed25aba12de">keepOnlyPresentContact</a> (const std::chrono::nanoseconds &amp;time)</td></tr>
+<tr class="memdesc:a18765146a60f14f3160d2ed25aba12de"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clear all the steps, except the one returned by getPresentContact.  <a href="classBipedalLocomotion_1_1Contacts_1_1ContactList.html#a18765146a60f14f3160d2ed25aba12de">More...</a><br /></td></tr>
+<tr class="separator:a18765146a60f14f3160d2ed25aba12de"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae37ba5ccb9b1f932fd524d3b1f0787a1"><td class="memItemLeft" align="right" valign="top"><a id="ae37ba5ccb9b1f932fd524d3b1f0787a1"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1Contacts_1_1ContactList.html#ae37ba5ccb9b1f932fd524d3b1f0787a1">clear</a> ()</td></tr>
+<tr class="memdesc:ae37ba5ccb9b1f932fd524d3b1f0787a1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clear the contacts. <br /></td></tr>
+<tr class="separator:ae37ba5ccb9b1f932fd524d3b1f0787a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2799ae5244c4e079f5086af782aad7a3"><td class="memItemLeft" align="right" valign="top"><a id="a2799ae5244c4e079f5086af782aad7a3"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1Contacts_1_1ContactList.html#a2799ae5244c4e079f5086af782aad7a3">removeLastContact</a> ()</td></tr>
+<tr class="memdesc:a2799ae5244c4e079f5086af782aad7a3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Remove only the last contact. <br /></td></tr>
+<tr class="separator:a2799ae5244c4e079f5086af782aad7a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4de6747fb7da579515ca26ea6131e4a9"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1Contacts_1_1ContactList.html#a4de6747fb7da579515ca26ea6131e4a9">toString</a> () const</td></tr>
+<tr class="memdesc:a4de6747fb7da579515ca26ea6131e4a9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert the contact list to a string.  <a href="classBipedalLocomotion_1_1Contacts_1_1ContactList.html#a4de6747fb7da579515ca26ea6131e4a9">More...</a><br /></td></tr>
+<tr class="separator:a4de6747fb7da579515ca26ea6131e4a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acda44db39235f3101d71239651350ba5"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1Contacts_1_1ContactList.html#acda44db39235f3101d71239651350ba5">forceSampleTime</a> (const std::chrono::nanoseconds &amp;dt)</td></tr>
+<tr class="memdesc:acda44db39235f3101d71239651350ba5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Force the sample time of the contact list.  <a href="classBipedalLocomotion_1_1Contacts_1_1ContactList.html#acda44db39235f3101d71239651350ba5">More...</a><br /></td></tr>
+<tr class="separator:acda44db39235f3101d71239651350ba5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1111bf2f8224dc526d264a0c3422fa71"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1Contacts_1_1ContactList.html#a1111bf2f8224dc526d264a0c3422fa71">areContactsSampled</a> (const std::chrono::nanoseconds &amp;dt) const</td></tr>
+<tr class="memdesc:a1111bf2f8224dc526d264a0c3422fa71"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if the contacts are sampled with the given sample time.  <a href="classBipedalLocomotion_1_1Contacts_1_1ContactList.html#a1111bf2f8224dc526d264a0c3422fa71">More...</a><br /></td></tr>
+<tr class="separator:a1111bf2f8224dc526d264a0c3422fa71"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Class containing a list of contacts. </p>
+<p>The contact are added such that the activation time is strictly growing. In addition, contacts cannot be overlapping. It represents a series of contact activations and deactivations of a single entity. </p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="ade62df89c2fdb4d22da2bce2e54bac31"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ade62df89c2fdb4d22da2bce2e54bac31">&#9670;&nbsp;</a></span>setDefaultName()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ContactList::setDefaultName </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>defaultName</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Set the default name. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">defaultName</td><td>the default name. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a3b5942b8c7e1bcec604599d8e9d6f792"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3b5942b8c7e1bcec604599d8e9d6f792">&#9670;&nbsp;</a></span>defaultName()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const std::string &amp; ContactList::defaultName </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get the default name. </p>
+<dl class="section return"><dt>Returns</dt><dd>the default name. </dd></dl>
+
+</div>
+</div>
+<a id="a5aab14ffd9e9c4891d7889389550ccf9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5aab14ffd9e9c4891d7889389550ccf9">&#9670;&nbsp;</a></span>setDefaultContactType()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ContactList::setDefaultContactType </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="Contact_8h.html#a34ae1b101a919e7e1b42ddf2193c51b0">BipedalLocomotion::Contacts::ContactType</a> &amp;&#160;</td>
+          <td class="paramname"><em>type</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Set the default contact type. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">The</td><td>default contact type. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ae15a9cd73f76dae0a4b365a728a543c8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae15a9cd73f76dae0a4b365a728a543c8">&#9670;&nbsp;</a></span>setDefaultIndex()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ContactList::setDefaultIndex </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>defaultIndex</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Set the default frame index of the contact. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">defaultIndex</td><td>the default index. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="aaf581b40eab843c690227f45455315fd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaf581b40eab843c690227f45455315fd">&#9670;&nbsp;</a></span>defaultIndex()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int ContactList::defaultIndex </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get the default frame index of the contact. </p>
+<dl class="section return"><dt>Returns</dt><dd>the default index. </dd></dl>
+
+</div>
+</div>
+<a id="afc9f6946085c1a9575e9e5c7cedd7a73"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afc9f6946085c1a9575e9e5c7cedd7a73">&#9670;&nbsp;</a></span>defaultContactType()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="Contact_8h.html#a34ae1b101a919e7e1b42ddf2193c51b0">ContactType</a> &amp; ContactList::defaultContactType </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get the default contact type. </p>
+<dl class="section return"><dt>Returns</dt><dd>the default contact type. </dd></dl>
+
+</div>
+</div>
+<a id="ab687b4981eeba23019270eab7762670f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab687b4981eeba23019270eab7762670f">&#9670;&nbsp;</a></span>addContact() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool ContactList::addContact </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structBipedalLocomotion_1_1Contacts_1_1PlannedContact.html">BipedalLocomotion::Contacts::PlannedContact</a> &amp;&#160;</td>
+          <td class="paramname"><em>newContact</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Add a new contact to the list. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">newContact</td><td>The new contact </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>false if it was not possible to insert the contact. Possible failures: the activation time is greater than the deactivation time, or the new contact overlaps with an existing contact. </dd></dl>
+
+</div>
+</div>
+<a id="aa192015b900b3248fd94e20d78d0bb51"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa192015b900b3248fd94e20d78d0bb51">&#9670;&nbsp;</a></span>addContact() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool ContactList::addContact </td>
+          <td>(</td>
+          <td class="paramtype">const manif::SE3d &amp;&#160;</td>
+          <td class="paramname"><em>newTransform</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::chrono::nanoseconds &amp;&#160;</td>
+          <td class="paramname"><em>activationTime</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::chrono::nanoseconds &amp;&#160;</td>
+          <td class="paramname"><em>deactivationTime</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Add a new contact to the list. </p>
+<p>It uses the defaultName and the defaultContactType for the missing informations. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">newTransform</td><td>The contact pose. </td></tr>
+    <tr><td class="paramname">activationTime</td><td>The activation time. </td></tr>
+    <tr><td class="paramname">deactivationTime</td><td>The deactivation time. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>false if it was not possible to insert the contact. Possible failures: the activation time is greater than the deactivation time, or the new contact overlaps with an existing contact. </dd></dl>
+
+</div>
+</div>
+<a id="a1af98c9a10f855824a9e1eab6170f1a4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1af98c9a10f855824a9e1eab6170f1a4">&#9670;&nbsp;</a></span>erase()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">ContactList::const_iterator ContactList::erase </td>
+          <td>(</td>
+          <td class="paramtype">const_iterator&#160;</td>
+          <td class="paramname"><em>iterator</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Erase a contact. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">iterator</td><td>to the contact to erase. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>an iterator to the contact that follows the one removed. </dd></dl>
+
+</div>
+</div>
+<a id="ad7fa6c6d9d909e628490b0144937de7e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad7fa6c6d9d909e628490b0144937de7e">&#9670;&nbsp;</a></span>end()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">ContactList::const_iterator ContactList::end </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Return a const iterator to the end of the list. </p>
+<p>This is only a placeholder, it does not reference any contact. </p>
+
+</div>
+</div>
+<a id="a9b4dfe39769c0f27e401b789d93d99fc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9b4dfe39769c0f27e401b789d93d99fc">&#9670;&nbsp;</a></span>cend()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">ContactList::const_iterator ContactList::cend </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Return a const iterator to the end of the list. </p>
+<p>This is only a placeholder, it does not reference any contact. </p>
+
+</div>
+</div>
+<a id="a771b6beae4a36c179abcb6bedcba7d95"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a771b6beae4a36c179abcb6bedcba7d95">&#9670;&nbsp;</a></span>rend()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">ContactList::const_reverse_iterator ContactList::rend </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Return a const reverse iterator to the end of the list. </p>
+<p>This is only a placeholder, it does not reference any contact. </p>
+
+</div>
+</div>
+<a id="a14c2836d2023ddc433fea21c6da219c2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a14c2836d2023ddc433fea21c6da219c2">&#9670;&nbsp;</a></span>crend()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">ContactList::const_reverse_iterator ContactList::crend </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Return a const reverse iterator to the end of the list. </p>
+<p>This is only a placeholder, it does not reference any contact. </p>
+
+</div>
+</div>
+<a id="ad68e1336529cc8bd70ee434a1e5579cb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad68e1336529cc8bd70ee434a1e5579cb">&#9670;&nbsp;</a></span>operator[]()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="structBipedalLocomotion_1_1Contacts_1_1PlannedContact.html">PlannedContact</a> &amp; ContactList::operator[] </td>
+          <td>(</td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>index</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Access contacts by index. </p>
+<dl class="section warning"><dt>Warning</dt><dd>This method in a for loop is much less efficient than using iterators. </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">index</td><td>of the phase to be accessed. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>A const reference to the desired contact. </dd></dl>
+
+</div>
+</div>
+<a id="a554f89ca45507c4ade05fcbfbd18bce0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a554f89ca45507c4ade05fcbfbd18bce0">&#9670;&nbsp;</a></span>size()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t ContactList::size </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get the size of the list. </p>
+<dl class="section return"><dt>Returns</dt><dd>The number of contacts. </dd></dl>
+
+</div>
+</div>
+<a id="a774ddbeb856a760515af9ea6112ddd19"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a774ddbeb856a760515af9ea6112ddd19">&#9670;&nbsp;</a></span>editContact()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool ContactList::editContact </td>
+          <td>(</td>
+          <td class="paramtype">ContactList::const_iterator&#160;</td>
+          <td class="paramname"><em>element</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structBipedalLocomotion_1_1Contacts_1_1PlannedContact.html">BipedalLocomotion::Contacts::PlannedContact</a> &amp;&#160;</td>
+          <td class="paramname"><em>newContact</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Edit an existing contact. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">element</td><td>Iterator to the element to edit. </td></tr>
+    <tr><td class="paramname">newContact</td><td>The new contact </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>false if the element is not valid or if the new contact timing would require a reordering of the list. </dd></dl>
+
+</div>
+</div>
+<a id="a62802f8588c7613e9b4e576e2bb477a3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a62802f8588c7613e9b4e576e2bb477a3">&#9670;&nbsp;</a></span>getActiveContact()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">ContactList::const_iterator ContactList::getActiveContact </td>
+          <td>(</td>
+          <td class="paramtype">const std::chrono::nanoseconds &amp;&#160;</td>
+          <td class="paramname"><em>time</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get the active contact given the time. </p>
+<p>It returns the active contact (i.e., the highest activation time lower than time and the deactivation time strictly higher than time). If no contacts are active at the given time, it returns an iterator to the end. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">time</td><td>The present time. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>an iterator to the last contact having an activation time lower than time. If no contact satisfies this condition, it returns a pointer to the end. </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>Differently from getPresentContact the contact needs to be active. </dd></dl>
+
+</div>
+</div>
+<a id="a162030ddbbe3b87315954aed49375c5e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a162030ddbbe3b87315954aed49375c5e">&#9670;&nbsp;</a></span>getNextContact()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">ContactList::const_iterator ContactList::getNextContact </td>
+          <td>(</td>
+          <td class="paramtype">const std::chrono::nanoseconds &amp;&#160;</td>
+          <td class="paramname"><em>time</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get the next contact given the time. </p>
+<p>It returns the contact with the lowest activation time higher than time. If no contacts have an activation time higher than time, it returns an iterator to the end. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">time</td><td>The present time. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>an iterator to the first contact having an activation time higher than time. If no contact satisfies this condition, it returns a pointer to the end. </dd></dl>
+
+</div>
+</div>
+<a id="a0e4d8399526b025e92c6bc464e697a9b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0e4d8399526b025e92c6bc464e697a9b">&#9670;&nbsp;</a></span>getPresentContact()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">ContactList::const_iterator ContactList::getPresentContact </td>
+          <td>(</td>
+          <td class="paramtype">const std::chrono::nanoseconds &amp;&#160;</td>
+          <td class="paramname"><em>time</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get the contact given the time. </p>
+<p>It returns the contact with the highest activation time lower than time. If no contacts have an activation time lower than time, it returns an iterator to the end. Notice that the contact may not be active, i.e. the deactivationTime may be lower than time. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">time</td><td>The present time. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>an iterator to the last contact having an activation time lower than time. If no contact satisfies this condition, it returns a pointer to the end. </dd></dl>
+
+</div>
+</div>
+<a id="a43734dd9bf9e882efe7364c4ea8ad100"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a43734dd9bf9e882efe7364c4ea8ad100">&#9670;&nbsp;</a></span>getPreviousContact()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">ContactList::const_iterator ContactList::getPreviousContact </td>
+          <td>(</td>
+          <td class="paramtype">const std::chrono::nanoseconds &amp;&#160;</td>
+          <td class="paramname"><em>time</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get the contact given the time. </p>
+<p>It returns the contact with the highest deactivation time lower than time. If no contacts have a deactivation time lower than time, it returns an iterator to the end. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">time</td><td>The present time. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>an iterator to the last contact having an activation time lower than time. If no contact satisfies this condition, it returns a pointer to the end. </dd></dl>
+
+</div>
+</div>
+<a id="a18765146a60f14f3160d2ed25aba12de"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a18765146a60f14f3160d2ed25aba12de">&#9670;&nbsp;</a></span>keepOnlyPresentContact()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool ContactList::keepOnlyPresentContact </td>
+          <td>(</td>
+          <td class="paramtype">const std::chrono::nanoseconds &amp;&#160;</td>
+          <td class="paramname"><em>time</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Clear all the steps, except the one returned by getPresentContact. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">time</td><td>The present time. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>false if no contact is available at this time. </dd></dl>
+
+</div>
+</div>
+<a id="a4de6747fb7da579515ca26ea6131e4a9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4de6747fb7da579515ca26ea6131e4a9">&#9670;&nbsp;</a></span>toString()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string ContactList::toString </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Convert the contact list to a string. </p>
+<dl class="section return"><dt>Returns</dt><dd>A string containing the information of the contact list. </dd></dl>
+
+</div>
+</div>
+<a id="acda44db39235f3101d71239651350ba5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acda44db39235f3101d71239651350ba5">&#9670;&nbsp;</a></span>forceSampleTime()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool ContactList::forceSampleTime </td>
+          <td>(</td>
+          <td class="paramtype">const std::chrono::nanoseconds &amp;&#160;</td>
+          <td class="paramname"><em>dt</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Force the sample time of the contact list. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">dt</td><td>The new sample time. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true if the contact list has been correctly resampled. </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>the activation time is rounded down to the nearest multiple of dt, while the deactivation time is rounded up to the nearest multiple of dt. </dd>
+<dd>
+If the deactivation time of a contact in the list is equal to <code>std::chrono::nanoseconds::max()</code> it will not be rounded up. </dd></dl>
+<dl class="section warning"><dt>Warning</dt><dd>This will change the sample time of all the contacts in the list. All the iterators to the contacts will be invalidated. </dd></dl>
+
+</div>
+</div>
+<a id="a1111bf2f8224dc526d264a0c3422fa71"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1111bf2f8224dc526d264a0c3422fa71">&#9670;&nbsp;</a></span>areContactsSampled()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool ContactList::areContactsSampled </td>
+          <td>(</td>
+          <td class="paramtype">const std::chrono::nanoseconds &amp;&#160;</td>
+          <td class="paramname"><em>dt</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Check if the contacts are sampled with the given sample time. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">dt</td><td>The sample time. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true if the contacts are sampled with the given sample time. </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>If the deactivation time of a contact in the list is equal to <code>std::chrono::nanoseconds::max()</code> it will consider it as sampled with the given sample time. </dd></dl>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following files:<ul>
+<li>Contacts/include/BipedalLocomotion/Contacts/<a class="el" href="ContactList_8h.html">ContactList.h</a></li>
+<li>Contacts/src/<a class="el" href="ContactList_8cpp.html">ContactList.cpp</a></li>
+</ul>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- Doxygen custom footer -->
+<div id="nav-path" class="navpath">
+  <ul>
+    <li class="footer">
+      <a href="https://github.com/gbionics/bipedal-locomotion-framework">GitHub</a> &bull;
+      <a href="https://gbionics.ai/">Generative Bionics</a> &bull;
+      Licensed under <a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause "New" or "Revised" License</a> &bull;
+      Generated by <a href="https://www.doxygen.org/index.html">Doxygen</a> 1.9.1
+    </li>
+  </ul>
+</div>
 </body>
 </html>

@@ -1,662 +1,970 @@
-<!DOCTYPE html>
-<html lang="en">
+<!-- HTML header for doxygen 1.9.1 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-  <meta charset="UTF-8" />
-  <title>BipedalLocomotion::IK::QPInverseKinematics class | bipedal locomotion framework master</title>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
-  <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
-  <link rel="icon" href="favicon-dark.png" type="image/png" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#22272e" />
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>bipedal locomotion framework: BipedalLocomotion::IK::QPInverseKinematics Class Reference</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js", "TeX/AMSmath.js", "TeX/AMSsymbols.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+});
+</script>
+<script type="text/javascript" async="async" src="https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only-darkmode-toggle.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="doxygen-awesome-darkmode-toggle.js"></script>
+<script type="text/javascript" src="doxygen-awesome-fragment-copy-button.js"></script>
+<script type="text/javascript" src="doxygen-awesome-interactive-toc.js"></script>
+<script type="text/javascript" src="doxygen-awesome-paragraph-link.js"></script>
+<script type="text/javascript" src="doxygen-awesome-tabs.js"></script>
+<script type="text/javascript">
+    DoxygenAwesomeDarkModeToggle.init()
+    DoxygenAwesomeFragmentCopyButton.init()
+    DoxygenAwesomeInteractiveToc.init()
+    DoxygenAwesomeParagraphLink.init()
+    DoxygenAwesomeTabs.init()
+</script>
 </head>
 <body>
-<header><nav id="navigation">
-  <div class="m-container">
-    <div class="m-row">
-      <span id="m-navbar-brand" class="m-col-t-8 m-col-m-none m-left-m">
-        <a href="./index.html">bipedal locomotion framework</a> <span class="m-breadcrumb">|</span> <a href="index.html" class="m-thin">master</a>
-      </span>
-      <div class="m-col-t-4 m-hide-m m-text-right m-nopadr">
-        <a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
-          <path id="m-doc-search-icon-path" d="m6 0c-3.31 0-6 2.69-6 6 0 3.31 2.69 6 6 6 1.49 0 2.85-0.541 3.89-1.44-0.0164 0.338 0.147 0.759 0.5 1.15l3.22 3.79c0.552 0.614 1.45 0.665 2 0.115 0.55-0.55 0.499-1.45-0.115-2l-3.79-3.22c-0.392-0.353-0.812-0.515-1.15-0.5 0.895-1.05 1.44-2.41 1.44-3.89 0-3.31-2.69-6-6-6zm0 1.56a4.44 4.44 0 0 1 4.44 4.44 4.44 4.44 0 0 1-4.44 4.44 4.44 4.44 0 0 1-4.44-4.44 4.44 4.44 0 0 1 4.44-4.44z"/>
-        </svg></a>
-        <a id="m-navbar-show" href="#navigation" title="Show navigation"></a>
-        <a id="m-navbar-hide" href="#" title="Hide navigation"></a>
-      </div>
-      <div id="m-navbar-collapse" class="m-col-t-12 m-show-m m-col-m-none m-right-m">
-        <div class="m-row">
-          <ol class="m-col-t-6 m-col-m-none">
-            <li><a href="pages.html">Pages</a></li>
-            <li><a href="annotated.html">Classes</a></li>
-            <li><a href="files.html">Files</a></li>
-          </ol>
-          <ol class="m-col-t-6 m-col-m-none" start="4">
-            <li>
-              <a href="pages.html">Versions</a>
-              <ol>
-                <li><a href="./index.html">Master</a></li>
-                <li><a href="./v0.19.0/index.html">v0.19.0</a></li>
-                <li><a href="./v0.21.1/index.html">v0.21.1</a></li>
-                <li><a href="./v0.18.0/index.html">v0.18.0</a></li>
-              </ol>
-            </li>
-            <li>
-              <a href="pages.html">Contacts</a>
-              <ol>
-                <li><a href="https://github.com/ami-iit/bipedal-locomotion-framework">GitHub</a></li>
-                <li><a href="https://www.iit.it/web/ami/">Lab website</a></li>
-              </ol>
-            </li>
-            <li class="m-show-m"><a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
-              <use href="#m-doc-search-icon-path" />
-            </svg></a></li>
-          </ol>
-        </div>
-      </div>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">bipedal locomotion framework
+   </div>
+   <div id="projectbrief">A suite of libraries for achieving bipedal locomotion on humanoid robots</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.9.1 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "search",false,'Search','.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',true,false,'search.php','Search');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
     </div>
   </div>
-</nav></header>
-<main><article>
-  <div class="m-container m-container-inflatable">
-    <div class="m-row">
-      <div class="m-col-l-10 m-push-l-1">
-        <h1>
-          <span class="m-breadcrumb"><a href="namespaceBipedalLocomotion.html">BipedalLocomotion</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespaceBipedalLocomotion_1_1IK.html">IK</a>::<wbr/></span>QPInverseKinematics <span class="m-thin">class</span>
-          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="QPInverseKinematics_8h.html">&lt;BipedalLocomotion/IK/QPInverseKinematics.h&gt;</a></div>
-        </h1>
-        <p><a href="classBipedalLocomotion_1_1IK_1_1QPInverseKinematics.html" class="m-doc">QPInverseKinematics</a> is a concrete class and implements an integration base inverse kinematics.</p>
-        <nav class="m-block m-default">
-          <h3>Contents</h3>
-          <ul>
-            <li><a href="#qp_vc">Velocity Control</a></li>
-            <li><a href="#qp_ik">Inverse Kinematics</a></li>
-            <li>
-              Reference
-              <ul>
-                <li><a href="#base-classes">Base classes</a></li>
-                <li><a href="#derived-classes">Derived classes</a></li>
-                <li><a href="#pub-static-methods">Public static functions</a></li>
-                <li><a href="#typeless-methods">Constructors, destructors, conversion operators</a></li>
-                <li><a href="#pub-methods">Public functions</a></li>
-              </ul>
-            </li>
-          </ul>
-        </nav>
-<p>The inverse kinematics is here implemented as Quadratic Programming (QP) problem. The user should set the desired task with the method <a href="classBipedalLocomotion_1_1IK_1_1QPInverseKinematics.html#a7666e60ae056992a39f56eddd1134d75" class="m-doc">QPInverseKinematics::<wbr />addTask</a>. Each task has a given priority. Currently we support only priority equal to 0 or 1. If the task priority is set to 0 the task will be considered as hard task, thus treated as an equality constraint. If the priority is equal to 1 the task will be embedded in the cost function. The class is also able to treat inequality constraints. A possible usage of the IK can be found in &quot;Romualdi et al. A Benchmarking of DCM Based
-Architectures for Position and Velocity Controlled Walking of Humanoid Robots&quot; <a href="https://doi.org/10.1109/HUMANOIDS.2018.8625025">https:/<wbr />/<wbr />doi.org/<wbr />10.1109/<wbr />HUMANOIDS.2018.8625025</a> Here you can find an example of the <a href="classBipedalLocomotion_1_1IK_1_1QPInverseKinematics.html" class="m-doc">QPInverseKinematics</a> class used as velocity controller or IK</p><section id="qp_vc"><h3><a href="#qp_vc">Velocity Control</a></h3><p>Here you can find an example of the <a href="classBipedalLocomotion_1_1IK_1_1QPFixedBaseInverseKinematics.html" class="m-doc">QPFixedBaseInverseKinematics</a> interface used as a velocity controller.<br /></p><img class="m-image" src="https://user-images.githubusercontent.com/16744101/142453785-9e6f2b5e-dc82-417a-a5e3-bc8c61865d0b.png" alt="Image" /></section><section id="qp_ik"><h3><a href="#qp_ik">Inverse Kinematics</a></h3><p>If you want to use <a href="classBipedalLocomotion_1_1IK_1_1QPInverseKinematics.html" class="m-doc">QPInverseKinematics</a> as IK you need to integrate the output velocity. System::FloatingBaseSystemVelocityKinematics and System::Integrator classes can be used to integrate the output of the IK taking into account the geometrical structure of the configuration space ( <svg class="m-math" style="width: 9.217em; height: 1.298em; vertical-align: -0.312em;" viewBox="0 -9.474739 88.487002 12.463531">
-<title>
-$ \mathbb{R}^3 \times SO(3) \times \mathbb{R}^n$
-</title>
-<defs>
-<path id='eq1-g3-79' d='M8.679452-5.236364C8.679452-7.208966 7.388294-8.416438 5.71457-8.416438C3.156164-8.416438 .573848-5.66675 .573848-2.905106C.573848-1.028144 1.817186 .251059 3.550685 .251059C6.06127 .251059 8.679452-2.367123 8.679452-5.236364ZM3.622416-.02391C2.642092-.02391 1.601993-.74122 1.601993-2.606227C1.601993-3.694147 1.996513-5.475467 2.976837-6.670984C3.849564-7.723039 4.853798-8.153425 5.654795-8.153425C6.706849-8.153425 7.723039-7.388294 7.723039-5.66675C7.723039-4.60274 7.268742-2.940971 6.467746-1.80523C5.595019-.585803 4.507098-.02391 3.622416-.02391Z'/>
-<path id='eq1-g3-83' d='M7.591532-8.308842C7.591532-8.416438 7.507846-8.416438 7.483935-8.416438C7.436115-8.416438 7.424159-8.404483 7.280697-8.225156C7.208966-8.141469 6.718804-7.519801 6.706849-7.507846C6.312329-8.284932 5.523288-8.416438 5.021171-8.416438C3.502864-8.416438 2.12802-7.029639 2.12802-5.678705C2.12802-4.782067 2.666002-4.25604 3.251806-4.052802C3.383313-4.004981 4.088667-3.813699 4.447323-3.730012C5.057036-3.56264 5.212453-3.514819 5.463512-3.251806C5.511333-3.19203 5.750436-2.917061 5.750436-2.355168C5.750436-1.243337 4.722291-.095641 3.526775-.095641C2.546451-.095641 1.458531-.514072 1.458531-1.853051C1.458531-2.080199 1.506351-2.367123 1.542217-2.486675C1.542217-2.52254 1.554172-2.582316 1.554172-2.606227C1.554172-2.654047 1.530262-2.713823 1.43462-2.713823C1.327024-2.713823 1.315068-2.689913 1.267248-2.486675L.657534-.035866C.657534-.02391 .609714 .131507 .609714 .143462C.609714 .251059 .705355 .251059 .729265 .251059C.777086 .251059 .789041 .239103 .932503 .059776L1.482441-.657534C1.769365-.227148 2.391034 .251059 3.502864 .251059C5.045081 .251059 6.455791-1.243337 6.455791-2.737733C6.455791-3.239851 6.336239-3.682192 5.881943-4.124533C5.630884-4.375592 5.415691-4.435367 4.315816-4.722291C3.514819-4.937484 3.407223-4.97335 3.19203-5.164633C2.988792-5.36787 2.833375-5.654795 2.833375-6.06127C2.833375-7.065504 3.849564-8.093649 4.985305-8.093649C6.156912-8.093649 6.706849-7.376339 6.706849-6.240598C6.706849-5.929763 6.647073-5.606974 6.647073-5.559153C6.647073-5.451557 6.742715-5.451557 6.77858-5.451557C6.886177-5.451557 6.898132-5.487422 6.945953-5.678705L7.591532-8.308842Z'/>
-<path id='eq1-g2-110' d='M1.594022-1.307098C1.617933-1.42665 1.697634-1.729514 1.721544-1.849066C1.833126-2.279452 1.833126-2.287422 2.016438-2.550436C2.279452-2.940971 2.654047-3.291656 3.188045-3.291656C3.474969-3.291656 3.642341-3.124284 3.642341-2.749689C3.642341-2.311333 3.307597-1.40274 3.156164-1.012204C3.052553-.749191 3.052553-.70137 3.052553-.597758C3.052553-.143462 3.427148 .079701 3.769863 .079701C4.550934 .079701 4.877709-1.036115 4.877709-1.139726C4.877709-1.219427 4.813948-1.243337 4.758157-1.243337C4.662516-1.243337 4.646575-1.187547 4.622665-1.107846C4.431382-.454296 4.096638-.143462 3.793773-.143462C3.666252-.143462 3.602491-.223163 3.602491-.406476S3.666252-.765131 3.745953-.964384C3.865504-1.267248 4.216189-2.183811 4.216189-2.630137C4.216189-3.227895 3.801743-3.514819 3.227895-3.514819C2.582316-3.514819 2.16787-3.124284 1.936737-2.82142C1.880946-3.259776 1.530262-3.514819 1.123786-3.514819C.836862-3.514819 .637609-3.331507 .510087-3.084433C.318804-2.709838 .239103-2.311333 .239103-2.295392C.239103-2.223661 .294894-2.191781 .358655-2.191781C.462267-2.191781 .470237-2.223661 .526027-2.430884C.621669-2.82142 .765131-3.291656 1.099875-3.291656C1.307098-3.291656 1.354919-3.092403 1.354919-2.917061C1.354919-2.773599 1.315068-2.622167 1.251308-2.359153C1.235367-2.295392 1.115816-1.825156 1.083935-1.713574L.789041-.518057C.757161-.398506 .70934-.199253 .70934-.167372C.70934 .01594 .860772 .079701 .964384 .079701C1.107846 .079701 1.227397-.01594 1.283188-.111582C1.307098-.159402 1.370859-.430386 1.41071-.597758L1.594022-1.307098Z'/>
-<path id='eq1-g1-2' d='M4.65056-3.323537L2.259527-5.702615C2.116065-5.846077 2.092154-5.869988 1.996513-5.869988C1.876961-5.869988 1.75741-5.762391 1.75741-5.630884C1.75741-5.547198 1.78132-5.523288 1.912827-5.391781L4.303861-2.988792L1.912827-.585803C1.78132-.454296 1.75741-.430386 1.75741-.3467C1.75741-.215193 1.876961-.107597 1.996513-.107597C2.092154-.107597 2.116065-.131507 2.259527-.274969L4.638605-2.654047L7.113325-.179328C7.137235-.167372 7.220922-.107597 7.292653-.107597C7.436115-.107597 7.531756-.215193 7.531756-.3467C7.531756-.37061 7.531756-.418431 7.49589-.478207C7.483935-.502117 5.583064-2.379078 4.985305-2.988792L7.173101-5.176588C7.232877-5.248319 7.412204-5.403736 7.47198-5.475467C7.483935-5.499377 7.531756-5.547198 7.531756-5.630884C7.531756-5.762391 7.436115-5.869988 7.292653-5.869988C7.197011-5.869988 7.149191-5.822167 7.017684-5.69066L4.65056-3.323537Z'/>
-<path id='eq1-g4-51' d='M2.016438-2.662017C2.646077-2.662017 3.044583-2.199751 3.044583-1.362889C3.044583-.366625 2.478705-.071731 2.056289-.071731C1.617933-.071731 1.020174-.231133 .74122-.653549C1.028144-.653549 1.227397-.836862 1.227397-1.099875C1.227397-1.354919 1.044085-1.538232 .789041-1.538232C.573848-1.538232 .350685-1.40274 .350685-1.083935C.350685-.326775 1.163636 .167372 2.072229 .167372C3.132254 .167372 3.873474-.565878 3.873474-1.362889C3.873474-2.024408 3.347447-2.630137 2.534496-2.805479C3.164134-3.028643 3.634371-3.57061 3.634371-4.208219S2.917061-5.300125 2.088169-5.300125C1.235367-5.300125 .589788-4.837858 .589788-4.23213C.589788-3.937235 .789041-3.809714 .996264-3.809714C1.243337-3.809714 1.40274-3.985056 1.40274-4.216189C1.40274-4.511083 1.147696-4.622665 .972354-4.630635C1.307098-5.068991 1.920797-5.092902 2.064259-5.092902C2.271482-5.092902 2.87721-5.029141 2.87721-4.208219C2.87721-3.650311 2.646077-3.315567 2.534496-3.188045C2.295392-2.940971 2.11208-2.925031 1.625903-2.893151C1.474471-2.885181 1.41071-2.87721 1.41071-2.773599C1.41071-2.662017 1.482441-2.662017 1.617933-2.662017H2.016438Z'/>
-<path id='eq1-g5-40' d='M3.88543 2.905106C3.88543 2.86924 3.88543 2.84533 3.682192 2.642092C2.486675 1.43462 1.817186-.537983 1.817186-2.976837C1.817186-5.296139 2.379078-7.292653 3.765878-8.703362C3.88543-8.810959 3.88543-8.834869 3.88543-8.870735C3.88543-8.942466 3.825654-8.966376 3.777833-8.966376C3.622416-8.966376 2.642092-8.105604 2.056289-6.933998C1.446575-5.726526 1.171606-4.447323 1.171606-2.976837C1.171606-1.912827 1.338979-.490162 1.960648 .789041C2.666002 2.223661 3.646326 3.000747 3.777833 3.000747C3.825654 3.000747 3.88543 2.976837 3.88543 2.905106Z'/>
-<path id='eq1-g5-41' d='M3.371357-2.976837C3.371357-3.88543 3.251806-5.36787 2.582316-6.75467C1.876961-8.18929 .896638-8.966376 .765131-8.966376C.71731-8.966376 .657534-8.942466 .657534-8.870735C.657534-8.834869 .657534-8.810959 .860772-8.607721C2.056289-7.400249 2.725778-5.427646 2.725778-2.988792C2.725778-.669489 2.163885 1.327024 .777086 2.737733C.657534 2.84533 .657534 2.86924 .657534 2.905106C.657534 2.976837 .71731 3.000747 .765131 3.000747C.920548 3.000747 1.900872 2.139975 2.486675 .968369C3.096389-.251059 3.371357-1.542217 3.371357-2.976837Z'/>
-<path id='eq1-g5-51' d='M2.199751-4.291905C1.996513-4.27995 1.948692-4.267995 1.948692-4.160399C1.948692-4.040847 2.008468-4.040847 2.223661-4.040847H2.773599C3.789788-4.040847 4.244085-3.203985 4.244085-2.056289C4.244085-.490162 3.431133-.071731 2.84533-.071731C2.271482-.071731 1.291158-.3467 .944458-1.135741C1.327024-1.075965 1.673724-1.291158 1.673724-1.721544C1.673724-2.068244 1.422665-2.307347 1.08792-2.307347C.800996-2.307347 .490162-2.139975 .490162-1.685679C.490162-.621669 1.554172 .251059 2.881196 .251059C4.303861 .251059 5.355915-.836862 5.355915-2.044334C5.355915-3.144209 4.471233-4.004981 3.323537-4.208219C4.363636-4.507098 5.033126-5.379826 5.033126-6.312329C5.033126-7.256787 4.052802-7.950187 2.893151-7.950187C1.697634-7.950187 .812951-7.220922 .812951-6.348194C.812951-5.869988 1.183562-5.774346 1.362889-5.774346C1.613948-5.774346 1.900872-5.953674 1.900872-6.312329C1.900872-6.694894 1.613948-6.862267 1.350934-6.862267C1.279203-6.862267 1.255293-6.862267 1.219427-6.850311C1.673724-7.663263 2.797509-7.663263 2.857285-7.663263C3.251806-7.663263 4.028892-7.483935 4.028892-6.312329C4.028892-6.085181 3.993026-5.415691 3.646326-4.901619C3.287671-4.375592 2.881196-4.339726 2.558406-4.327771L2.199751-4.291905Z'/>
-<path id='eq1-g0-82' d='M3.203985-3.753923H3.634371L5.427646-.980324C5.547198-.789041 5.834122-.32279 5.965629-.143462C6.049315 0 6.085181 0 6.360149 0H8.009963C8.225156 0 8.404483 0 8.404483-.215193C8.404483-.310834 8.332752-.394521 8.225156-.418431C7.782814-.514072 7.197011-1.303113 6.910087-1.685679C6.826401-1.80523 6.228643-2.594271 5.427646-3.88543C6.491656-4.076712 7.519801-4.531009 7.519801-5.953674C7.519801-7.615442 5.762391-8.18929 4.351681-8.18929H.597758C.382565-8.18929 .191283-8.18929 .191283-7.974097C.191283-7.770859 .418431-7.770859 .514072-7.770859C1.195517-7.770859 1.255293-7.687173 1.255293-7.089415V-1.099875C1.255293-.502117 1.195517-.418431 .514072-.418431C.418431-.418431 .191283-.418431 .191283-.215193C.191283 0 .382565 0 .597758 0H3.873474C4.088667 0 4.267995 0 4.267995-.215193C4.267995-.418431 4.064757-.418431 3.93325-.418431C3.251806-.418431 3.203985-.514072 3.203985-1.099875V-3.753923ZM5.511333-4.339726C5.846077-4.782067 5.881943-5.415691 5.881943-5.941719C5.881943-6.515567 5.810212-7.149191 5.427646-7.639352C5.917808-7.531756 7.10137-7.161146 7.10137-5.953674C7.10137-5.176588 6.742715-4.566874 5.511333-4.339726ZM3.203985-7.12528C3.203985-7.376339 3.203985-7.770859 3.945205-7.770859C4.961395-7.770859 5.463512-7.352428 5.463512-5.941719C5.463512-4.399502 5.092902-4.172354 3.203985-4.172354V-7.12528ZM1.578082-.418431C1.673724-.633624 1.673724-.968369 1.673724-1.075965V-7.113325C1.673724-7.232877 1.673724-7.555666 1.578082-7.770859H2.940971C2.785554-7.579577 2.785554-7.340473 2.785554-7.161146V-1.075965C2.785554-.956413 2.785554-.633624 2.881196-.418431H1.578082ZM4.124533-3.753923C4.208219-3.765878 4.25604-3.777833 4.351681-3.777833C4.531009-3.777833 4.794022-3.801743 4.97335-3.825654C5.152677-3.53873 6.443836-1.41071 7.436115-.418431H6.276463L4.124533-3.753923Z'/>
-</defs>
-<g id='eq1-page1'>
-<use x='0' y='0' xlink:href='#eq1-g0-82'/>
-<use x='8.634312' y='-4.338437' xlink:href='#eq1-g4-51'/>
-<use x='16.02329' y='0' xlink:href='#eq1-g1-2'/>
-<use x='27.978451' y='0' xlink:href='#eq1-g3-83'/>
-<use x='35.873774' y='0' xlink:href='#eq1-g3-79'/>
-<use x='45.145022' y='0' xlink:href='#eq1-g5-40'/>
-<use x='49.697348' y='0' xlink:href='#eq1-g5-51'/>
-<use x='55.550338' y='0' xlink:href='#eq1-g5-41'/>
-<use x='62.759327' y='0' xlink:href='#eq1-g1-2'/>
-<use x='74.714488' y='0' xlink:href='#eq1-g0-82'/>
-<use x='83.3488' y='-4.338437' xlink:href='#eq1-g2-110'/>
-</g>
-</svg>)<br /></p><img class="m-image" src="https://user-images.githubusercontent.com/16744101/142453860-6bba2a7a-26af-48da-b04e-114314c6f67c.png" alt="Image" /></section>
-        <section id="base-classes">
-          <h2><a href="#base-classes">Base classes</a></h2>
-          <dl class="m-doc">
-            <dt>
-              class <a href="classBipedalLocomotion_1_1IK_1_1IntegrationBasedIK.html" class="m-doc">IntegrationBasedIK</a>
-            </dt>
-            <dd><a href="classBipedalLocomotion_1_1IK_1_1IntegrationBasedIK.html" class="m-doc">IntegrationBasedIK</a> implements the interface for the integration base inverse kinematics.</dd>
-          </dl>
-        </section>
-        <section id="derived-classes">
-          <h2><a href="#derived-classes">Derived classes</a></h2>
-          <dl class="m-doc">
-            <dt>
-              class <a href="classBipedalLocomotion_1_1IK_1_1QPFixedBaseInverseKinematics.html" class="m-doc">QPFixedBaseInverseKinematics</a>
-            </dt>
-            <dd><a href="classBipedalLocomotion_1_1IK_1_1QPFixedBaseInverseKinematics.html" class="m-doc">QPFixedBaseInverseKinematics</a> is specialization of <a href="classBipedalLocomotion_1_1IK_1_1QPInverseKinematics.html" class="m-doc">QPInverseKinematics</a> class in the case of fixed base system.</dd>
-          </dl>
-        </section>
-        <section id="pub-static-methods">
-          <h2><a href="#pub-static-methods">Public static functions</a></h2>
-          <dl class="m-doc">
-            <dt>
-              <span class="m-doc-wrap-bumper">static auto <a href="#a7583c2fe82491dd339c3ad02a0b95d87" class="m-doc">build</a>(</span><span class="m-doc-wrap">std::weak_ptr&lt;const <a href="classBipedalLocomotion_1_1ParametersHandler_1_1IParametersHandler.html" class="m-doc">ParametersHandler::<wbr />IParametersHandler</a>&gt; handler,
-              std::shared_ptr&lt;iDynTree::KinDynComputations&gt; kinDyn) -&gt; <a href="structBipedalLocomotion_1_1IK_1_1IntegrationBasedIKProblem.html" class="m-doc">IntegrationBasedIKProblem</a></span>
-            </dt>
-            <dd>Build the inverse kinematics solver.</dd>
-          </dl>
-        </section>
-        <section id="typeless-methods">
-          <h2><a href="#typeless-methods">Constructors, destructors, conversion operators</a></h2>
-          <dl class="m-doc">
-            <dt id="a5e8f8d2855c94ef0539815664b65a0fb">
-              <span class="m-doc-wrap-bumper"><a href="#a5e8f8d2855c94ef0539815664b65a0fb" class="m-doc-self">QPInverseKinematics</a>(</span><span class="m-doc-wrap">)</span>
-            </dt>
-            <dd>Constructor.</dd>
-            <dt id="ab66c09c2e12b3496f357018d0818e831">
-              <span class="m-doc-wrap-bumper"><a href="#ab66c09c2e12b3496f357018d0818e831" class="m-doc-self">~QPInverseKinematics</a>(</span><span class="m-doc-wrap">) <span class="m-label m-flat m-warning">virtual</span></span>
-            </dt>
-            <dd>Destructor.</dd>
-          </dl>
-        </section>
-        <section id="pub-methods">
-          <h2><a href="#pub-methods">Public functions</a></h2>
-          <dl class="m-doc">
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a7666e60ae056992a39f56eddd1134d75" class="m-doc">addTask</a>(</span><span class="m-doc-wrap">std::shared_ptr&lt;Task&gt; task,
-              const std::string&amp; taskName,
-              std::size_t priority,
-              std::shared_ptr&lt;const <a href="ILinearTaskSolver_8h.html#aa0b9c4f50fc80885f1a6401dba73ad50" class="m-doc">System::<wbr />WeightProviderPort</a>&gt; weightProvider = nullptr) -&gt; bool <span class="m-label m-flat m-warning">override</span></span>
-            </dt>
-            <dd>Add a linear task in the solver.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a2b0c765e65eb6875342f438560c99e6c" class="m-doc">addTask</a>(</span><span class="m-doc-wrap">std::shared_ptr&lt;Task&gt; task,
-              const std::string&amp; taskName,
-              std::size_t priority,
-              Eigen::Ref&lt;const Eigen::VectorXd&gt; weight) -&gt; bool <span class="m-label m-flat m-warning">override</span></span>
-            </dt>
-            <dd>Add a linear task in the solver.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a8357aa4b53db64ac10d9065f98203320" class="m-doc">setTaskWeight</a>(</span><span class="m-doc-wrap">const std::string&amp; taskName,
-              std::shared_ptr&lt;const <a href="ILinearTaskSolver_8h.html#aa0b9c4f50fc80885f1a6401dba73ad50" class="m-doc">System::<wbr />WeightProviderPort</a>&gt; weightProvider) -&gt; bool <span class="m-label m-flat m-warning">override</span></span>
-            </dt>
-            <dd>Set the weightProvider associated to an already existing task.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a418b0e0b18f2f99ca55b88829e031898" class="m-doc">setTaskWeight</a>(</span><span class="m-doc-wrap">const std::string&amp; taskName,
-              Eigen::Ref&lt;const Eigen::VectorXd&gt; weight) -&gt; bool <span class="m-label m-flat m-warning">override</span></span>
-            </dt>
-            <dd>Set the weight associated to an already existing task.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a93ccdd021104e971a0741897124dd943" class="m-doc">getTaskWeightProvider</a>(</span><span class="m-doc-wrap">const std::string&amp; taskName) const -&gt; std::weak_ptr&lt;const <a href="ILinearTaskSolver_8h.html#aa0b9c4f50fc80885f1a6401dba73ad50" class="m-doc">System::<wbr />WeightProviderPort</a>&gt; <span class="m-label m-flat m-warning">override</span></span>
-            </dt>
-            <dd>Get the weightProvider associated to an already existing task.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a345b7b00600b13be14c74bdb007c5362" class="m-doc">finalize</a>(</span><span class="m-doc-wrap">const <a href="classBipedalLocomotion_1_1System_1_1VariablesHandler.html" class="m-doc">System::<wbr />VariablesHandler</a>&amp; handler) -&gt; bool <span class="m-label m-flat m-warning">override</span></span>
-            </dt>
-            <dd>Finalize the IK.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a6e3605df43a7cb6f01807e9cffec0b6c" class="m-doc">initialize</a>(</span><span class="m-doc-wrap">std::weak_ptr&lt;const <a href="classBipedalLocomotion_1_1ParametersHandler_1_1IParametersHandler.html" class="m-doc">ParametersHandler::<wbr />IParametersHandler</a>&gt; handler) -&gt; bool <span class="m-label m-flat m-warning">override</span></span>
-            </dt>
-            <dd>Initialize the inverse kinematics algorithm.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#aea4524325aeaa138f0953b5bbf56e5b6" class="m-doc">getTaskNames</a>(</span><span class="m-doc-wrap">) const -&gt; std::vector&lt;std::string&gt; <span class="m-label m-flat m-warning">override</span></span>
-            </dt>
-            <dd>Get a vector containing the name of the tasks.</dd>
-            <dt id="a82818a7d4b208780d7ae1fb03b7bb38a">
-              <span class="m-doc-wrap-bumper">auto <a href="#a82818a7d4b208780d7ae1fb03b7bb38a" class="m-doc-self">isOutputValid</a>(</span><span class="m-doc-wrap">) const -&gt; bool <span class="m-label m-flat m-warning">override</span></span>
-            </dt>
-            <dd>Return true if the content of get is valid.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a7e89856750429fa6bc97d34845a1f153" class="m-doc">advance</a>(</span><span class="m-doc-wrap">) -&gt; bool <span class="m-label m-flat m-warning">override</span></span>
-            </dt>
-            <dd>Solve the inverse kinematics.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#ac3382473c18f86c151e40e567b048b68" class="m-doc">getOutput</a>(</span><span class="m-doc-wrap">) const -&gt; const State&amp; <span class="m-label m-flat m-warning">override</span></span>
-            </dt>
-            <dd>Get the outcome of the optimization problem.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a7fd5fd750763109e53b5369fd5517e86" class="m-doc">getTask</a>(</span><span class="m-doc-wrap">const std::string&amp; name) const -&gt; std::weak_ptr&lt;Task&gt; <span class="m-label m-flat m-warning">override</span></span>
-            </dt>
-            <dd>Get a specific task.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a516929da79680d1df8fe34d85dac5c3b" class="m-doc">toString</a>(</span><span class="m-doc-wrap">) const -&gt; std::string <span class="m-label m-flat m-warning">override</span></span>
-            </dt>
-            <dd>Return the description of the InverseKinematics problem.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a0db3848338591bfe39376b7c4d7aefb9" class="m-doc">getRawSolution</a>(</span><span class="m-doc-wrap">) const -&gt; Eigen::Ref&lt;const Eigen::VectorXd&gt; <span class="m-label m-flat m-warning">override</span></span>
-            </dt>
-            <dd>Return the vector representing the entire solution of the <a href="classBipedalLocomotion_1_1IK_1_1QPInverseKinematics.html" class="m-doc">QPInverseKinematics</a>.</dd>
-          </dl>
-        </section>
-        <section>
-          <h2>Function documentation</h2>
-          <section class="m-doc-details" id="a7583c2fe82491dd339c3ad02a0b95d87"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">static <a href="structBipedalLocomotion_1_1IK_1_1IntegrationBasedIKProblem.html" class="m-doc">IntegrationBasedIKProblem</a> BipedalLocomotion::<wbr />IK::<wbr />QPInverseKinematics::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a7583c2fe82491dd339c3ad02a0b95d87" class="m-doc-self">build</a>(</span><span class="m-doc-wrap">std::weak_ptr&lt;const <a href="classBipedalLocomotion_1_1ParametersHandler_1_1IParametersHandler.html" class="m-doc">ParametersHandler::<wbr />IParametersHandler</a>&gt; handler,
-              std::shared_ptr&lt;iDynTree::KinDynComputations&gt; kinDyn)</span></span>
-            </h3>
-            <p>Build the inverse kinematics solver.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">handler</td>
-                  <td>pointer to the IParametersHandler interface.</td>
-                </tr>
-                <tr>
-                  <td>kinDyn</td>
-                  <td>a pointer to an iDynTree::KinDynComputations object that will be shared among all the tasks.</td>
-                </tr>
-              </tbody>
-              <tfoot>
-                <tr>
-                  <th>Returns</th>
-                  <td>an <a href="structBipedalLocomotion_1_1IK_1_1IntegrationBasedIKProblem.html" class="m-doc">IntegrationBasedIKProblem</a>. In case of issues an invalid <a href="structBipedalLocomotion_1_1IK_1_1IntegrationBasedIKProblem.html" class="m-doc">IntegrationBasedIKProblem</a> will be returned.</td>
-                </tr>
-              </tfoot>
-            </table>
-<aside class="m-note m-info"><h4>Note</h4><p>the following parameters are required by the class</p><table class="m-table"><thead><tr><th>Group</th><th>Parameter Name</th><th>Type</th><th>Description</th><th>Mandatory</th></tr></thead><tbody><tr><td></td><td><code>tasks</code></td><td><code>vector&lt;string&gt;</code></td><td>Vector containing the list of the tasks considered in the IK.</td><td>Yes</td></tr><tr><td><code>IK</code></td><td><code>robot_velocity_variable_name</code></td><td><code>string</code></td><td>Name of the variable contained in <code>VariablesHandler</code> describing the generalized robot velocity</td><td>Yes</td></tr><tr><td><code>IK</code></td><td><code>verbosity</code></td><td><code>bool</code></td><td>Verbosity of the solver. Default value <code>false</code></td><td>No</td></tr></tbody></table><p>Where the generalized robot velocity is a vector containing the base spatialvelocity (expressed in mixed representation) and the joint velocities. For <strong>each</strong> task listed in the parameter <code>tasks</code> the user must specify all the parameters required by the task itself but <code>robot_velocity_variable_name</code> since is already specified in the <code>IK</code> group. Moreover the following parameters are required for each task.</p><table class="m-table"><thead><tr><th>Group</th><th>Parameter Name</th><th>Type</th><th>Description</th><th>Mandatory</th></tr></thead><tbody><tr><td><code>TASK_NAME</code></td><td><code>type</code></td><td><code>string</code></td><td>String representing the type of the task. The string should match the name of the C++ class.</td><td>Yes</td></tr><tr><td><code>TASK_NAME</code></td><td><code>priority</code></td><td><code>int</code></td><td>Priority associated to the task. (Check <a href="classBipedalLocomotion_1_1IK_1_1QPInverseKinematics.html#a7666e60ae056992a39f56eddd1134d75" class="m-doc">QPInverseKinematics::<wbr />addTask</a> for further information)</td><td>Yes</td></tr><tr><td><code>TASK_NAME</code></td><td><code>weight_provider_type</code></td><td><code>string</code></td><td>String representing the type of the weight provider. The string should match the name of the C++ class. It is required only if the task is low priority. The default value in case of low priority task (<code>priority = 1</code>) is <code>ConstantWeightProvider</code></td><td>No</td></tr></tbody></table><p>Given the weight type specified by <code>weight_provider_type</code>, the user must specify all the parameters required by the provider in the <code>TASK_NAME</code> group handler <code>TASK_NAME</code> is a placeholder for the name of the task contained in the <code>tasks</code> list.</p><p>The following <code>ini</code> file presents an example of the configuration that can be used to build the IK</p><pre class="m-code"><span class="na">tasks                           (&quot;COM_TASK&quot;, &quot;RIGHT_FOOT_TASK&quot;, &quot;LEFT_FOOT_TASK&quot;, &quot;TORSO_TASK&quot;, &quot;JOINT_REGULARIZATION_TASK&quot;)</span>
-
-<span class="k">[IK]</span>
-<span class="na">robot_velocity_variable_name    robot_velocity</span>
-
-<span class="k">[COM_TASK]</span>
-<span class="na">type                            CoMTask</span>
-<span class="na">kp_linear                       2.0</span>
-<span class="na">mask                            (true, true, true)</span>
-<span class="na">priority                        0</span>
-
-<span class="k">[RIGHT_FOOT_TASK]</span>
-<span class="na">type                            SE3Task</span>
-<span class="na">frame_name                      r_sole</span>
-<span class="na">kp_linear                       7.0</span>
-<span class="na">kp_angular                      5.0</span>
-<span class="na">priority                        0</span>
-
-<span class="k">[LEFT_FOOT_TASK]</span>
-<span class="na">type                            SE3Task</span>
-<span class="na">frame_name                      l_sole</span>
-<span class="na">kp_linear                       7.0</span>
-<span class="na">kp_angular                      5.0</span>
-<span class="na">priority                        0</span>
-
-
-<span class="k">[JOINT_REGULARIZATION_TASK]</span>
-<span class="na">type                            JointTrackingTask</span>
-<span class="na">kp                              (5.0, 5.0, 5.0,</span>
-<span class="w">                                 </span><span class="na">5.0, 5.0, 5.0, 5.0,</span>
-<span class="w">                                 </span><span class="na">5.0, 5.0, 5.0, 5.0,</span>
-<span class="w">                                 </span><span class="na">5.0, 5.0, 5.0, 5.0, 5.0, 5.0,</span>
-<span class="w">                                 </span><span class="na">5.0, 5.0, 5.0, 5.0, 5.0, 5.0)</span>
-<span class="na">priority                        1</span>
-<span class="na">weight_provider_type            ConstantWeightProvider</span>
-<span class="na">weight                          (1.0, 1.0, 1.0,</span>
-<span class="w">                                 </span><span class="na">2.0, 2.0, 2.0, 2.0,</span>
-<span class="w">                                 </span><span class="na">2.0, 2.0, 2.0, 2.0,</span>
-<span class="w">                                 </span><span class="na">1.0, 1.0, 1.0, 1.0, 1.0, 1.0,</span>
-<span class="w">                                 </span><span class="na">1.0, 1.0, 1.0, 1.0, 1.0, 1.0)</span>
-
-<span class="k">[include TORSO_TASK &quot;./tasks/torso.ini&quot;]</span></pre><p>Where the file <code>./tasks/torso.ini</code> contains the definition of a low priority task whose weight is a <a href="classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1MultiStateWeightProvider.html" class="m-doc">BipedalLocomotion::<wbr />ContinuousDynamicalSystem::<wbr />MultiStateWeightProvider</a>. Since <code>MultiStateWeightProvider</code> requires the definition of subgroups, an additional file is suggested as explained in: <a href="https://github.com/robotology/yarp/discussions/2563">https:/<wbr />/<wbr />github.com/<wbr />robotology/<wbr />yarp/<wbr />discussions/<wbr />2563</a></p><pre class="m-code"><span class="na">type                            SO3Task</span>
-<span class="na">frame_name                      chest</span>
-<span class="na">kp_angular                      5.0</span>
-
-<span class="na">weight_provider_type            MultiStateWeightProvider</span>
-
-<span class="na">states                          (&quot;STANCE&quot;, &quot;WALKING&quot;)</span>
-<span class="na">sampling_time                   0.01</span>
-<span class="na">settling_time                   3.0</span>
-
-<span class="k">[STANCE]</span>
-<span class="na">name                            stance</span>
-<span class="na">weight                          (0.1, 0.1, 0.1)</span>
-
-<span class="k">[WALKING]</span>
-<span class="na">name                            walking</span>
-<span class="na">weight                          (5.0, 5.0, 5.0)</span></pre></aside>
-          </div></section>
-          <section class="m-doc-details" id="a7666e60ae056992a39f56eddd1134d75"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">bool BipedalLocomotion::<wbr />IK::<wbr />QPInverseKinematics::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a7666e60ae056992a39f56eddd1134d75" class="m-doc-self">addTask</a>(</span><span class="m-doc-wrap">std::shared_ptr&lt;Task&gt; task,
-              const std::string&amp; taskName,
-              std::size_t priority,
-              std::shared_ptr&lt;const <a href="ILinearTaskSolver_8h.html#aa0b9c4f50fc80885f1a6401dba73ad50" class="m-doc">System::<wbr />WeightProviderPort</a>&gt; weightProvider = nullptr) <span class="m-label m-warning">override</span></span></span>
-            </h3>
-            <p>Add a linear task in the solver.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">task</td>
-                  <td>pointer to a given linear task</td>
-                </tr>
-                <tr>
-                  <td>taskName</td>
-                  <td>unique name associated to the task.</td>
-                </tr>
-                <tr>
-                  <td>priority</td>
-                  <td>Priority associated to the task. The lower the number the higher the priority.</td>
-                </tr>
-                <tr>
-                  <td>weightProvider</td>
-                  <td>Weight provider associated to the task. This parameter is optional. The default value is an object that does not contain any value. The user may avoid to pass a provider only if the priority of the task is equal to 0.</td>
-                </tr>
-              </tbody>
-              <tfoot>
-                <tr>
-                  <th>Returns</th>
-                  <td>true if the task has been added to the solver.</td>
-                </tr>
-              </tfoot>
-            </table>
-<aside class="m-note m-danger"><h4>Warning</h4><p>The QPTSID cannot handle inequality tasks (please check Task::Type) with priority equal to 1.</p><p>The QPTSID can handle only priority equal to 0 and 1. 0 means high priority while 1 low priority.</p></aside>
-          </div></section>
-          <section class="m-doc-details" id="a2b0c765e65eb6875342f438560c99e6c"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">bool BipedalLocomotion::<wbr />IK::<wbr />QPInverseKinematics::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a2b0c765e65eb6875342f438560c99e6c" class="m-doc-self">addTask</a>(</span><span class="m-doc-wrap">std::shared_ptr&lt;Task&gt; task,
-              const std::string&amp; taskName,
-              std::size_t priority,
-              Eigen::Ref&lt;const Eigen::VectorXd&gt; weight) <span class="m-label m-warning">override</span></span></span>
-            </h3>
-            <p>Add a linear task in the solver.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">task</td>
-                  <td>pointer to a given linear task</td>
-                </tr>
-                <tr>
-                  <td>taskName</td>
-                  <td>unique name associated to the task.</td>
-                </tr>
-                <tr>
-                  <td>priority</td>
-                  <td>Priority associated to the task. The lower the number the higher the priority.</td>
-                </tr>
-                <tr>
-                  <td>weight</td>
-                  <td>Weight associated to the task.</td>
-                </tr>
-              </tbody>
-              <tfoot>
-                <tr>
-                  <th>Returns</th>
-                  <td>true if the task has been added to the solver.</td>
-                </tr>
-              </tfoot>
-            </table>
-<aside class="m-note m-info"><h4>Note</h4><p>The solver assumes the weight is a constant value.</p></aside><aside class="m-note m-danger"><h4>Warning</h4><p>The <a href="classBipedalLocomotion_1_1IK_1_1QPInverseKinematics.html" class="m-doc">QPInverseKinematics</a> cannot handle inequality tasks (please check Task::Type) with priority equal to 1.</p></aside>
-          </div></section>
-          <section class="m-doc-details" id="a8357aa4b53db64ac10d9065f98203320"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">bool BipedalLocomotion::<wbr />IK::<wbr />QPInverseKinematics::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a8357aa4b53db64ac10d9065f98203320" class="m-doc-self">setTaskWeight</a>(</span><span class="m-doc-wrap">const std::string&amp; taskName,
-              std::shared_ptr&lt;const <a href="ILinearTaskSolver_8h.html#aa0b9c4f50fc80885f1a6401dba73ad50" class="m-doc">System::<wbr />WeightProviderPort</a>&gt; weightProvider) <span class="m-label m-warning">override</span></span></span>
-            </h3>
-            <p>Set the weightProvider associated to an already existing task.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">taskName</td>
-                  <td>name associated to the task</td>
-                </tr>
-                <tr>
-                  <td>weightProvider</td>
-                  <td>new weight provider associated to the task.</td>
-                </tr>
-              </tbody>
-              <tfoot>
-                <tr>
-                  <th>Returns</th>
-                  <td>true if the weight has been updated</td>
-                </tr>
-              </tfoot>
-            </table>
-          </div></section>
-          <section class="m-doc-details" id="a418b0e0b18f2f99ca55b88829e031898"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">bool BipedalLocomotion::<wbr />IK::<wbr />QPInverseKinematics::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a418b0e0b18f2f99ca55b88829e031898" class="m-doc-self">setTaskWeight</a>(</span><span class="m-doc-wrap">const std::string&amp; taskName,
-              Eigen::Ref&lt;const Eigen::VectorXd&gt; weight) <span class="m-label m-warning">override</span></span></span>
-            </h3>
-            <p>Set the weight associated to an already existing task.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">taskName</td>
-                  <td>name associated to the task</td>
-                </tr>
-                <tr>
-                  <td>weight</td>
-                  <td>new Weight associated to the task. A constant weight is assumed.</td>
-                </tr>
-              </tbody>
-              <tfoot>
-                <tr>
-                  <th>Returns</th>
-                  <td>true if the weight has been updated</td>
-                </tr>
-              </tfoot>
-            </table>
-          </div></section>
-          <section class="m-doc-details" id="a93ccdd021104e971a0741897124dd943"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">std::weak_ptr&lt;const <a href="ILinearTaskSolver_8h.html#aa0b9c4f50fc80885f1a6401dba73ad50" class="m-doc">System::<wbr />WeightProviderPort</a>&gt; BipedalLocomotion::<wbr />IK::<wbr />QPInverseKinematics::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a93ccdd021104e971a0741897124dd943" class="m-doc-self">getTaskWeightProvider</a>(</span><span class="m-doc-wrap">const std::string&amp; taskName) const <span class="m-label m-warning">override</span></span></span>
-            </h3>
-            <p>Get the weightProvider associated to an already existing task.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">taskName</td>
-                  <td>name associated to the task</td>
-                </tr>
-              </tbody>
-              <tfoot>
-                <tr>
-                  <th>Returns</th>
-                  <td>a weak pointer to the weightProvider. If the task does not exist the pointer is not lockable</td>
-                </tr>
-              </tfoot>
-            </table>
-          </div></section>
-          <section class="m-doc-details" id="a345b7b00600b13be14c74bdb007c5362"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">bool BipedalLocomotion::<wbr />IK::<wbr />QPInverseKinematics::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a345b7b00600b13be14c74bdb007c5362" class="m-doc-self">finalize</a>(</span><span class="m-doc-wrap">const <a href="classBipedalLocomotion_1_1System_1_1VariablesHandler.html" class="m-doc">System::<wbr />VariablesHandler</a>&amp; handler) <span class="m-label m-warning">override</span></span></span>
-            </h3>
-            <p>Finalize the IK.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">handler</td>
-                  <td>parameter handler.</td>
-                </tr>
-              </tbody>
-              <tfoot>
-                <tr>
-                  <th>Returns</th>
-                  <td>true in case of success, false otherwise.</td>
-                </tr>
-              </tfoot>
-            </table>
-<aside class="m-note m-info"><h4>Note</h4><p>You should call this method after you add ALL the tasks.</p></aside>
-          </div></section>
-          <section class="m-doc-details" id="a6e3605df43a7cb6f01807e9cffec0b6c"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">bool BipedalLocomotion::<wbr />IK::<wbr />QPInverseKinematics::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a6e3605df43a7cb6f01807e9cffec0b6c" class="m-doc-self">initialize</a>(</span><span class="m-doc-wrap">std::weak_ptr&lt;const <a href="classBipedalLocomotion_1_1ParametersHandler_1_1IParametersHandler.html" class="m-doc">ParametersHandler::<wbr />IParametersHandler</a>&gt; handler) <span class="m-label m-warning">override</span></span></span>
-            </h3>
-            <p>Initialize the inverse kinematics algorithm.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">handler</td>
-                  <td>pointer to the IParametersHandler interface.</td>
-                </tr>
-              </tbody>
-              <tfoot>
-                <tr>
-                  <th>Returns</th>
-                  <td>True in case of success, false otherwise.</td>
-                </tr>
-              </tfoot>
-            </table>
-<aside class="m-note m-info"><h4>Note</h4><p>the following parameters are required by the class</p><table class="m-table"><thead><tr><th>Parameter Name</th><th>Type</th><th>Description</th><th>Mandatory</th></tr></thead><tbody><tr><td><code>robot_velocity_variable_name</code></td><td><code>string</code></td><td>Name of the variable contained in <code>VariablesHandler</code> describing the generalized robot velocity</td><td>Yes</td></tr><tr><td><code>verbosity</code></td><td><code>bool</code></td><td>Verbosity of the solver. Default value <code>false</code></td><td>No</td></tr></tbody></table><p>Where the generalized robot velocity is a vector containing the base spatial velocity (expressed in mixed representation) and the joint velocities.</p></aside>
-          </div></section>
-          <section class="m-doc-details" id="aea4524325aeaa138f0953b5bbf56e5b6"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">std::vector&lt;std::string&gt; BipedalLocomotion::<wbr />IK::<wbr />QPInverseKinematics::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aea4524325aeaa138f0953b5bbf56e5b6" class="m-doc-self">getTaskNames</a>(</span><span class="m-doc-wrap">) const <span class="m-label m-warning">override</span></span></span>
-            </h3>
-            <p>Get a vector containing the name of the tasks.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <tfoot>
-                <tr>
-                  <th style="width: 1%">Returns</th>
-                  <td>an std::vector containing all the names associated to the tasks</td>
-                </tr>
-              </tfoot>
-            </table>
-          </div></section>
-          <section class="m-doc-details" id="a7e89856750429fa6bc97d34845a1f153"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">bool BipedalLocomotion::<wbr />IK::<wbr />QPInverseKinematics::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a7e89856750429fa6bc97d34845a1f153" class="m-doc-self">advance</a>(</span><span class="m-doc-wrap">) <span class="m-label m-warning">override</span></span></span>
-            </h3>
-            <p>Solve the inverse kinematics.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <tfoot>
-                <tr>
-                  <th style="width: 1%">Returns</th>
-                  <td>true in case of success and false otherwise.</td>
-                </tr>
-              </tfoot>
-            </table>
-          </div></section>
-          <section class="m-doc-details" id="ac3382473c18f86c151e40e567b048b68"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">const State&amp; BipedalLocomotion::<wbr />IK::<wbr />QPInverseKinematics::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ac3382473c18f86c151e40e567b048b68" class="m-doc-self">getOutput</a>(</span><span class="m-doc-wrap">) const <span class="m-label m-warning">override</span></span></span>
-            </h3>
-            <p>Get the outcome of the optimization problem.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <tfoot>
-                <tr>
-                  <th style="width: 1%">Returns</th>
-                  <td>the state of the inverse kinematics.</td>
-                </tr>
-              </tfoot>
-            </table>
-          </div></section>
-          <section class="m-doc-details" id="a7fd5fd750763109e53b5369fd5517e86"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">std::weak_ptr&lt;Task&gt; BipedalLocomotion::<wbr />IK::<wbr />QPInverseKinematics::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a7fd5fd750763109e53b5369fd5517e86" class="m-doc-self">getTask</a>(</span><span class="m-doc-wrap">const std::string&amp; name) const <span class="m-label m-warning">override</span></span></span>
-            </h3>
-            <p>Get a specific task.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">name</td>
-                  <td>name associated to the task.</td>
-                </tr>
-              </tbody>
-              <tfoot>
-                <tr>
-                  <th>Returns</th>
-                  <td>a weak ptr associated to an existing task in the IK. If the task does not exist a nullptr is returned.</td>
-                </tr>
-              </tfoot>
-            </table>
-          </div></section>
-          <section class="m-doc-details" id="a516929da79680d1df8fe34d85dac5c3b"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">std::string BipedalLocomotion::<wbr />IK::<wbr />QPInverseKinematics::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a516929da79680d1df8fe34d85dac5c3b" class="m-doc-self">toString</a>(</span><span class="m-doc-wrap">) const <span class="m-label m-warning">override</span></span></span>
-            </h3>
-            <p>Return the description of the InverseKinematics problem.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <tfoot>
-                <tr>
-                  <th style="width: 1%">Returns</th>
-                  <td>a string containing the description of the solver.</td>
-                </tr>
-              </tfoot>
-            </table>
-          </div></section>
-          <section class="m-doc-details" id="a0db3848338591bfe39376b7c4d7aefb9"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">Eigen::Ref&lt;const Eigen::VectorXd&gt; BipedalLocomotion::<wbr />IK::<wbr />QPInverseKinematics::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a0db3848338591bfe39376b7c4d7aefb9" class="m-doc-self">getRawSolution</a>(</span><span class="m-doc-wrap">) const <span class="m-label m-warning">override</span></span></span>
-            </h3>
-            <p>Return the vector representing the entire solution of the <a href="classBipedalLocomotion_1_1IK_1_1QPInverseKinematics.html" class="m-doc">QPInverseKinematics</a>.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <tfoot>
-                <tr>
-                  <th style="width: 1%">Returns</th>
-                  <td>a vector containing the solution of the optimization problem</td>
-                </tr>
-              </tfoot>
-            </table>
-          </div></section>
-        </section>
-      </div>
-    </div>
-  </div>
-</article></main>
-<div class="m-doc-search" id="search">
-  <a href="#!" onclick="return hideSearch()"></a>
-  <div class="m-container">
-    <div class="m-row">
-      <div class="m-col-m-8 m-push-m-2">
-        <div class="m-doc-search-header m-text m-small">
-          <div><span class="m-label m-default">Tab</span> / <span class="m-label m-default">T</span> to search, <span class="m-label m-default">Esc</span> to close</div>
-          <div id="search-symbolcount">&hellip;</div>
-        </div>
-        <div class="m-doc-search-content">
-          <form>
-            <input type="search" name="q" id="search-input" placeholder="Loading &hellip;" disabled="disabled" autofocus="autofocus" autocomplete="off" spellcheck="false" />
-          </form>
-          <noscript class="m-text m-danger m-text-center">Unlike everything else in the docs, the search functionality <em>requires</em> JavaScript.</noscript>
-          <div id="search-help" class="m-text m-dim m-text-center">
-            <p class="m-noindent">Search for symbols, directories, files, pages or
-            modules. You can omit any prefix from the symbol or file path; adding a
-            <code>:</code> or <code>/</code> suffix lists all members of given symbol or
-            directory.</p>
-            <p class="m-noindent">Use <span class="m-label m-dim">&darr;</span>
-            / <span class="m-label m-dim">&uarr;</span> to navigate through the list,
-            <span class="m-label m-dim">Enter</span> to go.
-            <span class="m-label m-dim">Tab</span> autocompletes common prefix, you can
-            copy a link to the result using <span class="m-label m-dim">⌘</span>
-            <span class="m-label m-dim">L</span> while <span class="m-label m-dim">⌘</span>
-            <span class="m-label m-dim">M</span> produces a Markdown link.</p>
-          </div>
-          <div id="search-notfound" class="m-text m-warning m-text-center">Sorry, nothing was found.</div>
-          <ul id="search-results"></ul>
-        </div>
-      </div>
-    </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
   </div>
 </div>
-<script src="search-v2.js"></script>
-<script src="searchdata-v2.js" async="async"></script>
-<footer><nav>
-  <div class="m-container">
-    <div class="m-row">
-      <div class="m-col-l-10 m-push-l-1">
-        <p>bipedal-locomotion-framework documentation. Licensed under the <a href="https://www.gnu.org/licenses/lgpl-3.0.en.html">GNU Lesser General Public License v3.0</a>. Project maintained by the <a href="https://www.iit.it/web/ami/">Artificial and Mechanical Intelligence Lab</a>. Contact the team via <a href="https://github.com/ami-iit/bipedal-locomotion-framework/issues/new">GitHub</a>.<br />Generated by <a href="https://doxygen.org/">Doxygen</a> 1.9.1 and <a href="https://mcss.mosra.cz/">m.css</a>.
-      </div>
-    </div>
-  </div>
-</nav></footer>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(document).ready(function(){initNavTree('classBipedalLocomotion_1_1IK_1_1QPInverseKinematics.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-static-methods">Static Public Member Functions</a> &#124;
+<a href="classBipedalLocomotion_1_1IK_1_1QPInverseKinematics-members.html">List of all members</a>  </div>
+  <div class="headertitle">
+<div class="title">BipedalLocomotion::IK::QPInverseKinematics Class Reference</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p><a class="el" href="classBipedalLocomotion_1_1IK_1_1QPInverseKinematics.html" title="QPInverseKinematics is a concrete class and implements an integration base inverse kinematics.">QPInverseKinematics</a> is a concrete class and implements an integration base inverse kinematics.  
+ <a href="classBipedalLocomotion_1_1IK_1_1QPInverseKinematics.html#details">More...</a></p>
+
+<p><code>#include &lt;IK/include/BipedalLocomotion/IK/QPInverseKinematics.h&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:aa6e9c24404766d5fdbe4bdfccae98aea"><td class="memItemLeft" align="right" valign="top"><a id="aa6e9c24404766d5fdbe4bdfccae98aea"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1IK_1_1QPInverseKinematics.html#aa6e9c24404766d5fdbe4bdfccae98aea">QPInverseKinematics</a> ()</td></tr>
+<tr class="memdesc:aa6e9c24404766d5fdbe4bdfccae98aea"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor. <br /></td></tr>
+<tr class="separator:aa6e9c24404766d5fdbe4bdfccae98aea"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afed9c87f7191d7516c1e2e2d16570062"><td class="memItemLeft" align="right" valign="top"><a id="afed9c87f7191d7516c1e2e2d16570062"></a>
+virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1IK_1_1QPInverseKinematics.html#afed9c87f7191d7516c1e2e2d16570062">~QPInverseKinematics</a> ()</td></tr>
+<tr class="memdesc:afed9c87f7191d7516c1e2e2d16570062"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor. <br /></td></tr>
+<tr class="separator:afed9c87f7191d7516c1e2e2d16570062"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7666e60ae056992a39f56eddd1134d75"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1IK_1_1QPInverseKinematics.html#a7666e60ae056992a39f56eddd1134d75">addTask</a> (std::shared_ptr&lt; Task &gt; task, const std::string &amp;taskName, std::size_t priority, std::shared_ptr&lt; const <a class="el" href="ILinearTaskSolver_8h.html#aa0b9c4f50fc80885f1a6401dba73ad50">System::WeightProviderPort</a> &gt; weightProvider=nullptr) override</td></tr>
+<tr class="memdesc:a7666e60ae056992a39f56eddd1134d75"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a linear task in the solver.  <a href="classBipedalLocomotion_1_1IK_1_1QPInverseKinematics.html#a7666e60ae056992a39f56eddd1134d75">More...</a><br /></td></tr>
+<tr class="separator:a7666e60ae056992a39f56eddd1134d75"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2b0c765e65eb6875342f438560c99e6c"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1IK_1_1QPInverseKinematics.html#a2b0c765e65eb6875342f438560c99e6c">addTask</a> (std::shared_ptr&lt; Task &gt; task, const std::string &amp;taskName, std::size_t priority, Eigen::Ref&lt; const Eigen::VectorXd &gt; weight) override</td></tr>
+<tr class="memdesc:a2b0c765e65eb6875342f438560c99e6c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a linear task in the solver.  <a href="classBipedalLocomotion_1_1IK_1_1QPInverseKinematics.html#a2b0c765e65eb6875342f438560c99e6c">More...</a><br /></td></tr>
+<tr class="separator:a2b0c765e65eb6875342f438560c99e6c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaf34b9a0c65fa2697cd5b7073727ab39"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1IK_1_1QPInverseKinematics.html#aaf34b9a0c65fa2697cd5b7073727ab39">setTaskWeight</a> (const std::string &amp;taskName, std::shared_ptr&lt; const <a class="el" href="ILinearTaskSolver_8h.html#aa0b9c4f50fc80885f1a6401dba73ad50">System::WeightProviderPort</a> &gt; weightProvider) override</td></tr>
+<tr class="memdesc:aaf34b9a0c65fa2697cd5b7073727ab39"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the weightProvider associated to an already existing task.  <a href="classBipedalLocomotion_1_1IK_1_1QPInverseKinematics.html#aaf34b9a0c65fa2697cd5b7073727ab39">More...</a><br /></td></tr>
+<tr class="separator:aaf34b9a0c65fa2697cd5b7073727ab39"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a76a1a82763a46182017b713e5237ae4a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1IK_1_1QPInverseKinematics.html#a76a1a82763a46182017b713e5237ae4a">setTaskWeight</a> (const std::string &amp;taskName, Eigen::Ref&lt; const Eigen::VectorXd &gt; weight) override</td></tr>
+<tr class="memdesc:a76a1a82763a46182017b713e5237ae4a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the weight associated to an already existing task.  <a href="classBipedalLocomotion_1_1IK_1_1QPInverseKinematics.html#a76a1a82763a46182017b713e5237ae4a">More...</a><br /></td></tr>
+<tr class="separator:a76a1a82763a46182017b713e5237ae4a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a86ecad88aad59b972b64cde3dcbe5476"><td class="memItemLeft" align="right" valign="top">std::weak_ptr&lt; const <a class="el" href="ILinearTaskSolver_8h.html#aa0b9c4f50fc80885f1a6401dba73ad50">System::WeightProviderPort</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1IK_1_1QPInverseKinematics.html#a86ecad88aad59b972b64cde3dcbe5476">getTaskWeightProvider</a> (const std::string &amp;taskName) const override</td></tr>
+<tr class="memdesc:a86ecad88aad59b972b64cde3dcbe5476"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the weightProvider associated to an already existing task.  <a href="classBipedalLocomotion_1_1IK_1_1QPInverseKinematics.html#a86ecad88aad59b972b64cde3dcbe5476">More...</a><br /></td></tr>
+<tr class="separator:a86ecad88aad59b972b64cde3dcbe5476"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a002751b1ac8f4b0a41cbbb414d5b2d0f"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1IK_1_1QPInverseKinematics.html#a002751b1ac8f4b0a41cbbb414d5b2d0f">finalize</a> (const <a class="el" href="classBipedalLocomotion_1_1System_1_1VariablesHandler.html">System::VariablesHandler</a> &amp;handler) override</td></tr>
+<tr class="memdesc:a002751b1ac8f4b0a41cbbb414d5b2d0f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Finalize the IK.  <a href="classBipedalLocomotion_1_1IK_1_1QPInverseKinematics.html#a002751b1ac8f4b0a41cbbb414d5b2d0f">More...</a><br /></td></tr>
+<tr class="separator:a002751b1ac8f4b0a41cbbb414d5b2d0f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5334a23163859dd10cfb74229ac00b19"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1IK_1_1QPInverseKinematics.html#a5334a23163859dd10cfb74229ac00b19">initialize</a> (std::weak_ptr&lt; const <a class="el" href="classBipedalLocomotion_1_1ParametersHandler_1_1IParametersHandler.html">ParametersHandler::IParametersHandler</a> &gt; handler) override</td></tr>
+<tr class="memdesc:a5334a23163859dd10cfb74229ac00b19"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize the inverse kinematics algorithm.  <a href="classBipedalLocomotion_1_1IK_1_1QPInverseKinematics.html#a5334a23163859dd10cfb74229ac00b19">More...</a><br /></td></tr>
+<tr class="separator:a5334a23163859dd10cfb74229ac00b19"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aba7ab99936b2d34de069d436e72582ce"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1IK_1_1QPInverseKinematics.html#aba7ab99936b2d34de069d436e72582ce">getTaskNames</a> () const override</td></tr>
+<tr class="memdesc:aba7ab99936b2d34de069d436e72582ce"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a vector containing the name of the tasks.  <a href="classBipedalLocomotion_1_1IK_1_1QPInverseKinematics.html#aba7ab99936b2d34de069d436e72582ce">More...</a><br /></td></tr>
+<tr class="separator:aba7ab99936b2d34de069d436e72582ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a839bf79b1bfc65097e0d3f190b299e9d"><td class="memItemLeft" align="right" valign="top"><a id="a839bf79b1bfc65097e0d3f190b299e9d"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1IK_1_1QPInverseKinematics.html#a839bf79b1bfc65097e0d3f190b299e9d">isOutputValid</a> () const override</td></tr>
+<tr class="memdesc:a839bf79b1bfc65097e0d3f190b299e9d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return true if the content of get is valid. <br /></td></tr>
+<tr class="separator:a839bf79b1bfc65097e0d3f190b299e9d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a30b994ea707164aba3f77e8b619a853e"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1IK_1_1QPInverseKinematics.html#a30b994ea707164aba3f77e8b619a853e">advance</a> () override</td></tr>
+<tr class="memdesc:a30b994ea707164aba3f77e8b619a853e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Solve the inverse kinematics.  <a href="classBipedalLocomotion_1_1IK_1_1QPInverseKinematics.html#a30b994ea707164aba3f77e8b619a853e">More...</a><br /></td></tr>
+<tr class="separator:a30b994ea707164aba3f77e8b619a853e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7fd9a7a18ce0222cf5018d281c7f5fef"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="structBipedalLocomotion_1_1IK_1_1IntegrationBasedIKState.html">State</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1IK_1_1QPInverseKinematics.html#a7fd9a7a18ce0222cf5018d281c7f5fef">getOutput</a> () const override</td></tr>
+<tr class="memdesc:a7fd9a7a18ce0222cf5018d281c7f5fef"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the outcome of the optimization problem.  <a href="classBipedalLocomotion_1_1IK_1_1QPInverseKinematics.html#a7fd9a7a18ce0222cf5018d281c7f5fef">More...</a><br /></td></tr>
+<tr class="separator:a7fd9a7a18ce0222cf5018d281c7f5fef"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afb8403a6949a24c99162fbd62f335648"><td class="memItemLeft" align="right" valign="top">std::weak_ptr&lt; <a class="el" href="structBipedalLocomotion_1_1IK_1_1IKLinearTask.html">Task</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1IK_1_1QPInverseKinematics.html#afb8403a6949a24c99162fbd62f335648">getTask</a> (const std::string &amp;name) const override</td></tr>
+<tr class="memdesc:afb8403a6949a24c99162fbd62f335648"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a specific task.  <a href="classBipedalLocomotion_1_1IK_1_1QPInverseKinematics.html#afb8403a6949a24c99162fbd62f335648">More...</a><br /></td></tr>
+<tr class="separator:afb8403a6949a24c99162fbd62f335648"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a663caaa3cda3df238309ead8ae5e11ed"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1IK_1_1QPInverseKinematics.html#a663caaa3cda3df238309ead8ae5e11ed">toString</a> () const override</td></tr>
+<tr class="memdesc:a663caaa3cda3df238309ead8ae5e11ed"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the description of the InverseKinematics problem.  <a href="classBipedalLocomotion_1_1IK_1_1QPInverseKinematics.html#a663caaa3cda3df238309ead8ae5e11ed">More...</a><br /></td></tr>
+<tr class="separator:a663caaa3cda3df238309ead8ae5e11ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7a3124022f48c678d783a13295abc019"><td class="memItemLeft" align="right" valign="top">Eigen::Ref&lt; const Eigen::VectorXd &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1IK_1_1QPInverseKinematics.html#a7a3124022f48c678d783a13295abc019">getRawSolution</a> () const override</td></tr>
+<tr class="memdesc:a7a3124022f48c678d783a13295abc019"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the vector representing the entire solution of the <a class="el" href="classBipedalLocomotion_1_1IK_1_1QPInverseKinematics.html" title="QPInverseKinematics is a concrete class and implements an integration base inverse kinematics.">QPInverseKinematics</a>.  <a href="classBipedalLocomotion_1_1IK_1_1QPInverseKinematics.html#a7a3124022f48c678d783a13295abc019">More...</a><br /></td></tr>
+<tr class="separator:a7a3124022f48c678d783a13295abc019"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_classBipedalLocomotion_1_1IK_1_1IntegrationBasedIK"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classBipedalLocomotion_1_1IK_1_1IntegrationBasedIK')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classBipedalLocomotion_1_1IK_1_1IntegrationBasedIK.html">BipedalLocomotion::IK::IntegrationBasedIK</a></td></tr>
+<tr class="memitem:af7a521cfc81b2f7d2e0c881858133478 inherit pub_methods_classBipedalLocomotion_1_1IK_1_1IntegrationBasedIK"><td class="memItemLeft" align="right" valign="top"><a id="af7a521cfc81b2f7d2e0c881858133478"></a>
+virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1IK_1_1IntegrationBasedIK.html#af7a521cfc81b2f7d2e0c881858133478">~IntegrationBasedIK</a> ()=default</td></tr>
+<tr class="memdesc:af7a521cfc81b2f7d2e0c881858133478 inherit pub_methods_classBipedalLocomotion_1_1IK_1_1IntegrationBasedIK"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor. <br /></td></tr>
+<tr class="separator:af7a521cfc81b2f7d2e0c881858133478 inherit pub_methods_classBipedalLocomotion_1_1IK_1_1IntegrationBasedIK"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_classBipedalLocomotion_1_1System_1_1ILinearTaskSolver"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classBipedalLocomotion_1_1System_1_1ILinearTaskSolver')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classBipedalLocomotion_1_1System_1_1ILinearTaskSolver.html">BipedalLocomotion::System::ILinearTaskSolver&lt; IKLinearTask, IntegrationBasedIKState &gt;</a></td></tr>
+<tr class="memitem:a3f7b647df3e41efe16c75754181f9931 inherit pub_methods_classBipedalLocomotion_1_1System_1_1ILinearTaskSolver"><td class="memItemLeft" align="right" valign="top"><a id="a3f7b647df3e41efe16c75754181f9931"></a>
+virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1System_1_1ILinearTaskSolver.html#a3f7b647df3e41efe16c75754181f9931">~ILinearTaskSolver</a> ()=default</td></tr>
+<tr class="memdesc:a3f7b647df3e41efe16c75754181f9931 inherit pub_methods_classBipedalLocomotion_1_1System_1_1ILinearTaskSolver"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor. <br /></td></tr>
+<tr class="separator:a3f7b647df3e41efe16c75754181f9931 inherit pub_methods_classBipedalLocomotion_1_1System_1_1ILinearTaskSolver"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_classBipedalLocomotion_1_1System_1_1Source"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classBipedalLocomotion_1_1System_1_1Source')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classBipedalLocomotion_1_1System_1_1Source.html">BipedalLocomotion::System::Source&lt; Output &gt;</a></td></tr>
+<tr class="memitem:a472624c76d5e02e8ae16991cd77016ce inherit pub_methods_classBipedalLocomotion_1_1System_1_1Source"><td class="memItemLeft" align="right" valign="top"><a id="a472624c76d5e02e8ae16991cd77016ce"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>setInput</b> (const <a class="el" href="Advanceable_8h.html#a1558f6843cd1a0f40215a6364b0af652">EmptySignal</a> &amp;input) final</td></tr>
+<tr class="separator:a472624c76d5e02e8ae16991cd77016ce inherit pub_methods_classBipedalLocomotion_1_1System_1_1Source"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1c126531af21d485f09f297cb162c30a inherit pub_methods_classBipedalLocomotion_1_1System_1_1Source"><td class="memItemLeft" align="right" valign="top"><a id="a1c126531af21d485f09f297cb162c30a"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>Source</b> (const <a class="el" href="classBipedalLocomotion_1_1System_1_1Source.html">Source</a> &amp;)=delete</td></tr>
+<tr class="separator:a1c126531af21d485f09f297cb162c30a inherit pub_methods_classBipedalLocomotion_1_1System_1_1Source"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af0cf2abdf10e6594372a0b062fe4a8af inherit pub_methods_classBipedalLocomotion_1_1System_1_1Source"><td class="memItemLeft" align="right" valign="top"><a id="af0cf2abdf10e6594372a0b062fe4a8af"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>Source</b> (<a class="el" href="classBipedalLocomotion_1_1System_1_1Source.html">Source</a> &amp;&amp;)=delete</td></tr>
+<tr class="separator:af0cf2abdf10e6594372a0b062fe4a8af inherit pub_methods_classBipedalLocomotion_1_1System_1_1Source"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a922e6eec2f74620c49f9fcd1ddf709ae inherit pub_methods_classBipedalLocomotion_1_1System_1_1Source"><td class="memItemLeft" align="right" valign="top"><a id="a922e6eec2f74620c49f9fcd1ddf709ae"></a>
+<a class="el" href="classBipedalLocomotion_1_1System_1_1Source.html">Source</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator=</b> (const <a class="el" href="classBipedalLocomotion_1_1System_1_1Source.html">Source</a> &amp;)=delete</td></tr>
+<tr class="separator:a922e6eec2f74620c49f9fcd1ddf709ae inherit pub_methods_classBipedalLocomotion_1_1System_1_1Source"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad63e64dcad4c269263ecd20b2c81352b inherit pub_methods_classBipedalLocomotion_1_1System_1_1Source"><td class="memItemLeft" align="right" valign="top"><a id="ad63e64dcad4c269263ecd20b2c81352b"></a>
+<a class="el" href="classBipedalLocomotion_1_1System_1_1Source.html">Source</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator=</b> (<a class="el" href="classBipedalLocomotion_1_1System_1_1Source.html">Source</a> &amp;&amp;)=delete</td></tr>
+<tr class="separator:ad63e64dcad4c269263ecd20b2c81352b inherit pub_methods_classBipedalLocomotion_1_1System_1_1Source"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_classBipedalLocomotion_1_1System_1_1Advanceable"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classBipedalLocomotion_1_1System_1_1Advanceable')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classBipedalLocomotion_1_1System_1_1Advanceable.html">BipedalLocomotion::System::Advanceable&lt; EmptySignal, Output &gt;</a></td></tr>
+<tr class="memitem:aaeb3eba3073fbc844dea1eba4c9b68f3 inherit pub_methods_classBipedalLocomotion_1_1System_1_1Advanceable"><td class="memItemLeft" align="right" valign="top"><a id="aaeb3eba3073fbc844dea1eba4c9b68f3"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>Advanceable</b> (const <a class="el" href="classBipedalLocomotion_1_1System_1_1Advanceable.html">Advanceable</a> &amp;)=delete</td></tr>
+<tr class="separator:aaeb3eba3073fbc844dea1eba4c9b68f3 inherit pub_methods_classBipedalLocomotion_1_1System_1_1Advanceable"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac1549cb26bd896e27370e97b0795ba3f inherit pub_methods_classBipedalLocomotion_1_1System_1_1Advanceable"><td class="memItemLeft" align="right" valign="top"><a id="ac1549cb26bd896e27370e97b0795ba3f"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>Advanceable</b> (<a class="el" href="classBipedalLocomotion_1_1System_1_1Advanceable.html">Advanceable</a> &amp;&amp;)=delete</td></tr>
+<tr class="separator:ac1549cb26bd896e27370e97b0795ba3f inherit pub_methods_classBipedalLocomotion_1_1System_1_1Advanceable"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae147cdee9ff9160a9dfe0d3e349a9aad inherit pub_methods_classBipedalLocomotion_1_1System_1_1Advanceable"><td class="memItemLeft" align="right" valign="top"><a id="ae147cdee9ff9160a9dfe0d3e349a9aad"></a>
+<a class="el" href="classBipedalLocomotion_1_1System_1_1Advanceable.html">Advanceable</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator=</b> (const <a class="el" href="classBipedalLocomotion_1_1System_1_1Advanceable.html">Advanceable</a> &amp;)=delete</td></tr>
+<tr class="separator:ae147cdee9ff9160a9dfe0d3e349a9aad inherit pub_methods_classBipedalLocomotion_1_1System_1_1Advanceable"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adf0d9fc07bab0ec5d4db7f3a35816bf2 inherit pub_methods_classBipedalLocomotion_1_1System_1_1Advanceable"><td class="memItemLeft" align="right" valign="top"><a id="adf0d9fc07bab0ec5d4db7f3a35816bf2"></a>
+<a class="el" href="classBipedalLocomotion_1_1System_1_1Advanceable.html">Advanceable</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator=</b> (<a class="el" href="classBipedalLocomotion_1_1System_1_1Advanceable.html">Advanceable</a> &amp;&amp;)=delete</td></tr>
+<tr class="separator:adf0d9fc07bab0ec5d4db7f3a35816bf2 inherit pub_methods_classBipedalLocomotion_1_1System_1_1Advanceable"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a618ab786bb43814b3b3012b843fce93b inherit pub_methods_classBipedalLocomotion_1_1System_1_1Advanceable"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1System_1_1Advanceable.html#a618ab786bb43814b3b3012b843fce93b">close</a> ()</td></tr>
+<tr class="memdesc:a618ab786bb43814b3b3012b843fce93b inherit pub_methods_classBipedalLocomotion_1_1System_1_1Advanceable"><td class="mdescLeft">&#160;</td><td class="mdescRight">Close the Advanceable.  <a href="classBipedalLocomotion_1_1System_1_1Advanceable.html#a618ab786bb43814b3b3012b843fce93b">More...</a><br /></td></tr>
+<tr class="separator:a618ab786bb43814b3b3012b843fce93b inherit pub_methods_classBipedalLocomotion_1_1System_1_1Advanceable"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_classBipedalLocomotion_1_1System_1_1InputPort"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classBipedalLocomotion_1_1System_1_1InputPort')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classBipedalLocomotion_1_1System_1_1InputPort.html">BipedalLocomotion::System::InputPort&lt; _Input &gt;</a></td></tr>
+<tr class="memitem:a74d1418613e89a7f2993ea936228a44a inherit pub_methods_classBipedalLocomotion_1_1System_1_1InputPort"><td class="memItemLeft" align="right" valign="top"><a id="a74d1418613e89a7f2993ea936228a44a"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>InputPort</b> (const <a class="el" href="classBipedalLocomotion_1_1System_1_1InputPort.html">InputPort</a> &amp;)=delete</td></tr>
+<tr class="separator:a74d1418613e89a7f2993ea936228a44a inherit pub_methods_classBipedalLocomotion_1_1System_1_1InputPort"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a02ec5c947f1d2d83d2952c3b899cc58f inherit pub_methods_classBipedalLocomotion_1_1System_1_1InputPort"><td class="memItemLeft" align="right" valign="top"><a id="a02ec5c947f1d2d83d2952c3b899cc58f"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>InputPort</b> (<a class="el" href="classBipedalLocomotion_1_1System_1_1InputPort.html">InputPort</a> &amp;&amp;)=delete</td></tr>
+<tr class="separator:a02ec5c947f1d2d83d2952c3b899cc58f inherit pub_methods_classBipedalLocomotion_1_1System_1_1InputPort"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a54f476d3c8d6d003fb714309ea6272aa inherit pub_methods_classBipedalLocomotion_1_1System_1_1InputPort"><td class="memItemLeft" align="right" valign="top"><a id="a54f476d3c8d6d003fb714309ea6272aa"></a>
+<a class="el" href="classBipedalLocomotion_1_1System_1_1InputPort.html">InputPort</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator=</b> (const <a class="el" href="classBipedalLocomotion_1_1System_1_1InputPort.html">InputPort</a> &amp;)=delete</td></tr>
+<tr class="separator:a54f476d3c8d6d003fb714309ea6272aa inherit pub_methods_classBipedalLocomotion_1_1System_1_1InputPort"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adb341b37472241b6da8b552166308d7b inherit pub_methods_classBipedalLocomotion_1_1System_1_1InputPort"><td class="memItemLeft" align="right" valign="top"><a id="adb341b37472241b6da8b552166308d7b"></a>
+<a class="el" href="classBipedalLocomotion_1_1System_1_1InputPort.html">InputPort</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator=</b> (<a class="el" href="classBipedalLocomotion_1_1System_1_1InputPort.html">InputPort</a> &amp;&amp;)=delete</td></tr>
+<tr class="separator:adb341b37472241b6da8b552166308d7b inherit pub_methods_classBipedalLocomotion_1_1System_1_1InputPort"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad2637be5c9075a2d8f09fedc6a42d808 inherit pub_methods_classBipedalLocomotion_1_1System_1_1InputPort"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1System_1_1InputPort.html#ad2637be5c9075a2d8f09fedc6a42d808">setInput</a> (const Input &amp;input)=0</td></tr>
+<tr class="memdesc:ad2637be5c9075a2d8f09fedc6a42d808 inherit pub_methods_classBipedalLocomotion_1_1System_1_1InputPort"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the input of the port.  <a href="classBipedalLocomotion_1_1System_1_1InputPort.html#ad2637be5c9075a2d8f09fedc6a42d808">More...</a><br /></td></tr>
+<tr class="separator:ad2637be5c9075a2d8f09fedc6a42d808 inherit pub_methods_classBipedalLocomotion_1_1System_1_1InputPort"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_classBipedalLocomotion_1_1System_1_1OutputPort"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classBipedalLocomotion_1_1System_1_1OutputPort')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classBipedalLocomotion_1_1System_1_1OutputPort.html">BipedalLocomotion::System::OutputPort&lt; _Output &gt;</a></td></tr>
+<tr class="memitem:a0a39b891749961d34507b4b591886741 inherit pub_methods_classBipedalLocomotion_1_1System_1_1OutputPort"><td class="memItemLeft" align="right" valign="top"><a id="a0a39b891749961d34507b4b591886741"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>OutputPort</b> (const <a class="el" href="classBipedalLocomotion_1_1System_1_1OutputPort.html">OutputPort</a> &amp;)=delete</td></tr>
+<tr class="separator:a0a39b891749961d34507b4b591886741 inherit pub_methods_classBipedalLocomotion_1_1System_1_1OutputPort"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a581340f280eca1890a8a7b2331761b57 inherit pub_methods_classBipedalLocomotion_1_1System_1_1OutputPort"><td class="memItemLeft" align="right" valign="top"><a id="a581340f280eca1890a8a7b2331761b57"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>OutputPort</b> (<a class="el" href="classBipedalLocomotion_1_1System_1_1OutputPort.html">OutputPort</a> &amp;&amp;)=delete</td></tr>
+<tr class="separator:a581340f280eca1890a8a7b2331761b57 inherit pub_methods_classBipedalLocomotion_1_1System_1_1OutputPort"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af5e15f5e4962a5c8e0f0c0a49adb9ca1 inherit pub_methods_classBipedalLocomotion_1_1System_1_1OutputPort"><td class="memItemLeft" align="right" valign="top"><a id="af5e15f5e4962a5c8e0f0c0a49adb9ca1"></a>
+<a class="el" href="classBipedalLocomotion_1_1System_1_1OutputPort.html">OutputPort</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator=</b> (const <a class="el" href="classBipedalLocomotion_1_1System_1_1OutputPort.html">OutputPort</a> &amp;)=delete</td></tr>
+<tr class="separator:af5e15f5e4962a5c8e0f0c0a49adb9ca1 inherit pub_methods_classBipedalLocomotion_1_1System_1_1OutputPort"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad5c6ce3ad7d2a064d7bb512fe0bc489e inherit pub_methods_classBipedalLocomotion_1_1System_1_1OutputPort"><td class="memItemLeft" align="right" valign="top"><a id="ad5c6ce3ad7d2a064d7bb512fe0bc489e"></a>
+<a class="el" href="classBipedalLocomotion_1_1System_1_1OutputPort.html">OutputPort</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator=</b> (<a class="el" href="classBipedalLocomotion_1_1System_1_1OutputPort.html">OutputPort</a> &amp;&amp;)=delete</td></tr>
+<tr class="separator:ad5c6ce3ad7d2a064d7bb512fe0bc489e inherit pub_methods_classBipedalLocomotion_1_1System_1_1OutputPort"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
+Static Public Member Functions</h2></td></tr>
+<tr class="memitem:a96f1991b2a0b45115f0fd69981b63437"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="structBipedalLocomotion_1_1IK_1_1IntegrationBasedIKProblem.html">IntegrationBasedIKProblem</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1IK_1_1QPInverseKinematics.html#a96f1991b2a0b45115f0fd69981b63437">build</a> (std::weak_ptr&lt; const <a class="el" href="classBipedalLocomotion_1_1ParametersHandler_1_1IParametersHandler.html">ParametersHandler::IParametersHandler</a> &gt; handler, std::shared_ptr&lt; iDynTree::KinDynComputations &gt; kinDyn)</td></tr>
+<tr class="memdesc:a96f1991b2a0b45115f0fd69981b63437"><td class="mdescLeft">&#160;</td><td class="mdescRight">Build the inverse kinematics solver.  <a href="classBipedalLocomotion_1_1IK_1_1QPInverseKinematics.html#a96f1991b2a0b45115f0fd69981b63437">More...</a><br /></td></tr>
+<tr class="separator:a96f1991b2a0b45115f0fd69981b63437"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
+Additional Inherited Members</h2></td></tr>
+<tr class="inherit_header pub_types_classBipedalLocomotion_1_1System_1_1ILinearTaskSolver"><td colspan="2" onclick="javascript:toggleInherit('pub_types_classBipedalLocomotion_1_1System_1_1ILinearTaskSolver')"><img src="closed.png" alt="-"/>&#160;Public Types inherited from <a class="el" href="classBipedalLocomotion_1_1System_1_1ILinearTaskSolver.html">BipedalLocomotion::System::ILinearTaskSolver&lt; IKLinearTask, IntegrationBasedIKState &gt;</a></td></tr>
+<tr class="memitem:a6d1cc19ae482b87b3f5dadefa1eb4e7b inherit pub_types_classBipedalLocomotion_1_1System_1_1ILinearTaskSolver"><td class="memItemLeft" align="right" valign="top"><a id="a6d1cc19ae482b87b3f5dadefa1eb4e7b"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>Task</b> = IKLinearTask</td></tr>
+<tr class="separator:a6d1cc19ae482b87b3f5dadefa1eb4e7b inherit pub_types_classBipedalLocomotion_1_1System_1_1ILinearTaskSolver"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a770b4595f008dbc6ae50e2889639df12 inherit pub_types_classBipedalLocomotion_1_1System_1_1ILinearTaskSolver"><td class="memItemLeft" align="right" valign="top"><a id="a770b4595f008dbc6ae50e2889639df12"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>State</b> = IntegrationBasedIKState</td></tr>
+<tr class="separator:a770b4595f008dbc6ae50e2889639df12 inherit pub_types_classBipedalLocomotion_1_1System_1_1ILinearTaskSolver"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_types_classBipedalLocomotion_1_1System_1_1Advanceable"><td colspan="2" onclick="javascript:toggleInherit('pub_types_classBipedalLocomotion_1_1System_1_1Advanceable')"><img src="closed.png" alt="-"/>&#160;Public Types inherited from <a class="el" href="classBipedalLocomotion_1_1System_1_1Advanceable.html">BipedalLocomotion::System::Advanceable&lt; EmptySignal, Output &gt;</a></td></tr>
+<tr class="memitem:a975a7ecbf38c917c7b72519581fc7dba inherit pub_types_classBipedalLocomotion_1_1System_1_1Advanceable"><td class="memItemLeft" align="right" valign="top"><a id="a975a7ecbf38c917c7b72519581fc7dba"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>Input</b> = typename <a class="el" href="classBipedalLocomotion_1_1System_1_1InputPort.html">BipedalLocomotion::System::InputPort</a>&lt; <a class="el" href="Advanceable_8h.html#a1558f6843cd1a0f40215a6364b0af652">EmptySignal</a> &gt;::Input</td></tr>
+<tr class="separator:a975a7ecbf38c917c7b72519581fc7dba inherit pub_types_classBipedalLocomotion_1_1System_1_1Advanceable"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a69603f2c9c608815908425b5b8c2005c inherit pub_types_classBipedalLocomotion_1_1System_1_1Advanceable"><td class="memItemLeft" align="right" valign="top"><a id="a69603f2c9c608815908425b5b8c2005c"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>Output</b> = typename <a class="el" href="classBipedalLocomotion_1_1System_1_1OutputPort.html">BipedalLocomotion::System::OutputPort</a>&lt; Output &gt;::Output</td></tr>
+<tr class="separator:a69603f2c9c608815908425b5b8c2005c inherit pub_types_classBipedalLocomotion_1_1System_1_1Advanceable"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_types_classBipedalLocomotion_1_1System_1_1InputPort"><td colspan="2" onclick="javascript:toggleInherit('pub_types_classBipedalLocomotion_1_1System_1_1InputPort')"><img src="closed.png" alt="-"/>&#160;Public Types inherited from <a class="el" href="classBipedalLocomotion_1_1System_1_1InputPort.html">BipedalLocomotion::System::InputPort&lt; _Input &gt;</a></td></tr>
+<tr class="memitem:adc7e6f59dd13c49f34ec04c1a4550a5a inherit pub_types_classBipedalLocomotion_1_1System_1_1InputPort"><td class="memItemLeft" align="right" valign="top"><a id="adc7e6f59dd13c49f34ec04c1a4550a5a"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>Input</b> = _Input</td></tr>
+<tr class="separator:adc7e6f59dd13c49f34ec04c1a4550a5a inherit pub_types_classBipedalLocomotion_1_1System_1_1InputPort"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_types_classBipedalLocomotion_1_1System_1_1OutputPort"><td colspan="2" onclick="javascript:toggleInherit('pub_types_classBipedalLocomotion_1_1System_1_1OutputPort')"><img src="closed.png" alt="-"/>&#160;Public Types inherited from <a class="el" href="classBipedalLocomotion_1_1System_1_1OutputPort.html">BipedalLocomotion::System::OutputPort&lt; _Output &gt;</a></td></tr>
+<tr class="memitem:ab9150fecab94a5c4e06bc0579277d8c3 inherit pub_types_classBipedalLocomotion_1_1System_1_1OutputPort"><td class="memItemLeft" align="right" valign="top"><a id="ab9150fecab94a5c4e06bc0579277d8c3"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>Output</b> = _Output</td></tr>
+<tr class="separator:ab9150fecab94a5c4e06bc0579277d8c3 inherit pub_types_classBipedalLocomotion_1_1System_1_1OutputPort"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p><a class="el" href="classBipedalLocomotion_1_1IK_1_1QPInverseKinematics.html" title="QPInverseKinematics is a concrete class and implements an integration base inverse kinematics.">QPInverseKinematics</a> is a concrete class and implements an integration base inverse kinematics. </p>
+<p>The inverse kinematics is here implemented as Quadratic Programming (QP) problem. The user should set the desired task with the method <a class="el" href="classBipedalLocomotion_1_1IK_1_1QPInverseKinematics.html#a7666e60ae056992a39f56eddd1134d75" title="Add a linear task in the solver.">QPInverseKinematics::addTask</a>. Each task has a given priority. Currently we support only priority equal to 0 or 1. If the task priority is set to 0 the task will be considered as hard task, thus treated as an equality constraint. If the priority is equal to 1 the task will be embedded in the cost function. The class is also able to treat inequality constraints. A possible usage of the IK can be found in "Romualdi et al. A Benchmarking of DCM Based
+Architectures for Position and Velocity Controlled Walking of Humanoid Robots" <a href="https://doi.org/10.1109/HUMANOIDS.2018.8625025">https://doi.org/10.1109/HUMANOIDS.2018.8625025</a> Here you can find an example of the <a class="el" href="classBipedalLocomotion_1_1IK_1_1QPInverseKinematics.html" title="QPInverseKinematics is a concrete class and implements an integration base inverse kinematics.">QPInverseKinematics</a> class used as velocity controller or IK </p>
+<h2><a class="anchor" id="qp_vc"></a>
+Velocity Control</h2>
+<p>Here you can find an example of the <a class="el" href="classBipedalLocomotion_1_1IK_1_1QPFixedBaseInverseKinematics.html" title="QPFixedBaseInverseKinematics is specialization of QPInverseKinematics class in the case of fixed base...">QPFixedBaseInverseKinematics</a> interface used as a velocity controller. <br  />
+ <img src="https://user-images.githubusercontent.com/16744101/142453785-9e6f2b5e-dc82-417a-a5e3-bc8c61865d0b.png" alt="VelocityControl" width="1500" class="inline"/> </p>
+<h2><a class="anchor" id="qp_ik"></a>
+Inverse Kinematics</h2>
+<p>If you want to use <a class="el" href="classBipedalLocomotion_1_1IK_1_1QPInverseKinematics.html" title="QPInverseKinematics is a concrete class and implements an integration base inverse kinematics.">QPInverseKinematics</a> as IK you need to integrate the output velocity. System::FloatingBaseSystemVelocityKinematics and System::Integrator classes can be used to integrate the output of the IK taking into account the geometrical structure of the configuration space ( \( \mathbb{R}^3 \times SO(3) \times \mathbb{R}^n\)) <br  />
+ <img src="https://user-images.githubusercontent.com/16744101/142453860-6bba2a7a-26af-48da-b04e-114314c6f67c.png" alt="InverseKinematics" width="1500" class="inline"/> </p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="a7666e60ae056992a39f56eddd1134d75"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7666e60ae056992a39f56eddd1134d75">&#9670;&nbsp;</a></span>addTask() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool BipedalLocomotion::IK::QPInverseKinematics::addTask </td>
+          <td>(</td>
+          <td class="paramtype">std::shared_ptr&lt; Task &gt;&#160;</td>
+          <td class="paramname"><em>task</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>taskName</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::size_t&#160;</td>
+          <td class="paramname"><em>priority</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::shared_ptr&lt; const <a class="el" href="ILinearTaskSolver_8h.html#aa0b9c4f50fc80885f1a6401dba73ad50">System::WeightProviderPort</a> &gt;&#160;</td>
+          <td class="paramname"><em>weightProvider</em> = <code>nullptr</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Add a linear task in the solver. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">task</td><td>pointer to a given linear task </td></tr>
+    <tr><td class="paramname">taskName</td><td>unique name associated to the task. </td></tr>
+    <tr><td class="paramname">priority</td><td>Priority associated to the task. The lower the number the higher the priority. </td></tr>
+    <tr><td class="paramname">weightProvider</td><td>Weight provider associated to the task. This parameter is optional. The default value is an object that does not contain any value. The user may avoid to pass a provider only if the priority of the task is equal to 0. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true if the task has been added to the solver. </dd></dl>
+<dl class="section warning"><dt>Warning</dt><dd>The QPTSID cannot handle inequality tasks (please check <a class="el" href="classBipedalLocomotion_1_1System_1_1LinearTask.html#a2f9d37ec58342f227021c12a4a539748" title="Type of the task.">Task::Type</a>) with priority equal to 1. </dd>
+<dd>
+The QPTSID can handle only priority equal to 0 and 1. 0 means high priority while 1 low priority. </dd></dl>
+
+<p>Implements <a class="el" href="classBipedalLocomotion_1_1System_1_1ILinearTaskSolver.html#a2aa760519d2a9a20045d27ca97cc1d8f">BipedalLocomotion::System::ILinearTaskSolver&lt; IKLinearTask, IntegrationBasedIKState &gt;</a>.</p>
+
+</div>
+</div>
+<a id="a2b0c765e65eb6875342f438560c99e6c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2b0c765e65eb6875342f438560c99e6c">&#9670;&nbsp;</a></span>addTask() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool BipedalLocomotion::IK::QPInverseKinematics::addTask </td>
+          <td>(</td>
+          <td class="paramtype">std::shared_ptr&lt; Task &gt;&#160;</td>
+          <td class="paramname"><em>task</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>taskName</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::size_t&#160;</td>
+          <td class="paramname"><em>priority</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Eigen::Ref&lt; const Eigen::VectorXd &gt;&#160;</td>
+          <td class="paramname"><em>weight</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Add a linear task in the solver. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">task</td><td>pointer to a given linear task </td></tr>
+    <tr><td class="paramname">taskName</td><td>unique name associated to the task. </td></tr>
+    <tr><td class="paramname">priority</td><td>Priority associated to the task. The lower the number the higher the priority. </td></tr>
+    <tr><td class="paramname">weight</td><td>Weight associated to the task. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true if the task has been added to the solver. </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>The solver assumes the weight is a constant value. </dd></dl>
+<dl class="section warning"><dt>Warning</dt><dd>The <a class="el" href="classBipedalLocomotion_1_1IK_1_1QPInverseKinematics.html" title="QPInverseKinematics is a concrete class and implements an integration base inverse kinematics.">QPInverseKinematics</a> cannot handle inequality tasks (please check <a class="el" href="classBipedalLocomotion_1_1System_1_1LinearTask.html#a2f9d37ec58342f227021c12a4a539748" title="Type of the task.">Task::Type</a>) with priority equal to 1. </dd></dl>
+
+<p>Implements <a class="el" href="classBipedalLocomotion_1_1System_1_1ILinearTaskSolver.html#aa120f4a6ec30a664c29b0acfcca7730d">BipedalLocomotion::System::ILinearTaskSolver&lt; IKLinearTask, IntegrationBasedIKState &gt;</a>.</p>
+
+</div>
+</div>
+<a id="aaf34b9a0c65fa2697cd5b7073727ab39"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaf34b9a0c65fa2697cd5b7073727ab39">&#9670;&nbsp;</a></span>setTaskWeight() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool QPInverseKinematics::setTaskWeight </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>taskName</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::shared_ptr&lt; const <a class="el" href="ILinearTaskSolver_8h.html#aa0b9c4f50fc80885f1a6401dba73ad50">System::WeightProviderPort</a> &gt;&#160;</td>
+          <td class="paramname"><em>weightProvider</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Set the weightProvider associated to an already existing task. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">taskName</td><td>name associated to the task </td></tr>
+    <tr><td class="paramname">weightProvider</td><td>new weight provider associated to the task. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true if the weight has been updated </dd></dl>
+
+<p>Implements <a class="el" href="classBipedalLocomotion_1_1System_1_1ILinearTaskSolver.html#a3de5b3fbd5d68247e799e4dd36f610cf">BipedalLocomotion::System::ILinearTaskSolver&lt; IKLinearTask, IntegrationBasedIKState &gt;</a>.</p>
+
+</div>
+</div>
+<a id="a76a1a82763a46182017b713e5237ae4a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a76a1a82763a46182017b713e5237ae4a">&#9670;&nbsp;</a></span>setTaskWeight() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool QPInverseKinematics::setTaskWeight </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>taskName</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Eigen::Ref&lt; const Eigen::VectorXd &gt;&#160;</td>
+          <td class="paramname"><em>weight</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Set the weight associated to an already existing task. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">taskName</td><td>name associated to the task </td></tr>
+    <tr><td class="paramname">weight</td><td>new Weight associated to the task. A constant weight is assumed. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true if the weight has been updated </dd></dl>
+
+<p>Implements <a class="el" href="classBipedalLocomotion_1_1System_1_1ILinearTaskSolver.html#aaf4d7e4a163df3f4939d119f002302d6">BipedalLocomotion::System::ILinearTaskSolver&lt; IKLinearTask, IntegrationBasedIKState &gt;</a>.</p>
+
+</div>
+</div>
+<a id="a86ecad88aad59b972b64cde3dcbe5476"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a86ecad88aad59b972b64cde3dcbe5476">&#9670;&nbsp;</a></span>getTaskWeightProvider()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::weak_ptr&lt; const <a class="el" href="ILinearTaskSolver_8h.html#aa0b9c4f50fc80885f1a6401dba73ad50">System::WeightProviderPort</a> &gt; QPInverseKinematics::getTaskWeightProvider </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>taskName</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get the weightProvider associated to an already existing task. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">taskName</td><td>name associated to the task </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>a weak pointer to the weightProvider. If the task does not exist the pointer is not lockable </dd></dl>
+
+<p>Implements <a class="el" href="classBipedalLocomotion_1_1System_1_1ILinearTaskSolver.html#a216c5bf1a5a79f6b4f0fad6939a8087b">BipedalLocomotion::System::ILinearTaskSolver&lt; IKLinearTask, IntegrationBasedIKState &gt;</a>.</p>
+
+</div>
+</div>
+<a id="a002751b1ac8f4b0a41cbbb414d5b2d0f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a002751b1ac8f4b0a41cbbb414d5b2d0f">&#9670;&nbsp;</a></span>finalize()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool QPInverseKinematics::finalize </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classBipedalLocomotion_1_1System_1_1VariablesHandler.html">System::VariablesHandler</a> &amp;&#160;</td>
+          <td class="paramname"><em>handler</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Finalize the IK. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">handler</td><td>parameter handler. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section note"><dt>Note</dt><dd>You should call this method after you add ALL the tasks. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>true in case of success, false otherwise. </dd></dl>
+
+<p>Implements <a class="el" href="classBipedalLocomotion_1_1System_1_1ILinearTaskSolver.html#aab3c4a0555f5e1f98f7fbda7c200a7ed">BipedalLocomotion::System::ILinearTaskSolver&lt; IKLinearTask, IntegrationBasedIKState &gt;</a>.</p>
+
+</div>
+</div>
+<a id="a5334a23163859dd10cfb74229ac00b19"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5334a23163859dd10cfb74229ac00b19">&#9670;&nbsp;</a></span>initialize()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool QPInverseKinematics::initialize </td>
+          <td>(</td>
+          <td class="paramtype">std::weak_ptr&lt; const <a class="el" href="classBipedalLocomotion_1_1ParametersHandler_1_1IParametersHandler.html">ParametersHandler::IParametersHandler</a> &gt;&#160;</td>
+          <td class="paramname"><em>handler</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Initialize the inverse kinematics algorithm. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">handler</td><td>pointer to the IParametersHandler interface. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section note"><dt>Note</dt><dd>the following parameters are required by the class <table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadCenter">Parameter Name   </th><th class="markdownTableHeadCenter">Type   </th><th class="markdownTableHeadCenter">Description   </th><th class="markdownTableHeadCenter">Mandatory    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyCenter"><code>robot_velocity_variable_name</code>   </td><td class="markdownTableBodyCenter"><code>string</code>   </td><td class="markdownTableBodyCenter">Name of the variable contained in <code>VariablesHandler</code> describing the generalized robot velocity   </td><td class="markdownTableBodyCenter">Yes    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyCenter"><code>verbosity</code>   </td><td class="markdownTableBodyCenter"><code>bool</code>   </td><td class="markdownTableBodyCenter">Verbosity of the solver. Default value <code>false</code>   </td><td class="markdownTableBodyCenter">No   </td></tr>
+</table>
+Where the generalized robot velocity is a vector containing the base spatial velocity (expressed in mixed representation) and the joint velocities. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>True in case of success, false otherwise. </dd></dl>
+
+<p>Reimplemented from <a class="el" href="classBipedalLocomotion_1_1System_1_1Advanceable.html#a6db247d3db83217a16e963d01f6bcb77">BipedalLocomotion::System::Advanceable&lt; EmptySignal, Output &gt;</a>.</p>
+
+</div>
+</div>
+<a id="a96f1991b2a0b45115f0fd69981b63437"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a96f1991b2a0b45115f0fd69981b63437">&#9670;&nbsp;</a></span>build()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structBipedalLocomotion_1_1IK_1_1IntegrationBasedIKProblem.html">IntegrationBasedIKProblem</a> QPInverseKinematics::build </td>
+          <td>(</td>
+          <td class="paramtype">std::weak_ptr&lt; const <a class="el" href="classBipedalLocomotion_1_1ParametersHandler_1_1IParametersHandler.html">ParametersHandler::IParametersHandler</a> &gt;&#160;</td>
+          <td class="paramname"><em>handler</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::shared_ptr&lt; iDynTree::KinDynComputations &gt;&#160;</td>
+          <td class="paramname"><em>kinDyn</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Build the inverse kinematics solver. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">kinDyn</td><td>a pointer to an iDynTree::KinDynComputations object that will be shared among all the tasks. </td></tr>
+    <tr><td class="paramname">handler</td><td>pointer to the IParametersHandler interface. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section note"><dt>Note</dt><dd>the following parameters are required by the class <table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadCenter">Group   </th><th class="markdownTableHeadCenter">Parameter Name   </th><th class="markdownTableHeadCenter">Type   </th><th class="markdownTableHeadCenter">Description   </th><th class="markdownTableHeadCenter">Mandatory    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"><code>tasks</code>   </td><td class="markdownTableBodyCenter"><code>vector&lt;string&gt;</code>   </td><td class="markdownTableBodyCenter">Vector containing the list of the tasks considered in the IK.   </td><td class="markdownTableBodyCenter">Yes    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyCenter"><code>IK</code>   </td><td class="markdownTableBodyCenter"><code>robot_velocity_variable_name</code>   </td><td class="markdownTableBodyCenter"><code>string</code>   </td><td class="markdownTableBodyCenter">Name of the variable contained in <code>VariablesHandler</code> describing the generalized robot velocity   </td><td class="markdownTableBodyCenter">Yes    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyCenter"><code>IK</code>   </td><td class="markdownTableBodyCenter"><code>verbosity</code>   </td><td class="markdownTableBodyCenter"><code>bool</code>   </td><td class="markdownTableBodyCenter">Verbosity of the solver. Default value <code>false</code>   </td><td class="markdownTableBodyCenter">No   </td></tr>
+</table>
+Where the generalized robot velocity is a vector containing the base spatialvelocity (expressed in mixed representation) and the joint velocities. For <b>each</b> task listed in the parameter <code>tasks</code> the user must specify all the parameters required by the task itself but <code>robot_velocity_variable_name</code> since is already specified in the <code>IK</code> group. Moreover the following parameters are required for each task. <table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadCenter">Group   </th><th class="markdownTableHeadCenter">Parameter Name   </th><th class="markdownTableHeadCenter">Type   </th><th class="markdownTableHeadCenter">Description   </th><th class="markdownTableHeadCenter">Mandatory    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyCenter"><code>TASK_NAME</code>   </td><td class="markdownTableBodyCenter"><code>type</code>   </td><td class="markdownTableBodyCenter"><code>string</code>   </td><td class="markdownTableBodyCenter">String representing the type of the task. The string should match the name of the C++ class.   </td><td class="markdownTableBodyCenter">Yes    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyCenter"><code>TASK_NAME</code>   </td><td class="markdownTableBodyCenter"><code>priority</code>   </td><td class="markdownTableBodyCenter"><code>int</code>   </td><td class="markdownTableBodyCenter">Priority associated to the task. (Check <a class="el" href="classBipedalLocomotion_1_1IK_1_1QPInverseKinematics.html#a7666e60ae056992a39f56eddd1134d75" title="Add a linear task in the solver.">QPInverseKinematics::addTask</a> for further information)   </td><td class="markdownTableBodyCenter">Yes    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyCenter"><code>TASK_NAME</code>   </td><td class="markdownTableBodyCenter"><code>weight_provider_type</code>   </td><td class="markdownTableBodyCenter"><code>string</code>   </td><td class="markdownTableBodyCenter">String representing the type of the weight provider. The string should match the name of the C++ class. It is required only if the task is low priority. The default value in case of low priority task (<code>priority = 1</code>) is <code>ConstantWeightProvider</code>   </td><td class="markdownTableBodyCenter">No   </td></tr>
+</table>
+Given the weight type specified by <code>weight_provider_type</code>, the user must specify all the parameters required by the provider in the <code>TASK_NAME</code> group handler <code>TASK_NAME</code> is a placeholder for the name of the task contained in the <code>tasks</code> list. </dd>
+<dd>
+The following <code>ini</code> file presents an example of the configuration that can be used to build the IK <div class="fragment"><div class="line">tasks                           (&quot;COM_TASK&quot;, &quot;RIGHT_FOOT_TASK&quot;, &quot;LEFT_FOOT_TASK&quot;, &quot;TORSO_TASK&quot;, &quot;JOINT_REGULARIZATION_TASK&quot;)</div>
+<div class="line"> </div>
+<div class="line">[IK]</div>
+<div class="line">robot_velocity_variable_name    robot_velocity</div>
+<div class="line"> </div>
+<div class="line">[COM_TASK]</div>
+<div class="line">type                            CoMTask</div>
+<div class="line">kp_linear                       2.0</div>
+<div class="line">mask                            (true, true, true)</div>
+<div class="line">priority                        0</div>
+<div class="line"> </div>
+<div class="line">[RIGHT_FOOT_TASK]</div>
+<div class="line">type                            SE3Task</div>
+<div class="line">frame_name                      r_sole</div>
+<div class="line">kp_linear                       7.0</div>
+<div class="line">kp_angular                      5.0</div>
+<div class="line">priority                        0</div>
+<div class="line"> </div>
+<div class="line">[LEFT_FOOT_TASK]</div>
+<div class="line">type                            SE3Task</div>
+<div class="line">frame_name                      l_sole</div>
+<div class="line">kp_linear                       7.0</div>
+<div class="line">kp_angular                      5.0</div>
+<div class="line">priority                        0</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line">[JOINT_REGULARIZATION_TASK]</div>
+<div class="line">type                            JointTrackingTask</div>
+<div class="line">kp                              (5.0, 5.0, 5.0,</div>
+<div class="line">                                 5.0, 5.0, 5.0, 5.0,</div>
+<div class="line">                                 5.0, 5.0, 5.0, 5.0,</div>
+<div class="line">                                 5.0, 5.0, 5.0, 5.0, 5.0, 5.0,</div>
+<div class="line">                                 5.0, 5.0, 5.0, 5.0, 5.0, 5.0)</div>
+<div class="line">priority                        1</div>
+<div class="line">weight_provider_type            ConstantWeightProvider</div>
+<div class="line">weight                          (1.0, 1.0, 1.0,</div>
+<div class="line">                                 2.0, 2.0, 2.0, 2.0,</div>
+<div class="line">                                 2.0, 2.0, 2.0, 2.0,</div>
+<div class="line">                                 1.0, 1.0, 1.0, 1.0, 1.0, 1.0,</div>
+<div class="line">                                 1.0, 1.0, 1.0, 1.0, 1.0, 1.0)</div>
+<div class="line"> </div>
+<div class="line">[include TORSO_TASK &quot;./tasks/torso.ini&quot;]</div>
+</div><!-- fragment --> Where the file <code>./tasks/torso.ini</code> contains the definition of a low priority task whose weight is a <a class="el" href="classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1MultiStateWeightProvider.html" title="MultiStateWeightProvider describes the provider for a constant weight.">BipedalLocomotion::ContinuousDynamicalSystem::MultiStateWeightProvider</a>. Since <code>MultiStateWeightProvider</code> requires the definition of subgroups, an additional file is suggested as explained in: <a href="https://github.com/robotology/yarp/discussions/2563">https://github.com/robotology/yarp/discussions/2563</a> <div class="fragment"><div class="line">type                            SO3Task</div>
+<div class="line">frame_name                      chest</div>
+<div class="line">kp_angular                      5.0</div>
+<div class="line"> </div>
+<div class="line">weight_provider_type            MultiStateWeightProvider</div>
+<div class="line"> </div>
+<div class="line">states                          (&quot;STANCE&quot;, &quot;WALKING&quot;)</div>
+<div class="line">sampling_time                   0.01</div>
+<div class="line">settling_time                   3.0</div>
+<div class="line"> </div>
+<div class="line">[STANCE]</div>
+<div class="line">name                            stance</div>
+<div class="line">weight                          (0.1, 0.1, 0.1)</div>
+<div class="line"> </div>
+<div class="line">[WALKING]</div>
+<div class="line">name                            walking</div>
+<div class="line">weight                          (5.0, 5.0, 5.0)</div>
+</div><!-- fragment --> </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>an <a class="el" href="structBipedalLocomotion_1_1IK_1_1IntegrationBasedIKProblem.html" title="IntegrationBasedIKProblem store all the ingredients to run an modfy at runtime an Integration based i...">IntegrationBasedIKProblem</a>. In case of issues an invalid <a class="el" href="structBipedalLocomotion_1_1IK_1_1IntegrationBasedIKProblem.html" title="IntegrationBasedIKProblem store all the ingredients to run an modfy at runtime an Integration based i...">IntegrationBasedIKProblem</a> will be returned. </dd></dl>
+
+</div>
+</div>
+<a id="aba7ab99936b2d34de069d436e72582ce"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aba7ab99936b2d34de069d436e72582ce">&#9670;&nbsp;</a></span>getTaskNames()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt; std::string &gt; QPInverseKinematics::getTaskNames </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get a vector containing the name of the tasks. </p>
+<dl class="section return"><dt>Returns</dt><dd>an std::vector containing all the names associated to the tasks </dd></dl>
+
+<p>Implements <a class="el" href="classBipedalLocomotion_1_1System_1_1ILinearTaskSolver.html#a0b947d91a384c6ffab544b62857f181e">BipedalLocomotion::System::ILinearTaskSolver&lt; IKLinearTask, IntegrationBasedIKState &gt;</a>.</p>
+
+</div>
+</div>
+<a id="a30b994ea707164aba3f77e8b619a853e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a30b994ea707164aba3f77e8b619a853e">&#9670;&nbsp;</a></span>advance()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool QPInverseKinematics::advance </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Solve the inverse kinematics. </p>
+<dl class="section return"><dt>Returns</dt><dd>true in case of success and false otherwise. </dd></dl>
+
+<p>Implements <a class="el" href="classBipedalLocomotion_1_1System_1_1Advanceable.html#a67107e46e831d93f572558b541aab6d2">BipedalLocomotion::System::Advanceable&lt; EmptySignal, Output &gt;</a>.</p>
+
+</div>
+</div>
+<a id="a7fd9a7a18ce0222cf5018d281c7f5fef"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7fd9a7a18ce0222cf5018d281c7f5fef">&#9670;&nbsp;</a></span>getOutput()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="structBipedalLocomotion_1_1IK_1_1IntegrationBasedIKState.html">QPInverseKinematics::State</a> &amp; QPInverseKinematics::getOutput </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get the outcome of the optimization problem. </p>
+<dl class="section return"><dt>Returns</dt><dd>the state of the inverse kinematics. </dd></dl>
+
+<p>Implements <a class="el" href="classBipedalLocomotion_1_1System_1_1OutputPort.html#a8c089ecf2dd8ff0fb2732233994b6cac">BipedalLocomotion::System::OutputPort&lt; _Output &gt;</a>.</p>
+
+</div>
+</div>
+<a id="afb8403a6949a24c99162fbd62f335648"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afb8403a6949a24c99162fbd62f335648">&#9670;&nbsp;</a></span>getTask()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::weak_ptr&lt; QPInverseKinematics::Task &gt; QPInverseKinematics::getTask </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>name</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get a specific task. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">name</td><td>name associated to the task. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>a weak ptr associated to an existing task in the IK. If the task does not exist a nullptr is returned. </dd></dl>
+
+<p>Implements <a class="el" href="classBipedalLocomotion_1_1System_1_1ILinearTaskSolver.html#a1025c001495c8dd9e700dd562add7fea">BipedalLocomotion::System::ILinearTaskSolver&lt; IKLinearTask, IntegrationBasedIKState &gt;</a>.</p>
+
+</div>
+</div>
+<a id="a663caaa3cda3df238309ead8ae5e11ed"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a663caaa3cda3df238309ead8ae5e11ed">&#9670;&nbsp;</a></span>toString()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string QPInverseKinematics::toString </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Return the description of the InverseKinematics problem. </p>
+<dl class="section return"><dt>Returns</dt><dd>a string containing the description of the solver. </dd></dl>
+
+<p>Implements <a class="el" href="classBipedalLocomotion_1_1System_1_1ILinearTaskSolver.html#afbd5b817d76ec0097386eec2bc5eb914">BipedalLocomotion::System::ILinearTaskSolver&lt; IKLinearTask, IntegrationBasedIKState &gt;</a>.</p>
+
+</div>
+</div>
+<a id="a7a3124022f48c678d783a13295abc019"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7a3124022f48c678d783a13295abc019">&#9670;&nbsp;</a></span>getRawSolution()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Eigen::Ref&lt; const Eigen::VectorXd &gt; QPInverseKinematics::getRawSolution </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Return the vector representing the entire solution of the <a class="el" href="classBipedalLocomotion_1_1IK_1_1QPInverseKinematics.html" title="QPInverseKinematics is a concrete class and implements an integration base inverse kinematics.">QPInverseKinematics</a>. </p>
+<dl class="section return"><dt>Returns</dt><dd>a vector containing the solution of the optimization problem </dd></dl>
+
+<p>Implements <a class="el" href="classBipedalLocomotion_1_1System_1_1ILinearTaskSolver.html#aab3cebfecafc57d2e8fc4f55d6f52b57">BipedalLocomotion::System::ILinearTaskSolver&lt; IKLinearTask, IntegrationBasedIKState &gt;</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following files:<ul>
+<li>IK/include/BipedalLocomotion/IK/<a class="el" href="QPInverseKinematics_8h.html">QPInverseKinematics.h</a></li>
+<li>IK/src/<a class="el" href="QPInverseKinematics_8cpp.html">QPInverseKinematics.cpp</a></li>
+</ul>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- Doxygen custom footer -->
+<div id="nav-path" class="navpath">
+  <ul>
+    <li class="footer">
+      <a href="https://github.com/gbionics/bipedal-locomotion-framework">GitHub</a> &bull;
+      <a href="https://gbionics.ai/">Generative Bionics</a> &bull;
+      Licensed under <a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause "New" or "Revised" License</a> &bull;
+      Generated by <a href="https://www.doxygen.org/index.html">Doxygen</a> 1.9.1
+    </li>
+  </ul>
+</div>
 </body>
 </html>

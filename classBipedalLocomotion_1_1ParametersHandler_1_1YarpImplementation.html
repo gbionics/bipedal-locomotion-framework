@@ -1,971 +1,1515 @@
-<!DOCTYPE html>
-<html lang="en">
+<!-- HTML header for doxygen 1.9.1 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-  <meta charset="UTF-8" />
-  <title>BipedalLocomotion::ParametersHandler::YarpImplementation class | bipedal locomotion framework master</title>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
-  <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
-  <link rel="icon" href="favicon-dark.png" type="image/png" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#22272e" />
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>bipedal locomotion framework: BipedalLocomotion::ParametersHandler::YarpImplementation Class Reference</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js", "TeX/AMSmath.js", "TeX/AMSsymbols.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+});
+</script>
+<script type="text/javascript" async="async" src="https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only-darkmode-toggle.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="doxygen-awesome-darkmode-toggle.js"></script>
+<script type="text/javascript" src="doxygen-awesome-fragment-copy-button.js"></script>
+<script type="text/javascript" src="doxygen-awesome-interactive-toc.js"></script>
+<script type="text/javascript" src="doxygen-awesome-paragraph-link.js"></script>
+<script type="text/javascript" src="doxygen-awesome-tabs.js"></script>
+<script type="text/javascript">
+    DoxygenAwesomeDarkModeToggle.init()
+    DoxygenAwesomeFragmentCopyButton.init()
+    DoxygenAwesomeInteractiveToc.init()
+    DoxygenAwesomeParagraphLink.init()
+    DoxygenAwesomeTabs.init()
+</script>
 </head>
 <body>
-<header><nav id="navigation">
-  <div class="m-container">
-    <div class="m-row">
-      <span id="m-navbar-brand" class="m-col-t-8 m-col-m-none m-left-m">
-        <a href="./index.html">bipedal locomotion framework</a> <span class="m-breadcrumb">|</span> <a href="index.html" class="m-thin">master</a>
-      </span>
-      <div class="m-col-t-4 m-hide-m m-text-right m-nopadr">
-        <a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
-          <path id="m-doc-search-icon-path" d="m6 0c-3.31 0-6 2.69-6 6 0 3.31 2.69 6 6 6 1.49 0 2.85-0.541 3.89-1.44-0.0164 0.338 0.147 0.759 0.5 1.15l3.22 3.79c0.552 0.614 1.45 0.665 2 0.115 0.55-0.55 0.499-1.45-0.115-2l-3.79-3.22c-0.392-0.353-0.812-0.515-1.15-0.5 0.895-1.05 1.44-2.41 1.44-3.89 0-3.31-2.69-6-6-6zm0 1.56a4.44 4.44 0 0 1 4.44 4.44 4.44 4.44 0 0 1-4.44 4.44 4.44 4.44 0 0 1-4.44-4.44 4.44 4.44 0 0 1 4.44-4.44z"/>
-        </svg></a>
-        <a id="m-navbar-show" href="#navigation" title="Show navigation"></a>
-        <a id="m-navbar-hide" href="#" title="Hide navigation"></a>
-      </div>
-      <div id="m-navbar-collapse" class="m-col-t-12 m-show-m m-col-m-none m-right-m">
-        <div class="m-row">
-          <ol class="m-col-t-6 m-col-m-none">
-            <li><a href="pages.html">Pages</a></li>
-            <li><a href="annotated.html">Classes</a></li>
-            <li><a href="files.html">Files</a></li>
-          </ol>
-          <ol class="m-col-t-6 m-col-m-none" start="4">
-            <li>
-              <a href="pages.html">Versions</a>
-              <ol>
-                <li><a href="./index.html">Master</a></li>
-                <li><a href="./v0.19.0/index.html">v0.19.0</a></li>
-                <li><a href="./v0.21.1/index.html">v0.21.1</a></li>
-                <li><a href="./v0.18.0/index.html">v0.18.0</a></li>
-              </ol>
-            </li>
-            <li>
-              <a href="pages.html">Contacts</a>
-              <ol>
-                <li><a href="https://github.com/ami-iit/bipedal-locomotion-framework">GitHub</a></li>
-                <li><a href="https://www.iit.it/web/ami/">Lab website</a></li>
-              </ol>
-            </li>
-            <li class="m-show-m"><a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
-              <use href="#m-doc-search-icon-path" />
-            </svg></a></li>
-          </ol>
-        </div>
-      </div>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">bipedal locomotion framework
+   </div>
+   <div id="projectbrief">A suite of libraries for achieving bipedal locomotion on humanoid robots</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.9.1 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "search",false,'Search','.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',true,false,'search.php','Search');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
     </div>
   </div>
-</nav></header>
-<main><article>
-  <div class="m-container m-container-inflatable">
-    <div class="m-row">
-      <div class="m-col-l-10 m-push-l-1">
-        <h1>
-          <span class="m-breadcrumb"><a href="namespaceBipedalLocomotion.html">BipedalLocomotion</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespaceBipedalLocomotion_1_1ParametersHandler.html">ParametersHandler</a>::<wbr/></span>YarpImplementation <span class="m-thin">class</span>
-          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="YarpImplementation_8h.html">&lt;BipedalLocomotion/ParametersHandler/YarpImplementation.h&gt;</a></div>
-        </h1>
-        <p><a href="classBipedalLocomotion_1_1ParametersHandler_1_1YarpImplementation.html" class="m-doc">YarpImplementation</a> Yarp implementation of the <a href="classBipedalLocomotion_1_1ParametersHandler_1_1IParametersHandler.html" class="m-doc">IParametersHandler</a> interface.</p>
-        <nav class="m-block m-default">
-          <h3>Contents</h3>
-          <ul>
-            <li>
-              Reference
-              <ul>
-                <li><a href="#base-classes">Base classes</a></li>
-                <li><a href="#typeless-methods">Constructors, destructors, conversion operators</a></li>
-                <li><a href="#pub-methods">Public functions</a></li>
-              </ul>
-            </li>
-          </ul>
-        </nav>
-        <section id="base-classes">
-          <h2><a href="#base-classes">Base classes</a></h2>
-          <dl class="m-doc">
-            <dt>
-              class <a href="classBipedalLocomotion_1_1ParametersHandler_1_1IParametersHandler.html" class="m-doc">IParametersHandler</a>
-            </dt>
-            <dd>Parameters handler interface.</dd>
-          </dl>
-        </section>
-        <section id="typeless-methods">
-          <h2><a href="#typeless-methods">Constructors, destructors, conversion operators</a></h2>
-          <dl class="m-doc">
-            <dt>
-              <span class="m-doc-wrap-bumper"><a href="#a2029a7fe24230683465d6ab99ef0d297" class="m-doc">YarpImplementation</a>(</span><span class="m-doc-wrap">const yarp::os::Searchable&amp; searchable)</span>
-            </dt>
-            <dd>Constructor.</dd>
-            <dt id="ae5223e6348970d0c3c388ac46abe5857">
-              <span class="m-doc-wrap-bumper"><a href="#ae5223e6348970d0c3c388ac46abe5857" class="m-doc-self">YarpImplementation</a>(</span><span class="m-doc-wrap">) <span class="m-label m-flat m-info">defaulted</span></span>
-            </dt>
-            <dd>Constructor.</dd>
-            <dt id="a229f0efd055b386c23fb4f3d16ba56eb">
-              <span class="m-doc-wrap-bumper"><a href="#a229f0efd055b386c23fb4f3d16ba56eb" class="m-doc-self">~YarpImplementation</a>(</span><span class="m-doc-wrap">) <span class="m-label m-flat m-info">defaulted</span></span>
-            </dt>
-            <dd>Destructor.</dd>
-          </dl>
-        </section>
-        <section id="pub-methods">
-          <h2><a href="#pub-methods">Public functions</a></h2>
-          <dl class="m-doc">
-            <dt>
-              <span class="m-doc-wrap-bumper">void <a href="#a60cf026ca1362f6762dca4abcc2b4ee6" class="m-doc">set</a>(</span><span class="m-doc-wrap">const yarp::os::Searchable&amp; searchable)</span>
-            </dt>
-            <dd>Set the handler from an object.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a19e160a13499f83b82e189813b7e371c" class="m-doc">setFromFile</a>(</span><span class="m-doc-wrap">const std::string&amp; filename) -&gt; bool</span>
-            </dt>
-            <dd>Set the handler from a file.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a484bf26a05d767b7f13589e25721b1ce" class="m-doc">getParameter</a>(</span><span class="m-doc-wrap">const std::string&amp; parameterName,
-              int&amp; parameter) const -&gt; bool <span class="m-label m-flat m-warning">final</span></span>
-            </dt>
-            <dd>Get a parameter [int].</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#aa5c5c9f4dbd352fbd5f9c17985accfb3" class="m-doc">getParameter</a>(</span><span class="m-doc-wrap">const std::string&amp; parameterName,
-              double&amp; parameter) const -&gt; bool <span class="m-label m-flat m-warning">final</span></span>
-            </dt>
-            <dd>Get a parameter [double].</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#ad76663f0dc1955660886542f3adfd173" class="m-doc">getParameter</a>(</span><span class="m-doc-wrap">const std::string&amp; parameterName,
-              std::string&amp; parameter) const -&gt; bool <span class="m-label m-flat m-warning">final</span></span>
-            </dt>
-            <dd>Get a parameter [std::string].</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a77838487a5c87eb82d5d98cdb986641b" class="m-doc">getParameter</a>(</span><span class="m-doc-wrap">const std::string&amp; parameterName,
-              bool&amp; parameter) const -&gt; bool <span class="m-label m-flat m-warning">final</span></span>
-            </dt>
-            <dd>Get a parameter [bool].</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#af77eaebe3d7d1327da4da50dfe89b2f9" class="m-doc">getParameter</a>(</span><span class="m-doc-wrap">const std::string&amp; parameterName,
-              std::chrono::nanoseconds&amp; parameter) const -&gt; bool <span class="m-label m-flat m-warning">final</span></span>
-            </dt>
-            <dd>Get a parameter [std::chrono::nanoseconds].</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a0111773bdb6634bebefca77aee1470ba" class="m-doc">getParameter</a>(</span><span class="m-doc-wrap">const std::string&amp; parameterName,
-              std::vector&lt;bool&gt;&amp; parameter) const -&gt; bool <span class="m-label m-flat m-warning">final</span></span>
-            </dt>
-            <dd>Get a parameter [std::vector&lt;bool&gt;].</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a8f3c85c02969f7f8db575cc24c22ebee" class="m-doc">getParameter</a>(</span><span class="m-doc-wrap">const std::string&amp; parameterName,
-              <a href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html" class="m-doc">GenericContainer::<wbr />Vector</a>&lt;int&gt;::Ref parameter) const -&gt; bool <span class="m-label m-flat m-warning">final</span></span>
-            </dt>
-            <dd>Get a parameter [GenericContainer::Vector&lt;int&gt;].</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a6a6b19fea7c698e4dbfe1bf47a88bac0" class="m-doc">getParameter</a>(</span><span class="m-doc-wrap">const std::string&amp; parameterName,
-              <a href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html" class="m-doc">GenericContainer::<wbr />Vector</a>&lt;double&gt;::Ref parameter) const -&gt; bool <span class="m-label m-flat m-warning">final</span></span>
-            </dt>
-            <dd>Get a parameter [GenericContainer::Vector&lt;double&gt;].</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a84e532092b9cc1f490cd69ceb1382ed4" class="m-doc">getParameter</a>(</span><span class="m-doc-wrap">const std::string&amp; parameterName,
-              <a href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html" class="m-doc">GenericContainer::<wbr />Vector</a>&lt;std::string&gt;::Ref parameter) const -&gt; bool <span class="m-label m-flat m-warning">final</span></span>
-            </dt>
-            <dd>Get a parameter [GenericContainer::Vector&lt;std::string&gt;].</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#ade61fb20a94b484bcb19f24c5e5480e1" class="m-doc">getParameter</a>(</span><span class="m-doc-wrap">const std::string&amp; parameterName,
-              <a href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html" class="m-doc">GenericContainer::<wbr />Vector</a>&lt;std::chrono::nanoseconds&gt;::Ref parameter) const -&gt; bool <span class="m-label m-flat m-warning">final</span></span>
-            </dt>
-            <dd>Get a parameter [GenericContainer::Vector&lt;std::chrono::nanoseconds&gt;].</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">void <a href="#a22c35bd2722d4ec538aab79cdfc99f56" class="m-doc">setParameter</a>(</span><span class="m-doc-wrap">const std::string&amp; parameterName,
-              const int&amp; parameter) <span class="m-label m-flat m-warning">final</span></span>
-            </dt>
-            <dd>Set a parameter [int].</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">void <a href="#a047943c17ef15231efa10b486b40e4d1" class="m-doc">setParameter</a>(</span><span class="m-doc-wrap">const std::string&amp; parameterName,
-              const double&amp; parameter) <span class="m-label m-flat m-warning">final</span></span>
-            </dt>
-            <dd>Set a parameter [double].</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">void <a href="#a6881d6a1f5fe38346354e9113903c28f" class="m-doc">setParameter</a>(</span><span class="m-doc-wrap">const std::string&amp; parameterName,
-              const std::string&amp; parameter) <span class="m-label m-flat m-warning">final</span></span>
-            </dt>
-            <dd>Set a parameter [std::string].</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">void <a href="#ae17080381e2cdafb498e59c8848379c6" class="m-doc">setParameter</a>(</span><span class="m-doc-wrap">const std::string&amp; parameterName,
-              const char* parameter) <span class="m-label m-flat m-warning">final</span></span>
-            </dt>
-            <dd>Set a parameter [const char*].</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">void <a href="#a597bfc52821217fb8e94fa33867fc4db" class="m-doc">setParameter</a>(</span><span class="m-doc-wrap">const std::string&amp; parameterName,
-              const bool&amp; parameter) <span class="m-label m-flat m-warning">final</span></span>
-            </dt>
-            <dd>Set a parameter [bool].</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">void <a href="#a2e30951b1f38cc986178b2e8904e1190" class="m-doc">setParameter</a>(</span><span class="m-doc-wrap">const std::string&amp; parameterName,
-              const std::chrono::nanoseconds&amp; parameter) <span class="m-label m-flat m-warning">final</span></span>
-            </dt>
-            <dd>Set a parameter [std::chrono::nanoseconds].</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">void <a href="#aa6ff4a24f07200238d7a1d6631338081" class="m-doc">setParameter</a>(</span><span class="m-doc-wrap">const std::string&amp; parameterName,
-              const std::vector&lt;bool&gt;&amp; parameter) <span class="m-label m-flat m-warning">final</span></span>
-            </dt>
-            <dd>Set a parameter [std::vector&lt;bool&gt;].</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">void <a href="#af544c00dc785e431af824e9b491a3ac3" class="m-doc">setParameter</a>(</span><span class="m-doc-wrap">const std::string&amp; parameterName,
-              const <a href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html" class="m-doc">GenericContainer::<wbr />Vector</a>&lt;const int&gt;::Ref parameter) <span class="m-label m-flat m-warning">final</span></span>
-            </dt>
-            <dd>Set a parameter [GenericContainer::Vector&lt;int&gt;].</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">void <a href="#aa6d600cbbe0fd72d7152179c4e055a10" class="m-doc">setParameter</a>(</span><span class="m-doc-wrap">const std::string&amp; parameterName,
-              const <a href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html" class="m-doc">GenericContainer::<wbr />Vector</a>&lt;const double&gt;::Ref parameter) <span class="m-label m-flat m-warning">final</span></span>
-            </dt>
-            <dd>Set a parameter [GenericContainer::Vector&lt;double&gt;].</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">void <a href="#aebc4c9d1fdec6de81711a2f62729c375" class="m-doc">setParameter</a>(</span><span class="m-doc-wrap">const std::string&amp; parameterName,
-              const <a href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html" class="m-doc">GenericContainer::<wbr />Vector</a>&lt;const std::string&gt;::Ref parameter) <span class="m-label m-flat m-warning">final</span></span>
-            </dt>
-            <dd>Set a parameter [GenericContainer::Vector&lt;std::string&gt;].</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">void <a href="#a1b2bba2e0b0d02f9dd404af6f19969b5" class="m-doc">setParameter</a>(</span><span class="m-doc-wrap">const std::string&amp; parameterName,
-              const <a href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html" class="m-doc">GenericContainer::<wbr />Vector</a>&lt;const std::chrono::nanoseconds&gt;::Ref parameter) <span class="m-label m-flat m-warning">final</span></span>
-            </dt>
-            <dd>Get a parameter [GenericContainer::Vector&lt;std::chrono::nanoseconds&gt;].</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a6b4468d8f7de872ec34ea500f3b9ba4c" class="m-doc">getGroup</a>(</span><span class="m-doc-wrap">const std::string&amp; name) const -&gt; weak_ptr <span class="m-label m-flat m-warning">final</span></span>
-            </dt>
-            <dd>Get a Group from the handler.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#abc6ef5e9b41ab7238fdcc01b9393f7e0" class="m-doc">setGroup</a>(</span><span class="m-doc-wrap">const std::string&amp; name,
-              shared_ptr newGroup) -&gt; bool <span class="m-label m-flat m-warning">final</span></span>
-            </dt>
-            <dd>Set a new group on the handler.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#abb16748e8b91989125a9dc225d380bde" class="m-doc">toString</a>(</span><span class="m-doc-wrap">) const -&gt; std::string <span class="m-label m-flat m-warning">final</span></span>
-            </dt>
-            <dd>Return a standard text representation of the content of the object.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a5e1f8b4bab80afcaf2f42be4772b82fa" class="m-doc">isEmpty</a>(</span><span class="m-doc-wrap">) const -&gt; bool <span class="m-label m-flat m-warning">final</span></span>
-            </dt>
-            <dd>Check if the handler contains parameters.</dd>
-            <dt id="a0da1c5181ac9645187da8e3cdf4be213">
-              <span class="m-doc-wrap-bumper">void <a href="#a0da1c5181ac9645187da8e3cdf4be213" class="m-doc-self">clear</a>(</span><span class="m-doc-wrap">) <span class="m-label m-flat m-warning">final</span></span>
-            </dt>
-            <dd>Clears the handler from all the parameters.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a24a75f5c666a6a26571fd1ad0320a42b" class="m-doc">clone</a>(</span><span class="m-doc-wrap">) const -&gt; shared_ptr <span class="m-label m-flat m-warning">final</span></span>
-            </dt>
-            <dd>Clone the content of the content.</dd>
-          </dl>
-        </section>
-        <section>
-          <h2>Function documentation</h2>
-          <section class="m-doc-details" id="a2029a7fe24230683465d6ab99ef0d297"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper"> BipedalLocomotion::<wbr />ParametersHandler::<wbr />YarpImplementation::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a2029a7fe24230683465d6ab99ef0d297" class="m-doc-self">YarpImplementation</a>(</span><span class="m-doc-wrap">const yarp::os::Searchable&amp; searchable)</span></span>
-            </h3>
-            <p>Constructor.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">searchable</td>
-                  <td>reference to a searchable object. The object is copied inside the Handler</td>
-                </tr>
-              </tbody>
-            </table>
-          </div></section>
-          <section class="m-doc-details" id="a60cf026ca1362f6762dca4abcc2b4ee6"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">void BipedalLocomotion::<wbr />ParametersHandler::<wbr />YarpImplementation::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a60cf026ca1362f6762dca4abcc2b4ee6" class="m-doc-self">set</a>(</span><span class="m-doc-wrap">const yarp::os::Searchable&amp; searchable)</span></span>
-            </h3>
-            <p>Set the handler from an object.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">searchable</td>
-                  <td>The object to copy</td>
-                </tr>
-              </tbody>
-            </table>
-          </div></section>
-          <section class="m-doc-details" id="a19e160a13499f83b82e189813b7e371c"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">bool BipedalLocomotion::<wbr />ParametersHandler::<wbr />YarpImplementation::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a19e160a13499f83b82e189813b7e371c" class="m-doc-self">setFromFile</a>(</span><span class="m-doc-wrap">const std::string&amp; filename)</span></span>
-            </h3>
-            <p>Set the handler from a file.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">filename</td>
-                  <td>the name of the file that should be loaded.</td>
-                </tr>
-              </tbody>
-              <tfoot>
-                <tr>
-                  <th>Returns</th>
-                  <td>true/false in case of success/failure.</td>
-                </tr>
-              </tfoot>
-            </table>
-          </div></section>
-          <section class="m-doc-details" id="a484bf26a05d767b7f13589e25721b1ce"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">bool BipedalLocomotion::<wbr />ParametersHandler::<wbr />YarpImplementation::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a484bf26a05d767b7f13589e25721b1ce" class="m-doc-self">getParameter</a>(</span><span class="m-doc-wrap">const std::string&amp; parameterName,
-              int&amp; parameter) const <span class="m-label m-warning">final</span></span></span>
-            </h3>
-            <p>Get a parameter [int].</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">parameterName</td>
-                  <td>name of the parameter</td>
-                </tr>
-                <tr>
-                  <td>parameter</td>
-                  <td>parameter</td>
-                </tr>
-              </tbody>
-              <tfoot>
-                <tr>
-                  <th>Returns</th>
-                  <td>true/false in case of success/failure</td>
-                </tr>
-              </tfoot>
-            </table>
-          </div></section>
-          <section class="m-doc-details" id="aa5c5c9f4dbd352fbd5f9c17985accfb3"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">bool BipedalLocomotion::<wbr />ParametersHandler::<wbr />YarpImplementation::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aa5c5c9f4dbd352fbd5f9c17985accfb3" class="m-doc-self">getParameter</a>(</span><span class="m-doc-wrap">const std::string&amp; parameterName,
-              double&amp; parameter) const <span class="m-label m-warning">final</span></span></span>
-            </h3>
-            <p>Get a parameter [double].</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">parameterName</td>
-                  <td>name of the parameter</td>
-                </tr>
-                <tr>
-                  <td>parameter</td>
-                  <td>parameter</td>
-                </tr>
-              </tbody>
-              <tfoot>
-                <tr>
-                  <th>Returns</th>
-                  <td>true/false in case of success/failure</td>
-                </tr>
-              </tfoot>
-            </table>
-          </div></section>
-          <section class="m-doc-details" id="ad76663f0dc1955660886542f3adfd173"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">bool BipedalLocomotion::<wbr />ParametersHandler::<wbr />YarpImplementation::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ad76663f0dc1955660886542f3adfd173" class="m-doc-self">getParameter</a>(</span><span class="m-doc-wrap">const std::string&amp; parameterName,
-              std::string&amp; parameter) const <span class="m-label m-warning">final</span></span></span>
-            </h3>
-            <p>Get a parameter [std::string].</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">parameterName</td>
-                  <td>name of the parameter</td>
-                </tr>
-                <tr>
-                  <td>parameter</td>
-                  <td>parameter</td>
-                </tr>
-              </tbody>
-              <tfoot>
-                <tr>
-                  <th>Returns</th>
-                  <td>true/false in case of success/failure</td>
-                </tr>
-              </tfoot>
-            </table>
-          </div></section>
-          <section class="m-doc-details" id="a77838487a5c87eb82d5d98cdb986641b"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">bool BipedalLocomotion::<wbr />ParametersHandler::<wbr />YarpImplementation::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a77838487a5c87eb82d5d98cdb986641b" class="m-doc-self">getParameter</a>(</span><span class="m-doc-wrap">const std::string&amp; parameterName,
-              bool&amp; parameter) const <span class="m-label m-warning">final</span></span></span>
-            </h3>
-            <p>Get a parameter [bool].</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">parameterName</td>
-                  <td>name of the parameter</td>
-                </tr>
-                <tr>
-                  <td>parameter</td>
-                  <td>parameter</td>
-                </tr>
-              </tbody>
-              <tfoot>
-                <tr>
-                  <th>Returns</th>
-                  <td>true/false in case of success/failure</td>
-                </tr>
-              </tfoot>
-            </table>
-          </div></section>
-          <section class="m-doc-details" id="af77eaebe3d7d1327da4da50dfe89b2f9"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">bool BipedalLocomotion::<wbr />ParametersHandler::<wbr />YarpImplementation::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#af77eaebe3d7d1327da4da50dfe89b2f9" class="m-doc-self">getParameter</a>(</span><span class="m-doc-wrap">const std::string&amp; parameterName,
-              std::chrono::nanoseconds&amp; parameter) const <span class="m-label m-warning">final</span></span></span>
-            </h3>
-            <p>Get a parameter [std::chrono::nanoseconds].</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">parameterName</td>
-                  <td>name of the parameter</td>
-                </tr>
-                <tr>
-                  <td>parameter</td>
-                  <td>parameter</td>
-                </tr>
-              </tbody>
-              <tfoot>
-                <tr>
-                  <th>Returns</th>
-                  <td>true/false in case of success/failure</td>
-                </tr>
-              </tfoot>
-            </table>
-          </div></section>
-          <section class="m-doc-details" id="a0111773bdb6634bebefca77aee1470ba"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">bool BipedalLocomotion::<wbr />ParametersHandler::<wbr />YarpImplementation::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a0111773bdb6634bebefca77aee1470ba" class="m-doc-self">getParameter</a>(</span><span class="m-doc-wrap">const std::string&amp; parameterName,
-              std::vector&lt;bool&gt;&amp; parameter) const <span class="m-label m-warning">final</span></span></span>
-            </h3>
-            <p>Get a parameter [std::vector&lt;bool&gt;].</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">parameterName</td>
-                  <td>name of the parameter</td>
-                </tr>
-                <tr>
-                  <td>parameter</td>
-                  <td>parameter</td>
-                </tr>
-              </tbody>
-              <tfoot>
-                <tr>
-                  <th>Returns</th>
-                  <td>true/false in case of success/failure</td>
-                </tr>
-              </tfoot>
-            </table>
-          </div></section>
-          <section class="m-doc-details" id="a8f3c85c02969f7f8db575cc24c22ebee"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">bool BipedalLocomotion::<wbr />ParametersHandler::<wbr />YarpImplementation::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a8f3c85c02969f7f8db575cc24c22ebee" class="m-doc-self">getParameter</a>(</span><span class="m-doc-wrap">const std::string&amp; parameterName,
-              <a href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html" class="m-doc">GenericContainer::<wbr />Vector</a>&lt;int&gt;::Ref parameter) const <span class="m-label m-warning">final</span></span></span>
-            </h3>
-            <p>Get a parameter [GenericContainer::Vector&lt;int&gt;].</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">parameterName</td>
-                  <td>name of the parameter</td>
-                </tr>
-                <tr>
-                  <td>parameter</td>
-                  <td>parameter</td>
-                </tr>
-              </tbody>
-              <tfoot>
-                <tr>
-                  <th>Returns</th>
-                  <td>true/false in case of success/failure</td>
-                </tr>
-              </tfoot>
-            </table>
-          </div></section>
-          <section class="m-doc-details" id="a6a6b19fea7c698e4dbfe1bf47a88bac0"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">bool BipedalLocomotion::<wbr />ParametersHandler::<wbr />YarpImplementation::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a6a6b19fea7c698e4dbfe1bf47a88bac0" class="m-doc-self">getParameter</a>(</span><span class="m-doc-wrap">const std::string&amp; parameterName,
-              <a href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html" class="m-doc">GenericContainer::<wbr />Vector</a>&lt;double&gt;::Ref parameter) const <span class="m-label m-warning">final</span></span></span>
-            </h3>
-            <p>Get a parameter [GenericContainer::Vector&lt;double&gt;].</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">parameterName</td>
-                  <td>name of the parameter</td>
-                </tr>
-                <tr>
-                  <td>parameter</td>
-                  <td>parameter</td>
-                </tr>
-              </tbody>
-              <tfoot>
-                <tr>
-                  <th>Returns</th>
-                  <td>true/false in case of success/failure</td>
-                </tr>
-              </tfoot>
-            </table>
-          </div></section>
-          <section class="m-doc-details" id="a84e532092b9cc1f490cd69ceb1382ed4"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">bool BipedalLocomotion::<wbr />ParametersHandler::<wbr />YarpImplementation::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a84e532092b9cc1f490cd69ceb1382ed4" class="m-doc-self">getParameter</a>(</span><span class="m-doc-wrap">const std::string&amp; parameterName,
-              <a href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html" class="m-doc">GenericContainer::<wbr />Vector</a>&lt;std::string&gt;::Ref parameter) const <span class="m-label m-warning">final</span></span></span>
-            </h3>
-            <p>Get a parameter [GenericContainer::Vector&lt;std::string&gt;].</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">parameterName</td>
-                  <td>name of the parameter</td>
-                </tr>
-                <tr>
-                  <td>parameter</td>
-                  <td>parameter</td>
-                </tr>
-              </tbody>
-              <tfoot>
-                <tr>
-                  <th>Returns</th>
-                  <td>true/false in case of success/failure</td>
-                </tr>
-              </tfoot>
-            </table>
-          </div></section>
-          <section class="m-doc-details" id="ade61fb20a94b484bcb19f24c5e5480e1"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">bool BipedalLocomotion::<wbr />ParametersHandler::<wbr />YarpImplementation::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ade61fb20a94b484bcb19f24c5e5480e1" class="m-doc-self">getParameter</a>(</span><span class="m-doc-wrap">const std::string&amp; parameterName,
-              <a href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html" class="m-doc">GenericContainer::<wbr />Vector</a>&lt;std::chrono::nanoseconds&gt;::Ref parameter) const <span class="m-label m-warning">final</span></span></span>
-            </h3>
-            <p>Get a parameter [GenericContainer::Vector&lt;std::chrono::nanoseconds&gt;].</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">parameterName</td>
-                  <td>name of the parameter</td>
-                </tr>
-                <tr>
-                  <td>parameter</td>
-                  <td>parameter</td>
-                </tr>
-              </tbody>
-              <tfoot>
-                <tr>
-                  <th>Returns</th>
-                  <td>true/false in case of success/failure</td>
-                </tr>
-              </tfoot>
-            </table>
-          </div></section>
-          <section class="m-doc-details" id="a22c35bd2722d4ec538aab79cdfc99f56"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">void BipedalLocomotion::<wbr />ParametersHandler::<wbr />YarpImplementation::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a22c35bd2722d4ec538aab79cdfc99f56" class="m-doc-self">setParameter</a>(</span><span class="m-doc-wrap">const std::string&amp; parameterName,
-              const int&amp; parameter) <span class="m-label m-warning">final</span></span></span>
-            </h3>
-            <p>Set a parameter [int].</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">parameterName</td>
-                  <td>name of the parameter</td>
-                </tr>
-                <tr>
-                  <td>parameter</td>
-                  <td>parameter</td>
-                </tr>
-              </tbody>
-            </table>
-          </div></section>
-          <section class="m-doc-details" id="a047943c17ef15231efa10b486b40e4d1"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">void BipedalLocomotion::<wbr />ParametersHandler::<wbr />YarpImplementation::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a047943c17ef15231efa10b486b40e4d1" class="m-doc-self">setParameter</a>(</span><span class="m-doc-wrap">const std::string&amp; parameterName,
-              const double&amp; parameter) <span class="m-label m-warning">final</span></span></span>
-            </h3>
-            <p>Set a parameter [double].</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">parameterName</td>
-                  <td>name of the parameter</td>
-                </tr>
-                <tr>
-                  <td>parameter</td>
-                  <td>parameter</td>
-                </tr>
-              </tbody>
-            </table>
-          </div></section>
-          <section class="m-doc-details" id="a6881d6a1f5fe38346354e9113903c28f"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">void BipedalLocomotion::<wbr />ParametersHandler::<wbr />YarpImplementation::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a6881d6a1f5fe38346354e9113903c28f" class="m-doc-self">setParameter</a>(</span><span class="m-doc-wrap">const std::string&amp; parameterName,
-              const std::string&amp; parameter) <span class="m-label m-warning">final</span></span></span>
-            </h3>
-            <p>Set a parameter [std::string].</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">parameterName</td>
-                  <td>name of the parameter</td>
-                </tr>
-                <tr>
-                  <td>parameter</td>
-                  <td>parameter</td>
-                </tr>
-              </tbody>
-            </table>
-          </div></section>
-          <section class="m-doc-details" id="ae17080381e2cdafb498e59c8848379c6"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">void BipedalLocomotion::<wbr />ParametersHandler::<wbr />YarpImplementation::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ae17080381e2cdafb498e59c8848379c6" class="m-doc-self">setParameter</a>(</span><span class="m-doc-wrap">const std::string&amp; parameterName,
-              const char* parameter) <span class="m-label m-warning">final</span></span></span>
-            </h3>
-            <p>Set a parameter [const char*].</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">parameterName</td>
-                  <td>name of the parameter</td>
-                </tr>
-                <tr>
-                  <td>parameter</td>
-                  <td>parameter</td>
-                </tr>
-              </tbody>
-            </table>
-<aside class="m-note m-info"><h4>Note</h4><p>this is required because of <a href="https://www.bfilipek.com/2019/07/surprising-conversions-char-bool.html">https:/<wbr />/<wbr />www.bfilipek.com/<wbr />2019/<wbr />07/<wbr />surprising-conversions-char-bool.html</a></p></aside>
-          </div></section>
-          <section class="m-doc-details" id="a597bfc52821217fb8e94fa33867fc4db"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">void BipedalLocomotion::<wbr />ParametersHandler::<wbr />YarpImplementation::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a597bfc52821217fb8e94fa33867fc4db" class="m-doc-self">setParameter</a>(</span><span class="m-doc-wrap">const std::string&amp; parameterName,
-              const bool&amp; parameter) <span class="m-label m-warning">final</span></span></span>
-            </h3>
-            <p>Set a parameter [bool].</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">parameterName</td>
-                  <td>name of the parameter</td>
-                </tr>
-                <tr>
-                  <td>parameter</td>
-                  <td>parameter</td>
-                </tr>
-              </tbody>
-            </table>
-          </div></section>
-          <section class="m-doc-details" id="a2e30951b1f38cc986178b2e8904e1190"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">void BipedalLocomotion::<wbr />ParametersHandler::<wbr />YarpImplementation::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a2e30951b1f38cc986178b2e8904e1190" class="m-doc-self">setParameter</a>(</span><span class="m-doc-wrap">const std::string&amp; parameterName,
-              const std::chrono::nanoseconds&amp; parameter) <span class="m-label m-warning">final</span></span></span>
-            </h3>
-            <p>Set a parameter [std::chrono::nanoseconds].</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">parameterName</td>
-                  <td>name of the parameter</td>
-                </tr>
-                <tr>
-                  <td>parameter</td>
-                  <td>parameter</td>
-                </tr>
-              </tbody>
-            </table>
-          </div></section>
-          <section class="m-doc-details" id="aa6ff4a24f07200238d7a1d6631338081"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">void BipedalLocomotion::<wbr />ParametersHandler::<wbr />YarpImplementation::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aa6ff4a24f07200238d7a1d6631338081" class="m-doc-self">setParameter</a>(</span><span class="m-doc-wrap">const std::string&amp; parameterName,
-              const std::vector&lt;bool&gt;&amp; parameter) <span class="m-label m-warning">final</span></span></span>
-            </h3>
-            <p>Set a parameter [std::vector&lt;bool&gt;].</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">parameterName</td>
-                  <td>name of the parameter</td>
-                </tr>
-                <tr>
-                  <td>parameter</td>
-                  <td>parameter</td>
-                </tr>
-              </tbody>
-            </table>
-          </div></section>
-          <section class="m-doc-details" id="af544c00dc785e431af824e9b491a3ac3"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">void BipedalLocomotion::<wbr />ParametersHandler::<wbr />YarpImplementation::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#af544c00dc785e431af824e9b491a3ac3" class="m-doc-self">setParameter</a>(</span><span class="m-doc-wrap">const std::string&amp; parameterName,
-              const <a href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html" class="m-doc">GenericContainer::<wbr />Vector</a>&lt;const int&gt;::Ref parameter) <span class="m-label m-warning">final</span></span></span>
-            </h3>
-            <p>Set a parameter [GenericContainer::Vector&lt;int&gt;].</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">parameterName</td>
-                  <td>name of the parameter</td>
-                </tr>
-                <tr>
-                  <td>parameter</td>
-                  <td>parameter</td>
-                </tr>
-              </tbody>
-            </table>
-          </div></section>
-          <section class="m-doc-details" id="aa6d600cbbe0fd72d7152179c4e055a10"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">void BipedalLocomotion::<wbr />ParametersHandler::<wbr />YarpImplementation::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aa6d600cbbe0fd72d7152179c4e055a10" class="m-doc-self">setParameter</a>(</span><span class="m-doc-wrap">const std::string&amp; parameterName,
-              const <a href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html" class="m-doc">GenericContainer::<wbr />Vector</a>&lt;const double&gt;::Ref parameter) <span class="m-label m-warning">final</span></span></span>
-            </h3>
-            <p>Set a parameter [GenericContainer::Vector&lt;double&gt;].</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">parameterName</td>
-                  <td>name of the parameter</td>
-                </tr>
-                <tr>
-                  <td>parameter</td>
-                  <td>parameter</td>
-                </tr>
-              </tbody>
-            </table>
-          </div></section>
-          <section class="m-doc-details" id="aebc4c9d1fdec6de81711a2f62729c375"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">void BipedalLocomotion::<wbr />ParametersHandler::<wbr />YarpImplementation::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aebc4c9d1fdec6de81711a2f62729c375" class="m-doc-self">setParameter</a>(</span><span class="m-doc-wrap">const std::string&amp; parameterName,
-              const <a href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html" class="m-doc">GenericContainer::<wbr />Vector</a>&lt;const std::string&gt;::Ref parameter) <span class="m-label m-warning">final</span></span></span>
-            </h3>
-            <p>Set a parameter [GenericContainer::Vector&lt;std::string&gt;].</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">parameterName</td>
-                  <td>name of the parameter</td>
-                </tr>
-                <tr>
-                  <td>parameter</td>
-                  <td>parameter</td>
-                </tr>
-              </tbody>
-            </table>
-          </div></section>
-          <section class="m-doc-details" id="a1b2bba2e0b0d02f9dd404af6f19969b5"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">void BipedalLocomotion::<wbr />ParametersHandler::<wbr />YarpImplementation::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a1b2bba2e0b0d02f9dd404af6f19969b5" class="m-doc-self">setParameter</a>(</span><span class="m-doc-wrap">const std::string&amp; parameterName,
-              const <a href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html" class="m-doc">GenericContainer::<wbr />Vector</a>&lt;const std::chrono::nanoseconds&gt;::Ref parameter) <span class="m-label m-warning">final</span></span></span>
-            </h3>
-            <p>Get a parameter [GenericContainer::Vector&lt;std::chrono::nanoseconds&gt;].</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">parameterName</td>
-                  <td>name of the parameter</td>
-                </tr>
-                <tr>
-                  <td>parameter</td>
-                  <td>parameter</td>
-                </tr>
-              </tbody>
-            </table>
-          </div></section>
-          <section class="m-doc-details" id="a6b4468d8f7de872ec34ea500f3b9ba4c"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">weak_ptr BipedalLocomotion::<wbr />ParametersHandler::<wbr />YarpImplementation::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a6b4468d8f7de872ec34ea500f3b9ba4c" class="m-doc-self">getGroup</a>(</span><span class="m-doc-wrap">const std::string&amp; name) const <span class="m-label m-warning">final</span></span></span>
-            </h3>
-            <p>Get a Group from the handler.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">name</td>
-                  <td>name of the group</td>
-                </tr>
-              </tbody>
-              <tfoot>
-                <tr>
-                  <th>Returns</th>
-                  <td>A pointer to <a href="classBipedalLocomotion_1_1ParametersHandler_1_1IParametersHandler.html" class="m-doc">IParametersHandler</a>, if the group is not found the weak pointer cannot be locked</td>
-                </tr>
-              </tfoot>
-            </table>
-          </div></section>
-          <section class="m-doc-details" id="abc6ef5e9b41ab7238fdcc01b9393f7e0"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">bool BipedalLocomotion::<wbr />ParametersHandler::<wbr />YarpImplementation::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#abc6ef5e9b41ab7238fdcc01b9393f7e0" class="m-doc-self">setGroup</a>(</span><span class="m-doc-wrap">const std::string&amp; name,
-              shared_ptr newGroup) <span class="m-label m-warning">final</span></span></span>
-            </h3>
-            <p>Set a new group on the handler.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">name</td>
-                  <td>name of the group</td>
-                </tr>
-                <tr>
-                  <td>newGroup</td>
-                  <td>shared pointer to the new group</td>
-                </tr>
-              </tbody>
-            </table>
-          </div></section>
-          <section class="m-doc-details" id="abb16748e8b91989125a9dc225d380bde"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">std::string BipedalLocomotion::<wbr />ParametersHandler::<wbr />YarpImplementation::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#abb16748e8b91989125a9dc225d380bde" class="m-doc-self">toString</a>(</span><span class="m-doc-wrap">) const <span class="m-label m-warning">final</span></span></span>
-            </h3>
-            <p>Return a standard text representation of the content of the object.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <tfoot>
-                <tr>
-                  <th style="width: 1%">Returns</th>
-                  <td>a string containing the standard text representation of the content of the object.</td>
-                </tr>
-              </tfoot>
-            </table>
-          </div></section>
-          <section class="m-doc-details" id="a5e1f8b4bab80afcaf2f42be4772b82fa"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">bool BipedalLocomotion::<wbr />ParametersHandler::<wbr />YarpImplementation::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a5e1f8b4bab80afcaf2f42be4772b82fa" class="m-doc-self">isEmpty</a>(</span><span class="m-doc-wrap">) const <span class="m-label m-warning">final</span></span></span>
-            </h3>
-            <p>Check if the handler contains parameters.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <tfoot>
-                <tr>
-                  <th style="width: 1%">Returns</th>
-                  <td>true if the handler does not contain any parameters, false otherwise</td>
-                </tr>
-              </tfoot>
-            </table>
-          </div></section>
-          <section class="m-doc-details" id="a24a75f5c666a6a26571fd1ad0320a42b"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">shared_ptr BipedalLocomotion::<wbr />ParametersHandler::<wbr />YarpImplementation::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a24a75f5c666a6a26571fd1ad0320a42b" class="m-doc-self">clone</a>(</span><span class="m-doc-wrap">) const <span class="m-label m-warning">final</span></span></span>
-            </h3>
-            <p>Clone the content of the content.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <tfoot>
-                <tr>
-                  <th style="width: 1%">Returns</th>
-                  <td>a IParametersHandler::shared_ptr clone of the current handler.</td>
-                </tr>
-              </tfoot>
-            </table>
-<aside class="m-note m-danger"><h4>Warning</h4></aside>
-          </div></section>
-        </section>
-      </div>
-    </div>
-  </div>
-</article></main>
-<div class="m-doc-search" id="search">
-  <a href="#!" onclick="return hideSearch()"></a>
-  <div class="m-container">
-    <div class="m-row">
-      <div class="m-col-m-8 m-push-m-2">
-        <div class="m-doc-search-header m-text m-small">
-          <div><span class="m-label m-default">Tab</span> / <span class="m-label m-default">T</span> to search, <span class="m-label m-default">Esc</span> to close</div>
-          <div id="search-symbolcount">&hellip;</div>
-        </div>
-        <div class="m-doc-search-content">
-          <form>
-            <input type="search" name="q" id="search-input" placeholder="Loading &hellip;" disabled="disabled" autofocus="autofocus" autocomplete="off" spellcheck="false" />
-          </form>
-          <noscript class="m-text m-danger m-text-center">Unlike everything else in the docs, the search functionality <em>requires</em> JavaScript.</noscript>
-          <div id="search-help" class="m-text m-dim m-text-center">
-            <p class="m-noindent">Search for symbols, directories, files, pages or
-            modules. You can omit any prefix from the symbol or file path; adding a
-            <code>:</code> or <code>/</code> suffix lists all members of given symbol or
-            directory.</p>
-            <p class="m-noindent">Use <span class="m-label m-dim">&darr;</span>
-            / <span class="m-label m-dim">&uarr;</span> to navigate through the list,
-            <span class="m-label m-dim">Enter</span> to go.
-            <span class="m-label m-dim">Tab</span> autocompletes common prefix, you can
-            copy a link to the result using <span class="m-label m-dim">⌘</span>
-            <span class="m-label m-dim">L</span> while <span class="m-label m-dim">⌘</span>
-            <span class="m-label m-dim">M</span> produces a Markdown link.</p>
-          </div>
-          <div id="search-notfound" class="m-text m-warning m-text-center">Sorry, nothing was found.</div>
-          <ul id="search-results"></ul>
-        </div>
-      </div>
-    </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
   </div>
 </div>
-<script src="search-v2.js"></script>
-<script src="searchdata-v2.js" async="async"></script>
-<footer><nav>
-  <div class="m-container">
-    <div class="m-row">
-      <div class="m-col-l-10 m-push-l-1">
-        <p>bipedal-locomotion-framework documentation. Licensed under the <a href="https://www.gnu.org/licenses/lgpl-3.0.en.html">GNU Lesser General Public License v3.0</a>. Project maintained by the <a href="https://www.iit.it/web/ami/">Artificial and Mechanical Intelligence Lab</a>. Contact the team via <a href="https://github.com/ami-iit/bipedal-locomotion-framework/issues/new">GitHub</a>.<br />Generated by <a href="https://doxygen.org/">Doxygen</a> 1.9.1 and <a href="https://mcss.mosra.cz/">m.css</a>.
-      </div>
-    </div>
-  </div>
-</nav></footer>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(document).ready(function(){initNavTree('classBipedalLocomotion_1_1ParametersHandler_1_1YarpImplementation.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="classBipedalLocomotion_1_1ParametersHandler_1_1YarpImplementation-members.html">List of all members</a>  </div>
+  <div class="headertitle">
+<div class="title">BipedalLocomotion::ParametersHandler::YarpImplementation Class Reference</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p><a class="el" href="classBipedalLocomotion_1_1ParametersHandler_1_1YarpImplementation.html" title="YarpImplementation Yarp implementation of the IParametersHandler interface.">YarpImplementation</a> Yarp implementation of the <a class="el" href="classBipedalLocomotion_1_1ParametersHandler_1_1IParametersHandler.html" title="Parameters handler interface.">IParametersHandler</a> interface.  
+ <a href="classBipedalLocomotion_1_1ParametersHandler_1_1YarpImplementation.html#details">More...</a></p>
+
+<p><code>#include &lt;ParametersHandler/YarpImplementation/include/BipedalLocomotion/ParametersHandler/YarpImplementation.h&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:afce849916b6bed08232b3fa160bfcc38"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1ParametersHandler_1_1YarpImplementation.html#afce849916b6bed08232b3fa160bfcc38">YarpImplementation</a> (const yarp::os::Searchable &amp;searchable)</td></tr>
+<tr class="memdesc:afce849916b6bed08232b3fa160bfcc38"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <a href="classBipedalLocomotion_1_1ParametersHandler_1_1YarpImplementation.html#afce849916b6bed08232b3fa160bfcc38">More...</a><br /></td></tr>
+<tr class="separator:afce849916b6bed08232b3fa160bfcc38"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae5223e6348970d0c3c388ac46abe5857"><td class="memItemLeft" align="right" valign="top"><a id="ae5223e6348970d0c3c388ac46abe5857"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1ParametersHandler_1_1YarpImplementation.html#ae5223e6348970d0c3c388ac46abe5857">YarpImplementation</a> ()=default</td></tr>
+<tr class="memdesc:ae5223e6348970d0c3c388ac46abe5857"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor. <br /></td></tr>
+<tr class="separator:ae5223e6348970d0c3c388ac46abe5857"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a836718e8538e91f4e828a2e8e8a99d22"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1ParametersHandler_1_1YarpImplementation.html#a836718e8538e91f4e828a2e8e8a99d22">set</a> (const yarp::os::Searchable &amp;searchable)</td></tr>
+<tr class="memdesc:a836718e8538e91f4e828a2e8e8a99d22"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the handler from an object.  <a href="classBipedalLocomotion_1_1ParametersHandler_1_1YarpImplementation.html#a836718e8538e91f4e828a2e8e8a99d22">More...</a><br /></td></tr>
+<tr class="separator:a836718e8538e91f4e828a2e8e8a99d22"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aff6086edbe621aa02e50deb226c6fa11"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1ParametersHandler_1_1YarpImplementation.html#aff6086edbe621aa02e50deb226c6fa11">setFromFile</a> (const std::string &amp;filename)</td></tr>
+<tr class="memdesc:aff6086edbe621aa02e50deb226c6fa11"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the handler from a file.  <a href="classBipedalLocomotion_1_1ParametersHandler_1_1YarpImplementation.html#aff6086edbe621aa02e50deb226c6fa11">More...</a><br /></td></tr>
+<tr class="separator:aff6086edbe621aa02e50deb226c6fa11"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa9ca286964fd3d3cede83ca987fd6ecd"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1ParametersHandler_1_1YarpImplementation.html#aa9ca286964fd3d3cede83ca987fd6ecd">getParameter</a> (const std::string &amp;parameterName, int &amp;parameter) const final</td></tr>
+<tr class="memdesc:aa9ca286964fd3d3cede83ca987fd6ecd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a parameter [int].  <a href="classBipedalLocomotion_1_1ParametersHandler_1_1YarpImplementation.html#aa9ca286964fd3d3cede83ca987fd6ecd">More...</a><br /></td></tr>
+<tr class="separator:aa9ca286964fd3d3cede83ca987fd6ecd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5d533fe7f2d2d81f8f765a4a14923376"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1ParametersHandler_1_1YarpImplementation.html#a5d533fe7f2d2d81f8f765a4a14923376">getParameter</a> (const std::string &amp;parameterName, double &amp;parameter) const final</td></tr>
+<tr class="memdesc:a5d533fe7f2d2d81f8f765a4a14923376"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a parameter [double].  <a href="classBipedalLocomotion_1_1ParametersHandler_1_1YarpImplementation.html#a5d533fe7f2d2d81f8f765a4a14923376">More...</a><br /></td></tr>
+<tr class="separator:a5d533fe7f2d2d81f8f765a4a14923376"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a37dad6b71e19dc4ebd6cec9d1af17736"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1ParametersHandler_1_1YarpImplementation.html#a37dad6b71e19dc4ebd6cec9d1af17736">getParameter</a> (const std::string &amp;parameterName, std::string &amp;parameter) const final</td></tr>
+<tr class="memdesc:a37dad6b71e19dc4ebd6cec9d1af17736"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a parameter [std::string].  <a href="classBipedalLocomotion_1_1ParametersHandler_1_1YarpImplementation.html#a37dad6b71e19dc4ebd6cec9d1af17736">More...</a><br /></td></tr>
+<tr class="separator:a37dad6b71e19dc4ebd6cec9d1af17736"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad437f55cd34d2c5505f9882b3076fb2b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1ParametersHandler_1_1YarpImplementation.html#ad437f55cd34d2c5505f9882b3076fb2b">getParameter</a> (const std::string &amp;parameterName, bool &amp;parameter) const final</td></tr>
+<tr class="memdesc:ad437f55cd34d2c5505f9882b3076fb2b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a parameter [bool].  <a href="classBipedalLocomotion_1_1ParametersHandler_1_1YarpImplementation.html#ad437f55cd34d2c5505f9882b3076fb2b">More...</a><br /></td></tr>
+<tr class="separator:ad437f55cd34d2c5505f9882b3076fb2b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0d829885db04b4a4d1f6290405cae1e5"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1ParametersHandler_1_1YarpImplementation.html#a0d829885db04b4a4d1f6290405cae1e5">getParameter</a> (const std::string &amp;parameterName, std::chrono::nanoseconds &amp;parameter) const final</td></tr>
+<tr class="memdesc:a0d829885db04b4a4d1f6290405cae1e5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a parameter [std::chrono::nanoseconds].  <a href="classBipedalLocomotion_1_1ParametersHandler_1_1YarpImplementation.html#a0d829885db04b4a4d1f6290405cae1e5">More...</a><br /></td></tr>
+<tr class="separator:a0d829885db04b4a4d1f6290405cae1e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5005027bd01eba98bf58fa8a0d9b8dd1"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1ParametersHandler_1_1YarpImplementation.html#a5005027bd01eba98bf58fa8a0d9b8dd1">getParameter</a> (const std::string &amp;parameterName, std::vector&lt; bool &gt; &amp;parameter) const final</td></tr>
+<tr class="memdesc:a5005027bd01eba98bf58fa8a0d9b8dd1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a parameter [std::vector&lt;bool&gt;].  <a href="classBipedalLocomotion_1_1ParametersHandler_1_1YarpImplementation.html#a5005027bd01eba98bf58fa8a0d9b8dd1">More...</a><br /></td></tr>
+<tr class="separator:a5005027bd01eba98bf58fa8a0d9b8dd1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2b4ae94c7f481b3e7cfd67307cb912b0"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1ParametersHandler_1_1YarpImplementation.html#a2b4ae94c7f481b3e7cfd67307cb912b0">getParameter</a> (const std::string &amp;parameterName, <a class="el" href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html">GenericContainer::Vector</a>&lt; int &gt;::Ref parameter) const final</td></tr>
+<tr class="memdesc:a2b4ae94c7f481b3e7cfd67307cb912b0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a parameter [GenericContainer::Vector&lt;int&gt;].  <a href="classBipedalLocomotion_1_1ParametersHandler_1_1YarpImplementation.html#a2b4ae94c7f481b3e7cfd67307cb912b0">More...</a><br /></td></tr>
+<tr class="separator:a2b4ae94c7f481b3e7cfd67307cb912b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a305ed2bc89c8f93e3e8185340009b2ca"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1ParametersHandler_1_1YarpImplementation.html#a305ed2bc89c8f93e3e8185340009b2ca">getParameter</a> (const std::string &amp;parameterName, <a class="el" href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html">GenericContainer::Vector</a>&lt; double &gt;::Ref parameter) const final</td></tr>
+<tr class="memdesc:a305ed2bc89c8f93e3e8185340009b2ca"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a parameter [GenericContainer::Vector&lt;double&gt;].  <a href="classBipedalLocomotion_1_1ParametersHandler_1_1YarpImplementation.html#a305ed2bc89c8f93e3e8185340009b2ca">More...</a><br /></td></tr>
+<tr class="separator:a305ed2bc89c8f93e3e8185340009b2ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a01331ba2f6db854b2d123ead9c4b0f1c"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1ParametersHandler_1_1YarpImplementation.html#a01331ba2f6db854b2d123ead9c4b0f1c">getParameter</a> (const std::string &amp;parameterName, <a class="el" href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html">GenericContainer::Vector</a>&lt; std::string &gt;::Ref parameter) const final</td></tr>
+<tr class="memdesc:a01331ba2f6db854b2d123ead9c4b0f1c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a parameter [GenericContainer::Vector&lt;std::string&gt;].  <a href="classBipedalLocomotion_1_1ParametersHandler_1_1YarpImplementation.html#a01331ba2f6db854b2d123ead9c4b0f1c">More...</a><br /></td></tr>
+<tr class="separator:a01331ba2f6db854b2d123ead9c4b0f1c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a81dd9c41dc685aaf825428a7018cb540"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1ParametersHandler_1_1YarpImplementation.html#a81dd9c41dc685aaf825428a7018cb540">getParameter</a> (const std::string &amp;parameterName, <a class="el" href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html">GenericContainer::Vector</a>&lt; std::chrono::nanoseconds &gt;::Ref parameter) const final</td></tr>
+<tr class="memdesc:a81dd9c41dc685aaf825428a7018cb540"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a parameter [GenericContainer::Vector&lt;std::chrono::nanoseconds&gt;].  <a href="classBipedalLocomotion_1_1ParametersHandler_1_1YarpImplementation.html#a81dd9c41dc685aaf825428a7018cb540">More...</a><br /></td></tr>
+<tr class="separator:a81dd9c41dc685aaf825428a7018cb540"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a23a81b4a0f100b65e5b9ef256f24cc38"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1ParametersHandler_1_1YarpImplementation.html#a23a81b4a0f100b65e5b9ef256f24cc38">setParameter</a> (const std::string &amp;parameterName, const int &amp;parameter) final</td></tr>
+<tr class="memdesc:a23a81b4a0f100b65e5b9ef256f24cc38"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set a parameter [int].  <a href="classBipedalLocomotion_1_1ParametersHandler_1_1YarpImplementation.html#a23a81b4a0f100b65e5b9ef256f24cc38">More...</a><br /></td></tr>
+<tr class="separator:a23a81b4a0f100b65e5b9ef256f24cc38"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af6c13da964277436e6dce57ff4eac1cd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1ParametersHandler_1_1YarpImplementation.html#af6c13da964277436e6dce57ff4eac1cd">setParameter</a> (const std::string &amp;parameterName, const double &amp;parameter) final</td></tr>
+<tr class="memdesc:af6c13da964277436e6dce57ff4eac1cd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set a parameter [double].  <a href="classBipedalLocomotion_1_1ParametersHandler_1_1YarpImplementation.html#af6c13da964277436e6dce57ff4eac1cd">More...</a><br /></td></tr>
+<tr class="separator:af6c13da964277436e6dce57ff4eac1cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0ca1b1604317ae5b51b745b74fbdefac"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1ParametersHandler_1_1YarpImplementation.html#a0ca1b1604317ae5b51b745b74fbdefac">setParameter</a> (const std::string &amp;parameterName, const std::string &amp;parameter) final</td></tr>
+<tr class="memdesc:a0ca1b1604317ae5b51b745b74fbdefac"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set a parameter [std::string].  <a href="classBipedalLocomotion_1_1ParametersHandler_1_1YarpImplementation.html#a0ca1b1604317ae5b51b745b74fbdefac">More...</a><br /></td></tr>
+<tr class="separator:a0ca1b1604317ae5b51b745b74fbdefac"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad9f22325acce4914fe4fd680171d882a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1ParametersHandler_1_1YarpImplementation.html#ad9f22325acce4914fe4fd680171d882a">setParameter</a> (const std::string &amp;parameterName, const char *parameter) final</td></tr>
+<tr class="memdesc:ad9f22325acce4914fe4fd680171d882a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set a parameter [const char*].  <a href="classBipedalLocomotion_1_1ParametersHandler_1_1YarpImplementation.html#ad9f22325acce4914fe4fd680171d882a">More...</a><br /></td></tr>
+<tr class="separator:ad9f22325acce4914fe4fd680171d882a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad26e7ca4d5d199a28a5ca5ed54109204"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1ParametersHandler_1_1YarpImplementation.html#ad26e7ca4d5d199a28a5ca5ed54109204">setParameter</a> (const std::string &amp;parameterName, const bool &amp;parameter) final</td></tr>
+<tr class="memdesc:ad26e7ca4d5d199a28a5ca5ed54109204"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set a parameter [bool].  <a href="classBipedalLocomotion_1_1ParametersHandler_1_1YarpImplementation.html#ad26e7ca4d5d199a28a5ca5ed54109204">More...</a><br /></td></tr>
+<tr class="separator:ad26e7ca4d5d199a28a5ca5ed54109204"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a40c630fc041a9fa5e5a63b2176b1cca6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1ParametersHandler_1_1YarpImplementation.html#a40c630fc041a9fa5e5a63b2176b1cca6">setParameter</a> (const std::string &amp;parameterName, const std::chrono::nanoseconds &amp;parameter) final</td></tr>
+<tr class="memdesc:a40c630fc041a9fa5e5a63b2176b1cca6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set a parameter [std::chrono::nanoseconds].  <a href="classBipedalLocomotion_1_1ParametersHandler_1_1YarpImplementation.html#a40c630fc041a9fa5e5a63b2176b1cca6">More...</a><br /></td></tr>
+<tr class="separator:a40c630fc041a9fa5e5a63b2176b1cca6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aac4d5e52c976673f98372123f78151a5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1ParametersHandler_1_1YarpImplementation.html#aac4d5e52c976673f98372123f78151a5">setParameter</a> (const std::string &amp;parameterName, const std::vector&lt; bool &gt; &amp;parameter) final</td></tr>
+<tr class="memdesc:aac4d5e52c976673f98372123f78151a5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set a parameter [std::vector&lt;bool&gt;].  <a href="classBipedalLocomotion_1_1ParametersHandler_1_1YarpImplementation.html#aac4d5e52c976673f98372123f78151a5">More...</a><br /></td></tr>
+<tr class="separator:aac4d5e52c976673f98372123f78151a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a18f0554685c1e48d6a2e59ce668a5513"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1ParametersHandler_1_1YarpImplementation.html#a18f0554685c1e48d6a2e59ce668a5513">setParameter</a> (const std::string &amp;parameterName, const <a class="el" href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html">GenericContainer::Vector</a>&lt; const int &gt;::Ref parameter) final</td></tr>
+<tr class="memdesc:a18f0554685c1e48d6a2e59ce668a5513"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set a parameter [GenericContainer::Vector&lt;int&gt;].  <a href="classBipedalLocomotion_1_1ParametersHandler_1_1YarpImplementation.html#a18f0554685c1e48d6a2e59ce668a5513">More...</a><br /></td></tr>
+<tr class="separator:a18f0554685c1e48d6a2e59ce668a5513"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af4273dd646f8cb83ae1116ad7c326915"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1ParametersHandler_1_1YarpImplementation.html#af4273dd646f8cb83ae1116ad7c326915">setParameter</a> (const std::string &amp;parameterName, const <a class="el" href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html">GenericContainer::Vector</a>&lt; const double &gt;::Ref parameter) final</td></tr>
+<tr class="memdesc:af4273dd646f8cb83ae1116ad7c326915"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set a parameter [GenericContainer::Vector&lt;double&gt;].  <a href="classBipedalLocomotion_1_1ParametersHandler_1_1YarpImplementation.html#af4273dd646f8cb83ae1116ad7c326915">More...</a><br /></td></tr>
+<tr class="separator:af4273dd646f8cb83ae1116ad7c326915"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae274237776dedce7ee10e2164213a299"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1ParametersHandler_1_1YarpImplementation.html#ae274237776dedce7ee10e2164213a299">setParameter</a> (const std::string &amp;parameterName, const <a class="el" href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html">GenericContainer::Vector</a>&lt; const std::string &gt;::Ref parameter) final</td></tr>
+<tr class="memdesc:ae274237776dedce7ee10e2164213a299"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set a parameter [GenericContainer::Vector&lt;std::string&gt;].  <a href="classBipedalLocomotion_1_1ParametersHandler_1_1YarpImplementation.html#ae274237776dedce7ee10e2164213a299">More...</a><br /></td></tr>
+<tr class="separator:ae274237776dedce7ee10e2164213a299"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6517369e543f0e86a2cea5862328d4a6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1ParametersHandler_1_1YarpImplementation.html#a6517369e543f0e86a2cea5862328d4a6">setParameter</a> (const std::string &amp;parameterName, const <a class="el" href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html">GenericContainer::Vector</a>&lt; const std::chrono::nanoseconds &gt;::Ref parameter) final</td></tr>
+<tr class="memdesc:a6517369e543f0e86a2cea5862328d4a6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a parameter [GenericContainer::Vector&lt;std::chrono::nanoseconds&gt;].  <a href="classBipedalLocomotion_1_1ParametersHandler_1_1YarpImplementation.html#a6517369e543f0e86a2cea5862328d4a6">More...</a><br /></td></tr>
+<tr class="separator:a6517369e543f0e86a2cea5862328d4a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a61f3f5ad6f229070ae8fe72899d9513b"><td class="memItemLeft" align="right" valign="top">weak_ptr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1ParametersHandler_1_1YarpImplementation.html#a61f3f5ad6f229070ae8fe72899d9513b">getGroup</a> (const std::string &amp;name) const final</td></tr>
+<tr class="memdesc:a61f3f5ad6f229070ae8fe72899d9513b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a Group from the handler.  <a href="classBipedalLocomotion_1_1ParametersHandler_1_1YarpImplementation.html#a61f3f5ad6f229070ae8fe72899d9513b">More...</a><br /></td></tr>
+<tr class="separator:a61f3f5ad6f229070ae8fe72899d9513b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae43fb3a21b8b2e482de2122aa793d81c"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1ParametersHandler_1_1YarpImplementation.html#ae43fb3a21b8b2e482de2122aa793d81c">setGroup</a> (const std::string &amp;name, shared_ptr newGroup) final</td></tr>
+<tr class="memdesc:ae43fb3a21b8b2e482de2122aa793d81c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set a new group on the handler.  <a href="classBipedalLocomotion_1_1ParametersHandler_1_1YarpImplementation.html#ae43fb3a21b8b2e482de2122aa793d81c">More...</a><br /></td></tr>
+<tr class="separator:ae43fb3a21b8b2e482de2122aa793d81c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a09e144289cf72340a1da18b5d4b6f1f3"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1ParametersHandler_1_1YarpImplementation.html#a09e144289cf72340a1da18b5d4b6f1f3">toString</a> () const final</td></tr>
+<tr class="memdesc:a09e144289cf72340a1da18b5d4b6f1f3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return a standard text representation of the content of the object.  <a href="classBipedalLocomotion_1_1ParametersHandler_1_1YarpImplementation.html#a09e144289cf72340a1da18b5d4b6f1f3">More...</a><br /></td></tr>
+<tr class="separator:a09e144289cf72340a1da18b5d4b6f1f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af2ae62757369f1c2f6c1cac7effee668"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1ParametersHandler_1_1YarpImplementation.html#af2ae62757369f1c2f6c1cac7effee668">isEmpty</a> () const final</td></tr>
+<tr class="memdesc:af2ae62757369f1c2f6c1cac7effee668"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if the handler contains parameters.  <a href="classBipedalLocomotion_1_1ParametersHandler_1_1YarpImplementation.html#af2ae62757369f1c2f6c1cac7effee668">More...</a><br /></td></tr>
+<tr class="separator:af2ae62757369f1c2f6c1cac7effee668"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9cb1bc9e078f6b66befb102a41f081d2"><td class="memItemLeft" align="right" valign="top"><a id="a9cb1bc9e078f6b66befb102a41f081d2"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1ParametersHandler_1_1YarpImplementation.html#a9cb1bc9e078f6b66befb102a41f081d2">clear</a> () final</td></tr>
+<tr class="memdesc:a9cb1bc9e078f6b66befb102a41f081d2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clears the handler from all the parameters. <br /></td></tr>
+<tr class="separator:a9cb1bc9e078f6b66befb102a41f081d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a69a302c8325d2aa1d5ba5482f2c0e906"><td class="memItemLeft" align="right" valign="top">shared_ptr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1ParametersHandler_1_1YarpImplementation.html#a69a302c8325d2aa1d5ba5482f2c0e906">clone</a> () const final</td></tr>
+<tr class="memdesc:a69a302c8325d2aa1d5ba5482f2c0e906"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clone the content of the content.  <a href="classBipedalLocomotion_1_1ParametersHandler_1_1YarpImplementation.html#a69a302c8325d2aa1d5ba5482f2c0e906">More...</a><br /></td></tr>
+<tr class="separator:a69a302c8325d2aa1d5ba5482f2c0e906"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a229f0efd055b386c23fb4f3d16ba56eb"><td class="memItemLeft" align="right" valign="top"><a id="a229f0efd055b386c23fb4f3d16ba56eb"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1ParametersHandler_1_1YarpImplementation.html#a229f0efd055b386c23fb4f3d16ba56eb">~YarpImplementation</a> ()=default</td></tr>
+<tr class="memdesc:a229f0efd055b386c23fb4f3d16ba56eb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor. <br /></td></tr>
+<tr class="separator:a229f0efd055b386c23fb4f3d16ba56eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_classBipedalLocomotion_1_1ParametersHandler_1_1IParametersHandler"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classBipedalLocomotion_1_1ParametersHandler_1_1IParametersHandler')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classBipedalLocomotion_1_1ParametersHandler_1_1IParametersHandler.html">BipedalLocomotion::ParametersHandler::IParametersHandler</a></td></tr>
+<tr class="memitem:ac2dde38cbb2c531e185a40144b1d98ac inherit pub_methods_classBipedalLocomotion_1_1ParametersHandler_1_1IParametersHandler"><td class="memItemLeft" align="right" valign="top"><a id="ac2dde38cbb2c531e185a40144b1d98ac"></a>
+virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1ParametersHandler_1_1IParametersHandler.html#ac2dde38cbb2c531e185a40144b1d98ac">~IParametersHandler</a> ()=default</td></tr>
+<tr class="memdesc:ac2dde38cbb2c531e185a40144b1d98ac inherit pub_methods_classBipedalLocomotion_1_1ParametersHandler_1_1IParametersHandler"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor. <br /></td></tr>
+<tr class="separator:ac2dde38cbb2c531e185a40144b1d98ac inherit pub_methods_classBipedalLocomotion_1_1ParametersHandler_1_1IParametersHandler"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
+Additional Inherited Members</h2></td></tr>
+<tr class="inherit_header pub_types_classBipedalLocomotion_1_1ParametersHandler_1_1IParametersHandler"><td colspan="2" onclick="javascript:toggleInherit('pub_types_classBipedalLocomotion_1_1ParametersHandler_1_1IParametersHandler')"><img src="closed.png" alt="-"/>&#160;Public Types inherited from <a class="el" href="classBipedalLocomotion_1_1ParametersHandler_1_1IParametersHandler.html">BipedalLocomotion::ParametersHandler::IParametersHandler</a></td></tr>
+<tr class="memitem:af52e37b791362f025487212e52256c51 inherit pub_types_classBipedalLocomotion_1_1ParametersHandler_1_1IParametersHandler"><td class="memItemLeft" align="right" valign="top"><a id="af52e37b791362f025487212e52256c51"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>unique_ptr</b> = std::unique_ptr&lt; <a class="el" href="classBipedalLocomotion_1_1ParametersHandler_1_1IParametersHandler.html">IParametersHandler</a> &gt;</td></tr>
+<tr class="separator:af52e37b791362f025487212e52256c51 inherit pub_types_classBipedalLocomotion_1_1ParametersHandler_1_1IParametersHandler"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8afda2b689337f31a090dabd24df53f3 inherit pub_types_classBipedalLocomotion_1_1ParametersHandler_1_1IParametersHandler"><td class="memItemLeft" align="right" valign="top"><a id="a8afda2b689337f31a090dabd24df53f3"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>shared_ptr</b> = std::shared_ptr&lt; <a class="el" href="classBipedalLocomotion_1_1ParametersHandler_1_1IParametersHandler.html">IParametersHandler</a> &gt;</td></tr>
+<tr class="separator:a8afda2b689337f31a090dabd24df53f3 inherit pub_types_classBipedalLocomotion_1_1ParametersHandler_1_1IParametersHandler"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a03eb908249dcb6c90bd61bdb55bd9aa7 inherit pub_types_classBipedalLocomotion_1_1ParametersHandler_1_1IParametersHandler"><td class="memItemLeft" align="right" valign="top"><a id="a03eb908249dcb6c90bd61bdb55bd9aa7"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>weak_ptr</b> = std::weak_ptr&lt; <a class="el" href="classBipedalLocomotion_1_1ParametersHandler_1_1IParametersHandler.html">IParametersHandler</a> &gt;</td></tr>
+<tr class="separator:a03eb908249dcb6c90bd61bdb55bd9aa7 inherit pub_types_classBipedalLocomotion_1_1ParametersHandler_1_1IParametersHandler"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p><a class="el" href="classBipedalLocomotion_1_1ParametersHandler_1_1YarpImplementation.html" title="YarpImplementation Yarp implementation of the IParametersHandler interface.">YarpImplementation</a> Yarp implementation of the <a class="el" href="classBipedalLocomotion_1_1ParametersHandler_1_1IParametersHandler.html" title="Parameters handler interface.">IParametersHandler</a> interface. </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="afce849916b6bed08232b3fa160bfcc38"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afce849916b6bed08232b3fa160bfcc38">&#9670;&nbsp;</a></span>YarpImplementation()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">YarpImplementation::YarpImplementation </td>
+          <td>(</td>
+          <td class="paramtype">const yarp::os::Searchable &amp;&#160;</td>
+          <td class="paramname"><em>searchable</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Constructor. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">searchable</td><td>reference to a searchable object. The object is copied inside the Handler </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a836718e8538e91f4e828a2e8e8a99d22"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a836718e8538e91f4e828a2e8e8a99d22">&#9670;&nbsp;</a></span>set()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void YarpImplementation::set </td>
+          <td>(</td>
+          <td class="paramtype">const yarp::os::Searchable &amp;&#160;</td>
+          <td class="paramname"><em>searchable</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Set the handler from an object. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">searchable</td><td>The object to copy </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="aff6086edbe621aa02e50deb226c6fa11"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aff6086edbe621aa02e50deb226c6fa11">&#9670;&nbsp;</a></span>setFromFile()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool YarpImplementation::setFromFile </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>filename</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Set the handler from a file. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">filename</td><td>the name of the file that should be loaded. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true/false in case of success/failure. </dd></dl>
+
+</div>
+</div>
+<a id="aa9ca286964fd3d3cede83ca987fd6ecd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa9ca286964fd3d3cede83ca987fd6ecd">&#9670;&nbsp;</a></span>getParameter() <span class="overload">[1/10]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool YarpImplementation::getParameter </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>parameterName</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int &amp;&#160;</td>
+          <td class="paramname"><em>parameter</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">final</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get a parameter [int]. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">parameterName</td><td>name of the parameter </td></tr>
+    <tr><td class="paramname">parameter</td><td>parameter </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true/false in case of success/failure </dd></dl>
+
+<p>Implements <a class="el" href="classBipedalLocomotion_1_1ParametersHandler_1_1IParametersHandler.html#afdb240a10f9cb5345c86574f974d7e5d">BipedalLocomotion::ParametersHandler::IParametersHandler</a>.</p>
+
+</div>
+</div>
+<a id="a5d533fe7f2d2d81f8f765a4a14923376"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5d533fe7f2d2d81f8f765a4a14923376">&#9670;&nbsp;</a></span>getParameter() <span class="overload">[2/10]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool YarpImplementation::getParameter </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>parameterName</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double &amp;&#160;</td>
+          <td class="paramname"><em>parameter</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">final</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get a parameter [double]. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">parameterName</td><td>name of the parameter </td></tr>
+    <tr><td class="paramname">parameter</td><td>parameter </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true/false in case of success/failure </dd></dl>
+
+<p>Implements <a class="el" href="classBipedalLocomotion_1_1ParametersHandler_1_1IParametersHandler.html#a309b3e41c285bafc3abfdaa19107a94d">BipedalLocomotion::ParametersHandler::IParametersHandler</a>.</p>
+
+</div>
+</div>
+<a id="a37dad6b71e19dc4ebd6cec9d1af17736"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a37dad6b71e19dc4ebd6cec9d1af17736">&#9670;&nbsp;</a></span>getParameter() <span class="overload">[3/10]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool YarpImplementation::getParameter </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>parameterName</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::string &amp;&#160;</td>
+          <td class="paramname"><em>parameter</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">final</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get a parameter [std::string]. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">parameterName</td><td>name of the parameter </td></tr>
+    <tr><td class="paramname">parameter</td><td>parameter </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true/false in case of success/failure </dd></dl>
+
+<p>Implements <a class="el" href="classBipedalLocomotion_1_1ParametersHandler_1_1IParametersHandler.html#a6f70e7ff8d921ddd86b1d787dea31817">BipedalLocomotion::ParametersHandler::IParametersHandler</a>.</p>
+
+</div>
+</div>
+<a id="ad437f55cd34d2c5505f9882b3076fb2b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad437f55cd34d2c5505f9882b3076fb2b">&#9670;&nbsp;</a></span>getParameter() <span class="overload">[4/10]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool YarpImplementation::getParameter </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>parameterName</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool &amp;&#160;</td>
+          <td class="paramname"><em>parameter</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">final</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get a parameter [bool]. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">parameterName</td><td>name of the parameter </td></tr>
+    <tr><td class="paramname">parameter</td><td>parameter </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true/false in case of success/failure </dd></dl>
+
+<p>Implements <a class="el" href="classBipedalLocomotion_1_1ParametersHandler_1_1IParametersHandler.html#a580f55f92e5113e5e956500a642c334f">BipedalLocomotion::ParametersHandler::IParametersHandler</a>.</p>
+
+</div>
+</div>
+<a id="a0d829885db04b4a4d1f6290405cae1e5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0d829885db04b4a4d1f6290405cae1e5">&#9670;&nbsp;</a></span>getParameter() <span class="overload">[5/10]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool YarpImplementation::getParameter </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>parameterName</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::chrono::nanoseconds &amp;&#160;</td>
+          <td class="paramname"><em>parameter</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">final</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get a parameter [std::chrono::nanoseconds]. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">parameterName</td><td>name of the parameter </td></tr>
+    <tr><td class="paramname">parameter</td><td>parameter </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true/false in case of success/failure </dd></dl>
+
+<p>Implements <a class="el" href="classBipedalLocomotion_1_1ParametersHandler_1_1IParametersHandler.html#a32cea1fc7fe065fbd6222b26a4e8e669">BipedalLocomotion::ParametersHandler::IParametersHandler</a>.</p>
+
+</div>
+</div>
+<a id="a5005027bd01eba98bf58fa8a0d9b8dd1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5005027bd01eba98bf58fa8a0d9b8dd1">&#9670;&nbsp;</a></span>getParameter() <span class="overload">[6/10]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool YarpImplementation::getParameter </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>parameterName</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::vector&lt; bool &gt; &amp;&#160;</td>
+          <td class="paramname"><em>parameter</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">final</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get a parameter [std::vector&lt;bool&gt;]. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">parameterName</td><td>name of the parameter </td></tr>
+    <tr><td class="paramname">parameter</td><td>parameter </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true/false in case of success/failure </dd></dl>
+
+<p>Implements <a class="el" href="classBipedalLocomotion_1_1ParametersHandler_1_1IParametersHandler.html#a4b5d92b170d471760070c9b19fcf2355">BipedalLocomotion::ParametersHandler::IParametersHandler</a>.</p>
+
+</div>
+</div>
+<a id="a2b4ae94c7f481b3e7cfd67307cb912b0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2b4ae94c7f481b3e7cfd67307cb912b0">&#9670;&nbsp;</a></span>getParameter() <span class="overload">[7/10]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool YarpImplementation::getParameter </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>parameterName</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html">GenericContainer::Vector</a>&lt; int &gt;::Ref&#160;</td>
+          <td class="paramname"><em>parameter</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">final</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get a parameter [GenericContainer::Vector&lt;int&gt;]. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">parameterName</td><td>name of the parameter </td></tr>
+    <tr><td class="paramname">parameter</td><td>parameter </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true/false in case of success/failure </dd></dl>
+
+<p>Implements <a class="el" href="classBipedalLocomotion_1_1ParametersHandler_1_1IParametersHandler.html#ae2157684e9278364f16d491771db4de8">BipedalLocomotion::ParametersHandler::IParametersHandler</a>.</p>
+
+</div>
+</div>
+<a id="a305ed2bc89c8f93e3e8185340009b2ca"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a305ed2bc89c8f93e3e8185340009b2ca">&#9670;&nbsp;</a></span>getParameter() <span class="overload">[8/10]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool YarpImplementation::getParameter </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>parameterName</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html">GenericContainer::Vector</a>&lt; double &gt;::Ref&#160;</td>
+          <td class="paramname"><em>parameter</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">final</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get a parameter [GenericContainer::Vector&lt;double&gt;]. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">parameterName</td><td>name of the parameter </td></tr>
+    <tr><td class="paramname">parameter</td><td>parameter </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true/false in case of success/failure </dd></dl>
+
+<p>Implements <a class="el" href="classBipedalLocomotion_1_1ParametersHandler_1_1IParametersHandler.html#a3f9f2f10327e8e1f090357ca49fa6149">BipedalLocomotion::ParametersHandler::IParametersHandler</a>.</p>
+
+</div>
+</div>
+<a id="a01331ba2f6db854b2d123ead9c4b0f1c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a01331ba2f6db854b2d123ead9c4b0f1c">&#9670;&nbsp;</a></span>getParameter() <span class="overload">[9/10]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool YarpImplementation::getParameter </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>parameterName</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html">GenericContainer::Vector</a>&lt; std::string &gt;::Ref&#160;</td>
+          <td class="paramname"><em>parameter</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">final</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get a parameter [GenericContainer::Vector&lt;std::string&gt;]. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">parameterName</td><td>name of the parameter </td></tr>
+    <tr><td class="paramname">parameter</td><td>parameter </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true/false in case of success/failure </dd></dl>
+
+<p>Implements <a class="el" href="classBipedalLocomotion_1_1ParametersHandler_1_1IParametersHandler.html#aaa35d7a32c43c5d75e48ad1228d1d335">BipedalLocomotion::ParametersHandler::IParametersHandler</a>.</p>
+
+</div>
+</div>
+<a id="a81dd9c41dc685aaf825428a7018cb540"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a81dd9c41dc685aaf825428a7018cb540">&#9670;&nbsp;</a></span>getParameter() <span class="overload">[10/10]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool YarpImplementation::getParameter </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>parameterName</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html">GenericContainer::Vector</a>&lt; std::chrono::nanoseconds &gt;::Ref&#160;</td>
+          <td class="paramname"><em>parameter</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">final</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get a parameter [GenericContainer::Vector&lt;std::chrono::nanoseconds&gt;]. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">parameterName</td><td>name of the parameter </td></tr>
+    <tr><td class="paramname">parameter</td><td>parameter </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true/false in case of success/failure </dd></dl>
+
+<p>Implements <a class="el" href="classBipedalLocomotion_1_1ParametersHandler_1_1IParametersHandler.html#a9145dbaf1143a1a3da2f415e6c67894a">BipedalLocomotion::ParametersHandler::IParametersHandler</a>.</p>
+
+</div>
+</div>
+<a id="a23a81b4a0f100b65e5b9ef256f24cc38"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a23a81b4a0f100b65e5b9ef256f24cc38">&#9670;&nbsp;</a></span>setParameter() <span class="overload">[1/11]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void YarpImplementation::setParameter </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>parameterName</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int &amp;&#160;</td>
+          <td class="paramname"><em>parameter</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">final</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Set a parameter [int]. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">parameterName</td><td>name of the parameter </td></tr>
+    <tr><td class="paramname">parameter</td><td>parameter </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Implements <a class="el" href="classBipedalLocomotion_1_1ParametersHandler_1_1IParametersHandler.html#a6d237be21441ba4ad215955d1e59d78c">BipedalLocomotion::ParametersHandler::IParametersHandler</a>.</p>
+
+</div>
+</div>
+<a id="af6c13da964277436e6dce57ff4eac1cd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af6c13da964277436e6dce57ff4eac1cd">&#9670;&nbsp;</a></span>setParameter() <span class="overload">[2/11]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void YarpImplementation::setParameter </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>parameterName</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>parameter</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">final</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Set a parameter [double]. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">parameterName</td><td>name of the parameter </td></tr>
+    <tr><td class="paramname">parameter</td><td>parameter </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Implements <a class="el" href="classBipedalLocomotion_1_1ParametersHandler_1_1IParametersHandler.html#af3d26ff754203f7ea0c18026299279f5">BipedalLocomotion::ParametersHandler::IParametersHandler</a>.</p>
+
+</div>
+</div>
+<a id="a0ca1b1604317ae5b51b745b74fbdefac"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0ca1b1604317ae5b51b745b74fbdefac">&#9670;&nbsp;</a></span>setParameter() <span class="overload">[3/11]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void YarpImplementation::setParameter </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>parameterName</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>parameter</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">final</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Set a parameter [std::string]. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">parameterName</td><td>name of the parameter </td></tr>
+    <tr><td class="paramname">parameter</td><td>parameter </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Implements <a class="el" href="classBipedalLocomotion_1_1ParametersHandler_1_1IParametersHandler.html#a676ff31c0f2a523d23115acb820fa8c4">BipedalLocomotion::ParametersHandler::IParametersHandler</a>.</p>
+
+</div>
+</div>
+<a id="ad9f22325acce4914fe4fd680171d882a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad9f22325acce4914fe4fd680171d882a">&#9670;&nbsp;</a></span>setParameter() <span class="overload">[4/11]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void YarpImplementation::setParameter </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>parameterName</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>parameter</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">final</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Set a parameter [const char*]. </p>
+<dl class="section note"><dt>Note</dt><dd>this is required because of <a href="https://www.bfilipek.com/2019/07/surprising-conversions-char-bool.html">https://www.bfilipek.com/2019/07/surprising-conversions-char-bool.html</a> </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">parameterName</td><td>name of the parameter </td></tr>
+    <tr><td class="paramname">parameter</td><td>parameter </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Implements <a class="el" href="classBipedalLocomotion_1_1ParametersHandler_1_1IParametersHandler.html#ac50bdd9d7c54d542979601502aa63724">BipedalLocomotion::ParametersHandler::IParametersHandler</a>.</p>
+
+</div>
+</div>
+<a id="ad26e7ca4d5d199a28a5ca5ed54109204"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad26e7ca4d5d199a28a5ca5ed54109204">&#9670;&nbsp;</a></span>setParameter() <span class="overload">[5/11]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void YarpImplementation::setParameter </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>parameterName</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const bool &amp;&#160;</td>
+          <td class="paramname"><em>parameter</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">final</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Set a parameter [bool]. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">parameterName</td><td>name of the parameter </td></tr>
+    <tr><td class="paramname">parameter</td><td>parameter </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Implements <a class="el" href="classBipedalLocomotion_1_1ParametersHandler_1_1IParametersHandler.html#a31e93d8df853c8e714ea0f02b561692d">BipedalLocomotion::ParametersHandler::IParametersHandler</a>.</p>
+
+</div>
+</div>
+<a id="a40c630fc041a9fa5e5a63b2176b1cca6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a40c630fc041a9fa5e5a63b2176b1cca6">&#9670;&nbsp;</a></span>setParameter() <span class="overload">[6/11]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void YarpImplementation::setParameter </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>parameterName</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::chrono::nanoseconds &amp;&#160;</td>
+          <td class="paramname"><em>parameter</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">final</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Set a parameter [std::chrono::nanoseconds]. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">parameterName</td><td>name of the parameter </td></tr>
+    <tr><td class="paramname">parameter</td><td>parameter </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Implements <a class="el" href="classBipedalLocomotion_1_1ParametersHandler_1_1IParametersHandler.html#aedd08b1aeedb09aff57a9dbb19dc88c1">BipedalLocomotion::ParametersHandler::IParametersHandler</a>.</p>
+
+</div>
+</div>
+<a id="aac4d5e52c976673f98372123f78151a5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aac4d5e52c976673f98372123f78151a5">&#9670;&nbsp;</a></span>setParameter() <span class="overload">[7/11]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void YarpImplementation::setParameter </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>parameterName</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::vector&lt; bool &gt; &amp;&#160;</td>
+          <td class="paramname"><em>parameter</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">final</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Set a parameter [std::vector&lt;bool&gt;]. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">parameterName</td><td>name of the parameter </td></tr>
+    <tr><td class="paramname">parameter</td><td>parameter </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Implements <a class="el" href="classBipedalLocomotion_1_1ParametersHandler_1_1IParametersHandler.html#adbf64417a4c269eea758e895545a05db">BipedalLocomotion::ParametersHandler::IParametersHandler</a>.</p>
+
+</div>
+</div>
+<a id="a18f0554685c1e48d6a2e59ce668a5513"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a18f0554685c1e48d6a2e59ce668a5513">&#9670;&nbsp;</a></span>setParameter() <span class="overload">[8/11]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void YarpImplementation::setParameter </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>parameterName</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html">GenericContainer::Vector</a>&lt; const int &gt;::Ref&#160;</td>
+          <td class="paramname"><em>parameter</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">final</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Set a parameter [GenericContainer::Vector&lt;int&gt;]. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">parameterName</td><td>name of the parameter </td></tr>
+    <tr><td class="paramname">parameter</td><td>parameter </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Implements <a class="el" href="classBipedalLocomotion_1_1ParametersHandler_1_1IParametersHandler.html#a99835b09d78671d66f127bb3f2f11a8f">BipedalLocomotion::ParametersHandler::IParametersHandler</a>.</p>
+
+</div>
+</div>
+<a id="af4273dd646f8cb83ae1116ad7c326915"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af4273dd646f8cb83ae1116ad7c326915">&#9670;&nbsp;</a></span>setParameter() <span class="overload">[9/11]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void YarpImplementation::setParameter </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>parameterName</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html">GenericContainer::Vector</a>&lt; const double &gt;::Ref&#160;</td>
+          <td class="paramname"><em>parameter</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">final</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Set a parameter [GenericContainer::Vector&lt;double&gt;]. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">parameterName</td><td>name of the parameter </td></tr>
+    <tr><td class="paramname">parameter</td><td>parameter </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Implements <a class="el" href="classBipedalLocomotion_1_1ParametersHandler_1_1IParametersHandler.html#a6acc040bc256463c628af59033a59863">BipedalLocomotion::ParametersHandler::IParametersHandler</a>.</p>
+
+</div>
+</div>
+<a id="ae274237776dedce7ee10e2164213a299"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae274237776dedce7ee10e2164213a299">&#9670;&nbsp;</a></span>setParameter() <span class="overload">[10/11]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void YarpImplementation::setParameter </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>parameterName</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html">GenericContainer::Vector</a>&lt; const std::string &gt;::Ref&#160;</td>
+          <td class="paramname"><em>parameter</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">final</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Set a parameter [GenericContainer::Vector&lt;std::string&gt;]. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">parameterName</td><td>name of the parameter </td></tr>
+    <tr><td class="paramname">parameter</td><td>parameter </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Implements <a class="el" href="classBipedalLocomotion_1_1ParametersHandler_1_1IParametersHandler.html#ab1cb738f9b06bf45c5f0bb63c87b87eb">BipedalLocomotion::ParametersHandler::IParametersHandler</a>.</p>
+
+</div>
+</div>
+<a id="a6517369e543f0e86a2cea5862328d4a6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6517369e543f0e86a2cea5862328d4a6">&#9670;&nbsp;</a></span>setParameter() <span class="overload">[11/11]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void YarpImplementation::setParameter </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>parameterName</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html">GenericContainer::Vector</a>&lt; const std::chrono::nanoseconds &gt;::Ref&#160;</td>
+          <td class="paramname"><em>parameter</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">final</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get a parameter [GenericContainer::Vector&lt;std::chrono::nanoseconds&gt;]. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">parameterName</td><td>name of the parameter </td></tr>
+    <tr><td class="paramname">parameter</td><td>parameter </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Implements <a class="el" href="classBipedalLocomotion_1_1ParametersHandler_1_1IParametersHandler.html#a8446ca0f4e9028008b73ce6080615e64">BipedalLocomotion::ParametersHandler::IParametersHandler</a>.</p>
+
+</div>
+</div>
+<a id="a61f3f5ad6f229070ae8fe72899d9513b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a61f3f5ad6f229070ae8fe72899d9513b">&#9670;&nbsp;</a></span>getGroup()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">YarpImplementation::weak_ptr YarpImplementation::getGroup </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>name</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">final</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get a Group from the handler. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">name</td><td>name of the group </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>A pointer to <a class="el" href="classBipedalLocomotion_1_1ParametersHandler_1_1IParametersHandler.html" title="Parameters handler interface.">IParametersHandler</a>, if the group is not found the weak pointer cannot be locked </dd></dl>
+
+<p>Implements <a class="el" href="classBipedalLocomotion_1_1ParametersHandler_1_1IParametersHandler.html#a8ca1254ab3f157396052b4df3cefc15d">BipedalLocomotion::ParametersHandler::IParametersHandler</a>.</p>
+
+</div>
+</div>
+<a id="ae43fb3a21b8b2e482de2122aa793d81c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae43fb3a21b8b2e482de2122aa793d81c">&#9670;&nbsp;</a></span>setGroup()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool YarpImplementation::setGroup </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">IParametersHandler::shared_ptr&#160;</td>
+          <td class="paramname"><em>newGroup</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">final</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Set a new group on the handler. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">name</td><td>name of the group </td></tr>
+    <tr><td class="paramname">newGroup</td><td>shared pointer to the new group </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Implements <a class="el" href="classBipedalLocomotion_1_1ParametersHandler_1_1IParametersHandler.html#a78e1afbcb61323fa5d5a105466aa4a1b">BipedalLocomotion::ParametersHandler::IParametersHandler</a>.</p>
+
+</div>
+</div>
+<a id="a09e144289cf72340a1da18b5d4b6f1f3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a09e144289cf72340a1da18b5d4b6f1f3">&#9670;&nbsp;</a></span>toString()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string YarpImplementation::toString </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">final</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Return a standard text representation of the content of the object. </p>
+<dl class="section return"><dt>Returns</dt><dd>a string containing the standard text representation of the content of the object. </dd></dl>
+
+<p>Implements <a class="el" href="classBipedalLocomotion_1_1ParametersHandler_1_1IParametersHandler.html#a22dd2d7f429a64092bba1e3bdbe29713">BipedalLocomotion::ParametersHandler::IParametersHandler</a>.</p>
+
+</div>
+</div>
+<a id="af2ae62757369f1c2f6c1cac7effee668"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af2ae62757369f1c2f6c1cac7effee668">&#9670;&nbsp;</a></span>isEmpty()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool YarpImplementation::isEmpty </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">final</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Check if the handler contains parameters. </p>
+<dl class="section return"><dt>Returns</dt><dd>true if the handler does not contain any parameters, false otherwise </dd></dl>
+
+<p>Implements <a class="el" href="classBipedalLocomotion_1_1ParametersHandler_1_1IParametersHandler.html#ab15662ad31c0c5c750a8c0d301bd7033">BipedalLocomotion::ParametersHandler::IParametersHandler</a>.</p>
+
+</div>
+</div>
+<a id="a69a302c8325d2aa1d5ba5482f2c0e906"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a69a302c8325d2aa1d5ba5482f2c0e906">&#9670;&nbsp;</a></span>clone()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">IParametersHandler::shared_ptr YarpImplementation::clone </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">final</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Clone the content of the content. </p>
+<dl class="section return"><dt>Returns</dt><dd>a IParametersHandler::shared_ptr clone of the current handler. </dd></dl>
+<dl class="section warning"><dt>Warning</dt><dd></dd></dl>
+
+<p>Implements <a class="el" href="classBipedalLocomotion_1_1ParametersHandler_1_1IParametersHandler.html#ad77436eee28c16c2ac6218ee04ec88b5">BipedalLocomotion::ParametersHandler::IParametersHandler</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following files:<ul>
+<li>ParametersHandler/YarpImplementation/include/BipedalLocomotion/ParametersHandler/<a class="el" href="YarpImplementation_8h.html">YarpImplementation.h</a></li>
+<li>ParametersHandler/YarpImplementation/src/<a class="el" href="YarpImplementation_8cpp.html">YarpImplementation.cpp</a></li>
+</ul>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- Doxygen custom footer -->
+<div id="nav-path" class="navpath">
+  <ul>
+    <li class="footer">
+      <a href="https://github.com/gbionics/bipedal-locomotion-framework">GitHub</a> &bull;
+      <a href="https://gbionics.ai/">Generative Bionics</a> &bull;
+      Licensed under <a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause "New" or "Revised" License</a> &bull;
+      Generated by <a href="https://www.doxygen.org/index.html">Doxygen</a> 1.9.1
+    </li>
+  </ul>
+</div>
 </body>
 </html>

@@ -1,331 +1,653 @@
-<!DOCTYPE html>
-<html lang="en">
+<!-- HTML header for doxygen 1.9.1 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-  <meta charset="UTF-8" />
-  <title>BipedalLocomotion::GenericContainer::Vector::Ref class | bipedal locomotion framework master</title>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
-  <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
-  <link rel="icon" href="favicon-dark.png" type="image/png" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#22272e" />
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>bipedal locomotion framework: BipedalLocomotion::GenericContainer::Vector&lt; T &gt;::Ref Class Reference</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js", "TeX/AMSmath.js", "TeX/AMSsymbols.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+});
+</script>
+<script type="text/javascript" async="async" src="https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only-darkmode-toggle.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="doxygen-awesome-darkmode-toggle.js"></script>
+<script type="text/javascript" src="doxygen-awesome-fragment-copy-button.js"></script>
+<script type="text/javascript" src="doxygen-awesome-interactive-toc.js"></script>
+<script type="text/javascript" src="doxygen-awesome-paragraph-link.js"></script>
+<script type="text/javascript" src="doxygen-awesome-tabs.js"></script>
+<script type="text/javascript">
+    DoxygenAwesomeDarkModeToggle.init()
+    DoxygenAwesomeFragmentCopyButton.init()
+    DoxygenAwesomeInteractiveToc.init()
+    DoxygenAwesomeParagraphLink.init()
+    DoxygenAwesomeTabs.init()
+</script>
 </head>
 <body>
-<header><nav id="navigation">
-  <div class="m-container">
-    <div class="m-row">
-      <span id="m-navbar-brand" class="m-col-t-8 m-col-m-none m-left-m">
-        <a href="./index.html">bipedal locomotion framework</a> <span class="m-breadcrumb">|</span> <a href="index.html" class="m-thin">master</a>
-      </span>
-      <div class="m-col-t-4 m-hide-m m-text-right m-nopadr">
-        <a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
-          <path id="m-doc-search-icon-path" d="m6 0c-3.31 0-6 2.69-6 6 0 3.31 2.69 6 6 6 1.49 0 2.85-0.541 3.89-1.44-0.0164 0.338 0.147 0.759 0.5 1.15l3.22 3.79c0.552 0.614 1.45 0.665 2 0.115 0.55-0.55 0.499-1.45-0.115-2l-3.79-3.22c-0.392-0.353-0.812-0.515-1.15-0.5 0.895-1.05 1.44-2.41 1.44-3.89 0-3.31-2.69-6-6-6zm0 1.56a4.44 4.44 0 0 1 4.44 4.44 4.44 4.44 0 0 1-4.44 4.44 4.44 4.44 0 0 1-4.44-4.44 4.44 4.44 0 0 1 4.44-4.44z"/>
-        </svg></a>
-        <a id="m-navbar-show" href="#navigation" title="Show navigation"></a>
-        <a id="m-navbar-hide" href="#" title="Hide navigation"></a>
-      </div>
-      <div id="m-navbar-collapse" class="m-col-t-12 m-show-m m-col-m-none m-right-m">
-        <div class="m-row">
-          <ol class="m-col-t-6 m-col-m-none">
-            <li><a href="pages.html">Pages</a></li>
-            <li><a href="annotated.html">Classes</a></li>
-            <li><a href="files.html">Files</a></li>
-          </ol>
-          <ol class="m-col-t-6 m-col-m-none" start="4">
-            <li>
-              <a href="pages.html">Versions</a>
-              <ol>
-                <li><a href="./index.html">Master</a></li>
-                <li><a href="./v0.19.0/index.html">v0.19.0</a></li>
-                <li><a href="./v0.21.1/index.html">v0.21.1</a></li>
-                <li><a href="./v0.18.0/index.html">v0.18.0</a></li>
-              </ol>
-            </li>
-            <li>
-              <a href="pages.html">Contacts</a>
-              <ol>
-                <li><a href="https://github.com/ami-iit/bipedal-locomotion-framework">GitHub</a></li>
-                <li><a href="https://www.iit.it/web/ami/">Lab website</a></li>
-              </ol>
-            </li>
-            <li class="m-show-m"><a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
-              <use href="#m-doc-search-icon-path" />
-            </svg></a></li>
-          </ol>
-        </div>
-      </div>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">bipedal locomotion framework
+   </div>
+   <div id="projectbrief">A suite of libraries for achieving bipedal locomotion on humanoid robots</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.9.1 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "search",false,'Search','.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',true,false,'search.php','Search');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
     </div>
   </div>
-</nav></header>
-<main><article>
-  <div class="m-container m-container-inflatable">
-    <div class="m-row">
-      <div class="m-col-l-10 m-push-l-1">
-        <h1>
-          <span class="m-breadcrumb"><a href="namespaceBipedalLocomotion.html">BipedalLocomotion</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespaceBipedalLocomotion_1_1GenericContainer.html">GenericContainer</a>::<wbr/></span><span class="m-breadcrumb"><a href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html">Vector</a>::<wbr/></span>Ref <span class="m-thin">class</span>
-          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="Vector_8h.html">&lt;BipedalLocomotion/GenericContainer/Vector.h&gt;</a></div>
-        </h1>
-        <p>The class ref is used a substitution to a classical reference to a <a href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html" class="m-doc">Vector</a>.</p>
-        <nav class="m-block m-default">
-          <h3>Contents</h3>
-          <ul>
-            <li>
-              Reference
-              <ul>
-                <li><a href="#base-classes">Base classes</a></li>
-                <li><a href="#typeless-methods">Constructors, destructors, conversion operators</a></li>
-                <li><a href="#pub-methods">Public functions</a></li>
-              </ul>
-            </li>
-          </ul>
-        </nav>
-<p>The advantage of using this, is that custom vectors (all those supported by <a href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html" class="m-doc">GenericContainer::<wbr />Vector</a>) can be implicitly casted to <a href="classBipedalLocomotion_1_1GenericContainer_1_1Vector_1_1Ref.html" class="m-doc">Ref</a>. <a href="classBipedalLocomotion_1_1GenericContainer_1_1Vector_1_1Ref.html" class="m-doc">Ref</a> does not allocate any memory in construction, hence can be used as a parameter to be passed by copy. The = operator clones the content. <a href="classBipedalLocomotion_1_1GenericContainer_1_1Vector_1_1Ref.html" class="m-doc">Ref</a> inherits Vector&lt;T&gt;, hence it can be used as it was a Vector&lt;T&gt;.</p>
-        <section id="base-classes">
-          <h2><a href="#base-classes">Base classes</a></h2>
-          <dl class="m-doc">
-            <dt>
-              <div class="m-doc-template">template&lt;typename T&gt;</div>
-              class <a href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html" class="m-doc">BipedalLocomotion::GenericContainer::Vector&lt;T&gt;</a>
-            </dt>
-            <dd>Forward declaration of <a href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html" class="m-doc">Vector</a> class.</dd>
-          </dl>
-        </section>
-        <section id="typeless-methods">
-          <h2><a href="#typeless-methods">Constructors, destructors, conversion operators</a></h2>
-          <dl class="m-doc">
-            <dt id="af9aedd44a2ae16eb75d893141ede4170">
-              <span class="m-doc-wrap-bumper"><a href="#af9aedd44a2ae16eb75d893141ede4170" class="m-doc-self">Ref</a>(</span><span class="m-doc-wrap">) <span class="m-label m-flat m-danger">deleted</span></span>
-            </dt>
-            <dd>A reference cannot exist on its own.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper"><a href="#a8f343fd42e25ebd19634a7fdd5fba9e1" class="m-doc">Ref</a>(</span><span class="m-doc-wrap"><a href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html" class="m-doc">BipedalLocomotion::<wbr />GenericContainer::<wbr />Vector</a>&lt;T&gt;::<a href="classBipedalLocomotion_1_1GenericContainer_1_1Vector_1_1Ref.html" class="m-doc">Ref</a>&amp; other)</span>
-            </dt>
-            <dd>Copy constructor.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper"><a href="#a5b9816f8f92f1fa8d4d5ea6f2c267fae" class="m-doc">Ref</a>(</span><span class="m-doc-wrap"><a href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html" class="m-doc">BipedalLocomotion::<wbr />GenericContainer::<wbr />Vector</a>&lt;T&gt;::<a href="classBipedalLocomotion_1_1GenericContainer_1_1Vector_1_1Ref.html" class="m-doc">Ref</a>&amp;&amp; other)</span>
-            </dt>
-            <dd>Move constructor.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper"><a href="#acecafed7a41dba62f32302fa769e6590" class="m-doc">Ref</a>(</span><span class="m-doc-wrap"><a href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html" class="m-doc">BipedalLocomotion::<wbr />GenericContainer::<wbr />Vector</a>&lt;T&gt;&amp; other)</span>
-            </dt>
-            <dd>Constructor from a GenericContainer::Vector&lt;T&gt;&amp;.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper"><a href="#a76f151747e877c0e5a3261b243c00320" class="m-doc">Ref</a>(</span><span class="m-doc-wrap"><a href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html" class="m-doc">BipedalLocomotion::<wbr />GenericContainer::<wbr />Vector</a>&lt;T&gt;&amp;&amp; other)</span>
-            </dt>
-            <dd>Constructor from a GenericContainer::Vector&lt;T&gt;&amp;.</dd>
-            <dt>
-              <div class="m-doc-template">template&lt;class <a href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html" class="m-doc">Vector</a>, typename = typename std::enable_if&lt;!<a href="structBipedalLocomotion_1_1GenericContainer_1_1is__vector.html" class="m-doc">GenericContainer::<wbr />is_vector</a>&lt;<a href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html" class="m-doc">Vector</a>&gt;::value&amp;&amp;                                                               !std::is_same&lt;<a href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html" class="m-doc">Vector</a>, std::string&gt;::value&amp;&amp;                                                               GenericContainer::is_vector_ref_constructible&lt;T,<a href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html" class="m-doc">Vector</a>&gt;::value&amp;&amp;                                                               !std::is_const_v&lt;T&gt;&amp;&amp;                                                               !is_container_const&lt;<a href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html" class="m-doc">Vector</a>&gt;::value&gt;::type&gt;</div>
-              <span class="m-doc-wrap-bumper"><a href="#ab3f502b73dda6c5301b21f8f6af8bf4e" class="m-doc">Ref</a>(</span><span class="m-doc-wrap"><a href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html" class="m-doc">Vector</a>&amp; input)</span>
-            </dt>
-            <dd>Constructor from another container.</dd>
-            <dt>
-              <div class="m-doc-template">template&lt;class <a href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html" class="m-doc">Vector</a>, typename = typename std::enable_if&lt;!<a href="structBipedalLocomotion_1_1GenericContainer_1_1is__vector.html" class="m-doc">GenericContainer::<wbr />is_vector</a>&lt;<a href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html" class="m-doc">Vector</a>&gt;::value&amp;&amp;                                                               !std::is_same&lt;<a href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html" class="m-doc">Vector</a>, std::string&gt;::value&amp;&amp;                                                               GenericContainer::is_vector_ref_constructible&lt;T,<a href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html" class="m-doc">Vector</a>&gt;::value&amp;&amp;                                                               std::is_const_v&lt;T&gt;&gt;::type&gt;</div>
-              <span class="m-doc-wrap-bumper"><a href="#a92080b7fa41786c8a5cdfd87e6513425" class="m-doc">Ref</a>(</span><span class="m-doc-wrap">const <a href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html" class="m-doc">Vector</a>&amp; input)</span>
-            </dt>
-            <dd>Constructor from another container.</dd>
-            <dt id="afb75195226006054d1783077f1663ba6">
-              <span class="m-doc-wrap-bumper"><a href="#afb75195226006054d1783077f1663ba6" class="m-doc-self">~Ref</a>(</span><span class="m-doc-wrap">) <span class="m-label m-flat m-info">defaulted</span></span>
-            </dt>
-            <dd>Default constructor.</dd>
-          </dl>
-        </section>
-        <section id="pub-methods">
-          <h2><a href="#pub-methods">Public functions</a></h2>
-          <dl class="m-doc">
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#adefaeb0ff580fa8e0df37cc02e98dd7c" class="m-doc">operator=</a>(</span><span class="m-doc-wrap">const <a href="classBipedalLocomotion_1_1GenericContainer_1_1Vector_1_1Ref.html" class="m-doc">Ref</a>&amp; other) -&gt; <a href="classBipedalLocomotion_1_1GenericContainer_1_1Vector_1_1Ref.html" class="m-doc">Ref</a></span>
-            </dt>
-            <dd>Copy operator.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a6993d73d90962d5a71ee726cf3d95355" class="m-doc">operator=</a>(</span><span class="m-doc-wrap"><a href="classBipedalLocomotion_1_1GenericContainer_1_1Vector_1_1Ref.html" class="m-doc">Ref</a>&amp;&amp; other) -&gt; <a href="classBipedalLocomotion_1_1GenericContainer_1_1Vector_1_1Ref.html" class="m-doc">Ref</a></span>
-            </dt>
-            <dd>Copy operator.</dd>
-          </dl>
-        </section>
-        <section>
-          <h2>Function documentation</h2>
-          <section class="m-doc-details" id="a8f343fd42e25ebd19634a7fdd5fba9e1"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper"> BipedalLocomotion::<wbr />GenericContainer::<wbr />Vector::<wbr />Ref::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a8f343fd42e25ebd19634a7fdd5fba9e1" class="m-doc-self">Ref</a>(</span><span class="m-doc-wrap"><a href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html" class="m-doc">BipedalLocomotion::<wbr />GenericContainer::<wbr />Vector</a>&lt;T&gt;::<a href="classBipedalLocomotion_1_1GenericContainer_1_1Vector_1_1Ref.html" class="m-doc">Ref</a>&amp; other)</span></span>
-            </h3>
-            <p>Copy constructor.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">other</td>
-                  <td>The ref from which to copy the context.</td>
-                </tr>
-              </tbody>
-            </table>
-          </div></section>
-          <section class="m-doc-details" id="a5b9816f8f92f1fa8d4d5ea6f2c267fae"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper"> BipedalLocomotion::<wbr />GenericContainer::<wbr />Vector::<wbr />Ref::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a5b9816f8f92f1fa8d4d5ea6f2c267fae" class="m-doc-self">Ref</a>(</span><span class="m-doc-wrap"><a href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html" class="m-doc">BipedalLocomotion::<wbr />GenericContainer::<wbr />Vector</a>&lt;T&gt;::<a href="classBipedalLocomotion_1_1GenericContainer_1_1Vector_1_1Ref.html" class="m-doc">Ref</a>&amp;&amp; other)</span></span>
-            </h3>
-            <p>Move constructor.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">other</td>
-                  <td>The ref from which to get the context.</td>
-                </tr>
-              </tbody>
-            </table>
-          </div></section>
-          <section class="m-doc-details" id="acecafed7a41dba62f32302fa769e6590"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper"> BipedalLocomotion::<wbr />GenericContainer::<wbr />Vector::<wbr />Ref::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#acecafed7a41dba62f32302fa769e6590" class="m-doc-self">Ref</a>(</span><span class="m-doc-wrap"><a href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html" class="m-doc">BipedalLocomotion::<wbr />GenericContainer::<wbr />Vector</a>&lt;T&gt;&amp; other)</span></span>
-            </h3>
-            <p>Constructor from a GenericContainer::Vector&lt;T&gt;&amp;.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">other</td>
-                  <td>The input vector from which the context is copied</td>
-                </tr>
-              </tbody>
-            </table>
-          </div></section>
-          <section class="m-doc-details" id="a76f151747e877c0e5a3261b243c00320"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper"> BipedalLocomotion::<wbr />GenericContainer::<wbr />Vector::<wbr />Ref::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a76f151747e877c0e5a3261b243c00320" class="m-doc-self">Ref</a>(</span><span class="m-doc-wrap"><a href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html" class="m-doc">BipedalLocomotion::<wbr />GenericContainer::<wbr />Vector</a>&lt;T&gt;&amp;&amp; other)</span></span>
-            </h3>
-            <p>Constructor from a GenericContainer::Vector&lt;T&gt;&amp;.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">other</td>
-                  <td>The input vector from which the context is taken In principle, <a href="classBipedalLocomotion_1_1GenericContainer_1_1Vector_1_1Ref.html" class="m-doc">Ref</a> should be the reference of a Vector&lt;T&gt; which should remain alive while <a href="classBipedalLocomotion_1_1GenericContainer_1_1Vector_1_1Ref.html" class="m-doc">Ref</a> is alive. On the other hand, Vector&lt;T&gt; is only a pointer to some data which does not own. Hence, <a href="classBipedalLocomotion_1_1GenericContainer_1_1Vector_1_1Ref.html" class="m-doc">Ref</a> can remain alive even if the Vector&lt;T&gt; is deleted, provided that the original container stays alive.</td>
-                </tr>
-              </tbody>
-            </table>
-          </div></section>
-          <section class="m-doc-details" id="ab3f502b73dda6c5301b21f8f6af8bf4e"><div>
-            <h3>
-              <div class="m-doc-template">
-                template&lt;class <a href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html" class="m-doc">Vector</a>, typename = typename std::enable_if&lt;!<a href="structBipedalLocomotion_1_1GenericContainer_1_1is__vector.html" class="m-doc">GenericContainer::<wbr />is_vector</a>&lt;<a href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html" class="m-doc">Vector</a>&gt;::value&amp;&amp;                                                               !std::is_same&lt;<a href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html" class="m-doc">Vector</a>, std::string&gt;::value&amp;&amp;                                                               GenericContainer::is_vector_ref_constructible&lt;T,<a href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html" class="m-doc">Vector</a>&gt;::value&amp;&amp;                                                               !std::is_const_v&lt;T&gt;&amp;&amp;                                                               !is_container_const&lt;<a href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html" class="m-doc">Vector</a>&gt;::value&gt;::type&gt;
-              </div>
-              <span class="m-doc-wrap-bumper"> BipedalLocomotion::<wbr />GenericContainer::<wbr />Vector::<wbr />Ref::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ab3f502b73dda6c5301b21f8f6af8bf4e" class="m-doc-self">Ref</a>(</span><span class="m-doc-wrap"><a href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html" class="m-doc">Vector</a>&amp; input)</span></span>
-            </h3>
-            <p>Constructor from another container.</p>
-<p>This is used if:</p><ul><li>the input container is not a <a href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html" class="m-doc">GenericContainer::<wbr />Vector</a>, to avoid ambiguities with other constructors</li><li>the input container is not a string. This allows using <a href="classBipedalLocomotion_1_1GenericContainer_1_1Vector_1_1Ref.html" class="m-doc">Ref</a> and string with overloaded methods.</li><li>a GenericContainer::Vector&lt;T&gt;::Ref can be constructed from the Container</li><li>T is not const</li><li>the input container is not const.</li></ul>
-          </div></section>
-          <section class="m-doc-details" id="a92080b7fa41786c8a5cdfd87e6513425"><div>
-            <h3>
-              <div class="m-doc-template">
-                template&lt;class <a href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html" class="m-doc">Vector</a>, typename = typename std::enable_if&lt;!<a href="structBipedalLocomotion_1_1GenericContainer_1_1is__vector.html" class="m-doc">GenericContainer::<wbr />is_vector</a>&lt;<a href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html" class="m-doc">Vector</a>&gt;::value&amp;&amp;                                                               !std::is_same&lt;<a href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html" class="m-doc">Vector</a>, std::string&gt;::value&amp;&amp;                                                               GenericContainer::is_vector_ref_constructible&lt;T,<a href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html" class="m-doc">Vector</a>&gt;::value&amp;&amp;                                                               std::is_const_v&lt;T&gt;&gt;::type&gt;
-              </div>
-              <span class="m-doc-wrap-bumper"> BipedalLocomotion::<wbr />GenericContainer::<wbr />Vector::<wbr />Ref::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a92080b7fa41786c8a5cdfd87e6513425" class="m-doc-self">Ref</a>(</span><span class="m-doc-wrap">const <a href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html" class="m-doc">Vector</a>&amp; input)</span></span>
-            </h3>
-            <p>Constructor from another container.</p>
-<p>This is used if:</p><ul><li>the input container is not a <a href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html" class="m-doc">GenericContainer::<wbr />Vector</a>, to avoid ambiguities with other constructors</li><li>the input container is not a string. This allows using <a href="classBipedalLocomotion_1_1GenericContainer_1_1Vector_1_1Ref.html" class="m-doc">Ref</a> and string with overloaded methods.</li><li>a GenericContainer::Vector&lt;T&gt;::Ref can be constructed from the Container</li><li>T is const.</li></ul>
-          </div></section>
-          <section class="m-doc-details" id="adefaeb0ff580fa8e0df37cc02e98dd7c"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper"><a href="classBipedalLocomotion_1_1GenericContainer_1_1Vector_1_1Ref.html" class="m-doc">Ref</a> BipedalLocomotion::<wbr />GenericContainer::<wbr />Vector::<wbr />Ref::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#adefaeb0ff580fa8e0df37cc02e98dd7c" class="m-doc-self">operator=</a>(</span><span class="m-doc-wrap">const <a href="classBipedalLocomotion_1_1GenericContainer_1_1Vector_1_1Ref.html" class="m-doc">Ref</a>&amp; other)</span></span>
-            </h3>
-            <p>Copy operator.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">other</td>
-                  <td>The other <a href="classBipedalLocomotion_1_1GenericContainer_1_1Vector_1_1Ref.html" class="m-doc">Ref</a>, from which the data is copied</td>
-                </tr>
-              </tbody>
-              <tfoot>
-                <tr>
-                  <th>Returns</th>
-                  <td>A reference to the vector resulting from the copy.</td>
-                </tr>
-              </tfoot>
-            </table>
-          </div></section>
-          <section class="m-doc-details" id="a6993d73d90962d5a71ee726cf3d95355"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper"><a href="classBipedalLocomotion_1_1GenericContainer_1_1Vector_1_1Ref.html" class="m-doc">Ref</a> BipedalLocomotion::<wbr />GenericContainer::<wbr />Vector::<wbr />Ref::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a6993d73d90962d5a71ee726cf3d95355" class="m-doc-self">operator=</a>(</span><span class="m-doc-wrap"><a href="classBipedalLocomotion_1_1GenericContainer_1_1Vector_1_1Ref.html" class="m-doc">Ref</a>&amp;&amp; other)</span></span>
-            </h3>
-            <p>Copy operator.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">other</td>
-                  <td>The other <a href="classBipedalLocomotion_1_1GenericContainer_1_1Vector_1_1Ref.html" class="m-doc">Ref</a>, from which the data is copied</td>
-                </tr>
-              </tbody>
-              <tfoot>
-                <tr>
-                  <th>Returns</th>
-                  <td>A reference to the vector resulting from the copy.</td>
-                </tr>
-              </tfoot>
-            </table>
-          </div></section>
-        </section>
-      </div>
-    </div>
-  </div>
-</article></main>
-<div class="m-doc-search" id="search">
-  <a href="#!" onclick="return hideSearch()"></a>
-  <div class="m-container">
-    <div class="m-row">
-      <div class="m-col-m-8 m-push-m-2">
-        <div class="m-doc-search-header m-text m-small">
-          <div><span class="m-label m-default">Tab</span> / <span class="m-label m-default">T</span> to search, <span class="m-label m-default">Esc</span> to close</div>
-          <div id="search-symbolcount">&hellip;</div>
-        </div>
-        <div class="m-doc-search-content">
-          <form>
-            <input type="search" name="q" id="search-input" placeholder="Loading &hellip;" disabled="disabled" autofocus="autofocus" autocomplete="off" spellcheck="false" />
-          </form>
-          <noscript class="m-text m-danger m-text-center">Unlike everything else in the docs, the search functionality <em>requires</em> JavaScript.</noscript>
-          <div id="search-help" class="m-text m-dim m-text-center">
-            <p class="m-noindent">Search for symbols, directories, files, pages or
-            modules. You can omit any prefix from the symbol or file path; adding a
-            <code>:</code> or <code>/</code> suffix lists all members of given symbol or
-            directory.</p>
-            <p class="m-noindent">Use <span class="m-label m-dim">&darr;</span>
-            / <span class="m-label m-dim">&uarr;</span> to navigate through the list,
-            <span class="m-label m-dim">Enter</span> to go.
-            <span class="m-label m-dim">Tab</span> autocompletes common prefix, you can
-            copy a link to the result using <span class="m-label m-dim">⌘</span>
-            <span class="m-label m-dim">L</span> while <span class="m-label m-dim">⌘</span>
-            <span class="m-label m-dim">M</span> produces a Markdown link.</p>
-          </div>
-          <div id="search-notfound" class="m-text m-warning m-text-center">Sorry, nothing was found.</div>
-          <ul id="search-results"></ul>
-        </div>
-      </div>
-    </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
   </div>
 </div>
-<script src="search-v2.js"></script>
-<script src="searchdata-v2.js" async="async"></script>
-<footer><nav>
-  <div class="m-container">
-    <div class="m-row">
-      <div class="m-col-l-10 m-push-l-1">
-        <p>bipedal-locomotion-framework documentation. Licensed under the <a href="https://www.gnu.org/licenses/lgpl-3.0.en.html">GNU Lesser General Public License v3.0</a>. Project maintained by the <a href="https://www.iit.it/web/ami/">Artificial and Mechanical Intelligence Lab</a>. Contact the team via <a href="https://github.com/ami-iit/bipedal-locomotion-framework/issues/new">GitHub</a>.<br />Generated by <a href="https://doxygen.org/">Doxygen</a> 1.9.1 and <a href="https://mcss.mosra.cz/">m.css</a>.
-      </div>
-    </div>
-  </div>
-</nav></footer>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(document).ready(function(){initNavTree('classBipedalLocomotion_1_1GenericContainer_1_1Vector_1_1Ref.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="classBipedalLocomotion_1_1GenericContainer_1_1Vector_1_1Ref-members.html">List of all members</a>  </div>
+  <div class="headertitle">
+<div class="title">BipedalLocomotion::GenericContainer::Vector&lt; T &gt;::Ref Class Reference</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p>The class ref is used a substitution to a classical reference to a <a class="el" href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html" title="Forward declaration of Vector class.">Vector</a>.  
+ <a href="classBipedalLocomotion_1_1GenericContainer_1_1Vector_1_1Ref.html#details">More...</a></p>
+
+<p><code>#include &lt;GenericContainer/include/BipedalLocomotion/GenericContainer/Vector.h&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:af9aedd44a2ae16eb75d893141ede4170"><td class="memItemLeft" align="right" valign="top"><a id="af9aedd44a2ae16eb75d893141ede4170"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1GenericContainer_1_1Vector_1_1Ref.html#af9aedd44a2ae16eb75d893141ede4170">Ref</a> ()=delete</td></tr>
+<tr class="memdesc:af9aedd44a2ae16eb75d893141ede4170"><td class="mdescLeft">&#160;</td><td class="mdescRight">A reference cannot exist on its own. <br /></td></tr>
+<tr class="separator:af9aedd44a2ae16eb75d893141ede4170"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8f343fd42e25ebd19634a7fdd5fba9e1"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1GenericContainer_1_1Vector_1_1Ref.html#a8f343fd42e25ebd19634a7fdd5fba9e1">Ref</a> (<a class="el" href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html">BipedalLocomotion::GenericContainer::Vector</a>&lt; T &gt;::<a class="el" href="classBipedalLocomotion_1_1GenericContainer_1_1Vector_1_1Ref.html">Ref</a> &amp;other)</td></tr>
+<tr class="memdesc:a8f343fd42e25ebd19634a7fdd5fba9e1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy constructor.  <a href="classBipedalLocomotion_1_1GenericContainer_1_1Vector_1_1Ref.html#a8f343fd42e25ebd19634a7fdd5fba9e1">More...</a><br /></td></tr>
+<tr class="separator:a8f343fd42e25ebd19634a7fdd5fba9e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5b9816f8f92f1fa8d4d5ea6f2c267fae"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1GenericContainer_1_1Vector_1_1Ref.html#a5b9816f8f92f1fa8d4d5ea6f2c267fae">Ref</a> (<a class="el" href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html">BipedalLocomotion::GenericContainer::Vector</a>&lt; T &gt;::<a class="el" href="classBipedalLocomotion_1_1GenericContainer_1_1Vector_1_1Ref.html">Ref</a> &amp;&amp;other)</td></tr>
+<tr class="memdesc:a5b9816f8f92f1fa8d4d5ea6f2c267fae"><td class="mdescLeft">&#160;</td><td class="mdescRight">Move constructor.  <a href="classBipedalLocomotion_1_1GenericContainer_1_1Vector_1_1Ref.html#a5b9816f8f92f1fa8d4d5ea6f2c267fae">More...</a><br /></td></tr>
+<tr class="separator:a5b9816f8f92f1fa8d4d5ea6f2c267fae"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acecafed7a41dba62f32302fa769e6590"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1GenericContainer_1_1Vector_1_1Ref.html#acecafed7a41dba62f32302fa769e6590">Ref</a> (<a class="el" href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html">BipedalLocomotion::GenericContainer::Vector</a>&lt; T &gt; &amp;other)</td></tr>
+<tr class="memdesc:acecafed7a41dba62f32302fa769e6590"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor from a GenericContainer::Vector&lt;T&gt;&amp;.  <a href="classBipedalLocomotion_1_1GenericContainer_1_1Vector_1_1Ref.html#acecafed7a41dba62f32302fa769e6590">More...</a><br /></td></tr>
+<tr class="separator:acecafed7a41dba62f32302fa769e6590"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a76f151747e877c0e5a3261b243c00320"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1GenericContainer_1_1Vector_1_1Ref.html#a76f151747e877c0e5a3261b243c00320">Ref</a> (<a class="el" href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html">BipedalLocomotion::GenericContainer::Vector</a>&lt; T &gt; &amp;&amp;other)</td></tr>
+<tr class="memdesc:a76f151747e877c0e5a3261b243c00320"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor from a GenericContainer::Vector&lt;T&gt;&amp;.  <a href="classBipedalLocomotion_1_1GenericContainer_1_1Vector_1_1Ref.html#a76f151747e877c0e5a3261b243c00320">More...</a><br /></td></tr>
+<tr class="separator:a76f151747e877c0e5a3261b243c00320"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab3f502b73dda6c5301b21f8f6af8bf4e"><td class="memTemplParams" colspan="2">template&lt;class Vector , typename  = typename std::enable_if&lt;!GenericContainer::is_vector&lt;Vector&gt;::value &amp;&amp;                                                               !std::is_same&lt;Vector, std::string&gt;::value &amp;&amp;                                                               GenericContainer::is_vector_ref_constructible&lt;T,Vector&gt;::value &amp;&amp;                                                               !std::is_const_v&lt;T&gt; &amp;&amp;                                                               !is_container_const&lt;Vector&gt;::value&gt;::type&gt; </td></tr>
+<tr class="memitem:ab3f502b73dda6c5301b21f8f6af8bf4e"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1GenericContainer_1_1Vector_1_1Ref.html#ab3f502b73dda6c5301b21f8f6af8bf4e">Ref</a> (<a class="el" href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html">Vector</a> &amp;input)</td></tr>
+<tr class="memdesc:ab3f502b73dda6c5301b21f8f6af8bf4e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor from another container.  <a href="classBipedalLocomotion_1_1GenericContainer_1_1Vector_1_1Ref.html#ab3f502b73dda6c5301b21f8f6af8bf4e">More...</a><br /></td></tr>
+<tr class="separator:ab3f502b73dda6c5301b21f8f6af8bf4e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a92080b7fa41786c8a5cdfd87e6513425"><td class="memTemplParams" colspan="2">template&lt;class Vector , typename  = typename std::enable_if&lt;!GenericContainer::is_vector&lt;Vector&gt;::value &amp;&amp;                                                               !std::is_same&lt;Vector, std::string&gt;::value &amp;&amp;                                                               GenericContainer::is_vector_ref_constructible&lt;T,Vector&gt;::value &amp;&amp;                                                               std::is_const_v&lt;T&gt;&gt;::type&gt; </td></tr>
+<tr class="memitem:a92080b7fa41786c8a5cdfd87e6513425"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1GenericContainer_1_1Vector_1_1Ref.html#a92080b7fa41786c8a5cdfd87e6513425">Ref</a> (const <a class="el" href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html">Vector</a> &amp;input)</td></tr>
+<tr class="memdesc:a92080b7fa41786c8a5cdfd87e6513425"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor from another container.  <a href="classBipedalLocomotion_1_1GenericContainer_1_1Vector_1_1Ref.html#a92080b7fa41786c8a5cdfd87e6513425">More...</a><br /></td></tr>
+<tr class="separator:a92080b7fa41786c8a5cdfd87e6513425"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afb75195226006054d1783077f1663ba6"><td class="memItemLeft" align="right" valign="top"><a id="afb75195226006054d1783077f1663ba6"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1GenericContainer_1_1Vector_1_1Ref.html#afb75195226006054d1783077f1663ba6">~Ref</a> ()=default</td></tr>
+<tr class="memdesc:afb75195226006054d1783077f1663ba6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default constructor. <br /></td></tr>
+<tr class="separator:afb75195226006054d1783077f1663ba6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adefaeb0ff580fa8e0df37cc02e98dd7c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classBipedalLocomotion_1_1GenericContainer_1_1Vector_1_1Ref.html">Ref</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1GenericContainer_1_1Vector_1_1Ref.html#adefaeb0ff580fa8e0df37cc02e98dd7c">operator=</a> (const <a class="el" href="classBipedalLocomotion_1_1GenericContainer_1_1Vector_1_1Ref.html">Ref</a> &amp;other)</td></tr>
+<tr class="memdesc:adefaeb0ff580fa8e0df37cc02e98dd7c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy operator.  <a href="classBipedalLocomotion_1_1GenericContainer_1_1Vector_1_1Ref.html#adefaeb0ff580fa8e0df37cc02e98dd7c">More...</a><br /></td></tr>
+<tr class="separator:adefaeb0ff580fa8e0df37cc02e98dd7c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6993d73d90962d5a71ee726cf3d95355"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classBipedalLocomotion_1_1GenericContainer_1_1Vector_1_1Ref.html">Ref</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1GenericContainer_1_1Vector_1_1Ref.html#a6993d73d90962d5a71ee726cf3d95355">operator=</a> (<a class="el" href="classBipedalLocomotion_1_1GenericContainer_1_1Vector_1_1Ref.html">Ref</a> &amp;&amp;other)</td></tr>
+<tr class="memdesc:a6993d73d90962d5a71ee726cf3d95355"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy operator.  <a href="classBipedalLocomotion_1_1GenericContainer_1_1Vector_1_1Ref.html#a6993d73d90962d5a71ee726cf3d95355">More...</a><br /></td></tr>
+<tr class="separator:a6993d73d90962d5a71ee726cf3d95355"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_classBipedalLocomotion_1_1GenericContainer_1_1Vector"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classBipedalLocomotion_1_1GenericContainer_1_1Vector')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html">BipedalLocomotion::GenericContainer::Vector&lt; T &gt;</a></td></tr>
+<tr class="memitem:adecc18b1ac9f884a35a0d038226f77f0 inherit pub_methods_classBipedalLocomotion_1_1GenericContainer_1_1Vector"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html#adecc18b1ac9f884a35a0d038226f77f0">Vector</a> (iDynTree::Span&lt; T &gt; span, <a class="el" href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html#a179fb4125500117720e5b6d9c53d497d">resize_function_type</a> resizeLambda)</td></tr>
+<tr class="memdesc:adecc18b1ac9f884a35a0d038226f77f0 inherit pub_methods_classBipedalLocomotion_1_1GenericContainer_1_1Vector"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <a href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html#adecc18b1ac9f884a35a0d038226f77f0">More...</a><br /></td></tr>
+<tr class="separator:adecc18b1ac9f884a35a0d038226f77f0 inherit pub_methods_classBipedalLocomotion_1_1GenericContainer_1_1Vector"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4bd32da4a52c5286e5a51d571cb75c7e inherit pub_methods_classBipedalLocomotion_1_1GenericContainer_1_1Vector"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html#a4bd32da4a52c5286e5a51d571cb75c7e">Vector</a> (iDynTree::Span&lt; T &gt; span)</td></tr>
+<tr class="memdesc:a4bd32da4a52c5286e5a51d571cb75c7e inherit pub_methods_classBipedalLocomotion_1_1GenericContainer_1_1Vector"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <a href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html#a4bd32da4a52c5286e5a51d571cb75c7e">More...</a><br /></td></tr>
+<tr class="separator:a4bd32da4a52c5286e5a51d571cb75c7e inherit pub_methods_classBipedalLocomotion_1_1GenericContainer_1_1Vector"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa00909c13a587b8e433f31c1af2af8a3 inherit pub_methods_classBipedalLocomotion_1_1GenericContainer_1_1Vector"><td class="memItemLeft" align="right" valign="top"><a id="aa00909c13a587b8e433f31c1af2af8a3"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html#aa00909c13a587b8e433f31c1af2af8a3">~Vector</a> ()=default</td></tr>
+<tr class="memdesc:aa00909c13a587b8e433f31c1af2af8a3 inherit pub_methods_classBipedalLocomotion_1_1GenericContainer_1_1Vector"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor. <br /></td></tr>
+<tr class="separator:aa00909c13a587b8e433f31c1af2af8a3 inherit pub_methods_classBipedalLocomotion_1_1GenericContainer_1_1Vector"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a021e9da2bb8ad05425785f13d18052ad inherit pub_methods_classBipedalLocomotion_1_1GenericContainer_1_1Vector"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html#a021e9da2bb8ad05425785f13d18052ad">Vector</a> (const <a class="el" href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html">Vector</a>&lt; T &gt; &amp;other)=delete</td></tr>
+<tr class="memdesc:a021e9da2bb8ad05425785f13d18052ad inherit pub_methods_classBipedalLocomotion_1_1GenericContainer_1_1Vector"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy constructor.  <a href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html#a021e9da2bb8ad05425785f13d18052ad">More...</a><br /></td></tr>
+<tr class="separator:a021e9da2bb8ad05425785f13d18052ad inherit pub_methods_classBipedalLocomotion_1_1GenericContainer_1_1Vector"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0b14bc1588d8a0fb19c08c7ef2c55631 inherit pub_methods_classBipedalLocomotion_1_1GenericContainer_1_1Vector"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html#a0b14bc1588d8a0fb19c08c7ef2c55631">Vector</a> (<a class="el" href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html">Vector</a>&lt; T &gt; &amp;&amp;other)</td></tr>
+<tr class="memdesc:a0b14bc1588d8a0fb19c08c7ef2c55631 inherit pub_methods_classBipedalLocomotion_1_1GenericContainer_1_1Vector"><td class="mdescLeft">&#160;</td><td class="mdescRight">Move constructor.  <a href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html#a0b14bc1588d8a0fb19c08c7ef2c55631">More...</a><br /></td></tr>
+<tr class="separator:a0b14bc1588d8a0fb19c08c7ef2c55631 inherit pub_methods_classBipedalLocomotion_1_1GenericContainer_1_1Vector"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a765def1a501657c88c91497a25687b4f inherit pub_methods_classBipedalLocomotion_1_1GenericContainer_1_1Vector"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html#a765def1a501657c88c91497a25687b4f">clone</a> (const <a class="el" href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html">Vector</a>&lt; T &gt; &amp;other)</td></tr>
+<tr class="memdesc:a765def1a501657c88c91497a25687b4f inherit pub_methods_classBipedalLocomotion_1_1GenericContainer_1_1Vector"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copies the content of the vector.  <a href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html#a765def1a501657c88c91497a25687b4f">More...</a><br /></td></tr>
+<tr class="separator:a765def1a501657c88c91497a25687b4f inherit pub_methods_classBipedalLocomotion_1_1GenericContainer_1_1Vector"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9bc780199545553536488e69369c3f93 inherit pub_methods_classBipedalLocomotion_1_1GenericContainer_1_1Vector"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html#a9bc780199545553536488e69369c3f93">clone</a> (iDynTree::Span&lt; T &gt; other)</td></tr>
+<tr class="memdesc:a9bc780199545553536488e69369c3f93 inherit pub_methods_classBipedalLocomotion_1_1GenericContainer_1_1Vector"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copies the content of the vector.  <a href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html#a9bc780199545553536488e69369c3f93">More...</a><br /></td></tr>
+<tr class="separator:a9bc780199545553536488e69369c3f93 inherit pub_methods_classBipedalLocomotion_1_1GenericContainer_1_1Vector"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa73fd1269957b82b21d99f28f2639eaa inherit pub_methods_classBipedalLocomotion_1_1GenericContainer_1_1Vector"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html">Vector</a>&lt; T &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html#aa73fd1269957b82b21d99f28f2639eaa">operator=</a> (const <a class="el" href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html">Vector</a>&lt; T &gt; &amp;other)</td></tr>
+<tr class="memdesc:aa73fd1269957b82b21d99f28f2639eaa inherit pub_methods_classBipedalLocomotion_1_1GenericContainer_1_1Vector"><td class="mdescLeft">&#160;</td><td class="mdescRight">operator = Copies the content  <a href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html#aa73fd1269957b82b21d99f28f2639eaa">More...</a><br /></td></tr>
+<tr class="separator:aa73fd1269957b82b21d99f28f2639eaa inherit pub_methods_classBipedalLocomotion_1_1GenericContainer_1_1Vector"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa7418456c07db18ee41e7e0e539a913f inherit pub_methods_classBipedalLocomotion_1_1GenericContainer_1_1Vector"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html">Vector</a>&lt; T &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html#aa7418456c07db18ee41e7e0e539a913f">operator=</a> (iDynTree::Span&lt; T &gt; other)</td></tr>
+<tr class="memdesc:aa7418456c07db18ee41e7e0e539a913f inherit pub_methods_classBipedalLocomotion_1_1GenericContainer_1_1Vector"><td class="mdescLeft">&#160;</td><td class="mdescRight">operator = Copies the content  <a href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html#aa7418456c07db18ee41e7e0e539a913f">More...</a><br /></td></tr>
+<tr class="separator:aa7418456c07db18ee41e7e0e539a913f inherit pub_methods_classBipedalLocomotion_1_1GenericContainer_1_1Vector"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2a89e82c87e4dfab48aafbb9024a4350 inherit pub_methods_classBipedalLocomotion_1_1GenericContainer_1_1Vector"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html">Vector</a>&lt; T &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html#a2a89e82c87e4dfab48aafbb9024a4350">operator=</a> (<a class="el" href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html">Vector</a>&lt; T &gt; &amp;&amp;other)</td></tr>
+<tr class="memdesc:a2a89e82c87e4dfab48aafbb9024a4350 inherit pub_methods_classBipedalLocomotion_1_1GenericContainer_1_1Vector"><td class="mdescLeft">&#160;</td><td class="mdescRight">Move operator = Copies the content.  <a href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html#a2a89e82c87e4dfab48aafbb9024a4350">More...</a><br /></td></tr>
+<tr class="separator:a2a89e82c87e4dfab48aafbb9024a4350 inherit pub_methods_classBipedalLocomotion_1_1GenericContainer_1_1Vector"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac70d5617a50f5a8856a324f9580091b9 inherit pub_methods_classBipedalLocomotion_1_1GenericContainer_1_1Vector"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html#ac70d5617a50f5a8856a324f9580091b9">resizeVector</a> (index_type newSize)</td></tr>
+<tr class="memdesc:ac70d5617a50f5a8856a324f9580091b9 inherit pub_methods_classBipedalLocomotion_1_1GenericContainer_1_1Vector"><td class="mdescLeft">&#160;</td><td class="mdescRight">resizeVector It resize the original vector (if possible)  <a href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html#ac70d5617a50f5a8856a324f9580091b9">More...</a><br /></td></tr>
+<tr class="separator:ac70d5617a50f5a8856a324f9580091b9 inherit pub_methods_classBipedalLocomotion_1_1GenericContainer_1_1Vector"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a09f72ef6146dd541046a6a6fb9a5b623 inherit pub_methods_classBipedalLocomotion_1_1GenericContainer_1_1Vector"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html#a09f72ef6146dd541046a6a6fb9a5b623">resize</a> (index_type newSize)</td></tr>
+<tr class="memdesc:a09f72ef6146dd541046a6a6fb9a5b623 inherit pub_methods_classBipedalLocomotion_1_1GenericContainer_1_1Vector"><td class="mdescLeft">&#160;</td><td class="mdescRight">resize It resize the original vector (if possible)  <a href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html#a09f72ef6146dd541046a6a6fb9a5b623">More...</a><br /></td></tr>
+<tr class="separator:a09f72ef6146dd541046a6a6fb9a5b623 inherit pub_methods_classBipedalLocomotion_1_1GenericContainer_1_1Vector"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4fdd476b7b135f9bbbc5bb2d16afc5b9 inherit pub_methods_classBipedalLocomotion_1_1GenericContainer_1_1Vector"><td class="memItemLeft" align="right" valign="top">index_type&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html#a4fdd476b7b135f9bbbc5bb2d16afc5b9">size</a> () const</td></tr>
+<tr class="memdesc:a4fdd476b7b135f9bbbc5bb2d16afc5b9 inherit pub_methods_classBipedalLocomotion_1_1GenericContainer_1_1Vector"><td class="mdescLeft">&#160;</td><td class="mdescRight">size Get the size of the <a class="el" href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html" title="Forward declaration of Vector class.">Vector</a>  <a href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html#a4fdd476b7b135f9bbbc5bb2d16afc5b9">More...</a><br /></td></tr>
+<tr class="separator:a4fdd476b7b135f9bbbc5bb2d16afc5b9 inherit pub_methods_classBipedalLocomotion_1_1GenericContainer_1_1Vector"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a30f7c6df90375bffd1bc495f7979d3b1 inherit pub_methods_classBipedalLocomotion_1_1GenericContainer_1_1Vector"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html#a30f7c6df90375bffd1bc495f7979d3b1">empty</a> () const</td></tr>
+<tr class="memdesc:a30f7c6df90375bffd1bc495f7979d3b1 inherit pub_methods_classBipedalLocomotion_1_1GenericContainer_1_1Vector"><td class="mdescLeft">&#160;</td><td class="mdescRight">empty Checks if the container is empty (zero size)  <a href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html#a30f7c6df90375bffd1bc495f7979d3b1">More...</a><br /></td></tr>
+<tr class="separator:a30f7c6df90375bffd1bc495f7979d3b1 inherit pub_methods_classBipedalLocomotion_1_1GenericContainer_1_1Vector"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac73657af135dd7b0144d8224c7f23d9f inherit pub_methods_classBipedalLocomotion_1_1GenericContainer_1_1Vector"><td class="memItemLeft" align="right" valign="top">const_reference&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html#ac73657af135dd7b0144d8224c7f23d9f">operator[]</a> (index_type idx) const</td></tr>
+<tr class="memdesc:ac73657af135dd7b0144d8224c7f23d9f inherit pub_methods_classBipedalLocomotion_1_1GenericContainer_1_1Vector"><td class="mdescLeft">&#160;</td><td class="mdescRight">operator [] Accessor  <a href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html#ac73657af135dd7b0144d8224c7f23d9f">More...</a><br /></td></tr>
+<tr class="separator:ac73657af135dd7b0144d8224c7f23d9f inherit pub_methods_classBipedalLocomotion_1_1GenericContainer_1_1Vector"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a91c360963bed203fac33d7e3aa72508f inherit pub_methods_classBipedalLocomotion_1_1GenericContainer_1_1Vector"><td class="memItemLeft" align="right" valign="top">reference&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html#a91c360963bed203fac33d7e3aa72508f">operator[]</a> (index_type idx)</td></tr>
+<tr class="memdesc:a91c360963bed203fac33d7e3aa72508f inherit pub_methods_classBipedalLocomotion_1_1GenericContainer_1_1Vector"><td class="mdescLeft">&#160;</td><td class="mdescRight">operator [] Accessor  <a href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html#a91c360963bed203fac33d7e3aa72508f">More...</a><br /></td></tr>
+<tr class="separator:a91c360963bed203fac33d7e3aa72508f inherit pub_methods_classBipedalLocomotion_1_1GenericContainer_1_1Vector"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a61093f9033b034b273c9d3245127fb8a inherit pub_methods_classBipedalLocomotion_1_1GenericContainer_1_1Vector"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html#a57641a052b3f164b8bfc24105f9d26f1">vector_element_type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html#a61093f9033b034b273c9d3245127fb8a">getVal</a> (index_type idx) const</td></tr>
+<tr class="memdesc:a61093f9033b034b273c9d3245127fb8a inherit pub_methods_classBipedalLocomotion_1_1GenericContainer_1_1Vector"><td class="mdescLeft">&#160;</td><td class="mdescRight">getVal Accessor  <a href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html#a61093f9033b034b273c9d3245127fb8a">More...</a><br /></td></tr>
+<tr class="separator:a61093f9033b034b273c9d3245127fb8a inherit pub_methods_classBipedalLocomotion_1_1GenericContainer_1_1Vector"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a27d762527a91fc94749ba4aed34c7b27 inherit pub_methods_classBipedalLocomotion_1_1GenericContainer_1_1Vector"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html#a27d762527a91fc94749ba4aed34c7b27">setVal</a> (index_type idx, <a class="el" href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html#a57641a052b3f164b8bfc24105f9d26f1">vector_element_type</a> val)</td></tr>
+<tr class="memdesc:a27d762527a91fc94749ba4aed34c7b27 inherit pub_methods_classBipedalLocomotion_1_1GenericContainer_1_1Vector"><td class="mdescLeft">&#160;</td><td class="mdescRight">setVal Setter  <a href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html#a27d762527a91fc94749ba4aed34c7b27">More...</a><br /></td></tr>
+<tr class="separator:a27d762527a91fc94749ba4aed34c7b27 inherit pub_methods_classBipedalLocomotion_1_1GenericContainer_1_1Vector"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a13a3f4f64613a567063fa5a3f1c68d2a inherit pub_methods_classBipedalLocomotion_1_1GenericContainer_1_1Vector"><td class="memItemLeft" align="right" valign="top">const_reference&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html#a13a3f4f64613a567063fa5a3f1c68d2a">at</a> (index_type idx) const</td></tr>
+<tr class="memdesc:a13a3f4f64613a567063fa5a3f1c68d2a inherit pub_methods_classBipedalLocomotion_1_1GenericContainer_1_1Vector"><td class="mdescLeft">&#160;</td><td class="mdescRight">at Accessor  <a href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html#a13a3f4f64613a567063fa5a3f1c68d2a">More...</a><br /></td></tr>
+<tr class="separator:a13a3f4f64613a567063fa5a3f1c68d2a inherit pub_methods_classBipedalLocomotion_1_1GenericContainer_1_1Vector"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8b84a57279bc47d198b458cce6774962 inherit pub_methods_classBipedalLocomotion_1_1GenericContainer_1_1Vector"><td class="memItemLeft" align="right" valign="top">reference&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html#a8b84a57279bc47d198b458cce6774962">at</a> (index_type idx)</td></tr>
+<tr class="memdesc:a8b84a57279bc47d198b458cce6774962 inherit pub_methods_classBipedalLocomotion_1_1GenericContainer_1_1Vector"><td class="mdescLeft">&#160;</td><td class="mdescRight">at Accessor  <a href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html#a8b84a57279bc47d198b458cce6774962">More...</a><br /></td></tr>
+<tr class="separator:a8b84a57279bc47d198b458cce6774962 inherit pub_methods_classBipedalLocomotion_1_1GenericContainer_1_1Vector"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a225e077992be801e86230e08b52af380 inherit pub_methods_classBipedalLocomotion_1_1GenericContainer_1_1Vector"><td class="memItemLeft" align="right" valign="top">const_reference&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html#a225e077992be801e86230e08b52af380">operator()</a> (index_type idx) const</td></tr>
+<tr class="memdesc:a225e077992be801e86230e08b52af380 inherit pub_methods_classBipedalLocomotion_1_1GenericContainer_1_1Vector"><td class="mdescLeft">&#160;</td><td class="mdescRight">operator () Accessor  <a href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html#a225e077992be801e86230e08b52af380">More...</a><br /></td></tr>
+<tr class="separator:a225e077992be801e86230e08b52af380 inherit pub_methods_classBipedalLocomotion_1_1GenericContainer_1_1Vector"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a04f85a234bbb581b65ad899b4baab20a inherit pub_methods_classBipedalLocomotion_1_1GenericContainer_1_1Vector"><td class="memItemLeft" align="right" valign="top">reference&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html#a04f85a234bbb581b65ad899b4baab20a">operator()</a> (index_type idx)</td></tr>
+<tr class="memdesc:a04f85a234bbb581b65ad899b4baab20a inherit pub_methods_classBipedalLocomotion_1_1GenericContainer_1_1Vector"><td class="mdescLeft">&#160;</td><td class="mdescRight">operator () Accessor  <a href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html#a04f85a234bbb581b65ad899b4baab20a">More...</a><br /></td></tr>
+<tr class="separator:a04f85a234bbb581b65ad899b4baab20a inherit pub_methods_classBipedalLocomotion_1_1GenericContainer_1_1Vector"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab10fe69ae208bfa5a9ed922a8c196cf6 inherit pub_methods_classBipedalLocomotion_1_1GenericContainer_1_1Vector"><td class="memItemLeft" align="right" valign="top">pointer&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html#ab10fe69ae208bfa5a9ed922a8c196cf6">data</a> () const</td></tr>
+<tr class="memdesc:ab10fe69ae208bfa5a9ed922a8c196cf6 inherit pub_methods_classBipedalLocomotion_1_1GenericContainer_1_1Vector"><td class="mdescLeft">&#160;</td><td class="mdescRight">data Raw pointer to the data  <a href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html#ab10fe69ae208bfa5a9ed922a8c196cf6">More...</a><br /></td></tr>
+<tr class="separator:ab10fe69ae208bfa5a9ed922a8c196cf6 inherit pub_methods_classBipedalLocomotion_1_1GenericContainer_1_1Vector"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4e418475a094d986bd5990a69ad7c6a6 inherit pub_methods_classBipedalLocomotion_1_1GenericContainer_1_1Vector"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html#a313b647e948370b83dc0c1740fd2c8f5">iterator</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html#a4e418475a094d986bd5990a69ad7c6a6">begin</a> ()</td></tr>
+<tr class="memdesc:a4e418475a094d986bd5990a69ad7c6a6 inherit pub_methods_classBipedalLocomotion_1_1GenericContainer_1_1Vector"><td class="mdescLeft">&#160;</td><td class="mdescRight">begin Iterator  <a href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html#a4e418475a094d986bd5990a69ad7c6a6">More...</a><br /></td></tr>
+<tr class="separator:a4e418475a094d986bd5990a69ad7c6a6 inherit pub_methods_classBipedalLocomotion_1_1GenericContainer_1_1Vector"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4d6baff8e550d857837f2b890e9a568b inherit pub_methods_classBipedalLocomotion_1_1GenericContainer_1_1Vector"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html#a313b647e948370b83dc0c1740fd2c8f5">iterator</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html#a4d6baff8e550d857837f2b890e9a568b">end</a> ()</td></tr>
+<tr class="memdesc:a4d6baff8e550d857837f2b890e9a568b inherit pub_methods_classBipedalLocomotion_1_1GenericContainer_1_1Vector"><td class="mdescLeft">&#160;</td><td class="mdescRight">end Iterator  <a href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html#a4d6baff8e550d857837f2b890e9a568b">More...</a><br /></td></tr>
+<tr class="separator:a4d6baff8e550d857837f2b890e9a568b inherit pub_methods_classBipedalLocomotion_1_1GenericContainer_1_1Vector"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a97552d79f6011ead3f7fa64b40e8d392 inherit pub_methods_classBipedalLocomotion_1_1GenericContainer_1_1Vector"><td class="memItemLeft" align="right" valign="top">const_iterator&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html#a97552d79f6011ead3f7fa64b40e8d392">begin</a> () const</td></tr>
+<tr class="memdesc:a97552d79f6011ead3f7fa64b40e8d392 inherit pub_methods_classBipedalLocomotion_1_1GenericContainer_1_1Vector"><td class="mdescLeft">&#160;</td><td class="mdescRight">begin Iterator  <a href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html#a97552d79f6011ead3f7fa64b40e8d392">More...</a><br /></td></tr>
+<tr class="separator:a97552d79f6011ead3f7fa64b40e8d392 inherit pub_methods_classBipedalLocomotion_1_1GenericContainer_1_1Vector"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3d2cce7023422701c15efa9853a58272 inherit pub_methods_classBipedalLocomotion_1_1GenericContainer_1_1Vector"><td class="memItemLeft" align="right" valign="top">const_iterator&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html#a3d2cce7023422701c15efa9853a58272">end</a> () const</td></tr>
+<tr class="memdesc:a3d2cce7023422701c15efa9853a58272 inherit pub_methods_classBipedalLocomotion_1_1GenericContainer_1_1Vector"><td class="mdescLeft">&#160;</td><td class="mdescRight">end Iterator  <a href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html#a3d2cce7023422701c15efa9853a58272">More...</a><br /></td></tr>
+<tr class="separator:a3d2cce7023422701c15efa9853a58272 inherit pub_methods_classBipedalLocomotion_1_1GenericContainer_1_1Vector"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2372ac8afed80040cf767124aebb68b5 inherit pub_methods_classBipedalLocomotion_1_1GenericContainer_1_1Vector"><td class="memItemLeft" align="right" valign="top">const_iterator&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html#a2372ac8afed80040cf767124aebb68b5">cbegin</a> () const</td></tr>
+<tr class="memdesc:a2372ac8afed80040cf767124aebb68b5 inherit pub_methods_classBipedalLocomotion_1_1GenericContainer_1_1Vector"><td class="mdescLeft">&#160;</td><td class="mdescRight">cbegin Iterator  <a href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html#a2372ac8afed80040cf767124aebb68b5">More...</a><br /></td></tr>
+<tr class="separator:a2372ac8afed80040cf767124aebb68b5 inherit pub_methods_classBipedalLocomotion_1_1GenericContainer_1_1Vector"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5c1a1e786f5a5da2205568d9fbd5d434 inherit pub_methods_classBipedalLocomotion_1_1GenericContainer_1_1Vector"><td class="memItemLeft" align="right" valign="top">const_iterator&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html#a5c1a1e786f5a5da2205568d9fbd5d434">cend</a> () const</td></tr>
+<tr class="memdesc:a5c1a1e786f5a5da2205568d9fbd5d434 inherit pub_methods_classBipedalLocomotion_1_1GenericContainer_1_1Vector"><td class="mdescLeft">&#160;</td><td class="mdescRight">cend Iterator  <a href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html#a5c1a1e786f5a5da2205568d9fbd5d434">More...</a><br /></td></tr>
+<tr class="separator:a5c1a1e786f5a5da2205568d9fbd5d434 inherit pub_methods_classBipedalLocomotion_1_1GenericContainer_1_1Vector"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a47df090ff342328a85eaead732eab8f2 inherit pub_methods_classBipedalLocomotion_1_1GenericContainer_1_1Vector"><td class="memItemLeft" align="right" valign="top">reverse_iterator&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html#a47df090ff342328a85eaead732eab8f2">rbegin</a> ()</td></tr>
+<tr class="memdesc:a47df090ff342328a85eaead732eab8f2 inherit pub_methods_classBipedalLocomotion_1_1GenericContainer_1_1Vector"><td class="mdescLeft">&#160;</td><td class="mdescRight">rbegin Iterator to the first element of the reversed vector  <a href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html#a47df090ff342328a85eaead732eab8f2">More...</a><br /></td></tr>
+<tr class="separator:a47df090ff342328a85eaead732eab8f2 inherit pub_methods_classBipedalLocomotion_1_1GenericContainer_1_1Vector"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a833502c7670d8b5d56b8e2702e567c56 inherit pub_methods_classBipedalLocomotion_1_1GenericContainer_1_1Vector"><td class="memItemLeft" align="right" valign="top">reverse_iterator&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html#a833502c7670d8b5d56b8e2702e567c56">rend</a> ()</td></tr>
+<tr class="memdesc:a833502c7670d8b5d56b8e2702e567c56 inherit pub_methods_classBipedalLocomotion_1_1GenericContainer_1_1Vector"><td class="mdescLeft">&#160;</td><td class="mdescRight">rend Iterator to the element following the last element of the reversed vector.  <a href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html#a833502c7670d8b5d56b8e2702e567c56">More...</a><br /></td></tr>
+<tr class="separator:a833502c7670d8b5d56b8e2702e567c56 inherit pub_methods_classBipedalLocomotion_1_1GenericContainer_1_1Vector"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8da9cd4ab5b707411b387d84faccc643 inherit pub_methods_classBipedalLocomotion_1_1GenericContainer_1_1Vector"><td class="memItemLeft" align="right" valign="top">const_reverse_iterator&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html#a8da9cd4ab5b707411b387d84faccc643">rbegin</a> () const</td></tr>
+<tr class="memdesc:a8da9cd4ab5b707411b387d84faccc643 inherit pub_methods_classBipedalLocomotion_1_1GenericContainer_1_1Vector"><td class="mdescLeft">&#160;</td><td class="mdescRight">rbegin Iterator to the first element of the reversed vector  <a href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html#a8da9cd4ab5b707411b387d84faccc643">More...</a><br /></td></tr>
+<tr class="separator:a8da9cd4ab5b707411b387d84faccc643 inherit pub_methods_classBipedalLocomotion_1_1GenericContainer_1_1Vector"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac76fc757642e963273694237ef3b8ca5 inherit pub_methods_classBipedalLocomotion_1_1GenericContainer_1_1Vector"><td class="memItemLeft" align="right" valign="top">const_reverse_iterator&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html#ac76fc757642e963273694237ef3b8ca5">rend</a> () const</td></tr>
+<tr class="memdesc:ac76fc757642e963273694237ef3b8ca5 inherit pub_methods_classBipedalLocomotion_1_1GenericContainer_1_1Vector"><td class="mdescLeft">&#160;</td><td class="mdescRight">rend Iterator to the element following the last element of the reversed vector.  <a href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html#ac76fc757642e963273694237ef3b8ca5">More...</a><br /></td></tr>
+<tr class="separator:ac76fc757642e963273694237ef3b8ca5 inherit pub_methods_classBipedalLocomotion_1_1GenericContainer_1_1Vector"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab4b546071654b7efc36c5d3a55a9395c inherit pub_methods_classBipedalLocomotion_1_1GenericContainer_1_1Vector"><td class="memItemLeft" align="right" valign="top">const_reverse_iterator&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html#ab4b546071654b7efc36c5d3a55a9395c">crbegin</a> () const</td></tr>
+<tr class="memdesc:ab4b546071654b7efc36c5d3a55a9395c inherit pub_methods_classBipedalLocomotion_1_1GenericContainer_1_1Vector"><td class="mdescLeft">&#160;</td><td class="mdescRight">crbegin Iterator to the first element of the reversed vector  <a href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html#ab4b546071654b7efc36c5d3a55a9395c">More...</a><br /></td></tr>
+<tr class="separator:ab4b546071654b7efc36c5d3a55a9395c inherit pub_methods_classBipedalLocomotion_1_1GenericContainer_1_1Vector"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a74bf95f5058d0f2124f5a946b050dca0 inherit pub_methods_classBipedalLocomotion_1_1GenericContainer_1_1Vector"><td class="memItemLeft" align="right" valign="top">const_reverse_iterator&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html#a74bf95f5058d0f2124f5a946b050dca0">crend</a> () const</td></tr>
+<tr class="memdesc:a74bf95f5058d0f2124f5a946b050dca0 inherit pub_methods_classBipedalLocomotion_1_1GenericContainer_1_1Vector"><td class="mdescLeft">&#160;</td><td class="mdescRight">crend Iterator to the element following the last element of the reversed vector.  <a href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html#a74bf95f5058d0f2124f5a946b050dca0">More...</a><br /></td></tr>
+<tr class="separator:a74bf95f5058d0f2124f5a946b050dca0 inherit pub_methods_classBipedalLocomotion_1_1GenericContainer_1_1Vector"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae1488b2f061a0cab4b8f29d574a896ed inherit pub_methods_classBipedalLocomotion_1_1GenericContainer_1_1Vector"><td class="memItemLeft" align="right" valign="top"><a id="ae1488b2f061a0cab4b8f29d574a896ed"></a>
+<a class="el" href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html#abbc623c0034000f1fec683d720d81f50">eigen_map_type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html#ae1488b2f061a0cab4b8f29d574a896ed">toEigen</a> ()</td></tr>
+<tr class="memdesc:ae1488b2f061a0cab4b8f29d574a896ed inherit pub_methods_classBipedalLocomotion_1_1GenericContainer_1_1Vector"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get an Eigen map corresponding to the current generic vector (see <a href="https://eigen.tuxfamily.org/dox/classEigen_1_1Map.html">https://eigen.tuxfamily.org/dox/classEigen_1_1Map.html</a>). <br /></td></tr>
+<tr class="separator:ae1488b2f061a0cab4b8f29d574a896ed inherit pub_methods_classBipedalLocomotion_1_1GenericContainer_1_1Vector"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7a2101a9a20acfdb75a2b01e2701fb6c inherit pub_methods_classBipedalLocomotion_1_1GenericContainer_1_1Vector"><td class="memItemLeft" align="right" valign="top"><a id="a7a2101a9a20acfdb75a2b01e2701fb6c"></a>
+eigen_map_const_type&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html#a7a2101a9a20acfdb75a2b01e2701fb6c">toEigen</a> () const</td></tr>
+<tr class="memdesc:a7a2101a9a20acfdb75a2b01e2701fb6c inherit pub_methods_classBipedalLocomotion_1_1GenericContainer_1_1Vector"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get an Eigen const map corresponding to the current generic vector (see <a href="https://eigen.tuxfamily.org/dox/classEigen_1_1Map.html">https://eigen.tuxfamily.org/dox/classEigen_1_1Map.html</a>). <br /></td></tr>
+<tr class="separator:a7a2101a9a20acfdb75a2b01e2701fb6c inherit pub_methods_classBipedalLocomotion_1_1GenericContainer_1_1Vector"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
+Additional Inherited Members</h2></td></tr>
+<tr class="inherit_header pub_types_classBipedalLocomotion_1_1GenericContainer_1_1Vector"><td colspan="2" onclick="javascript:toggleInherit('pub_types_classBipedalLocomotion_1_1GenericContainer_1_1Vector')"><img src="closed.png" alt="-"/>&#160;Public Types inherited from <a class="el" href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html">BipedalLocomotion::GenericContainer::Vector&lt; T &gt;</a></td></tr>
+<tr class="memitem:a57641a052b3f164b8bfc24105f9d26f1 inherit pub_types_classBipedalLocomotion_1_1GenericContainer_1_1Vector"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html#a57641a052b3f164b8bfc24105f9d26f1">vector_element_type</a> = typename iDynTree::Span&lt; T &gt;::element_type</td></tr>
+<tr class="memdesc:a57641a052b3f164b8bfc24105f9d26f1 inherit pub_types_classBipedalLocomotion_1_1GenericContainer_1_1Vector"><td class="mdescLeft">&#160;</td><td class="mdescRight">Utility aliases depending on the type T.  <a href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html#a57641a052b3f164b8bfc24105f9d26f1">More...</a><br /></td></tr>
+<tr class="separator:a57641a052b3f164b8bfc24105f9d26f1 inherit pub_types_classBipedalLocomotion_1_1GenericContainer_1_1Vector"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a57f6d86dc70039a4399369f060d508ae inherit pub_types_classBipedalLocomotion_1_1GenericContainer_1_1Vector"><td class="memItemLeft" align="right" valign="top"><a id="a57f6d86dc70039a4399369f060d508ae"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>value_type</b> = typename iDynTree::Span&lt; T &gt;::value_type</td></tr>
+<tr class="separator:a57f6d86dc70039a4399369f060d508ae inherit pub_types_classBipedalLocomotion_1_1GenericContainer_1_1Vector"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4f55fa3873e474a690ddd800afbb98e4 inherit pub_types_classBipedalLocomotion_1_1GenericContainer_1_1Vector"><td class="memItemLeft" align="right" valign="top"><a id="a4f55fa3873e474a690ddd800afbb98e4"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>index_type</b> = typename iDynTree::Span&lt; T &gt;::index_type</td></tr>
+<tr class="separator:a4f55fa3873e474a690ddd800afbb98e4 inherit pub_types_classBipedalLocomotion_1_1GenericContainer_1_1Vector"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adae1d70a1d3dca657930c035e635e851 inherit pub_types_classBipedalLocomotion_1_1GenericContainer_1_1Vector"><td class="memItemLeft" align="right" valign="top"><a id="adae1d70a1d3dca657930c035e635e851"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>pointer</b> = typename iDynTree::Span&lt; T &gt;::pointer</td></tr>
+<tr class="separator:adae1d70a1d3dca657930c035e635e851 inherit pub_types_classBipedalLocomotion_1_1GenericContainer_1_1Vector"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a873edd06479798e49e1bfddc84e076d0 inherit pub_types_classBipedalLocomotion_1_1GenericContainer_1_1Vector"><td class="memItemLeft" align="right" valign="top"><a id="a873edd06479798e49e1bfddc84e076d0"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>reference</b> = typename iDynTree::Span&lt; T &gt;::reference</td></tr>
+<tr class="separator:a873edd06479798e49e1bfddc84e076d0 inherit pub_types_classBipedalLocomotion_1_1GenericContainer_1_1Vector"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad7a28eb6c208fae9527f728408513a43 inherit pub_types_classBipedalLocomotion_1_1GenericContainer_1_1Vector"><td class="memItemLeft" align="right" valign="top"><a id="ad7a28eb6c208fae9527f728408513a43"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>const_reference</b> = const value_type &amp;</td></tr>
+<tr class="separator:ad7a28eb6c208fae9527f728408513a43 inherit pub_types_classBipedalLocomotion_1_1GenericContainer_1_1Vector"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3474ae91039b79c5f0f97363e5119f9e inherit pub_types_classBipedalLocomotion_1_1GenericContainer_1_1Vector"><td class="memItemLeft" align="right" valign="top"><a id="a3474ae91039b79c5f0f97363e5119f9e"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>size_type</b> = typename iDynTree::Span&lt; T &gt;::size_type</td></tr>
+<tr class="separator:a3474ae91039b79c5f0f97363e5119f9e inherit pub_types_classBipedalLocomotion_1_1GenericContainer_1_1Vector"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a313b647e948370b83dc0c1740fd2c8f5 inherit pub_types_classBipedalLocomotion_1_1GenericContainer_1_1Vector"><td class="memItemLeft" align="right" valign="top"><a id="a313b647e948370b83dc0c1740fd2c8f5"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html#a313b647e948370b83dc0c1740fd2c8f5">iterator</a> = typename iDynTree::Span&lt; T &gt;::<a class="el" href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html#a313b647e948370b83dc0c1740fd2c8f5">iterator</a></td></tr>
+<tr class="memdesc:a313b647e948370b83dc0c1740fd2c8f5 inherit pub_types_classBipedalLocomotion_1_1GenericContainer_1_1Vector"><td class="mdescLeft">&#160;</td><td class="mdescRight">Utility aliases to define iterators. <br /></td></tr>
+<tr class="separator:a313b647e948370b83dc0c1740fd2c8f5 inherit pub_types_classBipedalLocomotion_1_1GenericContainer_1_1Vector"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a27f04c6db02f3f9147ebbaf9e0d205f5 inherit pub_types_classBipedalLocomotion_1_1GenericContainer_1_1Vector"><td class="memItemLeft" align="right" valign="top"><a id="a27f04c6db02f3f9147ebbaf9e0d205f5"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>const_iterator</b> = typename iDynTree::Span&lt; T &gt;::const_iterator</td></tr>
+<tr class="separator:a27f04c6db02f3f9147ebbaf9e0d205f5 inherit pub_types_classBipedalLocomotion_1_1GenericContainer_1_1Vector"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adc6bc899e28272405795bfbf048d0df5 inherit pub_types_classBipedalLocomotion_1_1GenericContainer_1_1Vector"><td class="memItemLeft" align="right" valign="top"><a id="adc6bc899e28272405795bfbf048d0df5"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>reverse_iterator</b> = typename iDynTree::Span&lt; T &gt;::reverse_iterator</td></tr>
+<tr class="separator:adc6bc899e28272405795bfbf048d0df5 inherit pub_types_classBipedalLocomotion_1_1GenericContainer_1_1Vector"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad3f6d6328f20524f45feba0fa59dc461 inherit pub_types_classBipedalLocomotion_1_1GenericContainer_1_1Vector"><td class="memItemLeft" align="right" valign="top"><a id="ad3f6d6328f20524f45feba0fa59dc461"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>const_reverse_iterator</b> = typename iDynTree::Span&lt; T &gt;::const_reverse_iterator</td></tr>
+<tr class="separator:ad3f6d6328f20524f45feba0fa59dc461 inherit pub_types_classBipedalLocomotion_1_1GenericContainer_1_1Vector"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a179fb4125500117720e5b6d9c53d497d inherit pub_types_classBipedalLocomotion_1_1GenericContainer_1_1Vector"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html#a179fb4125500117720e5b6d9c53d497d">resize_function_type</a> = std::function&lt; iDynTree::Span&lt; T &gt;(index_type)&gt;</td></tr>
+<tr class="memdesc:a179fb4125500117720e5b6d9c53d497d inherit pub_types_classBipedalLocomotion_1_1GenericContainer_1_1Vector"><td class="mdescLeft">&#160;</td><td class="mdescRight">Alias for the type of lambda used to resize the original vector.  <a href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html#a179fb4125500117720e5b6d9c53d497d">More...</a><br /></td></tr>
+<tr class="separator:a179fb4125500117720e5b6d9c53d497d inherit pub_types_classBipedalLocomotion_1_1GenericContainer_1_1Vector"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abbc623c0034000f1fec683d720d81f50 inherit pub_types_classBipedalLocomotion_1_1GenericContainer_1_1Vector"><td class="memItemLeft" align="right" valign="top"><a id="abbc623c0034000f1fec683d720d81f50"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html#abbc623c0034000f1fec683d720d81f50">eigen_map_type</a> = typename Eigen::Map&lt; Eigen::Matrix&lt; T, Eigen::Dynamic, 1 &gt; &gt;</td></tr>
+<tr class="memdesc:abbc623c0034000f1fec683d720d81f50 inherit pub_types_classBipedalLocomotion_1_1GenericContainer_1_1Vector"><td class="mdescLeft">&#160;</td><td class="mdescRight">Alias to determine the output type of <a class="el" href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html#ae1488b2f061a0cab4b8f29d574a896ed" title="Get an Eigen map corresponding to the current generic vector (see https://eigen.tuxfamily....">toEigen()</a> <br /></td></tr>
+<tr class="separator:abbc623c0034000f1fec683d720d81f50 inherit pub_types_classBipedalLocomotion_1_1GenericContainer_1_1Vector"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aed95ae0a7c5d802ff5f996ba9b7a455d inherit pub_types_classBipedalLocomotion_1_1GenericContainer_1_1Vector"><td class="memItemLeft" align="right" valign="top"><a id="aed95ae0a7c5d802ff5f996ba9b7a455d"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>eigen_map_const_type</b> = typename Eigen::Map&lt; const Eigen::Matrix&lt; T, Eigen::Dynamic, 1 &gt; &gt;</td></tr>
+<tr class="separator:aed95ae0a7c5d802ff5f996ba9b7a455d inherit pub_types_classBipedalLocomotion_1_1GenericContainer_1_1Vector"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pro_methods_classBipedalLocomotion_1_1GenericContainer_1_1Vector"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_classBipedalLocomotion_1_1GenericContainer_1_1Vector')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html">BipedalLocomotion::GenericContainer::Vector&lt; T &gt;</a></td></tr>
+<tr class="memitem:aaaa9a73b59fc0db6aec86338f39e9ca9 inherit pro_methods_classBipedalLocomotion_1_1GenericContainer_1_1Vector"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html#aaaa9a73b59fc0db6aec86338f39e9ca9">Vector</a> ()=default</td></tr>
+<tr class="memdesc:aaaa9a73b59fc0db6aec86338f39e9ca9 inherit pro_methods_classBipedalLocomotion_1_1GenericContainer_1_1Vector"><td class="mdescLeft">&#160;</td><td class="mdescRight">The default constructor is private.  <a href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html#aaaa9a73b59fc0db6aec86338f39e9ca9">More...</a><br /></td></tr>
+<tr class="separator:aaaa9a73b59fc0db6aec86338f39e9ca9 inherit pro_methods_classBipedalLocomotion_1_1GenericContainer_1_1Vector"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pro_attribs_classBipedalLocomotion_1_1GenericContainer_1_1Vector"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_classBipedalLocomotion_1_1GenericContainer_1_1Vector')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html">BipedalLocomotion::GenericContainer::Vector&lt; T &gt;</a></td></tr>
+<tr class="memitem:a85b321d378f02d91cde3dff28cd5eb66 inherit pro_attribs_classBipedalLocomotion_1_1GenericContainer_1_1Vector"><td class="memItemLeft" align="right" valign="top">iDynTree::Span&lt; T &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html#a85b321d378f02d91cde3dff28cd5eb66">m_span</a></td></tr>
+<tr class="memdesc:a85b321d378f02d91cde3dff28cd5eb66 inherit pro_attribs_classBipedalLocomotion_1_1GenericContainer_1_1Vector"><td class="mdescLeft">&#160;</td><td class="mdescRight">Span of the pointed vector.  <a href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html#a85b321d378f02d91cde3dff28cd5eb66">More...</a><br /></td></tr>
+<tr class="separator:a85b321d378f02d91cde3dff28cd5eb66 inherit pro_attribs_classBipedalLocomotion_1_1GenericContainer_1_1Vector"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac2417abc0abe3d0ceec513757d05e476 inherit pro_attribs_classBipedalLocomotion_1_1GenericContainer_1_1Vector"><td class="memItemLeft" align="right" valign="top"><a id="ac2417abc0abe3d0ceec513757d05e476"></a>
+<a class="el" href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html#a179fb4125500117720e5b6d9c53d497d">resize_function_type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html#ac2417abc0abe3d0ceec513757d05e476">m_resizeLambda</a></td></tr>
+<tr class="memdesc:ac2417abc0abe3d0ceec513757d05e476 inherit pro_attribs_classBipedalLocomotion_1_1GenericContainer_1_1Vector"><td class="mdescLeft">&#160;</td><td class="mdescRight">User specified lambda to resize the existing container. <br /></td></tr>
+<tr class="separator:ac2417abc0abe3d0ceec513757d05e476 inherit pro_attribs_classBipedalLocomotion_1_1GenericContainer_1_1Vector"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><h3>template&lt;typename T&gt;<br />
+class BipedalLocomotion::GenericContainer::Vector&lt; T &gt;::Ref</h3>
+
+<p>The class ref is used a substitution to a classical reference to a <a class="el" href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html" title="Forward declaration of Vector class.">Vector</a>. </p>
+<p>The advantage of using this, is that custom vectors (all those supported by <a class="el" href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html" title="Forward declaration of Vector class.">GenericContainer::Vector</a>) can be implicitly casted to <a class="el" href="classBipedalLocomotion_1_1GenericContainer_1_1Vector_1_1Ref.html" title="The class ref is used a substitution to a classical reference to a Vector.">Ref</a>. <a class="el" href="classBipedalLocomotion_1_1GenericContainer_1_1Vector_1_1Ref.html" title="The class ref is used a substitution to a classical reference to a Vector.">Ref</a> does not allocate any memory in construction, hence can be used as a parameter to be passed by copy. The = operator clones the content. <a class="el" href="classBipedalLocomotion_1_1GenericContainer_1_1Vector_1_1Ref.html" title="The class ref is used a substitution to a classical reference to a Vector.">Ref</a> inherits Vector&lt;T&gt;, hence it can be used as it was a Vector&lt;T&gt;. </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a8f343fd42e25ebd19634a7fdd5fba9e1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8f343fd42e25ebd19634a7fdd5fba9e1">&#9670;&nbsp;</a></span>Ref() <span class="overload">[1/6]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html">BipedalLocomotion::GenericContainer::Vector</a>&lt; T &gt;::<a class="el" href="classBipedalLocomotion_1_1GenericContainer_1_1Vector_1_1Ref.html">Ref::Ref</a> </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html">BipedalLocomotion::GenericContainer::Vector</a>&lt; T &gt;::<a class="el" href="classBipedalLocomotion_1_1GenericContainer_1_1Vector_1_1Ref.html">Ref</a> &amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Copy constructor. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">other</td><td>The ref from which to copy the context. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a5b9816f8f92f1fa8d4d5ea6f2c267fae"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5b9816f8f92f1fa8d4d5ea6f2c267fae">&#9670;&nbsp;</a></span>Ref() <span class="overload">[2/6]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html">BipedalLocomotion::GenericContainer::Vector</a>&lt; T &gt;::<a class="el" href="classBipedalLocomotion_1_1GenericContainer_1_1Vector_1_1Ref.html">Ref::Ref</a> </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html">BipedalLocomotion::GenericContainer::Vector</a>&lt; T &gt;::<a class="el" href="classBipedalLocomotion_1_1GenericContainer_1_1Vector_1_1Ref.html">Ref</a> &amp;&amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Move constructor. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">other</td><td>The ref from which to get the context. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="acecafed7a41dba62f32302fa769e6590"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acecafed7a41dba62f32302fa769e6590">&#9670;&nbsp;</a></span>Ref() <span class="overload">[3/6]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html">BipedalLocomotion::GenericContainer::Vector</a>&lt; T &gt;::<a class="el" href="classBipedalLocomotion_1_1GenericContainer_1_1Vector_1_1Ref.html">Ref::Ref</a> </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html">BipedalLocomotion::GenericContainer::Vector</a>&lt; T &gt; &amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Constructor from a GenericContainer::Vector&lt;T&gt;&amp;. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">other</td><td>The input vector from which the context is copied </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a76f151747e877c0e5a3261b243c00320"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a76f151747e877c0e5a3261b243c00320">&#9670;&nbsp;</a></span>Ref() <span class="overload">[4/6]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html">BipedalLocomotion::GenericContainer::Vector</a>&lt; T &gt;::<a class="el" href="classBipedalLocomotion_1_1GenericContainer_1_1Vector_1_1Ref.html">Ref::Ref</a> </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html">BipedalLocomotion::GenericContainer::Vector</a>&lt; T &gt; &amp;&amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Constructor from a GenericContainer::Vector&lt;T&gt;&amp;. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">other</td><td>The input vector from which the context is taken In principle, <a class="el" href="classBipedalLocomotion_1_1GenericContainer_1_1Vector_1_1Ref.html" title="The class ref is used a substitution to a classical reference to a Vector.">Ref</a> should be the reference of a Vector&lt;T&gt; which should remain alive while <a class="el" href="classBipedalLocomotion_1_1GenericContainer_1_1Vector_1_1Ref.html" title="The class ref is used a substitution to a classical reference to a Vector.">Ref</a> is alive. On the other hand, Vector&lt;T&gt; is only a pointer to some data which does not own. Hence, <a class="el" href="classBipedalLocomotion_1_1GenericContainer_1_1Vector_1_1Ref.html" title="The class ref is used a substitution to a classical reference to a Vector.">Ref</a> can remain alive even if the Vector&lt;T&gt; is deleted, provided that the original container stays alive. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ab3f502b73dda6c5301b21f8f6af8bf4e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab3f502b73dda6c5301b21f8f6af8bf4e">&#9670;&nbsp;</a></span>Ref() <span class="overload">[5/6]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<div class="memtemplate">
+template&lt;class Vector , typename  = typename std::enable_if&lt;!GenericContainer::is_vector&lt;Vector&gt;::value &amp;&amp;                                                               !std::is_same&lt;Vector, std::string&gt;::value &amp;&amp;                                                               GenericContainer::is_vector_ref_constructible&lt;T,Vector&gt;::value &amp;&amp;                                                               !std::is_const_v&lt;T&gt; &amp;&amp;                                                               !is_container_const&lt;Vector&gt;::value&gt;::type&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html">BipedalLocomotion::GenericContainer::Vector</a>&lt; T &gt;::<a class="el" href="classBipedalLocomotion_1_1GenericContainer_1_1Vector_1_1Ref.html">Ref::Ref</a> </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html">Vector</a> &amp;&#160;</td>
+          <td class="paramname"><em>input</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Constructor from another container. </p>
+<p>This is used if:</p><ul>
+<li>the input container is not a <a class="el" href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html" title="Forward declaration of Vector class.">GenericContainer::Vector</a>, to avoid ambiguities with other constructors</li>
+<li>the input container is not a string. This allows using <a class="el" href="classBipedalLocomotion_1_1GenericContainer_1_1Vector_1_1Ref.html" title="The class ref is used a substitution to a classical reference to a Vector.">Ref</a> and string with overloaded methods.</li>
+<li>a GenericContainer::Vector&lt;T&gt;::Ref can be constructed from the Container</li>
+<li>T is not const</li>
+<li>the input container is not const. </li>
+</ul>
+
+</div>
+</div>
+<a id="a92080b7fa41786c8a5cdfd87e6513425"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a92080b7fa41786c8a5cdfd87e6513425">&#9670;&nbsp;</a></span>Ref() <span class="overload">[6/6]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<div class="memtemplate">
+template&lt;class Vector , typename  = typename std::enable_if&lt;!GenericContainer::is_vector&lt;Vector&gt;::value &amp;&amp;                                                               !std::is_same&lt;Vector, std::string&gt;::value &amp;&amp;                                                               GenericContainer::is_vector_ref_constructible&lt;T,Vector&gt;::value &amp;&amp;                                                               std::is_const_v&lt;T&gt;&gt;::type&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html">BipedalLocomotion::GenericContainer::Vector</a>&lt; T &gt;::<a class="el" href="classBipedalLocomotion_1_1GenericContainer_1_1Vector_1_1Ref.html">Ref::Ref</a> </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html">Vector</a> &amp;&#160;</td>
+          <td class="paramname"><em>input</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Constructor from another container. </p>
+<p>This is used if:</p><ul>
+<li>the input container is not a <a class="el" href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html" title="Forward declaration of Vector class.">GenericContainer::Vector</a>, to avoid ambiguities with other constructors</li>
+<li>the input container is not a string. This allows using <a class="el" href="classBipedalLocomotion_1_1GenericContainer_1_1Vector_1_1Ref.html" title="The class ref is used a substitution to a classical reference to a Vector.">Ref</a> and string with overloaded methods.</li>
+<li>a GenericContainer::Vector&lt;T&gt;::Ref can be constructed from the Container</li>
+<li>T is const. </li>
+</ul>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="adefaeb0ff580fa8e0df37cc02e98dd7c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adefaeb0ff580fa8e0df37cc02e98dd7c">&#9670;&nbsp;</a></span>operator=() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classBipedalLocomotion_1_1GenericContainer_1_1Vector_1_1Ref.html">Ref</a> <a class="el" href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html">BipedalLocomotion::GenericContainer::Vector</a>&lt; T &gt;::Ref::operator= </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classBipedalLocomotion_1_1GenericContainer_1_1Vector_1_1Ref.html">Ref</a> &amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Copy operator. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">other</td><td>The other <a class="el" href="classBipedalLocomotion_1_1GenericContainer_1_1Vector_1_1Ref.html" title="The class ref is used a substitution to a classical reference to a Vector.">Ref</a>, from which the data is copied </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>A reference to the vector resulting from the copy. </dd></dl>
+
+</div>
+</div>
+<a id="a6993d73d90962d5a71ee726cf3d95355"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6993d73d90962d5a71ee726cf3d95355">&#9670;&nbsp;</a></span>operator=() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classBipedalLocomotion_1_1GenericContainer_1_1Vector_1_1Ref.html">Ref</a> <a class="el" href="classBipedalLocomotion_1_1GenericContainer_1_1Vector.html">BipedalLocomotion::GenericContainer::Vector</a>&lt; T &gt;::Ref::operator= </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classBipedalLocomotion_1_1GenericContainer_1_1Vector_1_1Ref.html">Ref</a> &amp;&amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Copy operator. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">other</td><td>The other <a class="el" href="classBipedalLocomotion_1_1GenericContainer_1_1Vector_1_1Ref.html" title="The class ref is used a substitution to a classical reference to a Vector.">Ref</a>, from which the data is copied </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>A reference to the vector resulting from the copy. </dd></dl>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following file:<ul>
+<li>GenericContainer/include/BipedalLocomotion/GenericContainer/Vector.h</li>
+</ul>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- Doxygen custom footer -->
+<div id="nav-path" class="navpath">
+  <ul>
+    <li class="footer">
+      <a href="https://github.com/gbionics/bipedal-locomotion-framework">GitHub</a> &bull;
+      <a href="https://gbionics.ai/">Generative Bionics</a> &bull;
+      Licensed under <a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause "New" or "Revised" License</a> &bull;
+      Generated by <a href="https://www.doxygen.org/index.html">Doxygen</a> 1.9.1
+    </li>
+  </ul>
+</div>
 </body>
 </html>

@@ -1,332 +1,237 @@
-<!DOCTYPE html>
-<html lang="en">
+<!-- HTML header for doxygen 1.9.1 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-  <meta charset="UTF-8" />
-  <title>BipedalLocomotion::System::OutputPort class | bipedal locomotion framework master</title>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
-  <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
-  <link rel="icon" href="favicon-dark.png" type="image/png" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#22272e" />
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>bipedal locomotion framework: BipedalLocomotion::System::OutputPort&lt; _Output &gt; Class Template Reference</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js", "TeX/AMSmath.js", "TeX/AMSsymbols.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+});
+</script>
+<script type="text/javascript" async="async" src="https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only-darkmode-toggle.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="doxygen-awesome-darkmode-toggle.js"></script>
+<script type="text/javascript" src="doxygen-awesome-fragment-copy-button.js"></script>
+<script type="text/javascript" src="doxygen-awesome-interactive-toc.js"></script>
+<script type="text/javascript" src="doxygen-awesome-paragraph-link.js"></script>
+<script type="text/javascript" src="doxygen-awesome-tabs.js"></script>
+<script type="text/javascript">
+    DoxygenAwesomeDarkModeToggle.init()
+    DoxygenAwesomeFragmentCopyButton.init()
+    DoxygenAwesomeInteractiveToc.init()
+    DoxygenAwesomeParagraphLink.init()
+    DoxygenAwesomeTabs.init()
+</script>
 </head>
 <body>
-<header><nav id="navigation">
-  <div class="m-container">
-    <div class="m-row">
-      <span id="m-navbar-brand" class="m-col-t-8 m-col-m-none m-left-m">
-        <a href="./index.html">bipedal locomotion framework</a> <span class="m-breadcrumb">|</span> <a href="index.html" class="m-thin">master</a>
-      </span>
-      <div class="m-col-t-4 m-hide-m m-text-right m-nopadr">
-        <a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
-          <path id="m-doc-search-icon-path" d="m6 0c-3.31 0-6 2.69-6 6 0 3.31 2.69 6 6 6 1.49 0 2.85-0.541 3.89-1.44-0.0164 0.338 0.147 0.759 0.5 1.15l3.22 3.79c0.552 0.614 1.45 0.665 2 0.115 0.55-0.55 0.499-1.45-0.115-2l-3.79-3.22c-0.392-0.353-0.812-0.515-1.15-0.5 0.895-1.05 1.44-2.41 1.44-3.89 0-3.31-2.69-6-6-6zm0 1.56a4.44 4.44 0 0 1 4.44 4.44 4.44 4.44 0 0 1-4.44 4.44 4.44 4.44 0 0 1-4.44-4.44 4.44 4.44 0 0 1 4.44-4.44z"/>
-        </svg></a>
-        <a id="m-navbar-show" href="#navigation" title="Show navigation"></a>
-        <a id="m-navbar-hide" href="#" title="Hide navigation"></a>
-      </div>
-      <div id="m-navbar-collapse" class="m-col-t-12 m-show-m m-col-m-none m-right-m">
-        <div class="m-row">
-          <ol class="m-col-t-6 m-col-m-none">
-            <li><a href="pages.html">Pages</a></li>
-            <li><a href="annotated.html">Classes</a></li>
-            <li><a href="files.html">Files</a></li>
-          </ol>
-          <ol class="m-col-t-6 m-col-m-none" start="4">
-            <li>
-              <a href="pages.html">Versions</a>
-              <ol>
-                <li><a href="./index.html">Master</a></li>
-                <li><a href="./v0.19.0/index.html">v0.19.0</a></li>
-                <li><a href="./v0.21.1/index.html">v0.21.1</a></li>
-                <li><a href="./v0.18.0/index.html">v0.18.0</a></li>
-              </ol>
-            </li>
-            <li>
-              <a href="pages.html">Contacts</a>
-              <ol>
-                <li><a href="https://github.com/ami-iit/bipedal-locomotion-framework">GitHub</a></li>
-                <li><a href="https://www.iit.it/web/ami/">Lab website</a></li>
-              </ol>
-            </li>
-            <li class="m-show-m"><a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
-              <use href="#m-doc-search-icon-path" />
-            </svg></a></li>
-          </ol>
-        </div>
-      </div>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">bipedal locomotion framework
+   </div>
+   <div id="projectbrief">A suite of libraries for achieving bipedal locomotion on humanoid robots</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.9.1 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "search",false,'Search','.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',true,false,'search.php','Search');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
     </div>
   </div>
-</nav></header>
-<main><article>
-  <div class="m-container m-container-inflatable">
-    <div class="m-row">
-      <div class="m-col-l-10 m-push-l-1">
-        <h1>
-          <div class="m-doc-include m-code m-inverted m-right-m m-text-right"><span class="cp">#include</span> <a class="cpf" href="OutputPort_8h.html">&lt;BipedalLocomotion/System/OutputPort.h&gt;</a></div>
-          <div class="m-doc-template">template&lt;class _Output&gt;</div>
-          <span class="m-breadcrumb"><a href="namespaceBipedalLocomotion.html">BipedalLocomotion</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespaceBipedalLocomotion_1_1System.html">System</a>::<wbr/></span>OutputPort <span class="m-thin">class</span>
-        </h1>
-        <p>Basic class that represents an output port.</p>
-        <nav class="m-block m-default">
-          <h3>Contents</h3>
-          <ul>
-            <li>
-              Reference
-              <ul>
-                <li><a href="#derived-classes">Derived classes</a></li>
-                <li><a href="#pub-types">Public types</a></li>
-                <li><a href="#typeless-methods">Constructors, destructors, conversion operators</a></li>
-                <li><a href="#pub-methods">Public functions</a></li>
-              </ul>
-            </li>
-          </ul>
-        </nav>
-<p>The interface contains method to set inputs and output.</p>
-        <section id="derived-classes">
-          <h2><a href="#derived-classes">Derived classes</a></h2>
-          <dl class="m-doc">
-            <dt>
-              <div class="m-doc-template">template&lt;class _Input, class _Output&gt;</div>
-              class <a href="classBipedalLocomotion_1_1System_1_1Advanceable.html" class="m-doc">Advanceable</a>
-            </dt>
-            <dd>Basic class that represents a discrete system.</dd>
-            <dt>
-              <div class="m-doc-template">template&lt;class _Input, class _Output&gt;</div>
-              class <a href="classBipedalLocomotion_1_1System_1_1Advanceable.html" class="m-doc">Advanceable</a>
-            </dt>
-            <dd>Basic class that represents a discrete system.</dd>
-            <dt>
-              <div class="m-doc-template">template&lt;class _Input, class _Output&gt;</div>
-              class <a href="classBipedalLocomotion_1_1System_1_1Advanceable.html" class="m-doc">Advanceable</a>
-            </dt>
-            <dd>Basic class that represents a discrete system.</dd>
-            <dt>
-              <div class="m-doc-template">template&lt;class _Input, class _Output&gt;</div>
-              class <a href="classBipedalLocomotion_1_1System_1_1Advanceable.html" class="m-doc">Advanceable</a>
-            </dt>
-            <dd>Basic class that represents a discrete system.</dd>
-            <dt>
-              <div class="m-doc-template">template&lt;class _Input, class _Output&gt;</div>
-              class <a href="classBipedalLocomotion_1_1System_1_1Advanceable.html" class="m-doc">Advanceable</a>
-            </dt>
-            <dd>Basic class that represents a discrete system.</dd>
-            <dt>
-              <div class="m-doc-template">template&lt;class _Input, class _Output&gt;</div>
-              class <a href="classBipedalLocomotion_1_1System_1_1Advanceable.html" class="m-doc">Advanceable</a>
-            </dt>
-            <dd>Basic class that represents a discrete system.</dd>
-            <dt>
-              <div class="m-doc-template">template&lt;class _Input, class _Output&gt;</div>
-              class <a href="classBipedalLocomotion_1_1System_1_1Advanceable.html" class="m-doc">Advanceable</a>
-            </dt>
-            <dd>Basic class that represents a discrete system.</dd>
-            <dt>
-              <div class="m-doc-template">template&lt;class _Input, class _Output&gt;</div>
-              class <a href="classBipedalLocomotion_1_1System_1_1Advanceable.html" class="m-doc">Advanceable</a>
-            </dt>
-            <dd>Basic class that represents a discrete system.</dd>
-            <dt>
-              <div class="m-doc-template">template&lt;class _Input, class _Output&gt;</div>
-              class <a href="classBipedalLocomotion_1_1System_1_1Advanceable.html" class="m-doc">Advanceable</a>
-            </dt>
-            <dd>Basic class that represents a discrete system.</dd>
-            <dt>
-              <div class="m-doc-template">template&lt;class _Input, class _Output&gt;</div>
-              class <a href="classBipedalLocomotion_1_1System_1_1Advanceable.html" class="m-doc">Advanceable</a>
-            </dt>
-            <dd>Basic class that represents a discrete system.</dd>
-            <dt>
-              <div class="m-doc-template">template&lt;class _Input, class _Output&gt;</div>
-              class <a href="classBipedalLocomotion_1_1System_1_1Advanceable.html" class="m-doc">Advanceable</a>
-            </dt>
-            <dd>Basic class that represents a discrete system.</dd>
-            <dt>
-              <div class="m-doc-template">template&lt;class _Input, class _Output&gt;</div>
-              class <a href="classBipedalLocomotion_1_1System_1_1Advanceable.html" class="m-doc">Advanceable</a>
-            </dt>
-            <dd>Basic class that represents a discrete system.</dd>
-            <dt>
-              <div class="m-doc-template">template&lt;class _Input, class _Output&gt;</div>
-              class <a href="classBipedalLocomotion_1_1System_1_1Advanceable.html" class="m-doc">Advanceable</a>
-            </dt>
-            <dd>Basic class that represents a discrete system.</dd>
-            <dt>
-              <div class="m-doc-template">template&lt;class _Input, class _Output&gt;</div>
-              class <a href="classBipedalLocomotion_1_1System_1_1Advanceable.html" class="m-doc">Advanceable</a>
-            </dt>
-            <dd>Basic class that represents a discrete system.</dd>
-            <dt>
-              <div class="m-doc-template">template&lt;class _Input, class _Output&gt;</div>
-              class <a href="classBipedalLocomotion_1_1System_1_1Advanceable.html" class="m-doc">Advanceable</a>
-            </dt>
-            <dd>Basic class that represents a discrete system.</dd>
-            <dt>
-              <div class="m-doc-template">template&lt;class _Input, class _Output&gt;</div>
-              class <a href="classBipedalLocomotion_1_1System_1_1Advanceable.html" class="m-doc">Advanceable</a>
-            </dt>
-            <dd>Basic class that represents a discrete system.</dd>
-            <dt>
-              <div class="m-doc-template">template&lt;class _Input, class _Output&gt;</div>
-              class <a href="classBipedalLocomotion_1_1System_1_1Advanceable.html" class="m-doc">Advanceable</a>
-            </dt>
-            <dd>Basic class that represents a discrete system.</dd>
-            <dt>
-              <div class="m-doc-template">template&lt;class _Input, class _Output&gt;</div>
-              class <a href="classBipedalLocomotion_1_1System_1_1Advanceable.html" class="m-doc">Advanceable</a>
-            </dt>
-            <dd>Basic class that represents a discrete system.</dd>
-            <dt>
-              <div class="m-doc-template">template&lt;class _Input, class _Output&gt;</div>
-              class <a href="classBipedalLocomotion_1_1System_1_1Advanceable.html" class="m-doc">Advanceable</a>
-            </dt>
-            <dd>Basic class that represents a discrete system.</dd>
-            <dt>
-              <div class="m-doc-template">template&lt;class _Input, class _Output&gt;</div>
-              class <a href="classBipedalLocomotion_1_1System_1_1Advanceable.html" class="m-doc">Advanceable</a>
-            </dt>
-            <dd>Basic class that represents a discrete system.</dd>
-            <dt>
-              <div class="m-doc-template">template&lt;class _Input, class _Output&gt;</div>
-              class <a href="classBipedalLocomotion_1_1System_1_1Advanceable.html" class="m-doc">Advanceable</a>
-            </dt>
-            <dd>Basic class that represents a discrete system.</dd>
-          </dl>
-        </section>
-        <section id="pub-types">
-          <h2><a href="#pub-types">Public types</a></h2>
-          <dl class="m-doc">
-            <dt id="ab9150fecab94a5c4e06bc0579277d8c3">
-              using <a href="#ab9150fecab94a5c4e06bc0579277d8c3" class="m-doc-self">Output</a> = _Output
-            </dt>
-            <dd><span></span></dd>
-          </dl>
-        </section>
-        <section id="typeless-methods">
-          <h2><a href="#typeless-methods">Constructors, destructors, conversion operators</a></h2>
-          <dl class="m-doc">
-            <dt id="a7c0d15e677a1935918fc747ba4c25ec1">
-              <span class="m-doc-wrap-bumper"><a href="#a7c0d15e677a1935918fc747ba4c25ec1" class="m-doc-self">OutputPort</a>(</span><span class="m-doc-wrap">) <span class="m-label m-flat m-info">defaulted</span></span>
-            </dt>
-            <dd><span></span></dd>
-            <dt id="a0a39b891749961d34507b4b591886741">
-              <span class="m-doc-wrap-bumper"><a href="#a0a39b891749961d34507b4b591886741" class="m-doc-self">OutputPort</a>(</span><span class="m-doc-wrap">const <a href="classBipedalLocomotion_1_1System_1_1OutputPort.html" class="m-doc">OutputPort</a>&amp;) <span class="m-label m-flat m-danger">deleted</span></span>
-            </dt>
-            <dd><span></span></dd>
-            <dt id="a581340f280eca1890a8a7b2331761b57">
-              <span class="m-doc-wrap-bumper"><a href="#a581340f280eca1890a8a7b2331761b57" class="m-doc-self">OutputPort</a>(</span><span class="m-doc-wrap"><a href="classBipedalLocomotion_1_1System_1_1OutputPort.html" class="m-doc">OutputPort</a>&amp;&amp;) <span class="m-label m-flat m-danger">deleted</span></span>
-            </dt>
-            <dd><span></span></dd>
-            <dt id="adcc49c38152c9204dcab4f8e87f68977">
-              <span class="m-doc-wrap-bumper"><a href="#adcc49c38152c9204dcab4f8e87f68977" class="m-doc-self">~OutputPort</a>(</span><span class="m-doc-wrap">) <span class="m-label m-flat m-info">defaulted</span> <span class="m-label m-flat m-warning">virtual</span></span>
-            </dt>
-            <dd><span></span></dd>
-          </dl>
-        </section>
-        <section id="pub-methods">
-          <h2><a href="#pub-methods">Public functions</a></h2>
-          <dl class="m-doc">
-            <dt id="af5e15f5e4962a5c8e0f0c0a49adb9ca1">
-              <span class="m-doc-wrap-bumper">auto <a href="#af5e15f5e4962a5c8e0f0c0a49adb9ca1" class="m-doc-self">operator=</a>(</span><span class="m-doc-wrap">const <a href="classBipedalLocomotion_1_1System_1_1OutputPort.html" class="m-doc">OutputPort</a>&amp;) -&gt; <a href="classBipedalLocomotion_1_1System_1_1OutputPort.html" class="m-doc">OutputPort</a>&amp; <span class="m-label m-flat m-danger">deleted</span></span>
-            </dt>
-            <dd><span></span></dd>
-            <dt id="ad5c6ce3ad7d2a064d7bb512fe0bc489e">
-              <span class="m-doc-wrap-bumper">auto <a href="#ad5c6ce3ad7d2a064d7bb512fe0bc489e" class="m-doc-self">operator=</a>(</span><span class="m-doc-wrap"><a href="classBipedalLocomotion_1_1System_1_1OutputPort.html" class="m-doc">OutputPort</a>&amp;&amp;) -&gt; <a href="classBipedalLocomotion_1_1System_1_1OutputPort.html" class="m-doc">OutputPort</a>&amp; <span class="m-label m-flat m-danger">deleted</span></span>
-            </dt>
-            <dd><span></span></dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a8c089ecf2dd8ff0fb2732233994b6cac" class="m-doc">getOutput</a>(</span><span class="m-doc-wrap">) const -&gt; const Output&amp; <span class="m-label m-flat m-warning">pure virtual</span></span>
-            </dt>
-            <dd>Get the output of the port.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#ac50de29a6160baa2bba195af9d69430a" class="m-doc">isOutputValid</a>(</span><span class="m-doc-wrap">) const -&gt; bool <span class="m-label m-flat m-warning">pure virtual</span></span>
-            </dt>
-            <dd>Determines the validity of the object retrieved with <a href="classBipedalLocomotion_1_1System_1_1OutputPort.html#a8c089ecf2dd8ff0fb2732233994b6cac" class="m-doc">getOutput()</a></dd>
-          </dl>
-        </section>
-        <section>
-          <h2>Function documentation</h2>
-          <section class="m-doc-details" id="a8c089ecf2dd8ff0fb2732233994b6cac"><div>
-            <h3>
-              <div class="m-doc-template">
-                template&lt;class _Output&gt;
-              </div>
-              <span class="m-doc-wrap-bumper">const Output&amp; BipedalLocomotion::<wbr />System::<wbr />OutputPort&lt;_Output&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a8c089ecf2dd8ff0fb2732233994b6cac" class="m-doc-self">getOutput</a>(</span><span class="m-doc-wrap">) const <span class="m-label m-warning">pure virtual</span></span></span>
-            </h3>
-            <p>Get the output of the port.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <tfoot>
-                <tr>
-                  <th style="width: 1%">Returns</th>
-                  <td>a const reference of the requested object.</td>
-                </tr>
-              </tfoot>
-            </table>
-          </div></section>
-          <section class="m-doc-details" id="ac50de29a6160baa2bba195af9d69430a"><div>
-            <h3>
-              <div class="m-doc-template">
-                template&lt;class _Output&gt;
-              </div>
-              <span class="m-doc-wrap-bumper">bool BipedalLocomotion::<wbr />System::<wbr />OutputPort&lt;_Output&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ac50de29a6160baa2bba195af9d69430a" class="m-doc-self">isOutputValid</a>(</span><span class="m-doc-wrap">) const <span class="m-label m-warning">pure virtual</span></span></span>
-            </h3>
-            <p>Determines the validity of the object retrieved with <a href="classBipedalLocomotion_1_1System_1_1OutputPort.html#a8c089ecf2dd8ff0fb2732233994b6cac" class="m-doc">getOutput()</a></p>
-            <table class="m-table m-fullwidth m-flat">
-              <tfoot>
-                <tr>
-                  <th style="width: 1%">Returns</th>
-                  <td>True if the object is valid, false otherwise.</td>
-                </tr>
-              </tfoot>
-            </table>
-          </div></section>
-        </section>
-      </div>
-    </div>
-  </div>
-</article></main>
-<div class="m-doc-search" id="search">
-  <a href="#!" onclick="return hideSearch()"></a>
-  <div class="m-container">
-    <div class="m-row">
-      <div class="m-col-m-8 m-push-m-2">
-        <div class="m-doc-search-header m-text m-small">
-          <div><span class="m-label m-default">Tab</span> / <span class="m-label m-default">T</span> to search, <span class="m-label m-default">Esc</span> to close</div>
-          <div id="search-symbolcount">&hellip;</div>
-        </div>
-        <div class="m-doc-search-content">
-          <form>
-            <input type="search" name="q" id="search-input" placeholder="Loading &hellip;" disabled="disabled" autofocus="autofocus" autocomplete="off" spellcheck="false" />
-          </form>
-          <noscript class="m-text m-danger m-text-center">Unlike everything else in the docs, the search functionality <em>requires</em> JavaScript.</noscript>
-          <div id="search-help" class="m-text m-dim m-text-center">
-            <p class="m-noindent">Search for symbols, directories, files, pages or
-            modules. You can omit any prefix from the symbol or file path; adding a
-            <code>:</code> or <code>/</code> suffix lists all members of given symbol or
-            directory.</p>
-            <p class="m-noindent">Use <span class="m-label m-dim">&darr;</span>
-            / <span class="m-label m-dim">&uarr;</span> to navigate through the list,
-            <span class="m-label m-dim">Enter</span> to go.
-            <span class="m-label m-dim">Tab</span> autocompletes common prefix, you can
-            copy a link to the result using <span class="m-label m-dim">⌘</span>
-            <span class="m-label m-dim">L</span> while <span class="m-label m-dim">⌘</span>
-            <span class="m-label m-dim">M</span> produces a Markdown link.</p>
-          </div>
-          <div id="search-notfound" class="m-text m-warning m-text-center">Sorry, nothing was found.</div>
-          <ul id="search-results"></ul>
-        </div>
-      </div>
-    </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
   </div>
 </div>
-<script src="search-v2.js"></script>
-<script src="searchdata-v2.js" async="async"></script>
-<footer><nav>
-  <div class="m-container">
-    <div class="m-row">
-      <div class="m-col-l-10 m-push-l-1">
-        <p>bipedal-locomotion-framework documentation. Licensed under the <a href="https://www.gnu.org/licenses/lgpl-3.0.en.html">GNU Lesser General Public License v3.0</a>. Project maintained by the <a href="https://www.iit.it/web/ami/">Artificial and Mechanical Intelligence Lab</a>. Contact the team via <a href="https://github.com/ami-iit/bipedal-locomotion-framework/issues/new">GitHub</a>.<br />Generated by <a href="https://doxygen.org/">Doxygen</a> 1.9.1 and <a href="https://mcss.mosra.cz/">m.css</a>.
-      </div>
-    </div>
-  </div>
-</nav></footer>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(document).ready(function(){initNavTree('classBipedalLocomotion_1_1System_1_1OutputPort.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#pub-types">Public Types</a> &#124;
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="classBipedalLocomotion_1_1System_1_1OutputPort-members.html">List of all members</a>  </div>
+  <div class="headertitle">
+<div class="title">BipedalLocomotion::System::OutputPort&lt; _Output &gt; Class Template Reference<span class="mlabels"><span class="mlabel">abstract</span></span></div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p>Basic class that represents an output port.  
+ <a href="classBipedalLocomotion_1_1System_1_1OutputPort.html#details">More...</a></p>
+
+<p><code>#include &lt;System/include/BipedalLocomotion/System/OutputPort.h&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
+Public Types</h2></td></tr>
+<tr class="memitem:ab9150fecab94a5c4e06bc0579277d8c3"><td class="memItemLeft" align="right" valign="top"><a id="ab9150fecab94a5c4e06bc0579277d8c3"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>Output</b> = _Output</td></tr>
+<tr class="separator:ab9150fecab94a5c4e06bc0579277d8c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a0a39b891749961d34507b4b591886741"><td class="memItemLeft" align="right" valign="top"><a id="a0a39b891749961d34507b4b591886741"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>OutputPort</b> (const <a class="el" href="classBipedalLocomotion_1_1System_1_1OutputPort.html">OutputPort</a> &amp;)=delete</td></tr>
+<tr class="separator:a0a39b891749961d34507b4b591886741"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a581340f280eca1890a8a7b2331761b57"><td class="memItemLeft" align="right" valign="top"><a id="a581340f280eca1890a8a7b2331761b57"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>OutputPort</b> (<a class="el" href="classBipedalLocomotion_1_1System_1_1OutputPort.html">OutputPort</a> &amp;&amp;)=delete</td></tr>
+<tr class="separator:a581340f280eca1890a8a7b2331761b57"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af5e15f5e4962a5c8e0f0c0a49adb9ca1"><td class="memItemLeft" align="right" valign="top"><a id="af5e15f5e4962a5c8e0f0c0a49adb9ca1"></a>
+<a class="el" href="classBipedalLocomotion_1_1System_1_1OutputPort.html">OutputPort</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator=</b> (const <a class="el" href="classBipedalLocomotion_1_1System_1_1OutputPort.html">OutputPort</a> &amp;)=delete</td></tr>
+<tr class="separator:af5e15f5e4962a5c8e0f0c0a49adb9ca1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad5c6ce3ad7d2a064d7bb512fe0bc489e"><td class="memItemLeft" align="right" valign="top"><a id="ad5c6ce3ad7d2a064d7bb512fe0bc489e"></a>
+<a class="el" href="classBipedalLocomotion_1_1System_1_1OutputPort.html">OutputPort</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator=</b> (<a class="el" href="classBipedalLocomotion_1_1System_1_1OutputPort.html">OutputPort</a> &amp;&amp;)=delete</td></tr>
+<tr class="separator:ad5c6ce3ad7d2a064d7bb512fe0bc489e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8c089ecf2dd8ff0fb2732233994b6cac"><td class="memItemLeft" align="right" valign="top">virtual const Output &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1System_1_1OutputPort.html#a8c089ecf2dd8ff0fb2732233994b6cac">getOutput</a> () const =0</td></tr>
+<tr class="memdesc:a8c089ecf2dd8ff0fb2732233994b6cac"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the output of the port.  <a href="classBipedalLocomotion_1_1System_1_1OutputPort.html#a8c089ecf2dd8ff0fb2732233994b6cac">More...</a><br /></td></tr>
+<tr class="separator:a8c089ecf2dd8ff0fb2732233994b6cac"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac50de29a6160baa2bba195af9d69430a"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1System_1_1OutputPort.html#ac50de29a6160baa2bba195af9d69430a">isOutputValid</a> () const =0</td></tr>
+<tr class="memdesc:ac50de29a6160baa2bba195af9d69430a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Determines the validity of the object retrieved with <a class="el" href="classBipedalLocomotion_1_1System_1_1OutputPort.html#a8c089ecf2dd8ff0fb2732233994b6cac" title="Get the output of the port.">getOutput()</a>  <a href="classBipedalLocomotion_1_1System_1_1OutputPort.html#ac50de29a6160baa2bba195af9d69430a">More...</a><br /></td></tr>
+<tr class="separator:ac50de29a6160baa2bba195af9d69430a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><h3>template&lt;class _Output&gt;<br />
+class BipedalLocomotion::System::OutputPort&lt; _Output &gt;</h3>
+
+<p>Basic class that represents an output port. </p>
+<p>The interface contains method to set inputs and output. </p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="a8c089ecf2dd8ff0fb2732233994b6cac"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8c089ecf2dd8ff0fb2732233994b6cac">&#9670;&nbsp;</a></span>getOutput()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class _Output &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual const Output&amp; <a class="el" href="classBipedalLocomotion_1_1System_1_1OutputPort.html">BipedalLocomotion::System::OutputPort</a>&lt; _Output &gt;::getOutput </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get the output of the port. </p>
+<dl class="section return"><dt>Returns</dt><dd>a const reference of the requested object. </dd></dl>
+
+<p>Implemented in <a class="el" href="classBipedalLocomotion_1_1TSID_1_1QPTSID.html#ae78d5b849dbf0d52645546107e2b9f1c">BipedalLocomotion::TSID::QPTSID</a>, <a class="el" href="classBipedalLocomotion_1_1Planners_1_1UnicycleTrajectoryPlanner.html#a91d2c7e5b034956159662a0ed7c8f0fd">BipedalLocomotion::Planners::UnicycleTrajectoryPlanner</a>, <a class="el" href="classBipedalLocomotion_1_1Planners_1_1UnicycleTrajectoryGenerator.html#a202108d0e2ee16f73e15ad1c63986555">BipedalLocomotion::Planners::UnicycleTrajectoryGenerator</a>, <a class="el" href="classBipedalLocomotion_1_1ML_1_1VelMANNTrajectoryGenerator.html#a0c46f5e50c88cb83d23976a4649cb623">BipedalLocomotion::ML::VelMANNTrajectoryGenerator</a>, <a class="el" href="classBipedalLocomotion_1_1ML_1_1VelMANNAutoregressiveInputBuilder.html#ae7c129a28215fb0cc5785b70cd7bd593">BipedalLocomotion::ML::VelMANNAutoregressiveInputBuilder</a>, <a class="el" href="classBipedalLocomotion_1_1ML_1_1VelMANNAutoregressive.html#a52b09116ca07a77bd1ca990e2d19e8a5">BipedalLocomotion::ML::VelMANNAutoregressive</a>, <a class="el" href="classBipedalLocomotion_1_1ML_1_1VelMANN.html#a9951b79efd70488332322f3c2e0255a0">BipedalLocomotion::ML::VelMANN</a>, <a class="el" href="classBipedalLocomotion_1_1ML_1_1MANNTrajectoryGenerator.html#a2337bea4d8da36ba43a44bf2fb82b2ba">BipedalLocomotion::ML::MANNTrajectoryGenerator</a>, <a class="el" href="classBipedalLocomotion_1_1ML_1_1MANNAutoregressiveInputBuilder.html#a83d733b70916940701b870fcaee4d6cc">BipedalLocomotion::ML::MANNAutoregressiveInputBuilder</a>, <a class="el" href="classBipedalLocomotion_1_1ML_1_1MANNAutoregressive.html#a8f56b77728d6a184c6af719f227b3043">BipedalLocomotion::ML::MANNAutoregressive</a>, <a class="el" href="classBipedalLocomotion_1_1ML_1_1MANN.html#af2e885fdd5edd19124f49c67d2479de2">BipedalLocomotion::ML::MANN</a>, <a class="el" href="classBipedalLocomotion_1_1Math_1_1SchmittTrigger.html#a490efeae8d19e7aad3bc852750503baa">BipedalLocomotion::Math::SchmittTrigger</a>, <a class="el" href="classBipedalLocomotion_1_1JointLevelControllers_1_1PositionToTorqueController.html#a2696752fe789bd637e80d0977ef2e795">BipedalLocomotion::JointLevelControllers::PositionToTorqueController</a>, <a class="el" href="classBipedalLocomotion_1_1JointLevelControllers_1_1PositionToCurrentController.html#a6783efe4b9a2b89039caa62dcb7e0888">BipedalLocomotion::JointLevelControllers::PositionToCurrentController</a>, <a class="el" href="classBipedalLocomotion_1_1JointLevelControllers_1_1EMAWithLimits.html#ab18b3072b02e0bd719cfa3ef2c3a92b8">BipedalLocomotion::JointLevelControllers::EMAWithLimits</a>, <a class="el" href="classBipedalLocomotion_1_1IK_1_1QPInverseKinematics.html#a7fd9a7a18ce0222cf5018d281c7f5fef">BipedalLocomotion::IK::QPInverseKinematics</a>, <a class="el" href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1RobotDynamicsEstimator.html#a3dc964157cf994ed3e51b05c327f96ca">BipedalLocomotion::Estimators::RobotDynamicsEstimator::RobotDynamicsEstimator</a>, <a class="el" href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1UkfInputProvider.html#ade2020dd1fd593bdc7a139b7f58727ee">BipedalLocomotion::Estimators::RobotDynamicsEstimator::UkfInputProvider</a>, <a class="el" href="classBipedalLocomotion_1_1Estimators_1_1BaseEstimatorFromFootIMU.html#a096e518c9a8c5f30a00ec09da5d56ea0">BipedalLocomotion::Estimators::BaseEstimatorFromFootIMU</a>, <a class="el" href="classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1MultiStateWeightProvider.html#ace84e0ce6b637a17819c2ecdb7416118">BipedalLocomotion::ContinuousDynamicalSystem::MultiStateWeightProvider</a>, <a class="el" href="classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1FirstOrderSmoother.html#a0d327ddd1366b4f4655cffdba4799f63">BipedalLocomotion::ContinuousDynamicalSystem::FirstOrderSmoother</a>, <a class="el" href="classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1ButterworthLowPassFilter.html#af511e7459f6cfc61ea89ff7452165177">BipedalLocomotion::ContinuousDynamicalSystem::ButterworthLowPassFilter</a>, <a class="el" href="classBipedalLocomotion_1_1Contacts_1_1GlobalCoPEvaluator.html#a6bd484dd7b7a57d04939eb364c0f2fc4">BipedalLocomotion::Contacts::GlobalCoPEvaluator</a>, <a class="el" href="classBipedalLocomotion_1_1System_1_1Sink.html#a4f83834c9269c31074e5a7e35ddb5f99">BipedalLocomotion::System::Sink&lt; Input &gt;</a>, <a class="el" href="classBipedalLocomotion_1_1System_1_1ConstantWeightProvider.html#a85ac097788b82ccb11b8e0cb7d6e99a3">BipedalLocomotion::System::ConstantWeightProvider</a>, <a class="el" href="classBipedalLocomotion_1_1SimplifiedModelControllers_1_1CoMZMPController.html#a1765eeb022ed534046bd5ddbf81172a7">BipedalLocomotion::SimplifiedModelControllers::CoMZMPController</a>, <a class="el" href="classBipedalLocomotion_1_1RobotInterface_1_1YarpSensorBridge.html#a820d98e47b2d332a5a2cf89bb6cd326b">BipedalLocomotion::RobotInterface::YarpSensorBridge</a>, <a class="el" href="classBipedalLocomotion_1_1ReducedModelControllers_1_1CentroidalMPC.html#a592d6f40e07a0b098d387cb9ceb7e21a">BipedalLocomotion::ReducedModelControllers::CentroidalMPC</a>, <a class="el" href="classBipedalLocomotion_1_1Planners_1_1TimeVaryingDCMPlanner.html#a9cd563dd2d0934dfbb7fd40118804a83">BipedalLocomotion::Planners::TimeVaryingDCMPlanner</a>, <a class="el" href="classBipedalLocomotion_1_1Planners_1_1SwingFootPlanner.html#af8f10687ed3d3b9fad7b219adbd88452">BipedalLocomotion::Planners::SwingFootPlanner</a>, <a class="el" href="classBipedalLocomotion_1_1Planners_1_1SO3Planner.html#a9e1bc5e248e0f83cddae20277200ca12">BipedalLocomotion::Planners::SO3Planner&lt; trivialization &gt;</a>, <a class="el" href="classBipedalLocomotion_1_1Planners_1_1SO3Planner.html#a9e1bc5e248e0f83cddae20277200ca12">BipedalLocomotion::Planners::SO3Planner&lt; LieGroupTrivialization::Right &gt;</a>, <a class="el" href="classBipedalLocomotion_1_1Perception_1_1ArucoDetector.html#a8f6ba061a1f79b935137d33f1ddc34d4">BipedalLocomotion::Perception::ArucoDetector</a>, <a class="el" href="classBipedalLocomotion_1_1Math_1_1Spline.html#a5b22ec55c97bccb788fc7ea18dd9510a">BipedalLocomotion::Math::Spline&lt; T &gt;</a>, <a class="el" href="classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator.html#a2f24f1b30cafac67e32fc793b9e223c7">BipedalLocomotion::Estimators::FloatingBaseEstimator</a>, <a class="el" href="classBipedalLocomotion_1_1Estimators_1_1RecursiveLeastSquare.html#a0263c8349fde262090a3b9bab33b5316">BipedalLocomotion::Estimators::RecursiveLeastSquare</a>, and <a class="el" href="classBipedalLocomotion_1_1Contacts_1_1ContactDetector.html#a6afd8c8957310d12e463a8104f07119a">BipedalLocomotion::Contacts::ContactDetector</a>.</p>
+
+</div>
+</div>
+<a id="ac50de29a6160baa2bba195af9d69430a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac50de29a6160baa2bba195af9d69430a">&#9670;&nbsp;</a></span>isOutputValid()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class _Output &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual bool <a class="el" href="classBipedalLocomotion_1_1System_1_1OutputPort.html">BipedalLocomotion::System::OutputPort</a>&lt; _Output &gt;::isOutputValid </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Determines the validity of the object retrieved with <a class="el" href="classBipedalLocomotion_1_1System_1_1OutputPort.html#a8c089ecf2dd8ff0fb2732233994b6cac" title="Get the output of the port.">getOutput()</a> </p>
+<dl class="section return"><dt>Returns</dt><dd>True if the object is valid, false otherwise. </dd></dl>
+
+<p>Implemented in <a class="el" href="classBipedalLocomotion_1_1TSID_1_1QPTSID.html#a2d366318736859f8789ec77959b1d036">BipedalLocomotion::TSID::QPTSID</a>, <a class="el" href="classBipedalLocomotion_1_1Planners_1_1UnicycleTrajectoryPlanner.html#a2a496f83fd70975470a65603c83321d8">BipedalLocomotion::Planners::UnicycleTrajectoryPlanner</a>, <a class="el" href="classBipedalLocomotion_1_1Planners_1_1UnicycleTrajectoryGenerator.html#adac1c1f922fb7d852d2e35d7205b5654">BipedalLocomotion::Planners::UnicycleTrajectoryGenerator</a>, <a class="el" href="classBipedalLocomotion_1_1ML_1_1VelMANNTrajectoryGenerator.html#aa624b2fb13060ddd0711c7b5bc116ad5">BipedalLocomotion::ML::VelMANNTrajectoryGenerator</a>, <a class="el" href="classBipedalLocomotion_1_1ML_1_1VelMANNAutoregressiveInputBuilder.html#af44e023d8ab5e7c9df972c9c11bf274f">BipedalLocomotion::ML::VelMANNAutoregressiveInputBuilder</a>, <a class="el" href="classBipedalLocomotion_1_1ML_1_1VelMANNAutoregressive.html#aa5906ac9151e2a0dac2de643f6ccbd1c">BipedalLocomotion::ML::VelMANNAutoregressive</a>, <a class="el" href="classBipedalLocomotion_1_1ML_1_1VelMANN.html#ae7cf5526231aad56423c176b22c40a9d">BipedalLocomotion::ML::VelMANN</a>, <a class="el" href="classBipedalLocomotion_1_1ML_1_1MANNTrajectoryGenerator.html#a3b2b1803bcb86f72d3756442d11711d2">BipedalLocomotion::ML::MANNTrajectoryGenerator</a>, <a class="el" href="classBipedalLocomotion_1_1ML_1_1MANNAutoregressiveInputBuilder.html#a1f1a171435a19e17db26c8398bff33f1">BipedalLocomotion::ML::MANNAutoregressiveInputBuilder</a>, <a class="el" href="classBipedalLocomotion_1_1ML_1_1MANNAutoregressive.html#a793881e3b8d8e3a64ef93d96c0041ebf">BipedalLocomotion::ML::MANNAutoregressive</a>, <a class="el" href="classBipedalLocomotion_1_1ML_1_1MANN.html#afcbbd0bdaadfd2388ba35cb9e2617fd4">BipedalLocomotion::ML::MANN</a>, <a class="el" href="classBipedalLocomotion_1_1Math_1_1SchmittTrigger.html#a983fc338df5fa07ca56056a7be057200">BipedalLocomotion::Math::SchmittTrigger</a>, <a class="el" href="classBipedalLocomotion_1_1JointLevelControllers_1_1PositionToTorqueController.html#a5cab1e6c42386c6e89c22462716d13fa">BipedalLocomotion::JointLevelControllers::PositionToTorqueController</a>, <a class="el" href="classBipedalLocomotion_1_1JointLevelControllers_1_1PositionToCurrentController.html#aa0f1ed5732c4dc35c1456c12c4756850">BipedalLocomotion::JointLevelControllers::PositionToCurrentController</a>, <a class="el" href="classBipedalLocomotion_1_1JointLevelControllers_1_1EMAWithLimits.html#aa292fc5800c65b165a7edb01e8592c08">BipedalLocomotion::JointLevelControllers::EMAWithLimits</a>, <a class="el" href="classBipedalLocomotion_1_1IK_1_1QPInverseKinematics.html#a839bf79b1bfc65097e0d3f190b299e9d">BipedalLocomotion::IK::QPInverseKinematics</a>, <a class="el" href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1RobotDynamicsEstimator.html#a84bcde4e62924e87f7870d927d39e662">BipedalLocomotion::Estimators::RobotDynamicsEstimator::RobotDynamicsEstimator</a>, <a class="el" href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1UkfInputProvider.html#a682d1d5e46f0d9f39d9dbf463e6642e2">BipedalLocomotion::Estimators::RobotDynamicsEstimator::UkfInputProvider</a>, <a class="el" href="classBipedalLocomotion_1_1Estimators_1_1BaseEstimatorFromFootIMU.html#a3e5320b4a3fc48bf7c7ba88188446451">BipedalLocomotion::Estimators::BaseEstimatorFromFootIMU</a>, <a class="el" href="classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1FirstOrderSmoother.html#acbe9d4f91d2b600ed4749d6f0fdfebd5">BipedalLocomotion::ContinuousDynamicalSystem::FirstOrderSmoother</a>, <a class="el" href="classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1ButterworthLowPassFilter.html#a7a57b8304aa0df7e59289dff40eb07e5">BipedalLocomotion::ContinuousDynamicalSystem::ButterworthLowPassFilter</a>, <a class="el" href="classBipedalLocomotion_1_1Contacts_1_1GlobalCoPEvaluator.html#a2450ae7fbc5a0e1a7c2ef2b666c282db">BipedalLocomotion::Contacts::GlobalCoPEvaluator</a>, <a class="el" href="classBipedalLocomotion_1_1System_1_1Sink.html#a6228f114c0fc428501649d4c13ae5cb8">BipedalLocomotion::System::Sink&lt; Input &gt;</a>, <a class="el" href="classBipedalLocomotion_1_1System_1_1ConstantWeightProvider.html#abe8d4eb96d7eb60b9b286489278647a7">BipedalLocomotion::System::ConstantWeightProvider</a>, <a class="el" href="classBipedalLocomotion_1_1SimplifiedModelControllers_1_1CoMZMPController.html#ab08948a1f2cdaa98dd326da856475d7d">BipedalLocomotion::SimplifiedModelControllers::CoMZMPController</a>, <a class="el" href="classBipedalLocomotion_1_1RobotInterface_1_1YarpSensorBridge.html#ad70655b20e4bbc600913e904862e289e">BipedalLocomotion::RobotInterface::YarpSensorBridge</a>, <a class="el" href="classBipedalLocomotion_1_1ReducedModelControllers_1_1CentroidalMPC.html#a5ea1f16b1d8d911710ae13fe91700906">BipedalLocomotion::ReducedModelControllers::CentroidalMPC</a>, <a class="el" href="classBipedalLocomotion_1_1Planners_1_1TimeVaryingDCMPlanner.html#afdbe72e56d72388596ac80803917a82d">BipedalLocomotion::Planners::TimeVaryingDCMPlanner</a>, <a class="el" href="classBipedalLocomotion_1_1Planners_1_1SwingFootPlanner.html#a51830d4784d0b13177e601d08818d124">BipedalLocomotion::Planners::SwingFootPlanner</a>, <a class="el" href="classBipedalLocomotion_1_1Planners_1_1SO3Planner.html#acdf5026823d28b0bec14badad5617599">BipedalLocomotion::Planners::SO3Planner&lt; trivialization &gt;</a>, <a class="el" href="classBipedalLocomotion_1_1Planners_1_1SO3Planner.html#acdf5026823d28b0bec14badad5617599">BipedalLocomotion::Planners::SO3Planner&lt; LieGroupTrivialization::Right &gt;</a>, <a class="el" href="classBipedalLocomotion_1_1Perception_1_1ArucoDetector.html#a4995d765ed7a107bfd9be7871c089fc0">BipedalLocomotion::Perception::ArucoDetector</a>, <a class="el" href="classBipedalLocomotion_1_1Math_1_1Spline.html#a016211240b78f71eca3fcbe0db741464">BipedalLocomotion::Math::Spline&lt; T &gt;</a>, <a class="el" href="classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator.html#a0baf4a4877c4c790c35be575f63ea2d2">BipedalLocomotion::Estimators::FloatingBaseEstimator</a>, <a class="el" href="classBipedalLocomotion_1_1Estimators_1_1RecursiveLeastSquare.html#a7959827d41a3576e1fe812c60a3ab16d">BipedalLocomotion::Estimators::RecursiveLeastSquare</a>, <a class="el" href="classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1MultiStateWeightProvider.html#a70a66a96e918ee3b579b3a5fdd4eb2ed">BipedalLocomotion::ContinuousDynamicalSystem::MultiStateWeightProvider</a>, and <a class="el" href="classBipedalLocomotion_1_1Contacts_1_1ContactDetector.html#ab0fdd86ff0defb369af54648aa305ad2">BipedalLocomotion::Contacts::ContactDetector</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following file:<ul>
+<li>System/include/BipedalLocomotion/System/<a class="el" href="OutputPort_8h.html">OutputPort.h</a></li>
+</ul>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- Doxygen custom footer -->
+<div id="nav-path" class="navpath">
+  <ul>
+    <li class="footer">
+      <a href="https://github.com/gbionics/bipedal-locomotion-framework">GitHub</a> &bull;
+      <a href="https://gbionics.ai/">Generative Bionics</a> &bull;
+      Licensed under <a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause "New" or "Revised" License</a> &bull;
+      Generated by <a href="https://www.doxygen.org/index.html">Doxygen</a> 1.9.1
+    </li>
+  </ul>
+</div>
 </body>
 </html>

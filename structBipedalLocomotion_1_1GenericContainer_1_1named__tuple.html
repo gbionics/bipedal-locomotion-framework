@@ -1,361 +1,501 @@
-<!DOCTYPE html>
-<html lang="en">
+<!-- HTML header for doxygen 1.9.1 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-  <meta charset="UTF-8" />
-  <title>BipedalLocomotion::GenericContainer::named_tuple struct | bipedal locomotion framework master</title>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
-  <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
-  <link rel="icon" href="favicon-dark.png" type="image/png" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#22272e" />
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>bipedal locomotion framework: BipedalLocomotion::GenericContainer::named_tuple&lt; Params &gt; Struct Template Reference</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js", "TeX/AMSmath.js", "TeX/AMSsymbols.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+});
+</script>
+<script type="text/javascript" async="async" src="https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only-darkmode-toggle.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="doxygen-awesome-darkmode-toggle.js"></script>
+<script type="text/javascript" src="doxygen-awesome-fragment-copy-button.js"></script>
+<script type="text/javascript" src="doxygen-awesome-interactive-toc.js"></script>
+<script type="text/javascript" src="doxygen-awesome-paragraph-link.js"></script>
+<script type="text/javascript" src="doxygen-awesome-tabs.js"></script>
+<script type="text/javascript">
+    DoxygenAwesomeDarkModeToggle.init()
+    DoxygenAwesomeFragmentCopyButton.init()
+    DoxygenAwesomeInteractiveToc.init()
+    DoxygenAwesomeParagraphLink.init()
+    DoxygenAwesomeTabs.init()
+</script>
 </head>
 <body>
-<header><nav id="navigation">
-  <div class="m-container">
-    <div class="m-row">
-      <span id="m-navbar-brand" class="m-col-t-8 m-col-m-none m-left-m">
-        <a href="./index.html">bipedal locomotion framework</a> <span class="m-breadcrumb">|</span> <a href="index.html" class="m-thin">master</a>
-      </span>
-      <div class="m-col-t-4 m-hide-m m-text-right m-nopadr">
-        <a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
-          <path id="m-doc-search-icon-path" d="m6 0c-3.31 0-6 2.69-6 6 0 3.31 2.69 6 6 6 1.49 0 2.85-0.541 3.89-1.44-0.0164 0.338 0.147 0.759 0.5 1.15l3.22 3.79c0.552 0.614 1.45 0.665 2 0.115 0.55-0.55 0.499-1.45-0.115-2l-3.79-3.22c-0.392-0.353-0.812-0.515-1.15-0.5 0.895-1.05 1.44-2.41 1.44-3.89 0-3.31-2.69-6-6-6zm0 1.56a4.44 4.44 0 0 1 4.44 4.44 4.44 4.44 0 0 1-4.44 4.44 4.44 4.44 0 0 1-4.44-4.44 4.44 4.44 0 0 1 4.44-4.44z"/>
-        </svg></a>
-        <a id="m-navbar-show" href="#navigation" title="Show navigation"></a>
-        <a id="m-navbar-hide" href="#" title="Hide navigation"></a>
-      </div>
-      <div id="m-navbar-collapse" class="m-col-t-12 m-show-m m-col-m-none m-right-m">
-        <div class="m-row">
-          <ol class="m-col-t-6 m-col-m-none">
-            <li><a href="pages.html">Pages</a></li>
-            <li><a href="annotated.html">Classes</a></li>
-            <li><a href="files.html">Files</a></li>
-          </ol>
-          <ol class="m-col-t-6 m-col-m-none" start="4">
-            <li>
-              <a href="pages.html">Versions</a>
-              <ol>
-                <li><a href="./index.html">Master</a></li>
-                <li><a href="./v0.19.0/index.html">v0.19.0</a></li>
-                <li><a href="./v0.21.1/index.html">v0.21.1</a></li>
-                <li><a href="./v0.18.0/index.html">v0.18.0</a></li>
-              </ol>
-            </li>
-            <li>
-              <a href="pages.html">Contacts</a>
-              <ol>
-                <li><a href="https://github.com/ami-iit/bipedal-locomotion-framework">GitHub</a></li>
-                <li><a href="https://www.iit.it/web/ami/">Lab website</a></li>
-              </ol>
-            </li>
-            <li class="m-show-m"><a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
-              <use href="#m-doc-search-icon-path" />
-            </svg></a></li>
-          </ol>
-        </div>
-      </div>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">bipedal locomotion framework
+   </div>
+   <div id="projectbrief">A suite of libraries for achieving bipedal locomotion on humanoid robots</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.9.1 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "search",false,'Search','.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',true,false,'search.php','Search');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
     </div>
   </div>
-</nav></header>
-<main><article>
-  <div class="m-container m-container-inflatable">
-    <div class="m-row">
-      <div class="m-col-l-10 m-push-l-1">
-        <h1>
-          <div class="m-doc-include m-code m-inverted m-right-m m-text-right"><span class="cp">#include</span> <a class="cpf" href="NamedTuple_8h.html">&lt;BipedalLocomotion/GenericContainer/NamedTuple.h&gt;</a></div>
-          <div class="m-doc-template">template&lt;typename... Params&gt;</div>
-          <span class="m-breadcrumb"><a href="namespaceBipedalLocomotion.html">BipedalLocomotion</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespaceBipedalLocomotion_1_1GenericContainer.html">GenericContainer</a>::<wbr/></span>named_tuple <span class="m-thin">struct</span>
-        </h1>
-        <p><a href="structBipedalLocomotion_1_1GenericContainer_1_1named__tuple.html" class="m-doc">named_<wbr />tuple</a> is a class that inherits from tuple.</p>
-        <nav class="m-block m-default">
-          <h3>Contents</h3>
-          <ul>
-            <li>
-              Reference
-              <ul>
-                <li><a href="#pub-types">Public types</a></li>
-                <li><a href="#typeless-methods">Constructors, destructors, conversion operators</a></li>
-                <li><a href="#pub-methods">Public functions</a></li>
-              </ul>
-            </li>
-          </ul>
-        </nav>
-<p>Its main purpose is to make more readable and less error prone code that uses <code>std::tuple</code>.</p><pre class="m-code"><span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">BipedalLocomotion</span><span class="o">::</span><span class="nn">GenericContainer</span><span class="o">::</span><span class="nn">literals</span><span class="p">;</span>
-
-<span class="k">auto</span><span class="w"> </span><span class="n">foo</span><span class="w"> </span><span class="o">=</span>
-<span class="n">BipedalLocomotion</span><span class="o">::</span><span class="n">GenericContainer</span><span class="o">::</span><span class="n">make_named_tuple</span><span class="p">(</span><span class="n">BipedalLocomotion</span><span class="o">::</span><span class="n">GenericContainer</span><span class="o">::</span><span class="n">named_param</span><span class="o">&lt;</span><span class="s">&quot;name&quot;</span><span class="n">_h</span><span class="p">,</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">(),</span>
-<span class="w">                                                      </span><span class="n">BipedalLocomotion</span><span class="o">::</span><span class="n">GenericContainer</span><span class="o">::</span><span class="n">named_param</span><span class="o">&lt;</span><span class="s">&quot;number&quot;</span><span class="n">_h</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="o">&gt;</span><span class="p">());</span>
-
-<span class="c1">// it is still possible to access the elements of the named_tuple with structured binding</span>
-<span class="c1">// declaration</span>
-<span class="k">auto</span><span class="o">&amp;</span><span class="w"> </span><span class="p">[</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">foo</span><span class="p">;</span>
-<span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">150</span><span class="p">;</span>
-
-<span class="c1">// moreover you can call std::get&lt;&gt; as usual</span>
-<span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">get</span><span class="o">&lt;</span><span class="mi">1</span><span class="o">&gt;</span><span class="p">(</span><span class="n">foo</span><span class="p">);</span>
-
-<span class="c1">// Differently from a normal tuple it is possible to access to the element via the hash as</span>
-<span class="c1">// follows</span>
-<span class="n">foo</span><span class="p">.</span><span class="n">get_from_hash</span><span class="o">&lt;</span><span class="s">&quot;name&quot;</span><span class="n">_h</span><span class="o">&gt;</span><span class="p">()</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Smith&quot;</span><span class="p">;</span>
-<span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span><span class="w"> </span><span class="n">temp_string</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">foo</span><span class="p">.</span><span class="n">get_from_hash</span><span class="o">&lt;</span><span class="s">&quot;name&quot;</span><span class="n">_h</span><span class="o">&gt;</span><span class="p">();</span></pre>
-        <section id="pub-types">
-          <h2><a href="#pub-types">Public types</a></h2>
-          <dl class="m-doc">
-            <dt id="ae0678a6ed65835895dc29fc28b5ff9d0">
-              using <a href="#ae0678a6ed65835895dc29fc28b5ff9d0" class="m-doc-self">underlying_tuple</a> = std::tuple&lt;typename Params::Type...&gt;
-            </dt>
-            <dd>Underlying tuple that can be generate from this <a href="structBipedalLocomotion_1_1GenericContainer_1_1named__tuple.html" class="m-doc">named_<wbr />tuple</a>.</dd>
-          </dl>
-        </section>
-        <section id="typeless-methods">
-          <h2><a href="#typeless-methods">Constructors, destructors, conversion operators</a></h2>
-          <dl class="m-doc">
-            <dt id="ae0998b1c3455b0663ce8ba685a73fb8c">
-              <span class="m-doc-wrap-bumper"><a href="#ae0998b1c3455b0663ce8ba685a73fb8c" class="m-doc-self">named_tuple</a>(</span><span class="m-doc-wrap">) <span class="m-label m-flat m-primary">constexpr</span></span>
-            </dt>
-            <dd>Constructor.</dd>
-            <dt id="aab715eb5e81fbe7a8eb30b74767e2c3b">
-              <span class="m-doc-wrap-bumper"><a href="#aab715eb5e81fbe7a8eb30b74767e2c3b" class="m-doc-self">named_tuple</a>(</span><span class="m-doc-wrap">Params &amp;&amp; ... args)</span>
-            </dt>
-            <dd>Constructor.</dd>
-            <dt>
-              <div class="m-doc-template">template&lt;typename... Args&gt;</div>
-              <span class="m-doc-wrap-bumper"><a href="#a639718fa237c24ba9865876e449f7202" class="m-doc">named_tuple</a>(</span><span class="m-doc-wrap">const std::tuple&lt;Args...&gt;&amp; t)</span>
-            </dt>
-            <dd>Construct from a tuple.</dd>
-            <dt>
-              <div class="m-doc-template">template&lt;typename... Args&gt;</div>
-              <span class="m-doc-wrap-bumper"><a href="#a64bba5aa718265896658eb2e0411c8b8" class="m-doc">named_tuple</a>(</span><span class="m-doc-wrap">std::tuple&lt;Args...&gt;&amp;&amp; t)</span>
-            </dt>
-            <dd>Construct from a tuple.</dd>
-          </dl>
-        </section>
-        <section id="pub-methods">
-          <h2><a href="#pub-methods">Public functions</a></h2>
-          <dl class="m-doc">
-            <dt>
-              <div class="m-doc-template">template&lt;typename... Args&gt;</div>
-              <span class="m-doc-wrap-bumper">auto <a href="#a97abdf681a3aecdc7277984412910b21" class="m-doc">operator=</a>(</span><span class="m-doc-wrap">const std::tuple&lt;Args...&gt;&amp; t) -&gt; <a href="structBipedalLocomotion_1_1GenericContainer_1_1named__tuple.html" class="m-doc">named_<wbr />tuple</a>&amp;</span>
-            </dt>
-            <dd>Copy from a tuple.</dd>
-            <dt>
-              <div class="m-doc-template">template&lt;std::size_t I&gt;</div>
-              <span class="m-doc-wrap-bumper">auto <a href="#a95a086685c1ad77b94464fb6d7f49ae5" class="m-doc">get</a>(</span><span class="m-doc-wrap">) const -&gt; const std::tuple_element&lt;I, <a href="structBipedalLocomotion_1_1GenericContainer_1_1named__tuple.html#ae0678a6ed65835895dc29fc28b5ff9d0" class="m-doc">underlying_<wbr />tuple</a>&gt;::type&amp; <span class="m-label m-flat m-success">noexcept</span></span>
-            </dt>
-            <dd>Extracts the Ith element from the <a href="structBipedalLocomotion_1_1GenericContainer_1_1named__tuple.html" class="m-doc">named_<wbr />tuple</a>.</dd>
-            <dt>
-              <div class="m-doc-template">template&lt;std::size_t I&gt;</div>
-              <span class="m-doc-wrap-bumper">auto <a href="#a0e6ab3315e814585124ff6bb1952ace5" class="m-doc">get</a>(</span><span class="m-doc-wrap">) -&gt; std::tuple_element&lt;I, <a href="structBipedalLocomotion_1_1GenericContainer_1_1named__tuple.html#ae0678a6ed65835895dc29fc28b5ff9d0" class="m-doc">underlying_<wbr />tuple</a>&gt;::type&amp; <span class="m-label m-flat m-success">noexcept</span></span>
-            </dt>
-            <dd>Extracts the Ith element from the <a href="structBipedalLocomotion_1_1GenericContainer_1_1named__tuple.html" class="m-doc">named_<wbr />tuple</a>.</dd>
-            <dt>
-              <div class="m-doc-template">template&lt;hash_type Hash&gt;</div>
-              <span class="m-doc-wrap-bumper">auto <a href="#a915b403920de6dc9408df99dd0aff863" class="m-doc">get_from_hash</a>(</span><span class="m-doc-wrap">) const -&gt; const auto&amp; <span class="m-label m-flat m-success">noexcept</span></span>
-            </dt>
-            <dd>Extracts the element from the <a href="structBipedalLocomotion_1_1GenericContainer_1_1named__tuple.html" class="m-doc">named_<wbr />tuple</a> associated to the hash <code>Hash</code>.</dd>
-            <dt>
-              <div class="m-doc-template">template&lt;hash_type Hash&gt;</div>
-              <span class="m-doc-wrap-bumper">auto <a href="#a5a4d6b22b3f493abfba148d977e04b25" class="m-doc">get_from_hash</a>(</span><span class="m-doc-wrap">) -&gt; auto&amp; <span class="m-label m-flat m-success">noexcept</span></span>
-            </dt>
-            <dd>Extracts the element from the <a href="structBipedalLocomotion_1_1GenericContainer_1_1named__tuple.html" class="m-doc">named_<wbr />tuple</a> associated to the hash <code>Hash</code>.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#ac18226129c902c1daeea6f5dd59b8be4" class="m-doc">to_tuple</a>(</span><span class="m-doc-wrap">) const -&gt; <a href="structBipedalLocomotion_1_1GenericContainer_1_1named__tuple.html#ae0678a6ed65835895dc29fc28b5ff9d0" class="m-doc">underlying_<wbr />tuple</a> <span class="m-label m-flat m-success">noexcept</span></span>
-            </dt>
-            <dd>Return the associated std::tuple.</dd>
-          </dl>
-        </section>
-        <section>
-          <h2>Function documentation</h2>
-          <section class="m-doc-details" id="a639718fa237c24ba9865876e449f7202"><div>
-            <h3>
-              <div class="m-doc-template">
-                template&lt;typename... Params&gt;
-                template&lt;typename... Args&gt;
-              </div>
-              <span class="m-doc-wrap-bumper"> BipedalLocomotion::<wbr />GenericContainer::<wbr />named_tuple&lt;Params&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a639718fa237c24ba9865876e449f7202" class="m-doc-self">named_tuple</a>(</span><span class="m-doc-wrap">const std::tuple&lt;Args...&gt;&amp; t)</span></span>
-            </h3>
-            <p>Construct from a tuple.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">t</td>
-                  <td>a tuple having the same number of elements of of <a href="structBipedalLocomotion_1_1GenericContainer_1_1named__tuple.html" class="m-doc">named_<wbr />tuple</a>.</td>
-                </tr>
-              </tbody>
-            </table>
-<aside class="m-note m-info"><h4>Note</h4><p>This constructor requires the type of the elements of the tuple to be convertible into Params.</p></aside>
-          </div></section>
-          <section class="m-doc-details" id="a64bba5aa718265896658eb2e0411c8b8"><div>
-            <h3>
-              <div class="m-doc-template">
-                template&lt;typename... Params&gt;
-                template&lt;typename... Args&gt;
-              </div>
-              <span class="m-doc-wrap-bumper"> BipedalLocomotion::<wbr />GenericContainer::<wbr />named_tuple&lt;Params&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a64bba5aa718265896658eb2e0411c8b8" class="m-doc-self">named_tuple</a>(</span><span class="m-doc-wrap">std::tuple&lt;Args...&gt;&amp;&amp; t)</span></span>
-            </h3>
-            <p>Construct from a tuple.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">t</td>
-                  <td>a tuple having the same number of elements of <a href="structBipedalLocomotion_1_1GenericContainer_1_1named__tuple.html" class="m-doc">named_<wbr />tuple</a>.</td>
-                </tr>
-              </tbody>
-            </table>
-<aside class="m-note m-info"><h4>Note</h4><p>This constructor requires the type of the elements of the tuple to be convertible into Params.</p></aside>
-          </div></section>
-          <section class="m-doc-details" id="a97abdf681a3aecdc7277984412910b21"><div>
-            <h3>
-              <div class="m-doc-template">
-                template&lt;typename... Params&gt;
-                template&lt;typename... Args&gt;
-              </div>
-              <span class="m-doc-wrap-bumper"><a href="structBipedalLocomotion_1_1GenericContainer_1_1named__tuple.html" class="m-doc">named_<wbr />tuple</a>&amp; BipedalLocomotion::<wbr />GenericContainer::<wbr />named_tuple&lt;Params&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a97abdf681a3aecdc7277984412910b21" class="m-doc-self">operator=</a>(</span><span class="m-doc-wrap">const std::tuple&lt;Args...&gt;&amp; t)</span></span>
-            </h3>
-            <p>Copy from a tuple.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">t</td>
-                  <td>tuple</td>
-                </tr>
-              </tbody>
-            </table>
-          </div></section>
-          <section class="m-doc-details" id="a95a086685c1ad77b94464fb6d7f49ae5"><div>
-            <h3>
-              <div class="m-doc-template">
-                template&lt;typename... Params&gt;
-                template&lt;std::size_t I&gt;
-              </div>
-              <span class="m-doc-wrap-bumper">const std::tuple_element&lt;I, <a href="structBipedalLocomotion_1_1GenericContainer_1_1named__tuple.html#ae0678a6ed65835895dc29fc28b5ff9d0" class="m-doc">underlying_<wbr />tuple</a>&gt;::type&amp; BipedalLocomotion::<wbr />GenericContainer::<wbr />named_tuple&lt;Params&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a95a086685c1ad77b94464fb6d7f49ae5" class="m-doc-self">get</a>(</span><span class="m-doc-wrap">) const <span class="m-label m-success">noexcept</span></span></span>
-            </h3>
-            <p>Extracts the Ith element from the <a href="structBipedalLocomotion_1_1GenericContainer_1_1named__tuple.html" class="m-doc">named_<wbr />tuple</a>.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <tfoot>
-                <tr>
-                  <th style="width: 1%">Returns</th>
-                  <td>A reference to the selected element of t.</td>
-                </tr>
-              </tfoot>
-            </table>
-<p>It must be an integer value in <code>[0, sizeof...(Types))</code>.</p>
-          </div></section>
-          <section class="m-doc-details" id="a0e6ab3315e814585124ff6bb1952ace5"><div>
-            <h3>
-              <div class="m-doc-template">
-                template&lt;typename... Params&gt;
-                template&lt;std::size_t I&gt;
-              </div>
-              <span class="m-doc-wrap-bumper">std::tuple_element&lt;I, <a href="structBipedalLocomotion_1_1GenericContainer_1_1named__tuple.html#ae0678a6ed65835895dc29fc28b5ff9d0" class="m-doc">underlying_<wbr />tuple</a>&gt;::type&amp; BipedalLocomotion::<wbr />GenericContainer::<wbr />named_tuple&lt;Params&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a0e6ab3315e814585124ff6bb1952ace5" class="m-doc-self">get</a>(</span><span class="m-doc-wrap">) <span class="m-label m-success">noexcept</span></span></span>
-            </h3>
-            <p>Extracts the Ith element from the <a href="structBipedalLocomotion_1_1GenericContainer_1_1named__tuple.html" class="m-doc">named_<wbr />tuple</a>.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <tfoot>
-                <tr>
-                  <th style="width: 1%">Returns</th>
-                  <td>A reference to the selected element of t.</td>
-                </tr>
-              </tfoot>
-            </table>
-<p>I must be an integer value in <code>[0, sizeof...(Types))</code>.</p>
-          </div></section>
-          <section class="m-doc-details" id="a915b403920de6dc9408df99dd0aff863"><div>
-            <h3>
-              <div class="m-doc-template">
-                template&lt;typename... Params&gt;
-                template&lt;hash_type Hash&gt;
-              </div>
-              <span class="m-doc-wrap-bumper">const auto&amp; BipedalLocomotion::<wbr />GenericContainer::<wbr />named_tuple&lt;Params&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a915b403920de6dc9408df99dd0aff863" class="m-doc-self">get_from_hash</a>(</span><span class="m-doc-wrap">) const <span class="m-label m-success">noexcept</span></span></span>
-            </h3>
-            <p>Extracts the element from the <a href="structBipedalLocomotion_1_1GenericContainer_1_1named__tuple.html" class="m-doc">named_<wbr />tuple</a> associated to the hash <code>Hash</code>.</p>
-<p><code>Hash</code> must be among one of the hash values associated to the tuple when created. @return A reference to the selected element of t.</p>
-          </div></section>
-          <section class="m-doc-details" id="a5a4d6b22b3f493abfba148d977e04b25"><div>
-            <h3>
-              <div class="m-doc-template">
-                template&lt;typename... Params&gt;
-                template&lt;hash_type Hash&gt;
-              </div>
-              <span class="m-doc-wrap-bumper">auto&amp; BipedalLocomotion::<wbr />GenericContainer::<wbr />named_tuple&lt;Params&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a5a4d6b22b3f493abfba148d977e04b25" class="m-doc-self">get_from_hash</a>(</span><span class="m-doc-wrap">) <span class="m-label m-success">noexcept</span></span></span>
-            </h3>
-            <p>Extracts the element from the <a href="structBipedalLocomotion_1_1GenericContainer_1_1named__tuple.html" class="m-doc">named_<wbr />tuple</a> associated to the hash <code>Hash</code>.</p>
-<p><code>Hash</code> must be among one of the hash values associated to the tuple when created. @return A reference to the selected element of t.</p>
-          </div></section>
-          <section class="m-doc-details" id="ac18226129c902c1daeea6f5dd59b8be4"><div>
-            <h3>
-              <div class="m-doc-template">
-                template&lt;typename... Params&gt;
-              </div>
-              <span class="m-doc-wrap-bumper"><a href="structBipedalLocomotion_1_1GenericContainer_1_1named__tuple.html#ae0678a6ed65835895dc29fc28b5ff9d0" class="m-doc">underlying_<wbr />tuple</a> BipedalLocomotion::<wbr />GenericContainer::<wbr />named_tuple&lt;Params&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ac18226129c902c1daeea6f5dd59b8be4" class="m-doc-self">to_tuple</a>(</span><span class="m-doc-wrap">) const <span class="m-label m-success">noexcept</span></span></span>
-            </h3>
-            <p>Return the associated std::tuple.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <tfoot>
-                <tr>
-                  <th style="width: 1%">Returns</th>
-                  <td>the tuple associated to the <a href="structBipedalLocomotion_1_1GenericContainer_1_1named__tuple.html" class="m-doc">named_<wbr />tuple</a></td>
-                </tr>
-              </tfoot>
-            </table>
-          </div></section>
-        </section>
-      </div>
-    </div>
-  </div>
-</article></main>
-<div class="m-doc-search" id="search">
-  <a href="#!" onclick="return hideSearch()"></a>
-  <div class="m-container">
-    <div class="m-row">
-      <div class="m-col-m-8 m-push-m-2">
-        <div class="m-doc-search-header m-text m-small">
-          <div><span class="m-label m-default">Tab</span> / <span class="m-label m-default">T</span> to search, <span class="m-label m-default">Esc</span> to close</div>
-          <div id="search-symbolcount">&hellip;</div>
-        </div>
-        <div class="m-doc-search-content">
-          <form>
-            <input type="search" name="q" id="search-input" placeholder="Loading &hellip;" disabled="disabled" autofocus="autofocus" autocomplete="off" spellcheck="false" />
-          </form>
-          <noscript class="m-text m-danger m-text-center">Unlike everything else in the docs, the search functionality <em>requires</em> JavaScript.</noscript>
-          <div id="search-help" class="m-text m-dim m-text-center">
-            <p class="m-noindent">Search for symbols, directories, files, pages or
-            modules. You can omit any prefix from the symbol or file path; adding a
-            <code>:</code> or <code>/</code> suffix lists all members of given symbol or
-            directory.</p>
-            <p class="m-noindent">Use <span class="m-label m-dim">&darr;</span>
-            / <span class="m-label m-dim">&uarr;</span> to navigate through the list,
-            <span class="m-label m-dim">Enter</span> to go.
-            <span class="m-label m-dim">Tab</span> autocompletes common prefix, you can
-            copy a link to the result using <span class="m-label m-dim">⌘</span>
-            <span class="m-label m-dim">L</span> while <span class="m-label m-dim">⌘</span>
-            <span class="m-label m-dim">M</span> produces a Markdown link.</p>
-          </div>
-          <div id="search-notfound" class="m-text m-warning m-text-center">Sorry, nothing was found.</div>
-          <ul id="search-results"></ul>
-        </div>
-      </div>
-    </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
   </div>
 </div>
-<script src="search-v2.js"></script>
-<script src="searchdata-v2.js" async="async"></script>
-<footer><nav>
-  <div class="m-container">
-    <div class="m-row">
-      <div class="m-col-l-10 m-push-l-1">
-        <p>bipedal-locomotion-framework documentation. Licensed under the <a href="https://www.gnu.org/licenses/lgpl-3.0.en.html">GNU Lesser General Public License v3.0</a>. Project maintained by the <a href="https://www.iit.it/web/ami/">Artificial and Mechanical Intelligence Lab</a>. Contact the team via <a href="https://github.com/ami-iit/bipedal-locomotion-framework/issues/new">GitHub</a>.<br />Generated by <a href="https://doxygen.org/">Doxygen</a> 1.9.1 and <a href="https://mcss.mosra.cz/">m.css</a>.
-      </div>
-    </div>
-  </div>
-</nav></footer>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(document).ready(function(){initNavTree('structBipedalLocomotion_1_1GenericContainer_1_1named__tuple.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#pub-types">Public Types</a> &#124;
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="structBipedalLocomotion_1_1GenericContainer_1_1named__tuple-members.html">List of all members</a>  </div>
+  <div class="headertitle">
+<div class="title">BipedalLocomotion::GenericContainer::named_tuple&lt; Params &gt; Struct Template Reference</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p><a class="el" href="structBipedalLocomotion_1_1GenericContainer_1_1named__tuple.html" title="named_tuple is a class that inherits from tuple.">named_tuple</a> is a class that inherits from tuple.  
+ <a href="structBipedalLocomotion_1_1GenericContainer_1_1named__tuple.html#details">More...</a></p>
+
+<p><code>#include &lt;GenericContainer/include/BipedalLocomotion/GenericContainer/NamedTuple.h&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
+Public Types</h2></td></tr>
+<tr class="memitem:ae0678a6ed65835895dc29fc28b5ff9d0"><td class="memItemLeft" align="right" valign="top"><a id="ae0678a6ed65835895dc29fc28b5ff9d0"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structBipedalLocomotion_1_1GenericContainer_1_1named__tuple.html#ae0678a6ed65835895dc29fc28b5ff9d0">underlying_tuple</a> = std::tuple&lt; typename Params::Type... &gt;</td></tr>
+<tr class="memdesc:ae0678a6ed65835895dc29fc28b5ff9d0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Underlying tuple that can be generate from this <a class="el" href="structBipedalLocomotion_1_1GenericContainer_1_1named__tuple.html" title="named_tuple is a class that inherits from tuple.">named_tuple</a>. <br /></td></tr>
+<tr class="separator:ae0678a6ed65835895dc29fc28b5ff9d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:ae0998b1c3455b0663ce8ba685a73fb8c"><td class="memItemLeft" align="right" valign="top"><a id="ae0998b1c3455b0663ce8ba685a73fb8c"></a>
+constexpr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structBipedalLocomotion_1_1GenericContainer_1_1named__tuple.html#ae0998b1c3455b0663ce8ba685a73fb8c">named_tuple</a> ()</td></tr>
+<tr class="memdesc:ae0998b1c3455b0663ce8ba685a73fb8c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor. <br /></td></tr>
+<tr class="separator:ae0998b1c3455b0663ce8ba685a73fb8c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aab715eb5e81fbe7a8eb30b74767e2c3b"><td class="memItemLeft" align="right" valign="top"><a id="aab715eb5e81fbe7a8eb30b74767e2c3b"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structBipedalLocomotion_1_1GenericContainer_1_1named__tuple.html#aab715eb5e81fbe7a8eb30b74767e2c3b">named_tuple</a> (Params &amp;&amp;... args)</td></tr>
+<tr class="memdesc:aab715eb5e81fbe7a8eb30b74767e2c3b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor. <br /></td></tr>
+<tr class="separator:aab715eb5e81fbe7a8eb30b74767e2c3b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a639718fa237c24ba9865876e449f7202"><td class="memTemplParams" colspan="2">template&lt;typename... Args&gt; </td></tr>
+<tr class="memitem:a639718fa237c24ba9865876e449f7202"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="structBipedalLocomotion_1_1GenericContainer_1_1named__tuple.html#a639718fa237c24ba9865876e449f7202">named_tuple</a> (const std::tuple&lt; Args... &gt; &amp;t)</td></tr>
+<tr class="memdesc:a639718fa237c24ba9865876e449f7202"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct from a tuple.  <a href="structBipedalLocomotion_1_1GenericContainer_1_1named__tuple.html#a639718fa237c24ba9865876e449f7202">More...</a><br /></td></tr>
+<tr class="separator:a639718fa237c24ba9865876e449f7202"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a64bba5aa718265896658eb2e0411c8b8"><td class="memTemplParams" colspan="2">template&lt;typename... Args&gt; </td></tr>
+<tr class="memitem:a64bba5aa718265896658eb2e0411c8b8"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="structBipedalLocomotion_1_1GenericContainer_1_1named__tuple.html#a64bba5aa718265896658eb2e0411c8b8">named_tuple</a> (std::tuple&lt; Args... &gt; &amp;&amp;t)</td></tr>
+<tr class="memdesc:a64bba5aa718265896658eb2e0411c8b8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct from a tuple.  <a href="structBipedalLocomotion_1_1GenericContainer_1_1named__tuple.html#a64bba5aa718265896658eb2e0411c8b8">More...</a><br /></td></tr>
+<tr class="separator:a64bba5aa718265896658eb2e0411c8b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a97abdf681a3aecdc7277984412910b21"><td class="memTemplParams" colspan="2">template&lt;typename... Args&gt; </td></tr>
+<tr class="memitem:a97abdf681a3aecdc7277984412910b21"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="structBipedalLocomotion_1_1GenericContainer_1_1named__tuple.html">named_tuple</a> &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="structBipedalLocomotion_1_1GenericContainer_1_1named__tuple.html#a97abdf681a3aecdc7277984412910b21">operator=</a> (const std::tuple&lt; Args... &gt; &amp;t)</td></tr>
+<tr class="memdesc:a97abdf681a3aecdc7277984412910b21"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy from a tuple.  <a href="structBipedalLocomotion_1_1GenericContainer_1_1named__tuple.html#a97abdf681a3aecdc7277984412910b21">More...</a><br /></td></tr>
+<tr class="separator:a97abdf681a3aecdc7277984412910b21"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a95a086685c1ad77b94464fb6d7f49ae5"><td class="memTemplParams" colspan="2">template&lt;std::size_t I&gt; </td></tr>
+<tr class="memitem:a95a086685c1ad77b94464fb6d7f49ae5"><td class="memTemplItemLeft" align="right" valign="top">const std::tuple_element&lt; I, <a class="el" href="structBipedalLocomotion_1_1GenericContainer_1_1named__tuple.html#ae0678a6ed65835895dc29fc28b5ff9d0">underlying_tuple</a> &gt;::type &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="structBipedalLocomotion_1_1GenericContainer_1_1named__tuple.html#a95a086685c1ad77b94464fb6d7f49ae5">get</a> () const noexcept</td></tr>
+<tr class="memdesc:a95a086685c1ad77b94464fb6d7f49ae5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Extracts the Ith element from the <a class="el" href="structBipedalLocomotion_1_1GenericContainer_1_1named__tuple.html" title="named_tuple is a class that inherits from tuple.">named_tuple</a>.  <a href="structBipedalLocomotion_1_1GenericContainer_1_1named__tuple.html#a95a086685c1ad77b94464fb6d7f49ae5">More...</a><br /></td></tr>
+<tr class="separator:a95a086685c1ad77b94464fb6d7f49ae5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0e6ab3315e814585124ff6bb1952ace5"><td class="memTemplParams" colspan="2">template&lt;std::size_t I&gt; </td></tr>
+<tr class="memitem:a0e6ab3315e814585124ff6bb1952ace5"><td class="memTemplItemLeft" align="right" valign="top">std::tuple_element&lt; I, <a class="el" href="structBipedalLocomotion_1_1GenericContainer_1_1named__tuple.html#ae0678a6ed65835895dc29fc28b5ff9d0">underlying_tuple</a> &gt;::type &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="structBipedalLocomotion_1_1GenericContainer_1_1named__tuple.html#a0e6ab3315e814585124ff6bb1952ace5">get</a> () noexcept</td></tr>
+<tr class="memdesc:a0e6ab3315e814585124ff6bb1952ace5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Extracts the Ith element from the <a class="el" href="structBipedalLocomotion_1_1GenericContainer_1_1named__tuple.html" title="named_tuple is a class that inherits from tuple.">named_tuple</a>.  <a href="structBipedalLocomotion_1_1GenericContainer_1_1named__tuple.html#a0e6ab3315e814585124ff6bb1952ace5">More...</a><br /></td></tr>
+<tr class="separator:a0e6ab3315e814585124ff6bb1952ace5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a915b403920de6dc9408df99dd0aff863"><td class="memTemplParams" colspan="2">template&lt;hash_type Hash&gt; </td></tr>
+<tr class="memitem:a915b403920de6dc9408df99dd0aff863"><td class="memTemplItemLeft" align="right" valign="top">const auto &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="structBipedalLocomotion_1_1GenericContainer_1_1named__tuple.html#a915b403920de6dc9408df99dd0aff863">get_from_hash</a> () const noexcept</td></tr>
+<tr class="memdesc:a915b403920de6dc9408df99dd0aff863"><td class="mdescLeft">&#160;</td><td class="mdescRight">Extracts the element from the <a class="el" href="structBipedalLocomotion_1_1GenericContainer_1_1named__tuple.html" title="named_tuple is a class that inherits from tuple.">named_tuple</a> associated to the hash <code>Hash</code>.  <a href="structBipedalLocomotion_1_1GenericContainer_1_1named__tuple.html#a915b403920de6dc9408df99dd0aff863">More...</a><br /></td></tr>
+<tr class="separator:a915b403920de6dc9408df99dd0aff863"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5a4d6b22b3f493abfba148d977e04b25"><td class="memTemplParams" colspan="2">template&lt;hash_type Hash&gt; </td></tr>
+<tr class="memitem:a5a4d6b22b3f493abfba148d977e04b25"><td class="memTemplItemLeft" align="right" valign="top">auto &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="structBipedalLocomotion_1_1GenericContainer_1_1named__tuple.html#a5a4d6b22b3f493abfba148d977e04b25">get_from_hash</a> () noexcept</td></tr>
+<tr class="memdesc:a5a4d6b22b3f493abfba148d977e04b25"><td class="mdescLeft">&#160;</td><td class="mdescRight">Extracts the element from the <a class="el" href="structBipedalLocomotion_1_1GenericContainer_1_1named__tuple.html" title="named_tuple is a class that inherits from tuple.">named_tuple</a> associated to the hash <code>Hash</code>.  <a href="structBipedalLocomotion_1_1GenericContainer_1_1named__tuple.html#a5a4d6b22b3f493abfba148d977e04b25">More...</a><br /></td></tr>
+<tr class="separator:a5a4d6b22b3f493abfba148d977e04b25"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac18226129c902c1daeea6f5dd59b8be4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structBipedalLocomotion_1_1GenericContainer_1_1named__tuple.html#ae0678a6ed65835895dc29fc28b5ff9d0">underlying_tuple</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structBipedalLocomotion_1_1GenericContainer_1_1named__tuple.html#ac18226129c902c1daeea6f5dd59b8be4">to_tuple</a> () const noexcept</td></tr>
+<tr class="memdesc:ac18226129c902c1daeea6f5dd59b8be4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the associated std::tuple.  <a href="structBipedalLocomotion_1_1GenericContainer_1_1named__tuple.html#ac18226129c902c1daeea6f5dd59b8be4">More...</a><br /></td></tr>
+<tr class="separator:ac18226129c902c1daeea6f5dd59b8be4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><h3>template&lt;typename... Params&gt;<br />
+struct BipedalLocomotion::GenericContainer::named_tuple&lt; Params &gt;</h3>
+
+<p><a class="el" href="structBipedalLocomotion_1_1GenericContainer_1_1named__tuple.html" title="named_tuple is a class that inherits from tuple.">named_tuple</a> is a class that inherits from tuple. </p>
+<p>Its main purpose is to make more readable and less error prone code that uses <code>std::tuple</code>. </p><div class="fragment"><div class="line"><span class="keyword">using namespace </span>BipedalLocomotion::GenericContainer::literals;</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">auto</span> foo =</div>
+<div class="line"><a class="code" href="NamedTuple_8h.html#ac322ee615f7d23018c47ef2b3290b2fa">BipedalLocomotion::GenericContainer::make_named_tuple</a>(<a class="code" href="structBipedalLocomotion_1_1GenericContainer_1_1named__param.html">BipedalLocomotion::GenericContainer::named_param&lt;&quot;name&quot;_h, std::string&gt;</a>(),</div>
+<div class="line">                                                      <a class="code" href="structBipedalLocomotion_1_1GenericContainer_1_1named__param.html">BipedalLocomotion::GenericContainer::named_param&lt;&quot;number&quot;_h, int&gt;</a>());</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// it is still possible to access the elements of the named_tuple with structured binding</span></div>
+<div class="line"><span class="comment">// declaration</span></div>
+<div class="line"><span class="keyword">auto</span>&amp; [a, b] = foo;</div>
+<div class="line">b = 150;</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// moreover you can call std::get&lt;&gt; as usual</span></div>
+<div class="line"><span class="keywordtype">int</span> n = std::get&lt;1&gt;(foo);</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Differently from a normal tuple it is possible to access to the element via the hash as</span></div>
+<div class="line"><span class="comment">// follows</span></div>
+<div class="line">foo.get_from_hash&lt;<span class="stringliteral">&quot;name&quot;</span>_h&gt;() = <span class="stringliteral">&quot;Smith&quot;</span>;</div>
+<div class="line"><span class="keyword">const</span> std::string&amp; temp_string = foo.get_from_hash&lt;<span class="stringliteral">&quot;name&quot;</span>_h&gt;();</div>
+<div class="ttc" id="aNamedTuple_8h_html_ac322ee615f7d23018c47ef2b3290b2fa"><div class="ttname"><a href="NamedTuple_8h.html#ac322ee615f7d23018c47ef2b3290b2fa">BipedalLocomotion::GenericContainer::make_named_tuple</a></div><div class="ttdeci">constexpr auto make_named_tuple(Args &amp;&amp;... args)</div><div class="ttdoc">Creates a named_tuple object, deducing the target type from the types of arguments.</div><div class="ttdef"><b>Definition:</b> NamedTuple.h:302</div></div>
+<div class="ttc" id="astructBipedalLocomotion_1_1GenericContainer_1_1named__param_html"><div class="ttname"><a href="structBipedalLocomotion_1_1GenericContainer_1_1named__param.html">BipedalLocomotion::GenericContainer::named_param</a></div><div class="ttdoc">named_param is a struct that associate a compile time hash to a value.</div><div class="ttdef"><b>Definition:</b> NamedTuple.h:47</div></div>
+</div><!-- fragment --> </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a639718fa237c24ba9865876e449f7202"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a639718fa237c24ba9865876e449f7202">&#9670;&nbsp;</a></span>named_tuple() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename... Params&gt; </div>
+<div class="memtemplate">
+template&lt;typename... Args&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structBipedalLocomotion_1_1GenericContainer_1_1named__tuple.html">BipedalLocomotion::GenericContainer::named_tuple</a>&lt; Params &gt;::<a class="el" href="structBipedalLocomotion_1_1GenericContainer_1_1named__tuple.html">named_tuple</a> </td>
+          <td>(</td>
+          <td class="paramtype">const std::tuple&lt; Args... &gt; &amp;&#160;</td>
+          <td class="paramname"><em>t</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Construct from a tuple. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">t</td><td>a tuple having the same number of elements of of <a class="el" href="structBipedalLocomotion_1_1GenericContainer_1_1named__tuple.html" title="named_tuple is a class that inherits from tuple.">named_tuple</a>. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section note"><dt>Note</dt><dd>This constructor requires the type of the elements of the tuple to be convertible into Params. </dd></dl>
+
+</div>
+</div>
+<a id="a64bba5aa718265896658eb2e0411c8b8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a64bba5aa718265896658eb2e0411c8b8">&#9670;&nbsp;</a></span>named_tuple() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename... Params&gt; </div>
+<div class="memtemplate">
+template&lt;typename... Args&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structBipedalLocomotion_1_1GenericContainer_1_1named__tuple.html">BipedalLocomotion::GenericContainer::named_tuple</a>&lt; Params &gt;::<a class="el" href="structBipedalLocomotion_1_1GenericContainer_1_1named__tuple.html">named_tuple</a> </td>
+          <td>(</td>
+          <td class="paramtype">std::tuple&lt; Args... &gt; &amp;&amp;&#160;</td>
+          <td class="paramname"><em>t</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Construct from a tuple. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">t</td><td>a tuple having the same number of elements of <a class="el" href="structBipedalLocomotion_1_1GenericContainer_1_1named__tuple.html" title="named_tuple is a class that inherits from tuple.">named_tuple</a>. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section note"><dt>Note</dt><dd>This constructor requires the type of the elements of the tuple to be convertible into Params. </dd></dl>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a97abdf681a3aecdc7277984412910b21"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a97abdf681a3aecdc7277984412910b21">&#9670;&nbsp;</a></span>operator=()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename... Params&gt; </div>
+<div class="memtemplate">
+template&lt;typename... Args&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structBipedalLocomotion_1_1GenericContainer_1_1named__tuple.html">named_tuple</a>&amp; <a class="el" href="structBipedalLocomotion_1_1GenericContainer_1_1named__tuple.html">BipedalLocomotion::GenericContainer::named_tuple</a>&lt; Params &gt;::operator= </td>
+          <td>(</td>
+          <td class="paramtype">const std::tuple&lt; Args... &gt; &amp;&#160;</td>
+          <td class="paramname"><em>t</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Copy from a tuple. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">t</td><td>tuple </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a95a086685c1ad77b94464fb6d7f49ae5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a95a086685c1ad77b94464fb6d7f49ae5">&#9670;&nbsp;</a></span>get() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename... Params&gt; </div>
+<div class="memtemplate">
+template&lt;std::size_t I&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const std::tuple_element&lt;I, <a class="el" href="structBipedalLocomotion_1_1GenericContainer_1_1named__tuple.html#ae0678a6ed65835895dc29fc28b5ff9d0">underlying_tuple</a>&gt;::type&amp; <a class="el" href="structBipedalLocomotion_1_1GenericContainer_1_1named__tuple.html">BipedalLocomotion::GenericContainer::named_tuple</a>&lt; Params &gt;::get </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Extracts the Ith element from the <a class="el" href="structBipedalLocomotion_1_1GenericContainer_1_1named__tuple.html" title="named_tuple is a class that inherits from tuple.">named_tuple</a>. </p>
+<p>It must be an integer value in <code>[0, sizeof...(Types))</code>. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">t</td><td>the <a class="el" href="structBipedalLocomotion_1_1GenericContainer_1_1named__tuple.html" title="named_tuple is a class that inherits from tuple.">named_tuple</a> </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>A reference to the selected element of t. </dd></dl>
+
+</div>
+</div>
+<a id="a0e6ab3315e814585124ff6bb1952ace5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0e6ab3315e814585124ff6bb1952ace5">&#9670;&nbsp;</a></span>get() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename... Params&gt; </div>
+<div class="memtemplate">
+template&lt;std::size_t I&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::tuple_element&lt;I, <a class="el" href="structBipedalLocomotion_1_1GenericContainer_1_1named__tuple.html#ae0678a6ed65835895dc29fc28b5ff9d0">underlying_tuple</a>&gt;::type&amp; <a class="el" href="structBipedalLocomotion_1_1GenericContainer_1_1named__tuple.html">BipedalLocomotion::GenericContainer::named_tuple</a>&lt; Params &gt;::get </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Extracts the Ith element from the <a class="el" href="structBipedalLocomotion_1_1GenericContainer_1_1named__tuple.html" title="named_tuple is a class that inherits from tuple.">named_tuple</a>. </p>
+<p>I must be an integer value in <code>[0, sizeof...(Types))</code>. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">t</td><td>the <a class="el" href="structBipedalLocomotion_1_1GenericContainer_1_1named__tuple.html" title="named_tuple is a class that inherits from tuple.">named_tuple</a> </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>A reference to the selected element of t. </dd></dl>
+
+</div>
+</div>
+<a id="a915b403920de6dc9408df99dd0aff863"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a915b403920de6dc9408df99dd0aff863">&#9670;&nbsp;</a></span>get_from_hash() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename... Params&gt; </div>
+<div class="memtemplate">
+template&lt;hash_type Hash&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const auto&amp; <a class="el" href="structBipedalLocomotion_1_1GenericContainer_1_1named__tuple.html">BipedalLocomotion::GenericContainer::named_tuple</a>&lt; Params &gt;::get_from_hash </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Extracts the element from the <a class="el" href="structBipedalLocomotion_1_1GenericContainer_1_1named__tuple.html" title="named_tuple is a class that inherits from tuple.">named_tuple</a> associated to the hash <code>Hash</code>. </p>
+<p><code>Hash</code> must be among one of the hash values associated to the tuple when created. @return A reference to the selected element of t. </p>
+
+</div>
+</div>
+<a id="a5a4d6b22b3f493abfba148d977e04b25"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5a4d6b22b3f493abfba148d977e04b25">&#9670;&nbsp;</a></span>get_from_hash() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename... Params&gt; </div>
+<div class="memtemplate">
+template&lt;hash_type Hash&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">auto&amp; <a class="el" href="structBipedalLocomotion_1_1GenericContainer_1_1named__tuple.html">BipedalLocomotion::GenericContainer::named_tuple</a>&lt; Params &gt;::get_from_hash </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Extracts the element from the <a class="el" href="structBipedalLocomotion_1_1GenericContainer_1_1named__tuple.html" title="named_tuple is a class that inherits from tuple.">named_tuple</a> associated to the hash <code>Hash</code>. </p>
+<p><code>Hash</code> must be among one of the hash values associated to the tuple when created. @return A reference to the selected element of t. </p>
+
+</div>
+</div>
+<a id="ac18226129c902c1daeea6f5dd59b8be4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac18226129c902c1daeea6f5dd59b8be4">&#9670;&nbsp;</a></span>to_tuple()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename... Params&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structBipedalLocomotion_1_1GenericContainer_1_1named__tuple.html#ae0678a6ed65835895dc29fc28b5ff9d0">underlying_tuple</a> <a class="el" href="structBipedalLocomotion_1_1GenericContainer_1_1named__tuple.html">BipedalLocomotion::GenericContainer::named_tuple</a>&lt; Params &gt;::to_tuple </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Return the associated std::tuple. </p>
+<dl class="section return"><dt>Returns</dt><dd>the tuple associated to the <a class="el" href="structBipedalLocomotion_1_1GenericContainer_1_1named__tuple.html" title="named_tuple is a class that inherits from tuple.">named_tuple</a> </dd></dl>
+
+</div>
+</div>
+<hr/>The documentation for this struct was generated from the following file:<ul>
+<li>GenericContainer/include/BipedalLocomotion/GenericContainer/<a class="el" href="NamedTuple_8h.html">NamedTuple.h</a></li>
+</ul>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- Doxygen custom footer -->
+<div id="nav-path" class="navpath">
+  <ul>
+    <li class="footer">
+      <a href="https://github.com/gbionics/bipedal-locomotion-framework">GitHub</a> &bull;
+      <a href="https://gbionics.ai/">Generative Bionics</a> &bull;
+      Licensed under <a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause "New" or "Revised" License</a> &bull;
+      Generated by <a href="https://www.doxygen.org/index.html">Doxygen</a> 1.9.1
+    </li>
+  </ul>
+</div>
 </body>
 </html>

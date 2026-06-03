@@ -1,462 +1,581 @@
-<!DOCTYPE html>
-<html lang="en">
+<!-- HTML header for doxygen 1.9.1 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-  <meta charset="UTF-8" />
-  <title>BipedalLocomotion::Estimators::RobotDynamicsEstimator::Dynamics class | bipedal locomotion framework master</title>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
-  <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
-  <link rel="icon" href="favicon-dark.png" type="image/png" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#22272e" />
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>bipedal locomotion framework: BipedalLocomotion::Estimators::RobotDynamicsEstimator::Dynamics Class Reference</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js", "TeX/AMSmath.js", "TeX/AMSsymbols.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+});
+</script>
+<script type="text/javascript" async="async" src="https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only-darkmode-toggle.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="doxygen-awesome-darkmode-toggle.js"></script>
+<script type="text/javascript" src="doxygen-awesome-fragment-copy-button.js"></script>
+<script type="text/javascript" src="doxygen-awesome-interactive-toc.js"></script>
+<script type="text/javascript" src="doxygen-awesome-paragraph-link.js"></script>
+<script type="text/javascript" src="doxygen-awesome-tabs.js"></script>
+<script type="text/javascript">
+    DoxygenAwesomeDarkModeToggle.init()
+    DoxygenAwesomeFragmentCopyButton.init()
+    DoxygenAwesomeInteractiveToc.init()
+    DoxygenAwesomeParagraphLink.init()
+    DoxygenAwesomeTabs.init()
+</script>
 </head>
 <body>
-<header><nav id="navigation">
-  <div class="m-container">
-    <div class="m-row">
-      <span id="m-navbar-brand" class="m-col-t-8 m-col-m-none m-left-m">
-        <a href="./index.html">bipedal locomotion framework</a> <span class="m-breadcrumb">|</span> <a href="index.html" class="m-thin">master</a>
-      </span>
-      <div class="m-col-t-4 m-hide-m m-text-right m-nopadr">
-        <a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
-          <path id="m-doc-search-icon-path" d="m6 0c-3.31 0-6 2.69-6 6 0 3.31 2.69 6 6 6 1.49 0 2.85-0.541 3.89-1.44-0.0164 0.338 0.147 0.759 0.5 1.15l3.22 3.79c0.552 0.614 1.45 0.665 2 0.115 0.55-0.55 0.499-1.45-0.115-2l-3.79-3.22c-0.392-0.353-0.812-0.515-1.15-0.5 0.895-1.05 1.44-2.41 1.44-3.89 0-3.31-2.69-6-6-6zm0 1.56a4.44 4.44 0 0 1 4.44 4.44 4.44 4.44 0 0 1-4.44 4.44 4.44 4.44 0 0 1-4.44-4.44 4.44 4.44 0 0 1 4.44-4.44z"/>
-        </svg></a>
-        <a id="m-navbar-show" href="#navigation" title="Show navigation"></a>
-        <a id="m-navbar-hide" href="#" title="Hide navigation"></a>
-      </div>
-      <div id="m-navbar-collapse" class="m-col-t-12 m-show-m m-col-m-none m-right-m">
-        <div class="m-row">
-          <ol class="m-col-t-6 m-col-m-none">
-            <li><a href="pages.html">Pages</a></li>
-            <li><a href="annotated.html">Classes</a></li>
-            <li><a href="files.html">Files</a></li>
-          </ol>
-          <ol class="m-col-t-6 m-col-m-none" start="4">
-            <li>
-              <a href="pages.html">Versions</a>
-              <ol>
-                <li><a href="./index.html">Master</a></li>
-                <li><a href="./v0.19.0/index.html">v0.19.0</a></li>
-                <li><a href="./v0.21.1/index.html">v0.21.1</a></li>
-                <li><a href="./v0.18.0/index.html">v0.18.0</a></li>
-              </ol>
-            </li>
-            <li>
-              <a href="pages.html">Contacts</a>
-              <ol>
-                <li><a href="https://github.com/ami-iit/bipedal-locomotion-framework">GitHub</a></li>
-                <li><a href="https://www.iit.it/web/ami/">Lab website</a></li>
-              </ol>
-            </li>
-            <li class="m-show-m"><a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
-              <use href="#m-doc-search-icon-path" />
-            </svg></a></li>
-          </ol>
-        </div>
-      </div>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">bipedal locomotion framework
+   </div>
+   <div id="projectbrief">A suite of libraries for achieving bipedal locomotion on humanoid robots</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.9.1 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "search",false,'Search','.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',true,false,'search.php','Search');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
     </div>
   </div>
-</nav></header>
-<main><article>
-  <div class="m-container m-container-inflatable">
-    <div class="m-row">
-      <div class="m-col-l-10 m-push-l-1">
-        <h1>
-          <span class="m-breadcrumb"><a href="namespaceBipedalLocomotion.html">BipedalLocomotion</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespaceBipedalLocomotion_1_1Estimators.html">Estimators</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespaceBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator.html">RobotDynamicsEstimator</a>::<wbr/></span>Dynamics <span class="m-thin">class</span>
-          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="Dynamics_8h.html">&lt;BipedalLocomotion/RobotDynamicsEstimator/Dynamics.h&gt;</a></div>
-        </h1>
-        <p>The class <a href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1Dynamics.html" class="m-doc">Dynamics</a> represents a base class describing a generic model composing the ukf process model or the ukf measurement model.</p>
-        <nav class="m-block m-default">
-          <h3>Contents</h3>
-          <ul>
-            <li>
-              Reference
-              <ul>
-                <li><a href="#derived-classes">Derived classes</a></li>
-                <li><a href="#typeless-methods">Constructors, destructors, conversion operators</a></li>
-                <li><a href="#pub-methods">Public functions</a></li>
-                <li><a href="#pro-methods">Protected functions</a></li>
-                <li><a href="#pro-attribs">Protected variables</a></li>
-              </ul>
-            </li>
-          </ul>
-        </nav>
-<p>The <a href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1Dynamics.html" class="m-doc">Dynamics</a> object is created from a parameter handler which specifies the name of the variable described by the dynamics object, the covariances associated to the variable, the initial covariance, the <a href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1Dynamics.html" class="m-doc">Dynamics</a> model which specifies which implementation of this class will be used. The model of the <a href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1Dynamics.html" class="m-doc">Dynamics</a> object depends on the current state and an input object which need to be set before calling the update method.</p>
-        <section id="derived-classes">
-          <h2><a href="#derived-classes">Derived classes</a></h2>
-          <dl class="m-doc">
-            <dt>
-              class <a href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1AccelerometerMeasurementDynamics.html" class="m-doc">AccelerometerMeasurementDynamics</a>
-            </dt>
-            <dd>The <a href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1AccelerometerMeasurementDynamics.html" class="m-doc">AccelerometerMeasurementDynamics</a> class is a concrete implementation of the <a href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1Dynamics.html" class="m-doc">Dynamics</a>.</dd>
-            <dt>
-              class <a href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1ConstantMeasurementModel.html" class="m-doc">ConstantMeasurementModel</a>
-            </dt>
-            <dd>The <a href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1ConstantMeasurementModel.html" class="m-doc">ConstantMeasurementModel</a> class is a concrete implementation of the <a href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1Dynamics.html" class="m-doc">Dynamics</a>.</dd>
-            <dt>
-              class <a href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1ExternalContactStateDynamics.html" class="m-doc">ExternalContactStateDynamics</a>
-            </dt>
-            <dd>The <a href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1ExternalContactStateDynamics.html" class="m-doc">ExternalContactStateDynamics</a> class is a concrete implementation of the <a href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1Dynamics.html" class="m-doc">Dynamics</a>.</dd>
-            <dt>
-              class <a href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1GyroscopeMeasurementDynamics.html" class="m-doc">GyroscopeMeasurementDynamics</a>
-            </dt>
-            <dd>The <a href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1GyroscopeMeasurementDynamics.html" class="m-doc">GyroscopeMeasurementDynamics</a> class is a concrete implementation of the <a href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1Dynamics.html" class="m-doc">Dynamics</a>.</dd>
-            <dt>
-              class <a href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1JointVelocityStateDynamics.html" class="m-doc">JointVelocityStateDynamics</a>
-            </dt>
-            <dd>The JointVelocityDynamics class is a concrete implementation of the <a href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1Dynamics.html" class="m-doc">Dynamics</a>.</dd>
-            <dt>
-              class <a href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1MotorCurrentMeasurementDynamics.html" class="m-doc">MotorCurrentMeasurementDynamics</a>
-            </dt>
-            <dd>The <a href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1MotorCurrentMeasurementDynamics.html" class="m-doc">MotorCurrentMeasurementDynamics</a> class is a concrete implementation of the <a href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1Dynamics.html" class="m-doc">Dynamics</a>.</dd>
-            <dt>
-              class <a href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1ZeroVelocityStateDynamics.html" class="m-doc">ZeroVelocityStateDynamics</a>
-            </dt>
-            <dd>The <a href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1ZeroVelocityStateDynamics.html" class="m-doc">ZeroVelocityStateDynamics</a> class is a concrete implementation of the <a href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1Dynamics.html" class="m-doc">Dynamics</a>.</dd>
-          </dl>
-        </section>
-        <section id="typeless-methods">
-          <h2><a href="#typeless-methods">Constructors, destructors, conversion operators</a></h2>
-          <dl class="m-doc">
-            <dt id="aa21073a31262bbbc161f0f36130e8273">
-              <span class="m-doc-wrap-bumper"><a href="#aa21073a31262bbbc161f0f36130e8273" class="m-doc-self">~Dynamics</a>(</span><span class="m-doc-wrap">) <span class="m-label m-flat m-info">defaulted</span> <span class="m-label m-flat m-warning">virtual</span></span>
-            </dt>
-            <dd>Destructor.</dd>
-          </dl>
-        </section>
-        <section id="pub-methods">
-          <h2><a href="#pub-methods">Public functions</a></h2>
-          <dl class="m-doc">
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a60ccb70d762e4d9d02ded424a393c64f" class="m-doc">initialize</a>(</span><span class="m-doc-wrap">std::weak_ptr&lt;const <a href="classBipedalLocomotion_1_1ParametersHandler_1_1IParametersHandler.html" class="m-doc">ParametersHandler::<wbr />IParametersHandler</a>&gt; paramHandler,
-              const std::string&amp; name) -&gt; bool <span class="m-label m-flat m-warning">virtual</span></span>
-            </dt>
-            <dd>Initialize the task.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a09e7ef24e05c4aaca536cc019810e0c5" class="m-doc">finalize</a>(</span><span class="m-doc-wrap">const <a href="classBipedalLocomotion_1_1System_1_1VariablesHandler.html" class="m-doc">System::<wbr />VariablesHandler</a>&amp; handler) -&gt; bool <span class="m-label m-flat m-warning">virtual</span></span>
-            </dt>
-            <dd>Finalize the <a href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1Dynamics.html" class="m-doc">Dynamics</a>.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#ad150cc229cc82083a713ed2ba453e82a" class="m-doc">setSubModels</a>(</span><span class="m-doc-wrap">const std::vector&lt;<a href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1SubModel.html" class="m-doc">SubModel</a>&gt;&amp; subModelList,
-              const std::vector&lt;std::shared_ptr&lt;<a href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1KinDynWrapper.html" class="m-doc">KinDynWrapper</a>&gt;&gt;&amp; kinDynWrapperList) -&gt; bool <span class="m-label m-flat m-warning">virtual</span></span>
-            </dt>
-            <dd>Set the <a href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1KinDynWrapper.html" class="m-doc">KinDynWrapper</a> object.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#aafd426248fbbf4a93405b9f4b321d821" class="m-doc">update</a>(</span><span class="m-doc-wrap">) -&gt; bool <span class="m-label m-flat m-warning">virtual</span></span>
-            </dt>
-            <dd>Update the dynamics of the variable.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#ac7ad9601f0f1b7f6516e1117e4845ae2" class="m-doc">getUpdatedVariable</a>(</span><span class="m-doc-wrap">) const -&gt; Eigen::Ref&lt;const Eigen::VectorXd&gt;</span>
-            </dt>
-            <dd>Get the next value m_updatedVariable.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a7570b0d3691c7838e5108b13d36196f8" class="m-doc">size</a>(</span><span class="m-doc-wrap">) const -&gt; int</span>
-            </dt>
-            <dd>Get the size of the state.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">void <a href="#a3874e314d326424d9f9514e218badb86" class="m-doc">setState</a>(</span><span class="m-doc-wrap">const Eigen::Ref&lt;const Eigen::VectorXd&gt; ukfState) <span class="m-label m-flat m-warning">pure virtual</span></span>
-            </dt>
-            <dd>Set the state of the ukf needed to update the dynamics.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">void <a href="#a53c4861a09cd78e7c7548cd46a28b6e3" class="m-doc">setInput</a>(</span><span class="m-doc-wrap">const <a href="structBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1UKFInput.html" class="m-doc">UKFInput</a>&amp; ukfInput) <span class="m-label m-flat m-warning">pure virtual</span></span>
-            </dt>
-            <dd>Set a <code><a href="structBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1UKFInput.html" class="m-doc">UKFInput</a></code> object.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a518aaf5ff8b96345b34fdba009fc2ce5" class="m-doc">getCovariance</a>(</span><span class="m-doc-wrap">) -&gt; Eigen::Ref&lt;const Eigen::VectorXd&gt;</span>
-            </dt>
-            <dd>getCovariance access the covariance <code>Eigen::VectorXd</code> associated to the variables described by this dynamics.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a1ff246934d62ec52decf6a4df46150c1" class="m-doc">getInitialStateCovariance</a>(</span><span class="m-doc-wrap">) -&gt; Eigen::Ref&lt;const Eigen::VectorXd&gt;</span>
-            </dt>
-            <dd>getInitialStateCovariance access the covariance <code>Eigen::VectorXd</code> associated to the initial state.</dd>
-          </dl>
-        </section>
-        <section id="pro-methods">
-          <h2><a href="#pro-methods">Protected functions</a></h2>
-          <dl class="m-doc">
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a4272a944fe6a88c70a2ec198851ae18c" class="m-doc">checkStateVariableHandler</a>(</span><span class="m-doc-wrap">) -&gt; bool <span class="m-label m-flat m-warning">virtual</span></span>
-            </dt>
-            <dd>Controls whether the variable handler contains the variables on which the dynamics depend.</dd>
-          </dl>
-        </section>
-        <section id="pro-attribs">
-          <h2><a href="#pro-attribs">Protected variables</a></h2>
-          <dl class="m-doc">
-            <dt id="a6f6ab82393f65792c50a2f267e2d2235">
-              int <a href="#a6f6ab82393f65792c50a2f267e2d2235" class="m-doc-self">m_size</a>
-            </dt>
-            <dd>Size of the variable associate to the <a href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1Dynamics.html" class="m-doc">Dynamics</a> object.</dd>
-            <dt id="af79b12fb9a01f2eb05db0c59a639bad9">
-              Eigen::VectorXd <a href="#af79b12fb9a01f2eb05db0c59a639bad9" class="m-doc-self">m_updatedVariable</a>
-            </dt>
-            <dd>Updated variable computed using the dynamic model.</dd>
-            <dt id="acbab99c51da6ecc85731da9e410a943b">
-              std::string <a href="#acbab99c51da6ecc85731da9e410a943b" class="m-doc-self">m_description</a>
-            </dt>
-            <dd>String describing the type of the dynamics.</dd>
-            <dt id="adda3fb21d2afc618efa3b5da736f8a65">
-              Eigen::VectorXd <a href="#adda3fb21d2afc618efa3b5da736f8a65" class="m-doc-self">m_covariances</a>
-            </dt>
-            <dd>Vector of covariances.</dd>
-            <dt id="a57fe02624c1ae50c1d839b6ad0e67d8a">
-              bool <a href="#a57fe02624c1ae50c1d839b6ad0e67d8a" class="m-doc-self">m_isInitialized</a>
-            </dt>
-            <dd>True if the dynamics has been initialized.</dd>
-            <dt id="ac80148fa7320566717a83ca303a40057">
-              Eigen::VectorXd <a href="#ac80148fa7320566717a83ca303a40057" class="m-doc-self">m_initialCovariances</a>
-            </dt>
-            <dd>Vector of initial covariances.</dd>
-          </dl>
-        </section>
-        <section>
-          <h2>Function documentation</h2>
-          <section class="m-doc-details" id="a60ccb70d762e4d9d02ded424a393c64f"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">bool BipedalLocomotion::<wbr />Estimators::<wbr />RobotDynamicsEstimator::<wbr />Dynamics::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a60ccb70d762e4d9d02ded424a393c64f" class="m-doc-self">initialize</a>(</span><span class="m-doc-wrap">std::weak_ptr&lt;const <a href="classBipedalLocomotion_1_1ParametersHandler_1_1IParametersHandler.html" class="m-doc">ParametersHandler::<wbr />IParametersHandler</a>&gt; paramHandler,
-              const std::string&amp; name) <span class="m-label m-warning">virtual</span></span></span>
-            </h3>
-            <p>Initialize the task.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">paramHandler</td>
-                  <td>pointer to the parameters handler.</td>
-                </tr>
-                <tr>
-                  <td>name</td>
-                  <td>name of the dynamics.</td>
-                </tr>
-              </tbody>
-              <tfoot>
-                <tr>
-                  <th>Returns</th>
-                  <td>True in case of success, false otherwise.</td>
-                </tr>
-              </tfoot>
-            </table>
-          </div></section>
-          <section class="m-doc-details" id="a09e7ef24e05c4aaca536cc019810e0c5"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">bool BipedalLocomotion::<wbr />Estimators::<wbr />RobotDynamicsEstimator::<wbr />Dynamics::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a09e7ef24e05c4aaca536cc019810e0c5" class="m-doc-self">finalize</a>(</span><span class="m-doc-wrap">const <a href="classBipedalLocomotion_1_1System_1_1VariablesHandler.html" class="m-doc">System::<wbr />VariablesHandler</a>&amp; handler) <span class="m-label m-warning">virtual</span></span></span>
-            </h3>
-            <p>Finalize the <a href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1Dynamics.html" class="m-doc">Dynamics</a>.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">handler</td>
-                  <td>object describing the variables in the vector for which all the dynamics are defined.</td>
-                </tr>
-              </tbody>
-              <tfoot>
-                <tr>
-                  <th>Returns</th>
-                  <td>true in case of success, false otherwise.</td>
-                </tr>
-              </tfoot>
-            </table>
-<aside class="m-note m-info"><h4>Note</h4><p>You should call this method after you add ALL the dynamics to the variable handler.</p></aside>
-          </div></section>
-          <section class="m-doc-details" id="ad150cc229cc82083a713ed2ba453e82a"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">bool BipedalLocomotion::<wbr />Estimators::<wbr />RobotDynamicsEstimator::<wbr />Dynamics::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ad150cc229cc82083a713ed2ba453e82a" class="m-doc-self">setSubModels</a>(</span><span class="m-doc-wrap">const std::vector&lt;<a href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1SubModel.html" class="m-doc">SubModel</a>&gt;&amp; subModelList,
-              const std::vector&lt;std::shared_ptr&lt;<a href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1KinDynWrapper.html" class="m-doc">KinDynWrapper</a>&gt;&gt;&amp; kinDynWrapperList) <span class="m-label m-warning">virtual</span></span></span>
-            </h3>
-            <p>Set the <a href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1KinDynWrapper.html" class="m-doc">KinDynWrapper</a> object.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">subModelList</td>
-                  <td>list of <a href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1SubModel.html" class="m-doc">SubModel</a> objects</td>
-                </tr>
-                <tr>
-                  <td>kinDynWrapperList</td>
-                  <td>list of pointers to <a href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1KinDynWrapper.html" class="m-doc">KinDynWrapper</a> objects.</td>
-                </tr>
-              </tbody>
-              <tfoot>
-                <tr>
-                  <th>Returns</th>
-                  <td>True in case of success, false otherwise.</td>
-                </tr>
-              </tfoot>
-            </table>
-          </div></section>
-          <section class="m-doc-details" id="aafd426248fbbf4a93405b9f4b321d821"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">bool BipedalLocomotion::<wbr />Estimators::<wbr />RobotDynamicsEstimator::<wbr />Dynamics::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aafd426248fbbf4a93405b9f4b321d821" class="m-doc-self">update</a>(</span><span class="m-doc-wrap">) <span class="m-label m-warning">virtual</span></span></span>
-            </h3>
-            <p>Update the dynamics of the variable.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <tfoot>
-                <tr>
-                  <th style="width: 1%">Returns</th>
-                  <td>True in case of success, false otherwise.</td>
-                </tr>
-              </tfoot>
-            </table>
-          </div></section>
-          <section class="m-doc-details" id="ac7ad9601f0f1b7f6516e1117e4845ae2"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">Eigen::Ref&lt;const Eigen::VectorXd&gt; BipedalLocomotion::<wbr />Estimators::<wbr />RobotDynamicsEstimator::<wbr />Dynamics::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ac7ad9601f0f1b7f6516e1117e4845ae2" class="m-doc-self">getUpdatedVariable</a>(</span><span class="m-doc-wrap">) const</span></span>
-            </h3>
-            <p>Get the next value m_updatedVariable.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <tfoot>
-                <tr>
-                  <th style="width: 1%">Returns</th>
-                  <td>a const reference to the next variable value.</td>
-                </tr>
-              </tfoot>
-            </table>
-          </div></section>
-          <section class="m-doc-details" id="a7570b0d3691c7838e5108b13d36196f8"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">int BipedalLocomotion::<wbr />Estimators::<wbr />RobotDynamicsEstimator::<wbr />Dynamics::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a7570b0d3691c7838e5108b13d36196f8" class="m-doc-self">size</a>(</span><span class="m-doc-wrap">) const</span></span>
-            </h3>
-            <p>Get the size of the state.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <tfoot>
-                <tr>
-                  <th style="width: 1%">Returns</th>
-                  <td>the size of the state.</td>
-                </tr>
-              </tfoot>
-            </table>
-          </div></section>
-          <section class="m-doc-details" id="a3874e314d326424d9f9514e218badb86"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">void BipedalLocomotion::<wbr />Estimators::<wbr />RobotDynamicsEstimator::<wbr />Dynamics::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a3874e314d326424d9f9514e218badb86" class="m-doc-self">setState</a>(</span><span class="m-doc-wrap">const Eigen::Ref&lt;const Eigen::VectorXd&gt; ukfState) <span class="m-label m-warning">pure virtual</span></span></span>
-            </h3>
-            <p>Set the state of the ukf needed to update the dynamics.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">ukfState</td>
-                  <td>reference to the ukf state.</td>
-                </tr>
-              </tbody>
-            </table>
-          </div></section>
-          <section class="m-doc-details" id="a53c4861a09cd78e7c7548cd46a28b6e3"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">void BipedalLocomotion::<wbr />Estimators::<wbr />RobotDynamicsEstimator::<wbr />Dynamics::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a53c4861a09cd78e7c7548cd46a28b6e3" class="m-doc-self">setInput</a>(</span><span class="m-doc-wrap">const <a href="structBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1UKFInput.html" class="m-doc">UKFInput</a>&amp; ukfInput) <span class="m-label m-warning">pure virtual</span></span></span>
-            </h3>
-            <p>Set a <code><a href="structBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1UKFInput.html" class="m-doc">UKFInput</a></code> object.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">ukfInput</td>
-                  <td>reference to the <a href="structBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1UKFInput.html" class="m-doc">UKFInput</a> struct.</td>
-                </tr>
-              </tbody>
-            </table>
-          </div></section>
-          <section class="m-doc-details" id="a518aaf5ff8b96345b34fdba009fc2ce5"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">Eigen::Ref&lt;const Eigen::VectorXd&gt; BipedalLocomotion::<wbr />Estimators::<wbr />RobotDynamicsEstimator::<wbr />Dynamics::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a518aaf5ff8b96345b34fdba009fc2ce5" class="m-doc-self">getCovariance</a>(</span><span class="m-doc-wrap">)</span></span>
-            </h3>
-            <p>getCovariance access the covariance <code>Eigen::VectorXd</code> associated to the variables described by this dynamics.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <tfoot>
-                <tr>
-                  <th style="width: 1%">Returns</th>
-                  <td>the vector of covariances.</td>
-                </tr>
-              </tfoot>
-            </table>
-          </div></section>
-          <section class="m-doc-details" id="a1ff246934d62ec52decf6a4df46150c1"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">Eigen::Ref&lt;const Eigen::VectorXd&gt; BipedalLocomotion::<wbr />Estimators::<wbr />RobotDynamicsEstimator::<wbr />Dynamics::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a1ff246934d62ec52decf6a4df46150c1" class="m-doc-self">getInitialStateCovariance</a>(</span><span class="m-doc-wrap">)</span></span>
-            </h3>
-            <p>getInitialStateCovariance access the covariance <code>Eigen::VectorXd</code> associated to the initial state.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <tfoot>
-                <tr>
-                  <th style="width: 1%">Returns</th>
-                  <td>the vector of covariances.</td>
-                </tr>
-              </tfoot>
-            </table>
-          </div></section>
-          <section class="m-doc-details" id="a4272a944fe6a88c70a2ec198851ae18c"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">bool BipedalLocomotion::<wbr />Estimators::<wbr />RobotDynamicsEstimator::<wbr />Dynamics::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a4272a944fe6a88c70a2ec198851ae18c" class="m-doc-self">checkStateVariableHandler</a>(</span><span class="m-doc-wrap">) <span class="m-label m-warning">virtual</span> <span class="m-label m-warning">protected</span></span></span>
-            </h3>
-            <p>Controls whether the variable handler contains the variables on which the dynamics depend.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <tfoot>
-                <tr>
-                  <th style="width: 1%">Returns</th>
-                  <td>True in case all the dependencies are contained in the variable handler, false otherwise.</td>
-                </tr>
-              </tfoot>
-            </table>
-          </div></section>
-        </section>
-      </div>
-    </div>
-  </div>
-</article></main>
-<div class="m-doc-search" id="search">
-  <a href="#!" onclick="return hideSearch()"></a>
-  <div class="m-container">
-    <div class="m-row">
-      <div class="m-col-m-8 m-push-m-2">
-        <div class="m-doc-search-header m-text m-small">
-          <div><span class="m-label m-default">Tab</span> / <span class="m-label m-default">T</span> to search, <span class="m-label m-default">Esc</span> to close</div>
-          <div id="search-symbolcount">&hellip;</div>
-        </div>
-        <div class="m-doc-search-content">
-          <form>
-            <input type="search" name="q" id="search-input" placeholder="Loading &hellip;" disabled="disabled" autofocus="autofocus" autocomplete="off" spellcheck="false" />
-          </form>
-          <noscript class="m-text m-danger m-text-center">Unlike everything else in the docs, the search functionality <em>requires</em> JavaScript.</noscript>
-          <div id="search-help" class="m-text m-dim m-text-center">
-            <p class="m-noindent">Search for symbols, directories, files, pages or
-            modules. You can omit any prefix from the symbol or file path; adding a
-            <code>:</code> or <code>/</code> suffix lists all members of given symbol or
-            directory.</p>
-            <p class="m-noindent">Use <span class="m-label m-dim">&darr;</span>
-            / <span class="m-label m-dim">&uarr;</span> to navigate through the list,
-            <span class="m-label m-dim">Enter</span> to go.
-            <span class="m-label m-dim">Tab</span> autocompletes common prefix, you can
-            copy a link to the result using <span class="m-label m-dim">⌘</span>
-            <span class="m-label m-dim">L</span> while <span class="m-label m-dim">⌘</span>
-            <span class="m-label m-dim">M</span> produces a Markdown link.</p>
-          </div>
-          <div id="search-notfound" class="m-text m-warning m-text-center">Sorry, nothing was found.</div>
-          <ul id="search-results"></ul>
-        </div>
-      </div>
-    </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
   </div>
 </div>
-<script src="search-v2.js"></script>
-<script src="searchdata-v2.js" async="async"></script>
-<footer><nav>
-  <div class="m-container">
-    <div class="m-row">
-      <div class="m-col-l-10 m-push-l-1">
-        <p>bipedal-locomotion-framework documentation. Licensed under the <a href="https://www.gnu.org/licenses/lgpl-3.0.en.html">GNU Lesser General Public License v3.0</a>. Project maintained by the <a href="https://www.iit.it/web/ami/">Artificial and Mechanical Intelligence Lab</a>. Contact the team via <a href="https://github.com/ami-iit/bipedal-locomotion-framework/issues/new">GitHub</a>.<br />Generated by <a href="https://doxygen.org/">Doxygen</a> 1.9.1 and <a href="https://mcss.mosra.cz/">m.css</a>.
-      </div>
-    </div>
-  </div>
-</nav></footer>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(document).ready(function(){initNavTree('classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1Dynamics.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pro-methods">Protected Member Functions</a> &#124;
+<a href="#pro-attribs">Protected Attributes</a> &#124;
+<a href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1Dynamics-members.html">List of all members</a>  </div>
+  <div class="headertitle">
+<div class="title">BipedalLocomotion::Estimators::RobotDynamicsEstimator::Dynamics Class Reference<span class="mlabels"><span class="mlabel">abstract</span></span></div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p>The class <a class="el" href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1Dynamics.html" title="The class Dynamics represents a base class describing a generic model composing the ukf process model...">Dynamics</a> represents a base class describing a generic model composing the ukf process model or the ukf measurement model.  
+ <a href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1Dynamics.html#details">More...</a></p>
+
+<p><code>#include &lt;Estimators/include/BipedalLocomotion/RobotDynamicsEstimator/Dynamics.h&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:af1764a71012ed52f3afb3d165d91ce68"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1Dynamics.html#af1764a71012ed52f3afb3d165d91ce68">initialize</a> (std::weak_ptr&lt; const <a class="el" href="classBipedalLocomotion_1_1ParametersHandler_1_1IParametersHandler.html">ParametersHandler::IParametersHandler</a> &gt; paramHandler, const std::string &amp;name)</td></tr>
+<tr class="memdesc:af1764a71012ed52f3afb3d165d91ce68"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize the task.  <a href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1Dynamics.html#af1764a71012ed52f3afb3d165d91ce68">More...</a><br /></td></tr>
+<tr class="separator:af1764a71012ed52f3afb3d165d91ce68"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3987a865a6e3d4c852f8d89b7d430257"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1Dynamics.html#a3987a865a6e3d4c852f8d89b7d430257">finalize</a> (const <a class="el" href="classBipedalLocomotion_1_1System_1_1VariablesHandler.html">System::VariablesHandler</a> &amp;handler)</td></tr>
+<tr class="memdesc:a3987a865a6e3d4c852f8d89b7d430257"><td class="mdescLeft">&#160;</td><td class="mdescRight">Finalize the <a class="el" href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1Dynamics.html" title="The class Dynamics represents a base class describing a generic model composing the ukf process model...">Dynamics</a>.  <a href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1Dynamics.html#a3987a865a6e3d4c852f8d89b7d430257">More...</a><br /></td></tr>
+<tr class="separator:a3987a865a6e3d4c852f8d89b7d430257"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab62eebddbc6fbdb11a61e6fe5a451740"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1Dynamics.html#ab62eebddbc6fbdb11a61e6fe5a451740">setSubModels</a> (const std::vector&lt; <a class="el" href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1SubModel.html">SubModel</a> &gt; &amp;subModelList, const std::vector&lt; std::shared_ptr&lt; <a class="el" href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1KinDynWrapper.html">KinDynWrapper</a> &gt;&gt; &amp;kinDynWrapperList)</td></tr>
+<tr class="memdesc:ab62eebddbc6fbdb11a61e6fe5a451740"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the <a class="el" href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1KinDynWrapper.html" title="KinDynWrapper is a concrete class and implements a wrapper of the KinDynComputation class from iDynTr...">KinDynWrapper</a> object.  <a href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1Dynamics.html#ab62eebddbc6fbdb11a61e6fe5a451740">More...</a><br /></td></tr>
+<tr class="separator:ab62eebddbc6fbdb11a61e6fe5a451740"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa875285893b41e182f1c9202f1bacbea"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1Dynamics.html#aa875285893b41e182f1c9202f1bacbea">update</a> ()</td></tr>
+<tr class="memdesc:aa875285893b41e182f1c9202f1bacbea"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update the dynamics of the variable.  <a href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1Dynamics.html#aa875285893b41e182f1c9202f1bacbea">More...</a><br /></td></tr>
+<tr class="separator:aa875285893b41e182f1c9202f1bacbea"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a53c6c1743864d7647328f7c5fc240953"><td class="memItemLeft" align="right" valign="top">Eigen::Ref&lt; const Eigen::VectorXd &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1Dynamics.html#a53c6c1743864d7647328f7c5fc240953">getUpdatedVariable</a> () const</td></tr>
+<tr class="memdesc:a53c6c1743864d7647328f7c5fc240953"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the next value m_updatedVariable.  <a href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1Dynamics.html#a53c6c1743864d7647328f7c5fc240953">More...</a><br /></td></tr>
+<tr class="separator:a53c6c1743864d7647328f7c5fc240953"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3444291ead617a209d123b60ff16af49"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1Dynamics.html#a3444291ead617a209d123b60ff16af49">size</a> () const</td></tr>
+<tr class="memdesc:a3444291ead617a209d123b60ff16af49"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the size of the state.  <a href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1Dynamics.html#a3444291ead617a209d123b60ff16af49">More...</a><br /></td></tr>
+<tr class="separator:a3444291ead617a209d123b60ff16af49"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3874e314d326424d9f9514e218badb86"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1Dynamics.html#a3874e314d326424d9f9514e218badb86">setState</a> (const Eigen::Ref&lt; const Eigen::VectorXd &gt; ukfState)=0</td></tr>
+<tr class="memdesc:a3874e314d326424d9f9514e218badb86"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the state of the ukf needed to update the dynamics.  <a href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1Dynamics.html#a3874e314d326424d9f9514e218badb86">More...</a><br /></td></tr>
+<tr class="separator:a3874e314d326424d9f9514e218badb86"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a53c4861a09cd78e7c7548cd46a28b6e3"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1Dynamics.html#a53c4861a09cd78e7c7548cd46a28b6e3">setInput</a> (const <a class="el" href="structBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1UKFInput.html">UKFInput</a> &amp;ukfInput)=0</td></tr>
+<tr class="memdesc:a53c4861a09cd78e7c7548cd46a28b6e3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set a <code><a class="el" href="structBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1UKFInput.html" title="The UKFInput struct represents the input of the ukf needed to update the dynamics.">UKFInput</a></code> object.  <a href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1Dynamics.html#a53c4861a09cd78e7c7548cd46a28b6e3">More...</a><br /></td></tr>
+<tr class="separator:a53c4861a09cd78e7c7548cd46a28b6e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a99ecf057695700cbf22cc7abd9ae2895"><td class="memItemLeft" align="right" valign="top">Eigen::Ref&lt; const Eigen::VectorXd &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1Dynamics.html#a99ecf057695700cbf22cc7abd9ae2895">getCovariance</a> ()</td></tr>
+<tr class="memdesc:a99ecf057695700cbf22cc7abd9ae2895"><td class="mdescLeft">&#160;</td><td class="mdescRight">getCovariance access the covariance <code>Eigen::VectorXd</code> associated to the variables described by this dynamics.  <a href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1Dynamics.html#a99ecf057695700cbf22cc7abd9ae2895">More...</a><br /></td></tr>
+<tr class="separator:a99ecf057695700cbf22cc7abd9ae2895"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad453bd6e5df4416c22d552a8a64294de"><td class="memItemLeft" align="right" valign="top">Eigen::Ref&lt; const Eigen::VectorXd &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1Dynamics.html#ad453bd6e5df4416c22d552a8a64294de">getInitialStateCovariance</a> ()</td></tr>
+<tr class="memdesc:ad453bd6e5df4416c22d552a8a64294de"><td class="mdescLeft">&#160;</td><td class="mdescRight">getInitialStateCovariance access the covariance <code>Eigen::VectorXd</code> associated to the initial state.  <a href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1Dynamics.html#ad453bd6e5df4416c22d552a8a64294de">More...</a><br /></td></tr>
+<tr class="separator:ad453bd6e5df4416c22d552a8a64294de"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa21073a31262bbbc161f0f36130e8273"><td class="memItemLeft" align="right" valign="top"><a id="aa21073a31262bbbc161f0f36130e8273"></a>
+virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1Dynamics.html#aa21073a31262bbbc161f0f36130e8273">~Dynamics</a> ()=default</td></tr>
+<tr class="memdesc:aa21073a31262bbbc161f0f36130e8273"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor. <br /></td></tr>
+<tr class="separator:aa21073a31262bbbc161f0f36130e8273"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
+Protected Member Functions</h2></td></tr>
+<tr class="memitem:abc39fb8f0f226dd96397b79e4df86010"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1Dynamics.html#abc39fb8f0f226dd96397b79e4df86010">checkStateVariableHandler</a> ()</td></tr>
+<tr class="memdesc:abc39fb8f0f226dd96397b79e4df86010"><td class="mdescLeft">&#160;</td><td class="mdescRight">Controls whether the variable handler contains the variables on which the dynamics depend.  <a href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1Dynamics.html#abc39fb8f0f226dd96397b79e4df86010">More...</a><br /></td></tr>
+<tr class="separator:abc39fb8f0f226dd96397b79e4df86010"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
+Protected Attributes</h2></td></tr>
+<tr class="memitem:a6f6ab82393f65792c50a2f267e2d2235"><td class="memItemLeft" align="right" valign="top"><a id="a6f6ab82393f65792c50a2f267e2d2235"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1Dynamics.html#a6f6ab82393f65792c50a2f267e2d2235">m_size</a></td></tr>
+<tr class="memdesc:a6f6ab82393f65792c50a2f267e2d2235"><td class="mdescLeft">&#160;</td><td class="mdescRight">Size of the variable associate to the <a class="el" href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1Dynamics.html" title="The class Dynamics represents a base class describing a generic model composing the ukf process model...">Dynamics</a> object. <br /></td></tr>
+<tr class="separator:a6f6ab82393f65792c50a2f267e2d2235"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af79b12fb9a01f2eb05db0c59a639bad9"><td class="memItemLeft" align="right" valign="top"><a id="af79b12fb9a01f2eb05db0c59a639bad9"></a>
+Eigen::VectorXd&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1Dynamics.html#af79b12fb9a01f2eb05db0c59a639bad9">m_updatedVariable</a></td></tr>
+<tr class="memdesc:af79b12fb9a01f2eb05db0c59a639bad9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updated variable computed using the dynamic model. <br /></td></tr>
+<tr class="separator:af79b12fb9a01f2eb05db0c59a639bad9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acbab99c51da6ecc85731da9e410a943b"><td class="memItemLeft" align="right" valign="top"><a id="acbab99c51da6ecc85731da9e410a943b"></a>
+std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1Dynamics.html#acbab99c51da6ecc85731da9e410a943b">m_description</a> {&quot;Generic <a class="el" href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1Dynamics.html">Dynamics</a> Element&quot;}</td></tr>
+<tr class="memdesc:acbab99c51da6ecc85731da9e410a943b"><td class="mdescLeft">&#160;</td><td class="mdescRight">String describing the type of the dynamics. <br /></td></tr>
+<tr class="separator:acbab99c51da6ecc85731da9e410a943b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adda3fb21d2afc618efa3b5da736f8a65"><td class="memItemLeft" align="right" valign="top"><a id="adda3fb21d2afc618efa3b5da736f8a65"></a>
+Eigen::VectorXd&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1Dynamics.html#adda3fb21d2afc618efa3b5da736f8a65">m_covariances</a></td></tr>
+<tr class="memdesc:adda3fb21d2afc618efa3b5da736f8a65"><td class="mdescLeft">&#160;</td><td class="mdescRight">Vector of covariances. <br /></td></tr>
+<tr class="separator:adda3fb21d2afc618efa3b5da736f8a65"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a57fe02624c1ae50c1d839b6ad0e67d8a"><td class="memItemLeft" align="right" valign="top"><a id="a57fe02624c1ae50c1d839b6ad0e67d8a"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1Dynamics.html#a57fe02624c1ae50c1d839b6ad0e67d8a">m_isInitialized</a> {false}</td></tr>
+<tr class="memdesc:a57fe02624c1ae50c1d839b6ad0e67d8a"><td class="mdescLeft">&#160;</td><td class="mdescRight">True if the dynamics has been initialized. <br /></td></tr>
+<tr class="separator:a57fe02624c1ae50c1d839b6ad0e67d8a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac80148fa7320566717a83ca303a40057"><td class="memItemLeft" align="right" valign="top"><a id="ac80148fa7320566717a83ca303a40057"></a>
+Eigen::VectorXd&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1Dynamics.html#ac80148fa7320566717a83ca303a40057">m_initialCovariances</a></td></tr>
+<tr class="memdesc:ac80148fa7320566717a83ca303a40057"><td class="mdescLeft">&#160;</td><td class="mdescRight">Vector of initial covariances. <br /></td></tr>
+<tr class="separator:ac80148fa7320566717a83ca303a40057"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>The class <a class="el" href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1Dynamics.html" title="The class Dynamics represents a base class describing a generic model composing the ukf process model...">Dynamics</a> represents a base class describing a generic model composing the ukf process model or the ukf measurement model. </p>
+<p>The <a class="el" href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1Dynamics.html" title="The class Dynamics represents a base class describing a generic model composing the ukf process model...">Dynamics</a> object is created from a parameter handler which specifies the name of the variable described by the dynamics object, the covariances associated to the variable, the initial covariance, the <a class="el" href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1Dynamics.html" title="The class Dynamics represents a base class describing a generic model composing the ukf process model...">Dynamics</a> model which specifies which implementation of this class will be used. The model of the <a class="el" href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1Dynamics.html" title="The class Dynamics represents a base class describing a generic model composing the ukf process model...">Dynamics</a> object depends on the current state and an input object which need to be set before calling the update method. </p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="abc39fb8f0f226dd96397b79e4df86010"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abc39fb8f0f226dd96397b79e4df86010">&#9670;&nbsp;</a></span>checkStateVariableHandler()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Dynamics::checkStateVariableHandler </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Controls whether the variable handler contains the variables on which the dynamics depend. </p>
+<dl class="section return"><dt>Returns</dt><dd>True in case all the dependencies are contained in the variable handler, false otherwise. </dd></dl>
+
+<p>Reimplemented in <a class="el" href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1MotorCurrentMeasurementDynamics.html#a08598584accdb194d3739ccc491901e8">BipedalLocomotion::Estimators::RobotDynamicsEstimator::MotorCurrentMeasurementDynamics</a>, <a class="el" href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1JointVelocityStateDynamics.html#a7adeeb799406f961fe0726f95de452fb">BipedalLocomotion::Estimators::RobotDynamicsEstimator::JointVelocityStateDynamics</a>, <a class="el" href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1GyroscopeMeasurementDynamics.html#ac94fa671ce2b4fcbb999fe448027f2a3">BipedalLocomotion::Estimators::RobotDynamicsEstimator::GyroscopeMeasurementDynamics</a>, and <a class="el" href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1AccelerometerMeasurementDynamics.html#a101828f13c55b3a7a55ce17f172bc8fb">BipedalLocomotion::Estimators::RobotDynamicsEstimator::AccelerometerMeasurementDynamics</a>.</p>
+
+</div>
+</div>
+<a id="af1764a71012ed52f3afb3d165d91ce68"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af1764a71012ed52f3afb3d165d91ce68">&#9670;&nbsp;</a></span>initialize()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Dynamics::initialize </td>
+          <td>(</td>
+          <td class="paramtype">std::weak_ptr&lt; const <a class="el" href="classBipedalLocomotion_1_1ParametersHandler_1_1IParametersHandler.html">ParametersHandler::IParametersHandler</a> &gt;&#160;</td>
+          <td class="paramname"><em>paramHandler</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>name</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Initialize the task. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">paramHandler</td><td>pointer to the parameters handler. </td></tr>
+    <tr><td class="paramname">name</td><td>name of the dynamics. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>True in case of success, false otherwise. </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">paramHandler</td><td>paramHandler* </td></tr>
+    <tr><td class="paramname">name</td><td>name* </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Reimplemented in <a class="el" href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1ZeroVelocityStateDynamics.html#af676658cb80306ca2b023fa17e0743d3">BipedalLocomotion::Estimators::RobotDynamicsEstimator::ZeroVelocityStateDynamics</a>, <a class="el" href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1MotorCurrentMeasurementDynamics.html#a338230b5fe216786bbd35ffbaf54e45f">BipedalLocomotion::Estimators::RobotDynamicsEstimator::MotorCurrentMeasurementDynamics</a>, <a class="el" href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1JointVelocityStateDynamics.html#aaf2fd96d48d133218dea475d5ccc3bc7">BipedalLocomotion::Estimators::RobotDynamicsEstimator::JointVelocityStateDynamics</a>, <a class="el" href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1GyroscopeMeasurementDynamics.html#a3a0dc00a846702c36fd358788d1f9ecd">BipedalLocomotion::Estimators::RobotDynamicsEstimator::GyroscopeMeasurementDynamics</a>, <a class="el" href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1ExternalContactStateDynamics.html#a2c418da67c204ae19df94b78618bf7f3">BipedalLocomotion::Estimators::RobotDynamicsEstimator::ExternalContactStateDynamics</a>, <a class="el" href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1ConstantMeasurementModel.html#aee2d7c0b10a99cfd28ac877234f55972">BipedalLocomotion::Estimators::RobotDynamicsEstimator::ConstantMeasurementModel</a>, and <a class="el" href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1AccelerometerMeasurementDynamics.html#ad962443fe4ccbee6e0d9f92eeb371185">BipedalLocomotion::Estimators::RobotDynamicsEstimator::AccelerometerMeasurementDynamics</a>.</p>
+
+</div>
+</div>
+<a id="a3987a865a6e3d4c852f8d89b7d430257"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3987a865a6e3d4c852f8d89b7d430257">&#9670;&nbsp;</a></span>finalize()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Dynamics::finalize </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classBipedalLocomotion_1_1System_1_1VariablesHandler.html">System::VariablesHandler</a> &amp;&#160;</td>
+          <td class="paramname"><em>handler</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Finalize the <a class="el" href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1Dynamics.html" title="The class Dynamics represents a base class describing a generic model composing the ukf process model...">Dynamics</a>. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">handler</td><td>object describing the variables in the vector for which all the dynamics are defined. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section note"><dt>Note</dt><dd>You should call this method after you add ALL the dynamics to the variable handler. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>true in case of success, false otherwise. </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">handler</td><td>stateVariableHandler* </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Reimplemented in <a class="el" href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1ZeroVelocityStateDynamics.html#ad5544ce145a444d8c0871869d52a33e0">BipedalLocomotion::Estimators::RobotDynamicsEstimator::ZeroVelocityStateDynamics</a>, <a class="el" href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1JointVelocityStateDynamics.html#af6bbc581aba2ab3508ffd47b24becd78">BipedalLocomotion::Estimators::RobotDynamicsEstimator::JointVelocityStateDynamics</a>, <a class="el" href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1GyroscopeMeasurementDynamics.html#ae6eb978878989961b83885831d2e6648">BipedalLocomotion::Estimators::RobotDynamicsEstimator::GyroscopeMeasurementDynamics</a>, <a class="el" href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1ExternalContactStateDynamics.html#a829781b060eb4ce2f0128f5eaf44f029">BipedalLocomotion::Estimators::RobotDynamicsEstimator::ExternalContactStateDynamics</a>, <a class="el" href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1ConstantMeasurementModel.html#a09c5d1883e2a7bd6642c002eaedbcc4a">BipedalLocomotion::Estimators::RobotDynamicsEstimator::ConstantMeasurementModel</a>, <a class="el" href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1AccelerometerMeasurementDynamics.html#aef3f707d1e8fd37079c8fa506012e84c">BipedalLocomotion::Estimators::RobotDynamicsEstimator::AccelerometerMeasurementDynamics</a>, and <a class="el" href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1MotorCurrentMeasurementDynamics.html#abbc64a8c7a6f23faa19a0e0d0110562d">BipedalLocomotion::Estimators::RobotDynamicsEstimator::MotorCurrentMeasurementDynamics</a>.</p>
+
+</div>
+</div>
+<a id="ab62eebddbc6fbdb11a61e6fe5a451740"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab62eebddbc6fbdb11a61e6fe5a451740">&#9670;&nbsp;</a></span>setSubModels()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Dynamics::setSubModels </td>
+          <td>(</td>
+          <td class="paramtype">const std::vector&lt; <a class="el" href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1SubModel.html">SubModel</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>subModelList</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::vector&lt; std::shared_ptr&lt; <a class="el" href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1KinDynWrapper.html">KinDynWrapper</a> &gt;&gt; &amp;&#160;</td>
+          <td class="paramname"><em>kinDynWrapperList</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Set the <a class="el" href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1KinDynWrapper.html" title="KinDynWrapper is a concrete class and implements a wrapper of the KinDynComputation class from iDynTr...">KinDynWrapper</a> object. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">subModelList</td><td>list of <a class="el" href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1SubModel.html" title="SubModel is a concrete class describing the sub-model object, its model, the list of sensors and the ...">SubModel</a> objects </td></tr>
+    <tr><td class="paramname">kinDynWrapperList</td><td>list of pointers to <a class="el" href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1KinDynWrapper.html" title="KinDynWrapper is a concrete class and implements a wrapper of the KinDynComputation class from iDynTr...">KinDynWrapper</a> objects. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>True in case of success, false otherwise. </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">subModelList</td><td>subModelList* </td></tr>
+    <tr><td class="paramname">kinDynWrapperList</td><td>kinDynWrapperList* </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Reimplemented in <a class="el" href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1ZeroVelocityStateDynamics.html#a3ff27c086b4a7ad86176d5d3bb508664">BipedalLocomotion::Estimators::RobotDynamicsEstimator::ZeroVelocityStateDynamics</a>, <a class="el" href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1MotorCurrentMeasurementDynamics.html#a80dca8690f6c780adcc692ad81b05df1">BipedalLocomotion::Estimators::RobotDynamicsEstimator::MotorCurrentMeasurementDynamics</a>, <a class="el" href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1JointVelocityStateDynamics.html#ab264380260105b177da374166e925075">BipedalLocomotion::Estimators::RobotDynamicsEstimator::JointVelocityStateDynamics</a>, <a class="el" href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1GyroscopeMeasurementDynamics.html#a868e63b7edb2c3416613f722ca8d2f12">BipedalLocomotion::Estimators::RobotDynamicsEstimator::GyroscopeMeasurementDynamics</a>, <a class="el" href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1ExternalContactStateDynamics.html#a16c9b8d1335e42c37c458f7cc5b00418">BipedalLocomotion::Estimators::RobotDynamicsEstimator::ExternalContactStateDynamics</a>, <a class="el" href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1ConstantMeasurementModel.html#a553453efa7e0372872ff475029c7921f">BipedalLocomotion::Estimators::RobotDynamicsEstimator::ConstantMeasurementModel</a>, and <a class="el" href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1AccelerometerMeasurementDynamics.html#a59ee50a8a1cac780673603b5aee1f294">BipedalLocomotion::Estimators::RobotDynamicsEstimator::AccelerometerMeasurementDynamics</a>.</p>
+
+</div>
+</div>
+<a id="aa875285893b41e182f1c9202f1bacbea"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa875285893b41e182f1c9202f1bacbea">&#9670;&nbsp;</a></span>update()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Dynamics::update </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Update the dynamics of the variable. </p>
+<dl class="section return"><dt>Returns</dt><dd>True in case of success, false otherwise. </dd></dl>
+
+<p>Reimplemented in <a class="el" href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1ZeroVelocityStateDynamics.html#a2605983244b8558846d32ef39f63c558">BipedalLocomotion::Estimators::RobotDynamicsEstimator::ZeroVelocityStateDynamics</a>, <a class="el" href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1MotorCurrentMeasurementDynamics.html#a964849eb4bbfafcf83dc08871de91539">BipedalLocomotion::Estimators::RobotDynamicsEstimator::MotorCurrentMeasurementDynamics</a>, <a class="el" href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1JointVelocityStateDynamics.html#a42904d91c55d3d0ddf0e00389d632485">BipedalLocomotion::Estimators::RobotDynamicsEstimator::JointVelocityStateDynamics</a>, <a class="el" href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1GyroscopeMeasurementDynamics.html#a11ea2b1a7f5e305afea1cced7dd225c9">BipedalLocomotion::Estimators::RobotDynamicsEstimator::GyroscopeMeasurementDynamics</a>, <a class="el" href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1ExternalContactStateDynamics.html#a5daeecd8f62fe0abdc77ad1f1b86e4d2">BipedalLocomotion::Estimators::RobotDynamicsEstimator::ExternalContactStateDynamics</a>, <a class="el" href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1ConstantMeasurementModel.html#aa98d3a777997261624ad92ddd0496f64">BipedalLocomotion::Estimators::RobotDynamicsEstimator::ConstantMeasurementModel</a>, and <a class="el" href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1AccelerometerMeasurementDynamics.html#aac83a55f7a01a6620da30a479894a4a6">BipedalLocomotion::Estimators::RobotDynamicsEstimator::AccelerometerMeasurementDynamics</a>.</p>
+
+</div>
+</div>
+<a id="a53c6c1743864d7647328f7c5fc240953"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a53c6c1743864d7647328f7c5fc240953">&#9670;&nbsp;</a></span>getUpdatedVariable()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Eigen::Ref&lt; const Eigen::VectorXd &gt; Dynamics::getUpdatedVariable </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get the next value m_updatedVariable. </p>
+<dl class="section return"><dt>Returns</dt><dd>a const reference to the next variable value. </dd></dl>
+
+</div>
+</div>
+<a id="a3444291ead617a209d123b60ff16af49"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3444291ead617a209d123b60ff16af49">&#9670;&nbsp;</a></span>size()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Dynamics::size </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get the size of the state. </p>
+<dl class="section return"><dt>Returns</dt><dd>the size of the state. </dd></dl>
+
+</div>
+</div>
+<a id="a3874e314d326424d9f9514e218badb86"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3874e314d326424d9f9514e218badb86">&#9670;&nbsp;</a></span>setState()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void BipedalLocomotion::Estimators::RobotDynamicsEstimator::Dynamics::setState </td>
+          <td>(</td>
+          <td class="paramtype">const Eigen::Ref&lt; const Eigen::VectorXd &gt;&#160;</td>
+          <td class="paramname"><em>ukfState</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Set the state of the ukf needed to update the dynamics. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ukfState</td><td>reference to the ukf state. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Implemented in <a class="el" href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1ZeroVelocityStateDynamics.html#aa0e73c0e6df47b44639e12bdaddfc725">BipedalLocomotion::Estimators::RobotDynamicsEstimator::ZeroVelocityStateDynamics</a>, <a class="el" href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1MotorCurrentMeasurementDynamics.html#ab03a2760cdbe7fd5f2095f4415f90b6f">BipedalLocomotion::Estimators::RobotDynamicsEstimator::MotorCurrentMeasurementDynamics</a>, <a class="el" href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1JointVelocityStateDynamics.html#aee5a3dcff4b4921548853b4e80b9fe86">BipedalLocomotion::Estimators::RobotDynamicsEstimator::JointVelocityStateDynamics</a>, <a class="el" href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1GyroscopeMeasurementDynamics.html#a46d021b5133041f9a29575969ad91e17">BipedalLocomotion::Estimators::RobotDynamicsEstimator::GyroscopeMeasurementDynamics</a>, <a class="el" href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1ExternalContactStateDynamics.html#aa8130761711d04d1e16ad904cfe06479">BipedalLocomotion::Estimators::RobotDynamicsEstimator::ExternalContactStateDynamics</a>, <a class="el" href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1ConstantMeasurementModel.html#adcbe625ea8d64fe7ea12618198d5bf8a">BipedalLocomotion::Estimators::RobotDynamicsEstimator::ConstantMeasurementModel</a>, and <a class="el" href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1AccelerometerMeasurementDynamics.html#a9ea35db69e1605d40708c6dd3368f2bf">BipedalLocomotion::Estimators::RobotDynamicsEstimator::AccelerometerMeasurementDynamics</a>.</p>
+
+</div>
+</div>
+<a id="a53c4861a09cd78e7c7548cd46a28b6e3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a53c4861a09cd78e7c7548cd46a28b6e3">&#9670;&nbsp;</a></span>setInput()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void BipedalLocomotion::Estimators::RobotDynamicsEstimator::Dynamics::setInput </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1UKFInput.html">UKFInput</a> &amp;&#160;</td>
+          <td class="paramname"><em>ukfInput</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Set a <code><a class="el" href="structBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1UKFInput.html" title="The UKFInput struct represents the input of the ukf needed to update the dynamics.">UKFInput</a></code> object. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ukfInput</td><td>reference to the <a class="el" href="structBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1UKFInput.html" title="The UKFInput struct represents the input of the ukf needed to update the dynamics.">UKFInput</a> struct. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Implemented in <a class="el" href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1ZeroVelocityStateDynamics.html#adf74cd12317c55b8f0baf82b1eac501f">BipedalLocomotion::Estimators::RobotDynamicsEstimator::ZeroVelocityStateDynamics</a>, <a class="el" href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1MotorCurrentMeasurementDynamics.html#a109527c76a5981586b375067fd47d168">BipedalLocomotion::Estimators::RobotDynamicsEstimator::MotorCurrentMeasurementDynamics</a>, <a class="el" href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1JointVelocityStateDynamics.html#a6d7158ab61702c3c21d7d9079c6c4712">BipedalLocomotion::Estimators::RobotDynamicsEstimator::JointVelocityStateDynamics</a>, <a class="el" href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1GyroscopeMeasurementDynamics.html#a607541a61a5a73d8c0cd6f49c43b2dbd">BipedalLocomotion::Estimators::RobotDynamicsEstimator::GyroscopeMeasurementDynamics</a>, <a class="el" href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1ExternalContactStateDynamics.html#adf6f98b5ed873a0c00ed8ff37787a623">BipedalLocomotion::Estimators::RobotDynamicsEstimator::ExternalContactStateDynamics</a>, <a class="el" href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1ConstantMeasurementModel.html#a347786970c88d82054d1dbeda24e8050">BipedalLocomotion::Estimators::RobotDynamicsEstimator::ConstantMeasurementModel</a>, and <a class="el" href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1AccelerometerMeasurementDynamics.html#a6a6b5287ed77a89885d16e0e792b7267">BipedalLocomotion::Estimators::RobotDynamicsEstimator::AccelerometerMeasurementDynamics</a>.</p>
+
+</div>
+</div>
+<a id="a99ecf057695700cbf22cc7abd9ae2895"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a99ecf057695700cbf22cc7abd9ae2895">&#9670;&nbsp;</a></span>getCovariance()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Eigen::Ref&lt; const Eigen::VectorXd &gt; Dynamics::getCovariance </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>getCovariance access the covariance <code>Eigen::VectorXd</code> associated to the variables described by this dynamics. </p>
+<dl class="section return"><dt>Returns</dt><dd>the vector of covariances. </dd></dl>
+
+</div>
+</div>
+<a id="ad453bd6e5df4416c22d552a8a64294de"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad453bd6e5df4416c22d552a8a64294de">&#9670;&nbsp;</a></span>getInitialStateCovariance()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Eigen::Ref&lt; const Eigen::VectorXd &gt; Dynamics::getInitialStateCovariance </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>getInitialStateCovariance access the covariance <code>Eigen::VectorXd</code> associated to the initial state. </p>
+<dl class="section return"><dt>Returns</dt><dd>the vector of covariances. </dd></dl>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following files:<ul>
+<li>Estimators/include/BipedalLocomotion/RobotDynamicsEstimator/<a class="el" href="Dynamics_8h.html">Dynamics.h</a></li>
+<li>Estimators/src/<a class="el" href="Dynamics_8cpp.html">Dynamics.cpp</a></li>
+</ul>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- Doxygen custom footer -->
+<div id="nav-path" class="navpath">
+  <ul>
+    <li class="footer">
+      <a href="https://github.com/gbionics/bipedal-locomotion-framework">GitHub</a> &bull;
+      <a href="https://gbionics.ai/">Generative Bionics</a> &bull;
+      Licensed under <a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause "New" or "Revised" License</a> &bull;
+      Generated by <a href="https://www.doxygen.org/index.html">Doxygen</a> 1.9.1
+    </li>
+  </ul>
+</div>
 </body>
 </html>

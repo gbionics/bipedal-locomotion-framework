@@ -1,419 +1,585 @@
-<!DOCTYPE html>
-<html lang="en">
+<!-- HTML header for doxygen 1.9.1 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-  <meta charset="UTF-8" />
-  <title>BipedalLocomotion::Estimators::RobotDynamicsEstimator::UkfState class | bipedal locomotion framework master</title>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
-  <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
-  <link rel="icon" href="favicon-dark.png" type="image/png" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#22272e" />
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>bipedal locomotion framework: BipedalLocomotion::Estimators::RobotDynamicsEstimator::UkfState Class Reference</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js", "TeX/AMSmath.js", "TeX/AMSsymbols.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+});
+</script>
+<script type="text/javascript" async="async" src="https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only-darkmode-toggle.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="doxygen-awesome-darkmode-toggle.js"></script>
+<script type="text/javascript" src="doxygen-awesome-fragment-copy-button.js"></script>
+<script type="text/javascript" src="doxygen-awesome-interactive-toc.js"></script>
+<script type="text/javascript" src="doxygen-awesome-paragraph-link.js"></script>
+<script type="text/javascript" src="doxygen-awesome-tabs.js"></script>
+<script type="text/javascript">
+    DoxygenAwesomeDarkModeToggle.init()
+    DoxygenAwesomeFragmentCopyButton.init()
+    DoxygenAwesomeInteractiveToc.init()
+    DoxygenAwesomeParagraphLink.init()
+    DoxygenAwesomeTabs.init()
+</script>
 </head>
 <body>
-<header><nav id="navigation">
-  <div class="m-container">
-    <div class="m-row">
-      <span id="m-navbar-brand" class="m-col-t-8 m-col-m-none m-left-m">
-        <a href="./index.html">bipedal locomotion framework</a> <span class="m-breadcrumb">|</span> <a href="index.html" class="m-thin">master</a>
-      </span>
-      <div class="m-col-t-4 m-hide-m m-text-right m-nopadr">
-        <a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
-          <path id="m-doc-search-icon-path" d="m6 0c-3.31 0-6 2.69-6 6 0 3.31 2.69 6 6 6 1.49 0 2.85-0.541 3.89-1.44-0.0164 0.338 0.147 0.759 0.5 1.15l3.22 3.79c0.552 0.614 1.45 0.665 2 0.115 0.55-0.55 0.499-1.45-0.115-2l-3.79-3.22c-0.392-0.353-0.812-0.515-1.15-0.5 0.895-1.05 1.44-2.41 1.44-3.89 0-3.31-2.69-6-6-6zm0 1.56a4.44 4.44 0 0 1 4.44 4.44 4.44 4.44 0 0 1-4.44 4.44 4.44 4.44 0 0 1-4.44-4.44 4.44 4.44 0 0 1 4.44-4.44z"/>
-        </svg></a>
-        <a id="m-navbar-show" href="#navigation" title="Show navigation"></a>
-        <a id="m-navbar-hide" href="#" title="Hide navigation"></a>
-      </div>
-      <div id="m-navbar-collapse" class="m-col-t-12 m-show-m m-col-m-none m-right-m">
-        <div class="m-row">
-          <ol class="m-col-t-6 m-col-m-none">
-            <li><a href="pages.html">Pages</a></li>
-            <li><a href="annotated.html">Classes</a></li>
-            <li><a href="files.html">Files</a></li>
-          </ol>
-          <ol class="m-col-t-6 m-col-m-none" start="4">
-            <li>
-              <a href="pages.html">Versions</a>
-              <ol>
-                <li><a href="./index.html">Master</a></li>
-                <li><a href="./v0.19.0/index.html">v0.19.0</a></li>
-                <li><a href="./v0.21.1/index.html">v0.21.1</a></li>
-                <li><a href="./v0.18.0/index.html">v0.18.0</a></li>
-              </ol>
-            </li>
-            <li>
-              <a href="pages.html">Contacts</a>
-              <ol>
-                <li><a href="https://github.com/ami-iit/bipedal-locomotion-framework">GitHub</a></li>
-                <li><a href="https://www.iit.it/web/ami/">Lab website</a></li>
-              </ol>
-            </li>
-            <li class="m-show-m"><a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
-              <use href="#m-doc-search-icon-path" />
-            </svg></a></li>
-          </ol>
-        </div>
-      </div>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">bipedal locomotion framework
+   </div>
+   <div id="projectbrief">A suite of libraries for achieving bipedal locomotion on humanoid robots</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.9.1 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "search",false,'Search','.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',true,false,'search.php','Search');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
     </div>
   </div>
-</nav></header>
-<main><article>
-  <div class="m-container m-container-inflatable">
-    <div class="m-row">
-      <div class="m-col-l-10 m-push-l-1">
-        <h1>
-          <span class="m-breadcrumb"><a href="namespaceBipedalLocomotion.html">BipedalLocomotion</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespaceBipedalLocomotion_1_1Estimators.html">Estimators</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespaceBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator.html">RobotDynamicsEstimator</a>::<wbr/></span>UkfState <span class="m-thin">class</span>
-          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="UkfState_8h.html">&lt;BipedalLocomotion/RobotDynamicsEstimator/UkfState.h&gt;</a></div>
-        </h1>
-        <p><a href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1UkfState.html" class="m-doc">UkfState</a> is a concrete class that represents the State of the estimator.</p>
-        <nav class="m-block m-default">
-          <h3>Contents</h3>
-          <ul>
-            <li>
-              Reference
-              <ul>
-                <li><a href="#pub-static-methods">Public static functions</a></li>
-                <li><a href="#pub-methods">Public functions</a></li>
-              </ul>
-            </li>
-          </ul>
-        </nav>
-<p>The user should build the dynamic model of the state setting a variable handler describing the variables composing the state, the list of the dynamic model associated to each variable in the variable handler, and the matrix of covariances associated to the state. The user should set also a ukf input provider which provides the inputs needed to update the ukf process dynamics.</p>
-        <section id="pub-static-methods">
-          <h2><a href="#pub-static-methods">Public static functions</a></h2>
-          <dl class="m-doc">
-            <dt>
-              <span class="m-doc-wrap-bumper">static auto <a href="#a0283c7b89f9b98738c4020dab96b1d52" class="m-doc">build</a>(</span><span class="m-doc-wrap">std::weak_ptr&lt;const <a href="classBipedalLocomotion_1_1ParametersHandler_1_1IParametersHandler.html" class="m-doc">ParametersHandler::<wbr />IParametersHandler</a>&gt; handler,
-              std::shared_ptr&lt;iDynTree::KinDynComputations&gt; kinDynFullModel,
-              const std::vector&lt;<a href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1SubModel.html" class="m-doc">SubModel</a>&gt;&amp; subModelList,
-              const std::vector&lt;std::shared_ptr&lt;<a href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1KinDynWrapper.html" class="m-doc">KinDynWrapper</a>&gt;&gt;&amp; kinDynWrapperList) -&gt; std::unique_ptr&lt;<a href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1UkfState.html" class="m-doc">UkfState</a>&gt;</span>
-            </dt>
-            <dd>Build the ukf state model.</dd>
-          </dl>
-        </section>
-        <section id="pub-methods">
-          <h2><a href="#pub-methods">Public functions</a></h2>
-          <dl class="m-doc">
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#ab5cd1c40b576e35ad2c572275dbe8081" class="m-doc">initialize</a>(</span><span class="m-doc-wrap">std::weak_ptr&lt;const <a href="classBipedalLocomotion_1_1ParametersHandler_1_1IParametersHandler.html" class="m-doc">ParametersHandler::<wbr />IParametersHandler</a>&gt; handler) -&gt; bool</span>
-            </dt>
-            <dd>Initialize the ukf state model.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#acaa99e30db3ebecd16d362b179382970" class="m-doc">finalize</a>(</span><span class="m-doc-wrap">const <a href="classBipedalLocomotion_1_1System_1_1VariablesHandler.html" class="m-doc">System::<wbr />VariablesHandler</a>&amp; handler) -&gt; bool</span>
-            </dt>
-            <dd>Finalize the <a href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1UkfState.html" class="m-doc">UkfState</a>.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">void <a href="#aaa9989719bf69312f6a848980128cbc7" class="m-doc">setUkfInputProvider</a>(</span><span class="m-doc-wrap">std::shared_ptr&lt;const <a href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1UkfInputProvider.html" class="m-doc">UkfInputProvider</a>&gt; ukfInputProvider)</span>
-            </dt>
-            <dd>setUkfInputProvider set the provider for the ukf input.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a092c14e33f699e1736f46ee230fd0be0" class="m-doc">getStateVariableHandler</a>(</span><span class="m-doc-wrap">) const -&gt; const <a href="classBipedalLocomotion_1_1System_1_1VariablesHandler.html" class="m-doc">System::<wbr />VariablesHandler</a>&amp;</span>
-            </dt>
-            <dd>getStateVariableHandler access the <code><a href="classBipedalLocomotion_1_1System_1_1VariablesHandler.html" class="m-doc">System::<wbr />VariablesHandler</a></code> instance created during the initialization phase.</dd>
-            <dt id="a6f79631bd5ad504f12da14aa745e89dc">
-              <span class="m-doc-wrap-bumper">void <a href="#a6f79631bd5ad504f12da14aa745e89dc" class="m-doc-self">propagate</a>(</span><span class="m-doc-wrap">const Eigen::Ref&lt;const Eigen::MatrixXd&gt;&amp; currentStates,
-              Eigen::Ref&lt;Eigen::MatrixXd&gt; propagatedStates) <span class="m-label m-flat m-warning">override</span></span>
-            </dt>
-            <dd>propagate implements the prediction phase of the ukf</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#af9b71712323de1a13b8a3316ee76bf81" class="m-doc">getNoiseCovarianceMatrix</a>(</span><span class="m-doc-wrap">) -&gt; Eigen::MatrixXd <span class="m-label m-flat m-warning">override</span></span>
-            </dt>
-            <dd>getNoiseCovarianceMatrix access the <code>Eigen::MatrixXd</code> representing the process covariance matrix.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a83258f0f53f4b63bac2abaaa23b54342" class="m-doc">setProperty</a>(</span><span class="m-doc-wrap">const std::string&amp; property) -&gt; bool <span class="m-label m-flat m-warning">override</span></span>
-            </dt>
-            <dd>setProperty is not implemented.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a1bb99526b4040b76530e708affcc7150" class="m-doc">getStateDescription</a>(</span><span class="m-doc-wrap">) -&gt; bfl::VectorDescription <span class="m-label m-flat m-warning">override</span></span>
-            </dt>
-            <dd>getStateDescription access the <code>bfl::VectorDescription</code>.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a7c79bcd69b5724370564b2fd0205ebd8" class="m-doc">getStateSize</a>(</span><span class="m-doc-wrap">) -&gt; std::size_t</span>
-            </dt>
-            <dd>getStateSize access the length of the state vector.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#afe13301fd258e6ab636ac9e4a7b0ab62" class="m-doc">getInitialStateCovarianceMatrix</a>(</span><span class="m-doc-wrap">) const -&gt; Eigen::Ref&lt;const Eigen::MatrixXd&gt;</span>
-            </dt>
-            <dd>getInitialStateCovarianceMatrix access the <code>Eigen::MatrixXd</code> representing the initial state covariance matrix.</dd>
-          </dl>
-        </section>
-        <section>
-          <h2>Function documentation</h2>
-          <section class="m-doc-details" id="a0283c7b89f9b98738c4020dab96b1d52"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">static std::unique_ptr&lt;<a href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1UkfState.html" class="m-doc">UkfState</a>&gt; BipedalLocomotion::<wbr />Estimators::<wbr />RobotDynamicsEstimator::<wbr />UkfState::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a0283c7b89f9b98738c4020dab96b1d52" class="m-doc-self">build</a>(</span><span class="m-doc-wrap">std::weak_ptr&lt;const <a href="classBipedalLocomotion_1_1ParametersHandler_1_1IParametersHandler.html" class="m-doc">ParametersHandler::<wbr />IParametersHandler</a>&gt; handler,
-              std::shared_ptr&lt;iDynTree::KinDynComputations&gt; kinDynFullModel,
-              const std::vector&lt;<a href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1SubModel.html" class="m-doc">SubModel</a>&gt;&amp; subModelList,
-              const std::vector&lt;std::shared_ptr&lt;<a href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1KinDynWrapper.html" class="m-doc">KinDynWrapper</a>&gt;&gt;&amp; kinDynWrapperList)</span></span>
-            </h3>
-            <p>Build the ukf state model.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">handler</td>
-                  <td>pointer to the IParametersHandler interface.</td>
-                </tr>
-                <tr>
-                  <td>kinDynFullModel</td>
-                  <td></td>
-                </tr>
-                <tr>
-                  <td>subModelList</td>
-                  <td>a vector of pairs (<a href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1SubModel.html" class="m-doc">SubModel</a>, <a href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1KinDynWrapper.html" class="m-doc">KinDynWrapper</a>) that will be shared among all the dynamics.</td>
-                </tr>
-                <tr>
-                  <td>kinDynWrapperList</td>
-                  <td></td>
-                </tr>
-              </tbody>
-              <tfoot>
-                <tr>
-                  <th>Returns</th>
-                  <td>a std::unique_ptr to the <a href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1UkfState.html" class="m-doc">UkfState</a>. In case of issues, an empty <a href="classBipedalLocomotion_1_1System_1_1VariablesHandler.html" class="m-doc">BipedalLocomotion::<wbr />System::<wbr />VariablesHandler</a> and an invalid pointer will be returned.</td>
-                </tr>
-              </tfoot>
-            </table>
-<aside class="m-note m-info"><h4>Note</h4><p>the following parameters are required by the class</p><table class="m-table"><thead><tr><th>Parameter Name</th><th>Type</th><th>Description</th><th>Mandatory</th></tr></thead><tbody><tr><td><code>dT</code></td><td><code>double</code></td><td>Sampling time.</td><td>Yes</td></tr><tr><td><code>dynamics_list</code></td><td><code>vector&lt;string&gt;</code></td><td>List of dynamics composing the state model.</td><td>Yes</td></tr></tbody></table><p>For <strong>each</strong> dynamics listed in the parameter <code>dynamics_list</code> the user must specified all the parameters required by the dynamics itself but <code>dT</code> since is already specified in the parent group. Moreover the following parameters are required for each dynamics.</p><table class="m-table"><thead><tr><th>Group</th><th>Parameter Name</th><th>Type</th><th>Description</th><th>Mandatory</th></tr></thead><tbody><tr><td><code>DYNAMICS_NAME</code></td><td><code>name</code></td><td><code>string</code></td><td>String representing the name of the dynamics.</td><td>Yes</td></tr><tr><td><code>DYNAMICS_NAME</code></td><td><code>elements</code></td><td><code>std::vector&lt;string&gt;</code></td><td>Vector of strings representing the elements composing the specific dynamics.</td><td>No</td></tr><tr><td><code>DYNAMICS_NAME</code></td><td><code>covariance</code></td><td><code>std::vector&lt;double&gt;</code></td><td>Vector of double containing the covariance associated to each element.</td><td>Yes</td></tr><tr><td><code>DYNAMICS_NAME</code></td><td><code>dynamic_model</code></td><td><code>string</code></td><td>String representing the type of dynamics. The string should match the name of the C++ class.</td><td>Yes</td></tr><tr><td><code>DYNAMICS_NAME</code></td><td><code>friction_k0</code></td><td><code>std::vector&lt;double&gt;</code></td><td>Vector of double containing the coefficient k0 of the friction model of each element.</td><td>No</td></tr><tr><td><code>DYNAMICS_NAME</code></td><td><code>friction_k1</code></td><td><code>std::vector&lt;double&gt;</code></td><td>Vector of double containing the coefficient k1 of the friction model of each element.</td><td>No</td></tr><tr><td><code>DYNAMICS_NAME</code></td><td><code>friction_k2</code></td><td><code>std::vector&lt;double&gt;</code></td><td>Vector of double containing the coefficient k2 of the friction model of each element.</td><td>No</td></tr></tbody></table>
-<p><code>DYNAMICS_NAME</code> is a placeholder for the name of the dynamics contained in the <code>dynamics_list</code> list. <code>name</code> can contain only the following values (&quot;ds&quot;, &quot;tau_m&quot;, &quot;tau_F&quot;, &quot;*_ft_sensor&quot;, &quot;*_ft_sensor_bias&quot;, &quot;*_ft_acc_bias&quot;, &quot;*_ftgyro_bias&quot;).</p><p>The following <code>ini</code> file presents an example of the configuration that can be used to build the <a href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1UkfState.html" class="m-doc">UkfState</a>.</p></aside><pre class="m-code"><span class="c1"># UkfState.ini</span>
-
-<span class="na">dynamics_list                   (&quot;JOINT_VELOCITY&quot;, &quot;FRICTION_TORQUE&quot;, &quot;RIGHT_LEG_FT&quot;, &quot;RIGHT_FOOT_REAR_GYRO_BIAS&quot;)</span>
-
-<span class="k">[JOINT_VELOCITY]</span>
-<span class="na">name                            &quot;ds&quot;</span>
-<span class="na">elements                        (&quot;r_hip_pitch&quot;, &quot;r_hip_roll&quot;, &quot;r_hip_yaw&quot;, &quot;r_knee&quot;, &quot;r_ankle_pitch&quot;, &quot;r_ankle_roll&quot;)</span>
-<span class="na">covariance                      (1e-3, 1e-3, 1e-3, 1e-3, 1e-3, 1e-3)</span>
-<span class="na">dynamic_model                   &quot;JointVelocityDynamics&quot;</span>
-
-<span class="k">[FRICTION_TORQUE]</span>
-<span class="na">name                            &quot;tau_F&quot;</span>
-<span class="na">elements                        (&quot;r_hip_pitch&quot;, &quot;r_hip_roll&quot;, &quot;r_hip_yaw&quot;, &quot;r_knee&quot;, &quot;r_ankle_pitch&quot;, &quot;r_ankle_roll&quot;)</span>
-<span class="na">covariance                      (1e-2, 1e-2, 1e-2, 1e-2, 1e-2, 1e-1)</span>
-<span class="na">dynamic_model                   &quot;FrictionTorqueDynamics&quot;</span>
-<span class="na">friction_k0                     (9.106, 5.03, 4.93, 12.88, 14.34, 1.12)</span>
-<span class="na">friction_k1                     (200.0, 6.9, 200.0, 59.87, 200.0, 200.0)</span>
-<span class="na">friction_k2                     (1.767, 5.64, 0.27, 2.0, 3.0, 0.0)</span>
-
-<span class="k">[RIGHT_LEG_FT]</span>
-<span class="na">name                            &quot;r_leg_ft_sensor&quot;</span>
-<span class="na">elements                        (&quot;fx&quot;, &quot;fy&quot;, &quot;fz&quot;, &quot;mx&quot;, &quot;my&quot;, &quot;mz&quot;)</span>
-<span class="na">covariance                      (1e-3, 1e-3, 1e-3, 1e-4, 1e-4, 1e-4)</span>
-<span class="na">dynamic_model                   &quot;ZeroVelocityStateDynamics&quot;</span>
-
-<span class="k">[RIGHT_FOOT_REAR_GYRO_BIAS]</span>
-<span class="na">name                            &quot;r_foot_rear_ft_gyro_bias&quot;</span>
-<span class="na">elements                        (&quot;x&quot;, &quot;y&quot;, &quot;z&quot;)</span>
-<span class="na">covariance                      (8.2e-8, 1e-2, 9.3e-3)</span>
-<span class="na">dynamic_model                   &quot;ZeroVelocityStateDynamics&quot;</span></pre>
-          </div></section>
-          <section class="m-doc-details" id="ab5cd1c40b576e35ad2c572275dbe8081"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">bool BipedalLocomotion::<wbr />Estimators::<wbr />RobotDynamicsEstimator::<wbr />UkfState::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ab5cd1c40b576e35ad2c572275dbe8081" class="m-doc-self">initialize</a>(</span><span class="m-doc-wrap">std::weak_ptr&lt;const <a href="classBipedalLocomotion_1_1ParametersHandler_1_1IParametersHandler.html" class="m-doc">ParametersHandler::<wbr />IParametersHandler</a>&gt; handler)</span></span>
-            </h3>
-            <p>Initialize the ukf state model.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">handler</td>
-                  <td>pointer to the IParametersHandler interface.</td>
-                </tr>
-              </tbody>
-              <tfoot>
-                <tr>
-                  <th>Returns</th>
-                  <td>True in case of success, false otherwise.</td>
-                </tr>
-              </tfoot>
-            </table>
-<aside class="m-note m-info"><h4>Note</h4><p>the following parameters are required by the class</p><table class="m-table"><thead><tr><th>Parameter Name</th><th>Type</th><th>Description</th><th>Mandatory</th></tr></thead><tbody><tr><td><code>sampling_time</code></td><td><code>std::chrono::nanoseconds</code></td><td>Sampling time.</td><td>Yes</td></tr></tbody></table></aside>
-          </div></section>
-          <section class="m-doc-details" id="acaa99e30db3ebecd16d362b179382970"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">bool BipedalLocomotion::<wbr />Estimators::<wbr />RobotDynamicsEstimator::<wbr />UkfState::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#acaa99e30db3ebecd16d362b179382970" class="m-doc-self">finalize</a>(</span><span class="m-doc-wrap">const <a href="classBipedalLocomotion_1_1System_1_1VariablesHandler.html" class="m-doc">System::<wbr />VariablesHandler</a>&amp; handler)</span></span>
-            </h3>
-            <p>Finalize the <a href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1UkfState.html" class="m-doc">UkfState</a>.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">handler</td>
-                  <td>variable handler.</td>
-                </tr>
-              </tbody>
-              <tfoot>
-                <tr>
-                  <th>Returns</th>
-                  <td>true in case of success, false otherwise.</td>
-                </tr>
-              </tfoot>
-            </table>
-<aside class="m-note m-info"><h4>Note</h4><p>You should call this method after you initialize the <a href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1UkfState.html" class="m-doc">UkfState</a>.</p></aside>
-          </div></section>
-          <section class="m-doc-details" id="aaa9989719bf69312f6a848980128cbc7"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">void BipedalLocomotion::<wbr />Estimators::<wbr />RobotDynamicsEstimator::<wbr />UkfState::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aaa9989719bf69312f6a848980128cbc7" class="m-doc-self">setUkfInputProvider</a>(</span><span class="m-doc-wrap">std::shared_ptr&lt;const <a href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1UkfInputProvider.html" class="m-doc">UkfInputProvider</a>&gt; ukfInputProvider)</span></span>
-            </h3>
-            <p>setUkfInputProvider set the provider for the ukf input.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">ukfInputProvider</td>
-                  <td>a pointer to a structure containing the joint positions and the robot base pose, velocity and acceleration.</td>
-                </tr>
-              </tbody>
-            </table>
-          </div></section>
-          <section class="m-doc-details" id="a092c14e33f699e1736f46ee230fd0be0"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">const <a href="classBipedalLocomotion_1_1System_1_1VariablesHandler.html" class="m-doc">System::<wbr />VariablesHandler</a>&amp; BipedalLocomotion::<wbr />Estimators::<wbr />RobotDynamicsEstimator::<wbr />UkfState::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a092c14e33f699e1736f46ee230fd0be0" class="m-doc-self">getStateVariableHandler</a>(</span><span class="m-doc-wrap">) const</span></span>
-            </h3>
-            <p>getStateVariableHandler access the <code><a href="classBipedalLocomotion_1_1System_1_1VariablesHandler.html" class="m-doc">System::<wbr />VariablesHandler</a></code> instance created during the initialization phase.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <tfoot>
-                <tr>
-                  <th style="width: 1%">Returns</th>
-                  <td>the state variable handler containing all the state variables and their sizes and offsets.</td>
-                </tr>
-              </tfoot>
-            </table>
-          </div></section>
-          <section class="m-doc-details" id="af9b71712323de1a13b8a3316ee76bf81"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">Eigen::MatrixXd BipedalLocomotion::<wbr />Estimators::<wbr />RobotDynamicsEstimator::<wbr />UkfState::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#af9b71712323de1a13b8a3316ee76bf81" class="m-doc-self">getNoiseCovarianceMatrix</a>(</span><span class="m-doc-wrap">) <span class="m-label m-warning">override</span></span></span>
-            </h3>
-            <p>getNoiseCovarianceMatrix access the <code>Eigen::MatrixXd</code> representing the process covariance matrix.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <tfoot>
-                <tr>
-                  <th style="width: 1%">Returns</th>
-                  <td>the process noise covariance matrix.</td>
-                </tr>
-              </tfoot>
-            </table>
-          </div></section>
-          <section class="m-doc-details" id="a83258f0f53f4b63bac2abaaa23b54342"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">bool BipedalLocomotion::<wbr />Estimators::<wbr />RobotDynamicsEstimator::<wbr />UkfState::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a83258f0f53f4b63bac2abaaa23b54342" class="m-doc-self">setProperty</a>(</span><span class="m-doc-wrap">const std::string&amp; property) <span class="m-label m-warning">override</span></span></span>
-            </h3>
-            <p>setProperty is not implemented.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">property</td>
-                  <td>is a string.</td>
-                </tr>
-              </tbody>
-              <tfoot>
-                <tr>
-                  <th>Returns</th>
-                  <td>false as it is not implemented.</td>
-                </tr>
-              </tfoot>
-            </table>
-          </div></section>
-          <section class="m-doc-details" id="a1bb99526b4040b76530e708affcc7150"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">bfl::VectorDescription BipedalLocomotion::<wbr />Estimators::<wbr />RobotDynamicsEstimator::<wbr />UkfState::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a1bb99526b4040b76530e708affcc7150" class="m-doc-self">getStateDescription</a>(</span><span class="m-doc-wrap">) <span class="m-label m-warning">override</span></span></span>
-            </h3>
-            <p>getStateDescription access the <code>bfl::VectorDescription</code>.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <tfoot>
-                <tr>
-                  <th style="width: 1%">Returns</th>
-                  <td>the state vector description.</td>
-                </tr>
-              </tfoot>
-            </table>
-          </div></section>
-          <section class="m-doc-details" id="a7c79bcd69b5724370564b2fd0205ebd8"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">std::size_t BipedalLocomotion::<wbr />Estimators::<wbr />RobotDynamicsEstimator::<wbr />UkfState::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a7c79bcd69b5724370564b2fd0205ebd8" class="m-doc-self">getStateSize</a>(</span><span class="m-doc-wrap">)</span></span>
-            </h3>
-            <p>getStateSize access the length of the state vector.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <tfoot>
-                <tr>
-                  <th style="width: 1%">Returns</th>
-                  <td>the length of state vector.</td>
-                </tr>
-              </tfoot>
-            </table>
-          </div></section>
-          <section class="m-doc-details" id="afe13301fd258e6ab636ac9e4a7b0ab62"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">Eigen::Ref&lt;const Eigen::MatrixXd&gt; BipedalLocomotion::<wbr />Estimators::<wbr />RobotDynamicsEstimator::<wbr />UkfState::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#afe13301fd258e6ab636ac9e4a7b0ab62" class="m-doc-self">getInitialStateCovarianceMatrix</a>(</span><span class="m-doc-wrap">) const</span></span>
-            </h3>
-            <p>getInitialStateCovarianceMatrix access the <code>Eigen::MatrixXd</code> representing the initial state covariance matrix.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <tfoot>
-                <tr>
-                  <th style="width: 1%">Returns</th>
-                  <td>a Eigen reference to the Eigen Matrix covariance.</td>
-                </tr>
-              </tfoot>
-            </table>
-          </div></section>
-        </section>
-      </div>
-    </div>
-  </div>
-</article></main>
-<div class="m-doc-search" id="search">
-  <a href="#!" onclick="return hideSearch()"></a>
-  <div class="m-container">
-    <div class="m-row">
-      <div class="m-col-m-8 m-push-m-2">
-        <div class="m-doc-search-header m-text m-small">
-          <div><span class="m-label m-default">Tab</span> / <span class="m-label m-default">T</span> to search, <span class="m-label m-default">Esc</span> to close</div>
-          <div id="search-symbolcount">&hellip;</div>
-        </div>
-        <div class="m-doc-search-content">
-          <form>
-            <input type="search" name="q" id="search-input" placeholder="Loading &hellip;" disabled="disabled" autofocus="autofocus" autocomplete="off" spellcheck="false" />
-          </form>
-          <noscript class="m-text m-danger m-text-center">Unlike everything else in the docs, the search functionality <em>requires</em> JavaScript.</noscript>
-          <div id="search-help" class="m-text m-dim m-text-center">
-            <p class="m-noindent">Search for symbols, directories, files, pages or
-            modules. You can omit any prefix from the symbol or file path; adding a
-            <code>:</code> or <code>/</code> suffix lists all members of given symbol or
-            directory.</p>
-            <p class="m-noindent">Use <span class="m-label m-dim">&darr;</span>
-            / <span class="m-label m-dim">&uarr;</span> to navigate through the list,
-            <span class="m-label m-dim">Enter</span> to go.
-            <span class="m-label m-dim">Tab</span> autocompletes common prefix, you can
-            copy a link to the result using <span class="m-label m-dim">⌘</span>
-            <span class="m-label m-dim">L</span> while <span class="m-label m-dim">⌘</span>
-            <span class="m-label m-dim">M</span> produces a Markdown link.</p>
-          </div>
-          <div id="search-notfound" class="m-text m-warning m-text-center">Sorry, nothing was found.</div>
-          <ul id="search-results"></ul>
-        </div>
-      </div>
-    </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
   </div>
 </div>
-<script src="search-v2.js"></script>
-<script src="searchdata-v2.js" async="async"></script>
-<footer><nav>
-  <div class="m-container">
-    <div class="m-row">
-      <div class="m-col-l-10 m-push-l-1">
-        <p>bipedal-locomotion-framework documentation. Licensed under the <a href="https://www.gnu.org/licenses/lgpl-3.0.en.html">GNU Lesser General Public License v3.0</a>. Project maintained by the <a href="https://www.iit.it/web/ami/">Artificial and Mechanical Intelligence Lab</a>. Contact the team via <a href="https://github.com/ami-iit/bipedal-locomotion-framework/issues/new">GitHub</a>.<br />Generated by <a href="https://doxygen.org/">Doxygen</a> 1.9.1 and <a href="https://mcss.mosra.cz/">m.css</a>.
-      </div>
-    </div>
-  </div>
-</nav></footer>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(document).ready(function(){initNavTree('classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1UkfState.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-static-methods">Static Public Member Functions</a> &#124;
+<a href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1UkfState-members.html">List of all members</a>  </div>
+  <div class="headertitle">
+<div class="title">BipedalLocomotion::Estimators::RobotDynamicsEstimator::UkfState Class Reference</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p><a class="el" href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1UkfState.html" title="UkfState is a concrete class that represents the State of the estimator.">UkfState</a> is a concrete class that represents the State of the estimator.  
+ <a href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1UkfState.html#details">More...</a></p>
+
+<p><code>#include &lt;Estimators/include/BipedalLocomotion/RobotDynamicsEstimator/UkfState.h&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:ab5cd1c40b576e35ad2c572275dbe8081"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1UkfState.html#ab5cd1c40b576e35ad2c572275dbe8081">initialize</a> (std::weak_ptr&lt; const <a class="el" href="classBipedalLocomotion_1_1ParametersHandler_1_1IParametersHandler.html">ParametersHandler::IParametersHandler</a> &gt; handler)</td></tr>
+<tr class="memdesc:ab5cd1c40b576e35ad2c572275dbe8081"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize the ukf state model.  <a href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1UkfState.html#ab5cd1c40b576e35ad2c572275dbe8081">More...</a><br /></td></tr>
+<tr class="separator:ab5cd1c40b576e35ad2c572275dbe8081"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acaa99e30db3ebecd16d362b179382970"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1UkfState.html#acaa99e30db3ebecd16d362b179382970">finalize</a> (const <a class="el" href="classBipedalLocomotion_1_1System_1_1VariablesHandler.html">System::VariablesHandler</a> &amp;handler)</td></tr>
+<tr class="memdesc:acaa99e30db3ebecd16d362b179382970"><td class="mdescLeft">&#160;</td><td class="mdescRight">Finalize the <a class="el" href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1UkfState.html" title="UkfState is a concrete class that represents the State of the estimator.">UkfState</a>.  <a href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1UkfState.html#acaa99e30db3ebecd16d362b179382970">More...</a><br /></td></tr>
+<tr class="separator:acaa99e30db3ebecd16d362b179382970"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaa9989719bf69312f6a848980128cbc7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1UkfState.html#aaa9989719bf69312f6a848980128cbc7">setUkfInputProvider</a> (std::shared_ptr&lt; const <a class="el" href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1UkfInputProvider.html">UkfInputProvider</a> &gt; ukfInputProvider)</td></tr>
+<tr class="memdesc:aaa9989719bf69312f6a848980128cbc7"><td class="mdescLeft">&#160;</td><td class="mdescRight">setUkfInputProvider set the provider for the ukf input.  <a href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1UkfState.html#aaa9989719bf69312f6a848980128cbc7">More...</a><br /></td></tr>
+<tr class="separator:aaa9989719bf69312f6a848980128cbc7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a36f746c0787b0ad0341604dc3bdecd4c"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="classBipedalLocomotion_1_1System_1_1VariablesHandler.html">System::VariablesHandler</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1UkfState.html#a36f746c0787b0ad0341604dc3bdecd4c">getStateVariableHandler</a> () const</td></tr>
+<tr class="memdesc:a36f746c0787b0ad0341604dc3bdecd4c"><td class="mdescLeft">&#160;</td><td class="mdescRight">getStateVariableHandler access the <code><a class="el" href="classBipedalLocomotion_1_1System_1_1VariablesHandler.html" title="VariableHandler is useful to handle variables in an optimization problem, Their name,...">System::VariablesHandler</a></code> instance created during the initialization phase.  <a href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1UkfState.html#a36f746c0787b0ad0341604dc3bdecd4c">More...</a><br /></td></tr>
+<tr class="separator:a36f746c0787b0ad0341604dc3bdecd4c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6f79631bd5ad504f12da14aa745e89dc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1UkfState.html#a6f79631bd5ad504f12da14aa745e89dc">propagate</a> (const Eigen::Ref&lt; const Eigen::MatrixXd &gt; &amp;currentStates, Eigen::Ref&lt; Eigen::MatrixXd &gt; propagatedStates) override</td></tr>
+<tr class="memdesc:a6f79631bd5ad504f12da14aa745e89dc"><td class="mdescLeft">&#160;</td><td class="mdescRight">propagate implements the prediction phase of the ukf  <a href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1UkfState.html#a6f79631bd5ad504f12da14aa745e89dc">More...</a><br /></td></tr>
+<tr class="separator:a6f79631bd5ad504f12da14aa745e89dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af9b71712323de1a13b8a3316ee76bf81"><td class="memItemLeft" align="right" valign="top">Eigen::MatrixXd&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1UkfState.html#af9b71712323de1a13b8a3316ee76bf81">getNoiseCovarianceMatrix</a> () override</td></tr>
+<tr class="memdesc:af9b71712323de1a13b8a3316ee76bf81"><td class="mdescLeft">&#160;</td><td class="mdescRight">getNoiseCovarianceMatrix access the <code>Eigen::MatrixXd</code> representing the process covariance matrix.  <a href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1UkfState.html#af9b71712323de1a13b8a3316ee76bf81">More...</a><br /></td></tr>
+<tr class="separator:af9b71712323de1a13b8a3316ee76bf81"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a83258f0f53f4b63bac2abaaa23b54342"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1UkfState.html#a83258f0f53f4b63bac2abaaa23b54342">setProperty</a> (const std::string &amp;property) override</td></tr>
+<tr class="memdesc:a83258f0f53f4b63bac2abaaa23b54342"><td class="mdescLeft">&#160;</td><td class="mdescRight">setProperty is not implemented.  <a href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1UkfState.html#a83258f0f53f4b63bac2abaaa23b54342">More...</a><br /></td></tr>
+<tr class="separator:a83258f0f53f4b63bac2abaaa23b54342"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1bb99526b4040b76530e708affcc7150"><td class="memItemLeft" align="right" valign="top">bfl::VectorDescription&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1UkfState.html#a1bb99526b4040b76530e708affcc7150">getStateDescription</a> () override</td></tr>
+<tr class="memdesc:a1bb99526b4040b76530e708affcc7150"><td class="mdescLeft">&#160;</td><td class="mdescRight">getStateDescription access the <code>bfl::VectorDescription</code>.  <a href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1UkfState.html#a1bb99526b4040b76530e708affcc7150">More...</a><br /></td></tr>
+<tr class="separator:a1bb99526b4040b76530e708affcc7150"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7c79bcd69b5724370564b2fd0205ebd8"><td class="memItemLeft" align="right" valign="top">std::size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1UkfState.html#a7c79bcd69b5724370564b2fd0205ebd8">getStateSize</a> ()</td></tr>
+<tr class="memdesc:a7c79bcd69b5724370564b2fd0205ebd8"><td class="mdescLeft">&#160;</td><td class="mdescRight">getStateSize access the length of the state vector.  <a href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1UkfState.html#a7c79bcd69b5724370564b2fd0205ebd8">More...</a><br /></td></tr>
+<tr class="separator:a7c79bcd69b5724370564b2fd0205ebd8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a434ce9443f997739548cdd539ec56f3a"><td class="memItemLeft" align="right" valign="top">Eigen::Ref&lt; const Eigen::MatrixXd &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1UkfState.html#a434ce9443f997739548cdd539ec56f3a">getInitialStateCovarianceMatrix</a> () const</td></tr>
+<tr class="memdesc:a434ce9443f997739548cdd539ec56f3a"><td class="mdescLeft">&#160;</td><td class="mdescRight">getInitialStateCovarianceMatrix access the <code>Eigen::MatrixXd</code> representing the initial state covariance matrix.  <a href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1UkfState.html#a434ce9443f997739548cdd539ec56f3a">More...</a><br /></td></tr>
+<tr class="separator:a434ce9443f997739548cdd539ec56f3a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
+Static Public Member Functions</h2></td></tr>
+<tr class="memitem:ae5115b58bf29e9cfea8cdbd69d74b559"><td class="memItemLeft" align="right" valign="top">static std::unique_ptr&lt; <a class="el" href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1UkfState.html">UkfState</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1UkfState.html#ae5115b58bf29e9cfea8cdbd69d74b559">build</a> (std::weak_ptr&lt; const <a class="el" href="classBipedalLocomotion_1_1ParametersHandler_1_1IParametersHandler.html">ParametersHandler::IParametersHandler</a> &gt; handler, std::shared_ptr&lt; iDynTree::KinDynComputations &gt; kinDynFullModel, const std::vector&lt; <a class="el" href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1SubModel.html">SubModel</a> &gt; &amp;subModelList, const std::vector&lt; std::shared_ptr&lt; <a class="el" href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1KinDynWrapper.html">KinDynWrapper</a> &gt;&gt; &amp;kinDynWrapperList)</td></tr>
+<tr class="memdesc:ae5115b58bf29e9cfea8cdbd69d74b559"><td class="mdescLeft">&#160;</td><td class="mdescRight">Build the ukf state model.  <a href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1UkfState.html#ae5115b58bf29e9cfea8cdbd69d74b559">More...</a><br /></td></tr>
+<tr class="separator:ae5115b58bf29e9cfea8cdbd69d74b559"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p><a class="el" href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1UkfState.html" title="UkfState is a concrete class that represents the State of the estimator.">UkfState</a> is a concrete class that represents the State of the estimator. </p>
+<p>The user should build the dynamic model of the state setting a variable handler describing the variables composing the state, the list of the dynamic model associated to each variable in the variable handler, and the matrix of covariances associated to the state. The user should set also a ukf input provider which provides the inputs needed to update the ukf process dynamics. </p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="ae5115b58bf29e9cfea8cdbd69d74b559"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae5115b58bf29e9cfea8cdbd69d74b559">&#9670;&nbsp;</a></span>build()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::unique_ptr&lt; <a class="el" href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1UkfState.html">RDE::UkfState</a> &gt; BipedalLocomotion::Estimators::RobotDynamicsEstimator::UkfState::build </td>
+          <td>(</td>
+          <td class="paramtype">std::weak_ptr&lt; const <a class="el" href="classBipedalLocomotion_1_1ParametersHandler_1_1IParametersHandler.html">ParametersHandler::IParametersHandler</a> &gt;&#160;</td>
+          <td class="paramname"><em>handler</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::shared_ptr&lt; iDynTree::KinDynComputations &gt;&#160;</td>
+          <td class="paramname"><em>kinDynFullModel</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::vector&lt; <a class="el" href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1SubModel.html">SubModel</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>subModelList</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::vector&lt; std::shared_ptr&lt; <a class="el" href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1KinDynWrapper.html">KinDynWrapper</a> &gt;&gt; &amp;&#160;</td>
+          <td class="paramname"><em>kinDynWrapperList</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Build the ukf state model. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">kinDyn</td><td>a pointer to an iDynTree::KinDynComputations object that will be shared among all the dynamics. </td></tr>
+    <tr><td class="paramname">subModelList</td><td>a vector of pairs (<a class="el" href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1SubModel.html" title="SubModel is a concrete class describing the sub-model object, its model, the list of sensors and the ...">SubModel</a>, <a class="el" href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1KinDynWrapper.html" title="KinDynWrapper is a concrete class and implements a wrapper of the KinDynComputation class from iDynTr...">KinDynWrapper</a>) that will be shared among all the dynamics. </td></tr>
+    <tr><td class="paramname">handler</td><td>pointer to the IParametersHandler interface. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section note"><dt>Note</dt><dd>the following parameters are required by the class <table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadCenter">Parameter Name   </th><th class="markdownTableHeadCenter">Type   </th><th class="markdownTableHeadCenter">Description   </th><th class="markdownTableHeadCenter">Mandatory    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyCenter"><code>dT</code>   </td><td class="markdownTableBodyCenter"><code>double</code>   </td><td class="markdownTableBodyCenter">Sampling time.   </td><td class="markdownTableBodyCenter">Yes    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyCenter"><code>dynamics_list</code>   </td><td class="markdownTableBodyCenter"><code>vector&lt;string&gt;</code>   </td><td class="markdownTableBodyCenter">List of dynamics composing the state model.   </td><td class="markdownTableBodyCenter">Yes   </td></tr>
+</table>
+For <b>each</b> dynamics listed in the parameter <code>dynamics_list</code> the user must specified all the parameters required by the dynamics itself but <code>dT</code> since is already specified in the parent group. Moreover the following parameters are required for each dynamics. <table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadCenter">Group   </th><th class="markdownTableHeadCenter">Parameter Name   </th><th class="markdownTableHeadCenter">Type   </th><th class="markdownTableHeadCenter">Description   </th><th class="markdownTableHeadCenter">Mandatory    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyCenter"><code>DYNAMICS_NAME</code>   </td><td class="markdownTableBodyCenter"><code>name</code>   </td><td class="markdownTableBodyCenter"><code>string</code>   </td><td class="markdownTableBodyCenter">String representing the name of the dynamics.   </td><td class="markdownTableBodyCenter">Yes    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyCenter"><code>DYNAMICS_NAME</code>   </td><td class="markdownTableBodyCenter"><code>elements</code>   </td><td class="markdownTableBodyCenter"><code>std::vector&lt;string&gt;</code>   </td><td class="markdownTableBodyCenter">Vector of strings representing the elements composing the specific dynamics.   </td><td class="markdownTableBodyCenter">No    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyCenter"><code>DYNAMICS_NAME</code>   </td><td class="markdownTableBodyCenter"><code>covariance</code>   </td><td class="markdownTableBodyCenter"><code>std::vector&lt;double&gt;</code>   </td><td class="markdownTableBodyCenter">Vector of double containing the covariance associated to each element.   </td><td class="markdownTableBodyCenter">Yes    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyCenter"><code>DYNAMICS_NAME</code>   </td><td class="markdownTableBodyCenter"><code>dynamic_model</code>   </td><td class="markdownTableBodyCenter"><code>string</code>   </td><td class="markdownTableBodyCenter">String representing the type of dynamics. The string should match the name of the C++ class.   </td><td class="markdownTableBodyCenter">Yes    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyCenter"><code>DYNAMICS_NAME</code>   </td><td class="markdownTableBodyCenter"><code>friction_k0</code>   </td><td class="markdownTableBodyCenter"><code>std::vector&lt;double&gt;</code>   </td><td class="markdownTableBodyCenter">Vector of double containing the coefficient k0 of the friction model of each element.   </td><td class="markdownTableBodyCenter">No    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyCenter"><code>DYNAMICS_NAME</code>   </td><td class="markdownTableBodyCenter"><code>friction_k1</code>   </td><td class="markdownTableBodyCenter"><code>std::vector&lt;double&gt;</code>   </td><td class="markdownTableBodyCenter">Vector of double containing the coefficient k1 of the friction model of each element.   </td><td class="markdownTableBodyCenter">No    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyCenter"><code>DYNAMICS_NAME</code>   </td><td class="markdownTableBodyCenter"><code>friction_k2</code>   </td><td class="markdownTableBodyCenter"><code>std::vector&lt;double&gt;</code>   </td><td class="markdownTableBodyCenter">Vector of double containing the coefficient k2 of the friction model of each element.   </td><td class="markdownTableBodyCenter">No   </td></tr>
+</table>
+<code>DYNAMICS_NAME</code> is a placeholder for the name of the dynamics contained in the <code>dynamics_list</code> list. <code>name</code> can contain only the following values ("ds", "tau_m", "tau_F", "*_ft_sensor", "*_ft_sensor_bias", "*_ft_acc_bias", "*_ftgyro_bias"). </dd>
+<dd>
+The following <code>ini</code> file presents an example of the configuration that can be used to build the <a class="el" href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1UkfState.html" title="UkfState is a concrete class that represents the State of the estimator.">UkfState</a>.</dd></dl>
+<div class="fragment"><div class="line"># UkfState.ini</div>
+<div class="line"> </div>
+<div class="line">dynamics_list                   (&quot;JOINT_VELOCITY&quot;, &quot;FRICTION_TORQUE&quot;, &quot;RIGHT_LEG_FT&quot;, &quot;RIGHT_FOOT_REAR_GYRO_BIAS&quot;)</div>
+<div class="line"> </div>
+<div class="line">[JOINT_VELOCITY]</div>
+<div class="line">name                            &quot;ds&quot;</div>
+<div class="line">elements                        (&quot;r_hip_pitch&quot;, &quot;r_hip_roll&quot;, &quot;r_hip_yaw&quot;, &quot;r_knee&quot;, &quot;r_ankle_pitch&quot;, &quot;r_ankle_roll&quot;)</div>
+<div class="line">covariance                      (1e-3, 1e-3, 1e-3, 1e-3, 1e-3, 1e-3)</div>
+<div class="line">dynamic_model                   &quot;JointVelocityDynamics&quot;</div>
+<div class="line"> </div>
+<div class="line">[FRICTION_TORQUE]</div>
+<div class="line">name                            &quot;tau_F&quot;</div>
+<div class="line">elements                        (&quot;r_hip_pitch&quot;, &quot;r_hip_roll&quot;, &quot;r_hip_yaw&quot;, &quot;r_knee&quot;, &quot;r_ankle_pitch&quot;, &quot;r_ankle_roll&quot;)</div>
+<div class="line">covariance                      (1e-2, 1e-2, 1e-2, 1e-2, 1e-2, 1e-1)</div>
+<div class="line">dynamic_model                   &quot;FrictionTorqueDynamics&quot;</div>
+<div class="line">friction_k0                     (9.106, 5.03, 4.93, 12.88, 14.34, 1.12)</div>
+<div class="line">friction_k1                     (200.0, 6.9, 200.0, 59.87, 200.0, 200.0)</div>
+<div class="line">friction_k2                     (1.767, 5.64, 0.27, 2.0, 3.0, 0.0)</div>
+<div class="line"> </div>
+<div class="line">[RIGHT_LEG_FT]</div>
+<div class="line">name                            &quot;r_leg_ft_sensor&quot;</div>
+<div class="line">elements                        (&quot;fx&quot;, &quot;fy&quot;, &quot;fz&quot;, &quot;mx&quot;, &quot;my&quot;, &quot;mz&quot;)</div>
+<div class="line">covariance                      (1e-3, 1e-3, 1e-3, 1e-4, 1e-4, 1e-4)</div>
+<div class="line">dynamic_model                   &quot;ZeroVelocityStateDynamics&quot;</div>
+<div class="line"> </div>
+<div class="line">[RIGHT_FOOT_REAR_GYRO_BIAS]</div>
+<div class="line">name                            &quot;r_foot_rear_ft_gyro_bias&quot;</div>
+<div class="line">elements                        (&quot;x&quot;, &quot;y&quot;, &quot;z&quot;)</div>
+<div class="line">covariance                      (8.2e-8, 1e-2, 9.3e-3)</div>
+<div class="line">dynamic_model                   &quot;ZeroVelocityStateDynamics&quot;</div>
+</div><!-- fragment --> <dl class="section return"><dt>Returns</dt><dd>a std::unique_ptr to the <a class="el" href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1UkfState.html" title="UkfState is a concrete class that represents the State of the estimator.">UkfState</a>. In case of issues, an empty <a class="el" href="classBipedalLocomotion_1_1System_1_1VariablesHandler.html" title="VariableHandler is useful to handle variables in an optimization problem, Their name,...">BipedalLocomotion::System::VariablesHandler</a> and an invalid pointer will be returned. </dd></dl>
+
+</div>
+</div>
+<a id="ab5cd1c40b576e35ad2c572275dbe8081"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab5cd1c40b576e35ad2c572275dbe8081">&#9670;&nbsp;</a></span>initialize()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool BipedalLocomotion::Estimators::RobotDynamicsEstimator::UkfState::initialize </td>
+          <td>(</td>
+          <td class="paramtype">std::weak_ptr&lt; const <a class="el" href="classBipedalLocomotion_1_1ParametersHandler_1_1IParametersHandler.html">ParametersHandler::IParametersHandler</a> &gt;&#160;</td>
+          <td class="paramname"><em>handler</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Initialize the ukf state model. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">handler</td><td>pointer to the IParametersHandler interface. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section note"><dt>Note</dt><dd>the following parameters are required by the class <table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadCenter">Parameter Name   </th><th class="markdownTableHeadCenter">Type   </th><th class="markdownTableHeadCenter">Description   </th><th class="markdownTableHeadCenter">Mandatory    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyCenter"><code>sampling_time</code>   </td><td class="markdownTableBodyCenter"><code>std::chrono::nanoseconds</code>   </td><td class="markdownTableBodyCenter">Sampling time.   </td><td class="markdownTableBodyCenter">Yes   </td></tr>
+</table>
+</dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>True in case of success, false otherwise. </dd></dl>
+
+</div>
+</div>
+<a id="acaa99e30db3ebecd16d362b179382970"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acaa99e30db3ebecd16d362b179382970">&#9670;&nbsp;</a></span>finalize()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool BipedalLocomotion::Estimators::RobotDynamicsEstimator::UkfState::finalize </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classBipedalLocomotion_1_1System_1_1VariablesHandler.html">System::VariablesHandler</a> &amp;&#160;</td>
+          <td class="paramname"><em>handler</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Finalize the <a class="el" href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1UkfState.html" title="UkfState is a concrete class that represents the State of the estimator.">UkfState</a>. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">handler</td><td>variable handler. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section note"><dt>Note</dt><dd>You should call this method after you initialize the <a class="el" href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1UkfState.html" title="UkfState is a concrete class that represents the State of the estimator.">UkfState</a>. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>true in case of success, false otherwise. </dd></dl>
+
+</div>
+</div>
+<a id="aaa9989719bf69312f6a848980128cbc7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaa9989719bf69312f6a848980128cbc7">&#9670;&nbsp;</a></span>setUkfInputProvider()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void BipedalLocomotion::Estimators::RobotDynamicsEstimator::UkfState::setUkfInputProvider </td>
+          <td>(</td>
+          <td class="paramtype">std::shared_ptr&lt; const <a class="el" href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1UkfInputProvider.html">UkfInputProvider</a> &gt;&#160;</td>
+          <td class="paramname"><em>ukfInputProvider</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>setUkfInputProvider set the provider for the ukf input. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ukfInputProvider</td><td>a pointer to a structure containing the joint positions and the robot base pose, velocity and acceleration. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a36f746c0787b0ad0341604dc3bdecd4c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a36f746c0787b0ad0341604dc3bdecd4c">&#9670;&nbsp;</a></span>getStateVariableHandler()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="classBipedalLocomotion_1_1System_1_1VariablesHandler.html">System::VariablesHandler</a> &amp; BipedalLocomotion::Estimators::RobotDynamicsEstimator::UkfState::getStateVariableHandler </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>getStateVariableHandler access the <code><a class="el" href="classBipedalLocomotion_1_1System_1_1VariablesHandler.html" title="VariableHandler is useful to handle variables in an optimization problem, Their name,...">System::VariablesHandler</a></code> instance created during the initialization phase. </p>
+<dl class="section return"><dt>Returns</dt><dd>the state variable handler containing all the state variables and their sizes and offsets. </dd></dl>
+
+</div>
+</div>
+<a id="a6f79631bd5ad504f12da14aa745e89dc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6f79631bd5ad504f12da14aa745e89dc">&#9670;&nbsp;</a></span>propagate()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void BipedalLocomotion::Estimators::RobotDynamicsEstimator::UkfState::propagate </td>
+          <td>(</td>
+          <td class="paramtype">const Eigen::Ref&lt; const Eigen::MatrixXd &gt; &amp;&#160;</td>
+          <td class="paramname"><em>currentStates</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Eigen::Ref&lt; Eigen::MatrixXd &gt;&#160;</td>
+          <td class="paramname"><em>propagatedStates</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>propagate implements the prediction phase of the ukf </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">cur_states</td><td>is the state computed at the previous step </td></tr>
+    <tr><td class="paramname">prop_states</td><td>is the predicted state </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="af9b71712323de1a13b8a3316ee76bf81"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af9b71712323de1a13b8a3316ee76bf81">&#9670;&nbsp;</a></span>getNoiseCovarianceMatrix()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Eigen::MatrixXd BipedalLocomotion::Estimators::RobotDynamicsEstimator::UkfState::getNoiseCovarianceMatrix </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>getNoiseCovarianceMatrix access the <code>Eigen::MatrixXd</code> representing the process covariance matrix. </p>
+<dl class="section return"><dt>Returns</dt><dd>the process noise covariance matrix. </dd></dl>
+
+</div>
+</div>
+<a id="a83258f0f53f4b63bac2abaaa23b54342"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a83258f0f53f4b63bac2abaaa23b54342">&#9670;&nbsp;</a></span>setProperty()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool BipedalLocomotion::Estimators::RobotDynamicsEstimator::UkfState::setProperty </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>property</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>setProperty is not implemented. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">property</td><td>is a string. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>false as it is not implemented. </dd></dl>
+
+</div>
+</div>
+<a id="a1bb99526b4040b76530e708affcc7150"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1bb99526b4040b76530e708affcc7150">&#9670;&nbsp;</a></span>getStateDescription()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bfl::VectorDescription BipedalLocomotion::Estimators::RobotDynamicsEstimator::UkfState::getStateDescription </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>getStateDescription access the <code>bfl::VectorDescription</code>. </p>
+<dl class="section return"><dt>Returns</dt><dd>the state vector description. </dd></dl>
+
+</div>
+</div>
+<a id="a7c79bcd69b5724370564b2fd0205ebd8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7c79bcd69b5724370564b2fd0205ebd8">&#9670;&nbsp;</a></span>getStateSize()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::size_t BipedalLocomotion::Estimators::RobotDynamicsEstimator::UkfState::getStateSize </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>getStateSize access the length of the state vector. </p>
+<dl class="section return"><dt>Returns</dt><dd>the length of state vector. </dd></dl>
+
+</div>
+</div>
+<a id="a434ce9443f997739548cdd539ec56f3a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a434ce9443f997739548cdd539ec56f3a">&#9670;&nbsp;</a></span>getInitialStateCovarianceMatrix()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Eigen::Ref&lt; const Eigen::MatrixXd &gt; BipedalLocomotion::Estimators::RobotDynamicsEstimator::UkfState::getInitialStateCovarianceMatrix </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>getInitialStateCovarianceMatrix access the <code>Eigen::MatrixXd</code> representing the initial state covariance matrix. </p>
+<dl class="section return"><dt>Returns</dt><dd>a Eigen reference to the Eigen Matrix covariance. </dd></dl>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following files:<ul>
+<li>Estimators/include/BipedalLocomotion/RobotDynamicsEstimator/<a class="el" href="UkfState_8h.html">UkfState.h</a></li>
+<li>Estimators/src/<a class="el" href="UkfState_8cpp.html">UkfState.cpp</a></li>
+</ul>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- Doxygen custom footer -->
+<div id="nav-path" class="navpath">
+  <ul>
+    <li class="footer">
+      <a href="https://github.com/gbionics/bipedal-locomotion-framework">GitHub</a> &bull;
+      <a href="https://gbionics.ai/">Generative Bionics</a> &bull;
+      Licensed under <a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause "New" or "Revised" License</a> &bull;
+      Generated by <a href="https://www.doxygen.org/index.html">Doxygen</a> 1.9.1
+    </li>
+  </ul>
+</div>
 </body>
 </html>

@@ -1,296 +1,443 @@
-<!DOCTYPE html>
-<html lang="en">
+<!-- HTML header for doxygen 1.9.1 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-  <meta charset="UTF-8" />
-  <title>BipedalLocomotion::ContinuousDynamicalSystem::MultiStateWeightProvider class | bipedal locomotion framework master</title>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
-  <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
-  <link rel="icon" href="favicon-dark.png" type="image/png" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#22272e" />
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>bipedal locomotion framework: BipedalLocomotion::ContinuousDynamicalSystem::MultiStateWeightProvider Class Reference</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js", "TeX/AMSmath.js", "TeX/AMSsymbols.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+});
+</script>
+<script type="text/javascript" async="async" src="https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only-darkmode-toggle.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="doxygen-awesome-darkmode-toggle.js"></script>
+<script type="text/javascript" src="doxygen-awesome-fragment-copy-button.js"></script>
+<script type="text/javascript" src="doxygen-awesome-interactive-toc.js"></script>
+<script type="text/javascript" src="doxygen-awesome-paragraph-link.js"></script>
+<script type="text/javascript" src="doxygen-awesome-tabs.js"></script>
+<script type="text/javascript">
+    DoxygenAwesomeDarkModeToggle.init()
+    DoxygenAwesomeFragmentCopyButton.init()
+    DoxygenAwesomeInteractiveToc.init()
+    DoxygenAwesomeParagraphLink.init()
+    DoxygenAwesomeTabs.init()
+</script>
 </head>
 <body>
-<header><nav id="navigation">
-  <div class="m-container">
-    <div class="m-row">
-      <span id="m-navbar-brand" class="m-col-t-8 m-col-m-none m-left-m">
-        <a href="./index.html">bipedal locomotion framework</a> <span class="m-breadcrumb">|</span> <a href="index.html" class="m-thin">master</a>
-      </span>
-      <div class="m-col-t-4 m-hide-m m-text-right m-nopadr">
-        <a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
-          <path id="m-doc-search-icon-path" d="m6 0c-3.31 0-6 2.69-6 6 0 3.31 2.69 6 6 6 1.49 0 2.85-0.541 3.89-1.44-0.0164 0.338 0.147 0.759 0.5 1.15l3.22 3.79c0.552 0.614 1.45 0.665 2 0.115 0.55-0.55 0.499-1.45-0.115-2l-3.79-3.22c-0.392-0.353-0.812-0.515-1.15-0.5 0.895-1.05 1.44-2.41 1.44-3.89 0-3.31-2.69-6-6-6zm0 1.56a4.44 4.44 0 0 1 4.44 4.44 4.44 4.44 0 0 1-4.44 4.44 4.44 4.44 0 0 1-4.44-4.44 4.44 4.44 0 0 1 4.44-4.44z"/>
-        </svg></a>
-        <a id="m-navbar-show" href="#navigation" title="Show navigation"></a>
-        <a id="m-navbar-hide" href="#" title="Hide navigation"></a>
-      </div>
-      <div id="m-navbar-collapse" class="m-col-t-12 m-show-m m-col-m-none m-right-m">
-        <div class="m-row">
-          <ol class="m-col-t-6 m-col-m-none">
-            <li><a href="pages.html">Pages</a></li>
-            <li><a href="annotated.html">Classes</a></li>
-            <li><a href="files.html">Files</a></li>
-          </ol>
-          <ol class="m-col-t-6 m-col-m-none" start="4">
-            <li>
-              <a href="pages.html">Versions</a>
-              <ol>
-                <li><a href="./index.html">Master</a></li>
-                <li><a href="./v0.19.0/index.html">v0.19.0</a></li>
-                <li><a href="./v0.21.1/index.html">v0.21.1</a></li>
-                <li><a href="./v0.18.0/index.html">v0.18.0</a></li>
-              </ol>
-            </li>
-            <li>
-              <a href="pages.html">Contacts</a>
-              <ol>
-                <li><a href="https://github.com/ami-iit/bipedal-locomotion-framework">GitHub</a></li>
-                <li><a href="https://www.iit.it/web/ami/">Lab website</a></li>
-              </ol>
-            </li>
-            <li class="m-show-m"><a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
-              <use href="#m-doc-search-icon-path" />
-            </svg></a></li>
-          </ol>
-        </div>
-      </div>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">bipedal locomotion framework
+   </div>
+   <div id="projectbrief">A suite of libraries for achieving bipedal locomotion on humanoid robots</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.9.1 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "search",false,'Search','.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',true,false,'search.php','Search');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
     </div>
   </div>
-</nav></header>
-<main><article>
-  <div class="m-container m-container-inflatable">
-    <div class="m-row">
-      <div class="m-col-l-10 m-push-l-1">
-        <h1>
-          <span class="m-breadcrumb"><a href="namespaceBipedalLocomotion.html">BipedalLocomotion</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespaceBipedalLocomotion_1_1ContinuousDynamicalSystem.html">ContinuousDynamicalSystem</a>::<wbr/></span>MultiStateWeightProvider <span class="m-thin">class</span>
-          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="MultiStateWeightProvider_8h.html">&lt;BipedalLocomotion/ContinuousDynamicalSystem/MultiStateWeightProvider.h&gt;</a></div>
-        </h1>
-        <p><a href="classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1MultiStateWeightProvider.html" class="m-doc">MultiStateWeightProvider</a> describes the provider for a constant weight.</p>
-        <nav class="m-block m-default">
-          <h3>Contents</h3>
-          <ul>
-            <li>
-              Reference
-              <ul>
-                <li><a href="#base-classes">Base classes</a></li>
-                <li><a href="#pub-methods">Public functions</a></li>
-              </ul>
-            </li>
-          </ul>
-        </nav>
-        <section id="base-classes">
-          <h2><a href="#base-classes">Base classes</a></h2>
-          <dl class="m-doc">
-            <dt>
-              struct <a href="structBipedalLocomotion_1_1System_1_1WeightProvider.html" class="m-doc">BipedalLocomotion::System::WeightProvider</a>
-            </dt>
-            <dd><a href="structBipedalLocomotion_1_1System_1_1WeightProvider.html" class="m-doc">WeightProvider</a> describes the provider for a weight.</dd>
-          </dl>
-        </section>
-        <section id="pub-methods">
-          <h2><a href="#pub-methods">Public functions</a></h2>
-          <dl class="m-doc">
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#ad46dbab464e8680510ff523a1d41383e" class="m-doc">getOutput</a>(</span><span class="m-doc-wrap">) const -&gt; const Eigen::VectorXd&amp; <span class="m-label m-flat m-warning">override</span></span>
-            </dt>
-            <dd>Get the weight associated to the provider.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a16cd88a66f84360f7e54929e88e28021" class="m-doc">initialize</a>(</span><span class="m-doc-wrap">std::weak_ptr&lt;const <a href="classBipedalLocomotion_1_1ParametersHandler_1_1IParametersHandler.html" class="m-doc">ParametersHandler::<wbr />IParametersHandler</a>&gt; handler) -&gt; bool <span class="m-label m-flat m-warning">override</span></span>
-            </dt>
-            <dd>Initialize constant weight provider.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a4145f74f5479a2c5dcada80c90b337cc" class="m-doc">setState</a>(</span><span class="m-doc-wrap">const std::string&amp; state) -&gt; bool</span>
-            </dt>
-            <dd>Set the state of the provider.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a7d971ca498c751ee6a24bb27b0edbb8a" class="m-doc">reset</a>(</span><span class="m-doc-wrap">const std::string&amp; state) -&gt; bool</span>
-            </dt>
-            <dd>Reset the internal weight of the provider.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a0957336abdfda330e80aec47c2d5429b" class="m-doc">advance</a>(</span><span class="m-doc-wrap">) -&gt; bool <span class="m-label m-flat m-warning">override</span></span>
-            </dt>
-            <dd>Update the content of the weight provider.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a2de5cc8fedca73e0a615ba3f505534be" class="m-doc">isOutputValid</a>(</span><span class="m-doc-wrap">) const -&gt; bool <span class="m-label m-flat m-warning">final</span></span>
-            </dt>
-            <dd>Determines the validity of the weight.</dd>
-          </dl>
-        </section>
-        <section>
-          <h2>Function documentation</h2>
-          <section class="m-doc-details" id="ad46dbab464e8680510ff523a1d41383e"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">const Eigen::VectorXd&amp; BipedalLocomotion::<wbr />ContinuousDynamicalSystem::<wbr />MultiStateWeightProvider::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ad46dbab464e8680510ff523a1d41383e" class="m-doc-self">getOutput</a>(</span><span class="m-doc-wrap">) const <span class="m-label m-warning">override</span></span></span>
-            </h3>
-            <p>Get the weight associated to the provider.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <tfoot>
-                <tr>
-                  <th style="width: 1%">Returns</th>
-                  <td>A vector representing the diagonal matrix of the weight</td>
-                </tr>
-              </tfoot>
-            </table>
-          </div></section>
-          <section class="m-doc-details" id="a16cd88a66f84360f7e54929e88e28021"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">bool BipedalLocomotion::<wbr />ContinuousDynamicalSystem::<wbr />MultiStateWeightProvider::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a16cd88a66f84360f7e54929e88e28021" class="m-doc-self">initialize</a>(</span><span class="m-doc-wrap">std::weak_ptr&lt;const <a href="classBipedalLocomotion_1_1ParametersHandler_1_1IParametersHandler.html" class="m-doc">ParametersHandler::<wbr />IParametersHandler</a>&gt; handler) <span class="m-label m-warning">override</span></span></span>
-            </h3>
-            <p>Initialize constant weight provider.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">handler</td>
-                  <td>pointer to the parameter handler.</td>
-                </tr>
-              </tbody>
-              <tfoot>
-                <tr>
-                  <th>Returns</th>
-                  <td>true in case of success/false otherwise.</td>
-                </tr>
-              </tfoot>
-            </table>
-<aside class="m-note m-info"><h4>Note</h4><p>The following parameters are required:</p><table class="m-table"><thead><tr><th>Parameter Name</th><th>Type</th><th>Description</th><th>Mandatory</th></tr></thead><tbody><tr><td><code>states</code></td><td><code>vector&lt;string&gt;</code></td><td>Vector associated to the names of the state stored in the provider</td><td>Yes</td></tr><tr><td><code>sampling_time</code></td><td><code>double</code></td><td>Sampling time used to discrete the linear system</td><td>Yes</td></tr><tr><td><code>settling_time</code></td><td><code>double</code></td><td>5% settling time (The settling time, <svg class="m-math" style="width: 1.123em; height: 1.038em; vertical-align: -0.187em;" viewBox="0 -8.169366 10.776924 9.962629">
-<title>
-$T_s$
-</title>
-<defs>
-<path id='eq1-g0-115' d='M3.211955-2.996762C3.028643-2.964882 2.86127-2.82142 2.86127-2.622167C2.86127-2.478705 2.956912-2.375093 3.132254-2.375093C3.251806-2.375093 3.498879-2.462765 3.498879-2.82142C3.498879-3.315567 2.980822-3.514819 2.486675-3.514819C1.41868-3.514819 1.083935-2.757659 1.083935-2.351183C1.083935-2.271482 1.083935-1.984558 1.378829-1.761395C1.562142-1.617933 1.697634-1.594022 2.11208-1.514321C2.391034-1.458531 2.84533-1.378829 2.84533-.964384C2.84533-.757161 2.693898-.494147 2.470735-.342715C2.175841-.151432 1.785305-.143462 1.657783-.143462C1.466501-.143462 .924533-.175342 .72528-.494147C1.131756-.510087 1.187547-.836862 1.187547-.932503C1.187547-1.171606 .972354-1.227397 .876712-1.227397C.749191-1.227397 .422416-1.131756 .422416-.6934C.422416-.223163 .916563 .079701 1.657783 .079701C3.044583 .079701 3.339477-.900623 3.339477-1.235367C3.339477-1.952677 2.558406-2.10411 2.263512-2.1599C1.880946-2.231631 1.570112-2.287422 1.570112-2.622167C1.570112-2.765629 1.705604-3.291656 2.478705-3.291656C2.781569-3.291656 3.092403-3.203985 3.211955-2.996762Z'/>
-<path id='eq1-g1-84' d='M4.985305-7.292653C5.057036-7.579577 5.080946-7.687173 5.260274-7.734994C5.355915-7.758904 5.750436-7.758904 6.001494-7.758904C7.197011-7.758904 7.758904-7.711083 7.758904-6.77858C7.758904-6.599253 7.711083-6.144956 7.639352-5.702615L7.627397-5.559153C7.627397-5.511333 7.675218-5.439601 7.746949-5.439601C7.866501-5.439601 7.866501-5.499377 7.902366-5.69066L8.249066-7.806725C8.272976-7.914321 8.272976-7.938232 8.272976-7.974097C8.272976-8.105604 8.201245-8.105604 7.962142-8.105604H1.422665C1.147696-8.105604 1.135741-8.093649 1.06401-7.878456L.334745-5.726526C.32279-5.702615 .286924-5.571108 .286924-5.559153C.286924-5.499377 .334745-5.439601 .406476-5.439601C.502117-5.439601 .526027-5.487422 .573848-5.642839C1.075965-7.089415 1.327024-7.758904 2.917061-7.758904H3.718057C4.004981-7.758904 4.124533-7.758904 4.124533-7.627397C4.124533-7.591532 4.124533-7.567621 4.064757-7.352428L2.462765-.932503C2.343213-.466252 2.319303-.3467 1.052055-.3467C.753176-.3467 .669489-.3467 .669489-.119552C.669489 0 .800996 0 .860772 0C1.159651 0 1.470486-.02391 1.769365-.02391H3.634371C3.93325-.02391 4.25604 0 4.554919 0C4.686426 0 4.805978 0 4.805978-.227148C4.805978-.3467 4.722291-.3467 4.411457-.3467C3.335492-.3467 3.335492-.454296 3.335492-.633624C3.335492-.645579 3.335492-.729265 3.383313-.920548L4.985305-7.292653Z'/>
-</defs>
-<g id='eq1-page1'>
-<use x='0' y='0' xlink:href='#eq1-g1-84'/>
-<use x='6.861005' y='1.793263' xlink:href='#eq1-g0-115'/>
-</g>
-</svg>, is the time required for the system output to fall within a certain percentage (i.e. 5%) of the steady-state value for a step input.)</td><td>Yes</td></tr></tbody></table></aside><p>For each <code>state</code> defined in <code>states</code>, you should define a Group called <code>state</code> that contains the following parameters</p><table class="m-table"><thead><tr><th>Parameter Name</th><th>Type</th><th>Description</th><th>Mandatory</th></tr></thead><tbody><tr><td><code>weight</code></td><td><code>vector&lt;double&gt;</code></td><td>Vector representing the diagonal matrix of a constant weight</td><td>Yes</td></tr><tr><td><code>name</code></td><td><code>string</code></td><td>Name of the state</td><td>Yes</td></tr></tbody></table><aside class="m-note m-info"><h4>Note</h4><p>the inner dynamical system is initialized with the first <code>state</code> stored in <code>states</code> vector.</p></aside>
-          </div></section>
-          <section class="m-doc-details" id="a4145f74f5479a2c5dcada80c90b337cc"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">bool BipedalLocomotion::<wbr />ContinuousDynamicalSystem::<wbr />MultiStateWeightProvider::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a4145f74f5479a2c5dcada80c90b337cc" class="m-doc-self">setState</a>(</span><span class="m-doc-wrap">const std::string&amp; state)</span></span>
-            </h3>
-            <p>Set the state of the provider.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">state</td>
-                  <td>name of the state. Please notice that the name should be the one passed in the initialization</td>
-                </tr>
-              </tbody>
-              <tfoot>
-                <tr>
-                  <th>Returns</th>
-                  <td>true in case of success/false otherwise.</td>
-                </tr>
-              </tfoot>
-            </table>
-          </div></section>
-          <section class="m-doc-details" id="a7d971ca498c751ee6a24bb27b0edbb8a"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">bool BipedalLocomotion::<wbr />ContinuousDynamicalSystem::<wbr />MultiStateWeightProvider::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a7d971ca498c751ee6a24bb27b0edbb8a" class="m-doc-self">reset</a>(</span><span class="m-doc-wrap">const std::string&amp; state)</span></span>
-            </h3>
-            <p>Reset the internal weight of the provider.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">state</td>
-                  <td>name of the state. Please notice that the name should be the one passed in the initialization.</td>
-                </tr>
-              </tbody>
-              <tfoot>
-                <tr>
-                  <th>Returns</th>
-                  <td>true in case of success/false otherwise.</td>
-                </tr>
-              </tfoot>
-            </table>
-<p>This method reset also the value of the dynamical system.</p>
-          </div></section>
-          <section class="m-doc-details" id="a0957336abdfda330e80aec47c2d5429b"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">bool BipedalLocomotion::<wbr />ContinuousDynamicalSystem::<wbr />MultiStateWeightProvider::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a0957336abdfda330e80aec47c2d5429b" class="m-doc-self">advance</a>(</span><span class="m-doc-wrap">) <span class="m-label m-warning">override</span></span></span>
-            </h3>
-            <p>Update the content of the weight provider.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <tfoot>
-                <tr>
-                  <th style="width: 1%">Returns</th>
-                  <td>True in case of success and false otherwise</td>
-                </tr>
-              </tfoot>
-            </table>
-          </div></section>
-          <section class="m-doc-details" id="a2de5cc8fedca73e0a615ba3f505534be"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">bool BipedalLocomotion::<wbr />ContinuousDynamicalSystem::<wbr />MultiStateWeightProvider::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a2de5cc8fedca73e0a615ba3f505534be" class="m-doc-self">isOutputValid</a>(</span><span class="m-doc-wrap">) const <span class="m-label m-warning">final</span></span></span>
-            </h3>
-            <p>Determines the validity of the weight.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <tfoot>
-                <tr>
-                  <th style="width: 1%">Returns</th>
-                  <td>True if the weight is valid, false otherwise.</td>
-                </tr>
-              </tfoot>
-            </table>
-          </div></section>
-        </section>
-      </div>
-    </div>
-  </div>
-</article></main>
-<div class="m-doc-search" id="search">
-  <a href="#!" onclick="return hideSearch()"></a>
-  <div class="m-container">
-    <div class="m-row">
-      <div class="m-col-m-8 m-push-m-2">
-        <div class="m-doc-search-header m-text m-small">
-          <div><span class="m-label m-default">Tab</span> / <span class="m-label m-default">T</span> to search, <span class="m-label m-default">Esc</span> to close</div>
-          <div id="search-symbolcount">&hellip;</div>
-        </div>
-        <div class="m-doc-search-content">
-          <form>
-            <input type="search" name="q" id="search-input" placeholder="Loading &hellip;" disabled="disabled" autofocus="autofocus" autocomplete="off" spellcheck="false" />
-          </form>
-          <noscript class="m-text m-danger m-text-center">Unlike everything else in the docs, the search functionality <em>requires</em> JavaScript.</noscript>
-          <div id="search-help" class="m-text m-dim m-text-center">
-            <p class="m-noindent">Search for symbols, directories, files, pages or
-            modules. You can omit any prefix from the symbol or file path; adding a
-            <code>:</code> or <code>/</code> suffix lists all members of given symbol or
-            directory.</p>
-            <p class="m-noindent">Use <span class="m-label m-dim">&darr;</span>
-            / <span class="m-label m-dim">&uarr;</span> to navigate through the list,
-            <span class="m-label m-dim">Enter</span> to go.
-            <span class="m-label m-dim">Tab</span> autocompletes common prefix, you can
-            copy a link to the result using <span class="m-label m-dim">⌘</span>
-            <span class="m-label m-dim">L</span> while <span class="m-label m-dim">⌘</span>
-            <span class="m-label m-dim">M</span> produces a Markdown link.</p>
-          </div>
-          <div id="search-notfound" class="m-text m-warning m-text-center">Sorry, nothing was found.</div>
-          <ul id="search-results"></ul>
-        </div>
-      </div>
-    </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
   </div>
 </div>
-<script src="search-v2.js"></script>
-<script src="searchdata-v2.js" async="async"></script>
-<footer><nav>
-  <div class="m-container">
-    <div class="m-row">
-      <div class="m-col-l-10 m-push-l-1">
-        <p>bipedal-locomotion-framework documentation. Licensed under the <a href="https://www.gnu.org/licenses/lgpl-3.0.en.html">GNU Lesser General Public License v3.0</a>. Project maintained by the <a href="https://www.iit.it/web/ami/">Artificial and Mechanical Intelligence Lab</a>. Contact the team via <a href="https://github.com/ami-iit/bipedal-locomotion-framework/issues/new">GitHub</a>.<br />Generated by <a href="https://doxygen.org/">Doxygen</a> 1.9.1 and <a href="https://mcss.mosra.cz/">m.css</a>.
-      </div>
-    </div>
-  </div>
-</nav></footer>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(document).ready(function(){initNavTree('classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1MultiStateWeightProvider.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1MultiStateWeightProvider-members.html">List of all members</a>  </div>
+  <div class="headertitle">
+<div class="title">BipedalLocomotion::ContinuousDynamicalSystem::MultiStateWeightProvider Class Reference</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p><a class="el" href="classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1MultiStateWeightProvider.html" title="MultiStateWeightProvider describes the provider for a constant weight.">MultiStateWeightProvider</a> describes the provider for a constant weight.  
+ <a href="classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1MultiStateWeightProvider.html#details">More...</a></p>
+
+<p><code>#include &lt;ContinuousDynamicalSystem/include/BipedalLocomotion/ContinuousDynamicalSystem/MultiStateWeightProvider.h&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:ace84e0ce6b637a17819c2ecdb7416118"><td class="memItemLeft" align="right" valign="top">const Eigen::VectorXd &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1MultiStateWeightProvider.html#ace84e0ce6b637a17819c2ecdb7416118">getOutput</a> () const override</td></tr>
+<tr class="memdesc:ace84e0ce6b637a17819c2ecdb7416118"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the weight associated to the provider.  <a href="classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1MultiStateWeightProvider.html#ace84e0ce6b637a17819c2ecdb7416118">More...</a><br /></td></tr>
+<tr class="separator:ace84e0ce6b637a17819c2ecdb7416118"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab757154b718b90295ff40bfe16adfa56"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1MultiStateWeightProvider.html#ab757154b718b90295ff40bfe16adfa56">initialize</a> (std::weak_ptr&lt; const <a class="el" href="classBipedalLocomotion_1_1ParametersHandler_1_1IParametersHandler.html">ParametersHandler::IParametersHandler</a> &gt; handler) override</td></tr>
+<tr class="memdesc:ab757154b718b90295ff40bfe16adfa56"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize constant weight provider.  <a href="classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1MultiStateWeightProvider.html#ab757154b718b90295ff40bfe16adfa56">More...</a><br /></td></tr>
+<tr class="separator:ab757154b718b90295ff40bfe16adfa56"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a490bb9584bac7f7427dd92bdca17085b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1MultiStateWeightProvider.html#a490bb9584bac7f7427dd92bdca17085b">setState</a> (const std::string &amp;state)</td></tr>
+<tr class="memdesc:a490bb9584bac7f7427dd92bdca17085b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the state of the provider.  <a href="classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1MultiStateWeightProvider.html#a490bb9584bac7f7427dd92bdca17085b">More...</a><br /></td></tr>
+<tr class="separator:a490bb9584bac7f7427dd92bdca17085b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3105f096b030715de823a31f38ccd31c"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1MultiStateWeightProvider.html#a3105f096b030715de823a31f38ccd31c">reset</a> (const std::string &amp;state)</td></tr>
+<tr class="memdesc:a3105f096b030715de823a31f38ccd31c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reset the internal weight of the provider.  <a href="classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1MultiStateWeightProvider.html#a3105f096b030715de823a31f38ccd31c">More...</a><br /></td></tr>
+<tr class="separator:a3105f096b030715de823a31f38ccd31c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af16a47fab7dfd0fad80658117aac4689"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1MultiStateWeightProvider.html#af16a47fab7dfd0fad80658117aac4689">advance</a> () override</td></tr>
+<tr class="memdesc:af16a47fab7dfd0fad80658117aac4689"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update the content of the weight provider.  <a href="classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1MultiStateWeightProvider.html#af16a47fab7dfd0fad80658117aac4689">More...</a><br /></td></tr>
+<tr class="separator:af16a47fab7dfd0fad80658117aac4689"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a70a66a96e918ee3b579b3a5fdd4eb2ed"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1MultiStateWeightProvider.html#a70a66a96e918ee3b579b3a5fdd4eb2ed">isOutputValid</a> () const final</td></tr>
+<tr class="memdesc:a70a66a96e918ee3b579b3a5fdd4eb2ed"><td class="mdescLeft">&#160;</td><td class="mdescRight">Determines the validity of the weight.  <a href="classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1MultiStateWeightProvider.html#a70a66a96e918ee3b579b3a5fdd4eb2ed">More...</a><br /></td></tr>
+<tr class="separator:a70a66a96e918ee3b579b3a5fdd4eb2ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_classBipedalLocomotion_1_1System_1_1Source"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classBipedalLocomotion_1_1System_1_1Source')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classBipedalLocomotion_1_1System_1_1Source.html">BipedalLocomotion::System::Source&lt; Eigen::VectorXd &gt;</a></td></tr>
+<tr class="memitem:a472624c76d5e02e8ae16991cd77016ce inherit pub_methods_classBipedalLocomotion_1_1System_1_1Source"><td class="memItemLeft" align="right" valign="top"><a id="a472624c76d5e02e8ae16991cd77016ce"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>setInput</b> (const <a class="el" href="Advanceable_8h.html#a1558f6843cd1a0f40215a6364b0af652">EmptySignal</a> &amp;input) final</td></tr>
+<tr class="separator:a472624c76d5e02e8ae16991cd77016ce inherit pub_methods_classBipedalLocomotion_1_1System_1_1Source"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1c126531af21d485f09f297cb162c30a inherit pub_methods_classBipedalLocomotion_1_1System_1_1Source"><td class="memItemLeft" align="right" valign="top"><a id="a1c126531af21d485f09f297cb162c30a"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>Source</b> (const <a class="el" href="classBipedalLocomotion_1_1System_1_1Source.html">Source</a> &amp;)=delete</td></tr>
+<tr class="separator:a1c126531af21d485f09f297cb162c30a inherit pub_methods_classBipedalLocomotion_1_1System_1_1Source"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af0cf2abdf10e6594372a0b062fe4a8af inherit pub_methods_classBipedalLocomotion_1_1System_1_1Source"><td class="memItemLeft" align="right" valign="top"><a id="af0cf2abdf10e6594372a0b062fe4a8af"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>Source</b> (<a class="el" href="classBipedalLocomotion_1_1System_1_1Source.html">Source</a> &amp;&amp;)=delete</td></tr>
+<tr class="separator:af0cf2abdf10e6594372a0b062fe4a8af inherit pub_methods_classBipedalLocomotion_1_1System_1_1Source"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a922e6eec2f74620c49f9fcd1ddf709ae inherit pub_methods_classBipedalLocomotion_1_1System_1_1Source"><td class="memItemLeft" align="right" valign="top"><a id="a922e6eec2f74620c49f9fcd1ddf709ae"></a>
+<a class="el" href="classBipedalLocomotion_1_1System_1_1Source.html">Source</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator=</b> (const <a class="el" href="classBipedalLocomotion_1_1System_1_1Source.html">Source</a> &amp;)=delete</td></tr>
+<tr class="separator:a922e6eec2f74620c49f9fcd1ddf709ae inherit pub_methods_classBipedalLocomotion_1_1System_1_1Source"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad63e64dcad4c269263ecd20b2c81352b inherit pub_methods_classBipedalLocomotion_1_1System_1_1Source"><td class="memItemLeft" align="right" valign="top"><a id="ad63e64dcad4c269263ecd20b2c81352b"></a>
+<a class="el" href="classBipedalLocomotion_1_1System_1_1Source.html">Source</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator=</b> (<a class="el" href="classBipedalLocomotion_1_1System_1_1Source.html">Source</a> &amp;&amp;)=delete</td></tr>
+<tr class="separator:ad63e64dcad4c269263ecd20b2c81352b inherit pub_methods_classBipedalLocomotion_1_1System_1_1Source"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_classBipedalLocomotion_1_1System_1_1Advanceable"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classBipedalLocomotion_1_1System_1_1Advanceable')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classBipedalLocomotion_1_1System_1_1Advanceable.html">BipedalLocomotion::System::Advanceable&lt; _Input, _Output &gt;</a></td></tr>
+<tr class="memitem:aaeb3eba3073fbc844dea1eba4c9b68f3 inherit pub_methods_classBipedalLocomotion_1_1System_1_1Advanceable"><td class="memItemLeft" align="right" valign="top"><a id="aaeb3eba3073fbc844dea1eba4c9b68f3"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>Advanceable</b> (const <a class="el" href="classBipedalLocomotion_1_1System_1_1Advanceable.html">Advanceable</a> &amp;)=delete</td></tr>
+<tr class="separator:aaeb3eba3073fbc844dea1eba4c9b68f3 inherit pub_methods_classBipedalLocomotion_1_1System_1_1Advanceable"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac1549cb26bd896e27370e97b0795ba3f inherit pub_methods_classBipedalLocomotion_1_1System_1_1Advanceable"><td class="memItemLeft" align="right" valign="top"><a id="ac1549cb26bd896e27370e97b0795ba3f"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>Advanceable</b> (<a class="el" href="classBipedalLocomotion_1_1System_1_1Advanceable.html">Advanceable</a> &amp;&amp;)=delete</td></tr>
+<tr class="separator:ac1549cb26bd896e27370e97b0795ba3f inherit pub_methods_classBipedalLocomotion_1_1System_1_1Advanceable"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae147cdee9ff9160a9dfe0d3e349a9aad inherit pub_methods_classBipedalLocomotion_1_1System_1_1Advanceable"><td class="memItemLeft" align="right" valign="top"><a id="ae147cdee9ff9160a9dfe0d3e349a9aad"></a>
+<a class="el" href="classBipedalLocomotion_1_1System_1_1Advanceable.html">Advanceable</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator=</b> (const <a class="el" href="classBipedalLocomotion_1_1System_1_1Advanceable.html">Advanceable</a> &amp;)=delete</td></tr>
+<tr class="separator:ae147cdee9ff9160a9dfe0d3e349a9aad inherit pub_methods_classBipedalLocomotion_1_1System_1_1Advanceable"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adf0d9fc07bab0ec5d4db7f3a35816bf2 inherit pub_methods_classBipedalLocomotion_1_1System_1_1Advanceable"><td class="memItemLeft" align="right" valign="top"><a id="adf0d9fc07bab0ec5d4db7f3a35816bf2"></a>
+<a class="el" href="classBipedalLocomotion_1_1System_1_1Advanceable.html">Advanceable</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator=</b> (<a class="el" href="classBipedalLocomotion_1_1System_1_1Advanceable.html">Advanceable</a> &amp;&amp;)=delete</td></tr>
+<tr class="separator:adf0d9fc07bab0ec5d4db7f3a35816bf2 inherit pub_methods_classBipedalLocomotion_1_1System_1_1Advanceable"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a618ab786bb43814b3b3012b843fce93b inherit pub_methods_classBipedalLocomotion_1_1System_1_1Advanceable"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1System_1_1Advanceable.html#a618ab786bb43814b3b3012b843fce93b">close</a> ()</td></tr>
+<tr class="memdesc:a618ab786bb43814b3b3012b843fce93b inherit pub_methods_classBipedalLocomotion_1_1System_1_1Advanceable"><td class="mdescLeft">&#160;</td><td class="mdescRight">Close the <a class="el" href="classBipedalLocomotion_1_1System_1_1Advanceable.html" title="Basic class that represents a discrete system.">Advanceable</a>.  <a href="classBipedalLocomotion_1_1System_1_1Advanceable.html#a618ab786bb43814b3b3012b843fce93b">More...</a><br /></td></tr>
+<tr class="separator:a618ab786bb43814b3b3012b843fce93b inherit pub_methods_classBipedalLocomotion_1_1System_1_1Advanceable"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_classBipedalLocomotion_1_1System_1_1InputPort"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classBipedalLocomotion_1_1System_1_1InputPort')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classBipedalLocomotion_1_1System_1_1InputPort.html">BipedalLocomotion::System::InputPort&lt; _Input &gt;</a></td></tr>
+<tr class="memitem:a74d1418613e89a7f2993ea936228a44a inherit pub_methods_classBipedalLocomotion_1_1System_1_1InputPort"><td class="memItemLeft" align="right" valign="top"><a id="a74d1418613e89a7f2993ea936228a44a"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>InputPort</b> (const <a class="el" href="classBipedalLocomotion_1_1System_1_1InputPort.html">InputPort</a> &amp;)=delete</td></tr>
+<tr class="separator:a74d1418613e89a7f2993ea936228a44a inherit pub_methods_classBipedalLocomotion_1_1System_1_1InputPort"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a02ec5c947f1d2d83d2952c3b899cc58f inherit pub_methods_classBipedalLocomotion_1_1System_1_1InputPort"><td class="memItemLeft" align="right" valign="top"><a id="a02ec5c947f1d2d83d2952c3b899cc58f"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>InputPort</b> (<a class="el" href="classBipedalLocomotion_1_1System_1_1InputPort.html">InputPort</a> &amp;&amp;)=delete</td></tr>
+<tr class="separator:a02ec5c947f1d2d83d2952c3b899cc58f inherit pub_methods_classBipedalLocomotion_1_1System_1_1InputPort"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a54f476d3c8d6d003fb714309ea6272aa inherit pub_methods_classBipedalLocomotion_1_1System_1_1InputPort"><td class="memItemLeft" align="right" valign="top"><a id="a54f476d3c8d6d003fb714309ea6272aa"></a>
+<a class="el" href="classBipedalLocomotion_1_1System_1_1InputPort.html">InputPort</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator=</b> (const <a class="el" href="classBipedalLocomotion_1_1System_1_1InputPort.html">InputPort</a> &amp;)=delete</td></tr>
+<tr class="separator:a54f476d3c8d6d003fb714309ea6272aa inherit pub_methods_classBipedalLocomotion_1_1System_1_1InputPort"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adb341b37472241b6da8b552166308d7b inherit pub_methods_classBipedalLocomotion_1_1System_1_1InputPort"><td class="memItemLeft" align="right" valign="top"><a id="adb341b37472241b6da8b552166308d7b"></a>
+<a class="el" href="classBipedalLocomotion_1_1System_1_1InputPort.html">InputPort</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator=</b> (<a class="el" href="classBipedalLocomotion_1_1System_1_1InputPort.html">InputPort</a> &amp;&amp;)=delete</td></tr>
+<tr class="separator:adb341b37472241b6da8b552166308d7b inherit pub_methods_classBipedalLocomotion_1_1System_1_1InputPort"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad2637be5c9075a2d8f09fedc6a42d808 inherit pub_methods_classBipedalLocomotion_1_1System_1_1InputPort"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1System_1_1InputPort.html#ad2637be5c9075a2d8f09fedc6a42d808">setInput</a> (const Input &amp;input)=0</td></tr>
+<tr class="memdesc:ad2637be5c9075a2d8f09fedc6a42d808 inherit pub_methods_classBipedalLocomotion_1_1System_1_1InputPort"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the input of the port.  <a href="classBipedalLocomotion_1_1System_1_1InputPort.html#ad2637be5c9075a2d8f09fedc6a42d808">More...</a><br /></td></tr>
+<tr class="separator:ad2637be5c9075a2d8f09fedc6a42d808 inherit pub_methods_classBipedalLocomotion_1_1System_1_1InputPort"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_classBipedalLocomotion_1_1System_1_1OutputPort"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classBipedalLocomotion_1_1System_1_1OutputPort')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classBipedalLocomotion_1_1System_1_1OutputPort.html">BipedalLocomotion::System::OutputPort&lt; _Output &gt;</a></td></tr>
+<tr class="memitem:a0a39b891749961d34507b4b591886741 inherit pub_methods_classBipedalLocomotion_1_1System_1_1OutputPort"><td class="memItemLeft" align="right" valign="top"><a id="a0a39b891749961d34507b4b591886741"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>OutputPort</b> (const <a class="el" href="classBipedalLocomotion_1_1System_1_1OutputPort.html">OutputPort</a> &amp;)=delete</td></tr>
+<tr class="separator:a0a39b891749961d34507b4b591886741 inherit pub_methods_classBipedalLocomotion_1_1System_1_1OutputPort"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a581340f280eca1890a8a7b2331761b57 inherit pub_methods_classBipedalLocomotion_1_1System_1_1OutputPort"><td class="memItemLeft" align="right" valign="top"><a id="a581340f280eca1890a8a7b2331761b57"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>OutputPort</b> (<a class="el" href="classBipedalLocomotion_1_1System_1_1OutputPort.html">OutputPort</a> &amp;&amp;)=delete</td></tr>
+<tr class="separator:a581340f280eca1890a8a7b2331761b57 inherit pub_methods_classBipedalLocomotion_1_1System_1_1OutputPort"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af5e15f5e4962a5c8e0f0c0a49adb9ca1 inherit pub_methods_classBipedalLocomotion_1_1System_1_1OutputPort"><td class="memItemLeft" align="right" valign="top"><a id="af5e15f5e4962a5c8e0f0c0a49adb9ca1"></a>
+<a class="el" href="classBipedalLocomotion_1_1System_1_1OutputPort.html">OutputPort</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator=</b> (const <a class="el" href="classBipedalLocomotion_1_1System_1_1OutputPort.html">OutputPort</a> &amp;)=delete</td></tr>
+<tr class="separator:af5e15f5e4962a5c8e0f0c0a49adb9ca1 inherit pub_methods_classBipedalLocomotion_1_1System_1_1OutputPort"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad5c6ce3ad7d2a064d7bb512fe0bc489e inherit pub_methods_classBipedalLocomotion_1_1System_1_1OutputPort"><td class="memItemLeft" align="right" valign="top"><a id="ad5c6ce3ad7d2a064d7bb512fe0bc489e"></a>
+<a class="el" href="classBipedalLocomotion_1_1System_1_1OutputPort.html">OutputPort</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator=</b> (<a class="el" href="classBipedalLocomotion_1_1System_1_1OutputPort.html">OutputPort</a> &amp;&amp;)=delete</td></tr>
+<tr class="separator:ad5c6ce3ad7d2a064d7bb512fe0bc489e inherit pub_methods_classBipedalLocomotion_1_1System_1_1OutputPort"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
+Additional Inherited Members</h2></td></tr>
+<tr class="inherit_header pub_types_classBipedalLocomotion_1_1System_1_1Advanceable"><td colspan="2" onclick="javascript:toggleInherit('pub_types_classBipedalLocomotion_1_1System_1_1Advanceable')"><img src="closed.png" alt="-"/>&#160;Public Types inherited from <a class="el" href="classBipedalLocomotion_1_1System_1_1Advanceable.html">BipedalLocomotion::System::Advanceable&lt; _Input, _Output &gt;</a></td></tr>
+<tr class="memitem:a975a7ecbf38c917c7b72519581fc7dba inherit pub_types_classBipedalLocomotion_1_1System_1_1Advanceable"><td class="memItemLeft" align="right" valign="top"><a id="a975a7ecbf38c917c7b72519581fc7dba"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>Input</b> = typename <a class="el" href="classBipedalLocomotion_1_1System_1_1InputPort.html">BipedalLocomotion::System::InputPort</a>&lt; _Input &gt;::Input</td></tr>
+<tr class="separator:a975a7ecbf38c917c7b72519581fc7dba inherit pub_types_classBipedalLocomotion_1_1System_1_1Advanceable"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a69603f2c9c608815908425b5b8c2005c inherit pub_types_classBipedalLocomotion_1_1System_1_1Advanceable"><td class="memItemLeft" align="right" valign="top"><a id="a69603f2c9c608815908425b5b8c2005c"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>Output</b> = typename <a class="el" href="classBipedalLocomotion_1_1System_1_1OutputPort.html">BipedalLocomotion::System::OutputPort</a>&lt; _Output &gt;::Output</td></tr>
+<tr class="separator:a69603f2c9c608815908425b5b8c2005c inherit pub_types_classBipedalLocomotion_1_1System_1_1Advanceable"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_types_classBipedalLocomotion_1_1System_1_1InputPort"><td colspan="2" onclick="javascript:toggleInherit('pub_types_classBipedalLocomotion_1_1System_1_1InputPort')"><img src="closed.png" alt="-"/>&#160;Public Types inherited from <a class="el" href="classBipedalLocomotion_1_1System_1_1InputPort.html">BipedalLocomotion::System::InputPort&lt; _Input &gt;</a></td></tr>
+<tr class="memitem:adc7e6f59dd13c49f34ec04c1a4550a5a inherit pub_types_classBipedalLocomotion_1_1System_1_1InputPort"><td class="memItemLeft" align="right" valign="top"><a id="adc7e6f59dd13c49f34ec04c1a4550a5a"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>Input</b> = _Input</td></tr>
+<tr class="separator:adc7e6f59dd13c49f34ec04c1a4550a5a inherit pub_types_classBipedalLocomotion_1_1System_1_1InputPort"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_types_classBipedalLocomotion_1_1System_1_1OutputPort"><td colspan="2" onclick="javascript:toggleInherit('pub_types_classBipedalLocomotion_1_1System_1_1OutputPort')"><img src="closed.png" alt="-"/>&#160;Public Types inherited from <a class="el" href="classBipedalLocomotion_1_1System_1_1OutputPort.html">BipedalLocomotion::System::OutputPort&lt; _Output &gt;</a></td></tr>
+<tr class="memitem:ab9150fecab94a5c4e06bc0579277d8c3 inherit pub_types_classBipedalLocomotion_1_1System_1_1OutputPort"><td class="memItemLeft" align="right" valign="top"><a id="ab9150fecab94a5c4e06bc0579277d8c3"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>Output</b> = _Output</td></tr>
+<tr class="separator:ab9150fecab94a5c4e06bc0579277d8c3 inherit pub_types_classBipedalLocomotion_1_1System_1_1OutputPort"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p><a class="el" href="classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1MultiStateWeightProvider.html" title="MultiStateWeightProvider describes the provider for a constant weight.">MultiStateWeightProvider</a> describes the provider for a constant weight. </p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="ace84e0ce6b637a17819c2ecdb7416118"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ace84e0ce6b637a17819c2ecdb7416118">&#9670;&nbsp;</a></span>getOutput()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const Eigen::VectorXd &amp; MultiStateWeightProvider::getOutput </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get the weight associated to the provider. </p>
+<dl class="section return"><dt>Returns</dt><dd>A vector representing the diagonal matrix of the weight </dd></dl>
+
+<p>Implements <a class="el" href="classBipedalLocomotion_1_1System_1_1OutputPort.html#a8c089ecf2dd8ff0fb2732233994b6cac">BipedalLocomotion::System::OutputPort&lt; _Output &gt;</a>.</p>
+
+</div>
+</div>
+<a id="ab757154b718b90295ff40bfe16adfa56"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab757154b718b90295ff40bfe16adfa56">&#9670;&nbsp;</a></span>initialize()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool MultiStateWeightProvider::initialize </td>
+          <td>(</td>
+          <td class="paramtype">std::weak_ptr&lt; const <a class="el" href="classBipedalLocomotion_1_1ParametersHandler_1_1IParametersHandler.html">ParametersHandler::IParametersHandler</a> &gt;&#160;</td>
+          <td class="paramname"><em>handler</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Initialize constant weight provider. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">handler</td><td>pointer to the parameter handler. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section note"><dt>Note</dt><dd>The following parameters are required: <table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadCenter">Parameter Name   </th><th class="markdownTableHeadCenter">Type   </th><th class="markdownTableHeadCenter">Description   </th><th class="markdownTableHeadCenter">Mandatory    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyCenter"><code>states</code>   </td><td class="markdownTableBodyCenter"><code>vector&lt;string&gt;</code>   </td><td class="markdownTableBodyCenter">Vector associated to the names of the state stored in the provider   </td><td class="markdownTableBodyCenter">Yes    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyCenter"><code>sampling_time</code>   </td><td class="markdownTableBodyCenter"><code>double</code>   </td><td class="markdownTableBodyCenter">Sampling time used to discrete the linear system   </td><td class="markdownTableBodyCenter">Yes    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyCenter"><code>settling_time</code>   </td><td class="markdownTableBodyCenter"><code>double</code>   </td><td class="markdownTableBodyCenter">5% settling time (The settling time, \(T_s\), is the time required for the system output to fall within a certain percentage (i.e. 5%) of the steady-state value for a step input.)   </td><td class="markdownTableBodyCenter">Yes   </td></tr>
+</table>
+</dd></dl>
+<p>For each <code>state</code> defined in <code>states</code>, you should define a Group called <code>state</code> that contains the following parameters </p><table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadCenter">Parameter Name   </th><th class="markdownTableHeadCenter">Type   </th><th class="markdownTableHeadCenter">Description   </th><th class="markdownTableHeadCenter">Mandatory    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyCenter"><code>weight</code>   </td><td class="markdownTableBodyCenter"><code>vector&lt;double&gt;</code>   </td><td class="markdownTableBodyCenter">Vector representing the diagonal matrix of a constant weight   </td><td class="markdownTableBodyCenter">Yes    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyCenter"><code>name</code>   </td><td class="markdownTableBodyCenter"><code>string</code>   </td><td class="markdownTableBodyCenter">Name of the state   </td><td class="markdownTableBodyCenter">Yes   </td></tr>
+</table>
+<dl class="section return"><dt>Returns</dt><dd>true in case of success/false otherwise. </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>the inner dynamical system is initialized with the first <code>state</code> stored in <code>states</code> vector. </dd></dl>
+
+<p>Reimplemented from <a class="el" href="classBipedalLocomotion_1_1System_1_1Advanceable.html#a6db247d3db83217a16e963d01f6bcb77">BipedalLocomotion::System::Advanceable&lt; _Input, _Output &gt;</a>.</p>
+
+</div>
+</div>
+<a id="a490bb9584bac7f7427dd92bdca17085b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a490bb9584bac7f7427dd92bdca17085b">&#9670;&nbsp;</a></span>setState()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool MultiStateWeightProvider::setState </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>state</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Set the state of the provider. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">state</td><td>name of the state. Please notice that the name should be the one passed in the initialization </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true in case of success/false otherwise. </dd></dl>
+
+</div>
+</div>
+<a id="a3105f096b030715de823a31f38ccd31c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3105f096b030715de823a31f38ccd31c">&#9670;&nbsp;</a></span>reset()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool MultiStateWeightProvider::reset </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>state</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Reset the internal weight of the provider. </p>
+<p>This method reset also the value of the dynamical system. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">state</td><td>name of the state. Please notice that the name should be the one passed in the initialization. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true in case of success/false otherwise. </dd></dl>
+
+</div>
+</div>
+<a id="af16a47fab7dfd0fad80658117aac4689"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af16a47fab7dfd0fad80658117aac4689">&#9670;&nbsp;</a></span>advance()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool MultiStateWeightProvider::advance </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Update the content of the weight provider. </p>
+<dl class="section return"><dt>Returns</dt><dd>True in case of success and false otherwise </dd></dl>
+
+<p>Implements <a class="el" href="classBipedalLocomotion_1_1System_1_1Advanceable.html#a67107e46e831d93f572558b541aab6d2">BipedalLocomotion::System::Advanceable&lt; _Input, _Output &gt;</a>.</p>
+
+</div>
+</div>
+<a id="a70a66a96e918ee3b579b3a5fdd4eb2ed"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a70a66a96e918ee3b579b3a5fdd4eb2ed">&#9670;&nbsp;</a></span>isOutputValid()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool MultiStateWeightProvider::isOutputValid </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">final</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Determines the validity of the weight. </p>
+<dl class="section return"><dt>Returns</dt><dd>True if the weight is valid, false otherwise. </dd></dl>
+
+<p>Implements <a class="el" href="classBipedalLocomotion_1_1System_1_1OutputPort.html#ac50de29a6160baa2bba195af9d69430a">BipedalLocomotion::System::OutputPort&lt; _Output &gt;</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following files:<ul>
+<li>ContinuousDynamicalSystem/include/BipedalLocomotion/ContinuousDynamicalSystem/<a class="el" href="MultiStateWeightProvider_8h.html">MultiStateWeightProvider.h</a></li>
+<li>ContinuousDynamicalSystem/src/<a class="el" href="src_2MultiStateWeightProvider_8cpp.html">MultiStateWeightProvider.cpp</a></li>
+</ul>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- Doxygen custom footer -->
+<div id="nav-path" class="navpath">
+  <ul>
+    <li class="footer">
+      <a href="https://github.com/gbionics/bipedal-locomotion-framework">GitHub</a> &bull;
+      <a href="https://gbionics.ai/">Generative Bionics</a> &bull;
+      Licensed under <a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause "New" or "Revised" License</a> &bull;
+      Generated by <a href="https://www.doxygen.org/index.html">Doxygen</a> 1.9.1
+    </li>
+  </ul>
+</div>
 </body>
 </html>

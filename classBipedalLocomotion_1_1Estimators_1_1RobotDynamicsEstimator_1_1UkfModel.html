@@ -1,332 +1,356 @@
-<!DOCTYPE html>
-<html lang="en">
+<!-- HTML header for doxygen 1.9.1 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-  <meta charset="UTF-8" />
-  <title>BipedalLocomotion::Estimators::RobotDynamicsEstimator::UkfModel class | bipedal locomotion framework master</title>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
-  <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
-  <link rel="icon" href="favicon-dark.png" type="image/png" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#22272e" />
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>bipedal locomotion framework: BipedalLocomotion::Estimators::RobotDynamicsEstimator::UkfModel Class Reference</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js", "TeX/AMSmath.js", "TeX/AMSsymbols.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+});
+</script>
+<script type="text/javascript" async="async" src="https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only-darkmode-toggle.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="doxygen-awesome-darkmode-toggle.js"></script>
+<script type="text/javascript" src="doxygen-awesome-fragment-copy-button.js"></script>
+<script type="text/javascript" src="doxygen-awesome-interactive-toc.js"></script>
+<script type="text/javascript" src="doxygen-awesome-paragraph-link.js"></script>
+<script type="text/javascript" src="doxygen-awesome-tabs.js"></script>
+<script type="text/javascript">
+    DoxygenAwesomeDarkModeToggle.init()
+    DoxygenAwesomeFragmentCopyButton.init()
+    DoxygenAwesomeInteractiveToc.init()
+    DoxygenAwesomeParagraphLink.init()
+    DoxygenAwesomeTabs.init()
+</script>
 </head>
 <body>
-<header><nav id="navigation">
-  <div class="m-container">
-    <div class="m-row">
-      <span id="m-navbar-brand" class="m-col-t-8 m-col-m-none m-left-m">
-        <a href="./index.html">bipedal locomotion framework</a> <span class="m-breadcrumb">|</span> <a href="index.html" class="m-thin">master</a>
-      </span>
-      <div class="m-col-t-4 m-hide-m m-text-right m-nopadr">
-        <a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
-          <path id="m-doc-search-icon-path" d="m6 0c-3.31 0-6 2.69-6 6 0 3.31 2.69 6 6 6 1.49 0 2.85-0.541 3.89-1.44-0.0164 0.338 0.147 0.759 0.5 1.15l3.22 3.79c0.552 0.614 1.45 0.665 2 0.115 0.55-0.55 0.499-1.45-0.115-2l-3.79-3.22c-0.392-0.353-0.812-0.515-1.15-0.5 0.895-1.05 1.44-2.41 1.44-3.89 0-3.31-2.69-6-6-6zm0 1.56a4.44 4.44 0 0 1 4.44 4.44 4.44 4.44 0 0 1-4.44 4.44 4.44 4.44 0 0 1-4.44-4.44 4.44 4.44 0 0 1 4.44-4.44z"/>
-        </svg></a>
-        <a id="m-navbar-show" href="#navigation" title="Show navigation"></a>
-        <a id="m-navbar-hide" href="#" title="Hide navigation"></a>
-      </div>
-      <div id="m-navbar-collapse" class="m-col-t-12 m-show-m m-col-m-none m-right-m">
-        <div class="m-row">
-          <ol class="m-col-t-6 m-col-m-none">
-            <li><a href="pages.html">Pages</a></li>
-            <li><a href="annotated.html">Classes</a></li>
-            <li><a href="files.html">Files</a></li>
-          </ol>
-          <ol class="m-col-t-6 m-col-m-none" start="4">
-            <li>
-              <a href="pages.html">Versions</a>
-              <ol>
-                <li><a href="./index.html">Master</a></li>
-                <li><a href="./v0.19.0/index.html">v0.19.0</a></li>
-                <li><a href="./v0.21.1/index.html">v0.21.1</a></li>
-                <li><a href="./v0.18.0/index.html">v0.18.0</a></li>
-              </ol>
-            </li>
-            <li>
-              <a href="pages.html">Contacts</a>
-              <ol>
-                <li><a href="https://github.com/ami-iit/bipedal-locomotion-framework">GitHub</a></li>
-                <li><a href="https://www.iit.it/web/ami/">Lab website</a></li>
-              </ol>
-            </li>
-            <li class="m-show-m"><a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
-              <use href="#m-doc-search-icon-path" />
-            </svg></a></li>
-          </ol>
-        </div>
-      </div>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">bipedal locomotion framework
+   </div>
+   <div id="projectbrief">A suite of libraries for achieving bipedal locomotion on humanoid robots</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.9.1 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "search",false,'Search','.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',true,false,'search.php','Search');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
     </div>
   </div>
-</nav></header>
-<main><article>
-  <div class="m-container m-container-inflatable">
-    <div class="m-row">
-      <div class="m-col-l-10 m-push-l-1">
-        <h1>
-          <span class="m-breadcrumb"><a href="namespaceBipedalLocomotion.html">BipedalLocomotion</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespaceBipedalLocomotion_1_1Estimators.html">Estimators</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespaceBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator.html">RobotDynamicsEstimator</a>::<wbr/></span>UkfModel <span class="m-thin">class</span>
-          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="UkfModel_8h.html">&lt;BipedalLocomotion/RobotDynamicsEstimator/UkfModel.h&gt;</a></div>
-        </h1>
-        <p><a href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1UkfModel.html" class="m-doc">UkfModel</a> is a base class to define the process and measurement model of the UKF.</p>
-        <nav class="m-block m-default">
-          <h3>Contents</h3>
-          <ul>
-            <li>
-              Reference
-              <ul>
-                <li><a href="#pub-methods">Public functions</a></li>
-                <li><a href="#pro-attribs">Protected variables</a></li>
-              </ul>
-            </li>
-          </ul>
-        </nav>
-<p>It includes all the methods shared between the two concrete classes, as the update of the robot dynamics and the robot state.</p>
-        <section id="pub-methods">
-          <h2><a href="#pub-methods">Public functions</a></h2>
-          <dl class="m-doc">
-            <dt id="a5d5f499ca1371198882f5d183d357a61">
-              <span class="m-doc-wrap-bumper">void <a href="#a5d5f499ca1371198882f5d183d357a61" class="m-doc-self">unpackState</a>(</span><span class="m-doc-wrap">)</span>
-            </dt>
-            <dd>unpackState splits the state vector in all the variables composing the state.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#afc428e73466214e61584cf3e21b7edf8" class="m-doc">updateState</a>(</span><span class="m-doc-wrap">) -&gt; bool</span>
-            </dt>
-            <dd>updateState updates the robot state and dynamics and of the sub-model states and dynamics by using the estimation of the previous step.</dd>
-          </dl>
-        </section>
-        <section id="pro-attribs">
-          <h2><a href="#pro-attribs">Protected variables</a></h2>
-          <dl class="m-doc">
-            <dt id="ae9269343763a48d0cb8eae6e6263e152">
-              bool <a href="#ae9269343763a48d0cb8eae6e6263e152" class="m-doc-self">m_isInitialized</a>
-            </dt>
-            <dd><span></span></dd>
-            <dt id="a3ad00191505bf0676c645c7ce60cbcdf">
-              bool <a href="#a3ad00191505bf0676c645c7ce60cbcdf" class="m-doc-self">m_isFinalized</a>
-            </dt>
-            <dd><span></span></dd>
-            <dt id="aa818148e2f570bb922763e203e1f40b8">
-              Eigen::Vector3d <a href="#aa818148e2f570bb922763e203e1f40b8" class="m-doc-self">m_gravity</a>
-            </dt>
-            <dd>Gravity vector.</dd>
-            <dt id="a04cb0fa18b3fa1ad8de5cca9c2771f92">
-              double <a href="#a04cb0fa18b3fa1ad8de5cca9c2771f92" class="m-doc-self">m_dT</a>
-            </dt>
-            <dd>Sampling time.</dd>
-            <dt id="a165ccd067eae37065d220fc9d4305ee4">
-              std::vector&lt;std::pair&lt;std::string, std::shared_ptr&lt;<a href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1Dynamics.html" class="m-doc">Dynamics</a>&gt;&gt;&gt; <a href="#a165ccd067eae37065d220fc9d4305ee4" class="m-doc-self">m_dynamicsList</a>
-            </dt>
-            <dd>List of the dynamics composing the model.</dd>
-            <dt id="a0ff8eb8672d372351c3979544bdec1a8">
-              <a href="classBipedalLocomotion_1_1System_1_1VariablesHandler.html" class="m-doc">System::<wbr />VariablesHandler</a> <a href="#a0ff8eb8672d372351c3979544bdec1a8" class="m-doc-self">m_stateVariableHandler</a>
-            </dt>
-            <dd>Variable handler describing the state vector.</dd>
-            <dt id="a5c372bf0a89bf73e10a564daef81532e">
-              std::shared_ptr&lt;iDynTree::KinDynComputations&gt; <a href="#a5c372bf0a89bf73e10a564daef81532e" class="m-doc-self">m_kinDynFullModel</a>
-            </dt>
-            <dd>KinDynComputation object for the full model.</dd>
-            <dt id="ae4b93a13fdefe2cc008c881f056e6f5f">
-              std::vector&lt;<a href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1SubModel.html" class="m-doc">SubModel</a>&gt; <a href="#ae4b93a13fdefe2cc008c881f056e6f5f" class="m-doc-self">m_subModelList</a>
-            </dt>
-            <dd>List of <a href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1SubModel.html" class="m-doc">SubModel</a> object describing the sub-models composing the full model.</dd>
-            <dt id="a382b1301faf97ba9e82198a78d656b71">
-              std::vector&lt;std::shared_ptr&lt;<a href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1KinDynWrapper.html" class="m-doc">KinDynWrapper</a>&gt;&gt; <a href="#a382b1301faf97ba9e82198a78d656b71" class="m-doc-self">m_kinDynWrapperList</a>
-            </dt>
-            <dd>List of <a href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1KinDynWrapper.html" class="m-doc">KinDynWrapper</a> objects containing kinematic and dynamic information specific of each sub-model.</dd>
-            <dt id="a065686ec840aaf7ca6bff44cbe6936b3">
-              std::shared_ptr&lt;const <a href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1UkfInputProvider.html" class="m-doc">UkfInputProvider</a>&gt; <a href="#a065686ec840aaf7ca6bff44cbe6936b3" class="m-doc-self">m_ukfInputProvider</a>
-            </dt>
-            <dd>Provider containing the updated robot state.</dd>
-            <dt id="aef7b58002ae81a58fd13160d6596e95f">
-              <a href="structBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1UKFInput.html" class="m-doc">UKFInput</a> <a href="#aef7b58002ae81a58fd13160d6596e95f" class="m-doc-self">m_ukfInput</a>
-            </dt>
-            <dd>Struct containing the inputs for the ukf populated by the ukfInputProvider.</dd>
-            <dt id="aedb181b42bc38f0382c31cd1c742b4ac">
-              Eigen::VectorXd <a href="#aedb181b42bc38f0382c31cd1c742b4ac" class="m-doc-self">m_jointVelocityState</a>
-            </dt>
-            <dd>Joint velocity computed by the ukf.</dd>
-            <dt id="aaa9f046c959bc1c7af66a59aacfeb142">
-              Eigen::VectorXd <a href="#aaa9f046c959bc1c7af66a59aacfeb142" class="m-doc-self">m_jointAccelerationState</a>
-            </dt>
-            <dd>Joint acceleration computed from forward dynamics which depends on the current ukf state.</dd>
-            <dt id="ade72744ee60fa02114553d7442303c55">
-              Eigen::VectorXd <a href="#ade72744ee60fa02114553d7442303c55" class="m-doc-self">m_currentState</a>
-            </dt>
-            <dd>State estimated in the previous step.</dd>
-            <dt id="aae2f7c58791ac5dbfad4147281f005bb">
-              std::vector&lt;Eigen::VectorXd&gt; <a href="#aae2f7c58791ac5dbfad4147281f005bb" class="m-doc-self">m_subModelJointPos</a>
-            </dt>
-            <dd>List of sub-model joint velocities.</dd>
-            <dt id="abeff6e82c4906d737a3129168a24ff7c">
-              std::vector&lt;Eigen::VectorXd&gt; <a href="#abeff6e82c4906d737a3129168a24ff7c" class="m-doc-self">m_subModelJointVel</a>
-            </dt>
-            <dd>List of sub-model joint velocities.</dd>
-            <dt id="a58a08a65425056a298bbccd88390aee5">
-              std::vector&lt;Eigen::VectorXd&gt; <a href="#a58a08a65425056a298bbccd88390aee5" class="m-doc-self">m_subModelJointAcc</a>
-            </dt>
-            <dd>List of sub-model joint accelerations.</dd>
-            <dt id="a0bbd53728d980cca3751b417facf3be2">
-              std::vector&lt;Eigen::VectorXd&gt; <a href="#a0bbd53728d980cca3751b417facf3be2" class="m-doc-self">m_subModelNuDot</a>
-            </dt>
-            <dd>List of sub-model accelerations (base + joints = nudot).</dd>
-            <dt id="abfb0d43557d2347267213e521a01900f">
-              std::vector&lt;Eigen::VectorXd&gt; <a href="#abfb0d43557d2347267213e521a01900f" class="m-doc-self">m_subModelJointMotorTorque</a>
-            </dt>
-            <dd>List of sub-model joint motor torques.</dd>
-            <dt id="a8e3e40bd72c08c44e5ee4eb159813ca8">
-              std::vector&lt;Eigen::VectorXd&gt; <a href="#a8e3e40bd72c08c44e5ee4eb159813ca8" class="m-doc-self">m_subModelFrictionTorque</a>
-            </dt>
-            <dd>List of sub-model friction torques.</dd>
-            <dt id="ac8bfa02547adceae46f06ec257829825">
-              std::map&lt;std::string, <a href="Wrench_8h.html#a45559f66740448bbc8253a9816dbef05" class="m-doc">Math::<wbr />Wrenchd</a>&gt; <a href="#ac8bfa02547adceae46f06ec257829825" class="m-doc-self">m_FTMap</a>
-            </dt>
-            <dd>The map contains names of the ft sensors and values of the wrench.</dd>
-            <dt id="a8106ef135d1f19dc85f73b9ed4871b4d">
-              std::map&lt;std::string, <a href="Wrench_8h.html#a45559f66740448bbc8253a9816dbef05" class="m-doc">Math::<wbr />Wrenchd</a>&gt; <a href="#a8106ef135d1f19dc85f73b9ed4871b4d" class="m-doc-self">m_extContactMap</a>
-            </dt>
-            <dd>The map contains names of the ft sensors and values of the wrench.</dd>
-            <dt id="a0d043df9cef91d596f529cac429e9051">
-              std::map&lt;std::string, Eigen::Vector3d&gt; <a href="#a0d043df9cef91d596f529cac429e9051" class="m-doc-self">m_accMap</a>
-            </dt>
-            <dd>The map contains names of the accelerometer sensors and values of the linear accelerations.</dd>
-            <dt id="ac42ee492465bf64a5b4d661637910b7b">
-              std::map&lt;std::string, Eigen::Vector3d&gt; <a href="#ac42ee492465bf64a5b4d661637910b7b" class="m-doc-self">m_gyroMap</a>
-            </dt>
-            <dd>The map contains names of the gyroscope sensors and values of the angular velocities.</dd>
-            <dt id="aa65db7b88ef6d7dcfaa349ed780ee1d9">
-              std::vector&lt;Eigen::VectorXd&gt; <a href="#aa65db7b88ef6d7dcfaa349ed780ee1d9" class="m-doc-self">m_totalTorqueFromContacts</a>
-            </dt>
-            <dd>Joint torques due to known and unknown contacts on the sub-model.</dd>
-            <dt id="ae3f63994e6a20f5a3e6e662f45172514">
-              <a href="Wrench_8h.html#a45559f66740448bbc8253a9816dbef05" class="m-doc">Math::<wbr />Wrenchd</a> <a href="#ae3f63994e6a20f5a3e6e662f45172514" class="m-doc-self">m_wrench</a>
-            </dt>
-            <dd>Joint torques due to a specific contact.</dd>
-            <dt id="a8eb4934ba749d8df6343cc4e5f6a50a6">
-              Eigen::VectorXd <a href="#a8eb4934ba749d8df6343cc4e5f6a50a6" class="m-doc-self">m_measurement</a>
-            </dt>
-            <dd>Measurements coming from the sensors.</dd>
-            <dt id="ad2a1312207b97c964b84ff3f6061fb98">
-              std::map&lt;std::string, Eigen::VectorXd&gt; <a href="#ad2a1312207b97c964b84ff3f6061fb98" class="m-doc-self">m_measurementMap</a>
-            </dt>
-            <dd>Measurement map &lt;measurement name, measurement value&gt;.</dd>
-            <dt id="a8c2be15bfa1ead6529435ffc90e1a6ef">
-              manif::SE3d::Tangent <a href="#a8c2be15bfa1ead6529435ffc90e1a6ef" class="m-doc-self">m_subModelBaseVelTemp</a>
-            </dt>
-            <dd>Velocity of the base of the sub-model.</dd>
-            <dt id="a8b8aac0b3b901b7e0b4800bb4a63d22c">
-              std::vector&lt;Eigen::MatrixXd&gt; <a href="#a8b8aac0b3b901b7e0b4800bb4a63d22c" class="m-doc-self">m_tempJacobianList</a>
-            </dt>
-            <dd>List of jacobians per eache submodel.</dd>
-            <dt id="aedc2b305a7e3f8fba97935c30d1caea4">
-              manif::SE3d <a href="#aedc2b305a7e3f8fba97935c30d1caea4" class="m-doc-self">m_worldTBase</a>
-            </dt>
-            <dd>Sub-model base pose wrt the inertial frame.</dd>
-            <dt id="a48f5c45d6b0cfd0c7f83d034b54619d8">
-              int <a href="#a48f5c45d6b0cfd0c7f83d034b54619d8" class="m-doc-self">m_offsetMeasurement</a>
-            </dt>
-            <dd>Offset used to fill the measurement vector.</dd>
-            <dt>
-              std::map&lt;std::pair&lt;std::string, std::string&gt;, std::string&gt; <a href="#ab87f160dd2789b29686d00b36b1b1eb2" class="m-doc">m_variableNameToUkfState</a>
-            </dt>
-            <dd>Map used to retrieve the name of the variable passed as state and the ukf name.</dd>
-            <dt id="a8361cca08f493ee9490a2a2d9d23cd77">
-              std::map&lt;std::string, std::string&gt; <a href="#a8361cca08f493ee9490a2a2d9d23cd77" class="m-doc-self">m_ukfNamesToMeasures</a>
-            </dt>
-            <dd>Map used to retrieve the name of the variable passed as input and the ukf name.</dd>
-            <dt id="a6cb70819f2e2d3edfcc83be41939c0c6">
-              Eigen::Vector3d <a href="#a6cb70819f2e2d3edfcc83be41939c0c6" class="m-doc-self">m_sensorLinearAcceleration</a>
-            </dt>
-            <dd>Linear acceleration measured by an accelerometer.</dd>
-            <dt id="ae07e71d87519e23aefa80c37a8c2cdd3">
-              Eigen::Vector3d <a href="#ae07e71d87519e23aefa80c37a8c2cdd3" class="m-doc-self">m_bOmegaIB</a>
-            </dt>
-            <dd>Angular velocity of a frame.</dd>
-            <dt id="a0df0965e3843bf895fbfd621130d3c2d">
-              manif::SE3Tangentd <a href="#a0df0965e3843bf895fbfd621130d3c2d" class="m-doc-self">m_tempAccelerometerVelocity</a>
-            </dt>
-            <dd>Velocity of an accelerometer.</dd>
-            <dt id="a22844d91c253a93e173d616147678d5e">
-              manif::SE3Tangentd <a href="#a22844d91c253a93e173d616147678d5e" class="m-doc-self">m_baseVelocity</a>
-            </dt>
-            <dd>Submodel base velocity.</dd>
-            <dt id="a0dea9c04c3631eb8d8d7ddb0435ccead">
-              manif::SE3Tangentd <a href="#a0dea9c04c3631eb8d8d7ddb0435ccead" class="m-doc-self">m_baseAcceleration</a>
-            </dt>
-            <dd>Submodel base acceleration.</dd>
-          </dl>
-        </section>
-        <section>
-          <h2>Function documentation</h2>
-          <section class="m-doc-details" id="afc428e73466214e61584cf3e21b7edf8"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">bool BipedalLocomotion::<wbr />Estimators::<wbr />RobotDynamicsEstimator::<wbr />UkfModel::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#afc428e73466214e61584cf3e21b7edf8" class="m-doc-self">updateState</a>(</span><span class="m-doc-wrap">)</span></span>
-            </h3>
-            <p>updateState updates the robot state and dynamics and of the sub-model states and dynamics by using the estimation of the previous step.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <tfoot>
-                <tr>
-                  <th style="width: 1%">Returns</th>
-                  <td>true in case of success, false otherwise.</td>
-                </tr>
-              </tfoot>
-            </table>
-          </div></section>
-        </section>
-        <section>
-          <h2>Variable documentation</h2>
-          <section class="m-doc-details" id="ab87f160dd2789b29686d00b36b1b1eb2"><div>
-            <h3>
-              std::map&lt;std::pair&lt;std::string, std::string&gt;, std::string&gt; BipedalLocomotion::<wbr />Estimators::<wbr />RobotDynamicsEstimator::<wbr />UkfModel::<wbr /><a href="#ab87f160dd2789b29686d00b36b1b1eb2" class="m-doc-self">m_variableNameToUkfState</a> <span class="m-label m-warning">protected</span>
-            </h3>
-            <p>Map used to retrieve the name of the variable passed as state and the ukf name.</p>
-<p>The key is a pair of &lt;name of the variable in the state vector, sensor type (ft, accelerometer, gyroscope)&gt; and the value is the dynamics group name that is the name used in the configuration file to define the group associated to the dynamics.</p>
-          </div></section>
-        </section>
-      </div>
-    </div>
-  </div>
-</article></main>
-<div class="m-doc-search" id="search">
-  <a href="#!" onclick="return hideSearch()"></a>
-  <div class="m-container">
-    <div class="m-row">
-      <div class="m-col-m-8 m-push-m-2">
-        <div class="m-doc-search-header m-text m-small">
-          <div><span class="m-label m-default">Tab</span> / <span class="m-label m-default">T</span> to search, <span class="m-label m-default">Esc</span> to close</div>
-          <div id="search-symbolcount">&hellip;</div>
-        </div>
-        <div class="m-doc-search-content">
-          <form>
-            <input type="search" name="q" id="search-input" placeholder="Loading &hellip;" disabled="disabled" autofocus="autofocus" autocomplete="off" spellcheck="false" />
-          </form>
-          <noscript class="m-text m-danger m-text-center">Unlike everything else in the docs, the search functionality <em>requires</em> JavaScript.</noscript>
-          <div id="search-help" class="m-text m-dim m-text-center">
-            <p class="m-noindent">Search for symbols, directories, files, pages or
-            modules. You can omit any prefix from the symbol or file path; adding a
-            <code>:</code> or <code>/</code> suffix lists all members of given symbol or
-            directory.</p>
-            <p class="m-noindent">Use <span class="m-label m-dim">&darr;</span>
-            / <span class="m-label m-dim">&uarr;</span> to navigate through the list,
-            <span class="m-label m-dim">Enter</span> to go.
-            <span class="m-label m-dim">Tab</span> autocompletes common prefix, you can
-            copy a link to the result using <span class="m-label m-dim">⌘</span>
-            <span class="m-label m-dim">L</span> while <span class="m-label m-dim">⌘</span>
-            <span class="m-label m-dim">M</span> produces a Markdown link.</p>
-          </div>
-          <div id="search-notfound" class="m-text m-warning m-text-center">Sorry, nothing was found.</div>
-          <ul id="search-results"></ul>
-        </div>
-      </div>
-    </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
   </div>
 </div>
-<script src="search-v2.js"></script>
-<script src="searchdata-v2.js" async="async"></script>
-<footer><nav>
-  <div class="m-container">
-    <div class="m-row">
-      <div class="m-col-l-10 m-push-l-1">
-        <p>bipedal-locomotion-framework documentation. Licensed under the <a href="https://www.gnu.org/licenses/lgpl-3.0.en.html">GNU Lesser General Public License v3.0</a>. Project maintained by the <a href="https://www.iit.it/web/ami/">Artificial and Mechanical Intelligence Lab</a>. Contact the team via <a href="https://github.com/ami-iit/bipedal-locomotion-framework/issues/new">GitHub</a>.<br />Generated by <a href="https://doxygen.org/">Doxygen</a> 1.9.1 and <a href="https://mcss.mosra.cz/">m.css</a>.
-      </div>
-    </div>
-  </div>
-</nav></footer>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(document).ready(function(){initNavTree('classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1UkfModel.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pro-attribs">Protected Attributes</a> &#124;
+<a href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1UkfModel-members.html">List of all members</a>  </div>
+  <div class="headertitle">
+<div class="title">BipedalLocomotion::Estimators::RobotDynamicsEstimator::UkfModel Class Reference</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p><a class="el" href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1UkfModel.html" title="UkfModel is a base class to define the process and measurement model of the UKF.">UkfModel</a> is a base class to define the process and measurement model of the UKF.  
+ <a href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1UkfModel.html#details">More...</a></p>
+
+<p><code>#include &lt;Estimators/include/BipedalLocomotion/RobotDynamicsEstimator/UkfModel.h&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a3ad9ba86916fe7396cafe6a709f55393"><td class="memItemLeft" align="right" valign="top"><a id="a3ad9ba86916fe7396cafe6a709f55393"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1UkfModel.html#a3ad9ba86916fe7396cafe6a709f55393">unpackState</a> ()</td></tr>
+<tr class="memdesc:a3ad9ba86916fe7396cafe6a709f55393"><td class="mdescLeft">&#160;</td><td class="mdescRight">unpackState splits the state vector in all the variables composing the state. <br /></td></tr>
+<tr class="separator:a3ad9ba86916fe7396cafe6a709f55393"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a27f1b4b234770dbb10876401ff9d3fca"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1UkfModel.html#a27f1b4b234770dbb10876401ff9d3fca">updateState</a> ()</td></tr>
+<tr class="memdesc:a27f1b4b234770dbb10876401ff9d3fca"><td class="mdescLeft">&#160;</td><td class="mdescRight">updateState updates the robot state and dynamics and of the sub-model states and dynamics by using the estimation of the previous step.  <a href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1UkfModel.html#a27f1b4b234770dbb10876401ff9d3fca">More...</a><br /></td></tr>
+<tr class="separator:a27f1b4b234770dbb10876401ff9d3fca"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
+Protected Attributes</h2></td></tr>
+<tr class="memitem:ae9269343763a48d0cb8eae6e6263e152"><td class="memItemLeft" align="right" valign="top"><a id="ae9269343763a48d0cb8eae6e6263e152"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>m_isInitialized</b> {false}</td></tr>
+<tr class="separator:ae9269343763a48d0cb8eae6e6263e152"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3ad00191505bf0676c645c7ce60cbcdf"><td class="memItemLeft" align="right" valign="top"><a id="a3ad00191505bf0676c645c7ce60cbcdf"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>m_isFinalized</b> {false}</td></tr>
+<tr class="separator:a3ad00191505bf0676c645c7ce60cbcdf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa818148e2f570bb922763e203e1f40b8"><td class="memItemLeft" align="right" valign="top"><a id="aa818148e2f570bb922763e203e1f40b8"></a>
+Eigen::Vector3d&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1UkfModel.html#aa818148e2f570bb922763e203e1f40b8">m_gravity</a> {0, 0, -Math::StandardAccelerationOfGravitation}</td></tr>
+<tr class="memdesc:aa818148e2f570bb922763e203e1f40b8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gravity vector. <br /></td></tr>
+<tr class="separator:aa818148e2f570bb922763e203e1f40b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a04cb0fa18b3fa1ad8de5cca9c2771f92"><td class="memItemLeft" align="right" valign="top"><a id="a04cb0fa18b3fa1ad8de5cca9c2771f92"></a>
+double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1UkfModel.html#a04cb0fa18b3fa1ad8de5cca9c2771f92">m_dT</a></td></tr>
+<tr class="memdesc:a04cb0fa18b3fa1ad8de5cca9c2771f92"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sampling time. <br /></td></tr>
+<tr class="separator:a04cb0fa18b3fa1ad8de5cca9c2771f92"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a165ccd067eae37065d220fc9d4305ee4"><td class="memItemLeft" align="right" valign="top"><a id="a165ccd067eae37065d220fc9d4305ee4"></a>
+std::vector&lt; std::pair&lt; std::string, std::shared_ptr&lt; <a class="el" href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1Dynamics.html">Dynamics</a> &gt; &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1UkfModel.html#a165ccd067eae37065d220fc9d4305ee4">m_dynamicsList</a></td></tr>
+<tr class="memdesc:a165ccd067eae37065d220fc9d4305ee4"><td class="mdescLeft">&#160;</td><td class="mdescRight">List of the dynamics composing the model. <br /></td></tr>
+<tr class="separator:a165ccd067eae37065d220fc9d4305ee4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0ff8eb8672d372351c3979544bdec1a8"><td class="memItemLeft" align="right" valign="top"><a id="a0ff8eb8672d372351c3979544bdec1a8"></a>
+<a class="el" href="classBipedalLocomotion_1_1System_1_1VariablesHandler.html">System::VariablesHandler</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1UkfModel.html#a0ff8eb8672d372351c3979544bdec1a8">m_stateVariableHandler</a></td></tr>
+<tr class="memdesc:a0ff8eb8672d372351c3979544bdec1a8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Variable handler describing the state vector. <br /></td></tr>
+<tr class="separator:a0ff8eb8672d372351c3979544bdec1a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5c372bf0a89bf73e10a564daef81532e"><td class="memItemLeft" align="right" valign="top"><a id="a5c372bf0a89bf73e10a564daef81532e"></a>
+std::shared_ptr&lt; iDynTree::KinDynComputations &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1UkfModel.html#a5c372bf0a89bf73e10a564daef81532e">m_kinDynFullModel</a></td></tr>
+<tr class="memdesc:a5c372bf0a89bf73e10a564daef81532e"><td class="mdescLeft">&#160;</td><td class="mdescRight">KinDynComputation object for the full model. <br /></td></tr>
+<tr class="separator:a5c372bf0a89bf73e10a564daef81532e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae4b93a13fdefe2cc008c881f056e6f5f"><td class="memItemLeft" align="right" valign="top"><a id="ae4b93a13fdefe2cc008c881f056e6f5f"></a>
+std::vector&lt; <a class="el" href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1SubModel.html">SubModel</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1UkfModel.html#ae4b93a13fdefe2cc008c881f056e6f5f">m_subModelList</a></td></tr>
+<tr class="memdesc:ae4b93a13fdefe2cc008c881f056e6f5f"><td class="mdescLeft">&#160;</td><td class="mdescRight">List of <a class="el" href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1SubModel.html" title="SubModel is a concrete class describing the sub-model object, its model, the list of sensors and the ...">SubModel</a> object describing the sub-models composing the full model. <br /></td></tr>
+<tr class="separator:ae4b93a13fdefe2cc008c881f056e6f5f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a382b1301faf97ba9e82198a78d656b71"><td class="memItemLeft" align="right" valign="top"><a id="a382b1301faf97ba9e82198a78d656b71"></a>
+std::vector&lt; std::shared_ptr&lt; <a class="el" href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1KinDynWrapper.html">KinDynWrapper</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1UkfModel.html#a382b1301faf97ba9e82198a78d656b71">m_kinDynWrapperList</a></td></tr>
+<tr class="memdesc:a382b1301faf97ba9e82198a78d656b71"><td class="mdescLeft">&#160;</td><td class="mdescRight">List of <a class="el" href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1KinDynWrapper.html" title="KinDynWrapper is a concrete class and implements a wrapper of the KinDynComputation class from iDynTr...">KinDynWrapper</a> objects containing kinematic and dynamic information specific of each sub-model. <br /></td></tr>
+<tr class="separator:a382b1301faf97ba9e82198a78d656b71"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a065686ec840aaf7ca6bff44cbe6936b3"><td class="memItemLeft" align="right" valign="top"><a id="a065686ec840aaf7ca6bff44cbe6936b3"></a>
+std::shared_ptr&lt; const <a class="el" href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1UkfInputProvider.html">UkfInputProvider</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1UkfModel.html#a065686ec840aaf7ca6bff44cbe6936b3">m_ukfInputProvider</a></td></tr>
+<tr class="memdesc:a065686ec840aaf7ca6bff44cbe6936b3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provider containing the updated robot state. <br /></td></tr>
+<tr class="separator:a065686ec840aaf7ca6bff44cbe6936b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aef7b58002ae81a58fd13160d6596e95f"><td class="memItemLeft" align="right" valign="top"><a id="aef7b58002ae81a58fd13160d6596e95f"></a>
+<a class="el" href="structBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1UKFInput.html">UKFInput</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1UkfModel.html#aef7b58002ae81a58fd13160d6596e95f">m_ukfInput</a></td></tr>
+<tr class="memdesc:aef7b58002ae81a58fd13160d6596e95f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Struct containing the inputs for the ukf populated by the ukfInputProvider. <br /></td></tr>
+<tr class="separator:aef7b58002ae81a58fd13160d6596e95f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aedb181b42bc38f0382c31cd1c742b4ac"><td class="memItemLeft" align="right" valign="top"><a id="aedb181b42bc38f0382c31cd1c742b4ac"></a>
+Eigen::VectorXd&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1UkfModel.html#aedb181b42bc38f0382c31cd1c742b4ac">m_jointVelocityState</a></td></tr>
+<tr class="memdesc:aedb181b42bc38f0382c31cd1c742b4ac"><td class="mdescLeft">&#160;</td><td class="mdescRight">Joint velocity computed by the ukf. <br /></td></tr>
+<tr class="separator:aedb181b42bc38f0382c31cd1c742b4ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaa9f046c959bc1c7af66a59aacfeb142"><td class="memItemLeft" align="right" valign="top"><a id="aaa9f046c959bc1c7af66a59aacfeb142"></a>
+Eigen::VectorXd&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1UkfModel.html#aaa9f046c959bc1c7af66a59aacfeb142">m_jointAccelerationState</a></td></tr>
+<tr class="memdesc:aaa9f046c959bc1c7af66a59aacfeb142"><td class="mdescLeft">&#160;</td><td class="mdescRight">Joint acceleration computed from forward dynamics which depends on the current ukf state. <br /></td></tr>
+<tr class="separator:aaa9f046c959bc1c7af66a59aacfeb142"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ade72744ee60fa02114553d7442303c55"><td class="memItemLeft" align="right" valign="top"><a id="ade72744ee60fa02114553d7442303c55"></a>
+Eigen::VectorXd&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1UkfModel.html#ade72744ee60fa02114553d7442303c55">m_currentState</a></td></tr>
+<tr class="memdesc:ade72744ee60fa02114553d7442303c55"><td class="mdescLeft">&#160;</td><td class="mdescRight">State estimated in the previous step. <br /></td></tr>
+<tr class="separator:ade72744ee60fa02114553d7442303c55"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aae2f7c58791ac5dbfad4147281f005bb"><td class="memItemLeft" align="right" valign="top"><a id="aae2f7c58791ac5dbfad4147281f005bb"></a>
+std::vector&lt; Eigen::VectorXd &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1UkfModel.html#aae2f7c58791ac5dbfad4147281f005bb">m_subModelJointPos</a></td></tr>
+<tr class="memdesc:aae2f7c58791ac5dbfad4147281f005bb"><td class="mdescLeft">&#160;</td><td class="mdescRight">List of sub-model joint velocities. <br /></td></tr>
+<tr class="separator:aae2f7c58791ac5dbfad4147281f005bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abeff6e82c4906d737a3129168a24ff7c"><td class="memItemLeft" align="right" valign="top"><a id="abeff6e82c4906d737a3129168a24ff7c"></a>
+std::vector&lt; Eigen::VectorXd &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1UkfModel.html#abeff6e82c4906d737a3129168a24ff7c">m_subModelJointVel</a></td></tr>
+<tr class="memdesc:abeff6e82c4906d737a3129168a24ff7c"><td class="mdescLeft">&#160;</td><td class="mdescRight">List of sub-model joint velocities. <br /></td></tr>
+<tr class="separator:abeff6e82c4906d737a3129168a24ff7c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a58a08a65425056a298bbccd88390aee5"><td class="memItemLeft" align="right" valign="top"><a id="a58a08a65425056a298bbccd88390aee5"></a>
+std::vector&lt; Eigen::VectorXd &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1UkfModel.html#a58a08a65425056a298bbccd88390aee5">m_subModelJointAcc</a></td></tr>
+<tr class="memdesc:a58a08a65425056a298bbccd88390aee5"><td class="mdescLeft">&#160;</td><td class="mdescRight">List of sub-model joint accelerations. <br /></td></tr>
+<tr class="separator:a58a08a65425056a298bbccd88390aee5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0bbd53728d980cca3751b417facf3be2"><td class="memItemLeft" align="right" valign="top"><a id="a0bbd53728d980cca3751b417facf3be2"></a>
+std::vector&lt; Eigen::VectorXd &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1UkfModel.html#a0bbd53728d980cca3751b417facf3be2">m_subModelNuDot</a></td></tr>
+<tr class="memdesc:a0bbd53728d980cca3751b417facf3be2"><td class="mdescLeft">&#160;</td><td class="mdescRight">List of sub-model accelerations (base + joints = nudot). <br /></td></tr>
+<tr class="separator:a0bbd53728d980cca3751b417facf3be2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abfb0d43557d2347267213e521a01900f"><td class="memItemLeft" align="right" valign="top"><a id="abfb0d43557d2347267213e521a01900f"></a>
+std::vector&lt; Eigen::VectorXd &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1UkfModel.html#abfb0d43557d2347267213e521a01900f">m_subModelJointMotorTorque</a></td></tr>
+<tr class="memdesc:abfb0d43557d2347267213e521a01900f"><td class="mdescLeft">&#160;</td><td class="mdescRight">List of sub-model joint motor torques. <br /></td></tr>
+<tr class="separator:abfb0d43557d2347267213e521a01900f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8e3e40bd72c08c44e5ee4eb159813ca8"><td class="memItemLeft" align="right" valign="top"><a id="a8e3e40bd72c08c44e5ee4eb159813ca8"></a>
+std::vector&lt; Eigen::VectorXd &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1UkfModel.html#a8e3e40bd72c08c44e5ee4eb159813ca8">m_subModelFrictionTorque</a></td></tr>
+<tr class="memdesc:a8e3e40bd72c08c44e5ee4eb159813ca8"><td class="mdescLeft">&#160;</td><td class="mdescRight">List of sub-model friction torques. <br /></td></tr>
+<tr class="separator:a8e3e40bd72c08c44e5ee4eb159813ca8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac8bfa02547adceae46f06ec257829825"><td class="memItemLeft" align="right" valign="top"><a id="ac8bfa02547adceae46f06ec257829825"></a>
+std::map&lt; std::string, <a class="el" href="Wrench_8h.html#a45559f66740448bbc8253a9816dbef05">Math::Wrenchd</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1UkfModel.html#ac8bfa02547adceae46f06ec257829825">m_FTMap</a></td></tr>
+<tr class="memdesc:ac8bfa02547adceae46f06ec257829825"><td class="mdescLeft">&#160;</td><td class="mdescRight">The map contains names of the ft sensors and values of the wrench. <br /></td></tr>
+<tr class="separator:ac8bfa02547adceae46f06ec257829825"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8106ef135d1f19dc85f73b9ed4871b4d"><td class="memItemLeft" align="right" valign="top"><a id="a8106ef135d1f19dc85f73b9ed4871b4d"></a>
+std::map&lt; std::string, <a class="el" href="Wrench_8h.html#a45559f66740448bbc8253a9816dbef05">Math::Wrenchd</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1UkfModel.html#a8106ef135d1f19dc85f73b9ed4871b4d">m_extContactMap</a></td></tr>
+<tr class="memdesc:a8106ef135d1f19dc85f73b9ed4871b4d"><td class="mdescLeft">&#160;</td><td class="mdescRight">The map contains names of the ft sensors and values of the wrench. <br /></td></tr>
+<tr class="separator:a8106ef135d1f19dc85f73b9ed4871b4d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0d043df9cef91d596f529cac429e9051"><td class="memItemLeft" align="right" valign="top"><a id="a0d043df9cef91d596f529cac429e9051"></a>
+std::map&lt; std::string, Eigen::Vector3d &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1UkfModel.html#a0d043df9cef91d596f529cac429e9051">m_accMap</a></td></tr>
+<tr class="memdesc:a0d043df9cef91d596f529cac429e9051"><td class="mdescLeft">&#160;</td><td class="mdescRight">The map contains names of the accelerometer sensors and values of the linear accelerations. <br /></td></tr>
+<tr class="separator:a0d043df9cef91d596f529cac429e9051"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac42ee492465bf64a5b4d661637910b7b"><td class="memItemLeft" align="right" valign="top"><a id="ac42ee492465bf64a5b4d661637910b7b"></a>
+std::map&lt; std::string, Eigen::Vector3d &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1UkfModel.html#ac42ee492465bf64a5b4d661637910b7b">m_gyroMap</a></td></tr>
+<tr class="memdesc:ac42ee492465bf64a5b4d661637910b7b"><td class="mdescLeft">&#160;</td><td class="mdescRight">The map contains names of the gyroscope sensors and values of the angular velocities. <br /></td></tr>
+<tr class="separator:ac42ee492465bf64a5b4d661637910b7b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa65db7b88ef6d7dcfaa349ed780ee1d9"><td class="memItemLeft" align="right" valign="top"><a id="aa65db7b88ef6d7dcfaa349ed780ee1d9"></a>
+std::vector&lt; Eigen::VectorXd &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1UkfModel.html#aa65db7b88ef6d7dcfaa349ed780ee1d9">m_totalTorqueFromContacts</a></td></tr>
+<tr class="memdesc:aa65db7b88ef6d7dcfaa349ed780ee1d9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Joint torques due to known and unknown contacts on the sub-model. <br /></td></tr>
+<tr class="separator:aa65db7b88ef6d7dcfaa349ed780ee1d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae3f63994e6a20f5a3e6e662f45172514"><td class="memItemLeft" align="right" valign="top"><a id="ae3f63994e6a20f5a3e6e662f45172514"></a>
+<a class="el" href="Wrench_8h.html#a45559f66740448bbc8253a9816dbef05">Math::Wrenchd</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1UkfModel.html#ae3f63994e6a20f5a3e6e662f45172514">m_wrench</a></td></tr>
+<tr class="memdesc:ae3f63994e6a20f5a3e6e662f45172514"><td class="mdescLeft">&#160;</td><td class="mdescRight">Joint torques due to a specific contact. <br /></td></tr>
+<tr class="separator:ae3f63994e6a20f5a3e6e662f45172514"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8eb4934ba749d8df6343cc4e5f6a50a6"><td class="memItemLeft" align="right" valign="top"><a id="a8eb4934ba749d8df6343cc4e5f6a50a6"></a>
+Eigen::VectorXd&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1UkfModel.html#a8eb4934ba749d8df6343cc4e5f6a50a6">m_measurement</a></td></tr>
+<tr class="memdesc:a8eb4934ba749d8df6343cc4e5f6a50a6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Measurements coming from the sensors. <br /></td></tr>
+<tr class="separator:a8eb4934ba749d8df6343cc4e5f6a50a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad2a1312207b97c964b84ff3f6061fb98"><td class="memItemLeft" align="right" valign="top"><a id="ad2a1312207b97c964b84ff3f6061fb98"></a>
+std::map&lt; std::string, Eigen::VectorXd &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1UkfModel.html#ad2a1312207b97c964b84ff3f6061fb98">m_measurementMap</a></td></tr>
+<tr class="memdesc:ad2a1312207b97c964b84ff3f6061fb98"><td class="mdescLeft">&#160;</td><td class="mdescRight">Measurement map &lt;measurement name, measurement value&gt;. <br /></td></tr>
+<tr class="separator:ad2a1312207b97c964b84ff3f6061fb98"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8c2be15bfa1ead6529435ffc90e1a6ef"><td class="memItemLeft" align="right" valign="top"><a id="a8c2be15bfa1ead6529435ffc90e1a6ef"></a>
+manif::SE3d::Tangent&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1UkfModel.html#a8c2be15bfa1ead6529435ffc90e1a6ef">m_subModelBaseVelTemp</a></td></tr>
+<tr class="memdesc:a8c2be15bfa1ead6529435ffc90e1a6ef"><td class="mdescLeft">&#160;</td><td class="mdescRight">Velocity of the base of the sub-model. <br /></td></tr>
+<tr class="separator:a8c2be15bfa1ead6529435ffc90e1a6ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8b8aac0b3b901b7e0b4800bb4a63d22c"><td class="memItemLeft" align="right" valign="top"><a id="a8b8aac0b3b901b7e0b4800bb4a63d22c"></a>
+std::vector&lt; Eigen::MatrixXd &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1UkfModel.html#a8b8aac0b3b901b7e0b4800bb4a63d22c">m_tempJacobianList</a></td></tr>
+<tr class="memdesc:a8b8aac0b3b901b7e0b4800bb4a63d22c"><td class="mdescLeft">&#160;</td><td class="mdescRight">List of jacobians per eache submodel. <br /></td></tr>
+<tr class="separator:a8b8aac0b3b901b7e0b4800bb4a63d22c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aedc2b305a7e3f8fba97935c30d1caea4"><td class="memItemLeft" align="right" valign="top"><a id="aedc2b305a7e3f8fba97935c30d1caea4"></a>
+manif::SE3d&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1UkfModel.html#aedc2b305a7e3f8fba97935c30d1caea4">m_worldTBase</a></td></tr>
+<tr class="memdesc:aedc2b305a7e3f8fba97935c30d1caea4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sub-model base pose wrt the inertial frame. <br /></td></tr>
+<tr class="separator:aedc2b305a7e3f8fba97935c30d1caea4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a48f5c45d6b0cfd0c7f83d034b54619d8"><td class="memItemLeft" align="right" valign="top"><a id="a48f5c45d6b0cfd0c7f83d034b54619d8"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1UkfModel.html#a48f5c45d6b0cfd0c7f83d034b54619d8">m_offsetMeasurement</a></td></tr>
+<tr class="memdesc:a48f5c45d6b0cfd0c7f83d034b54619d8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Offset used to fill the measurement vector. <br /></td></tr>
+<tr class="separator:a48f5c45d6b0cfd0c7f83d034b54619d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab87f160dd2789b29686d00b36b1b1eb2"><td class="memItemLeft" align="right" valign="top">std::map&lt; std::pair&lt; std::string, std::string &gt;, std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1UkfModel.html#ab87f160dd2789b29686d00b36b1b1eb2">m_variableNameToUkfState</a></td></tr>
+<tr class="memdesc:ab87f160dd2789b29686d00b36b1b1eb2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Map used to retrieve the name of the variable passed as state and the ukf name.  <a href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1UkfModel.html#ab87f160dd2789b29686d00b36b1b1eb2">More...</a><br /></td></tr>
+<tr class="separator:ab87f160dd2789b29686d00b36b1b1eb2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8361cca08f493ee9490a2a2d9d23cd77"><td class="memItemLeft" align="right" valign="top"><a id="a8361cca08f493ee9490a2a2d9d23cd77"></a>
+std::map&lt; std::string, std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1UkfModel.html#a8361cca08f493ee9490a2a2d9d23cd77">m_ukfNamesToMeasures</a></td></tr>
+<tr class="memdesc:a8361cca08f493ee9490a2a2d9d23cd77"><td class="mdescLeft">&#160;</td><td class="mdescRight">Map used to retrieve the name of the variable passed as input and the ukf name. <br /></td></tr>
+<tr class="separator:a8361cca08f493ee9490a2a2d9d23cd77"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6cb70819f2e2d3edfcc83be41939c0c6"><td class="memItemLeft" align="right" valign="top"><a id="a6cb70819f2e2d3edfcc83be41939c0c6"></a>
+Eigen::Vector3d&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1UkfModel.html#a6cb70819f2e2d3edfcc83be41939c0c6">m_sensorLinearAcceleration</a></td></tr>
+<tr class="memdesc:a6cb70819f2e2d3edfcc83be41939c0c6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Linear acceleration measured by an accelerometer. <br /></td></tr>
+<tr class="separator:a6cb70819f2e2d3edfcc83be41939c0c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae07e71d87519e23aefa80c37a8c2cdd3"><td class="memItemLeft" align="right" valign="top"><a id="ae07e71d87519e23aefa80c37a8c2cdd3"></a>
+Eigen::Vector3d&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1UkfModel.html#ae07e71d87519e23aefa80c37a8c2cdd3">m_bOmegaIB</a></td></tr>
+<tr class="memdesc:ae07e71d87519e23aefa80c37a8c2cdd3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Angular velocity of a frame. <br /></td></tr>
+<tr class="separator:ae07e71d87519e23aefa80c37a8c2cdd3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0df0965e3843bf895fbfd621130d3c2d"><td class="memItemLeft" align="right" valign="top"><a id="a0df0965e3843bf895fbfd621130d3c2d"></a>
+manif::SE3Tangentd&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1UkfModel.html#a0df0965e3843bf895fbfd621130d3c2d">m_tempAccelerometerVelocity</a></td></tr>
+<tr class="memdesc:a0df0965e3843bf895fbfd621130d3c2d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Velocity of an accelerometer. <br /></td></tr>
+<tr class="separator:a0df0965e3843bf895fbfd621130d3c2d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a22844d91c253a93e173d616147678d5e"><td class="memItemLeft" align="right" valign="top"><a id="a22844d91c253a93e173d616147678d5e"></a>
+manif::SE3Tangentd&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1UkfModel.html#a22844d91c253a93e173d616147678d5e">m_baseVelocity</a></td></tr>
+<tr class="memdesc:a22844d91c253a93e173d616147678d5e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Submodel base velocity. <br /></td></tr>
+<tr class="separator:a22844d91c253a93e173d616147678d5e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0dea9c04c3631eb8d8d7ddb0435ccead"><td class="memItemLeft" align="right" valign="top"><a id="a0dea9c04c3631eb8d8d7ddb0435ccead"></a>
+manif::SE3Tangentd&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1UkfModel.html#a0dea9c04c3631eb8d8d7ddb0435ccead">m_baseAcceleration</a></td></tr>
+<tr class="memdesc:a0dea9c04c3631eb8d8d7ddb0435ccead"><td class="mdescLeft">&#160;</td><td class="mdescRight">Submodel base acceleration. <br /></td></tr>
+<tr class="separator:a0dea9c04c3631eb8d8d7ddb0435ccead"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p><a class="el" href="classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1UkfModel.html" title="UkfModel is a base class to define the process and measurement model of the UKF.">UkfModel</a> is a base class to define the process and measurement model of the UKF. </p>
+<p>It includes all the methods shared between the two concrete classes, as the update of the robot dynamics and the robot state. </p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="a27f1b4b234770dbb10876401ff9d3fca"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a27f1b4b234770dbb10876401ff9d3fca">&#9670;&nbsp;</a></span>updateState()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool UkfModel::updateState </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>updateState updates the robot state and dynamics and of the sub-model states and dynamics by using the estimation of the previous step. </p>
+<dl class="section return"><dt>Returns</dt><dd>true in case of success, false otherwise. </dd></dl>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="ab87f160dd2789b29686d00b36b1b1eb2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab87f160dd2789b29686d00b36b1b1eb2">&#9670;&nbsp;</a></span>m_variableNameToUkfState</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::map&lt;std::pair&lt;std::string, std::string&gt;, std::string&gt; BipedalLocomotion::Estimators::RobotDynamicsEstimator::UkfModel::m_variableNameToUkfState</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Map used to retrieve the name of the variable passed as state and the ukf name. </p>
+<p>The key is a pair of &lt;name of the variable in the state vector, sensor type (ft, accelerometer, gyroscope)&gt; and the value is the dynamics group name that is the name used in the configuration file to define the group associated to the dynamics. </p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following files:<ul>
+<li>Estimators/include/BipedalLocomotion/RobotDynamicsEstimator/<a class="el" href="UkfModel_8h.html">UkfModel.h</a></li>
+<li>Estimators/src/<a class="el" href="UkfModel_8cpp.html">UkfModel.cpp</a></li>
+</ul>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- Doxygen custom footer -->
+<div id="nav-path" class="navpath">
+  <ul>
+    <li class="footer">
+      <a href="https://github.com/gbionics/bipedal-locomotion-framework">GitHub</a> &bull;
+      <a href="https://gbionics.ai/">Generative Bionics</a> &bull;
+      Licensed under <a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause "New" or "Revised" License</a> &bull;
+      Generated by <a href="https://www.doxygen.org/index.html">Doxygen</a> 1.9.1
+    </li>
+  </ul>
+</div>
 </body>
 </html>

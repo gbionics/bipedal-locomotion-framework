@@ -1,368 +1,395 @@
-<!DOCTYPE html>
-<html lang="en">
+<!-- HTML header for doxygen 1.9.1 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-  <meta charset="UTF-8" />
-  <title>BipedalLocomotion::System::AdvanceableRunner class | bipedal locomotion framework master</title>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
-  <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
-  <link rel="icon" href="favicon-dark.png" type="image/png" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#22272e" />
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>bipedal locomotion framework: BipedalLocomotion::System::AdvanceableRunner&lt; _Advanceable &gt; Class Template Reference</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js", "TeX/AMSmath.js", "TeX/AMSsymbols.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+});
+</script>
+<script type="text/javascript" async="async" src="https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only-darkmode-toggle.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="doxygen-awesome-darkmode-toggle.js"></script>
+<script type="text/javascript" src="doxygen-awesome-fragment-copy-button.js"></script>
+<script type="text/javascript" src="doxygen-awesome-interactive-toc.js"></script>
+<script type="text/javascript" src="doxygen-awesome-paragraph-link.js"></script>
+<script type="text/javascript" src="doxygen-awesome-tabs.js"></script>
+<script type="text/javascript">
+    DoxygenAwesomeDarkModeToggle.init()
+    DoxygenAwesomeFragmentCopyButton.init()
+    DoxygenAwesomeInteractiveToc.init()
+    DoxygenAwesomeParagraphLink.init()
+    DoxygenAwesomeTabs.init()
+</script>
 </head>
 <body>
-<header><nav id="navigation">
-  <div class="m-container">
-    <div class="m-row">
-      <span id="m-navbar-brand" class="m-col-t-8 m-col-m-none m-left-m">
-        <a href="./index.html">bipedal locomotion framework</a> <span class="m-breadcrumb">|</span> <a href="index.html" class="m-thin">master</a>
-      </span>
-      <div class="m-col-t-4 m-hide-m m-text-right m-nopadr">
-        <a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
-          <path id="m-doc-search-icon-path" d="m6 0c-3.31 0-6 2.69-6 6 0 3.31 2.69 6 6 6 1.49 0 2.85-0.541 3.89-1.44-0.0164 0.338 0.147 0.759 0.5 1.15l3.22 3.79c0.552 0.614 1.45 0.665 2 0.115 0.55-0.55 0.499-1.45-0.115-2l-3.79-3.22c-0.392-0.353-0.812-0.515-1.15-0.5 0.895-1.05 1.44-2.41 1.44-3.89 0-3.31-2.69-6-6-6zm0 1.56a4.44 4.44 0 0 1 4.44 4.44 4.44 4.44 0 0 1-4.44 4.44 4.44 4.44 0 0 1-4.44-4.44 4.44 4.44 0 0 1 4.44-4.44z"/>
-        </svg></a>
-        <a id="m-navbar-show" href="#navigation" title="Show navigation"></a>
-        <a id="m-navbar-hide" href="#" title="Hide navigation"></a>
-      </div>
-      <div id="m-navbar-collapse" class="m-col-t-12 m-show-m m-col-m-none m-right-m">
-        <div class="m-row">
-          <ol class="m-col-t-6 m-col-m-none">
-            <li><a href="pages.html">Pages</a></li>
-            <li><a href="annotated.html">Classes</a></li>
-            <li><a href="files.html">Files</a></li>
-          </ol>
-          <ol class="m-col-t-6 m-col-m-none" start="4">
-            <li>
-              <a href="pages.html">Versions</a>
-              <ol>
-                <li><a href="./index.html">Master</a></li>
-                <li><a href="./v0.19.0/index.html">v0.19.0</a></li>
-                <li><a href="./v0.21.1/index.html">v0.21.1</a></li>
-                <li><a href="./v0.18.0/index.html">v0.18.0</a></li>
-              </ol>
-            </li>
-            <li>
-              <a href="pages.html">Contacts</a>
-              <ol>
-                <li><a href="https://github.com/ami-iit/bipedal-locomotion-framework">GitHub</a></li>
-                <li><a href="https://www.iit.it/web/ami/">Lab website</a></li>
-              </ol>
-            </li>
-            <li class="m-show-m"><a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
-              <use href="#m-doc-search-icon-path" />
-            </svg></a></li>
-          </ol>
-        </div>
-      </div>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">bipedal locomotion framework
+   </div>
+   <div id="projectbrief">A suite of libraries for achieving bipedal locomotion on humanoid robots</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.9.1 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "search",false,'Search','.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',true,false,'search.php','Search');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
     </div>
   </div>
-</nav></header>
-<main><article>
-  <div class="m-container m-container-inflatable">
-    <div class="m-row">
-      <div class="m-col-l-10 m-push-l-1">
-        <h1>
-          <div class="m-doc-include m-code m-inverted m-right-m m-text-right"><span class="cp">#include</span> <a class="cpf" href="AdvanceableRunner_8h.html">&lt;BipedalLocomotion/System/AdvanceableRunner.h&gt;</a></div>
-          <div class="m-doc-template">template&lt;class _Advanceable&gt;</div>
-          <span class="m-breadcrumb"><a href="namespaceBipedalLocomotion.html">BipedalLocomotion</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespaceBipedalLocomotion_1_1System.html">System</a>::<wbr/></span>AdvanceableRunner <span class="m-thin">class</span>
-        </h1>
-        <p><a href="classBipedalLocomotion_1_1System_1_1AdvanceableRunner.html" class="m-doc">AdvanceableRunner</a> is an helper class that can be used to run a advanceable at a given period.</p>
-        <nav class="m-block m-default">
-          <h3>Contents</h3>
-          <ul>
-            <li>
-              Reference
-              <ul>
-                <li><a href="#pub-types">Public types</a></li>
-                <li><a href="#pub-methods">Public functions</a></li>
-              </ul>
-            </li>
-          </ul>
-        </nav>
-<p>Different AdvanceableRunners can communicate trough the <a href="classBipedalLocomotion_1_1System_1_1SharedResource.html" class="m-doc">SharedResource</a> class. The <a href="classBipedalLocomotion_1_1System_1_1AdvanceableRunner.html" class="m-doc">AdvanceableRunner</a> can be used only with <a href="classBipedalLocomotion_1_1System_1_1Advanceable.html" class="m-doc">Advanceable</a>. Do not try to use if with a class that does not inherit from advanceable, a compile time assert will be thrown. This is a visual example of usage<br /></p><img class="m-image" src="https://user-images.githubusercontent.com/16744101/112768882-7c137280-901e-11eb-8c24-05b7cc3fa5e5.png" alt="Image" /><p>Here we want to run two advanceables in parallel with a different sampling time. The <a href="classBipedalLocomotion_1_1System_1_1AdvanceableRunner.html" class="m-doc">AdvanceableRunner</a> is a class that helps you in creating a periodic thread. The <a href="classBipedalLocomotion_1_1System_1_1SharedResource.html" class="m-doc">SharedResource</a> is the way that can be used to communicate between two advanceables running in separate threads (i.e. the wired between two AdvanceableRunners)</p>
-        <section id="pub-types">
-          <h2><a href="#pub-types">Public types</a></h2>
-          <dl class="m-doc">
-            <dt id="ab8c0fcc548344a3a24e1b02cfa9001f1">
-              using <a href="#ab8c0fcc548344a3a24e1b02cfa9001f1" class="m-doc-self">Input</a> = typename _Advanceable::Input
-            </dt>
-            <dd><span></span></dd>
-            <dt id="aaa44595f1b0aeb91c084b9d9c9e732e2">
-              using <a href="#aaa44595f1b0aeb91c084b9d9c9e732e2" class="m-doc-self">Output</a> = typename _Advanceable::Output
-            </dt>
-            <dd><span></span></dd>
-          </dl>
-        </section>
-        <section id="pub-methods">
-          <h2><a href="#pub-methods">Public functions</a></h2>
-          <dl class="m-doc">
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#aad337626fe1769b56e334e2cb27ea300" class="m-doc">initialize</a>(</span><span class="m-doc-wrap">std::weak_ptr&lt;const <a href="classBipedalLocomotion_1_1ParametersHandler_1_1IParametersHandler.html" class="m-doc">ParametersHandler::<wbr />IParametersHandler</a>&gt; handler) -&gt; bool</span>
-            </dt>
-            <dd>Initialize the <a href="classBipedalLocomotion_1_1System_1_1AdvanceableRunner.html" class="m-doc">AdvanceableRunner</a> class.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a2b043ef9689e24f903c8e0610eb300b2" class="m-doc">setAdvanceable</a>(</span><span class="m-doc-wrap">std::unique_ptr&lt;_Advanceable&gt; advanceable) -&gt; bool</span>
-            </dt>
-            <dd>Set the advanceable inside the runner.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a3d739a55360825588ef53480b166dd51" class="m-doc">setInputResource</a>(</span><span class="m-doc-wrap">std::shared_ptr&lt;<a href="classBipedalLocomotion_1_1System_1_1SharedResource.html" class="m-doc">SharedResource</a>&lt;Input&gt;&gt; resource) -&gt; bool</span>
-            </dt>
-            <dd>Set the input resource.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#afc486d5f4d2c2ff5c4aae4c5037394ce" class="m-doc">setOutputResource</a>(</span><span class="m-doc-wrap">std::shared_ptr&lt;<a href="classBipedalLocomotion_1_1System_1_1SharedResource.html" class="m-doc">SharedResource</a>&lt;Output&gt;&gt; resource) -&gt; bool</span>
-            </dt>
-            <dd>Set the output resource.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a0e209f5ebd347e033ccf5e911e80cfc3" class="m-doc">getInfo</a>(</span><span class="m-doc-wrap">) -&gt; Info</span>
-            </dt>
-            <dd>Get some info of the runner,.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a98e110b9c75dd9cdf8f636de96e5396e" class="m-doc">run</a>(</span><span class="m-doc-wrap">std::shared_ptr&lt;<a href="classBipedalLocomotion_1_1System_1_1Barrier.html" class="m-doc">Barrier</a>&gt; barrier = nullptr) -&gt; std::thread</span>
-            </dt>
-            <dd>Run the advanceable runner.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">void <a href="#a884b552a1c6a2c74db297a48aeb7aeba" class="m-doc">stop</a>(</span><span class="m-doc-wrap">)</span>
-            </dt>
-            <dd>Stop the thread.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a1bec614ffe0fb148df00eb76c8bbeec9" class="m-doc">isRunning</a>(</span><span class="m-doc-wrap">) const -&gt; bool</span>
-            </dt>
-            <dd>Check if the <a href="classBipedalLocomotion_1_1System_1_1AdvanceableRunner.html" class="m-doc">AdvanceableRunner</a> is running.</dd>
-          </dl>
-        </section>
-        <section>
-          <h2>Function documentation</h2>
-          <section class="m-doc-details" id="aad337626fe1769b56e334e2cb27ea300"><div>
-            <h3>
-              <div class="m-doc-template">
-                template&lt;class _Advanceable&gt;
-              </div>
-              <span class="m-doc-wrap-bumper">bool BipedalLocomotion::<wbr />System::<wbr />AdvanceableRunner&lt;_Advanceable&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aad337626fe1769b56e334e2cb27ea300" class="m-doc-self">initialize</a>(</span><span class="m-doc-wrap">std::weak_ptr&lt;const <a href="classBipedalLocomotion_1_1ParametersHandler_1_1IParametersHandler.html" class="m-doc">ParametersHandler::<wbr />IParametersHandler</a>&gt; handler)</span></span>
-            </h3>
-            <p>Initialize the <a href="classBipedalLocomotion_1_1System_1_1AdvanceableRunner.html" class="m-doc">AdvanceableRunner</a> class.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">handler</td>
-                  <td>pointer to a parameter handler</td>
-                </tr>
-              </tbody>
-              <tfoot>
-                <tr>
-                  <th>Returns</th>
-                  <td>true in case of success, false otherwise.</td>
-                </tr>
-              </tfoot>
-            </table>
-<aside class="m-note m-info"><h4>Note</h4><p>The following parameters are required</p><table class="m-table"><thead><tr><th>Parameter Name</th><th>Type</th><th>Description</th><th>Mandatory</th></tr></thead><tbody><tr><td><code>sampling_time</code></td><td><code>double</code></td><td>Strictly positive number representing the sampling time in seconds</td><td>Yes</td></tr><tr><td><code>maximum_number_of_accepted_deadline_miss</code></td><td><code>int</code></td><td>Number of accepted deadline miss. if negative the check is not considered. Default value <code>-1</code></td><td>No</td></tr></tbody></table></aside>
-          </div></section>
-          <section class="m-doc-details" id="a2b043ef9689e24f903c8e0610eb300b2"><div>
-            <h3>
-              <div class="m-doc-template">
-                template&lt;class _Advanceable&gt;
-              </div>
-              <span class="m-doc-wrap-bumper">bool BipedalLocomotion::<wbr />System::<wbr />AdvanceableRunner&lt;_Advanceable&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a2b043ef9689e24f903c8e0610eb300b2" class="m-doc-self">setAdvanceable</a>(</span><span class="m-doc-wrap">std::unique_ptr&lt;_Advanceable&gt; advanceable)</span></span>
-            </h3>
-            <p>Set the advanceable inside the runner.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">advanceable</td>
-                  <td>an unique pointer representing the advanceable</td>
-                </tr>
-              </tbody>
-              <tfoot>
-                <tr>
-                  <th>Returns</th>
-                  <td>true in case of success, false otherwise</td>
-                </tr>
-              </tfoot>
-            </table>
-          </div></section>
-          <section class="m-doc-details" id="a3d739a55360825588ef53480b166dd51"><div>
-            <h3>
-              <div class="m-doc-template">
-                template&lt;class _Advanceable&gt;
-              </div>
-              <span class="m-doc-wrap-bumper">bool BipedalLocomotion::<wbr />System::<wbr />AdvanceableRunner&lt;_Advanceable&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a3d739a55360825588ef53480b166dd51" class="m-doc-self">setInputResource</a>(</span><span class="m-doc-wrap">std::shared_ptr&lt;<a href="classBipedalLocomotion_1_1System_1_1SharedResource.html" class="m-doc">SharedResource</a>&lt;Input&gt;&gt; resource)</span></span>
-            </h3>
-            <p>Set the input resource.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">resource</td>
-                  <td>pointer representing the input resource</td>
-                </tr>
-              </tbody>
-              <tfoot>
-                <tr>
-                  <th>Returns</th>
-                  <td>true in case of success, false otherwise</td>
-                </tr>
-              </tfoot>
-            </table>
-          </div></section>
-          <section class="m-doc-details" id="afc486d5f4d2c2ff5c4aae4c5037394ce"><div>
-            <h3>
-              <div class="m-doc-template">
-                template&lt;class _Advanceable&gt;
-              </div>
-              <span class="m-doc-wrap-bumper">bool BipedalLocomotion::<wbr />System::<wbr />AdvanceableRunner&lt;_Advanceable&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#afc486d5f4d2c2ff5c4aae4c5037394ce" class="m-doc-self">setOutputResource</a>(</span><span class="m-doc-wrap">std::shared_ptr&lt;<a href="classBipedalLocomotion_1_1System_1_1SharedResource.html" class="m-doc">SharedResource</a>&lt;Output&gt;&gt; resource)</span></span>
-            </h3>
-            <p>Set the output resource.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">resource</td>
-                  <td>pointer representing the output resource</td>
-                </tr>
-              </tbody>
-              <tfoot>
-                <tr>
-                  <th>Returns</th>
-                  <td>true in case of success, false otherwise</td>
-                </tr>
-              </tfoot>
-            </table>
-          </div></section>
-          <section class="m-doc-details" id="a0e209f5ebd347e033ccf5e911e80cfc3"><div>
-            <h3>
-              <div class="m-doc-template">
-                template&lt;class _Advanceable&gt;
-              </div>
-              <span class="m-doc-wrap-bumper">Info BipedalLocomotion::<wbr />System::<wbr />AdvanceableRunner&lt;_Advanceable&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a0e209f5ebd347e033ccf5e911e80cfc3" class="m-doc-self">getInfo</a>(</span><span class="m-doc-wrap">)</span></span>
-            </h3>
-            <p>Get some info of the runner,.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <tfoot>
-                <tr>
-                  <th style="width: 1%">Returns</th>
-                  <td>A copy of the Info struct</td>
-                </tr>
-              </tfoot>
-            </table>
-          </div></section>
-          <section class="m-doc-details" id="a98e110b9c75dd9cdf8f636de96e5396e"><div>
-            <h3>
-              <div class="m-doc-template">
-                template&lt;class _Advanceable&gt;
-              </div>
-              <span class="m-doc-wrap-bumper">std::thread BipedalLocomotion::<wbr />System::<wbr />AdvanceableRunner&lt;_Advanceable&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a98e110b9c75dd9cdf8f636de96e5396e" class="m-doc-self">run</a>(</span><span class="m-doc-wrap">std::shared_ptr&lt;<a href="classBipedalLocomotion_1_1System_1_1Barrier.html" class="m-doc">Barrier</a>&gt; barrier = nullptr)</span></span>
-            </h3>
-            <p>Run the advanceable runner.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">barrier</td>
-                  <td>is an optional parameter that can be used to synchronize the startup of all the <a href="classBipedalLocomotion_1_1System_1_1AdvanceableRunner.html" class="m-doc">AdvanceableRunner</a> spawned by the process.</td>
-                </tr>
-              </tbody>
-              <tfoot>
-                <tr>
-                  <th>Returns</th>
-                  <td>a thread of containing the running process. If the runner was not correctly initialized the thread is invalid.</td>
-                </tr>
-              </tfoot>
-            </table>
-<p>The function create a periodic thread running with a period of m_dT seconds.</p>
-          </div></section>
-          <section class="m-doc-details" id="a884b552a1c6a2c74db297a48aeb7aeba"><div>
-            <h3>
-              <div class="m-doc-template">
-                template&lt;class _Advanceable&gt;
-              </div>
-              <span class="m-doc-wrap-bumper">void BipedalLocomotion::<wbr />System::<wbr />AdvanceableRunner&lt;_Advanceable&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a884b552a1c6a2c74db297a48aeb7aeba" class="m-doc-self">stop</a>(</span><span class="m-doc-wrap">)</span></span>
-            </h3>
-            <p>Stop the thread.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <tfoot>
-                <tr>
-                  <th style="width: 1%">Returns</th>
-                  <td>true in case of success, false otherwise</td>
-                </tr>
-              </tfoot>
-            </table>
-          </div></section>
-          <section class="m-doc-details" id="a1bec614ffe0fb148df00eb76c8bbeec9"><div>
-            <h3>
-              <div class="m-doc-template">
-                template&lt;class _Advanceable&gt;
-              </div>
-              <span class="m-doc-wrap-bumper">bool BipedalLocomotion::<wbr />System::<wbr />AdvanceableRunner&lt;_Advanceable&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a1bec614ffe0fb148df00eb76c8bbeec9" class="m-doc-self">isRunning</a>(</span><span class="m-doc-wrap">) const</span></span>
-            </h3>
-            <p>Check if the <a href="classBipedalLocomotion_1_1System_1_1AdvanceableRunner.html" class="m-doc">AdvanceableRunner</a> is running.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <tfoot>
-                <tr>
-                  <th style="width: 1%">Returns</th>
-                  <td>true if the thread is running, false otherwise.</td>
-                </tr>
-              </tfoot>
-            </table>
-          </div></section>
-        </section>
-      </div>
-    </div>
-  </div>
-</article></main>
-<div class="m-doc-search" id="search">
-  <a href="#!" onclick="return hideSearch()"></a>
-  <div class="m-container">
-    <div class="m-row">
-      <div class="m-col-m-8 m-push-m-2">
-        <div class="m-doc-search-header m-text m-small">
-          <div><span class="m-label m-default">Tab</span> / <span class="m-label m-default">T</span> to search, <span class="m-label m-default">Esc</span> to close</div>
-          <div id="search-symbolcount">&hellip;</div>
-        </div>
-        <div class="m-doc-search-content">
-          <form>
-            <input type="search" name="q" id="search-input" placeholder="Loading &hellip;" disabled="disabled" autofocus="autofocus" autocomplete="off" spellcheck="false" />
-          </form>
-          <noscript class="m-text m-danger m-text-center">Unlike everything else in the docs, the search functionality <em>requires</em> JavaScript.</noscript>
-          <div id="search-help" class="m-text m-dim m-text-center">
-            <p class="m-noindent">Search for symbols, directories, files, pages or
-            modules. You can omit any prefix from the symbol or file path; adding a
-            <code>:</code> or <code>/</code> suffix lists all members of given symbol or
-            directory.</p>
-            <p class="m-noindent">Use <span class="m-label m-dim">&darr;</span>
-            / <span class="m-label m-dim">&uarr;</span> to navigate through the list,
-            <span class="m-label m-dim">Enter</span> to go.
-            <span class="m-label m-dim">Tab</span> autocompletes common prefix, you can
-            copy a link to the result using <span class="m-label m-dim">⌘</span>
-            <span class="m-label m-dim">L</span> while <span class="m-label m-dim">⌘</span>
-            <span class="m-label m-dim">M</span> produces a Markdown link.</p>
-          </div>
-          <div id="search-notfound" class="m-text m-warning m-text-center">Sorry, nothing was found.</div>
-          <ul id="search-results"></ul>
-        </div>
-      </div>
-    </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
   </div>
 </div>
-<script src="search-v2.js"></script>
-<script src="searchdata-v2.js" async="async"></script>
-<footer><nav>
-  <div class="m-container">
-    <div class="m-row">
-      <div class="m-col-l-10 m-push-l-1">
-        <p>bipedal-locomotion-framework documentation. Licensed under the <a href="https://www.gnu.org/licenses/lgpl-3.0.en.html">GNU Lesser General Public License v3.0</a>. Project maintained by the <a href="https://www.iit.it/web/ami/">Artificial and Mechanical Intelligence Lab</a>. Contact the team via <a href="https://github.com/ami-iit/bipedal-locomotion-framework/issues/new">GitHub</a>.<br />Generated by <a href="https://doxygen.org/">Doxygen</a> 1.9.1 and <a href="https://mcss.mosra.cz/">m.css</a>.
-      </div>
-    </div>
-  </div>
-</nav></footer>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(document).ready(function(){initNavTree('classBipedalLocomotion_1_1System_1_1AdvanceableRunner.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#nested-classes">Classes</a> &#124;
+<a href="#pub-types">Public Types</a> &#124;
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="classBipedalLocomotion_1_1System_1_1AdvanceableRunner-members.html">List of all members</a>  </div>
+  <div class="headertitle">
+<div class="title">BipedalLocomotion::System::AdvanceableRunner&lt; _Advanceable &gt; Class Template Reference</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p><a class="el" href="classBipedalLocomotion_1_1System_1_1AdvanceableRunner.html" title="AdvanceableRunner is an helper class that can be used to run a advanceable at a given period.">AdvanceableRunner</a> is an helper class that can be used to run a advanceable at a given period.  
+ <a href="classBipedalLocomotion_1_1System_1_1AdvanceableRunner.html#details">More...</a></p>
+
+<p><code>#include &lt;System/include/BipedalLocomotion/System/AdvanceableRunner.h&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
+Public Types</h2></td></tr>
+<tr class="memitem:ab8c0fcc548344a3a24e1b02cfa9001f1"><td class="memItemLeft" align="right" valign="top"><a id="ab8c0fcc548344a3a24e1b02cfa9001f1"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>Input</b> = typename _Advanceable::Input</td></tr>
+<tr class="separator:ab8c0fcc548344a3a24e1b02cfa9001f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaa44595f1b0aeb91c084b9d9c9e732e2"><td class="memItemLeft" align="right" valign="top"><a id="aaa44595f1b0aeb91c084b9d9c9e732e2"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>Output</b> = typename _Advanceable::Output</td></tr>
+<tr class="separator:aaa44595f1b0aeb91c084b9d9c9e732e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:aad337626fe1769b56e334e2cb27ea300"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1System_1_1AdvanceableRunner.html#aad337626fe1769b56e334e2cb27ea300">initialize</a> (std::weak_ptr&lt; const <a class="el" href="classBipedalLocomotion_1_1ParametersHandler_1_1IParametersHandler.html">ParametersHandler::IParametersHandler</a> &gt; handler)</td></tr>
+<tr class="memdesc:aad337626fe1769b56e334e2cb27ea300"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize the <a class="el" href="classBipedalLocomotion_1_1System_1_1AdvanceableRunner.html" title="AdvanceableRunner is an helper class that can be used to run a advanceable at a given period.">AdvanceableRunner</a> class.  <a href="classBipedalLocomotion_1_1System_1_1AdvanceableRunner.html#aad337626fe1769b56e334e2cb27ea300">More...</a><br /></td></tr>
+<tr class="separator:aad337626fe1769b56e334e2cb27ea300"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2b043ef9689e24f903c8e0610eb300b2"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1System_1_1AdvanceableRunner.html#a2b043ef9689e24f903c8e0610eb300b2">setAdvanceable</a> (std::unique_ptr&lt; _Advanceable &gt; advanceable)</td></tr>
+<tr class="memdesc:a2b043ef9689e24f903c8e0610eb300b2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the advanceable inside the runner.  <a href="classBipedalLocomotion_1_1System_1_1AdvanceableRunner.html#a2b043ef9689e24f903c8e0610eb300b2">More...</a><br /></td></tr>
+<tr class="separator:a2b043ef9689e24f903c8e0610eb300b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3d739a55360825588ef53480b166dd51"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1System_1_1AdvanceableRunner.html#a3d739a55360825588ef53480b166dd51">setInputResource</a> (std::shared_ptr&lt; <a class="el" href="classBipedalLocomotion_1_1System_1_1SharedResource.html">SharedResource</a>&lt; Input &gt;&gt; resource)</td></tr>
+<tr class="memdesc:a3d739a55360825588ef53480b166dd51"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the input resource.  <a href="classBipedalLocomotion_1_1System_1_1AdvanceableRunner.html#a3d739a55360825588ef53480b166dd51">More...</a><br /></td></tr>
+<tr class="separator:a3d739a55360825588ef53480b166dd51"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afc486d5f4d2c2ff5c4aae4c5037394ce"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1System_1_1AdvanceableRunner.html#afc486d5f4d2c2ff5c4aae4c5037394ce">setOutputResource</a> (std::shared_ptr&lt; <a class="el" href="classBipedalLocomotion_1_1System_1_1SharedResource.html">SharedResource</a>&lt; Output &gt;&gt; resource)</td></tr>
+<tr class="memdesc:afc486d5f4d2c2ff5c4aae4c5037394ce"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the output resource.  <a href="classBipedalLocomotion_1_1System_1_1AdvanceableRunner.html#afc486d5f4d2c2ff5c4aae4c5037394ce">More...</a><br /></td></tr>
+<tr class="separator:afc486d5f4d2c2ff5c4aae4c5037394ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0e209f5ebd347e033ccf5e911e80cfc3"><td class="memItemLeft" align="right" valign="top">Info&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1System_1_1AdvanceableRunner.html#a0e209f5ebd347e033ccf5e911e80cfc3">getInfo</a> ()</td></tr>
+<tr class="memdesc:a0e209f5ebd347e033ccf5e911e80cfc3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get some info of the runner,.  <a href="classBipedalLocomotion_1_1System_1_1AdvanceableRunner.html#a0e209f5ebd347e033ccf5e911e80cfc3">More...</a><br /></td></tr>
+<tr class="separator:a0e209f5ebd347e033ccf5e911e80cfc3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a98e110b9c75dd9cdf8f636de96e5396e"><td class="memItemLeft" align="right" valign="top">std::thread&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1System_1_1AdvanceableRunner.html#a98e110b9c75dd9cdf8f636de96e5396e">run</a> (std::shared_ptr&lt; <a class="el" href="classBipedalLocomotion_1_1System_1_1Barrier.html">Barrier</a> &gt; barrier=nullptr)</td></tr>
+<tr class="memdesc:a98e110b9c75dd9cdf8f636de96e5396e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Run the advanceable runner.  <a href="classBipedalLocomotion_1_1System_1_1AdvanceableRunner.html#a98e110b9c75dd9cdf8f636de96e5396e">More...</a><br /></td></tr>
+<tr class="separator:a98e110b9c75dd9cdf8f636de96e5396e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a884b552a1c6a2c74db297a48aeb7aeba"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1System_1_1AdvanceableRunner.html#a884b552a1c6a2c74db297a48aeb7aeba">stop</a> ()</td></tr>
+<tr class="memdesc:a884b552a1c6a2c74db297a48aeb7aeba"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stop the thread.  <a href="classBipedalLocomotion_1_1System_1_1AdvanceableRunner.html#a884b552a1c6a2c74db297a48aeb7aeba">More...</a><br /></td></tr>
+<tr class="separator:a884b552a1c6a2c74db297a48aeb7aeba"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1bec614ffe0fb148df00eb76c8bbeec9"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1System_1_1AdvanceableRunner.html#a1bec614ffe0fb148df00eb76c8bbeec9">isRunning</a> () const</td></tr>
+<tr class="memdesc:a1bec614ffe0fb148df00eb76c8bbeec9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if the <a class="el" href="classBipedalLocomotion_1_1System_1_1AdvanceableRunner.html" title="AdvanceableRunner is an helper class that can be used to run a advanceable at a given period.">AdvanceableRunner</a> is running.  <a href="classBipedalLocomotion_1_1System_1_1AdvanceableRunner.html#a1bec614ffe0fb148df00eb76c8bbeec9">More...</a><br /></td></tr>
+<tr class="separator:a1bec614ffe0fb148df00eb76c8bbeec9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><h3>template&lt;class _Advanceable&gt;<br />
+class BipedalLocomotion::System::AdvanceableRunner&lt; _Advanceable &gt;</h3>
+
+<p><a class="el" href="classBipedalLocomotion_1_1System_1_1AdvanceableRunner.html" title="AdvanceableRunner is an helper class that can be used to run a advanceable at a given period.">AdvanceableRunner</a> is an helper class that can be used to run a advanceable at a given period. </p>
+<p>Different AdvanceableRunners can communicate trough the <a class="el" href="classBipedalLocomotion_1_1System_1_1SharedResource.html" title="Basic class that contains a shared resource between two Block classes.">SharedResource</a> class. The <a class="el" href="classBipedalLocomotion_1_1System_1_1AdvanceableRunner.html" title="AdvanceableRunner is an helper class that can be used to run a advanceable at a given period.">AdvanceableRunner</a> can be used only with <a class="el" href="classBipedalLocomotion_1_1System_1_1Advanceable.html" title="Basic class that represents a discrete system.">Advanceable</a>. Do not try to use if with a class that does not inherit from advanceable, a compile time assert will be thrown. This is a visual example of usage <br  />
+ <img src="https://user-images.githubusercontent.com/16744101/112768882-7c137280-901e-11eb-8c24-05b7cc3fa5e5.png" alt="AdvanceableRunner" width="500" class="inline"/> Here we want to run two advanceables in parallel with a different sampling time. The <a class="el" href="classBipedalLocomotion_1_1System_1_1AdvanceableRunner.html" title="AdvanceableRunner is an helper class that can be used to run a advanceable at a given period.">AdvanceableRunner</a> is a class that helps you in creating a periodic thread. The <a class="el" href="classBipedalLocomotion_1_1System_1_1SharedResource.html" title="Basic class that contains a shared resource between two Block classes.">SharedResource</a> is the way that can be used to communicate between two advanceables running in separate threads (i.e. the wired between two AdvanceableRunners) </p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="aad337626fe1769b56e334e2cb27ea300"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aad337626fe1769b56e334e2cb27ea300">&#9670;&nbsp;</a></span>initialize()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class _Advanceable &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="classBipedalLocomotion_1_1System_1_1AdvanceableRunner.html">BipedalLocomotion::System::AdvanceableRunner</a>&lt; _Advanceable &gt;::initialize </td>
+          <td>(</td>
+          <td class="paramtype">std::weak_ptr&lt; const <a class="el" href="classBipedalLocomotion_1_1ParametersHandler_1_1IParametersHandler.html">ParametersHandler::IParametersHandler</a> &gt;&#160;</td>
+          <td class="paramname"><em>handler</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Initialize the <a class="el" href="classBipedalLocomotion_1_1System_1_1AdvanceableRunner.html" title="AdvanceableRunner is an helper class that can be used to run a advanceable at a given period.">AdvanceableRunner</a> class. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">handler</td><td>pointer to a parameter handler </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section note"><dt>Note</dt><dd>The following parameters are required <table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadCenter">Parameter Name   </th><th class="markdownTableHeadCenter">Type   </th><th class="markdownTableHeadCenter">Description   </th><th class="markdownTableHeadCenter">Mandatory    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyCenter"><code>sampling_time</code>   </td><td class="markdownTableBodyCenter"><code>double</code>   </td><td class="markdownTableBodyCenter">Strictly positive number representing the sampling time in seconds   </td><td class="markdownTableBodyCenter">Yes    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyCenter"><code>maximum_number_of_accepted_deadline_miss</code>   </td><td class="markdownTableBodyCenter"><code>int</code>   </td><td class="markdownTableBodyCenter">Number of accepted deadline miss. if negative the check is not considered. Default value <code>-1</code>   </td><td class="markdownTableBodyCenter">No   </td></tr>
+</table>
+</dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>true in case of success, false otherwise. </dd></dl>
+
+</div>
+</div>
+<a id="a2b043ef9689e24f903c8e0610eb300b2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2b043ef9689e24f903c8e0610eb300b2">&#9670;&nbsp;</a></span>setAdvanceable()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class _Advanceable &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="classBipedalLocomotion_1_1System_1_1AdvanceableRunner.html">BipedalLocomotion::System::AdvanceableRunner</a>&lt; _Advanceable &gt;::setAdvanceable </td>
+          <td>(</td>
+          <td class="paramtype">std::unique_ptr&lt; _Advanceable &gt;&#160;</td>
+          <td class="paramname"><em>advanceable</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Set the advanceable inside the runner. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">advanceable</td><td>an unique pointer representing the advanceable </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true in case of success, false otherwise </dd></dl>
+
+</div>
+</div>
+<a id="a3d739a55360825588ef53480b166dd51"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3d739a55360825588ef53480b166dd51">&#9670;&nbsp;</a></span>setInputResource()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class _Advanceable &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="classBipedalLocomotion_1_1System_1_1AdvanceableRunner.html">BipedalLocomotion::System::AdvanceableRunner</a>&lt; _Advanceable &gt;::setInputResource </td>
+          <td>(</td>
+          <td class="paramtype">std::shared_ptr&lt; <a class="el" href="classBipedalLocomotion_1_1System_1_1SharedResource.html">SharedResource</a>&lt; Input &gt;&gt;&#160;</td>
+          <td class="paramname"><em>resource</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Set the input resource. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">resource</td><td>pointer representing the input resource </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true in case of success, false otherwise </dd></dl>
+
+</div>
+</div>
+<a id="afc486d5f4d2c2ff5c4aae4c5037394ce"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afc486d5f4d2c2ff5c4aae4c5037394ce">&#9670;&nbsp;</a></span>setOutputResource()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class _Advanceable &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="classBipedalLocomotion_1_1System_1_1AdvanceableRunner.html">BipedalLocomotion::System::AdvanceableRunner</a>&lt; _Advanceable &gt;::setOutputResource </td>
+          <td>(</td>
+          <td class="paramtype">std::shared_ptr&lt; <a class="el" href="classBipedalLocomotion_1_1System_1_1SharedResource.html">SharedResource</a>&lt; Output &gt;&gt;&#160;</td>
+          <td class="paramname"><em>resource</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Set the output resource. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">resource</td><td>pointer representing the output resource </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true in case of success, false otherwise </dd></dl>
+
+</div>
+</div>
+<a id="a0e209f5ebd347e033ccf5e911e80cfc3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0e209f5ebd347e033ccf5e911e80cfc3">&#9670;&nbsp;</a></span>getInfo()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class _Advanceable &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classBipedalLocomotion_1_1System_1_1AdvanceableRunner.html">AdvanceableRunner</a>&lt; _Advanceable &gt;::Info <a class="el" href="classBipedalLocomotion_1_1System_1_1AdvanceableRunner.html">BipedalLocomotion::System::AdvanceableRunner</a>&lt; _Advanceable &gt;::getInfo</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get some info of the runner,. </p>
+<dl class="section return"><dt>Returns</dt><dd>A copy of the Info struct </dd></dl>
+
+</div>
+</div>
+<a id="a98e110b9c75dd9cdf8f636de96e5396e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a98e110b9c75dd9cdf8f636de96e5396e">&#9670;&nbsp;</a></span>run()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class _Advanceable &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">std::thread <a class="el" href="classBipedalLocomotion_1_1System_1_1AdvanceableRunner.html">BipedalLocomotion::System::AdvanceableRunner</a>&lt; _Advanceable &gt;::run </td>
+          <td>(</td>
+          <td class="paramtype">std::shared_ptr&lt; <a class="el" href="classBipedalLocomotion_1_1System_1_1Barrier.html">Barrier</a> &gt;&#160;</td>
+          <td class="paramname"><em>barrier</em> = <code>nullptr</code></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Run the advanceable runner. </p>
+<p>The function create a periodic thread running with a period of m_dT seconds. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">barrier</td><td>is an optional parameter that can be used to synchronize the startup of all the <a class="el" href="classBipedalLocomotion_1_1System_1_1AdvanceableRunner.html" title="AdvanceableRunner is an helper class that can be used to run a advanceable at a given period.">AdvanceableRunner</a> spawned by the process. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>a thread of containing the running process. If the runner was not correctly initialized the thread is invalid. </dd></dl>
+
+</div>
+</div>
+<a id="a884b552a1c6a2c74db297a48aeb7aeba"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a884b552a1c6a2c74db297a48aeb7aeba">&#9670;&nbsp;</a></span>stop()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class _Advanceable &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classBipedalLocomotion_1_1System_1_1AdvanceableRunner.html">BipedalLocomotion::System::AdvanceableRunner</a>&lt; _Advanceable &gt;::stop</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Stop the thread. </p>
+<dl class="section return"><dt>Returns</dt><dd>true in case of success, false otherwise </dd></dl>
+
+</div>
+</div>
+<a id="a1bec614ffe0fb148df00eb76c8bbeec9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1bec614ffe0fb148df00eb76c8bbeec9">&#9670;&nbsp;</a></span>isRunning()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class _Advanceable &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="classBipedalLocomotion_1_1System_1_1AdvanceableRunner.html">BipedalLocomotion::System::AdvanceableRunner</a>&lt; _Advanceable &gt;::isRunning</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Check if the <a class="el" href="classBipedalLocomotion_1_1System_1_1AdvanceableRunner.html" title="AdvanceableRunner is an helper class that can be used to run a advanceable at a given period.">AdvanceableRunner</a> is running. </p>
+<dl class="section return"><dt>Returns</dt><dd>true if the thread is running, false otherwise. </dd></dl>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following file:<ul>
+<li>System/include/BipedalLocomotion/System/<a class="el" href="AdvanceableRunner_8h.html">AdvanceableRunner.h</a></li>
+</ul>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- Doxygen custom footer -->
+<div id="nav-path" class="navpath">
+  <ul>
+    <li class="footer">
+      <a href="https://github.com/gbionics/bipedal-locomotion-framework">GitHub</a> &bull;
+      <a href="https://gbionics.ai/">Generative Bionics</a> &bull;
+      Licensed under <a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause "New" or "Revised" License</a> &bull;
+      Generated by <a href="https://www.doxygen.org/index.html">Doxygen</a> 1.9.1
+    </li>
+  </ul>
+</div>
 </body>
 </html>

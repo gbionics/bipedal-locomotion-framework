@@ -1,320 +1,361 @@
-<!DOCTYPE html>
-<html lang="en">
+<!-- HTML header for doxygen 1.9.1 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-  <meta charset="UTF-8" />
-  <title>BipedalLocomotion::ContinuousDynamicalSystem::FloatingBaseSystemVelocityKinematics class | bipedal locomotion framework master</title>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
-  <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
-  <link rel="icon" href="favicon-dark.png" type="image/png" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#22272e" />
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>bipedal locomotion framework: BipedalLocomotion::ContinuousDynamicalSystem::FloatingBaseSystemVelocityKinematics Class Reference</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js", "TeX/AMSmath.js", "TeX/AMSsymbols.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+});
+</script>
+<script type="text/javascript" async="async" src="https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only-darkmode-toggle.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="doxygen-awesome-darkmode-toggle.js"></script>
+<script type="text/javascript" src="doxygen-awesome-fragment-copy-button.js"></script>
+<script type="text/javascript" src="doxygen-awesome-interactive-toc.js"></script>
+<script type="text/javascript" src="doxygen-awesome-paragraph-link.js"></script>
+<script type="text/javascript" src="doxygen-awesome-tabs.js"></script>
+<script type="text/javascript">
+    DoxygenAwesomeDarkModeToggle.init()
+    DoxygenAwesomeFragmentCopyButton.init()
+    DoxygenAwesomeInteractiveToc.init()
+    DoxygenAwesomeParagraphLink.init()
+    DoxygenAwesomeTabs.init()
+</script>
 </head>
 <body>
-<header><nav id="navigation">
-  <div class="m-container">
-    <div class="m-row">
-      <span id="m-navbar-brand" class="m-col-t-8 m-col-m-none m-left-m">
-        <a href="./index.html">bipedal locomotion framework</a> <span class="m-breadcrumb">|</span> <a href="index.html" class="m-thin">master</a>
-      </span>
-      <div class="m-col-t-4 m-hide-m m-text-right m-nopadr">
-        <a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
-          <path id="m-doc-search-icon-path" d="m6 0c-3.31 0-6 2.69-6 6 0 3.31 2.69 6 6 6 1.49 0 2.85-0.541 3.89-1.44-0.0164 0.338 0.147 0.759 0.5 1.15l3.22 3.79c0.552 0.614 1.45 0.665 2 0.115 0.55-0.55 0.499-1.45-0.115-2l-3.79-3.22c-0.392-0.353-0.812-0.515-1.15-0.5 0.895-1.05 1.44-2.41 1.44-3.89 0-3.31-2.69-6-6-6zm0 1.56a4.44 4.44 0 0 1 4.44 4.44 4.44 4.44 0 0 1-4.44 4.44 4.44 4.44 0 0 1-4.44-4.44 4.44 4.44 0 0 1 4.44-4.44z"/>
-        </svg></a>
-        <a id="m-navbar-show" href="#navigation" title="Show navigation"></a>
-        <a id="m-navbar-hide" href="#" title="Hide navigation"></a>
-      </div>
-      <div id="m-navbar-collapse" class="m-col-t-12 m-show-m m-col-m-none m-right-m">
-        <div class="m-row">
-          <ol class="m-col-t-6 m-col-m-none">
-            <li><a href="pages.html">Pages</a></li>
-            <li><a href="annotated.html">Classes</a></li>
-            <li><a href="files.html">Files</a></li>
-          </ol>
-          <ol class="m-col-t-6 m-col-m-none" start="4">
-            <li>
-              <a href="pages.html">Versions</a>
-              <ol>
-                <li><a href="./index.html">Master</a></li>
-                <li><a href="./v0.19.0/index.html">v0.19.0</a></li>
-                <li><a href="./v0.21.1/index.html">v0.21.1</a></li>
-                <li><a href="./v0.18.0/index.html">v0.18.0</a></li>
-              </ol>
-            </li>
-            <li>
-              <a href="pages.html">Contacts</a>
-              <ol>
-                <li><a href="https://github.com/ami-iit/bipedal-locomotion-framework">GitHub</a></li>
-                <li><a href="https://www.iit.it/web/ami/">Lab website</a></li>
-              </ol>
-            </li>
-            <li class="m-show-m"><a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
-              <use href="#m-doc-search-icon-path" />
-            </svg></a></li>
-          </ol>
-        </div>
-      </div>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">bipedal locomotion framework
+   </div>
+   <div id="projectbrief">A suite of libraries for achieving bipedal locomotion on humanoid robots</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.9.1 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "search",false,'Search','.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',true,false,'search.php','Search');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
     </div>
   </div>
-</nav></header>
-<main><article>
-  <div class="m-container m-container-inflatable">
-    <div class="m-row">
-      <div class="m-col-l-10 m-push-l-1">
-        <h1>
-          <span class="m-breadcrumb"><a href="namespaceBipedalLocomotion.html">BipedalLocomotion</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespaceBipedalLocomotion_1_1ContinuousDynamicalSystem.html">ContinuousDynamicalSystem</a>::<wbr/></span>FloatingBaseSystemVelocityKinematics <span class="m-thin">class</span>
-          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="FloatingBaseSystemVelocityKinematics_8h.html">&lt;BipedalLocomotion/ContinuousDynamicalSystem/FloatingBaseSystemVelocityKinematics.h&gt;</a></div>
-        </h1>
-        <p><a href="classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1FloatingBaseSystemVelocityKinematics.html" class="m-doc">FloatingBaseSystemVelocityKinematics</a> describes a floating base system kinematics.</p>
-        <nav class="m-block m-default">
-          <h3>Contents</h3>
-          <ul>
-            <li>
-              Reference
-              <ul>
-                <li><a href="#base-classes">Base classes</a></li>
-                <li><a href="#pub-methods">Public functions</a></li>
-              </ul>
-            </li>
-          </ul>
-        </nav>
-<p>The <a href="classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1FloatingBaseSystemVelocityKinematics.html" class="m-doc">FloatingBaseSystemVelocityKinematics</a> inherits from a generic <a href="classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1DynamicalSystem.html" class="m-doc">DynamicalSystem</a> where the State is described by a <a href="structBipedalLocomotion_1_1GenericContainer_1_1named__tuple.html" class="m-doc">BipedalLocomotion::<wbr />GenericContainer::<wbr />named_tuple</a></p><table class="m-table"><thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead><tbody><tr><td><code>p</code></td><td><code>Eigen::Vector3d</code></td><td>Position of the base w.r.t. the inertial frame</td></tr><tr><td><code>R</code></td><td><code>manif::SO3d</code></td><td>Rotation matrix <svg class="m-math" style="width: 1.805em; height: 1.206em; vertical-align: -0.187em;" viewBox="0 -9.784673 17.324483 11.577936">
-<title>
-${}^I R _ {b}$
-</title>
-<defs>
-<path id='eq1-g1-82' d='M4.399502-7.352428C4.507098-7.79477 4.554919-7.81868 5.021171-7.81868H5.881943C6.910087-7.81868 7.675218-7.507846 7.675218-6.575342C7.675218-5.965629 7.364384-4.208219 4.961395-4.208219H3.610461L4.399502-7.352428ZM6.06127-4.064757C7.543711-4.387547 8.703362-5.34396 8.703362-6.372105C8.703362-7.304608 7.758904-8.16538 6.097136-8.16538H2.857285C2.618182-8.16538 2.510585-8.16538 2.510585-7.938232C2.510585-7.81868 2.594271-7.81868 2.82142-7.81868C3.53873-7.81868 3.53873-7.723039 3.53873-7.591532C3.53873-7.567621 3.53873-7.49589 3.490909-7.316563L1.876961-.884682C1.769365-.466252 1.745455-.3467 .920548-.3467C.645579-.3467 .561893-.3467 .561893-.119552C.561893 0 .6934 0 .729265 0C.944458 0 1.195517-.02391 1.422665-.02391H2.833375C3.048568-.02391 3.299626 0 3.514819 0C3.610461 0 3.741968 0 3.741968-.227148C3.741968-.3467 3.634371-.3467 3.455044-.3467C2.725778-.3467 2.725778-.442341 2.725778-.561893C2.725778-.573848 2.725778-.657534 2.749689-.753176L3.550685-3.969116H4.985305C6.121046-3.969116 6.336239-3.251806 6.336239-2.857285C6.336239-2.677958 6.216687-2.211706 6.133001-1.900872C6.001494-1.350934 5.965629-1.219427 5.965629-.992279C5.965629-.143462 6.659029 .251059 7.460025 .251059C8.428394 .251059 8.846824-.932503 8.846824-1.099875C8.846824-1.183562 8.787049-1.219427 8.715318-1.219427C8.619676-1.219427 8.595766-1.147696 8.571856-1.052055C8.284932-.203238 7.79477 .011955 7.49589 .011955S7.005729-.119552 7.005729-.657534C7.005729-.944458 7.149191-2.032379 7.161146-2.092154C7.220922-2.534496 7.220922-2.582316 7.220922-2.677958C7.220922-3.550685 6.515567-3.921295 6.06127-4.064757Z'/>
-<path id='eq1-g0-73' d='M3.092403-4.821918C3.164134-5.100872 3.180075-5.180573 3.777833-5.180573C3.961146-5.180573 4.056787-5.180573 4.056787-5.332005C4.056787-5.339975 4.048817-5.443587 3.921295-5.443587C3.801743-5.443587 3.55467-5.427646 3.427148-5.419676H2.327273C2.215691-5.427646 1.928767-5.443587 1.817186-5.443587C1.785305-5.443587 1.657783-5.443587 1.657783-5.292154C1.657783-5.180573 1.753425-5.180573 1.912827-5.180573C2.414944-5.180573 2.414944-5.132752 2.414944-5.037111C2.414944-5.021171 2.414944-4.98132 2.383064-4.853798L1.323039-.629639C1.251308-.342715 1.227397-.263014 .637609-.263014C.446326-.263014 .358655-.263014 .358655-.111582C.358655-.071731 .390535 0 .486177 0C.597758 0 .860772-.01594 .980324-.02391H2.088169C2.199751-.01594 2.486675 0 2.598257 0C2.646077 0 2.757659 0 2.757659-.151432C2.757659-.263014 2.662017-.263014 2.494645-.263014C2.375093-.263014 2.327273-.263014 2.191781-.278954S1.992528-.302864 1.992528-.390535C1.992528-.430386 2.000498-.430386 2.024408-.541968L3.092403-4.821918Z'/>
-<path id='eq1-g0-98' d='M1.944707-5.292154C1.952677-5.308095 1.976588-5.411706 1.976588-5.419676C1.976588-5.459527 1.944707-5.531258 1.849066-5.531258C1.817186-5.531258 1.570112-5.507347 1.3868-5.491407L.940473-5.459527C.765131-5.443587 .68543-5.435616 .68543-5.292154C.68543-5.180573 .797011-5.180573 .892653-5.180573C1.275218-5.180573 1.275218-5.132752 1.275218-5.061021C1.275218-5.0132 1.195517-4.694396 1.147696-4.511083L.454296-1.737484C.390535-1.466501 .390535-1.346949 .390535-1.211457C.390535-.390535 .892653 .079701 1.506351 .079701C2.486675 .079701 3.506849-1.052055 3.506849-2.207721C3.506849-2.996762 2.996762-3.514819 2.359153-3.514819C1.912827-3.514819 1.570112-3.227895 1.39477-3.076463L1.944707-5.292154ZM1.506351-.143462C1.219427-.143462 .932503-.366625 .932503-.948443C.932503-1.163636 .964384-1.362889 1.060025-1.745455C1.115816-1.976588 1.171606-2.199751 1.235367-2.430884C1.275218-2.574346 1.275218-2.590286 1.370859-2.709838C1.641843-3.044583 2.000498-3.291656 2.335243-3.291656C2.733748-3.291656 2.885181-2.901121 2.885181-2.542466C2.885181-2.247572 2.709838-1.39477 2.470735-.924533C2.263512-.494147 1.880946-.143462 1.506351-.143462Z'/>
-</defs>
-<g id='eq1-page1'>
-<use x='0' y='-4.338437' xlink:href='#eq1-g0-73'/>
-<use x='4.791799' y='0' xlink:href='#eq1-g1-82'/>
-<use x='13.701899' y='1.793263' xlink:href='#eq1-g0-98'/>
-</g>
-</svg>. Matrix that transform a vector whose coordinates are expressed in the base frame in the inertial frame</td></tr><tr><td><code>s</code></td><td><code>Eigen::VectorXd</code></td><td>Joint positions [in rad]</td></tr></tbody></table><p>The <code>StateDerivative</code> is described by a <a href="structBipedalLocomotion_1_1GenericContainer_1_1named__tuple.html" class="m-doc">BipedalLocomotion::<wbr />GenericContainer::<wbr />named_tuple</a></p><table class="m-table"><thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead><tbody><tr><td><code>dp</code></td><td><code>Eigen::Vector3d</code></td><td>Linear velocity of the origin of the base link whose coordinates are expressed in the Inertial frame (MIXED RERPESENTATION)</td></tr><tr><td><code>omega</code></td><td><code>manif::SO3d::Tangent</code></td><td>base angular velocity whose coordinates are expressed in the inertial frame (Left trivialized)</td></tr><tr><td><code>ds</code></td><td><code>Eigen::VectorXd</code></td><td>Joint velocities [in rad/s]</td></tr></tbody></table><p>The <code>Input</code> is described by a <a href="structBipedalLocomotion_1_1GenericContainer_1_1named__tuple.html" class="m-doc">BipedalLocomotion::<wbr />GenericContainer::<wbr />named_tuple</a></p><table class="m-table"><thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead><tbody><tr><td><code>twist</code></td><td><code>Eigen::Matrix&lt;double, 6, 1&gt;</code></td><td>Base twist expressed in mixed representation</td></tr><tr><td><code>ds</code></td><td><code>Eigen::VectorXd</code></td><td>Joint velocities [in rad/s]</td></tr></tbody></table>
-        <section id="base-classes">
-          <h2><a href="#base-classes">Base classes</a></h2>
-          <dl class="m-doc">
-            <dt>
-              <div class="m-doc-template">template&lt;class _Derived&gt;</div>
-              class <a href="classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1DynamicalSystem.html" class="m-doc">DynamicalSystem&lt;FloatingBaseSystemVelocityKinematics&gt;</a>
-            </dt>
-            <dd><a href="classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1DynamicalSystem.html" class="m-doc">DynamicalSystem</a> defines a continuous time dynamical system, i.e.</dd>
-          </dl>
-        </section>
-        <section id="pub-methods">
-          <h2><a href="#pub-methods">Public functions</a></h2>
-          <dl class="m-doc">
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a519a6438653f1c69ebc60b5c1f50a807" class="m-doc">initialize</a>(</span><span class="m-doc-wrap">std::weak_ptr&lt;const <a href="classBipedalLocomotion_1_1ParametersHandler_1_1IParametersHandler.html" class="m-doc">ParametersHandler::<wbr />IParametersHandler</a>&gt; handler) -&gt; bool</span>
-            </dt>
-            <dd>Initialize the Dynamical system.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a8d7edc02c5cadafcd49482ac265dec43" class="m-doc">setState</a>(</span><span class="m-doc-wrap">const <a href="classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1DynamicalSystem.html#abe9655801c0f0a1391619325e571cd57" class="m-doc">State</a>&amp; state) -&gt; bool</span>
-            </dt>
-            <dd>Set the state of the dynamical system.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a9090f9314ea643b92d367e7ffb8ef5df" class="m-doc">getState</a>(</span><span class="m-doc-wrap">) const -&gt; const <a href="classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1DynamicalSystem.html#abe9655801c0f0a1391619325e571cd57" class="m-doc">State</a>&amp;</span>
-            </dt>
-            <dd>Get the state to the dynamical system.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#af178d0f20f8c48d3b5faca10eaaf9afc" class="m-doc">setControlInput</a>(</span><span class="m-doc-wrap">const <a href="classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1DynamicalSystem.html#a4c2a4bbac36e26c14571f79bfd6e4fa7" class="m-doc">Input</a>&amp; controlInput) -&gt; bool</span>
-            </dt>
-            <dd>Set the control input to the dynamical system.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a1e4a874d74195cd564fe670e6816a5ac" class="m-doc">dynamics</a>(</span><span class="m-doc-wrap">const std::chrono::nanoseconds&amp; time,
-              <a href="classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1DynamicalSystem.html#a664a4e9ae349c0b14f83d98a90e52022" class="m-doc">StateDerivative</a>&amp; stateDerivative) -&gt; bool</span>
-            </dt>
-            <dd>Computes the floating based system dynamics.</dd>
-          </dl>
-        </section>
-        <section>
-          <h2>Function documentation</h2>
-          <section class="m-doc-details" id="a519a6438653f1c69ebc60b5c1f50a807"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">bool BipedalLocomotion::<wbr />ContinuousDynamicalSystem::<wbr />FloatingBaseSystemVelocityKinematics::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a519a6438653f1c69ebc60b5c1f50a807" class="m-doc-self">initialize</a>(</span><span class="m-doc-wrap">std::weak_ptr&lt;const <a href="classBipedalLocomotion_1_1ParametersHandler_1_1IParametersHandler.html" class="m-doc">ParametersHandler::<wbr />IParametersHandler</a>&gt; handler)</span></span>
-            </h3>
-            <p>Initialize the Dynamical system.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">handler</td>
-                  <td>pointer to the parameter handler.</td>
-                </tr>
-              </tbody>
-              <tfoot>
-                <tr>
-                  <th>Returns</th>
-                  <td>true in case of success/false otherwise.</td>
-                </tr>
-              </tfoot>
-            </table>
-<aside class="m-note m-info"><h4>Note</h4><p>This function does nothing but it is required for CRTP.</p></aside>
-          </div></section>
-          <section class="m-doc-details" id="a8d7edc02c5cadafcd49482ac265dec43"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">bool BipedalLocomotion::<wbr />ContinuousDynamicalSystem::<wbr />FloatingBaseSystemVelocityKinematics::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a8d7edc02c5cadafcd49482ac265dec43" class="m-doc-self">setState</a>(</span><span class="m-doc-wrap">const <a href="classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1DynamicalSystem.html#abe9655801c0f0a1391619325e571cd57" class="m-doc">State</a>&amp; state)</span></span>
-            </h3>
-            <p>Set the state of the dynamical system.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">state</td>
-                  <td>tuple containing a const reference to the state elements.</td>
-                </tr>
-              </tbody>
-              <tfoot>
-                <tr>
-                  <th>Returns</th>
-                  <td>true in case of success, false otherwise.</td>
-                </tr>
-              </tfoot>
-            </table>
-          </div></section>
-          <section class="m-doc-details" id="a9090f9314ea643b92d367e7ffb8ef5df"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">const <a href="classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1DynamicalSystem.html#abe9655801c0f0a1391619325e571cd57" class="m-doc">State</a>&amp; BipedalLocomotion::<wbr />ContinuousDynamicalSystem::<wbr />FloatingBaseSystemVelocityKinematics::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a9090f9314ea643b92d367e7ffb8ef5df" class="m-doc-self">getState</a>(</span><span class="m-doc-wrap">) const</span></span>
-            </h3>
-            <p>Get the state to the dynamical system.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <tfoot>
-                <tr>
-                  <th style="width: 1%">Returns</th>
-                  <td>the current state of the dynamical system</td>
-                </tr>
-              </tfoot>
-            </table>
-          </div></section>
-          <section class="m-doc-details" id="af178d0f20f8c48d3b5faca10eaaf9afc"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">bool BipedalLocomotion::<wbr />ContinuousDynamicalSystem::<wbr />FloatingBaseSystemVelocityKinematics::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#af178d0f20f8c48d3b5faca10eaaf9afc" class="m-doc-self">setControlInput</a>(</span><span class="m-doc-wrap">const <a href="classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1DynamicalSystem.html#a4c2a4bbac36e26c14571f79bfd6e4fa7" class="m-doc">Input</a>&amp; controlInput)</span></span>
-            </h3>
-            <p>Set the control input to the dynamical system.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">controlInput</td>
-                  <td>the value of the control input used to compute the system dynamics.</td>
-                </tr>
-              </tbody>
-              <tfoot>
-                <tr>
-                  <th>Returns</th>
-                  <td>true in case of success, false otherwise.</td>
-                </tr>
-              </tfoot>
-            </table>
-          </div></section>
-          <section class="m-doc-details" id="a1e4a874d74195cd564fe670e6816a5ac"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">bool BipedalLocomotion::<wbr />ContinuousDynamicalSystem::<wbr />FloatingBaseSystemVelocityKinematics::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a1e4a874d74195cd564fe670e6816a5ac" class="m-doc-self">dynamics</a>(</span><span class="m-doc-wrap">const std::chrono::nanoseconds&amp; time,
-              <a href="classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1DynamicalSystem.html#a664a4e9ae349c0b14f83d98a90e52022" class="m-doc">StateDerivative</a>&amp; stateDerivative)</span></span>
-            </h3>
-            <p>Computes the floating based system dynamics.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">time</td>
-                  <td>the time at witch the dynamics is computed.</td>
-                </tr>
-                <tr>
-                  <td>stateDerivative</td>
-                  <td></td>
-                </tr>
-              </tbody>
-              <tfoot>
-                <tr>
-                  <th>Returns</th>
-                  <td>true in case of success, false otherwise.</td>
-                </tr>
-              </tfoot>
-            </table>
-<p>It return <svg class="m-math" style="width: 4.602em; height: 1.245em; vertical-align: -0.312em;" viewBox="0 -8.966376 44.181092 11.955168">
-<title>
-$f(x, u, t)$
-</title>
-<defs>
-<path id='eq2-g1-40' d='M3.88543 2.905106C3.88543 2.86924 3.88543 2.84533 3.682192 2.642092C2.486675 1.43462 1.817186-.537983 1.817186-2.976837C1.817186-5.296139 2.379078-7.292653 3.765878-8.703362C3.88543-8.810959 3.88543-8.834869 3.88543-8.870735C3.88543-8.942466 3.825654-8.966376 3.777833-8.966376C3.622416-8.966376 2.642092-8.105604 2.056289-6.933998C1.446575-5.726526 1.171606-4.447323 1.171606-2.976837C1.171606-1.912827 1.338979-.490162 1.960648 .789041C2.666002 2.223661 3.646326 3.000747 3.777833 3.000747C3.825654 3.000747 3.88543 2.976837 3.88543 2.905106Z'/>
-<path id='eq2-g1-41' d='M3.371357-2.976837C3.371357-3.88543 3.251806-5.36787 2.582316-6.75467C1.876961-8.18929 .896638-8.966376 .765131-8.966376C.71731-8.966376 .657534-8.942466 .657534-8.870735C.657534-8.834869 .657534-8.810959 .860772-8.607721C2.056289-7.400249 2.725778-5.427646 2.725778-2.988792C2.725778-.669489 2.163885 1.327024 .777086 2.737733C.657534 2.84533 .657534 2.86924 .657534 2.905106C.657534 2.976837 .71731 3.000747 .765131 3.000747C.920548 3.000747 1.900872 2.139975 2.486675 .968369C3.096389-.251059 3.371357-1.542217 3.371357-2.976837Z'/>
-<path id='eq2-g0-59' d='M2.331258 .047821C2.331258-.645579 2.10411-1.159651 1.613948-1.159651C1.231382-1.159651 1.0401-.848817 1.0401-.585803S1.219427 0 1.625903 0C1.78132 0 1.912827-.047821 2.020423-.155417C2.044334-.179328 2.056289-.179328 2.068244-.179328C2.092154-.179328 2.092154-.011955 2.092154 .047821C2.092154 .442341 2.020423 1.219427 1.327024 1.996513C1.195517 2.139975 1.195517 2.163885 1.195517 2.187796C1.195517 2.247572 1.255293 2.307347 1.315068 2.307347C1.41071 2.307347 2.331258 1.422665 2.331258 .047821Z'/>
-<path id='eq2-g0-102' d='M5.332005-4.805978C5.571108-4.805978 5.66675-4.805978 5.66675-5.033126C5.66675-5.152677 5.571108-5.152677 5.355915-5.152677H4.387547C4.614695-6.38406 4.782067-7.232877 4.877709-7.615442C4.94944-7.902366 5.200498-8.177335 5.511333-8.177335C5.762391-8.177335 6.01345-8.069738 6.133001-7.962142C5.66675-7.914321 5.523288-7.567621 5.523288-7.364384C5.523288-7.12528 5.702615-6.981818 5.929763-6.981818C6.168867-6.981818 6.527522-7.185056 6.527522-7.639352C6.527522-8.141469 6.025405-8.416438 5.499377-8.416438C4.985305-8.416438 4.483188-8.033873 4.244085-7.567621C4.028892-7.149191 3.90934-6.718804 3.634371-5.152677H2.833375C2.606227-5.152677 2.486675-5.152677 2.486675-4.937484C2.486675-4.805978 2.558406-4.805978 2.797509-4.805978H3.56264C3.347447-3.694147 2.857285-.992279 2.582316 .286924C2.379078 1.327024 2.199751 2.199751 1.601993 2.199751C1.566127 2.199751 1.219427 2.199751 1.004234 1.972603C1.613948 1.924782 1.613948 1.398755 1.613948 1.3868C1.613948 1.147696 1.43462 1.004234 1.207472 1.004234C.968369 1.004234 .609714 1.207472 .609714 1.661768C.609714 2.175841 1.135741 2.438854 1.601993 2.438854C2.82142 2.438854 3.323537 .251059 3.455044-.3467C3.670237-1.267248 4.25604-4.447323 4.315816-4.805978H5.332005Z'/>
-<path id='eq2-g0-116' d='M2.402989-4.805978H3.502864C3.730012-4.805978 3.849564-4.805978 3.849564-5.021171C3.849564-5.152677 3.777833-5.152677 3.53873-5.152677H2.486675L2.929016-6.898132C2.976837-7.065504 2.976837-7.089415 2.976837-7.173101C2.976837-7.364384 2.82142-7.47198 2.666002-7.47198C2.570361-7.47198 2.295392-7.436115 2.199751-7.053549L1.733499-5.152677H.609714C.37061-5.152677 .263014-5.152677 .263014-4.925529C.263014-4.805978 .3467-4.805978 .573848-4.805978H1.637858L.848817-1.649813C.753176-1.231382 .71731-1.111831 .71731-.956413C.71731-.394521 1.111831 .119552 1.78132 .119552C2.988792 .119552 3.634371-1.625903 3.634371-1.709589C3.634371-1.78132 3.58655-1.817186 3.514819-1.817186C3.490909-1.817186 3.443088-1.817186 3.419178-1.769365C3.407223-1.75741 3.395268-1.745455 3.311582-1.554172C3.060523-.956413 2.510585-.119552 1.817186-.119552C1.458531-.119552 1.43462-.418431 1.43462-.681445C1.43462-.6934 1.43462-.920548 1.470486-1.06401L2.402989-4.805978Z'/>
-<path id='eq2-g0-117' d='M4.076712-.6934C4.23213-.02391 4.805978 .119552 5.092902 .119552C5.475467 .119552 5.762391-.131507 5.953674-.537983C6.156912-.968369 6.312329-1.673724 6.312329-1.709589C6.312329-1.769365 6.264508-1.817186 6.192777-1.817186C6.085181-1.817186 6.073225-1.75741 6.025405-1.578082C5.810212-.753176 5.595019-.119552 5.116812-.119552C4.758157-.119552 4.758157-.514072 4.758157-.669489C4.758157-.944458 4.794022-1.06401 4.913574-1.566127C4.99726-1.888917 5.080946-2.211706 5.152677-2.546451L5.642839-4.495143C5.726526-4.794022 5.726526-4.817933 5.726526-4.853798C5.726526-5.033126 5.583064-5.152677 5.403736-5.152677C5.057036-5.152677 4.97335-4.853798 4.901619-4.554919C4.782067-4.088667 4.136488-1.518306 4.052802-1.099875C4.040847-1.099875 3.574595-.119552 2.701868-.119552C2.080199-.119552 1.960648-.657534 1.960648-1.099875C1.960648-1.78132 2.295392-2.737733 2.606227-3.53873C2.749689-3.921295 2.809465-4.076712 2.809465-4.315816C2.809465-4.829888 2.438854-5.272229 1.865006-5.272229C.765131-5.272229 .32279-3.53873 .32279-3.443088C.32279-3.395268 .37061-3.335492 .454296-3.335492C.561893-3.335492 .573848-3.383313 .621669-3.550685C.908593-4.578829 1.374844-5.033126 1.829141-5.033126C1.948692-5.033126 2.139975-5.021171 2.139975-4.638605C2.139975-4.327771 2.008468-3.981071 1.829141-3.526775C1.303113-2.10411 1.243337-1.649813 1.243337-1.291158C1.243337-.071731 2.163885 .119552 2.654047 .119552C3.419178 .119552 3.837609-.406476 4.076712-.6934Z'/>
-<path id='eq2-g0-120' d='M5.66675-4.877709C5.284184-4.805978 5.140722-4.519054 5.140722-4.291905C5.140722-4.004981 5.36787-3.90934 5.535243-3.90934C5.893898-3.90934 6.144956-4.220174 6.144956-4.542964C6.144956-5.045081 5.571108-5.272229 5.068991-5.272229C4.339726-5.272229 3.93325-4.554919 3.825654-4.327771C3.550685-5.224408 2.809465-5.272229 2.594271-5.272229C1.374844-5.272229 .729265-3.706102 .729265-3.443088C.729265-3.395268 .777086-3.335492 .860772-3.335492C.956413-3.335492 .980324-3.407223 1.004234-3.455044C1.41071-4.782067 2.211706-5.033126 2.558406-5.033126C3.096389-5.033126 3.203985-4.531009 3.203985-4.244085C3.203985-3.981071 3.132254-3.706102 2.988792-3.132254L2.582316-1.494396C2.402989-.777086 2.056289-.119552 1.422665-.119552C1.362889-.119552 1.06401-.119552 .812951-.274969C1.243337-.358655 1.338979-.71731 1.338979-.860772C1.338979-1.099875 1.159651-1.243337 .932503-1.243337C.645579-1.243337 .334745-.992279 .334745-.609714C.334745-.107597 .896638 .119552 1.41071 .119552C1.984558 .119552 2.391034-.334745 2.642092-.824907C2.833375-.119552 3.431133 .119552 3.873474 .119552C5.092902 .119552 5.738481-1.446575 5.738481-1.709589C5.738481-1.769365 5.69066-1.817186 5.618929-1.817186C5.511333-1.817186 5.499377-1.75741 5.463512-1.661768C5.140722-.609714 4.447323-.119552 3.90934-.119552C3.490909-.119552 3.263761-.430386 3.263761-.920548C3.263761-1.183562 3.311582-1.374844 3.502864-2.163885L3.921295-3.789788C4.100623-4.507098 4.507098-5.033126 5.057036-5.033126C5.080946-5.033126 5.415691-5.033126 5.66675-4.877709Z'/>
-</defs>
-<g id='eq2-page1'>
-<use x='0' y='0' xlink:href='#eq2-g0-102'/>
-<use x='7.046437' y='0' xlink:href='#eq2-g1-40'/>
-<use x='11.598762' y='0' xlink:href='#eq2-g0-120'/>
-<use x='18.250849' y='0' xlink:href='#eq2-g0-59'/>
-<use x='23.495008' y='0' xlink:href='#eq2-g0-117'/>
-<use x='30.157448' y='0' xlink:href='#eq2-g0-59'/>
-<use x='35.401607' y='0' xlink:href='#eq2-g0-116'/>
-<use x='39.628766' y='0' xlink:href='#eq2-g1-41'/>
-</g>
-</svg>.</p><aside class="m-note m-info"><h4>Note</h4><p>The control input and the state have to be set separately with the methods setControlInput and setState.</p></aside>
-          </div></section>
-        </section>
-      </div>
-    </div>
-  </div>
-</article></main>
-<div class="m-doc-search" id="search">
-  <a href="#!" onclick="return hideSearch()"></a>
-  <div class="m-container">
-    <div class="m-row">
-      <div class="m-col-m-8 m-push-m-2">
-        <div class="m-doc-search-header m-text m-small">
-          <div><span class="m-label m-default">Tab</span> / <span class="m-label m-default">T</span> to search, <span class="m-label m-default">Esc</span> to close</div>
-          <div id="search-symbolcount">&hellip;</div>
-        </div>
-        <div class="m-doc-search-content">
-          <form>
-            <input type="search" name="q" id="search-input" placeholder="Loading &hellip;" disabled="disabled" autofocus="autofocus" autocomplete="off" spellcheck="false" />
-          </form>
-          <noscript class="m-text m-danger m-text-center">Unlike everything else in the docs, the search functionality <em>requires</em> JavaScript.</noscript>
-          <div id="search-help" class="m-text m-dim m-text-center">
-            <p class="m-noindent">Search for symbols, directories, files, pages or
-            modules. You can omit any prefix from the symbol or file path; adding a
-            <code>:</code> or <code>/</code> suffix lists all members of given symbol or
-            directory.</p>
-            <p class="m-noindent">Use <span class="m-label m-dim">&darr;</span>
-            / <span class="m-label m-dim">&uarr;</span> to navigate through the list,
-            <span class="m-label m-dim">Enter</span> to go.
-            <span class="m-label m-dim">Tab</span> autocompletes common prefix, you can
-            copy a link to the result using <span class="m-label m-dim">⌘</span>
-            <span class="m-label m-dim">L</span> while <span class="m-label m-dim">⌘</span>
-            <span class="m-label m-dim">M</span> produces a Markdown link.</p>
-          </div>
-          <div id="search-notfound" class="m-text m-warning m-text-center">Sorry, nothing was found.</div>
-          <ul id="search-results"></ul>
-        </div>
-      </div>
-    </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
   </div>
 </div>
-<script src="search-v2.js"></script>
-<script src="searchdata-v2.js" async="async"></script>
-<footer><nav>
-  <div class="m-container">
-    <div class="m-row">
-      <div class="m-col-l-10 m-push-l-1">
-        <p>bipedal-locomotion-framework documentation. Licensed under the <a href="https://www.gnu.org/licenses/lgpl-3.0.en.html">GNU Lesser General Public License v3.0</a>. Project maintained by the <a href="https://www.iit.it/web/ami/">Artificial and Mechanical Intelligence Lab</a>. Contact the team via <a href="https://github.com/ami-iit/bipedal-locomotion-framework/issues/new">GitHub</a>.<br />Generated by <a href="https://doxygen.org/">Doxygen</a> 1.9.1 and <a href="https://mcss.mosra.cz/">m.css</a>.
-      </div>
-    </div>
-  </div>
-</nav></footer>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(document).ready(function(){initNavTree('classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1FloatingBaseSystemVelocityKinematics.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1FloatingBaseSystemVelocityKinematics-members.html">List of all members</a>  </div>
+  <div class="headertitle">
+<div class="title">BipedalLocomotion::ContinuousDynamicalSystem::FloatingBaseSystemVelocityKinematics Class Reference</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p><a class="el" href="classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1FloatingBaseSystemVelocityKinematics.html" title="FloatingBaseSystemVelocityKinematics describes a floating base system kinematics.">FloatingBaseSystemVelocityKinematics</a> describes a floating base system kinematics.  
+ <a href="classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1FloatingBaseSystemVelocityKinematics.html#details">More...</a></p>
+
+<p><code>#include &lt;ContinuousDynamicalSystem/include/BipedalLocomotion/ContinuousDynamicalSystem/FloatingBaseSystemVelocityKinematics.h&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:ac42cbb259b326edfd73fbfe8471cb22d"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1FloatingBaseSystemVelocityKinematics.html#ac42cbb259b326edfd73fbfe8471cb22d">initialize</a> (std::weak_ptr&lt; const <a class="el" href="classBipedalLocomotion_1_1ParametersHandler_1_1IParametersHandler.html">ParametersHandler::IParametersHandler</a> &gt; handler)</td></tr>
+<tr class="memdesc:ac42cbb259b326edfd73fbfe8471cb22d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize the Dynamical system.  <a href="classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1FloatingBaseSystemVelocityKinematics.html#ac42cbb259b326edfd73fbfe8471cb22d">More...</a><br /></td></tr>
+<tr class="separator:ac42cbb259b326edfd73fbfe8471cb22d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a93fd526dbbeedb0c83b41a79aaa5fff9"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1FloatingBaseSystemVelocityKinematics.html#a93fd526dbbeedb0c83b41a79aaa5fff9">setState</a> (const <a class="el" href="classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1DynamicalSystem.html#abe9655801c0f0a1391619325e571cd57">State</a> &amp;state)</td></tr>
+<tr class="memdesc:a93fd526dbbeedb0c83b41a79aaa5fff9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the state of the dynamical system.  <a href="classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1FloatingBaseSystemVelocityKinematics.html#a93fd526dbbeedb0c83b41a79aaa5fff9">More...</a><br /></td></tr>
+<tr class="separator:a93fd526dbbeedb0c83b41a79aaa5fff9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad075e7170f3c716c2b84d6b39b09ec22"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1DynamicalSystem.html#abe9655801c0f0a1391619325e571cd57">State</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1FloatingBaseSystemVelocityKinematics.html#ad075e7170f3c716c2b84d6b39b09ec22">getState</a> () const</td></tr>
+<tr class="memdesc:ad075e7170f3c716c2b84d6b39b09ec22"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the state to the dynamical system.  <a href="classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1FloatingBaseSystemVelocityKinematics.html#ad075e7170f3c716c2b84d6b39b09ec22">More...</a><br /></td></tr>
+<tr class="separator:ad075e7170f3c716c2b84d6b39b09ec22"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a83a30f8834e079a166b0ea078bb5c054"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1FloatingBaseSystemVelocityKinematics.html#a83a30f8834e079a166b0ea078bb5c054">setControlInput</a> (const <a class="el" href="classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1DynamicalSystem.html#a4c2a4bbac36e26c14571f79bfd6e4fa7">Input</a> &amp;controlInput)</td></tr>
+<tr class="memdesc:a83a30f8834e079a166b0ea078bb5c054"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the control input to the dynamical system.  <a href="classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1FloatingBaseSystemVelocityKinematics.html#a83a30f8834e079a166b0ea078bb5c054">More...</a><br /></td></tr>
+<tr class="separator:a83a30f8834e079a166b0ea078bb5c054"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:add5c186636268233de0036e792054ad2"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1FloatingBaseSystemVelocityKinematics.html#add5c186636268233de0036e792054ad2">dynamics</a> (const std::chrono::nanoseconds &amp;time, <a class="el" href="classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1DynamicalSystem.html#a664a4e9ae349c0b14f83d98a90e52022">StateDerivative</a> &amp;stateDerivative)</td></tr>
+<tr class="memdesc:add5c186636268233de0036e792054ad2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the floating based system dynamics.  <a href="classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1FloatingBaseSystemVelocityKinematics.html#add5c186636268233de0036e792054ad2">More...</a><br /></td></tr>
+<tr class="separator:add5c186636268233de0036e792054ad2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1DynamicalSystem"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1DynamicalSystem')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1DynamicalSystem.html">BipedalLocomotion::ContinuousDynamicalSystem::DynamicalSystem&lt; FloatingBaseSystemVelocityKinematics &gt;</a></td></tr>
+<tr class="memitem:adea6b2fa40906bbc9198975e620e5ac4 inherit pub_methods_classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1DynamicalSystem"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1DynamicalSystem.html#adea6b2fa40906bbc9198975e620e5ac4">initialize</a> (std::weak_ptr&lt; const <a class="el" href="classBipedalLocomotion_1_1ParametersHandler_1_1IParametersHandler.html">ParametersHandler::IParametersHandler</a> &gt; handler)</td></tr>
+<tr class="memdesc:adea6b2fa40906bbc9198975e620e5ac4 inherit pub_methods_classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1DynamicalSystem"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize the Dynamical system.  <a href="classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1DynamicalSystem.html#adea6b2fa40906bbc9198975e620e5ac4">More...</a><br /></td></tr>
+<tr class="separator:adea6b2fa40906bbc9198975e620e5ac4 inherit pub_methods_classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1DynamicalSystem"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acafa2d1ec7a13c58736990e678e4ba47 inherit pub_methods_classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1DynamicalSystem"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1DynamicalSystem.html#acafa2d1ec7a13c58736990e678e4ba47">setState</a> (const <a class="el" href="classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1DynamicalSystem.html#abe9655801c0f0a1391619325e571cd57">State</a> &amp;state)</td></tr>
+<tr class="memdesc:acafa2d1ec7a13c58736990e678e4ba47 inherit pub_methods_classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1DynamicalSystem"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the state of the dynamical system.  <a href="classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1DynamicalSystem.html#acafa2d1ec7a13c58736990e678e4ba47">More...</a><br /></td></tr>
+<tr class="separator:acafa2d1ec7a13c58736990e678e4ba47 inherit pub_methods_classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1DynamicalSystem"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9f413dff797cbc805417478d3519a640 inherit pub_methods_classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1DynamicalSystem"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1DynamicalSystem.html#abe9655801c0f0a1391619325e571cd57">State</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1DynamicalSystem.html#a9f413dff797cbc805417478d3519a640">getState</a> () const</td></tr>
+<tr class="memdesc:a9f413dff797cbc805417478d3519a640 inherit pub_methods_classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1DynamicalSystem"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the state to the dynamical system.  <a href="classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1DynamicalSystem.html#a9f413dff797cbc805417478d3519a640">More...</a><br /></td></tr>
+<tr class="separator:a9f413dff797cbc805417478d3519a640 inherit pub_methods_classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1DynamicalSystem"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a141c1d0475b59777195c3e02a12cd0bb inherit pub_methods_classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1DynamicalSystem"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1DynamicalSystem.html#a141c1d0475b59777195c3e02a12cd0bb">setControlInput</a> (const <a class="el" href="classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1DynamicalSystem.html#a4c2a4bbac36e26c14571f79bfd6e4fa7">Input</a> &amp;controlInput)</td></tr>
+<tr class="memdesc:a141c1d0475b59777195c3e02a12cd0bb inherit pub_methods_classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1DynamicalSystem"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the control input to the dynamical system.  <a href="classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1DynamicalSystem.html#a141c1d0475b59777195c3e02a12cd0bb">More...</a><br /></td></tr>
+<tr class="separator:a141c1d0475b59777195c3e02a12cd0bb inherit pub_methods_classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1DynamicalSystem"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a464077f4f1329cc6a5697f1a874d6c48 inherit pub_methods_classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1DynamicalSystem"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1DynamicalSystem.html#a464077f4f1329cc6a5697f1a874d6c48">dynamics</a> (const std::chrono::nanoseconds &amp;time, <a class="el" href="classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1DynamicalSystem.html#a664a4e9ae349c0b14f83d98a90e52022">StateDerivative</a> &amp;stateDerivative)</td></tr>
+<tr class="memdesc:a464077f4f1329cc6a5697f1a874d6c48 inherit pub_methods_classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1DynamicalSystem"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the system dynamics.  <a href="classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1DynamicalSystem.html#a464077f4f1329cc6a5697f1a874d6c48">More...</a><br /></td></tr>
+<tr class="separator:a464077f4f1329cc6a5697f1a874d6c48 inherit pub_methods_classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1DynamicalSystem"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
+Additional Inherited Members</h2></td></tr>
+<tr class="inherit_header pub_types_classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1DynamicalSystem"><td colspan="2" onclick="javascript:toggleInherit('pub_types_classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1DynamicalSystem')"><img src="closed.png" alt="-"/>&#160;Public Types inherited from <a class="el" href="classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1DynamicalSystem.html">BipedalLocomotion::ContinuousDynamicalSystem::DynamicalSystem&lt; FloatingBaseSystemVelocityKinematics &gt;</a></td></tr>
+<tr class="memitem:abe9655801c0f0a1391619325e571cd57 inherit pub_types_classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1DynamicalSystem"><td class="memItemLeft" align="right" valign="top"><a id="abe9655801c0f0a1391619325e571cd57"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1DynamicalSystem.html#abe9655801c0f0a1391619325e571cd57">State</a> = typename <a class="el" href="structBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1internal_1_1traits.html">internal::traits</a>&lt; <a class="el" href="classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1FloatingBaseSystemVelocityKinematics.html">FloatingBaseSystemVelocityKinematics</a> &gt;::<a class="el" href="classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1DynamicalSystem.html#abe9655801c0f0a1391619325e571cd57">State</a></td></tr>
+<tr class="memdesc:abe9655801c0f0a1391619325e571cd57 inherit pub_types_classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1DynamicalSystem"><td class="mdescLeft">&#160;</td><td class="mdescRight">State space type. <br /></td></tr>
+<tr class="separator:abe9655801c0f0a1391619325e571cd57 inherit pub_types_classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1DynamicalSystem"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a664a4e9ae349c0b14f83d98a90e52022 inherit pub_types_classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1DynamicalSystem"><td class="memItemLeft" align="right" valign="top"><a id="a664a4e9ae349c0b14f83d98a90e52022"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1DynamicalSystem.html#a664a4e9ae349c0b14f83d98a90e52022">StateDerivative</a> = typename <a class="el" href="structBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1internal_1_1traits.html">internal::traits</a>&lt; <a class="el" href="classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1FloatingBaseSystemVelocityKinematics.html">FloatingBaseSystemVelocityKinematics</a> &gt;::<a class="el" href="classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1DynamicalSystem.html#a664a4e9ae349c0b14f83d98a90e52022">StateDerivative</a></td></tr>
+<tr class="memdesc:a664a4e9ae349c0b14f83d98a90e52022 inherit pub_types_classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1DynamicalSystem"><td class="mdescLeft">&#160;</td><td class="mdescRight">State space derivative type. <br /></td></tr>
+<tr class="separator:a664a4e9ae349c0b14f83d98a90e52022 inherit pub_types_classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1DynamicalSystem"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4c2a4bbac36e26c14571f79bfd6e4fa7 inherit pub_types_classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1DynamicalSystem"><td class="memItemLeft" align="right" valign="top"><a id="a4c2a4bbac36e26c14571f79bfd6e4fa7"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1DynamicalSystem.html#a4c2a4bbac36e26c14571f79bfd6e4fa7">Input</a> = typename <a class="el" href="structBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1internal_1_1traits.html">internal::traits</a>&lt; <a class="el" href="classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1FloatingBaseSystemVelocityKinematics.html">FloatingBaseSystemVelocityKinematics</a> &gt;::<a class="el" href="classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1DynamicalSystem.html#a4c2a4bbac36e26c14571f79bfd6e4fa7">Input</a></td></tr>
+<tr class="memdesc:a4c2a4bbac36e26c14571f79bfd6e4fa7 inherit pub_types_classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1DynamicalSystem"><td class="mdescLeft">&#160;</td><td class="mdescRight">Input type. <br /></td></tr>
+<tr class="separator:a4c2a4bbac36e26c14571f79bfd6e4fa7 inherit pub_types_classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1DynamicalSystem"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p><a class="el" href="classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1FloatingBaseSystemVelocityKinematics.html" title="FloatingBaseSystemVelocityKinematics describes a floating base system kinematics.">FloatingBaseSystemVelocityKinematics</a> describes a floating base system kinematics. </p>
+<p>The <a class="el" href="classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1FloatingBaseSystemVelocityKinematics.html" title="FloatingBaseSystemVelocityKinematics describes a floating base system kinematics.">FloatingBaseSystemVelocityKinematics</a> inherits from a generic <a class="el" href="classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1DynamicalSystem.html" title="DynamicalSystem defines a continuous time dynamical system, i.e.">DynamicalSystem</a> where the State is described by a <a class="el" href="structBipedalLocomotion_1_1GenericContainer_1_1named__tuple.html" title="named_tuple is a class that inherits from tuple.">BipedalLocomotion::GenericContainer::named_tuple</a> </p><table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadCenter">Name   </th><th class="markdownTableHeadCenter">Type   </th><th class="markdownTableHeadCenter">Description    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyCenter"><code>p</code>   </td><td class="markdownTableBodyCenter"><code>Eigen::Vector3d</code>   </td><td class="markdownTableBodyCenter">Position of the base w.r.t. the inertial frame    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyCenter"><code>R</code>   </td><td class="markdownTableBodyCenter"><code>manif::SO3d</code>   </td><td class="markdownTableBodyCenter">Rotation matrix \({}^I R _ {b}\). Matrix that transform a vector whose coordinates are expressed in the base frame in the inertial frame    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyCenter"><code>s</code>   </td><td class="markdownTableBodyCenter"><code>Eigen::VectorXd</code>   </td><td class="markdownTableBodyCenter">Joint positions [in rad]   </td></tr>
+</table>
+<p>The <code>StateDerivative</code> is described by a <a class="el" href="structBipedalLocomotion_1_1GenericContainer_1_1named__tuple.html" title="named_tuple is a class that inherits from tuple.">BipedalLocomotion::GenericContainer::named_tuple</a> </p><table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadCenter">Name   </th><th class="markdownTableHeadCenter">Type   </th><th class="markdownTableHeadCenter">Description    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyCenter"><code>dp</code>   </td><td class="markdownTableBodyCenter"><code>Eigen::Vector3d</code>   </td><td class="markdownTableBodyCenter">Linear velocity of the origin of the base link whose coordinates are expressed in the Inertial frame (MIXED RERPESENTATION)    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyCenter"><code>omega</code>   </td><td class="markdownTableBodyCenter"><code>manif::SO3d::Tangent</code>   </td><td class="markdownTableBodyCenter">base angular velocity whose coordinates are expressed in the inertial frame (Left trivialized)    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyCenter"><code>ds</code>   </td><td class="markdownTableBodyCenter"><code>Eigen::VectorXd</code>   </td><td class="markdownTableBodyCenter">Joint velocities [in rad/s]   </td></tr>
+</table>
+<p>The <code>Input</code> is described by a <a class="el" href="structBipedalLocomotion_1_1GenericContainer_1_1named__tuple.html" title="named_tuple is a class that inherits from tuple.">BipedalLocomotion::GenericContainer::named_tuple</a> </p><table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadCenter">Name   </th><th class="markdownTableHeadCenter">Type   </th><th class="markdownTableHeadCenter">Description    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyCenter"><code>twist</code>   </td><td class="markdownTableBodyCenter"><code>Eigen::Matrix&lt;double, 6, 1&gt;</code>   </td><td class="markdownTableBodyCenter">Base twist expressed in mixed representation    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyCenter"><code>ds</code>   </td><td class="markdownTableBodyCenter"><code>Eigen::VectorXd</code>   </td><td class="markdownTableBodyCenter">Joint velocities [in rad/s]   </td></tr>
+</table>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="ac42cbb259b326edfd73fbfe8471cb22d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac42cbb259b326edfd73fbfe8471cb22d">&#9670;&nbsp;</a></span>initialize()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool FloatingBaseSystemVelocityKinematics::initialize </td>
+          <td>(</td>
+          <td class="paramtype">std::weak_ptr&lt; const <a class="el" href="classBipedalLocomotion_1_1ParametersHandler_1_1IParametersHandler.html">ParametersHandler::IParametersHandler</a> &gt;&#160;</td>
+          <td class="paramname"><em>handler</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Initialize the Dynamical system. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">handler</td><td>pointer to the parameter handler. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true in case of success/false otherwise. </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>This function does nothing but it is required for CRTP. </dd></dl>
+
+</div>
+</div>
+<a id="a93fd526dbbeedb0c83b41a79aaa5fff9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a93fd526dbbeedb0c83b41a79aaa5fff9">&#9670;&nbsp;</a></span>setState()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool FloatingBaseSystemVelocityKinematics::setState </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1DynamicalSystem.html#abe9655801c0f0a1391619325e571cd57">State</a> &amp;&#160;</td>
+          <td class="paramname"><em>state</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Set the state of the dynamical system. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">state</td><td>tuple containing a const reference to the state elements. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true in case of success, false otherwise. </dd></dl>
+
+</div>
+</div>
+<a id="ad075e7170f3c716c2b84d6b39b09ec22"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad075e7170f3c716c2b84d6b39b09ec22">&#9670;&nbsp;</a></span>getState()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1DynamicalSystem.html#abe9655801c0f0a1391619325e571cd57">FloatingBaseSystemVelocityKinematics::State</a> &amp; FloatingBaseSystemVelocityKinematics::getState </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get the state to the dynamical system. </p>
+<dl class="section return"><dt>Returns</dt><dd>the current state of the dynamical system </dd></dl>
+
+</div>
+</div>
+<a id="a83a30f8834e079a166b0ea078bb5c054"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a83a30f8834e079a166b0ea078bb5c054">&#9670;&nbsp;</a></span>setControlInput()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool FloatingBaseSystemVelocityKinematics::setControlInput </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1DynamicalSystem.html#a4c2a4bbac36e26c14571f79bfd6e4fa7">Input</a> &amp;&#160;</td>
+          <td class="paramname"><em>controlInput</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Set the control input to the dynamical system. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">controlInput</td><td>the value of the control input used to compute the system dynamics. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true in case of success, false otherwise. </dd></dl>
+
+</div>
+</div>
+<a id="add5c186636268233de0036e792054ad2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#add5c186636268233de0036e792054ad2">&#9670;&nbsp;</a></span>dynamics()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool FloatingBaseSystemVelocityKinematics::dynamics </td>
+          <td>(</td>
+          <td class="paramtype">const std::chrono::nanoseconds &amp;&#160;</td>
+          <td class="paramname"><em>time</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1DynamicalSystem.html#a664a4e9ae349c0b14f83d98a90e52022">StateDerivative</a> &amp;&#160;</td>
+          <td class="paramname"><em>stateDerivative</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Computes the floating based system dynamics. </p>
+<p>It return \(f(x, u, t)\). </p><dl class="section note"><dt>Note</dt><dd>The control input and the state have to be set separately with the methods setControlInput and setState. </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">time</td><td>the time at witch the dynamics is computed. </td></tr>
+    <tr><td class="paramname">stateDynamics</td><td>tuple containing a reference to the element of the state derivative </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true in case of success, false otherwise. </dd></dl>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following files:<ul>
+<li>ContinuousDynamicalSystem/include/BipedalLocomotion/ContinuousDynamicalSystem/<a class="el" href="FloatingBaseSystemVelocityKinematics_8h.html">FloatingBaseSystemVelocityKinematics.h</a></li>
+<li>ContinuousDynamicalSystem/src/<a class="el" href="FloatingBaseSystemVelocityKinematics_8cpp.html">FloatingBaseSystemVelocityKinematics.cpp</a></li>
+</ul>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- Doxygen custom footer -->
+<div id="nav-path" class="navpath">
+  <ul>
+    <li class="footer">
+      <a href="https://github.com/gbionics/bipedal-locomotion-framework">GitHub</a> &bull;
+      <a href="https://gbionics.ai/">Generative Bionics</a> &bull;
+      Licensed under <a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause "New" or "Revised" License</a> &bull;
+      Generated by <a href="https://www.doxygen.org/index.html">Doxygen</a> 1.9.1
+    </li>
+  </ul>
+</div>
 </body>
 </html>

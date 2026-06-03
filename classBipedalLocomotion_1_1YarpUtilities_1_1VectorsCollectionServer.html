@@ -1,399 +1,498 @@
-<!DOCTYPE html>
-<html lang="en">
+<!-- HTML header for doxygen 1.9.1 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-  <meta charset="UTF-8" />
-  <title>BipedalLocomotion::YarpUtilities::VectorsCollectionServer class | bipedal locomotion framework master</title>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
-  <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
-  <link rel="icon" href="favicon-dark.png" type="image/png" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#22272e" />
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>bipedal locomotion framework: BipedalLocomotion::YarpUtilities::VectorsCollectionServer Class Reference</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js", "TeX/AMSmath.js", "TeX/AMSsymbols.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+});
+</script>
+<script type="text/javascript" async="async" src="https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only-darkmode-toggle.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="doxygen-awesome-darkmode-toggle.js"></script>
+<script type="text/javascript" src="doxygen-awesome-fragment-copy-button.js"></script>
+<script type="text/javascript" src="doxygen-awesome-interactive-toc.js"></script>
+<script type="text/javascript" src="doxygen-awesome-paragraph-link.js"></script>
+<script type="text/javascript" src="doxygen-awesome-tabs.js"></script>
+<script type="text/javascript">
+    DoxygenAwesomeDarkModeToggle.init()
+    DoxygenAwesomeFragmentCopyButton.init()
+    DoxygenAwesomeInteractiveToc.init()
+    DoxygenAwesomeParagraphLink.init()
+    DoxygenAwesomeTabs.init()
+</script>
 </head>
 <body>
-<header><nav id="navigation">
-  <div class="m-container">
-    <div class="m-row">
-      <span id="m-navbar-brand" class="m-col-t-8 m-col-m-none m-left-m">
-        <a href="./index.html">bipedal locomotion framework</a> <span class="m-breadcrumb">|</span> <a href="index.html" class="m-thin">master</a>
-      </span>
-      <div class="m-col-t-4 m-hide-m m-text-right m-nopadr">
-        <a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
-          <path id="m-doc-search-icon-path" d="m6 0c-3.31 0-6 2.69-6 6 0 3.31 2.69 6 6 6 1.49 0 2.85-0.541 3.89-1.44-0.0164 0.338 0.147 0.759 0.5 1.15l3.22 3.79c0.552 0.614 1.45 0.665 2 0.115 0.55-0.55 0.499-1.45-0.115-2l-3.79-3.22c-0.392-0.353-0.812-0.515-1.15-0.5 0.895-1.05 1.44-2.41 1.44-3.89 0-3.31-2.69-6-6-6zm0 1.56a4.44 4.44 0 0 1 4.44 4.44 4.44 4.44 0 0 1-4.44 4.44 4.44 4.44 0 0 1-4.44-4.44 4.44 4.44 0 0 1 4.44-4.44z"/>
-        </svg></a>
-        <a id="m-navbar-show" href="#navigation" title="Show navigation"></a>
-        <a id="m-navbar-hide" href="#" title="Hide navigation"></a>
-      </div>
-      <div id="m-navbar-collapse" class="m-col-t-12 m-show-m m-col-m-none m-right-m">
-        <div class="m-row">
-          <ol class="m-col-t-6 m-col-m-none">
-            <li><a href="pages.html">Pages</a></li>
-            <li><a href="annotated.html">Classes</a></li>
-            <li><a href="files.html">Files</a></li>
-          </ol>
-          <ol class="m-col-t-6 m-col-m-none" start="4">
-            <li>
-              <a href="pages.html">Versions</a>
-              <ol>
-                <li><a href="./index.html">Master</a></li>
-                <li><a href="./v0.19.0/index.html">v0.19.0</a></li>
-                <li><a href="./v0.21.1/index.html">v0.21.1</a></li>
-                <li><a href="./v0.18.0/index.html">v0.18.0</a></li>
-              </ol>
-            </li>
-            <li>
-              <a href="pages.html">Contacts</a>
-              <ol>
-                <li><a href="https://github.com/ami-iit/bipedal-locomotion-framework">GitHub</a></li>
-                <li><a href="https://www.iit.it/web/ami/">Lab website</a></li>
-              </ol>
-            </li>
-            <li class="m-show-m"><a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
-              <use href="#m-doc-search-icon-path" />
-            </svg></a></li>
-          </ol>
-        </div>
-      </div>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">bipedal locomotion framework
+   </div>
+   <div id="projectbrief">A suite of libraries for achieving bipedal locomotion on humanoid robots</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.9.1 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "search",false,'Search','.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',true,false,'search.php','Search');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
     </div>
   </div>
-</nav></header>
-<main><article>
-  <div class="m-container m-container-inflatable">
-    <div class="m-row">
-      <div class="m-col-l-10 m-push-l-1">
-        <h1>
-          <span class="m-breadcrumb"><a href="namespaceBipedalLocomotion.html">BipedalLocomotion</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespaceBipedalLocomotion_1_1YarpUtilities.html">YarpUtilities</a>::<wbr/></span>VectorsCollectionServer <span class="m-thin">class</span>
-          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="VectorsCollectionServer_8h.html">&lt;BipedalLocomotion/YarpUtilities/VectorsCollectionServer.h&gt;</a></div>
-        </h1>
-        <p><a href="classBipedalLocomotion_1_1YarpUtilities_1_1VectorsCollectionServer.html" class="m-doc">VectorsCollectionServer</a> is a class that implements the VectorsCollectionMetadataService.</p>
-        <nav class="m-block m-default">
-          <h3>Contents</h3>
-          <ul>
-            <li>
-              Reference
-              <ul>
-                <li><a href="#typeless-methods">Constructors, destructors, conversion operators</a></li>
-                <li><a href="#pub-methods">Public functions</a></li>
-              </ul>
-            </li>
-          </ul>
-        </nav>
-<p>It allows to send a VectorsCollection to a client.</p><aside class="m-note m-info"><h4>Note</h4><p>The VectorCollectionServer allows to send a VectorsCollection to a client. You can use the <a href="classBipedalLocomotion_1_1YarpUtilities_1_1VectorsCollectionServer.html" class="m-doc">VectorsCollectionServer</a> as follows</p><pre class="m-code"><span class="k">auto</span><span class="w"> </span><span class="n">handler</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">make_shared</span><span class="o">&lt;</span><span class="n">ParametersHandler</span><span class="o">::</span><span class="n">StdImplementation</span><span class="o">&gt;</span><span class="p">();</span>
-<span class="c1">// fill the handler with the parameters shown in the documentation</span>
-
-<span class="n">VectorCollectionServer</span><span class="w"> </span><span class="n">server</span><span class="p">;</span>
-<span class="n">server</span><span class="p">.</span><span class="n">initialize</span><span class="p">(</span><span class="n">handler</span><span class="p">);</span>
-<span class="c1">// The metadata should be populated before the data is sent.</span>
-<span class="c1">// The metadata are available to the client only after the finalizeMetadata function is called.</span>
-<span class="n">server</span><span class="p">.</span><span class="n">populateMetadata</span><span class="p">(</span><span class="s">&quot;key1&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s">&quot;metadata1&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;metadata2&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;metadata3&quot;</span><span class="p">});</span>
-<span class="n">server</span><span class="p">.</span><span class="n">populateMetadata</span><span class="p">(</span><span class="s">&quot;key2&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s">&quot;metadata4&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;metadata5&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;metadata6&quot;</span><span class="p">});</span>
-<span class="n">server</span><span class="p">.</span><span class="n">finalizeMetadata</span><span class="p">();</span>
-
-<span class="c1">// prepare the data</span>
-<span class="n">server</span><span class="p">.</span><span class="n">prepareData</span><span class="p">();</span>
-<span class="n">server</span><span class="p">.</span><span class="n">clearData</span><span class="p">();</span><span class="w"> </span><span class="c1">// optional</span>
-<span class="n">server</span><span class="p">.</span><span class="n">populateData</span><span class="p">(</span><span class="s">&quot;key1&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">2.0</span><span class="p">,</span><span class="w"> </span><span class="mf">3.0</span><span class="p">});</span>
-<span class="n">server</span><span class="p">.</span><span class="n">populateData</span><span class="p">(</span><span class="s">&quot;key2&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="mf">4.0</span><span class="p">,</span><span class="w"> </span><span class="mf">5.0</span><span class="p">,</span><span class="w"> </span><span class="mf">6.0</span><span class="p">});</span>
-
-<span class="n">server</span><span class="p">.</span><span class="n">sendData</span><span class="p">();</span></pre> <p><code>server.write()</code> will send the data to the client.</p></aside>
-        <section id="typeless-methods">
-          <h2><a href="#typeless-methods">Constructors, destructors, conversion operators</a></h2>
-          <dl class="m-doc">
-            <dt id="a2fd61e131a5a2ce3aaa8e808bb324fc6">
-              <span class="m-doc-wrap-bumper"><a href="#a2fd61e131a5a2ce3aaa8e808bb324fc6" class="m-doc-self">VectorsCollectionServer</a>(</span><span class="m-doc-wrap">)</span>
-            </dt>
-            <dd>Constructor.</dd>
-            <dt id="a39245425516a34510e4f88489e88f117">
-              <span class="m-doc-wrap-bumper"><a href="#a39245425516a34510e4f88489e88f117" class="m-doc-self">~VectorsCollectionServer</a>(</span><span class="m-doc-wrap">) <span class="m-label m-flat m-warning">virtual</span></span>
-            </dt>
-            <dd>Destructor.</dd>
-          </dl>
-        </section>
-        <section id="pub-methods">
-          <h2><a href="#pub-methods">Public functions</a></h2>
-          <dl class="m-doc">
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a5aa7a1d27b90a8ea57e04787fdae1835" class="m-doc">initialize</a>(</span><span class="m-doc-wrap">std::weak_ptr&lt;const <a href="classBipedalLocomotion_1_1ParametersHandler_1_1IParametersHandler.html" class="m-doc">ParametersHandler::<wbr />IParametersHandler</a>&gt; handler) -&gt; bool</span>
-            </dt>
-            <dd>Initialize the server.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#ac79fdca0811aa249a18c3f2e3c1d16e6" class="m-doc">populateMetadata</a>(</span><span class="m-doc-wrap">const std::string&amp; key,
-              const std::vector&lt;std::string&gt;&amp; metadata) -&gt; bool</span>
-            </dt>
-            <dd>Populate the metadata.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a8d6c90c7512271ebfa615e465634d6c8" class="m-doc">finalizeMetadata</a>(</span><span class="m-doc-wrap">) -&gt; bool</span>
-            </dt>
-            <dd>Finalize the metadata.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a47e3d8463e7d6ed8bc0b017b23bf1876" class="m-doc">populateData</a>(</span><span class="m-doc-wrap">const std::string&amp; key,
-              const iDynTree::Span&lt;const double&gt;&amp; data) -&gt; bool</span>
-            </dt>
-            <dd>Set the data.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a4e86fc0a34e47a37d548ccc894a3eead" class="m-doc">getMetadata</a>(</span><span class="m-doc-wrap">) -&gt; VectorsCollectionMetadata <span class="m-label m-flat m-warning">override</span></span>
-            </dt>
-            <dd>Get the metadata.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a3a06e2e61cee2489ee279c8607dfb76a" class="m-doc">getMetadataIncremental</a>(</span><span class="m-doc-wrap">const std::int32_t fromVersion) -&gt; VectorsCollectionMetadata <span class="m-label m-flat m-warning">override</span></span>
-            </dt>
-            <dd>Read only the metadata introduced after the provided version.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#ab9bad32b954249921c8b393b29d4890b" class="m-doc">areMetadataReady</a>(</span><span class="m-doc-wrap">) -&gt; bool <span class="m-label m-flat m-warning">override</span></span>
-            </dt>
-            <dd>Check if the metadata is ready.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">void <a href="#a11300c1246f96871f3952f8b0e47fb24" class="m-doc">prepareData</a>(</span><span class="m-doc-wrap">)</span>
-            </dt>
-            <dd>Prepare the data.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">void <a href="#ab664728a5a709297618f9e94b8a3e64b" class="m-doc">sendData</a>(</span><span class="m-doc-wrap">bool forceStrict = false)</span>
-            </dt>
-            <dd>Send the data filled with populateData.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a425cd46ed345c642ad4558b37914f0d7" class="m-doc">clearData</a>(</span><span class="m-doc-wrap">) -&gt; bool</span>
-            </dt>
-            <dd>Deallocates the memory held by the internal buffer used to store data.</dd>
-          </dl>
-        </section>
-        <section>
-          <h2>Function documentation</h2>
-          <section class="m-doc-details" id="a5aa7a1d27b90a8ea57e04787fdae1835"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">bool BipedalLocomotion::<wbr />YarpUtilities::<wbr />VectorsCollectionServer::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a5aa7a1d27b90a8ea57e04787fdae1835" class="m-doc-self">initialize</a>(</span><span class="m-doc-wrap">std::weak_ptr&lt;const <a href="classBipedalLocomotion_1_1ParametersHandler_1_1IParametersHandler.html" class="m-doc">ParametersHandler::<wbr />IParametersHandler</a>&gt; handler)</span></span>
-            </h3>
-            <p>Initialize the server.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">handler</td>
-                  <td>pointer to the parameters handler.</td>
-                </tr>
-              </tbody>
-              <tfoot>
-                <tr>
-                  <th>Returns</th>
-                  <td>true if the server has been initialized successfully, false otherwise.</td>
-                </tr>
-              </tfoot>
-            </table>
-<aside class="m-note m-info"><h4>Note</h4><p>The following parameters are required:</p><table class="m-table"><thead><tr><th>Parameter Name</th><th>Type</th><th>Description</th></tr></thead><tbody><tr><td>remote</td><td>string</td><td>Name of the port that will be created.</td></tr></tbody></table></aside>
-          </div></section>
-          <section class="m-doc-details" id="ac79fdca0811aa249a18c3f2e3c1d16e6"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">bool BipedalLocomotion::<wbr />YarpUtilities::<wbr />VectorsCollectionServer::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ac79fdca0811aa249a18c3f2e3c1d16e6" class="m-doc-self">populateMetadata</a>(</span><span class="m-doc-wrap">const std::string&amp; key,
-              const std::vector&lt;std::string&gt;&amp; metadata)</span></span>
-            </h3>
-            <p>Populate the metadata.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">key</td>
-                  <td>key of the metadata.</td>
-                </tr>
-                <tr>
-                  <td>metadata</td>
-                  <td>metadata.</td>
-                </tr>
-              </tbody>
-              <tfoot>
-                <tr>
-                  <th>Returns</th>
-                  <td>true if the metadata has been populated successfully, false otherwise.</td>
-                </tr>
-              </tfoot>
-            </table>
-          </div></section>
-          <section class="m-doc-details" id="a8d6c90c7512271ebfa615e465634d6c8"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">bool BipedalLocomotion::<wbr />YarpUtilities::<wbr />VectorsCollectionServer::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a8d6c90c7512271ebfa615e465634d6c8" class="m-doc-self">finalizeMetadata</a>(</span><span class="m-doc-wrap">)</span></span>
-            </h3>
-            <p>Finalize the metadata.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <tfoot>
-                <tr>
-                  <th style="width: 1%">Returns</th>
-                  <td>true if the metadata has been finalized successfully, false otherwise.</td>
-                </tr>
-              </tfoot>
-            </table>
-<aside class="m-note m-info"><h4>Note</h4><p>this function should be called after the metadata has been populated. It opens the ports.</p></aside>
-          </div></section>
-          <section class="m-doc-details" id="a47e3d8463e7d6ed8bc0b017b23bf1876"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">bool BipedalLocomotion::<wbr />YarpUtilities::<wbr />VectorsCollectionServer::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a47e3d8463e7d6ed8bc0b017b23bf1876" class="m-doc-self">populateData</a>(</span><span class="m-doc-wrap">const std::string&amp; key,
-              const iDynTree::Span&lt;const double&gt;&amp; data)</span></span>
-            </h3>
-            <p>Set the data.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">key</td>
-                  <td>key of the data.</td>
-                </tr>
-                <tr>
-                  <td>data</td>
-                  <td>data.</td>
-                </tr>
-              </tbody>
-              <tfoot>
-                <tr>
-                  <th>Returns</th>
-                  <td>true if the data has been set successfully, false otherwise.</td>
-                </tr>
-              </tfoot>
-            </table>
-<aside class="m-note m-info"><h4>Note</h4><p>this function should be called after the metadata has been finalized and after the prepareData function has been called.</p></aside>
-          </div></section>
-          <section class="m-doc-details" id="a4e86fc0a34e47a37d548ccc894a3eead"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">VectorsCollectionMetadata BipedalLocomotion::<wbr />YarpUtilities::<wbr />VectorsCollectionServer::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a4e86fc0a34e47a37d548ccc894a3eead" class="m-doc-self">getMetadata</a>(</span><span class="m-doc-wrap">) <span class="m-label m-warning">override</span></span></span>
-            </h3>
-            <p>Get the metadata.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <tfoot>
-                <tr>
-                  <th style="width: 1%">Returns</th>
-                  <td>the metadata.</td>
-                </tr>
-              </tfoot>
-            </table>
-<aside class="m-note m-info"><h4>Note</h4><p>if the metadata is not ready, an empty VectorsCollectionMetadata is returned.</p><p>if some keys are pending to be finalized, the last finalized metadata is returned.</p></aside>
-          </div></section>
-          <section class="m-doc-details" id="a3a06e2e61cee2489ee279c8607dfb76a"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">VectorsCollectionMetadata BipedalLocomotion::<wbr />YarpUtilities::<wbr />VectorsCollectionServer::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a3a06e2e61cee2489ee279c8607dfb76a" class="m-doc-self">getMetadataIncremental</a>(</span><span class="m-doc-wrap">const std::int32_t fromVersion) <span class="m-label m-warning">override</span></span></span>
-            </h3>
-            <p>Read only the metadata introduced after the provided version.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">fromVersion</td>
-                  <td>version from which the metadata should be returned. Pass -1 to get the full metadata.</td>
-                </tr>
-              </tbody>
-              <tfoot>
-                <tr>
-                  <th>Returns</th>
-                  <td>the metadata introduced after the provided version.</td>
-                </tr>
-              </tfoot>
-            </table>
-<aside class="m-note m-info"><h4>Note</h4><p>if the metadata is not ready, an empty VectorsCollectionMetadata is returned.</p></aside>
-          </div></section>
-          <section class="m-doc-details" id="ab9bad32b954249921c8b393b29d4890b"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">bool BipedalLocomotion::<wbr />YarpUtilities::<wbr />VectorsCollectionServer::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ab9bad32b954249921c8b393b29d4890b" class="m-doc-self">areMetadataReady</a>(</span><span class="m-doc-wrap">) <span class="m-label m-warning">override</span></span></span>
-            </h3>
-            <p>Check if the metadata is ready.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <tfoot>
-                <tr>
-                  <th style="width: 1%">Returns</th>
-                  <td>true if the metadata is ready (it has been finalized at least once), false otherwise.</td>
-                </tr>
-              </tfoot>
-            </table>
-          </div></section>
-          <section class="m-doc-details" id="a11300c1246f96871f3952f8b0e47fb24"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">void BipedalLocomotion::<wbr />YarpUtilities::<wbr />VectorsCollectionServer::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a11300c1246f96871f3952f8b0e47fb24" class="m-doc-self">prepareData</a>(</span><span class="m-doc-wrap">)</span></span>
-            </h3>
-            <p>Prepare the data.</p>
-<aside class="m-note m-info"><h4>Note</h4><p>this function should be called before the data is populated.</p></aside>
-          </div></section>
-          <section class="m-doc-details" id="ab664728a5a709297618f9e94b8a3e64b"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">void BipedalLocomotion::<wbr />YarpUtilities::<wbr />VectorsCollectionServer::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ab664728a5a709297618f9e94b8a3e64b" class="m-doc-self">sendData</a>(</span><span class="m-doc-wrap">bool forceStrict = false)</span></span>
-            </h3>
-            <p>Send the data filled with populateData.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">forceStrict</td>
-                  <td>If this is true, wait until any previous sends are complete. If false, the current object will not be sent on connections that are currently busy.</td>
-                </tr>
-              </tbody>
-            </table>
-          </div></section>
-          <section class="m-doc-details" id="a425cd46ed345c642ad4558b37914f0d7"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">bool BipedalLocomotion::<wbr />YarpUtilities::<wbr />VectorsCollectionServer::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a425cd46ed345c642ad4558b37914f0d7" class="m-doc-self">clearData</a>(</span><span class="m-doc-wrap">)</span></span>
-            </h3>
-            <p>Deallocates the memory held by the internal buffer used to store data.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <tfoot>
-                <tr>
-                  <th style="width: 1%">Returns</th>
-                  <td>true if the data has been cleared successfully, false otherwise.</td>
-                </tr>
-              </tfoot>
-            </table>
-<aside class="m-note m-info"><h4>Note</h4><p>If you have previously populated the object using populateData and intend to reuse it without reallocating memory, you may skip calling this function. Otherwise, use VectorsCollection::clearData to free the memory allocated in the internal buffer.</p><p>Note that this function only clears the data and does not affect the metadata.</p></aside>
-          </div></section>
-        </section>
-      </div>
-    </div>
-  </div>
-</article></main>
-<div class="m-doc-search" id="search">
-  <a href="#!" onclick="return hideSearch()"></a>
-  <div class="m-container">
-    <div class="m-row">
-      <div class="m-col-m-8 m-push-m-2">
-        <div class="m-doc-search-header m-text m-small">
-          <div><span class="m-label m-default">Tab</span> / <span class="m-label m-default">T</span> to search, <span class="m-label m-default">Esc</span> to close</div>
-          <div id="search-symbolcount">&hellip;</div>
-        </div>
-        <div class="m-doc-search-content">
-          <form>
-            <input type="search" name="q" id="search-input" placeholder="Loading &hellip;" disabled="disabled" autofocus="autofocus" autocomplete="off" spellcheck="false" />
-          </form>
-          <noscript class="m-text m-danger m-text-center">Unlike everything else in the docs, the search functionality <em>requires</em> JavaScript.</noscript>
-          <div id="search-help" class="m-text m-dim m-text-center">
-            <p class="m-noindent">Search for symbols, directories, files, pages or
-            modules. You can omit any prefix from the symbol or file path; adding a
-            <code>:</code> or <code>/</code> suffix lists all members of given symbol or
-            directory.</p>
-            <p class="m-noindent">Use <span class="m-label m-dim">&darr;</span>
-            / <span class="m-label m-dim">&uarr;</span> to navigate through the list,
-            <span class="m-label m-dim">Enter</span> to go.
-            <span class="m-label m-dim">Tab</span> autocompletes common prefix, you can
-            copy a link to the result using <span class="m-label m-dim">⌘</span>
-            <span class="m-label m-dim">L</span> while <span class="m-label m-dim">⌘</span>
-            <span class="m-label m-dim">M</span> produces a Markdown link.</p>
-          </div>
-          <div id="search-notfound" class="m-text m-warning m-text-center">Sorry, nothing was found.</div>
-          <ul id="search-results"></ul>
-        </div>
-      </div>
-    </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
   </div>
 </div>
-<script src="search-v2.js"></script>
-<script src="searchdata-v2.js" async="async"></script>
-<footer><nav>
-  <div class="m-container">
-    <div class="m-row">
-      <div class="m-col-l-10 m-push-l-1">
-        <p>bipedal-locomotion-framework documentation. Licensed under the <a href="https://www.gnu.org/licenses/lgpl-3.0.en.html">GNU Lesser General Public License v3.0</a>. Project maintained by the <a href="https://www.iit.it/web/ami/">Artificial and Mechanical Intelligence Lab</a>. Contact the team via <a href="https://github.com/ami-iit/bipedal-locomotion-framework/issues/new">GitHub</a>.<br />Generated by <a href="https://doxygen.org/">Doxygen</a> 1.9.1 and <a href="https://mcss.mosra.cz/">m.css</a>.
-      </div>
-    </div>
-  </div>
-</nav></footer>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(document).ready(function(){initNavTree('classBipedalLocomotion_1_1YarpUtilities_1_1VectorsCollectionServer.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="classBipedalLocomotion_1_1YarpUtilities_1_1VectorsCollectionServer-members.html">List of all members</a>  </div>
+  <div class="headertitle">
+<div class="title">BipedalLocomotion::YarpUtilities::VectorsCollectionServer Class Reference</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p><a class="el" href="classBipedalLocomotion_1_1YarpUtilities_1_1VectorsCollectionServer.html" title="VectorsCollectionServer is a class that implements the VectorsCollectionMetadataService.">VectorsCollectionServer</a> is a class that implements the VectorsCollectionMetadataService.  
+ <a href="classBipedalLocomotion_1_1YarpUtilities_1_1VectorsCollectionServer.html#details">More...</a></p>
+
+<p><code>#include &lt;YarpUtilities/include/BipedalLocomotion/YarpUtilities/VectorsCollectionServer.h&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:ab2d2b2211a2fab3a31dd7b54fb13eafc"><td class="memItemLeft" align="right" valign="top"><a id="ab2d2b2211a2fab3a31dd7b54fb13eafc"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1YarpUtilities_1_1VectorsCollectionServer.html#ab2d2b2211a2fab3a31dd7b54fb13eafc">VectorsCollectionServer</a> ()</td></tr>
+<tr class="memdesc:ab2d2b2211a2fab3a31dd7b54fb13eafc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor. <br /></td></tr>
+<tr class="separator:ab2d2b2211a2fab3a31dd7b54fb13eafc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2d514827997ea5a06f06253d3fb30e8c"><td class="memItemLeft" align="right" valign="top"><a id="a2d514827997ea5a06f06253d3fb30e8c"></a>
+virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1YarpUtilities_1_1VectorsCollectionServer.html#a2d514827997ea5a06f06253d3fb30e8c">~VectorsCollectionServer</a> ()</td></tr>
+<tr class="memdesc:a2d514827997ea5a06f06253d3fb30e8c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor. <br /></td></tr>
+<tr class="separator:a2d514827997ea5a06f06253d3fb30e8c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a395eb4285be9166e9a8b8c3ab9747783"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1YarpUtilities_1_1VectorsCollectionServer.html#a395eb4285be9166e9a8b8c3ab9747783">initialize</a> (std::weak_ptr&lt; const <a class="el" href="classBipedalLocomotion_1_1ParametersHandler_1_1IParametersHandler.html">ParametersHandler::IParametersHandler</a> &gt; handler)</td></tr>
+<tr class="memdesc:a395eb4285be9166e9a8b8c3ab9747783"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize the server.  <a href="classBipedalLocomotion_1_1YarpUtilities_1_1VectorsCollectionServer.html#a395eb4285be9166e9a8b8c3ab9747783">More...</a><br /></td></tr>
+<tr class="separator:a395eb4285be9166e9a8b8c3ab9747783"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac847b4a5fed2a9a73135987dcfb73b62"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1YarpUtilities_1_1VectorsCollectionServer.html#ac847b4a5fed2a9a73135987dcfb73b62">populateMetadata</a> (const std::string &amp;key, const std::vector&lt; std::string &gt; &amp;metadata)</td></tr>
+<tr class="memdesc:ac847b4a5fed2a9a73135987dcfb73b62"><td class="mdescLeft">&#160;</td><td class="mdescRight">Populate the metadata.  <a href="classBipedalLocomotion_1_1YarpUtilities_1_1VectorsCollectionServer.html#ac847b4a5fed2a9a73135987dcfb73b62">More...</a><br /></td></tr>
+<tr class="separator:ac847b4a5fed2a9a73135987dcfb73b62"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4c4e51af7dd922b6e3a7a307430bf206"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1YarpUtilities_1_1VectorsCollectionServer.html#a4c4e51af7dd922b6e3a7a307430bf206">finalizeMetadata</a> ()</td></tr>
+<tr class="memdesc:a4c4e51af7dd922b6e3a7a307430bf206"><td class="mdescLeft">&#160;</td><td class="mdescRight">Finalize the metadata.  <a href="classBipedalLocomotion_1_1YarpUtilities_1_1VectorsCollectionServer.html#a4c4e51af7dd922b6e3a7a307430bf206">More...</a><br /></td></tr>
+<tr class="separator:a4c4e51af7dd922b6e3a7a307430bf206"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa3e28a0463cbfe0efe7aa982e0f4620b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1YarpUtilities_1_1VectorsCollectionServer.html#aa3e28a0463cbfe0efe7aa982e0f4620b">populateData</a> (const std::string &amp;key, const iDynTree::Span&lt; const double &gt; &amp;data)</td></tr>
+<tr class="memdesc:aa3e28a0463cbfe0efe7aa982e0f4620b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the data.  <a href="classBipedalLocomotion_1_1YarpUtilities_1_1VectorsCollectionServer.html#aa3e28a0463cbfe0efe7aa982e0f4620b">More...</a><br /></td></tr>
+<tr class="separator:aa3e28a0463cbfe0efe7aa982e0f4620b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae8f0cb853a3087f89191212e714d0286"><td class="memItemLeft" align="right" valign="top">VectorsCollectionMetadata&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1YarpUtilities_1_1VectorsCollectionServer.html#ae8f0cb853a3087f89191212e714d0286">getMetadata</a> () override</td></tr>
+<tr class="memdesc:ae8f0cb853a3087f89191212e714d0286"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the metadata.  <a href="classBipedalLocomotion_1_1YarpUtilities_1_1VectorsCollectionServer.html#ae8f0cb853a3087f89191212e714d0286">More...</a><br /></td></tr>
+<tr class="separator:ae8f0cb853a3087f89191212e714d0286"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5ac1170b1aa78120cbce8e369b074e46"><td class="memItemLeft" align="right" valign="top">VectorsCollectionMetadata&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1YarpUtilities_1_1VectorsCollectionServer.html#a5ac1170b1aa78120cbce8e369b074e46">getMetadataIncremental</a> (const std::int32_t fromVersion) override</td></tr>
+<tr class="memdesc:a5ac1170b1aa78120cbce8e369b074e46"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read only the metadata introduced after the provided version.  <a href="classBipedalLocomotion_1_1YarpUtilities_1_1VectorsCollectionServer.html#a5ac1170b1aa78120cbce8e369b074e46">More...</a><br /></td></tr>
+<tr class="separator:a5ac1170b1aa78120cbce8e369b074e46"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a324d0fb9bd5851034a6f753336c68831"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1YarpUtilities_1_1VectorsCollectionServer.html#a324d0fb9bd5851034a6f753336c68831">areMetadataReady</a> () override</td></tr>
+<tr class="memdesc:a324d0fb9bd5851034a6f753336c68831"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if the metadata is ready.  <a href="classBipedalLocomotion_1_1YarpUtilities_1_1VectorsCollectionServer.html#a324d0fb9bd5851034a6f753336c68831">More...</a><br /></td></tr>
+<tr class="separator:a324d0fb9bd5851034a6f753336c68831"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a711ee544ad5b6545063d55151e4b12c2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1YarpUtilities_1_1VectorsCollectionServer.html#a711ee544ad5b6545063d55151e4b12c2">prepareData</a> ()</td></tr>
+<tr class="memdesc:a711ee544ad5b6545063d55151e4b12c2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Prepare the data.  <a href="classBipedalLocomotion_1_1YarpUtilities_1_1VectorsCollectionServer.html#a711ee544ad5b6545063d55151e4b12c2">More...</a><br /></td></tr>
+<tr class="separator:a711ee544ad5b6545063d55151e4b12c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a70dec5c2dfa278ca25fa0c5d97ef55cd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1YarpUtilities_1_1VectorsCollectionServer.html#a70dec5c2dfa278ca25fa0c5d97ef55cd">sendData</a> (bool forceStrict=false)</td></tr>
+<tr class="memdesc:a70dec5c2dfa278ca25fa0c5d97ef55cd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Send the data filled with populateData.  <a href="classBipedalLocomotion_1_1YarpUtilities_1_1VectorsCollectionServer.html#a70dec5c2dfa278ca25fa0c5d97ef55cd">More...</a><br /></td></tr>
+<tr class="separator:a70dec5c2dfa278ca25fa0c5d97ef55cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1747b42faa9dedf3d11ba37776890db2"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1YarpUtilities_1_1VectorsCollectionServer.html#a1747b42faa9dedf3d11ba37776890db2">clearData</a> ()</td></tr>
+<tr class="memdesc:a1747b42faa9dedf3d11ba37776890db2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deallocates the memory held by the internal buffer used to store data.  <a href="classBipedalLocomotion_1_1YarpUtilities_1_1VectorsCollectionServer.html#a1747b42faa9dedf3d11ba37776890db2">More...</a><br /></td></tr>
+<tr class="separator:a1747b42faa9dedf3d11ba37776890db2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p><a class="el" href="classBipedalLocomotion_1_1YarpUtilities_1_1VectorsCollectionServer.html" title="VectorsCollectionServer is a class that implements the VectorsCollectionMetadataService.">VectorsCollectionServer</a> is a class that implements the VectorsCollectionMetadataService. </p>
+<p>It allows to send a VectorsCollection to a client. </p><dl class="section note"><dt>Note</dt><dd>The VectorCollectionServer allows to send a VectorsCollection to a client. You can use the <a class="el" href="classBipedalLocomotion_1_1YarpUtilities_1_1VectorsCollectionServer.html" title="VectorsCollectionServer is a class that implements the VectorsCollectionMetadataService.">VectorsCollectionServer</a> as follows <div class="fragment"><div class="line"><span class="keyword">auto</span> handler = std::make_shared&lt;ParametersHandler::StdImplementation&gt;();</div>
+<div class="line"><span class="comment">// fill the handler with the parameters shown in the documentation</span></div>
+<div class="line"> </div>
+<div class="line">VectorCollectionServer server;</div>
+<div class="line">server.initialize(handler);</div>
+<div class="line"><span class="comment">// The metadata should be populated before the data is sent.</span></div>
+<div class="line"><span class="comment">// The metadata are available to the client only after the finalizeMetadata function is called.</span></div>
+<div class="line">server.populateMetadata(<span class="stringliteral">&quot;key1&quot;</span>, {<span class="stringliteral">&quot;metadata1&quot;</span>, <span class="stringliteral">&quot;metadata2&quot;</span>, <span class="stringliteral">&quot;metadata3&quot;</span>});</div>
+<div class="line">server.populateMetadata(<span class="stringliteral">&quot;key2&quot;</span>, {<span class="stringliteral">&quot;metadata4&quot;</span>, <span class="stringliteral">&quot;metadata5&quot;</span>, <span class="stringliteral">&quot;metadata6&quot;</span>});</div>
+<div class="line">server.finalizeMetadata();</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// prepare the data</span></div>
+<div class="line">server.prepareData();</div>
+<div class="line">server.clearData(); <span class="comment">// optional</span></div>
+<div class="line">server.populateData(<span class="stringliteral">&quot;key1&quot;</span>, {1.0, 2.0, 3.0});</div>
+<div class="line">server.populateData(<span class="stringliteral">&quot;key2&quot;</span>, {4.0, 5.0, 6.0});</div>
+<div class="line"> </div>
+<div class="line">server.sendData();</div>
+</div><!-- fragment --> <code>server.write()</code> will send the data to the client. </dd></dl>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="a395eb4285be9166e9a8b8c3ab9747783"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a395eb4285be9166e9a8b8c3ab9747783">&#9670;&nbsp;</a></span>initialize()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool VectorsCollectionServer::initialize </td>
+          <td>(</td>
+          <td class="paramtype">std::weak_ptr&lt; const <a class="el" href="classBipedalLocomotion_1_1ParametersHandler_1_1IParametersHandler.html">ParametersHandler::IParametersHandler</a> &gt;&#160;</td>
+          <td class="paramname"><em>handler</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Initialize the server. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">handler</td><td>pointer to the parameters handler. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section note"><dt>Note</dt><dd>The following parameters are required: <table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadCenter">Parameter Name   </th><th class="markdownTableHeadCenter">Type   </th><th class="markdownTableHeadCenter">Description    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyCenter">remote   </td><td class="markdownTableBodyCenter">string   </td><td class="markdownTableBodyCenter">Name of the port that will be created.   </td></tr>
+</table>
+</dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>true if the server has been initialized successfully, false otherwise. </dd></dl>
+
+</div>
+</div>
+<a id="ac847b4a5fed2a9a73135987dcfb73b62"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac847b4a5fed2a9a73135987dcfb73b62">&#9670;&nbsp;</a></span>populateMetadata()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool VectorsCollectionServer::populateMetadata </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>key</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::vector&lt; std::string &gt; &amp;&#160;</td>
+          <td class="paramname"><em>metadata</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Populate the metadata. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">key</td><td>key of the metadata. </td></tr>
+    <tr><td class="paramname">metadata</td><td>metadata. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true if the metadata has been populated successfully, false otherwise. </dd></dl>
+
+</div>
+</div>
+<a id="a4c4e51af7dd922b6e3a7a307430bf206"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4c4e51af7dd922b6e3a7a307430bf206">&#9670;&nbsp;</a></span>finalizeMetadata()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool VectorsCollectionServer::finalizeMetadata </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Finalize the metadata. </p>
+<dl class="section return"><dt>Returns</dt><dd>true if the metadata has been finalized successfully, false otherwise. </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>this function should be called after the metadata has been populated. It opens the ports. </dd></dl>
+
+</div>
+</div>
+<a id="aa3e28a0463cbfe0efe7aa982e0f4620b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa3e28a0463cbfe0efe7aa982e0f4620b">&#9670;&nbsp;</a></span>populateData()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool VectorsCollectionServer::populateData </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>key</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const iDynTree::Span&lt; const double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>data</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Set the data. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">key</td><td>key of the data. </td></tr>
+    <tr><td class="paramname">data</td><td>data. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true if the data has been set successfully, false otherwise. </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>this function should be called after the metadata has been finalized and after the prepareData function has been called. </dd></dl>
+
+</div>
+</div>
+<a id="ae8f0cb853a3087f89191212e714d0286"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae8f0cb853a3087f89191212e714d0286">&#9670;&nbsp;</a></span>getMetadata()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">VectorsCollectionMetadata VectorsCollectionServer::getMetadata </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get the metadata. </p>
+<dl class="section return"><dt>Returns</dt><dd>the metadata. </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>if the metadata is not ready, an empty VectorsCollectionMetadata is returned. </dd>
+<dd>
+if some keys are pending to be finalized, the last finalized metadata is returned. </dd></dl>
+
+</div>
+</div>
+<a id="a5ac1170b1aa78120cbce8e369b074e46"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5ac1170b1aa78120cbce8e369b074e46">&#9670;&nbsp;</a></span>getMetadataIncremental()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">VectorsCollectionMetadata VectorsCollectionServer::getMetadataIncremental </td>
+          <td>(</td>
+          <td class="paramtype">const std::int32_t&#160;</td>
+          <td class="paramname"><em>fromVersion</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Read only the metadata introduced after the provided version. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">fromVersion</td><td>version from which the metadata should be returned. Pass -1 to get the full metadata. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>the metadata introduced after the provided version. </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>if the metadata is not ready, an empty VectorsCollectionMetadata is returned. </dd></dl>
+
+</div>
+</div>
+<a id="a324d0fb9bd5851034a6f753336c68831"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a324d0fb9bd5851034a6f753336c68831">&#9670;&nbsp;</a></span>areMetadataReady()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool VectorsCollectionServer::areMetadataReady </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Check if the metadata is ready. </p>
+<dl class="section return"><dt>Returns</dt><dd>true if the metadata is ready (it has been finalized at least once), false otherwise. </dd></dl>
+
+</div>
+</div>
+<a id="a711ee544ad5b6545063d55151e4b12c2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a711ee544ad5b6545063d55151e4b12c2">&#9670;&nbsp;</a></span>prepareData()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void VectorsCollectionServer::prepareData </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Prepare the data. </p>
+<dl class="section note"><dt>Note</dt><dd>this function should be called before the data is populated. </dd></dl>
+
+</div>
+</div>
+<a id="a70dec5c2dfa278ca25fa0c5d97ef55cd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a70dec5c2dfa278ca25fa0c5d97ef55cd">&#9670;&nbsp;</a></span>sendData()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void VectorsCollectionServer::sendData </td>
+          <td>(</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>forceStrict</em> = <code>false</code></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Send the data filled with populateData. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">forceStrict</td><td>If this is true, wait until any previous sends are complete. If false, the current object will not be sent on connections that are currently busy. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a1747b42faa9dedf3d11ba37776890db2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1747b42faa9dedf3d11ba37776890db2">&#9670;&nbsp;</a></span>clearData()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool VectorsCollectionServer::clearData </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Deallocates the memory held by the internal buffer used to store data. </p>
+<dl class="section note"><dt>Note</dt><dd>If you have previously populated the object using populateData and intend to reuse it without reallocating memory, you may skip calling this function. Otherwise, use VectorsCollection::clearData to free the memory allocated in the internal buffer. </dd>
+<dd>
+Note that this function only clears the data and does not affect the metadata. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>true if the data has been cleared successfully, false otherwise. </dd></dl>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following files:<ul>
+<li>YarpUtilities/include/BipedalLocomotion/YarpUtilities/<a class="el" href="VectorsCollectionServer_8h.html">VectorsCollectionServer.h</a></li>
+<li>YarpUtilities/src/<a class="el" href="VectorsCollectionServer_8cpp.html">VectorsCollectionServer.cpp</a></li>
+</ul>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- Doxygen custom footer -->
+<div id="nav-path" class="navpath">
+  <ul>
+    <li class="footer">
+      <a href="https://github.com/gbionics/bipedal-locomotion-framework">GitHub</a> &bull;
+      <a href="https://gbionics.ai/">Generative Bionics</a> &bull;
+      Licensed under <a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause "New" or "Revised" License</a> &bull;
+      Generated by <a href="https://www.doxygen.org/index.html">Doxygen</a> 1.9.1
+    </li>
+  </ul>
+</div>
 </body>
 </html>

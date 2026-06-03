@@ -1,199 +1,211 @@
-<!DOCTYPE html>
-<html lang="en">
+<!-- HTML header for doxygen 1.9.1 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-  <meta charset="UTF-8" />
-  <title>BipedalLocomotion::Planners::UnicycleTrajectoryPlannerInput struct | bipedal locomotion framework master</title>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
-  <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
-  <link rel="icon" href="favicon-dark.png" type="image/png" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#22272e" />
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>bipedal locomotion framework: BipedalLocomotion::Planners::UnicycleTrajectoryPlannerInput Struct Reference</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js", "TeX/AMSmath.js", "TeX/AMSsymbols.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+});
+</script>
+<script type="text/javascript" async="async" src="https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only-darkmode-toggle.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="doxygen-awesome-darkmode-toggle.js"></script>
+<script type="text/javascript" src="doxygen-awesome-fragment-copy-button.js"></script>
+<script type="text/javascript" src="doxygen-awesome-interactive-toc.js"></script>
+<script type="text/javascript" src="doxygen-awesome-paragraph-link.js"></script>
+<script type="text/javascript" src="doxygen-awesome-tabs.js"></script>
+<script type="text/javascript">
+    DoxygenAwesomeDarkModeToggle.init()
+    DoxygenAwesomeFragmentCopyButton.init()
+    DoxygenAwesomeInteractiveToc.init()
+    DoxygenAwesomeParagraphLink.init()
+    DoxygenAwesomeTabs.init()
+</script>
 </head>
 <body>
-<header><nav id="navigation">
-  <div class="m-container">
-    <div class="m-row">
-      <span id="m-navbar-brand" class="m-col-t-8 m-col-m-none m-left-m">
-        <a href="./index.html">bipedal locomotion framework</a> <span class="m-breadcrumb">|</span> <a href="index.html" class="m-thin">master</a>
-      </span>
-      <div class="m-col-t-4 m-hide-m m-text-right m-nopadr">
-        <a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
-          <path id="m-doc-search-icon-path" d="m6 0c-3.31 0-6 2.69-6 6 0 3.31 2.69 6 6 6 1.49 0 2.85-0.541 3.89-1.44-0.0164 0.338 0.147 0.759 0.5 1.15l3.22 3.79c0.552 0.614 1.45 0.665 2 0.115 0.55-0.55 0.499-1.45-0.115-2l-3.79-3.22c-0.392-0.353-0.812-0.515-1.15-0.5 0.895-1.05 1.44-2.41 1.44-3.89 0-3.31-2.69-6-6-6zm0 1.56a4.44 4.44 0 0 1 4.44 4.44 4.44 4.44 0 0 1-4.44 4.44 4.44 4.44 0 0 1-4.44-4.44 4.44 4.44 0 0 1 4.44-4.44z"/>
-        </svg></a>
-        <a id="m-navbar-show" href="#navigation" title="Show navigation"></a>
-        <a id="m-navbar-hide" href="#" title="Hide navigation"></a>
-      </div>
-      <div id="m-navbar-collapse" class="m-col-t-12 m-show-m m-col-m-none m-right-m">
-        <div class="m-row">
-          <ol class="m-col-t-6 m-col-m-none">
-            <li><a href="pages.html">Pages</a></li>
-            <li><a href="annotated.html">Classes</a></li>
-            <li><a href="files.html">Files</a></li>
-          </ol>
-          <ol class="m-col-t-6 m-col-m-none" start="4">
-            <li>
-              <a href="pages.html">Versions</a>
-              <ol>
-                <li><a href="./index.html">Master</a></li>
-                <li><a href="./v0.19.0/index.html">v0.19.0</a></li>
-                <li><a href="./v0.21.1/index.html">v0.21.1</a></li>
-                <li><a href="./v0.18.0/index.html">v0.18.0</a></li>
-              </ol>
-            </li>
-            <li>
-              <a href="pages.html">Contacts</a>
-              <ol>
-                <li><a href="https://github.com/ami-iit/bipedal-locomotion-framework">GitHub</a></li>
-                <li><a href="https://www.iit.it/web/ami/">Lab website</a></li>
-              </ol>
-            </li>
-            <li class="m-show-m"><a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
-              <use href="#m-doc-search-icon-path" />
-            </svg></a></li>
-          </ol>
-        </div>
-      </div>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">bipedal locomotion framework
+   </div>
+   <div id="projectbrief">A suite of libraries for achieving bipedal locomotion on humanoid robots</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.9.1 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "search",false,'Search','.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',true,false,'search.php','Search');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
     </div>
   </div>
-</nav></header>
-<main><article>
-  <div class="m-container m-container-inflatable">
-    <div class="m-row">
-      <div class="m-col-l-10 m-push-l-1">
-        <h1>
-          <span class="m-breadcrumb"><a href="namespaceBipedalLocomotion.html">BipedalLocomotion</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespaceBipedalLocomotion_1_1Planners.html">Planners</a>::<wbr/></span>UnicycleTrajectoryPlannerInput <span class="m-thin">struct</span>
-          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="UnicycleTrajectoryPlanner_8h.html">&lt;BipedalLocomotion/Planners/UnicycleTrajectoryPlanner.h&gt;</a></div>
-        </h1>
-        <p><span></span></p>
-        <nav class="m-block m-default">
-          <h3>Contents</h3>
-          <ul>
-            <li>
-              Reference
-              <ul>
-                <li><a href="#pub-types">Public types</a></li>
-                <li><a href="#pub-static-methods">Public static functions</a></li>
-                <li><a href="#pub-attribs">Public variables</a></li>
-              </ul>
-            </li>
-          </ul>
-        </nav>
-        <section id="pub-types">
-          <h2><a href="#pub-types">Public types</a></h2>
-          <dl class="m-doc">
-            <dt>
-              struct <a href="structBipedalLocomotion_1_1Planners_1_1UnicycleTrajectoryPlannerInput_1_1COMInitialState.html" class="m-doc">COMInitialState</a>
-            </dt>
-            <dd><span></span></dd>
-          </dl>
-        </section>
-        <section id="pub-static-methods">
-          <h2><a href="#pub-static-methods">Public static functions</a></h2>
-          <dl class="m-doc">
-            <dt id="aea6954fe3071831a4d9364bdf661c949">
-              <span class="m-doc-wrap-bumper">static auto <a href="#aea6954fe3071831a4d9364bdf661c949" class="m-doc-self">generateDummyUnicycleTrajectoryPlannerInput</a>(</span><span class="m-doc-wrap">) -&gt; <a href="structBipedalLocomotion_1_1Planners_1_1UnicycleTrajectoryPlannerInput.html" class="m-doc">UnicycleTrajectoryPlannerInput</a></span>
-            </dt>
-            <dd><span></span></dd>
-          </dl>
-        </section>
-        <section id="pub-attribs">
-          <h2><a href="#pub-attribs">Public variables</a></h2>
-          <dl class="m-doc">
-            <dt>
-              Eigen::VectorXd <a href="#ac3dc4b76c6bb9e5cf9b8cf5e72751f73" class="m-doc">plannerInput</a>
-            </dt>
-            <dd><a href="structBipedalLocomotion_1_1Planners_1_1UnicycleTrajectoryPlannerInput.html" class="m-doc">UnicycleTrajectoryPlannerInput</a> implements the input to the planner.</dd>
-            <dt id="a07b069886b358a9f0a35e1f8d5671276">
-              DCMInitialState <a href="#a07b069886b358a9f0a35e1f8d5671276" class="m-doc-self">dcmInitialState</a>
-            </dt>
-            <dd>Initial state of the DCM trajectory generator.</dd>
-            <dt id="a650baff917ab1a2d7748723e7b75fef7">
-              InitialState <a href="#a650baff917ab1a2d7748723e7b75fef7" class="m-doc-self">zmpInitialState</a>
-            </dt>
-            <dd>Initial state of the ZMP trajectory generator.</dd>
-            <dt id="aab1afe2c2d1e58221a070e47c084c67b">
-              <a href="structBipedalLocomotion_1_1Planners_1_1UnicycleTrajectoryPlannerInput_1_1COMInitialState.html" class="m-doc">COMInitialState</a> <a href="#aab1afe2c2d1e58221a070e47c084c67b" class="m-doc-self">comInitialState</a>
-            </dt>
-            <dd>Initial state of the CoM.</dd>
-            <dt>
-              bool <a href="#a69b32074cf6df1e5ad45112e9fb4a3ad" class="m-doc">isLeftLastSwinging</a>
-            </dt>
-            <dd>True if the last foot that was swinging is the left one.</dd>
-            <dt id="a7c3e89f279fbd083c64c13901e51c400">
-              std::chrono::nanoseconds <a href="#a7c3e89f279fbd083c64c13901e51c400" class="m-doc-self">initTime</a>
-            </dt>
-            <dd>Initial time of the trajectory.</dd>
-            <dt id="ab94d7e7b56aed851da5478c21b8421bb">
-              manif::SE3d <a href="#ab94d7e7b56aed851da5478c21b8421bb" class="m-doc-self">measuredTransform</a>
-            </dt>
-            <dd>Measured transform of the last foot that touched the floor.</dd>
-          </dl>
-        </section>
-        <section>
-          <h2>Variable documentation</h2>
-          <section class="m-doc-details" id="ac3dc4b76c6bb9e5cf9b8cf5e72751f73"><div>
-            <h3>
-              Eigen::VectorXd BipedalLocomotion::<wbr />Planners::<wbr />UnicycleTrajectoryPlannerInput::<wbr /><a href="#ac3dc4b76c6bb9e5cf9b8cf5e72751f73" class="m-doc-self">plannerInput</a>
-            </h3>
-            <p><a href="structBipedalLocomotion_1_1Planners_1_1UnicycleTrajectoryPlannerInput.html" class="m-doc">UnicycleTrajectoryPlannerInput</a> implements the input to the planner.</p>
-<p>Depending on the type of unicycle controller used the plannerInput is a 2d-vector or a 3d-vector. For instance, if unicycle controller is set to UnicycleController::PERSON_FOLLOWING, the plannerInput is a vector of size 2 that represents a reference position (i.e., [x, y]). Instead, if it is set to UnicycleController::DIRECT, the plannerInput is a vector of size 3 that representes a velocity command (i.e., [xdot, ydot, wz]). Input to the unicycle planner</p>
-          </div></section>
-          <section class="m-doc-details" id="a69b32074cf6df1e5ad45112e9fb4a3ad"><div>
-            <h3>
-              bool BipedalLocomotion::<wbr />Planners::<wbr />UnicycleTrajectoryPlannerInput::<wbr /><a href="#a69b32074cf6df1e5ad45112e9fb4a3ad" class="m-doc-self">isLeftLastSwinging</a>
-            </h3>
-            <p>True if the last foot that was swinging is the left one.</p>
-<p>False otherwise.</p>
-          </div></section>
-        </section>
-      </div>
-    </div>
-  </div>
-</article></main>
-<div class="m-doc-search" id="search">
-  <a href="#!" onclick="return hideSearch()"></a>
-  <div class="m-container">
-    <div class="m-row">
-      <div class="m-col-m-8 m-push-m-2">
-        <div class="m-doc-search-header m-text m-small">
-          <div><span class="m-label m-default">Tab</span> / <span class="m-label m-default">T</span> to search, <span class="m-label m-default">Esc</span> to close</div>
-          <div id="search-symbolcount">&hellip;</div>
-        </div>
-        <div class="m-doc-search-content">
-          <form>
-            <input type="search" name="q" id="search-input" placeholder="Loading &hellip;" disabled="disabled" autofocus="autofocus" autocomplete="off" spellcheck="false" />
-          </form>
-          <noscript class="m-text m-danger m-text-center">Unlike everything else in the docs, the search functionality <em>requires</em> JavaScript.</noscript>
-          <div id="search-help" class="m-text m-dim m-text-center">
-            <p class="m-noindent">Search for symbols, directories, files, pages or
-            modules. You can omit any prefix from the symbol or file path; adding a
-            <code>:</code> or <code>/</code> suffix lists all members of given symbol or
-            directory.</p>
-            <p class="m-noindent">Use <span class="m-label m-dim">&darr;</span>
-            / <span class="m-label m-dim">&uarr;</span> to navigate through the list,
-            <span class="m-label m-dim">Enter</span> to go.
-            <span class="m-label m-dim">Tab</span> autocompletes common prefix, you can
-            copy a link to the result using <span class="m-label m-dim">⌘</span>
-            <span class="m-label m-dim">L</span> while <span class="m-label m-dim">⌘</span>
-            <span class="m-label m-dim">M</span> produces a Markdown link.</p>
-          </div>
-          <div id="search-notfound" class="m-text m-warning m-text-center">Sorry, nothing was found.</div>
-          <ul id="search-results"></ul>
-        </div>
-      </div>
-    </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
   </div>
 </div>
-<script src="search-v2.js"></script>
-<script src="searchdata-v2.js" async="async"></script>
-<footer><nav>
-  <div class="m-container">
-    <div class="m-row">
-      <div class="m-col-l-10 m-push-l-1">
-        <p>bipedal-locomotion-framework documentation. Licensed under the <a href="https://www.gnu.org/licenses/lgpl-3.0.en.html">GNU Lesser General Public License v3.0</a>. Project maintained by the <a href="https://www.iit.it/web/ami/">Artificial and Mechanical Intelligence Lab</a>. Contact the team via <a href="https://github.com/ami-iit/bipedal-locomotion-framework/issues/new">GitHub</a>.<br />Generated by <a href="https://doxygen.org/">Doxygen</a> 1.9.1 and <a href="https://mcss.mosra.cz/">m.css</a>.
-      </div>
-    </div>
-  </div>
-</nav></footer>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(document).ready(function(){initNavTree('structBipedalLocomotion_1_1Planners_1_1UnicycleTrajectoryPlannerInput.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#nested-classes">Classes</a> &#124;
+<a href="#pub-static-methods">Static Public Member Functions</a> &#124;
+<a href="#pub-attribs">Public Attributes</a> &#124;
+<a href="structBipedalLocomotion_1_1Planners_1_1UnicycleTrajectoryPlannerInput-members.html">List of all members</a>  </div>
+  <div class="headertitle">
+<div class="title">BipedalLocomotion::Planners::UnicycleTrajectoryPlannerInput Struct Reference</div>  </div>
+</div><!--header-->
+<div class="contents">
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structBipedalLocomotion_1_1Planners_1_1UnicycleTrajectoryPlannerInput_1_1COMInitialState.html">COMInitialState</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
+Static Public Member Functions</h2></td></tr>
+<tr class="memitem:ad8a48bbf3eb37d60b160e74cb880574d"><td class="memItemLeft" align="right" valign="top"><a id="ad8a48bbf3eb37d60b160e74cb880574d"></a>
+static <a class="el" href="structBipedalLocomotion_1_1Planners_1_1UnicycleTrajectoryPlannerInput.html">UnicycleTrajectoryPlannerInput</a>&#160;</td><td class="memItemRight" valign="bottom"><b>generateDummyUnicycleTrajectoryPlannerInput</b> ()</td></tr>
+<tr class="separator:ad8a48bbf3eb37d60b160e74cb880574d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
+Public Attributes</h2></td></tr>
+<tr class="memitem:ac3dc4b76c6bb9e5cf9b8cf5e72751f73"><td class="memItemLeft" align="right" valign="top">Eigen::VectorXd&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structBipedalLocomotion_1_1Planners_1_1UnicycleTrajectoryPlannerInput.html#ac3dc4b76c6bb9e5cf9b8cf5e72751f73">plannerInput</a></td></tr>
+<tr class="memdesc:ac3dc4b76c6bb9e5cf9b8cf5e72751f73"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="structBipedalLocomotion_1_1Planners_1_1UnicycleTrajectoryPlannerInput.html">UnicycleTrajectoryPlannerInput</a> implements the input to the planner.  <a href="structBipedalLocomotion_1_1Planners_1_1UnicycleTrajectoryPlannerInput.html#ac3dc4b76c6bb9e5cf9b8cf5e72751f73">More...</a><br /></td></tr>
+<tr class="separator:ac3dc4b76c6bb9e5cf9b8cf5e72751f73"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a07b069886b358a9f0a35e1f8d5671276"><td class="memItemLeft" align="right" valign="top"><a id="a07b069886b358a9f0a35e1f8d5671276"></a>
+DCMInitialState&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structBipedalLocomotion_1_1Planners_1_1UnicycleTrajectoryPlannerInput.html#a07b069886b358a9f0a35e1f8d5671276">dcmInitialState</a></td></tr>
+<tr class="memdesc:a07b069886b358a9f0a35e1f8d5671276"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initial state of the DCM trajectory generator. <br /></td></tr>
+<tr class="separator:a07b069886b358a9f0a35e1f8d5671276"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a650baff917ab1a2d7748723e7b75fef7"><td class="memItemLeft" align="right" valign="top"><a id="a650baff917ab1a2d7748723e7b75fef7"></a>
+InitialState&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structBipedalLocomotion_1_1Planners_1_1UnicycleTrajectoryPlannerInput.html#a650baff917ab1a2d7748723e7b75fef7">zmpInitialState</a></td></tr>
+<tr class="memdesc:a650baff917ab1a2d7748723e7b75fef7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initial state of the ZMP trajectory generator. <br /></td></tr>
+<tr class="separator:a650baff917ab1a2d7748723e7b75fef7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aab1afe2c2d1e58221a070e47c084c67b"><td class="memItemLeft" align="right" valign="top"><a id="aab1afe2c2d1e58221a070e47c084c67b"></a>
+<a class="el" href="structBipedalLocomotion_1_1Planners_1_1UnicycleTrajectoryPlannerInput_1_1COMInitialState.html">COMInitialState</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structBipedalLocomotion_1_1Planners_1_1UnicycleTrajectoryPlannerInput.html#aab1afe2c2d1e58221a070e47c084c67b">comInitialState</a></td></tr>
+<tr class="memdesc:aab1afe2c2d1e58221a070e47c084c67b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initial state of the CoM. <br /></td></tr>
+<tr class="separator:aab1afe2c2d1e58221a070e47c084c67b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a69b32074cf6df1e5ad45112e9fb4a3ad"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structBipedalLocomotion_1_1Planners_1_1UnicycleTrajectoryPlannerInput.html#a69b32074cf6df1e5ad45112e9fb4a3ad">isLeftLastSwinging</a></td></tr>
+<tr class="memdesc:a69b32074cf6df1e5ad45112e9fb4a3ad"><td class="mdescLeft">&#160;</td><td class="mdescRight">True if the last foot that was swinging is the left one.  <a href="structBipedalLocomotion_1_1Planners_1_1UnicycleTrajectoryPlannerInput.html#a69b32074cf6df1e5ad45112e9fb4a3ad">More...</a><br /></td></tr>
+<tr class="separator:a69b32074cf6df1e5ad45112e9fb4a3ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7c3e89f279fbd083c64c13901e51c400"><td class="memItemLeft" align="right" valign="top"><a id="a7c3e89f279fbd083c64c13901e51c400"></a>
+std::chrono::nanoseconds&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structBipedalLocomotion_1_1Planners_1_1UnicycleTrajectoryPlannerInput.html#a7c3e89f279fbd083c64c13901e51c400">initTime</a></td></tr>
+<tr class="memdesc:a7c3e89f279fbd083c64c13901e51c400"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initial time of the trajectory. <br /></td></tr>
+<tr class="separator:a7c3e89f279fbd083c64c13901e51c400"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab94d7e7b56aed851da5478c21b8421bb"><td class="memItemLeft" align="right" valign="top"><a id="ab94d7e7b56aed851da5478c21b8421bb"></a>
+manif::SE3d&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structBipedalLocomotion_1_1Planners_1_1UnicycleTrajectoryPlannerInput.html#ab94d7e7b56aed851da5478c21b8421bb">measuredTransform</a></td></tr>
+<tr class="memdesc:ab94d7e7b56aed851da5478c21b8421bb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Measured transform of the last foot that touched the floor. <br /></td></tr>
+<tr class="separator:ab94d7e7b56aed851da5478c21b8421bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="ac3dc4b76c6bb9e5cf9b8cf5e72751f73"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac3dc4b76c6bb9e5cf9b8cf5e72751f73">&#9670;&nbsp;</a></span>plannerInput</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Eigen::VectorXd BipedalLocomotion::Planners::UnicycleTrajectoryPlannerInput::plannerInput</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p><a class="el" href="structBipedalLocomotion_1_1Planners_1_1UnicycleTrajectoryPlannerInput.html">UnicycleTrajectoryPlannerInput</a> implements the input to the planner. </p>
+<p>Depending on the type of unicycle controller used the plannerInput is a 2d-vector or a 3d-vector. For instance, if unicycle controller is set to UnicycleController::PERSON_FOLLOWING, the plannerInput is a vector of size 2 that represents a reference position (i.e., [x, y]). Instead, if it is set to UnicycleController::DIRECT, the plannerInput is a vector of size 3 that representes a velocity command (i.e., [xdot, ydot, wz]). Input to the unicycle planner </p>
+
+</div>
+</div>
+<a id="a69b32074cf6df1e5ad45112e9fb4a3ad"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a69b32074cf6df1e5ad45112e9fb4a3ad">&#9670;&nbsp;</a></span>isLeftLastSwinging</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool BipedalLocomotion::Planners::UnicycleTrajectoryPlannerInput::isLeftLastSwinging</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>True if the last foot that was swinging is the left one. </p>
+<p>False otherwise. </p>
+
+</div>
+</div>
+<hr/>The documentation for this struct was generated from the following files:<ul>
+<li>Planners/include/BipedalLocomotion/Planners/<a class="el" href="UnicycleTrajectoryPlanner_8h.html">UnicycleTrajectoryPlanner.h</a></li>
+<li>Planners/src/<a class="el" href="UnicycleTrajectoryPlanner_8cpp.html">UnicycleTrajectoryPlanner.cpp</a></li>
+</ul>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- Doxygen custom footer -->
+<div id="nav-path" class="navpath">
+  <ul>
+    <li class="footer">
+      <a href="https://github.com/gbionics/bipedal-locomotion-framework">GitHub</a> &bull;
+      <a href="https://gbionics.ai/">Generative Bionics</a> &bull;
+      Licensed under <a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause "New" or "Revised" License</a> &bull;
+      Generated by <a href="https://www.doxygen.org/index.html">Doxygen</a> 1.9.1
+    </li>
+  </ul>
+</div>
 </body>
 </html>

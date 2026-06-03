@@ -1,265 +1,271 @@
-<!DOCTYPE html>
-<html lang="en">
+<!-- HTML header for doxygen 1.9.1 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-  <meta charset="UTF-8" />
-  <title>BipedalLocomotion::ContinuousDynamicalSystem::ForwardEuler class | bipedal locomotion framework master</title>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
-  <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
-  <link rel="icon" href="favicon-dark.png" type="image/png" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#22272e" />
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>bipedal locomotion framework: BipedalLocomotion::ContinuousDynamicalSystem::ForwardEuler&lt; _DynamicalSystem &gt; Class Template Reference</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js", "TeX/AMSmath.js", "TeX/AMSsymbols.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+});
+</script>
+<script type="text/javascript" async="async" src="https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only-darkmode-toggle.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="doxygen-awesome-darkmode-toggle.js"></script>
+<script type="text/javascript" src="doxygen-awesome-fragment-copy-button.js"></script>
+<script type="text/javascript" src="doxygen-awesome-interactive-toc.js"></script>
+<script type="text/javascript" src="doxygen-awesome-paragraph-link.js"></script>
+<script type="text/javascript" src="doxygen-awesome-tabs.js"></script>
+<script type="text/javascript">
+    DoxygenAwesomeDarkModeToggle.init()
+    DoxygenAwesomeFragmentCopyButton.init()
+    DoxygenAwesomeInteractiveToc.init()
+    DoxygenAwesomeParagraphLink.init()
+    DoxygenAwesomeTabs.init()
+</script>
 </head>
 <body>
-<header><nav id="navigation">
-  <div class="m-container">
-    <div class="m-row">
-      <span id="m-navbar-brand" class="m-col-t-8 m-col-m-none m-left-m">
-        <a href="./index.html">bipedal locomotion framework</a> <span class="m-breadcrumb">|</span> <a href="index.html" class="m-thin">master</a>
-      </span>
-      <div class="m-col-t-4 m-hide-m m-text-right m-nopadr">
-        <a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
-          <path id="m-doc-search-icon-path" d="m6 0c-3.31 0-6 2.69-6 6 0 3.31 2.69 6 6 6 1.49 0 2.85-0.541 3.89-1.44-0.0164 0.338 0.147 0.759 0.5 1.15l3.22 3.79c0.552 0.614 1.45 0.665 2 0.115 0.55-0.55 0.499-1.45-0.115-2l-3.79-3.22c-0.392-0.353-0.812-0.515-1.15-0.5 0.895-1.05 1.44-2.41 1.44-3.89 0-3.31-2.69-6-6-6zm0 1.56a4.44 4.44 0 0 1 4.44 4.44 4.44 4.44 0 0 1-4.44 4.44 4.44 4.44 0 0 1-4.44-4.44 4.44 4.44 0 0 1 4.44-4.44z"/>
-        </svg></a>
-        <a id="m-navbar-show" href="#navigation" title="Show navigation"></a>
-        <a id="m-navbar-hide" href="#" title="Hide navigation"></a>
-      </div>
-      <div id="m-navbar-collapse" class="m-col-t-12 m-show-m m-col-m-none m-right-m">
-        <div class="m-row">
-          <ol class="m-col-t-6 m-col-m-none">
-            <li><a href="pages.html">Pages</a></li>
-            <li><a href="annotated.html">Classes</a></li>
-            <li><a href="files.html">Files</a></li>
-          </ol>
-          <ol class="m-col-t-6 m-col-m-none" start="4">
-            <li>
-              <a href="pages.html">Versions</a>
-              <ol>
-                <li><a href="./index.html">Master</a></li>
-                <li><a href="./v0.19.0/index.html">v0.19.0</a></li>
-                <li><a href="./v0.21.1/index.html">v0.21.1</a></li>
-                <li><a href="./v0.18.0/index.html">v0.18.0</a></li>
-              </ol>
-            </li>
-            <li>
-              <a href="pages.html">Contacts</a>
-              <ol>
-                <li><a href="https://github.com/ami-iit/bipedal-locomotion-framework">GitHub</a></li>
-                <li><a href="https://www.iit.it/web/ami/">Lab website</a></li>
-              </ol>
-            </li>
-            <li class="m-show-m"><a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
-              <use href="#m-doc-search-icon-path" />
-            </svg></a></li>
-          </ol>
-        </div>
-      </div>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">bipedal locomotion framework
+   </div>
+   <div id="projectbrief">A suite of libraries for achieving bipedal locomotion on humanoid robots</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.9.1 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "search",false,'Search','.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',true,false,'search.php','Search');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
     </div>
   </div>
-</nav></header>
-<main><article>
-  <div class="m-container m-container-inflatable">
-    <div class="m-row">
-      <div class="m-col-l-10 m-push-l-1">
-        <h1>
-          <div class="m-doc-include m-code m-inverted m-right-m m-text-right"><span class="cp">#include</span> <a class="cpf" href="ForwardEuler_8h.html">&lt;BipedalLocomotion/ContinuousDynamicalSystem/ForwardEuler.h&gt;</a></div>
-          <div class="m-doc-template">template&lt;class _DynamicalSystem&gt;</div>
-          <span class="m-breadcrumb"><a href="namespaceBipedalLocomotion.html">BipedalLocomotion</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespaceBipedalLocomotion_1_1ContinuousDynamicalSystem.html">ContinuousDynamicalSystem</a>::<wbr/></span>ForwardEuler <span class="m-thin">class</span>
-        </h1>
-        <p>Forward Euler integration method.</p>
-        <table class="m-table m-fullwidth m-flat">
-          <thead>
-            <tr><th colspan="2">Template parameters</th></tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td style="width: 1%">_DynamicalSystem</td>
-              <td>a class derived from <a href="classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1DynamicalSystem.html" class="m-doc">DynamicalSystem</a></td>
-            </tr>
-          </tbody>
-        </table>
-        <nav class="m-block m-default">
-          <h3>Contents</h3>
-          <ul>
-            <li>
-              Reference
-              <ul>
-                <li><a href="#base-classes">Base classes</a></li>
-                <li><a href="#pub-types">Public types</a></li>
-                <li><a href="#pub-methods">Public functions</a></li>
-              </ul>
-            </li>
-          </ul>
-        </nav>
-<aside class="m-note m-danger"><h4>Warning</h4><p>We assume that the operator + is defined for the objects contained in the <a href="classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1DynamicalSystem.html#abe9655801c0f0a1391619325e571cd57" class="m-doc">DynamicalSystem::<wbr />State</a> and <a href="classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1DynamicalSystem.html#a664a4e9ae349c0b14f83d98a90e52022" class="m-doc">DynamicalSystem::<wbr />StateDerivative</a>.</p><p>The <a href="classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1ForwardEuler.html" class="m-doc">ForwardEuler</a> integrator is compatible with Lie groups defined by the <code>manif</code> library. Since the <em>box-plus</em> operator is not commutative for a Lie group, here we consider only manifold left plus</p><div class="m-math"><svg style="width: 11.024em; height: 1.245em;" viewBox="141.355187 -11.955168 105.832658 11.955168">
-<title>
-\[ X + \psi = X \circ \exp(\psi) \]
-</title>
-<defs>
-<path id='eq1-g0-14' d='M5.308095-2.988792C5.308095-4.267995 4.244085-5.308095 2.988792-5.308095C1.697634-5.308095 .657534-4.244085 .657534-2.988792C.657534-1.721544 1.697634-.669489 2.988792-.669489C4.244085-.669489 5.308095-1.709589 5.308095-2.988792ZM2.988792-1.147696C1.948692-1.147696 1.135741-1.984558 1.135741-2.988792S1.960648-4.829888 2.988792-4.829888C3.981071-4.829888 4.829888-4.016936 4.829888-2.988792S3.981071-1.147696 2.988792-1.147696Z'/>
-<path id='eq1-g2-40' d='M3.88543 2.905106C3.88543 2.86924 3.88543 2.84533 3.682192 2.642092C2.486675 1.43462 1.817186-.537983 1.817186-2.976837C1.817186-5.296139 2.379078-7.292653 3.765878-8.703362C3.88543-8.810959 3.88543-8.834869 3.88543-8.870735C3.88543-8.942466 3.825654-8.966376 3.777833-8.966376C3.622416-8.966376 2.642092-8.105604 2.056289-6.933998C1.446575-5.726526 1.171606-4.447323 1.171606-2.976837C1.171606-1.912827 1.338979-.490162 1.960648 .789041C2.666002 2.223661 3.646326 3.000747 3.777833 3.000747C3.825654 3.000747 3.88543 2.976837 3.88543 2.905106Z'/>
-<path id='eq1-g2-41' d='M3.371357-2.976837C3.371357-3.88543 3.251806-5.36787 2.582316-6.75467C1.876961-8.18929 .896638-8.966376 .765131-8.966376C.71731-8.966376 .657534-8.942466 .657534-8.870735C.657534-8.834869 .657534-8.810959 .860772-8.607721C2.056289-7.400249 2.725778-5.427646 2.725778-2.988792C2.725778-.669489 2.163885 1.327024 .777086 2.737733C.657534 2.84533 .657534 2.86924 .657534 2.905106C.657534 2.976837 .71731 3.000747 .765131 3.000747C.920548 3.000747 1.900872 2.139975 2.486675 .968369C3.096389-.251059 3.371357-1.542217 3.371357-2.976837Z'/>
-<path id='eq1-g2-43' d='M4.770112-2.761644H8.069738C8.237111-2.761644 8.452304-2.761644 8.452304-2.976837C8.452304-3.203985 8.249066-3.203985 8.069738-3.203985H4.770112V-6.503611C4.770112-6.670984 4.770112-6.886177 4.554919-6.886177C4.327771-6.886177 4.327771-6.682939 4.327771-6.503611V-3.203985H1.028144C.860772-3.203985 .645579-3.203985 .645579-2.988792C.645579-2.761644 .848817-2.761644 1.028144-2.761644H4.327771V.537983C4.327771 .705355 4.327771 .920548 4.542964 .920548C4.770112 .920548 4.770112 .71731 4.770112 .537983V-2.761644Z'/>
-<path id='eq1-g2-61' d='M8.069738-3.873474C8.237111-3.873474 8.452304-3.873474 8.452304-4.088667C8.452304-4.315816 8.249066-4.315816 8.069738-4.315816H1.028144C.860772-4.315816 .645579-4.315816 .645579-4.100623C.645579-3.873474 .848817-3.873474 1.028144-3.873474H8.069738ZM8.069738-1.649813C8.237111-1.649813 8.452304-1.649813 8.452304-1.865006C8.452304-2.092154 8.249066-2.092154 8.069738-2.092154H1.028144C.860772-2.092154 .645579-2.092154 .645579-1.876961C.645579-1.649813 .848817-1.649813 1.028144-1.649813H8.069738Z'/>
-<path id='eq1-g2-101' d='M4.578829-2.773599C4.841843-2.773599 4.865753-2.773599 4.865753-3.000747C4.865753-4.208219 4.220174-5.332005 2.773599-5.332005C1.41071-5.332005 .358655-4.100623 .358655-2.618182C.358655-1.0401 1.578082 .119552 2.905106 .119552C4.327771 .119552 4.865753-1.171606 4.865753-1.422665C4.865753-1.494396 4.805978-1.542217 4.734247-1.542217C4.638605-1.542217 4.614695-1.482441 4.590785-1.422665C4.27995-.418431 3.478954-.143462 2.976837-.143462S1.267248-.478207 1.267248-2.546451V-2.773599H4.578829ZM1.279203-3.000747C1.374844-4.877709 2.426899-5.092902 2.761644-5.092902C4.040847-5.092902 4.112578-3.407223 4.124533-3.000747H1.279203Z'/>
-<path id='eq1-g2-112' d='M2.929016 1.972603C2.163885 1.972603 2.020423 1.972603 2.020423 1.43462V-.645579C2.235616-.3467 2.725778 .119552 3.490909 .119552C4.865753 .119552 6.073225-1.0401 6.073225-2.582316C6.073225-4.100623 4.94944-5.272229 3.646326-5.272229C2.594271-5.272229 2.032379-4.519054 1.996513-4.471233V-5.272229L.334745-5.140722V-4.794022C1.171606-4.794022 1.243337-4.710336 1.243337-4.184309V1.43462C1.243337 1.972603 1.111831 1.972603 .334745 1.972603V2.319303C.645579 2.295392 1.291158 2.295392 1.625903 2.295392C1.972603 2.295392 2.618182 2.295392 2.929016 2.319303V1.972603ZM2.020423-3.813699C2.020423-4.040847 2.020423-4.052802 2.15193-4.244085C2.510585-4.782067 3.096389-5.009215 3.550685-5.009215C4.447323-5.009215 5.164633-3.921295 5.164633-2.582316C5.164633-1.159651 4.351681-.119552 3.431133-.119552C3.060523-.119552 2.713823-.274969 2.47472-.502117C2.199751-.777086 2.020423-1.016189 2.020423-1.350934V-3.813699Z'/>
-<path id='eq1-g2-120' d='M3.347447-2.82142C3.694147-3.275716 4.196264-3.921295 4.423412-4.172354C4.913574-4.722291 5.475467-4.805978 5.858032-4.805978V-5.152677C5.34396-5.128767 5.32005-5.128767 4.853798-5.128767C4.399502-5.128767 4.375592-5.128767 3.777833-5.152677V-4.805978C3.93325-4.782067 4.124533-4.710336 4.124533-4.435367C4.124533-4.23213 4.016936-4.100623 3.945205-4.004981L3.180075-3.036613L2.247572-4.267995C2.211706-4.315816 2.139975-4.423412 2.139975-4.507098C2.139975-4.578829 2.199751-4.794022 2.558406-4.805978V-5.152677C2.259527-5.128767 1.649813-5.128767 1.327024-5.128767C.932503-5.128767 .908593-5.128767 .179328-5.152677V-4.805978C.789041-4.805978 1.016189-4.782067 1.267248-4.459278L2.666002-2.630137C2.689913-2.606227 2.737733-2.534496 2.737733-2.49863S1.80523-1.291158 1.685679-1.135741C1.159651-.490162 .633624-.358655 .119552-.3467V0C.573848-.02391 .597758-.02391 1.111831-.02391C1.566127-.02391 1.590037-.02391 2.187796 0V-.3467C1.900872-.382565 1.853051-.561893 1.853051-.729265C1.853051-.920548 1.936737-1.016189 2.056289-1.171606C2.235616-1.422665 2.630137-1.912827 2.917061-2.283437L3.897385-1.004234C4.100623-.74122 4.100623-.71731 4.100623-.645579C4.100623-.549938 4.004981-.358655 3.682192-.3467V0C3.993026-.02391 4.578829-.02391 4.913574-.02391C5.308095-.02391 5.332005-.02391 6.049315 0V-.3467C5.415691-.3467 5.200498-.37061 4.913574-.753176L3.347447-2.82142Z'/>
-<path id='eq1-g1-32' d='M5.618929-8.009963C5.618929-8.021918 5.66675-8.177335 5.66675-8.18929C5.66675-8.296887 5.571108-8.296887 5.535243-8.296887C5.427646-8.296887 5.415691-8.237111 5.36787-8.057783L3.395268-.143462C2.402989-.263014 2.032379-.765131 2.032379-1.482441C2.032379-1.745455 2.032379-2.020423 2.594271-3.502864C2.749689-3.93325 2.809465-4.088667 2.809465-4.303861C2.809465-4.841843 2.426899-5.272229 1.865006-5.272229C.765131-5.272229 .32279-3.53873 .32279-3.443088C.32279-3.395268 .37061-3.335492 .454296-3.335492C.561893-3.335492 .573848-3.383313 .621669-3.550685C.908593-4.590785 1.3868-5.033126 1.829141-5.033126C1.936737-5.033126 2.139975-5.021171 2.139975-4.638605C2.139975-4.590785 2.139975-4.327771 1.936737-3.801743C1.291158-2.10411 1.291158-1.841096 1.291158-1.566127C1.291158-.418431 2.247572 .02391 3.323537 .107597C3.227895 .478207 3.144209 .860772 3.048568 1.231382C2.857285 1.948692 2.773599 2.283437 2.773599 2.331258C2.773599 2.438854 2.86924 2.438854 2.905106 2.438854C2.929016 2.438854 2.976837 2.438854 3.000747 2.391034C3.048568 2.343213 3.53873 .334745 3.58655 .119552C4.028892 .119552 4.97335 .119552 6.049315-.992279C6.443836-1.422665 6.802491-1.972603 7.005729-2.486675C7.12528-2.797509 7.412204-3.861519 7.412204-4.471233C7.412204-5.188543 7.053549-5.272229 6.933998-5.272229C6.647073-5.272229 6.38406-4.985305 6.38406-4.746202C6.38406-4.60274 6.467746-4.519054 6.515567-4.471233C6.623163-4.363636 6.945953-4.040847 6.945953-3.419178C6.945953-2.988792 6.706849-2.10411 5.941719-1.243337C4.937484-.119552 4.016936-.119552 3.658281-.119552L5.618929-8.009963Z'/>
-<path id='eq1-g1-88' d='M5.678705-4.853798L4.554919-7.47198C4.710336-7.758904 5.068991-7.806725 5.212453-7.81868C5.284184-7.81868 5.415691-7.830635 5.415691-8.033873C5.415691-8.16538 5.308095-8.16538 5.236364-8.16538C5.033126-8.16538 4.794022-8.141469 4.590785-8.141469H3.897385C3.16812-8.141469 2.642092-8.16538 2.630137-8.16538C2.534496-8.16538 2.414944-8.16538 2.414944-7.938232C2.414944-7.81868 2.52254-7.81868 2.677958-7.81868C3.371357-7.81868 3.419178-7.699128 3.53873-7.412204L4.961395-4.088667L2.367123-1.315068C1.936737-.848817 1.422665-.394521 .537983-.3467C.394521-.334745 .298879-.334745 .298879-.119552C.298879-.083686 .310834 0 .442341 0C.609714 0 .789041-.02391 .956413-.02391H1.518306C1.900872-.02391 2.319303 0 2.689913 0C2.773599 0 2.917061 0 2.917061-.215193C2.917061-.334745 2.833375-.3467 2.761644-.3467C2.52254-.37061 2.367123-.502117 2.367123-.6934C2.367123-.896638 2.510585-1.0401 2.857285-1.398755L3.921295-2.558406C4.184309-2.833375 4.817933-3.526775 5.080946-3.789788L6.336239-.848817C6.348194-.824907 6.396015-.705355 6.396015-.6934C6.396015-.585803 6.133001-.37061 5.750436-.3467C5.678705-.3467 5.547198-.334745 5.547198-.119552C5.547198 0 5.66675 0 5.726526 0C5.929763 0 6.168867-.02391 6.372105-.02391H7.687173C7.902366-.02391 8.129514 0 8.332752 0C8.416438 0 8.547945 0 8.547945-.227148C8.547945-.3467 8.428394-.3467 8.320797-.3467C7.603487-.358655 7.579577-.418431 7.376339-.860772L5.798257-4.566874L7.316563-6.192777C7.436115-6.312329 7.711083-6.611208 7.81868-6.73076C8.332752-7.268742 8.810959-7.758904 9.779328-7.81868C9.898879-7.830635 10.018431-7.830635 10.018431-8.033873C10.018431-8.16538 9.910834-8.16538 9.863014-8.16538C9.695641-8.16538 9.516314-8.141469 9.348941-8.141469H8.799004C8.416438-8.141469 7.998007-8.16538 7.627397-8.16538C7.543711-8.16538 7.400249-8.16538 7.400249-7.950187C7.400249-7.830635 7.483935-7.81868 7.555666-7.81868C7.746949-7.79477 7.950187-7.699128 7.950187-7.47198L7.938232-7.44807C7.926276-7.364384 7.902366-7.244832 7.770859-7.10137L5.678705-4.853798Z'/>
-</defs>
-<g id='eq1-page1'>
-<use x='141.355187' y='-2.988792' xlink:href='#eq1-g1-88'/>
-<use x='154.666959' y='-2.988792' xlink:href='#eq1-g2-43'/>
-<use x='166.428274' y='-2.988792' xlink:href='#eq1-g1-32'/>
-<use x='177.788319' y='-2.988792' xlink:href='#eq1-g2-61'/>
-<use x='190.213799' y='-2.988792' xlink:href='#eq1-g1-88'/>
-<use x='203.525571' y='-2.988792' xlink:href='#eq1-g0-14'/>
-<use x='212.159841' y='-2.988792' xlink:href='#eq1-g2-101'/>
-<use x='217.362499' y='-2.988792' xlink:href='#eq1-g2-120'/>
-<use x='223.540655' y='-2.988792' xlink:href='#eq1-g2-112'/>
-<use x='230.043978' y='-2.988792' xlink:href='#eq1-g2-40'/>
-<use x='234.596304' y='-2.988792' xlink:href='#eq1-g1-32'/>
-<use x='242.635519' y='-2.988792' xlink:href='#eq1-g2-41'/>
-</g>
-</svg></div><p>where <svg class="m-math" style="width: 1.110em; height: 0.851em; vertical-align: -0.000em;" viewBox="0 -8.169366 10.655108 8.169366">
-<title>
-$X$
-</title>
-<defs>
-<path id='eq2-g0-88' d='M5.678705-4.853798L4.554919-7.47198C4.710336-7.758904 5.068991-7.806725 5.212453-7.81868C5.284184-7.81868 5.415691-7.830635 5.415691-8.033873C5.415691-8.16538 5.308095-8.16538 5.236364-8.16538C5.033126-8.16538 4.794022-8.141469 4.590785-8.141469H3.897385C3.16812-8.141469 2.642092-8.16538 2.630137-8.16538C2.534496-8.16538 2.414944-8.16538 2.414944-7.938232C2.414944-7.81868 2.52254-7.81868 2.677958-7.81868C3.371357-7.81868 3.419178-7.699128 3.53873-7.412204L4.961395-4.088667L2.367123-1.315068C1.936737-.848817 1.422665-.394521 .537983-.3467C.394521-.334745 .298879-.334745 .298879-.119552C.298879-.083686 .310834 0 .442341 0C.609714 0 .789041-.02391 .956413-.02391H1.518306C1.900872-.02391 2.319303 0 2.689913 0C2.773599 0 2.917061 0 2.917061-.215193C2.917061-.334745 2.833375-.3467 2.761644-.3467C2.52254-.37061 2.367123-.502117 2.367123-.6934C2.367123-.896638 2.510585-1.0401 2.857285-1.398755L3.921295-2.558406C4.184309-2.833375 4.817933-3.526775 5.080946-3.789788L6.336239-.848817C6.348194-.824907 6.396015-.705355 6.396015-.6934C6.396015-.585803 6.133001-.37061 5.750436-.3467C5.678705-.3467 5.547198-.334745 5.547198-.119552C5.547198 0 5.66675 0 5.726526 0C5.929763 0 6.168867-.02391 6.372105-.02391H7.687173C7.902366-.02391 8.129514 0 8.332752 0C8.416438 0 8.547945 0 8.547945-.227148C8.547945-.3467 8.428394-.3467 8.320797-.3467C7.603487-.358655 7.579577-.418431 7.376339-.860772L5.798257-4.566874L7.316563-6.192777C7.436115-6.312329 7.711083-6.611208 7.81868-6.73076C8.332752-7.268742 8.810959-7.758904 9.779328-7.81868C9.898879-7.830635 10.018431-7.830635 10.018431-8.033873C10.018431-8.16538 9.910834-8.16538 9.863014-8.16538C9.695641-8.16538 9.516314-8.141469 9.348941-8.141469H8.799004C8.416438-8.141469 7.998007-8.16538 7.627397-8.16538C7.543711-8.16538 7.400249-8.16538 7.400249-7.950187C7.400249-7.830635 7.483935-7.81868 7.555666-7.81868C7.746949-7.79477 7.950187-7.699128 7.950187-7.47198L7.938232-7.44807C7.926276-7.364384 7.902366-7.244832 7.770859-7.10137L5.678705-4.853798Z'/>
-</defs>
-<g id='eq2-page1'>
-<use x='0' y='0' xlink:href='#eq2-g0-88'/>
-</g>
-</svg> belongs to a Lie group and <svg class="m-math" style="width: 0.837em; height: 1.107em; vertical-align: -0.243em;" viewBox="0 -8.302191 8.039219 10.626798">
-<title>
-$\psi$
-</title>
-<defs>
-<path id='eq3-g0-32' d='M5.618929-8.009963C5.618929-8.021918 5.66675-8.177335 5.66675-8.18929C5.66675-8.296887 5.571108-8.296887 5.535243-8.296887C5.427646-8.296887 5.415691-8.237111 5.36787-8.057783L3.395268-.143462C2.402989-.263014 2.032379-.765131 2.032379-1.482441C2.032379-1.745455 2.032379-2.020423 2.594271-3.502864C2.749689-3.93325 2.809465-4.088667 2.809465-4.303861C2.809465-4.841843 2.426899-5.272229 1.865006-5.272229C.765131-5.272229 .32279-3.53873 .32279-3.443088C.32279-3.395268 .37061-3.335492 .454296-3.335492C.561893-3.335492 .573848-3.383313 .621669-3.550685C.908593-4.590785 1.3868-5.033126 1.829141-5.033126C1.936737-5.033126 2.139975-5.021171 2.139975-4.638605C2.139975-4.590785 2.139975-4.327771 1.936737-3.801743C1.291158-2.10411 1.291158-1.841096 1.291158-1.566127C1.291158-.418431 2.247572 .02391 3.323537 .107597C3.227895 .478207 3.144209 .860772 3.048568 1.231382C2.857285 1.948692 2.773599 2.283437 2.773599 2.331258C2.773599 2.438854 2.86924 2.438854 2.905106 2.438854C2.929016 2.438854 2.976837 2.438854 3.000747 2.391034C3.048568 2.343213 3.53873 .334745 3.58655 .119552C4.028892 .119552 4.97335 .119552 6.049315-.992279C6.443836-1.422665 6.802491-1.972603 7.005729-2.486675C7.12528-2.797509 7.412204-3.861519 7.412204-4.471233C7.412204-5.188543 7.053549-5.272229 6.933998-5.272229C6.647073-5.272229 6.38406-4.985305 6.38406-4.746202C6.38406-4.60274 6.467746-4.519054 6.515567-4.471233C6.623163-4.363636 6.945953-4.040847 6.945953-3.419178C6.945953-2.988792 6.706849-2.10411 5.941719-1.243337C4.937484-.119552 4.016936-.119552 3.658281-.119552L5.618929-8.009963Z'/>
-</defs>
-<g id='eq3-page1'>
-<use x='0' y='0' xlink:href='#eq3-g0-32'/>
-</g>
-</svg> belongs to the tangent space.</p></aside>
-        <section id="base-classes">
-          <h2><a href="#base-classes">Base classes</a></h2>
-          <dl class="m-doc">
-            <dt>
-              <div class="m-doc-template">template&lt;class _Derived&gt;</div>
-              class <a href="classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1FixedStepIntegrator.html" class="m-doc">FixedStepIntegrator&lt;ForwardEuler&lt;_DynamicalSystem&gt;&gt;</a>
-            </dt>
-            <dd>Fixed step integrator base class.</dd>
-          </dl>
-        </section>
-        <section id="pub-types">
-          <h2><a href="#pub-types">Public types</a></h2>
-          <dl class="m-doc">
-            <dt id="aa26271c83b32e174a8fea487a2dafc4a">
-              using <a href="#aa26271c83b32e174a8fea487a2dafc4a" class="m-doc-self">DynamicalSystem</a> = typename <a href="structBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1internal_1_1traits.html" class="m-doc">internal::<wbr />traits</a>&lt;<a href="classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1ForwardEuler.html" class="m-doc">ForwardEuler</a>&lt;_DynamicalSystem&gt;&gt;::DynamicalSystem
-            </dt>
-            <dd><span></span></dd>
-            <dt id="a3bf6c7c2f1c3fa9e250ad06e5315e1c0">
-              using <a href="#a3bf6c7c2f1c3fa9e250ad06e5315e1c0" class="m-doc-self">State</a> = typename <a href="structBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1internal_1_1traits.html" class="m-doc">internal::<wbr />traits</a>&lt;<a href="classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1ForwardEuler.html" class="m-doc">ForwardEuler</a>&lt;_DynamicalSystem&gt;&gt;::State
-            </dt>
-            <dd><span></span></dd>
-            <dt id="a6d16666e106b95c9c22e9728f296784f">
-              using <a href="#a6d16666e106b95c9c22e9728f296784f" class="m-doc-self">StateDerivative</a> = typename <a href="structBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1internal_1_1traits.html" class="m-doc">internal::<wbr />traits</a>&lt;<a href="classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1ForwardEuler.html" class="m-doc">ForwardEuler</a>&lt;_DynamicalSystem&gt;&gt;::StateDerivative
-            </dt>
-            <dd><span></span></dd>
-          </dl>
-        </section>
-        <section id="pub-methods">
-          <h2><a href="#pub-methods">Public functions</a></h2>
-          <dl class="m-doc">
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a327ae91a49792ef50315363408e74053" class="m-doc">oneStepIntegration</a>(</span><span class="m-doc-wrap">const std::chrono::nanoseconds&amp; t0,
-              const std::chrono::nanoseconds&amp; dT) -&gt; bool</span>
-            </dt>
-            <dd>Integrate one step.</dd>
-          </dl>
-        </section>
-        <section>
-          <h2>Function documentation</h2>
-          <section class="m-doc-details" id="a327ae91a49792ef50315363408e74053"><div>
-            <h3>
-              <div class="m-doc-template">
-                template&lt;class _DynamicalSystem&gt;
-              </div>
-              <span class="m-doc-wrap-bumper">bool BipedalLocomotion::<wbr />ContinuousDynamicalSystem::<wbr />ForwardEuler&lt;_DynamicalSystem&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a327ae91a49792ef50315363408e74053" class="m-doc-self">oneStepIntegration</a>(</span><span class="m-doc-wrap">const std::chrono::nanoseconds&amp; t0,
-              const std::chrono::nanoseconds&amp; dT)</span></span>
-            </h3>
-            <p>Integrate one step.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">t0</td>
-                  <td>initial time.</td>
-                </tr>
-                <tr>
-                  <td>dT</td>
-                  <td>sampling time.</td>
-                </tr>
-              </tbody>
-              <tfoot>
-                <tr>
-                  <th>Returns</th>
-                  <td>true in case of success, false otherwise.</td>
-                </tr>
-              </tfoot>
-            </table>
-          </div></section>
-        </section>
-      </div>
-    </div>
-  </div>
-</article></main>
-<div class="m-doc-search" id="search">
-  <a href="#!" onclick="return hideSearch()"></a>
-  <div class="m-container">
-    <div class="m-row">
-      <div class="m-col-m-8 m-push-m-2">
-        <div class="m-doc-search-header m-text m-small">
-          <div><span class="m-label m-default">Tab</span> / <span class="m-label m-default">T</span> to search, <span class="m-label m-default">Esc</span> to close</div>
-          <div id="search-symbolcount">&hellip;</div>
-        </div>
-        <div class="m-doc-search-content">
-          <form>
-            <input type="search" name="q" id="search-input" placeholder="Loading &hellip;" disabled="disabled" autofocus="autofocus" autocomplete="off" spellcheck="false" />
-          </form>
-          <noscript class="m-text m-danger m-text-center">Unlike everything else in the docs, the search functionality <em>requires</em> JavaScript.</noscript>
-          <div id="search-help" class="m-text m-dim m-text-center">
-            <p class="m-noindent">Search for symbols, directories, files, pages or
-            modules. You can omit any prefix from the symbol or file path; adding a
-            <code>:</code> or <code>/</code> suffix lists all members of given symbol or
-            directory.</p>
-            <p class="m-noindent">Use <span class="m-label m-dim">&darr;</span>
-            / <span class="m-label m-dim">&uarr;</span> to navigate through the list,
-            <span class="m-label m-dim">Enter</span> to go.
-            <span class="m-label m-dim">Tab</span> autocompletes common prefix, you can
-            copy a link to the result using <span class="m-label m-dim">⌘</span>
-            <span class="m-label m-dim">L</span> while <span class="m-label m-dim">⌘</span>
-            <span class="m-label m-dim">M</span> produces a Markdown link.</p>
-          </div>
-          <div id="search-notfound" class="m-text m-warning m-text-center">Sorry, nothing was found.</div>
-          <ul id="search-results"></ul>
-        </div>
-      </div>
-    </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
   </div>
 </div>
-<script src="search-v2.js"></script>
-<script src="searchdata-v2.js" async="async"></script>
-<footer><nav>
-  <div class="m-container">
-    <div class="m-row">
-      <div class="m-col-l-10 m-push-l-1">
-        <p>bipedal-locomotion-framework documentation. Licensed under the <a href="https://www.gnu.org/licenses/lgpl-3.0.en.html">GNU Lesser General Public License v3.0</a>. Project maintained by the <a href="https://www.iit.it/web/ami/">Artificial and Mechanical Intelligence Lab</a>. Contact the team via <a href="https://github.com/ami-iit/bipedal-locomotion-framework/issues/new">GitHub</a>.<br />Generated by <a href="https://doxygen.org/">Doxygen</a> 1.9.1 and <a href="https://mcss.mosra.cz/">m.css</a>.
-      </div>
-    </div>
-  </div>
-</nav></footer>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(document).ready(function(){initNavTree('classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1ForwardEuler.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#pub-types">Public Types</a> &#124;
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1ForwardEuler-members.html">List of all members</a>  </div>
+  <div class="headertitle">
+<div class="title">BipedalLocomotion::ContinuousDynamicalSystem::ForwardEuler&lt; _DynamicalSystem &gt; Class Template Reference</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p>Forward Euler integration method.  
+ <a href="classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1ForwardEuler.html#details">More...</a></p>
+
+<p><code>#include &lt;ContinuousDynamicalSystem/include/BipedalLocomotion/ContinuousDynamicalSystem/ForwardEuler.h&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
+Public Types</h2></td></tr>
+<tr class="memitem:aa26271c83b32e174a8fea487a2dafc4a"><td class="memItemLeft" align="right" valign="top"><a id="aa26271c83b32e174a8fea487a2dafc4a"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>DynamicalSystem</b> = typename <a class="el" href="structBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1internal_1_1traits.html">internal::traits</a>&lt; <a class="el" href="classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1ForwardEuler.html">ForwardEuler</a>&lt; _DynamicalSystem &gt; &gt;::DynamicalSystem</td></tr>
+<tr class="separator:aa26271c83b32e174a8fea487a2dafc4a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3bf6c7c2f1c3fa9e250ad06e5315e1c0"><td class="memItemLeft" align="right" valign="top"><a id="a3bf6c7c2f1c3fa9e250ad06e5315e1c0"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>State</b> = typename <a class="el" href="structBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1internal_1_1traits.html">internal::traits</a>&lt; <a class="el" href="classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1ForwardEuler.html">ForwardEuler</a>&lt; _DynamicalSystem &gt; &gt;::State</td></tr>
+<tr class="separator:a3bf6c7c2f1c3fa9e250ad06e5315e1c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6d16666e106b95c9c22e9728f296784f"><td class="memItemLeft" align="right" valign="top"><a id="a6d16666e106b95c9c22e9728f296784f"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>StateDerivative</b> = typename <a class="el" href="structBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1internal_1_1traits.html">internal::traits</a>&lt; <a class="el" href="classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1ForwardEuler.html">ForwardEuler</a>&lt; _DynamicalSystem &gt; &gt;::StateDerivative</td></tr>
+<tr class="separator:a6d16666e106b95c9c22e9728f296784f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_types_classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1FixedStepIntegrator"><td colspan="2" onclick="javascript:toggleInherit('pub_types_classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1FixedStepIntegrator')"><img src="closed.png" alt="-"/>&#160;Public Types inherited from <a class="el" href="classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1FixedStepIntegrator.html">BipedalLocomotion::ContinuousDynamicalSystem::FixedStepIntegrator&lt; ForwardEuler&lt; _DynamicalSystem &gt; &gt;</a></td></tr>
+<tr class="memitem:a36710acd36e8981454d189b94c4a82c6 inherit pub_types_classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1FixedStepIntegrator"><td class="memItemLeft" align="right" valign="top"><a id="a36710acd36e8981454d189b94c4a82c6"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>DynamicalSystem</b> = typename <a class="el" href="structBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1internal_1_1traits.html">internal::traits</a>&lt; <a class="el" href="classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1FixedStepIntegrator.html">FixedStepIntegrator</a>&lt; <a class="el" href="classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1ForwardEuler.html">ForwardEuler</a>&lt; _DynamicalSystem &gt; &gt; &gt;::DynamicalSystem</td></tr>
+<tr class="separator:a36710acd36e8981454d189b94c4a82c6 inherit pub_types_classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1FixedStepIntegrator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa161bef36bfe0269101b546ce1faf986 inherit pub_types_classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1FixedStepIntegrator"><td class="memItemLeft" align="right" valign="top"><a id="aa161bef36bfe0269101b546ce1faf986"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>State</b> = typename <a class="el" href="structBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1internal_1_1traits.html">internal::traits</a>&lt; <a class="el" href="classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1FixedStepIntegrator.html">FixedStepIntegrator</a>&lt; <a class="el" href="classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1ForwardEuler.html">ForwardEuler</a>&lt; _DynamicalSystem &gt; &gt; &gt;::State</td></tr>
+<tr class="separator:aa161bef36bfe0269101b546ce1faf986 inherit pub_types_classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1FixedStepIntegrator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a09ee7311ce7327f0e334bd089c948b45 inherit pub_types_classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1FixedStepIntegrator"><td class="memItemLeft" align="right" valign="top"><a id="a09ee7311ce7327f0e334bd089c948b45"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>StateDerivative</b> = typename <a class="el" href="structBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1internal_1_1traits.html">internal::traits</a>&lt; <a class="el" href="classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1FixedStepIntegrator.html">FixedStepIntegrator</a>&lt; <a class="el" href="classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1ForwardEuler.html">ForwardEuler</a>&lt; _DynamicalSystem &gt; &gt; &gt;::StateDerivative</td></tr>
+<tr class="separator:a09ee7311ce7327f0e334bd089c948b45 inherit pub_types_classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1FixedStepIntegrator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_types_classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1Integrator"><td colspan="2" onclick="javascript:toggleInherit('pub_types_classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1Integrator')"><img src="closed.png" alt="-"/>&#160;Public Types inherited from <a class="el" href="classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1Integrator.html">BipedalLocomotion::ContinuousDynamicalSystem::Integrator&lt; _Derived &gt;</a></td></tr>
+<tr class="memitem:a6725719c887fd9702ca0529d73c219e2 inherit pub_types_classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1Integrator"><td class="memItemLeft" align="right" valign="top"><a id="a6725719c887fd9702ca0529d73c219e2"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>DynamicalSystem</b> = typename <a class="el" href="structBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1internal_1_1traits.html">internal::traits</a>&lt; <a class="el" href="classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1Integrator.html">Integrator</a>&lt; _Derived &gt; &gt;::DynamicalSystem</td></tr>
+<tr class="separator:a6725719c887fd9702ca0529d73c219e2 inherit pub_types_classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1Integrator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6faac6e30bf7310bf3b2692f00c544e7 inherit pub_types_classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1Integrator"><td class="memItemLeft" align="right" valign="top"><a id="a6faac6e30bf7310bf3b2692f00c544e7"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>State</b> = typename <a class="el" href="structBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1internal_1_1traits.html">internal::traits</a>&lt; <a class="el" href="classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1Integrator.html">Integrator</a>&lt; _Derived &gt; &gt;::State</td></tr>
+<tr class="separator:a6faac6e30bf7310bf3b2692f00c544e7 inherit pub_types_classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1Integrator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad1d1bb0fc15d18e7db541e5ee04a327e inherit pub_types_classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1Integrator"><td class="memItemLeft" align="right" valign="top"><a id="ad1d1bb0fc15d18e7db541e5ee04a327e"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>StateDerivative</b> = typename <a class="el" href="structBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1internal_1_1traits.html">internal::traits</a>&lt; <a class="el" href="classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1Integrator.html">Integrator</a>&lt; _Derived &gt; &gt;::StateDerivative</td></tr>
+<tr class="separator:ad1d1bb0fc15d18e7db541e5ee04a327e inherit pub_types_classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1Integrator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a327ae91a49792ef50315363408e74053"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1ForwardEuler.html#a327ae91a49792ef50315363408e74053">oneStepIntegration</a> (const std::chrono::nanoseconds &amp;t0, const std::chrono::nanoseconds &amp;dT)</td></tr>
+<tr class="memdesc:a327ae91a49792ef50315363408e74053"><td class="mdescLeft">&#160;</td><td class="mdescRight">Integrate one step.  <a href="classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1ForwardEuler.html#a327ae91a49792ef50315363408e74053">More...</a><br /></td></tr>
+<tr class="separator:a327ae91a49792ef50315363408e74053"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1FixedStepIntegrator"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1FixedStepIntegrator')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1FixedStepIntegrator.html">BipedalLocomotion::ContinuousDynamicalSystem::FixedStepIntegrator&lt; ForwardEuler&lt; _DynamicalSystem &gt; &gt;</a></td></tr>
+<tr class="memitem:a776a713f984cf23a5869285444e4a18d inherit pub_methods_classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1FixedStepIntegrator"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1FixedStepIntegrator.html#a776a713f984cf23a5869285444e4a18d">setIntegrationStep</a> (const std::chrono::nanoseconds &amp;dT)</td></tr>
+<tr class="memdesc:a776a713f984cf23a5869285444e4a18d inherit pub_methods_classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1FixedStepIntegrator"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the integration step time.  <a href="classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1FixedStepIntegrator.html#a776a713f984cf23a5869285444e4a18d">More...</a><br /></td></tr>
+<tr class="separator:a776a713f984cf23a5869285444e4a18d inherit pub_methods_classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1FixedStepIntegrator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1222b64cb5d84f0c8f76f91f59a3586d inherit pub_methods_classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1FixedStepIntegrator"><td class="memItemLeft" align="right" valign="top">const std::chrono::nanoseconds &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1FixedStepIntegrator.html#a1222b64cb5d84f0c8f76f91f59a3586d">getIntegrationStep</a> () const</td></tr>
+<tr class="memdesc:a1222b64cb5d84f0c8f76f91f59a3586d inherit pub_methods_classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1FixedStepIntegrator"><td class="mdescLeft">&#160;</td><td class="mdescRight">get the integration step time  <a href="classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1FixedStepIntegrator.html#a1222b64cb5d84f0c8f76f91f59a3586d">More...</a><br /></td></tr>
+<tr class="separator:a1222b64cb5d84f0c8f76f91f59a3586d inherit pub_methods_classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1FixedStepIntegrator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9597b90a5fd1c146b9c9bd01098c92f9 inherit pub_methods_classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1FixedStepIntegrator"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1FixedStepIntegrator.html#a9597b90a5fd1c146b9c9bd01098c92f9">integrate</a> (const std::chrono::nanoseconds &amp;initialTime, const std::chrono::nanoseconds &amp;finalTime)</td></tr>
+<tr class="memdesc:a9597b90a5fd1c146b9c9bd01098c92f9 inherit pub_methods_classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1FixedStepIntegrator"><td class="mdescLeft">&#160;</td><td class="mdescRight">Integrate the dynamical system from initialTime to finalTime.  <a href="classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1FixedStepIntegrator.html#a9597b90a5fd1c146b9c9bd01098c92f9">More...</a><br /></td></tr>
+<tr class="separator:a9597b90a5fd1c146b9c9bd01098c92f9 inherit pub_methods_classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1FixedStepIntegrator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1Integrator"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1Integrator')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1Integrator.html">BipedalLocomotion::ContinuousDynamicalSystem::Integrator&lt; _Derived &gt;</a></td></tr>
+<tr class="memitem:a5451a664b250c963ad16ded761e7fd1b inherit pub_methods_classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1Integrator"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1Integrator.html#a5451a664b250c963ad16ded761e7fd1b">setDynamicalSystem</a> (std::shared_ptr&lt; DynamicalSystem &gt; <a class="el" href="classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1Integrator.html#a074cbee339717f65f76b4120dc3df05a">dynamicalSystem</a>)</td></tr>
+<tr class="memdesc:a5451a664b250c963ad16ded761e7fd1b inherit pub_methods_classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1Integrator"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the <a class="el" href="classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1DynamicalSystem.html" title="DynamicalSystem defines a continuous time dynamical system, i.e.">DynamicalSystem</a> to be considered.  <a href="classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1Integrator.html#a5451a664b250c963ad16ded761e7fd1b">More...</a><br /></td></tr>
+<tr class="separator:a5451a664b250c963ad16ded761e7fd1b inherit pub_methods_classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1Integrator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a074cbee339717f65f76b4120dc3df05a inherit pub_methods_classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1Integrator"><td class="memItemLeft" align="right" valign="top">std::weak_ptr&lt; DynamicalSystem &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1Integrator.html#a074cbee339717f65f76b4120dc3df05a">dynamicalSystem</a> () const</td></tr>
+<tr class="memdesc:a074cbee339717f65f76b4120dc3df05a inherit pub_methods_classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1Integrator"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the dynamical system.  <a href="classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1Integrator.html#a074cbee339717f65f76b4120dc3df05a">More...</a><br /></td></tr>
+<tr class="separator:a074cbee339717f65f76b4120dc3df05a inherit pub_methods_classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1Integrator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae6265b4cb4bfece95a6c46358ac5ab52 inherit pub_methods_classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1Integrator"><td class="memItemLeft" align="right" valign="top">const State &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1Integrator.html#ae6265b4cb4bfece95a6c46358ac5ab52">getSolution</a> () const</td></tr>
+<tr class="memdesc:ae6265b4cb4bfece95a6c46358ac5ab52 inherit pub_methods_classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1Integrator"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve the solution.  <a href="classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1Integrator.html#ae6265b4cb4bfece95a6c46358ac5ab52">More...</a><br /></td></tr>
+<tr class="separator:ae6265b4cb4bfece95a6c46358ac5ab52 inherit pub_methods_classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1Integrator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad2c63846cd440f0a9de4c13973dae7e3 inherit pub_methods_classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1Integrator"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1Integrator.html#ad2c63846cd440f0a9de4c13973dae7e3">integrate</a> (const std::chrono::nanoseconds &amp;initialTime, const std::chrono::nanoseconds &amp;finalTime)</td></tr>
+<tr class="memdesc:ad2c63846cd440f0a9de4c13973dae7e3 inherit pub_methods_classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1Integrator"><td class="mdescLeft">&#160;</td><td class="mdescRight">Integrate the dynamical system from initialTime to finalTime.  <a href="classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1Integrator.html#ad2c63846cd440f0a9de4c13973dae7e3">More...</a><br /></td></tr>
+<tr class="separator:ad2c63846cd440f0a9de4c13973dae7e3 inherit pub_methods_classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1Integrator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
+Additional Inherited Members</h2></td></tr>
+<tr class="inherit_header pro_attribs_classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1FixedStepIntegrator"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1FixedStepIntegrator')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1FixedStepIntegrator.html">BipedalLocomotion::ContinuousDynamicalSystem::FixedStepIntegrator&lt; ForwardEuler&lt; _DynamicalSystem &gt; &gt;</a></td></tr>
+<tr class="memitem:a865139e9df376f36002aa583a6b808b6 inherit pro_attribs_classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1FixedStepIntegrator"><td class="memItemLeft" align="right" valign="top"><a id="a865139e9df376f36002aa583a6b808b6"></a>
+std::chrono::nanoseconds&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1FixedStepIntegrator.html#a865139e9df376f36002aa583a6b808b6">m_dT</a></td></tr>
+<tr class="memdesc:a865139e9df376f36002aa583a6b808b6 inherit pro_attribs_classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1FixedStepIntegrator"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fixed step size. <br /></td></tr>
+<tr class="separator:a865139e9df376f36002aa583a6b808b6 inherit pro_attribs_classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1FixedStepIntegrator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pro_attribs_classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1Integrator"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1Integrator')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1Integrator.html">BipedalLocomotion::ContinuousDynamicalSystem::Integrator&lt; _Derived &gt;</a></td></tr>
+<tr class="memitem:a46b112d6863d23df09e3814fe24c62a3 inherit pro_attribs_classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1Integrator"><td class="memItemLeft" align="right" valign="top"><a id="a46b112d6863d23df09e3814fe24c62a3"></a>
+std::shared_ptr&lt; DynamicalSystem &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1Integrator.html#a46b112d6863d23df09e3814fe24c62a3">m_dynamicalSystem</a></td></tr>
+<tr class="memdesc:a46b112d6863d23df09e3814fe24c62a3 inherit pro_attribs_classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1Integrator"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to a dynamical system. <br /></td></tr>
+<tr class="separator:a46b112d6863d23df09e3814fe24c62a3 inherit pro_attribs_classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1Integrator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><h3>template&lt;class _DynamicalSystem&gt;<br />
+class BipedalLocomotion::ContinuousDynamicalSystem::ForwardEuler&lt; _DynamicalSystem &gt;</h3>
+
+<p>Forward Euler integration method. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">_DynamicalSystem</td><td>a class derived from <a class="el" href="classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1DynamicalSystem.html" title="DynamicalSystem defines a continuous time dynamical system, i.e.">DynamicalSystem</a> </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section warning"><dt>Warning</dt><dd>We assume that the operator + is defined for the objects contained in the <a class="el" href="classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1DynamicalSystem.html#abe9655801c0f0a1391619325e571cd57" title="State space type.">DynamicalSystem::State</a> and <a class="el" href="classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1DynamicalSystem.html#a664a4e9ae349c0b14f83d98a90e52022" title="State space derivative type.">DynamicalSystem::StateDerivative</a>. </dd>
+<dd>
+The <a class="el" href="classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1ForwardEuler.html" title="Forward Euler integration method.">ForwardEuler</a> integrator is compatible with Lie groups defined by the <code>manif</code> library. Since the <em>box-plus</em> operator is not commutative for a Lie group, here we consider only manifold left plus <p class="formulaDsp">
+\[ X + \psi = X \circ \exp(\psi) \]
+</p>
+ where \(X\) belongs to a Lie group and \(\psi\) belongs to the tangent space. </dd></dl>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="a327ae91a49792ef50315363408e74053"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a327ae91a49792ef50315363408e74053">&#9670;&nbsp;</a></span>oneStepIntegration()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class _DynamicalSystem &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1ForwardEuler.html">BipedalLocomotion::ContinuousDynamicalSystem::ForwardEuler</a>&lt; _DynamicalSystem &gt;::oneStepIntegration </td>
+          <td>(</td>
+          <td class="paramtype">const std::chrono::nanoseconds &amp;&#160;</td>
+          <td class="paramname"><em>t0</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::chrono::nanoseconds &amp;&#160;</td>
+          <td class="paramname"><em>dT</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Integrate one step. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">t0</td><td>initial time. </td></tr>
+    <tr><td class="paramname">dT</td><td>sampling time. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true in case of success, false otherwise. </dd></dl>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following file:<ul>
+<li>ContinuousDynamicalSystem/include/BipedalLocomotion/ContinuousDynamicalSystem/<a class="el" href="ForwardEuler_8h.html">ForwardEuler.h</a></li>
+</ul>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- Doxygen custom footer -->
+<div id="nav-path" class="navpath">
+  <ul>
+    <li class="footer">
+      <a href="https://github.com/gbionics/bipedal-locomotion-framework">GitHub</a> &bull;
+      <a href="https://gbionics.ai/">Generative Bionics</a> &bull;
+      Licensed under <a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause "New" or "Revised" License</a> &bull;
+      Generated by <a href="https://www.doxygen.org/index.html">Doxygen</a> 1.9.1
+    </li>
+  </ul>
+</div>
 </body>
 </html>
