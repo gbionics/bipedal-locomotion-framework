@@ -581,3 +581,19 @@
    obj:/usr/lib/x86_64-linux-gnu/libtbb.so.12.11
    fun:_ZN2cv13parallel_for_ERKNS_5RangeERKNS_16ParallelLoopBodyEd
 }
+
+{
+   <ubuntu-24-04-aruco-marker-memcheck>
+   Memcheck:Leak
+   match-leak-kinds: possible
+   fun:calloc
+   fun:calloc
+   fun:allocate_dtv
+   fun:_dl_allocate_tls
+   fun:allocate_stack
+   fun:pthread_create@@GLIBC_2.34
+   obj:/usr/lib/x86_64-linux-gnu/libtbb.so.12.11
+   obj:/usr/lib/x86_64-linux-gnu/libtbb.so.12.11
+   fun:start_thread
+   fun:clone
+}
