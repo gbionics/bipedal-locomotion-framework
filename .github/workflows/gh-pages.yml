@@ -35,7 +35,7 @@ jobs:
           python3 ./generate_docs.py
 
       - name: Publish docs to gh-pages
-        # if: github.ref == 'refs/heads/master'
+        if: github.ref == 'refs/heads/master'
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
