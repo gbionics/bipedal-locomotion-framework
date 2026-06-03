@@ -4,6 +4,12 @@ on:
     branches:
       - '*'
       - '!gh-pages'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
 
 jobs:
   build:
@@ -30,25 +36,19 @@ jobs:
           cd docs
           python3 ./generate_docs.py
 
-      - name: Archive artifacts
-        uses: actions/upload-artifact@v4
+      - name: Upload pages artifact
+        uses: actions/upload-pages-artifact@v3
         with:
-          name: site
           path: docs/site
 
   deploy:
     runs-on: ubuntu-24.04
     needs: [build]
     if: github.ref == 'refs/heads/master'
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - name: Download artifacts
-        uses: actions/download-artifact@v4
-        with:
-          name: site
-          path: site
       - name: Deploy
-        uses: JamesIves/github-pages-deploy-action@3.7.1
-        with:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          BRANCH: gh-pages
-          FOLDER: site
+        id: deployment
+        uses: actions/deploy-pages@v4
