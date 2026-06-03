@@ -12,12 +12,12 @@ if(FRAMEWORK_COMPILE_YarpImplementation)
     PUBLIC_LINK_LIBRARIES  BipedalLocomotion::RobotInterface BipedalLocomotion::System YARP::YARP_dev YARP::YARP_os YARP::YARP_sig
     INSTALLATION_FOLDER    RobotInterface)
 
-  if(FRAMEWORK_COMPILE_Perception)
+  if(FRAMEWORK_COMPILE_Camera)
     add_bipedal_locomotion_library(
-      NAME                   PerceptionInterfaceYarpImplementation
+      NAME                   CameraInterfaceYarpImplementation
       SOURCES                src/YarpCameraBridge.cpp
       PUBLIC_HEADERS         include/BipedalLocomotion/RobotInterface/YarpCameraBridge.h
-      PUBLIC_LINK_LIBRARIES  BipedalLocomotion::PerceptionInterface  YARP::YARP_dev YARP::YARP_os YARP::YARP_sig
+      PUBLIC_LINK_LIBRARIES  BipedalLocomotion::CameraInterface  YARP::YARP_dev YARP::YARP_os YARP::YARP_sig
       PRIVATE_LINK_LIBRARIES BipedalLocomotion::TextLogging BipedalLocomotion::System
       INSTALLATION_FOLDER    RobotInterface)
   endif()

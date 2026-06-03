@@ -27,9 +27,9 @@ if(TARGET BipedalLocomotion::RobotInterface AND TARGET BipedalLocomotion::RobotI
 endif()
 
 if(TARGET BipedalLocomotion::RobotInterface
-    AND TARGET BipedalLocomotion::PerceptionInterface
+  AND TARGET BipedalLocomotion::CameraInterface
     AND TARGET BipedalLocomotion::RobotInterfaceYarpImplementation
-    AND TARGET BipedalLocomotion::PerceptionInterfaceYarpImplementation)
+  AND TARGET BipedalLocomotion::CameraInterfaceYarpImplementation)
 
   if(FRAMEWORK_COMPILE_PYTHON_BINDINGS)
     set(cvnp_target_link )
@@ -54,10 +54,10 @@ if(TARGET BipedalLocomotion::RobotInterface
   set(H_PREFIX include/BipedalLocomotion/bindings/RobotInterface)
 
   add_bipedal_locomotion_python_module(
-    NAME PerceptionInterfaceBindings
-    SOURCES src/PerceptionModule.cpp src/CameraBridge.cpp
-    HEADERS ${H_PREFIX}/PerceptionModule.h ${H_PREFIX}/CameraBridge.h
-    LINK_LIBRARIES BipedalLocomotion::PerceptionInterface BipedalLocomotion::PerceptionInterfaceYarpImplementation ${cvnp_target_link}
+    NAME CameraInterfaceBindings
+    SOURCES src/CameraModule.cpp src/CameraBridge.cpp
+    HEADERS ${H_PREFIX}/CameraModule.h ${H_PREFIX}/CameraBridge.h
+    LINK_LIBRARIES BipedalLocomotion::CameraInterface BipedalLocomotion::CameraInterfaceYarpImplementation ${cvnp_target_link}
     ADDITIONAL_COMPILE_DEFINITIONS pybind11_VERSION_MAJOR=${pybind11_VERSION_MAJOR}
                                    pybind11_VERSION_MINOR=${pybind11_VERSION_MINOR}
                                    pybind11_VERSION_PATCH=${pybind11_VERSION_PATCH}

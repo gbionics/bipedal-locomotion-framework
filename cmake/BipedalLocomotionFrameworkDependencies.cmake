@@ -97,9 +97,9 @@ blf_optional_find_package(tomlplusplus 3.0.1 QUIET)
 checkandset_dependency(tomlplusplus MINIMUM_VERSION 3.0.1)
 dependency_classifier(tomlplusplus MINIMUM_VERSION 3.0.1 IS_USED ${FRAMEWORK_USE_tomlplusplus} PUBLIC)
 
-blf_optional_find_package(robometry 1.1.0 QUIET)
-checkandset_dependency(robometry MINIMUM_VERSION 1.1.0)
-dependency_classifier(robometry MINIMUM_VERSION 1.1.0 IS_USED ${FRAMEWORK_USE_robometry})
+blf_optional_find_package(robometry 1.4.1 QUIET)
+checkandset_dependency(robometry MINIMUM_VERSION 1.4.1)
+dependency_classifier(robometry MINIMUM_VERSION 1.4.1 IS_USED ${FRAMEWORK_USE_robometry})
 
 blf_optional_find_package(BayesFilters QUIET)
 checkandset_dependency(BayesFilters)
@@ -256,21 +256,21 @@ framework_dependent_option(FRAMEWORK_COMPILE_JointTrajectoryPlayer
   "Compile joint-trajectory-player application?" ON
   "FRAMEWORK_COMPILE_YarpImplementation;FRAMEWORK_COMPILE_RobotInterface;FRAMEWORK_COMPILE_matioCppConversions;FRAMEWORK_USE_matioCpp;FRAMEWORK_USE_YARP;FRAMEWORK_COMPILE_Contact" OFF)
 
-framework_dependent_option(FRAMEWORK_COMPILE_Perception
-  "Compile Perception libraries?" ON
-  "FRAMEWORK_USE_OpenCV;FRAMEWORK_USE_PCL" OFF)
+framework_dependent_option(FRAMEWORK_COMPILE_Camera
+  "Compile camera-related libraries?" ON
+  "FRAMEWORK_USE_OpenCV" OFF)
 
-framework_dependent_option(FRAMEWORK_COMPILE_PerceptionInterface
-  "Compile PerceptionInterface libraries?" ON
-  "FRAMEWORK_COMPILE_Perception" OFF)
+framework_dependent_option(FRAMEWORK_COMPILE_Pointcloud
+  "Compile pointcloud-related libraries?" ON
+  "FRAMEWORK_USE_PCL" OFF)
 
 framework_dependent_option(FRAMEWORK_COMPILE_RealsenseCapture
   "Compile Realsense related software?" ON
-  "FRAMEWORK_COMPILE_PerceptionInterface;FRAMEWORK_USE_realsense2" OFF)
+  "FRAMEWORK_COMPILE_Camera;FRAMEWORK_COMPILE_Pointcloud;FRAMEWORK_USE_realsense2" OFF)
 
 framework_dependent_option(FRAMEWORK_COMPILE_RealSenseTestApplication
   "Compile realsense-test application?" ON
-  "FRAMEWORK_COMPILE_YarpImplementation;FRAMEWORK_COMPILE_Perception;FRAMEWORK_COMPILE_RealsenseCapture;FRAMEWORK_COMPILE_PerceptionInterface" OFF)
+  "FRAMEWORK_COMPILE_YarpImplementation;FRAMEWORK_COMPILE_Camera;FRAMEWORK_COMPILE_Pointcloud;FRAMEWORK_COMPILE_RealsenseCapture" OFF)
 
 framework_dependent_option(FRAMEWORK_COMPILE_CalibrationDeltaUpdaterApplication
   "Compile calibration-delta-updater application?" ON
@@ -282,11 +282,11 @@ framework_dependent_option(FRAMEWORK_COMPILE_BalancingPositionControlApplication
 
 framework_dependent_option(FRAMEWORK_COMPILE_YarpRobotLoggerDevice
   "Do you want to generate and compile the YarpRobotLoggerDevice?" ON
-  "FRAMEWORK_COMPILE_RobotInterface;FRAMEWORK_COMPILE_YarpImplementation;FRAMEWORK_COMPILE_Perception;FRAMEWORK_COMPILE_YarpUtilities;FRAMEWORK_USE_robometry;FRAMEWORK_USE_trintrin" OFF)
+  "FRAMEWORK_COMPILE_RobotInterface;FRAMEWORK_COMPILE_YarpImplementation;FRAMEWORK_COMPILE_Camera;FRAMEWORK_COMPILE_YarpUtilities;FRAMEWORK_USE_robometry;FRAMEWORK_USE_trintrin" OFF)
 
 framework_dependent_option(FRAMEWORK_COMPILE_JointTorqueControlDevice
   "Do you want to generate and compile the YarpRobotLoggerDevice?" ON
-  "FRAMEWORK_COMPILE_YarpImplementation;FRAMEWORK_COMPILE_YarpUtilities;FRAMEWORK_USE_onnxruntime" OFF)
+  "FRAMEWORK_COMPILE_YarpImplementation;FRAMEWORK_COMPILE_YarpUtilities;FRAMEWORK_COMPILE_RobotInterface;FRAMEWORK_COMPILE_Math;FRAMEWORK_COMPILE_ContinuousDynamicalSystem;FRAMEWORK_USE_onnxruntime" OFF)
 
 framework_dependent_option(FRAMEWORK_COMPILE_VectorsCollectionWrapper
   "Do you want to generate and compile the VectorsCollectionWrapper?" ON

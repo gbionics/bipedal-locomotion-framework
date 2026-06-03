@@ -51,6 +51,13 @@ class YarpRobotLoggerDevice : public yarp::dev::DeviceDriver,
                               public YarpRobotLoggerDeviceCommands
 {
 public:
+    enum class DeviceState
+    {
+        Idle,
+        Recording,
+        Saving
+    };
+
     YarpRobotLoggerDevice(double period,
                           yarp::os::ShouldUseSystemClock useSystemClock
                           = yarp::os::ShouldUseSystemClock::No);
@@ -64,6 +71,9 @@ public:
     virtual void run() final;
 
 private:
+    std::atomic<DeviceState> m_state{DeviceState::Idle};
+    bool m_autoStartLogging{true};
+
     std::chrono::nanoseconds m_previousTimestamp;
     std::chrono::nanoseconds m_acceptableStep{std::chrono::nanoseconds::max()};
     bool m_firstRun{true};
@@ -277,6 +287,29 @@ private:
     bool prepareExogenousImageLogging();
     bool prepareRTStreaming();
 
+    // State machine transitions
+    bool transitionToRecording();
+    bool transitionToIdle(bool save, const std::string& tag = "");
+
+    // Helpers for state transitions
+    void disconnectAllExogenousSignals();
+    void stopAllThreads();
+    void resetBufferManager();
+    void discardVideoFiles();
+
+    // Tag validation/sanitization - returns empty string on invalid input
+    bool sanitizeTag(const std::string& tag, std::string& outputFileName) const;
+
+    // Unified data logging helper (pushes to buffer manager + RT server)
+    template <typename T>
+    void logData(const std::string& name, const T& data, double time);
+
+    // Refactored run() sub-methods
+    void logRobotData(double time);
+    void logExogenousSignals(double time);
+    void logTextMessages(double time);
+    void logFrameTransforms(double time);
+
     const std::string defaultFilePrefix = "robot_logger_device";
 
     const std::string robotRtRootName = "robot_realtime";
@@ -332,7 +365,12 @@ private:
 
     void resumeAcquisitionThreads();
 
-    virtual bool saveData(const std::string& tag = "") override;
+    // RPC command implementations
+    virtual bool startRecording() override;
+    virtual bool saveRecording(const std::string& tag = "") override;
+    virtual bool saveAndStopRecording(const std::string& tag = "") override;
+    virtual bool discardRecording() override;
+    virtual std::string getState() override;
 };
 
 } // namespace BipedalLocomotion

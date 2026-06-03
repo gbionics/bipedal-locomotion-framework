@@ -58,7 +58,8 @@ The **bipedal-locomotion-framework** project consists of several components. The
 |              [`Math`](./src/Math)              |          Library containing mathematical algorithms          |      [`manif`](https://github.com/artivis/manif)             |
 |              [`ML`](./src/ML)              |          Library containing deep learning algorithms           |      [`onnxruntime`](https://onnxruntime.ai/)             |
 | [`ParametersHandler`](./src/ParametersHandler) |  Library for retrieving parameters from configuration files  | [`YARP`](https://www.yarp.it/git-master/) (only if you want the `YARP` implementation) [`tomlplusplus`](https://github.com/marzer/tomlplusplus/) (only if you want the `toml` implementation) |
-| [`PerceptionInterface`](./src/RobotInterface)  | Generic interface classes to adapt to perception data formats like images and point clouds | [`OpenCV`](https://github.com/opencv/opencv) [`PCL`](https://github.com/PointCloudLibrary/pcl) |
+| [`CameraInterface`](./src/RobotInterface)  | Generic interface classes to adapt to image data formats | [`OpenCV`](https://github.com/opencv/opencv) |
+| [`PointCloudInterface`](./src/RobotInterface)  | Generic interface classes to adapt to point-cloud data formats | [`PCL`](https://github.com/PointCloudLibrary/pcl) |
 |    [`PerceptionCapture`](./src/Perception)     |   Library containing driver classes for perception devices   | [`OpenCV`](https://github.com/opencv/opencv) [`PCL`](https://github.com/PointCloudLibrary/pcl) [`realsense2`](https://github.com/IntelRealSense/librealsense) |
 |    [`PerceptionFeatures`](./src/Perception)     |   Library containing perception algorithms useful for locomotion   | [`OpenCV`](https://github.com/opencv/opencv) |
 |          [`Planners`](./src/Planners)          |       Library containing planner useful for locomotion       | [`manif`](https://github.com/artivis/manif) [`CasADi`](https://web.casadi.org/) [`qhull`](http://www.qhull.org/) |
