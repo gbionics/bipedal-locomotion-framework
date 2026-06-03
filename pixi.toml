@@ -63,9 +63,8 @@ libmatio = "*"
 libmatio-cpp = "*"
 librobometry = ">=1.4.1"
 liblie-group-controllers = "*"
-# Eigen is temporary pinned to 3.* until the eigen 5.* migration is completed
-eigen = "3.*"
-eigen-abi-devel = "3.*"
+eigen = "*"
+eigen-abi-devel = "*"
 qhull = "*"
 casadi = ">=3.5.5"
 cppad = "*"
@@ -79,10 +78,7 @@ numpy = "*"
 pytest = "*"
 scipy = "*"
 libopencv = "*"
-# Disable PCL on osx-arm64: available PCL builds require older Boost ranges
-# (e.g. libboost 1.82–1.88 / boost-cpp 1.74–1.78), while librobometry
-# requires libboost >=1.90,<1.91, making the environment unsatisfiable.
-# pcl = "*"
+pcl = "*"
 tomlplusplus = "*"
 libunicycle-footstep-planner = "*"
 icub-models = ">=1.23.4"
