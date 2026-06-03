@@ -5,8 +5,9 @@
 <p align="center">
    <a href="https://isocpp.org"><img src="https://img.shields.io/badge/standard-C++17-blue.svg?style=flat&logo=c%2B%2B" alt="C++ Standard" class="center"/></a>
    <a href="https://github.com/ami-iit/bipedal-locomotion-framework/blob/master/LICENSE"><img src="https://img.shields.io/badge/License-BSD_3--Clause-orange.svg" alt="Size" class="center"/></a>
-  <a href="https://ami-iit.github.io/bipedal-locomotion-framework/"><img src="https://github.com/ami-iit/bipedal-locomotion-framework/actions/workflows/gh-pages.yml/badge.svg" alt="documentation"/></a>
-  <a href="https://github.com/ami-iit/bipedal-locomotion-framework/actions?query=workflow%3A%22C%2B%2B+CI+Workflow%22"><img src="https://github.com/ami-iit/bipedal-locomotion-framework/workflows/C++%20CI%20Workflow/badge.svg" alt="CI"/></a>
+   <a href="https://github.com/gbionics/bipedal-locomotion-framework/actions/workflows/gh-pages.yml"><img src="https://github.com/gbionics/bipedal-locomotion-framework/actions/workflows/gh-pages.yml/badge.svg" alt="documentation"/></a> </br>
+   <a href="https://github.com/gbionics/bipedal-locomotion-framework/actions/workflows/apt-ci.yml"><img src="https://github.com/gbionics/bipedal-locomotion-framework/actions/workflows/apt-ci.yml/badge.svg" alt="CI"/></a>
+   <a href="https://github.com/gbionics/bipedal-locomotion-framework/actions/workflows/conda-forge-ci.yml"><img src="https://github.com/gbionics/bipedal-locomotion-framework/actions/workflows/conda-forge-ci.yml/badge.svg" alt="CI"/></a>
 </p>
 
 ---
