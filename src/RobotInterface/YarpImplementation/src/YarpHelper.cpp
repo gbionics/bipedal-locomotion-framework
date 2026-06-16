@@ -60,9 +60,18 @@ PolyDriverDescriptor BipedalLocomotion::RobotInterface::constructRemoteControlBo
         return PolyDriverDescriptor();
     }
 
+    // Get optional device parameter, default to "remotecontrolboardremapper"
+    std::string deviceName = "remotecontrolboardremapper";
+    std::string deviceNameFromParam;
+    ok = ptr->getParameter("device", deviceNameFromParam);
+    if (ok)
+    {
+        deviceName = deviceNameFromParam;
+    }
+
     // open the remotecontrolboardremepper YARP device
     yarp::os::Property options;
-    options.put("device", "remotecontrolboardremapper");
+    options.put("device", deviceName);
 
     options.addGroup("axesNames");
     yarp::os::Bottle& bottle = options.findGroup("axesNames").addList();
