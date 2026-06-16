@@ -60,6 +60,7 @@ struct PolyDriverDescriptor
  * | `remote_control_boards` | `vector<string>` | List of the remote control boards associated to the joints |    Yes    |
  * |       `robot_name`      |     `string`     |                      Name of the robot                     |    Yes    |
  * |      `local_prefix`     |     `string`     |    Prefix of the local port (e.g. the application name)    |    Yes    |
+ * |       `device`         |     `string`     | Name of the device to open. (Default value `remotecontrolboardremapper`) |     No    |
  * @return A PolyDriverDescriptor. If one of the parameters is missing an invalid PolyDriverDescriptor is returned.
  */
 PolyDriverDescriptor constructRemoteControlBoardRemapper(
