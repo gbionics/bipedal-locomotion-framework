@@ -753,6 +753,7 @@ bool YarpRobotLoggerDevice::setupRobotSensorBridge(
         m_streamCartesianWrenches = false;
         m_streamFTSensors = false;
         m_streamTemperatureSensors = false;
+        m_streamBattery = false;
 
         return true;
     }
@@ -850,6 +851,13 @@ bool YarpRobotLoggerDevice::setupRobotSensorBridge(
     {
         log()->info("{} The 'stream_temperatures' parameter is not found. The temperature sensor "
                     "values are not "
+                    "logged",
+                    logPrefix);
+    }
+
+    if (!ptr->getParameter("stream_battery", m_streamBattery))
+    {
+        log()->info("{} The 'stream_battery' parameter is not found. The battery values are not "
                     "logged",
                     logPrefix);
     }
@@ -1361,6 +1369,18 @@ bool BipedalLocomotion::YarpRobotLoggerDevice::prepareRobotLogging()
                  && addChannel(fullTemperatureSensorName,
                                temperatureNames.size(), //
                                temperatureNames);
+        }
+    }
+
+    if (m_streamBattery)
+    {
+        for (const auto& name : m_robotSensorBridge->getBatteriesList())
+        {
+            std::string fullBatteryName = batteryName + treeDelim + name;
+            ok = ok
+                 && addChannel(fullBatteryName,
+                               batteryElementNames.size(),
+                               batteryElementNames);
         }
     }
 
@@ -2317,6 +2337,24 @@ void YarpRobotLoggerDevice::logRobotData(double time)
             {
                 signalFullName = cartesianWrenchesName + treeDelim + cartesianWrenchName;
                 logData(signalFullName, m_ftBuffer, time);
+            }
+        }
+    }
+
+    if (m_streamBattery)
+    {
+        BipedalLocomotion::RobotInterface::BatteryStatus batteryStatus;
+        for (const auto& name : m_robotSensorBridge->getBatteriesList())
+        {
+            if (m_robotSensorBridge->getBatteryStatus(name, batteryStatus))
+            {
+                Eigen::Matrix<double, 4, 1> batteryData;
+                batteryData << batteryStatus.voltage,
+                               batteryStatus.current,
+                               batteryStatus.charge,
+                               batteryStatus.temperature;
+                signalFullName = batteryName + treeDelim + name;
+                logData(signalFullName, batteryData, time);
             }
         }
     }

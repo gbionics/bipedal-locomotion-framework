@@ -33,6 +33,9 @@
 // YARP Camera Interfaces
 #include <yarp/dev/IRGBDSensor.h>
 
+// YARP Battery Interface
+#include <yarp/dev/IBattery.h>
+
 // YARP Control Board Interfaces
 #include <yarp/dev/IAxisInfo.h>
 #include <yarp/dev/IEncodersTimed.h>
@@ -143,6 +146,12 @@ struct YarpSensorBridge::Impl
     };
 
     ControlBoardRemapperMeasures controlBoardRemapperMeasures;
+
+    /**< map of battery interfaces attached through battery_nwc_yarp */
+    std::unordered_map<std::string, yarp::dev::IBattery*> batteryInterfaces;
+
+    /**< map holding battery measures (voltage, current, charge, temperature) with timestamp */
+    std::unordered_map<std::string, StampedYARPVector> batteryMeasures;
 
     /**< map of cartesian wrench streams attached through generic sensor interfaces */
     std::unordered_map<std::string, yarp::dev::IGenericSensor*> cartesianWrenchInterface;
@@ -383,6 +392,29 @@ struct YarpSensorBridge::Impl
             return false;
         }
 
+        return true;
+    }
+
+    /**
+     * Configure batteries meta data
+     */
+    bool configureBatteries(std::weak_ptr<const ParametersHandler::IParametersHandler> handler,
+                            SensorBridgeMetaData& metaData)
+    {
+        constexpr auto logPrefix = "[YarpSensorBridge::Impl::configureBatteries]";
+        auto ptr = handler.lock();
+        if (ptr == nullptr)
+        {
+            return false;
+        }
+
+        if (!ptr->getParameter("batteries_list", metaData.sensorsList.batteriesList))
+        {
+            log()->error("{} Required parameter \"batteries_list\" not available in the "
+                         "configuration.",
+                         logPrefix);
+            return false;
+        }
         return true;
     }
 
@@ -1208,6 +1240,60 @@ struct YarpSensorBridge::Impl
     }
 
     /**
+     * Attach all battery interfaces
+     * Looks for IBattery interface in devices matching the configured battery names
+     */
+    bool attachAllBatteries(const yarp::dev::PolyDriverList& devList)
+    {
+        if (!metaData.bridgeOptions.isBatteryEnabled)
+        {
+            return true;
+        }
+
+        constexpr auto logPrefix = "[YarpSensorBridge::Impl::attachAllBatteries]";
+
+        for (const auto& batteryName : metaData.sensorsList.batteriesList)
+        {
+            bool found{false};
+            for (int devIdx = 0; devIdx < devList.size(); devIdx++)
+            {
+                if (batteryName != devList[devIdx]->key)
+                {
+                    continue;
+                }
+
+                yarp::dev::IBattery* batteryInterface{nullptr};
+                if (devList[devIdx]->poly->view(batteryInterface) && batteryInterface != nullptr)
+                {
+                    batteryInterfaces[batteryName] = batteryInterface;
+                    // pre-populate measurement map (4 channels: voltage, current, charge, temperature)
+                    batteryMeasures[batteryName].first.resize(4, 0.0);
+                    batteryMeasures[batteryName].second = 0.0;
+                    found = true;
+                    break;
+                }
+                else
+                {
+                    log()->error("{} Could not view IBattery interface for {}.",
+                                 logPrefix,
+                                 batteryName);
+                    return false;
+                }
+            }
+
+            if (!found)
+            {
+                log()->error("{} Could not find battery device with key {}.",
+                             logPrefix,
+                             batteryName);
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
      * Attach to cartesian wrench interface
      */
     bool attachCartesianWrenchInterface(const yarp::dev::PolyDriverList& devList)
@@ -1918,6 +2004,50 @@ struct YarpSensorBridge::Impl
                                  checkForNAN);
     }
 
+    /**
+     * Read all battery sensor measurements
+     * Stores voltage, current, charge, temperature as a 4-element vector
+     */
+    bool readAllBatteries(std::vector<std::string>& failedSensorReads)
+    {
+        if (!metaData.bridgeOptions.isBatteryEnabled)
+        {
+            return true;
+        }
+
+        constexpr auto logPrefix = "[YarpSensorBridge::Impl::readAllBatteries]";
+
+        bool allReadCorrectly{true};
+        for (const auto& [batteryName, batteryInterface] : batteryInterfaces)
+        {
+            double voltage{0.0}, current{0.0}, charge{0.0}, temperature{0.0};
+            bool ok{true};
+            ok = ok && static_cast<bool>(batteryInterface->getBatteryVoltage(voltage));
+            ok = ok && static_cast<bool>(batteryInterface->getBatteryCurrent(current));
+            ok = ok && static_cast<bool>(batteryInterface->getBatteryCharge(charge));
+            ok = ok && static_cast<bool>(batteryInterface->getBatteryTemperature(temperature));
+
+            if (!ok)
+            {
+                log()->error("{} Unable to read from battery {}, using previous measurement.",
+                             logPrefix,
+                             batteryName);
+                failedSensorReads.emplace_back(batteryName);
+                allReadCorrectly = false;
+                continue;
+            }
+
+            auto& measure = batteryMeasures[batteryName];
+            measure.first[0] = voltage;
+            measure.first[1] = current;
+            measure.first[2] = charge;
+            measure.first[3] = temperature;
+            measure.second = BipedalLocomotion::clock().now().count() * 1e-9;
+        }
+
+        return allReadCorrectly;
+    }
+
     bool readAllSensors(std::vector<std::string>& failedReadAllSensors)
     {
         failedReadAllSensors.clear();
@@ -1971,6 +2101,13 @@ struct YarpSensorBridge::Impl
         }
 
         if (!readAllMASTemperatures(failedReads))
+        {
+            failedReadAllSensors.insert(failedReadAllSensors.end(),
+                                        failedReads.begin(),
+                                        failedReads.end());
+        }
+
+        if (!readAllBatteries(failedReads))
         {
             failedReadAllSensors.insert(failedReadAllSensors.end(),
                                         failedReads.begin(),

@@ -227,7 +227,22 @@ void CreateYarpSensorBridge(pybind11::module& module)
             double receiveTimeInSeconds;
             bool ok = impl.getJointTorques(joints, receiveTimeInSeconds);
             return std::make_tuple(ok, joints, receiveTimeInSeconds);
-        });
+        })
+        .def("get_batteries_list",
+             [](YarpSensorBridge& impl) {
+                 std::vector<std::string> list;
+                 bool ok = impl.getBatteriesList(list);
+                 return std::make_tuple(ok, list);
+             })
+        .def(
+            "get_battery_status",
+            [](YarpSensorBridge& impl, const std::string& name) {
+                BatteryStatus status;
+                double receiveTimeInSeconds;
+                bool ok = impl.getBatteryStatus(name, status, receiveTimeInSeconds);
+                return std::make_tuple(ok, status, receiveTimeInSeconds);
+            },
+            py::arg("battery_name"));
 }
 
 } // namespace RobotInterface

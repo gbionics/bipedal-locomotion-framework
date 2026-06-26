@@ -48,6 +48,7 @@ struct SensorBridgeOptions
     bool isMotorTemperatureSensorEnabled{false}; /** flag to connect motor temperature measurement sources */
 
     bool isTemperatureSensorEnabled{false}; /** flag to connect temperature measurement sources */
+    bool isBatteryEnabled{false}; /** flag to connect battery measurement sources */
 
     size_t nrJoints{0}; /**< number of joints available through Kinematics stream, to be configured
                            at initialization */
@@ -73,6 +74,18 @@ struct SensorLists
     std::vector<std::string> cartesianWrenchesList; /**< list of cartesian wrench streams attached
                                                        to the bridge */
     std::vector<std::string> temperatureSensorsList; /**< list of temperature sensors attached to the bridge */
+    std::vector<std::string> batteriesList; /**< list of batteries attached to the bridge */
+};
+
+/**
+ * Battery status struct holding measurements from a battery sensor.
+ */
+struct BatteryStatus
+{
+    double voltage{0.0};     /**< battery voltage in Volts */
+    double current{0.0};     /**< battery current in Amperes */
+    double charge{0.0};      /**< battery charge in percentage (0-100) */
+    double temperature{0.0}; /**< battery temperature in Celsius */
 };
 
 /**
@@ -392,6 +405,30 @@ public:
     virtual bool getTemperature(const std::string& temperatureSensorName,
                                 double& temperature,
                                 OptionalDoubleRef receiveTimeInSeconds = {})
+    {
+        return false;
+    };
+
+    /**
+     * Get batteries list
+     * @param[out] batteriesList list of batteries attached to the bridge
+     * @return  true/false in case of success/failure
+     */
+    virtual bool getBatteriesList(std::vector<std::string>& batteriesList)
+    {
+        return false;
+    };
+
+    /**
+     * Get battery status (voltage, current, charge, temperature)
+     * @param[in] batteryName name of the battery
+     * @param[out] batteryStatus battery status measurement
+     * @param[out] receiveTimeInSeconds time at which the measurement was received
+     * @return true/false in case of success/failure
+     */
+    virtual bool getBatteryStatus(const std::string& batteryName,
+                                  BatteryStatus& batteryStatus,
+                                  OptionalDoubleRef receiveTimeInSeconds = {})
     {
         return false;
     };

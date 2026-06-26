@@ -568,6 +568,29 @@ public:
     virtual bool getMotorAccelerations(Eigen::Ref<Eigen::VectorXd> motorAccelerations,
                                        OptionalDoubleRef receiveTimeInSeconds = {}) final;
 
+    /**
+     * Get batteries list
+     * @param[out] batteriesList list of batteries attached to the bridge
+     * @return  true/false in case of success/failure
+     */
+    bool getBatteriesList(std::vector<std::string>& batteriesList) final;
+
+    /**
+     * Get const reference to batteries list
+     */
+    const std::vector<std::string>& getBatteriesList() const;
+
+    /**
+     * Get battery status (voltage, current, charge, temperature)
+     * @param[in] batteryName name of the battery
+     * @param[out] batteryStatus battery status measurement
+     * @param[out] receiveTimeInSeconds time at which the measurement was received
+     * @return true/false in case of success/failure
+     */
+    bool getBatteryStatus(const std::string& batteryName,
+                          BatteryStatus& batteryStatus,
+                          OptionalDoubleRef receiveTimeInSeconds = {}) final;
+
 private:
     /** Private implementation */
     struct Impl;

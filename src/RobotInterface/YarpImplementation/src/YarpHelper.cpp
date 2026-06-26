@@ -394,3 +394,58 @@ PolyDriverDescriptor BipedalLocomotion::RobotInterface::constructRDGBSensorClien
 
     return device;
 }
+
+PolyDriverDescriptor BipedalLocomotion::RobotInterface::constructBatteryClient(
+    std::weak_ptr<const BipedalLocomotion::ParametersHandler::IParametersHandler> handler)
+{
+    constexpr auto errorPrefix = "[RobotInterface::constructBatteryClient]";
+
+    auto ptr = handler.lock();
+
+    if (ptr == nullptr)
+    {
+        log()->error("{} Invalid parameter handler.", errorPrefix);
+        return PolyDriverDescriptor();
+    }
+
+    bool ok = true;
+
+    std::string description;
+    ok = ok && ptr->getParameter("description", description);
+
+    std::string remotePortName;
+    ok = ok && ptr->getParameter("remote_port_name", remotePortName);
+
+    std::string localPrefix;
+    ok = ok && ptr->getParameter("local_prefix", localPrefix);
+
+    std::string localPortNamePostfix;
+    ok = ok && ptr->getParameter("local_port_name_postfix", localPortNamePostfix);
+
+    if (!ok)
+    {
+        log()->error("{} Unable to get all the parameters from configuration file.", errorPrefix);
+        return PolyDriverDescriptor();
+    }
+
+    yarp::os::Property options;
+    options.put("device", "battery_nwc_yarp");
+    options.put("remote", remotePortName);
+    options.put("local", "/" + localPrefix + localPortNamePostfix);
+
+    std::string carrier;
+    if (ptr->getParameter("carrier", carrier))
+    {
+        options.put("carrier", carrier);
+    }
+
+    PolyDriverDescriptor device(description, std::make_shared<yarp::dev::PolyDriver>());
+
+    if (!device.poly->open(options) || !device.poly->isValid())
+    {
+        log()->error("{} Could not open polydriver object.", errorPrefix);
+        return PolyDriverDescriptor();
+    }
+
+    return device;
+}

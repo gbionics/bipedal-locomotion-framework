@@ -228,6 +228,7 @@ private:
     bool m_streamCartesianWrenches{false};
     bool m_streamFTSensors{false};
     bool m_streamTemperatureSensors{false};
+    bool m_streamBattery{false};
     bool m_logText{true};
     bool m_logCodeStatus{true};
     bool m_logCameras{true};
@@ -354,6 +355,9 @@ private:
 
     const std::string temperatureName = "temperatures";
     const std::vector<std::string> temperatureNames = {"temperature"};
+
+    const std::string batteryName = "batteries";
+    const std::vector<std::string> batteryElementNames = {"voltage", "current", "charge", "temperature"};
 
     const std::string robotName = "yarp_robot_name";
 

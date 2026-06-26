@@ -169,6 +169,19 @@ bool YarpSensorBridge::initialize(std::weak_ptr<const IParametersHandler> handle
                     logPrefix);
     }
 
+    ret = m_pimpl->subConfigLoader("stream_battery",
+                                   "Batteries",
+                                   &YarpSensorBridge::Impl::configureBatteries,
+                                   handler,
+                                   m_pimpl->metaData,
+                                   m_pimpl->metaData.bridgeOptions.isBatteryEnabled);
+    if (!ret)
+    {
+        log()->info("{} Skipping the configuration of Batteries. YarpSensorBridge "
+                    "will not stream battery measures.",
+                    logPrefix);
+    }
+
     m_pimpl->bridgeInitialized = true;
     return true;
 }
@@ -190,6 +203,7 @@ bool YarpSensorBridge::setDriversList(const yarp::dev::PolyDriverList& deviceDri
     ret = ret && m_pimpl->attachAllSixAxisForceTorqueSensors(deviceDriversList);
     ret = ret && m_pimpl->attachCartesianWrenchInterface(deviceDriversList);
     ret = ret && m_pimpl->attachAllTemperatureSensors(deviceDriversList);
+    ret = ret && m_pimpl->attachAllBatteries(deviceDriversList);
 
     if (!ret)
     {
@@ -348,6 +362,47 @@ const std::vector<std::string>& YarpSensorBridge::getTemperatureSensorsList() co
 const std::vector<std::string>& YarpSensorBridge::getCartesianWrenchesList() const
 {
     return m_pimpl->metaData.sensorsList.cartesianWrenchesList;
+}
+
+bool YarpSensorBridge::getBatteriesList(std::vector<std::string>& batteriesList)
+{
+    if (!m_pimpl->checkValid("[YarpSensorBridge::getBatteriesList]"))
+    {
+        return false;
+    }
+    batteriesList = m_pimpl->metaData.sensorsList.batteriesList;
+    return true;
+}
+
+const std::vector<std::string>& YarpSensorBridge::getBatteriesList() const
+{
+    return m_pimpl->metaData.sensorsList.batteriesList;
+}
+
+bool YarpSensorBridge::getBatteryStatus(const std::string& batteryName,
+                                        BatteryStatus& batteryStatus,
+                                        OptionalDoubleRef receiveTimeInSeconds)
+{
+    constexpr auto logPrefix = "[YarpSensorBridge::getBatteryStatus]";
+
+    if (!m_pimpl->checkValidSensorMeasure(logPrefix,
+                                          m_pimpl->batteryMeasures,
+                                          batteryName))
+    {
+        return false;
+    }
+
+    const auto& measure = m_pimpl->batteryMeasures.at(batteryName);
+    batteryStatus.voltage     = measure.first[0];
+    batteryStatus.current     = measure.first[1];
+    batteryStatus.charge      = measure.first[2];
+    batteryStatus.temperature = measure.first[3];
+
+    if (receiveTimeInSeconds)
+    {
+        receiveTimeInSeconds.value().get() = measure.second;
+    }
+    return true;
 }
 
 bool YarpSensorBridge::getJointPosition(const std::string& jointName,

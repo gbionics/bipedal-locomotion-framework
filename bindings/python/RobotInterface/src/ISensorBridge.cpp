@@ -41,6 +41,7 @@ void CreateISensorBridge(pybind11::module& module)
                        &SensorBridgeOptions::isThreeAxisForceTorqueSensorEnabled)
         .def_readwrite("is_cartesian_wrench_enabled",
                        &SensorBridgeOptions::isCartesianWrenchEnabled)
+        .def_readwrite("is_battery_enabled", &SensorBridgeOptions::isBatteryEnabled)
         .def_readwrite("nr_joints", &SensorBridgeOptions::nrJoints);
 
     py::class_<SensorLists>(module, "SensorLists")
@@ -54,7 +55,15 @@ void CreateISensorBridge(pybind11::module& module)
                        &SensorLists::sixAxisForceTorqueSensorsList)
         .def_readwrite("three_axis_force_torque_sensors_list",
                        &SensorLists::threeAxisForceTorqueSensorsList)
-        .def_readwrite("cartesian_wrenches_list", &SensorLists::cartesianWrenchesList);
+        .def_readwrite("cartesian_wrenches_list", &SensorLists::cartesianWrenchesList)
+        .def_readwrite("batteries_list", &SensorLists::batteriesList);
+
+    py::class_<BatteryStatus>(module, "BatteryStatus")
+        .def(py::init())
+        .def_readwrite("voltage", &BatteryStatus::voltage)
+        .def_readwrite("current", &BatteryStatus::current)
+        .def_readwrite("charge", &BatteryStatus::charge)
+        .def_readwrite("temperature", &BatteryStatus::temperature);
 
     py::class_<SensorBridgeMetaData>(module, "SensorBridgeMetaData")
         .def(py::init())
