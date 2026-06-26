@@ -18,6 +18,7 @@ var hierarchy =
     ] ],
     [ "BipedalLocomotion::Estimators::BaseEstimatorFromFootIMUInput", "structBipedalLocomotion_1_1Estimators_1_1BaseEstimatorFromFootIMUInput.html", null ],
     [ "BipedalLocomotion::Estimators::BaseEstimatorFromFootIMUState", "structBipedalLocomotion_1_1Estimators_1_1BaseEstimatorFromFootIMUState.html", null ],
+    [ "BipedalLocomotion::RobotInterface::BatteryStatus", "structBipedalLocomotion_1_1RobotInterface_1_1BatteryStatus.html", null ],
     [ "BipedalLocomotion::RobotInterface::CameraBridgeMetaData", "structBipedalLocomotion_1_1RobotInterface_1_1CameraBridgeMetaData.html", null ],
     [ "BipedalLocomotion::RobotInterface::CameraBridgeOptions", "structBipedalLocomotion_1_1RobotInterface_1_1CameraBridgeOptions.html", null ],
     [ "BipedalLocomotion::RobotInterface::CameraLists", "structBipedalLocomotion_1_1RobotInterface_1_1CameraLists.html", null ],

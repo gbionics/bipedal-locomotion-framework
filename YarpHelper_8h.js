@@ -7,5 +7,6 @@ var YarpHelper_8h =
     [ "constructMultipleAnalogSensorsRemapper", "YarpHelper_8h.html#a3428753b80de7ab5cd7b5a38f1feba18", null ],
     [ "constructMultipleAnalogSensorsRemapper", "YarpHelper_8h.html#abc32625d98993ca36028defbabe9dc62", null ],
     [ "constructMultipleAnalogSensorsRemapper", "YarpHelper_8h.html#ad992949f2120fc211c0af9d296631ec5", null ],
-    [ "constructRDGBSensorClient", "YarpHelper_8h.html#a90efd8763c28720edded7499b94b9753", null ]
+    [ "constructRDGBSensorClient", "YarpHelper_8h.html#a90efd8763c28720edded7499b94b9753", null ],
+    [ "constructBatteryClient", "YarpHelper_8h.html#ab9e4417668007269fe7388bcd88f63c4", null ]
 ];

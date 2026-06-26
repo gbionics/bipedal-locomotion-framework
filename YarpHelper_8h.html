@@ -153,6 +153,9 @@ Functions</h2></td></tr>
 <tr class="memitem:a90efd8763c28720edded7499b94b9753"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structBipedalLocomotion_1_1RobotInterface_1_1PolyDriverDescriptor.html">PolyDriverDescriptor</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="YarpHelper_8h.html#a90efd8763c28720edded7499b94b9753">BipedalLocomotion::RobotInterface::constructRDGBSensorClient</a> (std::weak_ptr&lt; const <a class="el" href="classBipedalLocomotion_1_1ParametersHandler_1_1IParametersHandler.html">BipedalLocomotion::ParametersHandler::IParametersHandler</a> &gt; handler)</td></tr>
 <tr class="memdesc:a90efd8763c28720edded7499b94b9753"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function that can be used to build a <code>RGBDSensorClient</code> device.  <a href="YarpHelper_8h.html#a90efd8763c28720edded7499b94b9753">More...</a><br /></td></tr>
 <tr class="separator:a90efd8763c28720edded7499b94b9753"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab9e4417668007269fe7388bcd88f63c4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structBipedalLocomotion_1_1RobotInterface_1_1PolyDriverDescriptor.html">PolyDriverDescriptor</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="YarpHelper_8h.html#ab9e4417668007269fe7388bcd88f63c4">BipedalLocomotion::RobotInterface::constructBatteryClient</a> (std::weak_ptr&lt; const <a class="el" href="classBipedalLocomotion_1_1ParametersHandler_1_1IParametersHandler.html">BipedalLocomotion::ParametersHandler::IParametersHandler</a> &gt; handler)</td></tr>
+<tr class="memdesc:ab9e4417668007269fe7388bcd88f63c4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function that can be used to build a <code>battery_nwc_yarp</code> device.  <a href="YarpHelper_8h.html#ab9e4417668007269fe7388bcd88f63c4">More...</a><br /></td></tr>
+<tr class="separator:ab9e4417668007269fe7388bcd88f63c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><dl class="section author"><dt>Authors</dt><dd>Giulio Romualdi </dd></dl>
@@ -500,6 +503,48 @@ The <code>MultipleAnalogSensorsRemapper</code> device is implement in <a href="h
 </dd>
 <dd>
 The <code>RGBDSensorClient</code> device is implement in <a href="https://yarp.it/git-master/classRGBDSensorClient.html">yarp</a>. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>A PolyDriverDescriptor. In case of error an invalid <code>PolyDriverDescriptor</code> is returned. </dd></dl>
+
+</div>
+</div>
+<a id="ab9e4417668007269fe7388bcd88f63c4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab9e4417668007269fe7388bcd88f63c4">&#9670;&nbsp;</a></span>constructBatteryClient()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structBipedalLocomotion_1_1RobotInterface_1_1PolyDriverDescriptor.html">PolyDriverDescriptor</a> BipedalLocomotion::RobotInterface::constructBatteryClient </td>
+          <td>(</td>
+          <td class="paramtype">std::weak_ptr&lt; const <a class="el" href="classBipedalLocomotion_1_1ParametersHandler_1_1IParametersHandler.html">BipedalLocomotion::ParametersHandler::IParametersHandler</a> &gt;&#160;</td>
+          <td class="paramname"><em>handler</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Helper function that can be used to build a <code>battery_nwc_yarp</code> device. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">handler</td><td>pointer to a parameter handler interface. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section note"><dt>Note</dt><dd>The following parameters are taken into consideration <table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadCenter">Parameter Name   </th><th class="markdownTableHeadCenter">Type   </th><th class="markdownTableHeadCenter">Description   </th><th class="markdownTableHeadCenter">Mandatory    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyCenter"><code>description</code>   </td><td class="markdownTableBodyCenter"><code>string</code>   </td><td class="markdownTableBodyCenter">Description of the battery client. It is the device key name   </td><td class="markdownTableBodyCenter">Yes    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyCenter"><code>local_prefix</code>   </td><td class="markdownTableBodyCenter"><code>string</code>   </td><td class="markdownTableBodyCenter">Prefix of the local port (e.g. the application name)   </td><td class="markdownTableBodyCenter">Yes    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyCenter"><code>local_port_name_postfix</code>   </td><td class="markdownTableBodyCenter"><code>string</code>   </td><td class="markdownTableBodyCenter">Postfix of the local port. The local port name is <code>/&lt;local_prefix&gt;&lt;local_port_name_postfix&gt;</code>   </td><td class="markdownTableBodyCenter">Yes    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyCenter"><code>remote_port_name</code>   </td><td class="markdownTableBodyCenter"><code>string</code>   </td><td class="markdownTableBodyCenter">Full name of the port opened on the battery server side   </td><td class="markdownTableBodyCenter">Yes    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyCenter"><code>carrier</code>   </td><td class="markdownTableBodyCenter"><code>string</code>   </td><td class="markdownTableBodyCenter">Carrier for the connection (default "tcp")   </td><td class="markdownTableBodyCenter">No   </td></tr>
+</table>
+</dd></dl>
 <dl class="section return"><dt>Returns</dt><dd>A PolyDriverDescriptor. In case of error an invalid <code>PolyDriverDescriptor</code> is returned. </dd></dl>
 
 </div>

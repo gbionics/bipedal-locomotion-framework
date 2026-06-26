@@ -57,5 +57,8 @@ var classBipedalLocomotion_1_1RobotInterface_1_1YarpSensorBridge =
     [ "getMotorVelocity", "classBipedalLocomotion_1_1RobotInterface_1_1YarpSensorBridge.html#af90e07b1154f560151c636f8bf02b870", null ],
     [ "getMotorVelocities", "classBipedalLocomotion_1_1RobotInterface_1_1YarpSensorBridge.html#a44eae2366c7bdb0149c24197cdf9c5ac", null ],
     [ "getMotorAcceleration", "classBipedalLocomotion_1_1RobotInterface_1_1YarpSensorBridge.html#a0f26905fd7c4afb5016c9dd04efebd5d", null ],
-    [ "getMotorAccelerations", "classBipedalLocomotion_1_1RobotInterface_1_1YarpSensorBridge.html#a8b733ed49d5e8f0fe72ea2d9e5112909", null ]
+    [ "getMotorAccelerations", "classBipedalLocomotion_1_1RobotInterface_1_1YarpSensorBridge.html#a8b733ed49d5e8f0fe72ea2d9e5112909", null ],
+    [ "getBatteriesList", "classBipedalLocomotion_1_1RobotInterface_1_1YarpSensorBridge.html#ae11d6eae244766283b00b6d4ece7a20c", null ],
+    [ "getBatteriesList", "classBipedalLocomotion_1_1RobotInterface_1_1YarpSensorBridge.html#af156aa336748866a22c87ce600953fcd", null ],
+    [ "getBatteryStatus", "classBipedalLocomotion_1_1RobotInterface_1_1YarpSensorBridge.html#aced6a7d5a279cf104642916786e65819", null ]
 ];

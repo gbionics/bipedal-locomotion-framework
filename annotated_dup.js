@@ -219,6 +219,7 @@ var annotated_dup =
         [ "IRobotControl", "classBipedalLocomotion_1_1RobotInterface_1_1IRobotControl.html", "classBipedalLocomotion_1_1RobotInterface_1_1IRobotControl" ],
         [ "SensorBridgeOptions", "structBipedalLocomotion_1_1RobotInterface_1_1SensorBridgeOptions.html", "structBipedalLocomotion_1_1RobotInterface_1_1SensorBridgeOptions" ],
         [ "SensorLists", "structBipedalLocomotion_1_1RobotInterface_1_1SensorLists.html", "structBipedalLocomotion_1_1RobotInterface_1_1SensorLists" ],
+        [ "BatteryStatus", "structBipedalLocomotion_1_1RobotInterface_1_1BatteryStatus.html", "structBipedalLocomotion_1_1RobotInterface_1_1BatteryStatus" ],
         [ "SensorBridgeMetaData", "structBipedalLocomotion_1_1RobotInterface_1_1SensorBridgeMetaData.html", "structBipedalLocomotion_1_1RobotInterface_1_1SensorBridgeMetaData" ],
         [ "ISensorBridge", "classBipedalLocomotion_1_1RobotInterface_1_1ISensorBridge.html", "classBipedalLocomotion_1_1RobotInterface_1_1ISensorBridge" ],
         [ "DummySensorBridge", "classBipedalLocomotion_1_1RobotInterface_1_1DummySensorBridge.html", "classBipedalLocomotion_1_1RobotInterface_1_1DummySensorBridge" ],

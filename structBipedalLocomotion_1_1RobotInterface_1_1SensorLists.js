@@ -9,5 +9,6 @@ var structBipedalLocomotion_1_1RobotInterface_1_1SensorLists =
     [ "sixAxisForceTorqueSensorsList", "structBipedalLocomotion_1_1RobotInterface_1_1SensorLists.html#a90201ab87eb0bee988e3420bc6027a88", null ],
     [ "threeAxisForceTorqueSensorsList", "structBipedalLocomotion_1_1RobotInterface_1_1SensorLists.html#af3a0ea1976b13e59246c45667dbfd2fe", null ],
     [ "cartesianWrenchesList", "structBipedalLocomotion_1_1RobotInterface_1_1SensorLists.html#aba407eaf04ef1dd0cdac261bed171edc", null ],
-    [ "temperatureSensorsList", "structBipedalLocomotion_1_1RobotInterface_1_1SensorLists.html#a6a9c582a39db534a9b84c9f6a8bf8bf5", null ]
+    [ "temperatureSensorsList", "structBipedalLocomotion_1_1RobotInterface_1_1SensorLists.html#a6a9c582a39db534a9b84c9f6a8bf8bf5", null ],
+    [ "batteriesList", "structBipedalLocomotion_1_1RobotInterface_1_1SensorLists.html#a821e324481833b93155fae4086d5b8a4", null ]
 ];

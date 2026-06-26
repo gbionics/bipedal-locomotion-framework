@@ -299,6 +299,16 @@ const std::vector&lt; std::string &gt; &amp;&#160;</td><td class="memItemRight" 
 <tr class="memitem:a8b733ed49d5e8f0fe72ea2d9e5112909"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1RobotInterface_1_1YarpSensorBridge.html#a8b733ed49d5e8f0fe72ea2d9e5112909">getMotorAccelerations</a> (Eigen::Ref&lt; Eigen::VectorXd &gt; motorAccelerations, OptionalDoubleRef receiveTimeInSeconds={}) final</td></tr>
 <tr class="memdesc:a8b733ed49d5e8f0fe72ea2d9e5112909"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get all motors' accelerations in rad/s.  <a href="classBipedalLocomotion_1_1RobotInterface_1_1YarpSensorBridge.html#a8b733ed49d5e8f0fe72ea2d9e5112909">More...</a><br /></td></tr>
 <tr class="separator:a8b733ed49d5e8f0fe72ea2d9e5112909"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae11d6eae244766283b00b6d4ece7a20c"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1RobotInterface_1_1YarpSensorBridge.html#ae11d6eae244766283b00b6d4ece7a20c">getBatteriesList</a> (std::vector&lt; std::string &gt; &amp;batteriesList) final</td></tr>
+<tr class="memdesc:ae11d6eae244766283b00b6d4ece7a20c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get batteries list.  <a href="classBipedalLocomotion_1_1RobotInterface_1_1YarpSensorBridge.html#ae11d6eae244766283b00b6d4ece7a20c">More...</a><br /></td></tr>
+<tr class="separator:ae11d6eae244766283b00b6d4ece7a20c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af156aa336748866a22c87ce600953fcd"><td class="memItemLeft" align="right" valign="top"><a id="af156aa336748866a22c87ce600953fcd"></a>
+const std::vector&lt; std::string &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1RobotInterface_1_1YarpSensorBridge.html#af156aa336748866a22c87ce600953fcd">getBatteriesList</a> () const</td></tr>
+<tr class="memdesc:af156aa336748866a22c87ce600953fcd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get const reference to batteries list. <br /></td></tr>
+<tr class="separator:af156aa336748866a22c87ce600953fcd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aced6a7d5a279cf104642916786e65819"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1RobotInterface_1_1YarpSensorBridge.html#aced6a7d5a279cf104642916786e65819">getBatteryStatus</a> (const std::string &amp;batteryName, <a class="el" href="structBipedalLocomotion_1_1RobotInterface_1_1BatteryStatus.html">BatteryStatus</a> &amp;batteryStatus, OptionalDoubleRef receiveTimeInSeconds={}) final</td></tr>
+<tr class="memdesc:aced6a7d5a279cf104642916786e65819"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get battery status (voltage, current, charge, temperature)  <a href="classBipedalLocomotion_1_1RobotInterface_1_1YarpSensorBridge.html#aced6a7d5a279cf104642916786e65819">More...</a><br /></td></tr>
+<tr class="separator:aced6a7d5a279cf104642916786e65819"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classBipedalLocomotion_1_1RobotInterface_1_1ISensorBridge"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classBipedalLocomotion_1_1RobotInterface_1_1ISensorBridge')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classBipedalLocomotion_1_1RobotInterface_1_1ISensorBridge.html">BipedalLocomotion::RobotInterface::ISensorBridge</a></td></tr>
 <tr class="memitem:aecfb22aae3634befc8dc3b3592325484 inherit pub_methods_classBipedalLocomotion_1_1RobotInterface_1_1ISensorBridge"><td class="memItemLeft" align="right" valign="top"><a id="aecfb22aae3634befc8dc3b3592325484"></a>
 virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1RobotInterface_1_1ISensorBridge.html#aecfb22aae3634befc8dc3b3592325484">~ISensorBridge</a> ()=default</td></tr>
@@ -2680,6 +2690,98 @@ true/false in case of success/failure </dd></dl>
 <dl class="section return"><dt>Returns</dt><dd>true/false in case of success/failure </dd></dl>
 
 <p>Reimplemented from <a class="el" href="classBipedalLocomotion_1_1RobotInterface_1_1ISensorBridge.html#a371ce08830f823788cf4d9ca96c15dbe">BipedalLocomotion::RobotInterface::ISensorBridge</a>.</p>
+
+</div>
+</div>
+<a id="ae11d6eae244766283b00b6d4ece7a20c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae11d6eae244766283b00b6d4ece7a20c">&#9670;&nbsp;</a></span>getBatteriesList()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool YarpSensorBridge::getBatteriesList </td>
+          <td>(</td>
+          <td class="paramtype">std::vector&lt; std::string &gt; &amp;&#160;</td>
+          <td class="paramname"><em>batteriesList</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">final</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get batteries list. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[out]</td><td class="paramname">batteriesList</td><td>list of batteries attached to the bridge </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true/false in case of success/failure </dd></dl>
+
+<p>Reimplemented from <a class="el" href="classBipedalLocomotion_1_1RobotInterface_1_1ISensorBridge.html#a46e484349aaa18112b223fceecdbe470">BipedalLocomotion::RobotInterface::ISensorBridge</a>.</p>
+
+</div>
+</div>
+<a id="aced6a7d5a279cf104642916786e65819"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aced6a7d5a279cf104642916786e65819">&#9670;&nbsp;</a></span>getBatteryStatus()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool YarpSensorBridge::getBatteryStatus </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>batteryName</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structBipedalLocomotion_1_1RobotInterface_1_1BatteryStatus.html">BatteryStatus</a> &amp;&#160;</td>
+          <td class="paramname"><em>batteryStatus</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">OptionalDoubleRef&#160;</td>
+          <td class="paramname"><em>receiveTimeInSeconds</em> = <code>{}</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">final</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get battery status (voltage, current, charge, temperature) </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">batteryName</td><td>name of the battery </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">batteryStatus</td><td>battery status measurement </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">receiveTimeInSeconds</td><td>time at which the measurement was received </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true/false in case of success/failure </dd></dl>
+
+<p>Reimplemented from <a class="el" href="classBipedalLocomotion_1_1RobotInterface_1_1ISensorBridge.html#a94086387af25c2113affea31ed637662">BipedalLocomotion::RobotInterface::ISensorBridge</a>.</p>
 
 </div>
 </div>

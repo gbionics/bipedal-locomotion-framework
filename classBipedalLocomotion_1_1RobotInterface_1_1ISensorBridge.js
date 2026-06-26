@@ -30,6 +30,8 @@ var classBipedalLocomotion_1_1RobotInterface_1_1ISensorBridge =
     [ "getThreeAxisForceTorqueMeasurement", "classBipedalLocomotion_1_1RobotInterface_1_1ISensorBridge.html#afb90f14995a7b0c8c102f8b43985d6b4", null ],
     [ "getCartesianWrench", "classBipedalLocomotion_1_1RobotInterface_1_1ISensorBridge.html#ae541773a584a70f1ad586a22da91703c", null ],
     [ "getTemperature", "classBipedalLocomotion_1_1RobotInterface_1_1ISensorBridge.html#a9844da390618ef67e8dde314c4fee4a5", null ],
+    [ "getBatteriesList", "classBipedalLocomotion_1_1RobotInterface_1_1ISensorBridge.html#a46e484349aaa18112b223fceecdbe470", null ],
+    [ "getBatteryStatus", "classBipedalLocomotion_1_1RobotInterface_1_1ISensorBridge.html#a94086387af25c2113affea31ed637662", null ],
     [ "populateSensorBridgeOptionsFromConfig", "classBipedalLocomotion_1_1RobotInterface_1_1ISensorBridge.html#a75a4cacac8252789fa054a20a548ba75", null ],
     [ "populateSensorListsFromConfig", "classBipedalLocomotion_1_1RobotInterface_1_1ISensorBridge.html#ad81d1c091fa178daf1489060c3b4756c", null ],
     [ "populateSensorBridgeMetaDataFromConfig", "classBipedalLocomotion_1_1RobotInterface_1_1ISensorBridge.html#af951b34d0b4ff5dd51a23bf40dad488d", null ],
