@@ -7,9 +7,13 @@
 #define BIPEDAL_LOCOMOTION_FRAMEWORK_YARP_ROBOT_LOGGER_DEVICE_H
 
 #include <atomic>
+#include <chrono>
+#include <condition_variable>
 #include <memory>
 #include <mutex>
+#include <queue>
 #include <string>
+#include <thread>
 #include <unordered_map>
 #include <unordered_set>
 #include <vector>
@@ -181,6 +185,26 @@ private:
         std::atomic<bool> resetIndex{false};
         std::atomic<bool> paused{false};
         std::atomic<bool> requestPause{false};
+
+        // Producer-consumer frame queue
+        struct CapturedFrame
+        {
+            cv::Mat rgb;
+            cv::Mat depth;
+            std::chrono::nanoseconds timestamp{};
+            unsigned int frameIndex{0};
+        };
+        static constexpr std::size_t kMaxQueueDepth = 8;
+        std::mutex encoderQueueMutex;
+        std::condition_variable encoderQueueCv;
+        std::queue<CapturedFrame> encoderQueue;
+        std::thread encodeThread;
+        std::atomic<bool> encodeThreadRunning{false};
+        std::atomic<unsigned int> droppedFrames{0};
+
+        // Rate-limited overrun logging
+        std::chrono::steady_clock::time_point lastOverrunLog{};
+        unsigned int overrunsSinceLastLog{0};
     };
 
     std::string m_videoCodecCode{"mp4v"};
