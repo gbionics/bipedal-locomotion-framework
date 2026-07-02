@@ -5,6 +5,7 @@
  * distributed under the terms of the BSD-3-Clause license.
  */
 
+#include <algorithm>
 #include <cmath>
 #include <future>
 #include <thread>
@@ -717,6 +718,213 @@ struct YarpRobotControl::Impl
                            this->controlModes.end(),
                            [&mode](const auto& m) { return m == mode; });
     }
+
+    bool setReferencesSubset(Eigen::Ref<const Eigen::VectorXd> jointValues,
+                             const std::vector<int>& jointIndices,
+                             const IRobotControl::ControlMode& controlMode,
+                             std::optional<Eigen::Ref<const Eigen::VectorXd>> currentJointValues)
+    {
+        constexpr auto errorPrefix = "[YarpRobotControl::Impl::setReferencesSubset]";
+
+        const int n = static_cast<int>(jointIndices.size());
+
+        if (jointValues.size() != n)
+        {
+            log()->error("{} desiredJointValues size ({}) does not match jointIndices size ({}).",
+                         errorPrefix,
+                         jointValues.size(),
+                         n);
+            return false;
+        }
+
+        if (controlMode == IRobotControl::ControlMode::Unknown
+            || controlMode == IRobotControl::ControlMode::Idle)
+        {
+            log()->error("{} Cannot set references for Idle or Unknown control mode.", errorPrefix);
+            return false;
+        }
+
+        // Validate indices
+        for (const int idx : jointIndices)
+        {
+            if (idx < 0 || static_cast<std::size_t>(idx) >= this->actuatedDOFs)
+            {
+                log()->error("{} Joint index {} is out of range [0, {}).",
+                             errorPrefix,
+                             idx,
+                             this->actuatedDOFs);
+                return false;
+            }
+        }
+
+        auto isScalingNotRequired = [](IRobotControl::ControlMode mode) -> bool {
+            return mode == IRobotControl::ControlMode::Torque
+                || mode == IRobotControl::ControlMode::PWM
+                || mode == IRobotControl::ControlMode::Current;
+        };
+
+        // For PositionDirect: check the error for the subset joints
+        if (controlMode == IRobotControl::ControlMode::PositionDirect)
+        {
+            if (currentJointValues.has_value())
+            {
+                if (currentJointValues->size() != n)
+                {
+                    log()->error(
+                        "{} currentJointValues size ({}) does not match jointIndices size ({}).",
+                        errorPrefix,
+                        currentJointValues->size(),
+                        n);
+                    return false;
+                }
+                for (int i = 0; i < n; i++)
+                {
+                    const double error
+                        = std::abs((*currentJointValues)[i] - jointValues[i]);
+                    if (error > this->positionDirectMaxAdmissibleError)
+                    {
+                        if (this->jointsTypeList[jointIndices[i]] == JointType::REVOLUTE)
+                        {
+                            log()->error(
+                                "{} The error between the current and the desired position of joint "
+                                "'{}' is greater than {} deg. Error = {} deg.",
+                                errorPrefix,
+                                this->axesName[jointIndices[i]],
+                                180.0 / M_PI * this->positionDirectMaxAdmissibleError,
+                                180.0 / M_PI * error);
+                        } else
+                        {
+                            log()->error(
+                                "{} The error between the current and the desired position of joint "
+                                "'{}' is greater than {}. Error = {}.",
+                                errorPrefix,
+                                this->axesName[jointIndices[i]],
+                                this->positionDirectMaxAdmissibleError,
+                                error);
+                        }
+                        return false;
+                    }
+                }
+            } else
+            {
+                if (!this->getJointPos())
+                {
+                    log()->error("{} Unable to get the joint position.", errorPrefix);
+                    return false;
+                }
+                for (int i = 0; i < n; i++)
+                {
+                    const double error
+                        = std::abs(this->positionFeedback[jointIndices[i]] - jointValues[i]);
+                    if (error > this->positionDirectMaxAdmissibleError)
+                    {
+                        if (this->jointsTypeList[jointIndices[i]] == JointType::REVOLUTE)
+                        {
+                            log()->error(
+                                "{} The error between the current and the desired position of joint "
+                                "'{}' is greater than {} deg. Error = {} deg.",
+                                errorPrefix,
+                                this->axesName[jointIndices[i]],
+                                180.0 / M_PI * this->positionDirectMaxAdmissibleError,
+                                180.0 / M_PI * error);
+                        } else
+                        {
+                            log()->error(
+                                "{} The error between the current and the desired position of joint "
+                                "'{}' is greater than {}. Error = {}.",
+                                errorPrefix,
+                                this->axesName[jointIndices[i]],
+                                this->positionDirectMaxAdmissibleError,
+                                error);
+                        }
+                        return false;
+                    }
+                }
+            }
+        }
+
+        // For Position mode: compute reference speeds
+        if (controlMode == IRobotControl::ControlMode::Position)
+        {
+            Eigen::VectorXd currentPos(n);
+            if (currentJointValues.has_value())
+            {
+                if (currentJointValues->size() != n)
+                {
+                    log()->error(
+                        "{} currentJointValues size ({}) does not match jointIndices size ({}).",
+                        errorPrefix,
+                        currentJointValues->size(),
+                        n);
+                    return false;
+                }
+                currentPos = *currentJointValues;
+            } else
+            {
+                if (!this->getJointPos())
+                {
+                    log()->error("{} Unable to get the joint position.", errorPrefix);
+                    return false;
+                }
+                for (int i = 0; i < n; i++)
+                {
+                    currentPos[i] = this->positionFeedback[jointIndices[i]];
+                }
+            }
+
+            const double positioningDurationSeconds
+                = std::chrono::duration<double>(this->positioningDuration).count();
+            std::vector<double> refSpeeds(n);
+            for (int i = 0; i < n; i++)
+            {
+                const double jointError = std::abs(jointValues[i] - currentPos[i]);
+                double scaling, minVelocity;
+                if (this->jointsTypeList[jointIndices[i]] == JointType::REVOLUTE)
+                {
+                    scaling = 180.0 / M_PI;
+                    minVelocity = 3.0; // deg/s
+                } else
+                {
+                    scaling = 1.0;
+                    minVelocity = 10.0; // mm/s
+                }
+                refSpeeds[i] = std::max(minVelocity,
+                                        scaling * (jointError / positioningDurationSeconds));
+            }
+
+            if (!this->positionInterface->setRefSpeeds(n,
+                                                       jointIndices.data(),
+                                                       refSpeeds.data()))
+            {
+                log()->error("{} Unable to set the reference speed for the position control joints.",
+                             errorPrefix);
+                return false;
+            }
+
+            this->startPositionControlInstant = BipedalLocomotion::clock().now();
+        }
+
+        // Build desired values with unit conversion
+        Eigen::VectorXd refs(n);
+        for (int i = 0; i < n; i++)
+        {
+            double scaling = 1.0;
+            if (this->jointsTypeList[jointIndices[i]] == JointType::REVOLUTE
+                && !isScalingNotRequired(controlMode))
+            {
+                scaling = 180.0 / M_PI;
+            }
+            refs[i] = scaling * jointValues[i];
+        }
+
+        if (!this->control(controlMode)(n, jointIndices.data(), refs.data()))
+        {
+            log()->error("{} Unable to set the desired joint values.", errorPrefix);
+            return false;
+        }
+
+        return true;
+    }
 };
 
 YarpRobotControl::YarpRobotControl()
@@ -949,4 +1157,45 @@ bool YarpRobotControl::getJointLimits(Eigen::Ref<Eigen::VectorXd> lowerLimits,
         m_pimpl->controlLimitsInterface->getLimits(i, &lowerLimits[i], &upperLimits[i]);
     }
     return true;
+}
+
+bool YarpRobotControl::setReferences(
+    Eigen::Ref<const Eigen::VectorXd> desiredJointValues,
+    const std::vector<int>& jointIndices,
+    const IRobotControl::ControlMode& controlMode,
+    std::optional<Eigen::Ref<const Eigen::VectorXd>> currentJointValues)
+{
+    return m_pimpl->setReferencesSubset(desiredJointValues,
+                                        jointIndices,
+                                        controlMode,
+                                        currentJointValues);
+}
+
+bool YarpRobotControl::setReferences(
+    Eigen::Ref<const Eigen::VectorXd> desiredJointValues,
+    const std::vector<std::string>& jointNames,
+    const IRobotControl::ControlMode& controlMode,
+    std::optional<Eigen::Ref<const Eigen::VectorXd>> currentJointValues)
+{
+    constexpr auto errorPrefix = "[YarpRobotControl::setReferences]";
+
+    std::vector<int> jointIndices;
+    jointIndices.reserve(jointNames.size());
+    for (const auto& name : jointNames)
+    {
+        const auto it
+            = std::find(m_pimpl->axesName.begin(), m_pimpl->axesName.end(), name);
+        if (it == m_pimpl->axesName.end())
+        {
+            log()->error("{} Joint '{}' not found in the joint list.", errorPrefix, name);
+            return false;
+        }
+        jointIndices.push_back(
+            static_cast<int>(std::distance(m_pimpl->axesName.begin(), it)));
+    }
+
+    return m_pimpl->setReferencesSubset(desiredJointValues,
+                                        jointIndices,
+                                        controlMode,
+                                        currentJointValues);
 }
