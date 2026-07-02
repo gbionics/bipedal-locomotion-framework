@@ -153,6 +153,42 @@ public:
                   std::optional<Eigen::Ref<const Eigen::VectorXd>> currentJointValues = {}) final;
 
     /**
+     * Set the desired reference for a subset of joints identified by their indices.
+     * @param desiredJointValues desired joint values for the subset (size must match jointIndices).
+     * @param jointIndices indices of the joints to control (into the full joint list).
+     * @param controlMode control mode for all the subset joints.
+     * @param currentJointValues current joint values for the subset (same size as desiredJointValues).
+     *        If not provided, the values are read from the hardware.
+     * @return True/False in case of success/failure.
+     * @note In case of position control the values have to be expressed in rad, in case of velocity
+     * control in rad/s. If the robot is controlled in torques, the desired joint values are
+     * expressed in Nm.
+     */
+    bool
+    setReferences(Eigen::Ref<const Eigen::VectorXd> desiredJointValues,
+                  const std::vector<int>& jointIndices,
+                  const IRobotControl::ControlMode& controlMode,
+                  std::optional<Eigen::Ref<const Eigen::VectorXd>> currentJointValues = {}) final;
+
+    /**
+     * Set the desired reference for a subset of joints identified by their names.
+     * @param desiredJointValues desired joint values for the subset (size must match jointNames).
+     * @param jointNames names of the joints to control.
+     * @param controlMode control mode for all the subset joints.
+     * @param currentJointValues current joint values for the subset (same size as desiredJointValues).
+     *        If not provided, the values are read from the hardware.
+     * @return True/False in case of success/failure.
+     * @note In case of position control the values have to be expressed in rad, in case of velocity
+     * control in rad/s. If the robot is controlled in torques, the desired joint values are
+     * expressed in Nm.
+     */
+    bool
+    setReferences(Eigen::Ref<const Eigen::VectorXd> desiredJointValues,
+                  const std::vector<std::string>& jointNames,
+                  const IRobotControl::ControlMode& controlMode,
+                  std::optional<Eigen::Ref<const Eigen::VectorXd>> currentJointValues = {}) final;
+
+    /**
      * Get the list of the controlled joints
      * @return A vector containing the name of the controlled joints.
      */

@@ -13,3 +13,5 @@ bool IRobotControl::initialize(std::weak_ptr<ParametersHandler::IParametersHandl
 {
     return true;
 }
+
+
