@@ -92,15 +92,15 @@ public:
      * damping from Nms/rad to Nms/deg (all multiplied by π/180).
      * Torque feedforward is always forwarded in Nm without conversion.
      *
-     * @param pos      Position setpoints for all controlled joints [rad].
-     * @param vel      Velocity setpoints for all controlled joints [rad/s].
-     * @param torque   Torque feedforward setpoints for all controlled joints [Nm].
+     * @param position Position setpoints for all controlled joints [rad].
+     * @param velocity Velocity setpoints for all controlled joints [rad/s].
+     * @param torque Torque feedforward setpoints for all controlled joints [Nm].
      * @param stiffness Stiffness setpoints for all controlled joints [Nm/rad].
-     * @param damping  Damping setpoints for all controlled joints [Nms/rad].
+     * @param damping Damping setpoints for all controlled joints [Nms/rad].
      * @return True on success, false otherwise.
      */
-    bool setImpedanceSetPoints(Eigen::Ref<const Eigen::VectorXd> pos,
-                               Eigen::Ref<const Eigen::VectorXd> vel,
+    bool setImpedanceSetPoints(Eigen::Ref<const Eigen::VectorXd> position,
+                               Eigen::Ref<const Eigen::VectorXd> velocity,
                                Eigen::Ref<const Eigen::VectorXd> torque,
                                Eigen::Ref<const Eigen::VectorXd> stiffness,
                                Eigen::Ref<const Eigen::VectorXd> damping);
