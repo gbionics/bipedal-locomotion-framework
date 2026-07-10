@@ -12,7 +12,7 @@ add_bipedal_locomotion_library(
     PUBLIC_HEADERS         ${H_PREFIX}/ISensorBridge.h ${H_PREFIX}/IRobotControl.h ${H_PREFIX}/JointType.h
     PUBLIC_LINK_LIBRARIES  BipedalLocomotion::ParametersHandler Eigen3::Eigen
     PRIVATE_LINK_LIBRARIES BipedalLocomotion::TextLogging
-    SUBDIRECTORIES         YarpImplementation tests)
+    SUBDIRECTORIES         YarpImplementation DinRailImplementation tests)
 endif()
 
 if (FRAMEWORK_COMPILE_Camera)
