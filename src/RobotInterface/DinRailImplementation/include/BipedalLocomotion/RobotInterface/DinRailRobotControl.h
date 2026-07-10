@@ -87,8 +87,10 @@ public:
      * for all joints.  Position and velocity inputs are expected in SI units
      * (radians and radians per second); they are converted to degrees /
      * degrees-per-second internally for revolute joints before being forwarded
-     * to the underlying device.  Torque, stiffness and damping are forwarded
-     * as-is (Nm, Nm/rad, Nms/rad respectively).
+     * to the underlying device.  For revolute joints, position and velocity are
+     * converted from radians to degrees, stiffness from Nm/rad to Nm/deg, and
+     * damping from Nms/rad to Nms/deg (all multiplied by π/180).
+     * Torque feedforward is always forwarded in Nm without conversion.
      *
      * @param pos      Position setpoints for all controlled joints [rad].
      * @param vel      Velocity setpoints for all controlled joints [rad/s].

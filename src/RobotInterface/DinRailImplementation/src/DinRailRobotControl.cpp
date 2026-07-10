@@ -38,6 +38,8 @@ struct DinRailRobotControl::Impl
      */
     std::vector<double> posBuffer;
     std::vector<double> velBuffer;
+    std::vector<double> stiffnessBuffer;
+    std::vector<double> dampingBuffer;
 };
 
 DinRailRobotControl::DinRailRobotControl()
@@ -103,12 +105,14 @@ bool DinRailRobotControl::setDriver(std::shared_ptr<yarp::dev::PolyDriver> robot
     // Pre-allocate conversion buffers.
     m_pimpl->posBuffer.resize(m_pimpl->actuatedDOFs);
     m_pimpl->velBuffer.resize(m_pimpl->actuatedDOFs);
+    m_pimpl->stiffnessBuffer.resize(m_pimpl->actuatedDOFs);
+    m_pimpl->dampingBuffer.resize(m_pimpl->actuatedDOFs);
 
     return true;
 }
 
-bool DinRailRobotControl::setImpedanceSetPoints(Eigen::Ref<const Eigen::VectorXd> pos,
-                                                Eigen::Ref<const Eigen::VectorXd> vel,
+bool DinRailRobotControl::setImpedanceSetPoints(Eigen::Ref<const Eigen::VectorXd> position,
+                                                Eigen::Ref<const Eigen::VectorXd> velocity,
                                                 Eigen::Ref<const Eigen::VectorXd> torque,
                                                 Eigen::Ref<const Eigen::VectorXd> stiffness,
                                                 Eigen::Ref<const Eigen::VectorXd> damping)
@@ -124,15 +128,15 @@ bool DinRailRobotControl::setImpedanceSetPoints(Eigen::Ref<const Eigen::VectorXd
 
     const auto n = static_cast<Eigen::Index>(m_pimpl->actuatedDOFs);
 
-    if (pos.size() != n || vel.size() != n || torque.size() != n || stiffness.size() != n
+    if (position.size() != n || velocity.size() != n || torque.size() != n || stiffness.size() != n
         || damping.size() != n)
     {
         log()->error("{} Input vector size mismatch. Expected {} for all inputs. "
-                     "Got pos={}, vel={}, torque={}, stiffness={}, damping={}.",
+                     "Got position={}, velocity={}, torque={}, stiffness={}, damping={}.",
                      errorPrefix,
                      n,
-                     pos.size(),
-                     vel.size(),
+                     position.size(),
+                     velocity.size(),
                      torque.size(),
                      stiffness.size(),
                      damping.size());
@@ -140,31 +144,37 @@ bool DinRailRobotControl::setImpedanceSetPoints(Eigen::Ref<const Eigen::VectorXd
     }
 
     // Convert position (rad→deg) and velocity (rad/s→deg/s) for revolute joints.
-    // Prismatic joints are forwarded in SI units (metres, m/s) without conversion.
+    // Stiffness (Nm/rad→Nm/deg) and damping (Nms/rad→Nms/deg) are also scaled by
+    // the same factor for revolute joints: 1 Nm/rad = (π/180) Nm/deg.
+    // Prismatic joints are forwarded in SI units without conversion.
     constexpr double radToDeg = 180.0 / M_PI;
+    constexpr double degToRad = M_PI / 180.0; // scaling factor for stiffness/damping
     for (std::size_t i = 0; i < m_pimpl->actuatedDOFs; ++i)
     {
         if (m_pimpl->jointTypes[i] == JointType::REVOLUTE)
         {
-            m_pimpl->posBuffer[i] = radToDeg * pos[static_cast<Eigen::Index>(i)];
-            m_pimpl->velBuffer[i] = radToDeg * vel[static_cast<Eigen::Index>(i)];
+            m_pimpl->posBuffer[i] = radToDeg * position[static_cast<Eigen::Index>(i)];
+            m_pimpl->velBuffer[i] = radToDeg * velocity[static_cast<Eigen::Index>(i)];
+            m_pimpl->stiffnessBuffer[i] = degToRad * stiffness[static_cast<Eigen::Index>(i)];
+            m_pimpl->dampingBuffer[i] = degToRad * damping[static_cast<Eigen::Index>(i)];
         } else
         {
-            m_pimpl->posBuffer[i] = pos[static_cast<Eigen::Index>(i)];
-            m_pimpl->velBuffer[i] = vel[static_cast<Eigen::Index>(i)];
+            m_pimpl->posBuffer[i] = position[static_cast<Eigen::Index>(i)];
+            m_pimpl->velBuffer[i] = velocity[static_cast<Eigen::Index>(i)];
+            m_pimpl->stiffnessBuffer[i] = stiffness[static_cast<Eigen::Index>(i)];
+            m_pimpl->dampingBuffer[i] = damping[static_cast<Eigen::Index>(i)];
         }
     }
 
-    // Build non-owning VectorProxy views over the converted buffers and the
-    // Eigen inputs that require no conversion (torque, stiffness, damping).
+    // Build non-owning VectorProxy views over the converted buffers.
     // VectorProxy<const double>::Ref can be constructed from any contiguous
-    // container with .data() and .size(), which includes both std::vector and
+    // container with .data() and .size(), which includes std::vector and
     // Eigen::Ref<const Eigen::VectorXd>.
-    if (!m_pimpl->impedanceInterface->setSetPoints(m_pimpl->posBuffer, //
+    if (!m_pimpl->impedanceInterface->setSetPoints(m_pimpl->posBuffer,
                                                    m_pimpl->velBuffer,
                                                    torque,
-                                                   stiffness,
-                                                   damping))
+                                                   m_pimpl->stiffnessBuffer,
+                                                   m_pimpl->dampingBuffer))
     {
         log()->error("{} Failed to set impedance setpoints.", errorPrefix);
         return false;
