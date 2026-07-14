@@ -37,7 +37,7 @@ configure = { cmd = [
     "-DBUILD_TESTING:BOOL=ON",
     "-DFRAMEWORK_COMPILE_PYTHON_BINDINGS:BOOL=ON",
     "-DUSE_SYSTEM_Catch2:BOOL=ON",
-    "-DFRAMEWORK_USE_dinrail:BOOL=ON", 
+    "-DFRAMEWORK_USE_dinrail:BOOL=ON",
     # Workaround for slow PCL find in BLF
     "-DCMAKE_DISABLE_FIND_PACKAGE_VTK:BOOL=ON",
     "$BLF_PIXI_LINKER_CMAKE_OPTIONS",
