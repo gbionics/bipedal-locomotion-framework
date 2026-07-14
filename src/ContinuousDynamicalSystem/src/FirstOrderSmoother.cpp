@@ -69,16 +69,11 @@ bool FirstOrderSmoother::reset(Eigen::Ref<const Eigen::VectorXd> initialPoint)
         return false;
     }
 
-    // The following code is required to implement the following linear system
-    // dx = -a * x + a * u
-    // where a is given by 3.0 / settling_time
-    const int systemSize = initialPoint.size();
-    const Eigen::MatrixXd A = 3.0 / m_settlingTime //
-                              * Eigen::MatrixXd::Identity(systemSize, systemSize);
+    m_output = initialPoint;
 
-    if (!m_linearSystem->setSystemMatrices(-A, A))
+    if (!this->setSettlingTime(m_settlingTime))
     {
-        log()->error("{} Unable to set the linear system matrices.", logPrefix);
+        log()->error("{} Unable to set the settling time.", logPrefix);
         return false;
     }
 
@@ -88,11 +83,56 @@ bool FirstOrderSmoother::reset(Eigen::Ref<const Eigen::VectorXd> initialPoint)
         return false;
     }
 
-    m_output = initialPoint;
     m_isInitialStateSet = true;
 
     return true;
 }
+
+bool FirstOrderSmoother::setSettlingTime(const double settlingTime)
+{
+    constexpr auto logPrefix = "[FirstOrderSmoother::setSettlingTime]";
+
+    if (!m_isInitialized)
+    {
+        log()->error("{} Please initialize the class before.", logPrefix);
+        return false;
+    }
+
+    if (m_output.size() == 0)
+    {
+        log()->error("{} Please call reset() before setting the settling time.", logPrefix);
+        return false;
+    }
+
+    if (settlingTime <= 0)
+    {
+        log()->error("{} The settling time must be a positive number.", logPrefix);
+        return false;
+    }
+
+    // The following code is required to implement the following linear system
+    // dx = -a * x + a * u
+    // where a is given by 3.0 / settling_time
+    const int systemSize = m_output.size();
+    const Eigen::MatrixXd A = 3.0 / settlingTime //
+                              * Eigen::MatrixXd::Identity(systemSize, systemSize);
+
+    if (!m_linearSystem->setSystemMatrices(-A, A))
+    {
+        log()->error("{} Unable to set the linear system matrices.", logPrefix);
+        return false;
+    }
+
+    m_settlingTime = settlingTime;
+
+    return true;
+}
+
+double FirstOrderSmoother::getSettlingTime() const
+{
+    return m_settlingTime;
+}
+
 
 bool FirstOrderSmoother::advance()
 {

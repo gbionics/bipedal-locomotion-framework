@@ -9,6 +9,7 @@
 
 #include <BipedalLocomotion/bindings/ContinuousDynamicalSystem/ButterworthLowPassFilter.h>
 #include <BipedalLocomotion/bindings/ContinuousDynamicalSystem/CentroidalDynamics.h>
+#include <BipedalLocomotion/bindings/ContinuousDynamicalSystem/FirstOrderSmoother.h>
 #include <BipedalLocomotion/bindings/ContinuousDynamicalSystem/FloatingBaseSystemAccelerationKinematics.h>
 #include <BipedalLocomotion/bindings/ContinuousDynamicalSystem/FloatingBaseSystemVelocityKinematics.h>
 #include <BipedalLocomotion/bindings/ContinuousDynamicalSystem/LinearTimeInvariantSystem.h>
@@ -29,6 +30,7 @@ void CreateModule(pybind11::module& module)
     CreateLinearTimeInvariantSystem(module);
     CreateFloatingBaseSystemVelocityKinematics(module);
     CreateFloatingBaseSystemAccelerationKinematics(module);
+    CreateFirstOrderSmoother(module);
     CreateMultiStateWeightProvider(module);
     CreateCentroidalDynamics(module);
     CreateButterworthLowPassFilter(module);
