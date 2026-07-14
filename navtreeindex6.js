@@ -1,5 +1,7 @@
 var NAVTREEINDEX6 =
 {
+"classBipedalLocomotion_1_1GenericContainer_1_1Vector_1_1Ref.html#a92080b7fa41786c8a5cdfd87e6513425":[4,0,0,4,2,0,6],
+"classBipedalLocomotion_1_1GenericContainer_1_1Vector_1_1Ref.html#ab3f502b73dda6c5301b21f8f6af8bf4e":[4,0,0,4,2,0,5],
 "classBipedalLocomotion_1_1GenericContainer_1_1Vector_1_1Ref.html#acecafed7a41dba62f32302fa769e6590":[4,0,0,4,2,0,3],
 "classBipedalLocomotion_1_1GenericContainer_1_1Vector_1_1Ref.html#adefaeb0ff580fa8e0df37cc02e98dd7c":[4,0,0,4,2,0,8],
 "classBipedalLocomotion_1_1GenericContainer_1_1Vector_1_1Ref.html#af9aedd44a2ae16eb75d893141ede4170":[4,0,0,4,2,0,0],
@@ -247,7 +249,5 @@ var NAVTREEINDEX6 =
 "classBipedalLocomotion_1_1ML_1_1VelMANNTrajectoryGenerator.html#afee89888c7b641910a8ad3ae5dbc39f1":[4,0,0,8,23,2],
 "classBipedalLocomotion_1_1Math_1_1CARE.html":[4,0,0,7,0],
 "classBipedalLocomotion_1_1Math_1_1CARE.html#a1b8fc732dbc978b977343f57c401ed8f":[4,0,0,7,0,5],
-"classBipedalLocomotion_1_1Math_1_1CARE.html#a8d3ae5b6ce41a7e787b9e87ef317e2c2":[4,0,0,7,0,2],
-"classBipedalLocomotion_1_1Math_1_1CARE.html#a8f01a273766b4eecdb875b75f3a3ae8b":[4,0,0,7,0,1],
-"classBipedalLocomotion_1_1Math_1_1CARE.html#aa5c96393dda111ad47199707e8758abb":[4,0,0,7,0,3]
+"classBipedalLocomotion_1_1Math_1_1CARE.html#a8d3ae5b6ce41a7e787b9e87ef317e2c2":[4,0,0,7,0,2]
 };

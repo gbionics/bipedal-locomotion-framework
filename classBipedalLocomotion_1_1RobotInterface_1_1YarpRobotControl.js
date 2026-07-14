@@ -2,7 +2,7 @@ var classBipedalLocomotion_1_1RobotInterface_1_1YarpRobotControl =
 [
     [ "YarpRobotControl", "classBipedalLocomotion_1_1RobotInterface_1_1YarpRobotControl.html#a3d42952c6150c8865f0fb59d68067db7", null ],
     [ "~YarpRobotControl", "classBipedalLocomotion_1_1RobotInterface_1_1YarpRobotControl.html#a79a26fa0a2282c5f623b6ad762d39495", null ],
-    [ "initialize", "classBipedalLocomotion_1_1RobotInterface_1_1YarpRobotControl.html#a9fc594ffee498e51d3ce2f483e49f9ee", null ],
+    [ "initialize", "classBipedalLocomotion_1_1RobotInterface_1_1YarpRobotControl.html#abb2370697f03c19f41bfd901a373a109", null ],
     [ "setDriver", "classBipedalLocomotion_1_1RobotInterface_1_1YarpRobotControl.html#a7bde85cda60eafab69f4aca6301cf6c2", null ],
     [ "checkMotionDone", "classBipedalLocomotion_1_1RobotInterface_1_1YarpRobotControl.html#a04bf2a1f9097bf3af9e6828d5a369ac4", null ],
     [ "setControlMode", "classBipedalLocomotion_1_1RobotInterface_1_1YarpRobotControl.html#af971965a74bb35998140f8c71083c863", null ],

@@ -124,9 +124,9 @@ Public Member Functions</h2></td></tr>
 &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1RobotInterface_1_1YarpRobotControl.html#a3d42952c6150c8865f0fb59d68067db7">YarpRobotControl</a> ()</td></tr>
 <tr class="memdesc:a3d42952c6150c8865f0fb59d68067db7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor. <br /></td></tr>
 <tr class="separator:a3d42952c6150c8865f0fb59d68067db7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9fc594ffee498e51d3ce2f483e49f9ee"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1RobotInterface_1_1YarpRobotControl.html#a9fc594ffee498e51d3ce2f483e49f9ee">initialize</a> (std::weak_ptr&lt; <a class="el" href="classBipedalLocomotion_1_1ParametersHandler_1_1IParametersHandler.html">ParametersHandler::IParametersHandler</a> &gt; handler) final</td></tr>
-<tr class="separator:a9fc594ffee498e51d3ce2f483e49f9ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7bde85cda60eafab69f4aca6301cf6c2"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1RobotInterface_1_1YarpRobotControl.html#a7bde85cda60eafab69f4aca6301cf6c2">setDriver</a> (std::shared_ptr&lt; yarp::dev::PolyDriver &gt; robotDevice)</td></tr>
+<tr class="memitem:abb2370697f03c19f41bfd901a373a109"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1RobotInterface_1_1YarpRobotControl.html#abb2370697f03c19f41bfd901a373a109">initialize</a> (std::weak_ptr&lt; <a class="el" href="classBipedalLocomotion_1_1ParametersHandler_1_1IParametersHandler.html">ParametersHandler::IParametersHandler</a> &gt; handler) override</td></tr>
+<tr class="separator:abb2370697f03c19f41bfd901a373a109"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7bde85cda60eafab69f4aca6301cf6c2"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1RobotInterface_1_1YarpRobotControl.html#a7bde85cda60eafab69f4aca6301cf6c2">setDriver</a> (std::shared_ptr&lt; yarp::dev::PolyDriver &gt; robotDevice)</td></tr>
 <tr class="memdesc:a7bde85cda60eafab69f4aca6301cf6c2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the driver required to control the robot.  <a href="classBipedalLocomotion_1_1RobotInterface_1_1YarpRobotControl.html#a7bde85cda60eafab69f4aca6301cf6c2">More...</a><br /></td></tr>
 <tr class="separator:a7bde85cda60eafab69f4aca6301cf6c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a04bf2a1f9097bf3af9e6828d5a369ac4"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1RobotInterface_1_1YarpRobotControl.html#a04bf2a1f9097bf3af9e6828d5a369ac4">checkMotionDone</a> (bool &amp;motionDone, bool &amp;isTimeExpired, std::vector&lt; std::pair&lt; std::string, double &gt;&gt; &amp;info) final</td></tr>
@@ -200,8 +200,8 @@ using&#160;</td><td class="memItemRight" valign="bottom"><b>weak_ptr</b> = std::
 <div class="textblock"><p><a class="el" href="classBipedalLocomotion_1_1RobotInterface_1_1YarpRobotControl.html" title="YarpRobotControl Yarp implementation of the IRobotControl interface.">YarpRobotControl</a> Yarp implementation of the <a class="el" href="classBipedalLocomotion_1_1RobotInterface_1_1IRobotControl.html" title="Robot control interface.">IRobotControl</a> interface. </p>
 <dl class="section warning"><dt>Warning</dt><dd>At the current stage only revolute joints are supported. </dd></dl>
 </div><h2 class="groupheader">Member Function Documentation</h2>
-<a id="a9fc594ffee498e51d3ce2f483e49f9ee"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9fc594ffee498e51d3ce2f483e49f9ee">&#9670;&nbsp;</a></span>initialize()</h2>
+<a id="abb2370697f03c19f41bfd901a373a109"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abb2370697f03c19f41bfd901a373a109">&#9670;&nbsp;</a></span>initialize()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -219,7 +219,7 @@ using&#160;</td><td class="memItemRight" valign="bottom"><b>weak_ptr</b> = std::
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">final</span><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -245,6 +245,9 @@ using&#160;</td><td class="memItemRight" valign="bottom"><b>weak_ptr</b> = std::
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">bool YarpRobotControl::setDriver </td>
@@ -254,6 +257,11 @@ using&#160;</td><td class="memItemRight" valign="bottom"><b>weak_ptr</b> = std::
           <td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 <p>Set the driver required to control the robot. </p>
@@ -264,6 +272,8 @@ using&#160;</td><td class="memItemRight" valign="bottom"><b>weak_ptr</b> = std::
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>True/False in case of success/failure. </dd></dl>
+
+<p>Reimplemented in <a class="el" href="classBipedalLocomotion_1_1RobotInterface_1_1DinRailRobotControl.html#a603afee46087b32e72f9533b335d771f">BipedalLocomotion::RobotInterface::DinRailRobotControl</a>.</p>
 
 </div>
 </div>

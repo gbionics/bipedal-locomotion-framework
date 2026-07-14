@@ -283,7 +283,9 @@ var hierarchy =
       [ "BipedalLocomotion::Perception::Capture::RealSense", "classBipedalLocomotion_1_1Perception_1_1Capture_1_1RealSense.html", null ]
     ] ],
     [ "BipedalLocomotion::RobotInterface::IRobotControl", "classBipedalLocomotion_1_1RobotInterface_1_1IRobotControl.html", [
-      [ "BipedalLocomotion::RobotInterface::YarpRobotControl", "classBipedalLocomotion_1_1RobotInterface_1_1YarpRobotControl.html", null ]
+      [ "BipedalLocomotion::RobotInterface::YarpRobotControl", "classBipedalLocomotion_1_1RobotInterface_1_1YarpRobotControl.html", [
+        [ "BipedalLocomotion::RobotInterface::DinRailRobotControl", "classBipedalLocomotion_1_1RobotInterface_1_1DinRailRobotControl.html", null ]
+      ] ]
     ] ],
     [ "BipedalLocomotion::RobotInterface::ISensorBridge", "classBipedalLocomotion_1_1RobotInterface_1_1ISensorBridge.html", [
       [ "BipedalLocomotion::RobotInterface::DummySensorBridge", "classBipedalLocomotion_1_1RobotInterface_1_1DummySensorBridge.html", null ],

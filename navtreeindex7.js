@@ -1,5 +1,7 @@
 var NAVTREEINDEX7 =
 {
+"classBipedalLocomotion_1_1Math_1_1CARE.html#a8f01a273766b4eecdb875b75f3a3ae8b":[4,0,0,7,0,1],
+"classBipedalLocomotion_1_1Math_1_1CARE.html#aa5c96393dda111ad47199707e8758abb":[4,0,0,7,0,3],
 "classBipedalLocomotion_1_1Math_1_1CARE.html#acd0ca74b797c4926aeb69cfe5f30c9c6":[4,0,0,7,0,0],
 "classBipedalLocomotion_1_1Math_1_1CARE.html#ad6511f2daa79ca2a7a2f0628626c6dee":[4,0,0,7,0,4],
 "classBipedalLocomotion_1_1Math_1_1ContactWrenchCone.html":[4,0,0,7,1],
@@ -247,7 +249,5 @@ var NAVTREEINDEX7 =
 "classBipedalLocomotion_1_1Planners_1_1SwingFootPlanner.html":[4,0,0,11,6],
 "classBipedalLocomotion_1_1Planners_1_1SwingFootPlanner.html#a4e14a72e8773f9da946944beea5a9703":[4,0,0,11,6,5],
 "classBipedalLocomotion_1_1Planners_1_1SwingFootPlanner.html#a51830d4784d0b13177e601d08818d124":[4,0,0,11,6,4],
-"classBipedalLocomotion_1_1Planners_1_1SwingFootPlanner.html#a6671b3cdd30ae942cc7208197bd45f41":[4,0,0,11,6,2],
-"classBipedalLocomotion_1_1Planners_1_1SwingFootPlanner.html#ac4025b512845b15ffddbcc7d70e8a646":[4,0,0,11,6,0],
-"classBipedalLocomotion_1_1Planners_1_1SwingFootPlanner.html#ac81132c4144ea6f4c94ce882e012362e":[4,0,0,11,6,1]
+"classBipedalLocomotion_1_1Planners_1_1SwingFootPlanner.html#a6671b3cdd30ae942cc7208197bd45f41":[4,0,0,11,6,2]
 };

@@ -1,5 +1,7 @@
 var NAVTREEINDEX4 =
 {
+"classBipedalLocomotion_1_1Contacts_1_1FixedFootDetector.html#add439af171f844e6f22790789dbb2ff8":[4,0,0,1,1,3],
+"classBipedalLocomotion_1_1Contacts_1_1FixedFootDetector.html#af9c1565a825f6d081a7dc0a8d1f1ee50":[4,0,0,1,1,2],
 "classBipedalLocomotion_1_1Contacts_1_1GlobalCoPEvaluator.html":[4,0,0,1,12],
 "classBipedalLocomotion_1_1Contacts_1_1GlobalCoPEvaluator.html#a2450ae7fbc5a0e1a7c2ef2b666c282db":[4,0,0,1,12,4],
 "classBipedalLocomotion_1_1Contacts_1_1GlobalCoPEvaluator.html#a340385b1a87563883b72cc2c383b4816":[4,0,0,1,12,0],
@@ -247,7 +249,5 @@ var NAVTREEINDEX4 =
 "classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1AccelerometerMeasurementDynamics.html#aac83a55f7a01a6620da30a479894a4a6":[4,0,0,3,1,0,6],
 "classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1AccelerometerMeasurementDynamics.html#ad962443fe4ccbee6e0d9f92eeb371185":[4,0,0,3,1,0,2],
 "classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1AccelerometerMeasurementDynamics.html#aef3f707d1e8fd37079c8fa506012e84c":[4,0,0,3,1,0,3],
-"classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1ConstantMeasurementModel.html":[4,0,0,3,1,1],
-"classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1ConstantMeasurementModel.html#a09c5d1883e2a7bd6642c002eaedbcc4a":[4,0,0,3,1,1,1],
-"classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1ConstantMeasurementModel.html#a347786970c88d82054d1dbeda24e8050":[4,0,0,3,1,1,5]
+"classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1ConstantMeasurementModel.html":[4,0,0,3,1,1]
 };

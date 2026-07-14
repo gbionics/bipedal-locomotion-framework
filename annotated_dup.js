@@ -209,6 +209,7 @@ var annotated_dup =
         [ "CentroidalMPC", "classBipedalLocomotion_1_1ReducedModelControllers_1_1CentroidalMPC.html", "classBipedalLocomotion_1_1ReducedModelControllers_1_1CentroidalMPC" ]
       ] ],
       [ "RobotInterface", null, [
+        [ "DinRailRobotControl", "classBipedalLocomotion_1_1RobotInterface_1_1DinRailRobotControl.html", "classBipedalLocomotion_1_1RobotInterface_1_1DinRailRobotControl" ],
         [ "CameraBridgeOptions", "structBipedalLocomotion_1_1RobotInterface_1_1CameraBridgeOptions.html", "structBipedalLocomotion_1_1RobotInterface_1_1CameraBridgeOptions" ],
         [ "CameraLists", "structBipedalLocomotion_1_1RobotInterface_1_1CameraLists.html", "structBipedalLocomotion_1_1RobotInterface_1_1CameraLists" ],
         [ "CameraBridgeMetaData", "structBipedalLocomotion_1_1RobotInterface_1_1CameraBridgeMetaData.html", "structBipedalLocomotion_1_1RobotInterface_1_1CameraBridgeMetaData" ],
