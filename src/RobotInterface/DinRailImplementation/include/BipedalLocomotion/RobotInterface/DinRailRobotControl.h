@@ -78,7 +78,7 @@ public:
      * @param robotDevice device used to control the robot.
      * @return True/False in case of success/failure.
      */
-    bool setDriver(std::shared_ptr<yarp::dev::PolyDriver> robotDevice);
+    bool setDriver(std::shared_ptr<yarp::dev::PolyDriver> robotDevice) override;
 
     /**
      * Set all impedance control setpoints (MIT mode) for all controlled joints.
