@@ -57,14 +57,14 @@ public:
      * @return True/False in case of success/failure.
      // clang-format on
      */
-    bool initialize(std::weak_ptr<ParametersHandler::IParametersHandler> handler) final;
+    bool initialize(std::weak_ptr<ParametersHandler::IParametersHandler> handler) override;
 
     /**
      * Set the driver required to control the robot.
      * @param robotDevice device used to control the robot.
      * @return True/False in case of success/failure.
      */
-    bool setDriver(std::shared_ptr<yarp::dev::PolyDriver> robotDevice);
+    virtual bool setDriver(std::shared_ptr<yarp::dev::PolyDriver> robotDevice);
 
     /**
      * Check if the motion set through the position control mode ended.

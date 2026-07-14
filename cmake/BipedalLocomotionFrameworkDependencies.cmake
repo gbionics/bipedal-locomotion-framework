@@ -121,6 +121,10 @@ checkandset_dependency(onnxruntime)
 blf_optional_find_package(trintrin QUIET)
 checkandset_dependency(trintrin)
 
+blf_optional_find_package(dinrail QUIET)
+checkandset_dependency(dinrail)
+dependency_classifier(dinrail IS_USED ${FRAMEWORK_USE_dinrail} PUBLIC)
+
 ##########################      Test-related options       ##############################
 
 # MemoryAllocationMonitor require glibc >= 2.35
@@ -155,6 +159,10 @@ framework_dependent_option(FRAMEWORK_COMPILE_RosImplementation
 framework_dependent_option(FRAMEWORK_COMPILE_YarpImplementation
   "Compile All the YARP implementations?" ON
   "FRAMEWORK_COMPILE_YarpUtilities" OFF)
+
+framework_dependent_option(FRAMEWORK_COMPILE_DinRailImplementation
+  "Compile the DinRail implementation of RobotInterface?" ON
+  "FRAMEWORK_COMPILE_YarpImplementation;FRAMEWORK_USE_dinrail" OFF)
 
 framework_dependent_option(FRAMEWORK_COMPILE_TomlImplementation
   "Compile All the TOML implementations?" ON

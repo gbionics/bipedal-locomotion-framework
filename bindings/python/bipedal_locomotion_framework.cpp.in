@@ -62,6 +62,10 @@
 #include <BipedalLocomotion/bindings/RobotInterface/YarpModule.h>
 @endcmakeiftarget BipedalLocomotion::RobotInterface && BipedalLocomotion::RobotInterfaceYarpImplementation
 
+@cmakeiftarget BipedalLocomotion::RobotInterface && BipedalLocomotion::RobotInterfaceYarpImplementation && BipedalLocomotion::RobotInterfaceDinRailImplementation
+#include <BipedalLocomotion/bindings/RobotInterface/DinRailModule.h>
+@endcmakeiftarget BipedalLocomotion::RobotInterface && BipedalLocomotion::RobotInterfaceYarpImplementation && BipedalLocomotion::RobotInterfaceDinRailImplementation
+
 @cmakeiftarget BipedalLocomotion::RobotInterface && BipedalLocomotion::CameraInterface && BipedalLocomotion::RobotInterfaceYarpImplementation && BipedalLocomotion::CameraInterfaceYarpImplementation
 #include <BipedalLocomotion/bindings/RobotInterface/CameraModule.h>
 @endcmakeiftarget BipedalLocomotion::RobotInterface && BipedalLocomotion::CameraInterface && BipedalLocomotion::RobotInterfaceYarpImplementation && BipedalLocomotion::CameraInterfaceYarpImplementation
@@ -183,6 +187,10 @@ PYBIND11_MODULE(bindings, m)
     @cmakeiftarget BipedalLocomotion::RobotInterface && BipedalLocomotion::RobotInterfaceYarpImplementation
     bindings::RobotInterface::CreateYarpModule(robotInterfaceModule);
     @endcmakeiftarget BipedalLocomotion::RobotInterface && BipedalLocomotion::RobotInterfaceYarpImplementation
+
+    @cmakeiftarget BipedalLocomotion::RobotInterface && BipedalLocomotion::RobotInterfaceYarpImplementation && BipedalLocomotion::RobotInterfaceDinRailImplementation
+    bindings::RobotInterface::CreateDinRailModule(robotInterfaceModule);
+    @endcmakeiftarget BipedalLocomotion::RobotInterface && BipedalLocomotion::RobotInterfaceYarpImplementation && BipedalLocomotion::RobotInterfaceDinRailImplementation
 
     @cmakeiftarget BipedalLocomotion::RobotInterface && BipedalLocomotion::CameraInterface && BipedalLocomotion::RobotInterfaceYarpImplementation && BipedalLocomotion::CameraInterfaceYarpImplementation
     bindings::RobotInterface::CreateCameraModule(robotInterfaceModule);

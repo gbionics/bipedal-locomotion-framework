@@ -27,6 +27,23 @@ if(TARGET BipedalLocomotion::RobotInterface AND TARGET BipedalLocomotion::RobotI
 endif()
 
 if(TARGET BipedalLocomotion::RobotInterface
+   AND TARGET BipedalLocomotion::RobotInterfaceYarpImplementation
+   AND TARGET BipedalLocomotion::RobotInterfaceDinRailImplementation)
+
+  set(H_PREFIX include/BipedalLocomotion/bindings/RobotInterface)
+
+  add_bipedal_locomotion_python_module(
+    NAME RobotInterfaceDinRailImplementationBindings
+    SOURCES src/DinRailRobotControl.cpp src/DinRailModule.cpp
+    HEADERS ${H_PREFIX}/DinRailRobotControl.h ${H_PREFIX}/DinRailModule.h
+    LINK_LIBRARIES BipedalLocomotion::RobotInterface
+                   BipedalLocomotion::RobotInterfaceYarpImplementation
+                   BipedalLocomotion::RobotInterfaceDinRailImplementation
+    )
+
+endif()
+
+if(TARGET BipedalLocomotion::RobotInterface
   AND TARGET BipedalLocomotion::CameraInterface
     AND TARGET BipedalLocomotion::RobotInterfaceYarpImplementation
   AND TARGET BipedalLocomotion::CameraInterfaceYarpImplementation)
