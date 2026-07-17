@@ -161,7 +161,7 @@ TEST_CASE("First order smoother - time-varying settling time")
         return Eigen::Vector2d::Ones() - (Eigen::Vector2d::Ones() - stateAtSwitch) * std::exp(-a * t);
     };
 
-    for (unsigned int i = 0; i < 500; i++)
+    for (unsigned int i = 0; i < 1000; i++)
     {
         const Eigen::Vector2d output = smoother.getOutput();
         REQUIRE(output.isApprox(closeFormSolution(std::chrono::duration<double>(dT * i).count()),
