@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['wait_2758',['wait',['../classBipedalLocomotion_1_1System_1_1Barrier.html#a83a9d2e85e98b3d2081538bf0da29b60',1,'BipedalLocomotion::System::Barrier']]]
+  ['wait_2762',['wait',['../classBipedalLocomotion_1_1System_1_1Barrier.html#a83a9d2e85e98b3d2081538bf0da29b60',1,'BipedalLocomotion::System::Barrier']]]
 ];

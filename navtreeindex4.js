@@ -51,12 +51,14 @@ var NAVTREEINDEX4 =
 "classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1DynamicalSystem.html#acafa2d1ec7a13c58736990e678e4ba47":[4,0,0,2,4,4],
 "classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1DynamicalSystem.html#adea6b2fa40906bbc9198975e620e5ac4":[4,0,0,2,4,3],
 "classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1FirstOrderSmoother.html":[4,0,0,2,5],
-"classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1FirstOrderSmoother.html#a0d327ddd1366b4f4655cffdba4799f63":[4,0,0,2,5,3],
+"classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1FirstOrderSmoother.html#a0d327ddd1366b4f4655cffdba4799f63":[4,0,0,2,5,5],
 "classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1FirstOrderSmoother.html#a472ed1dcb0f10834fcdd01abf77eaefc":[4,0,0,2,5,0],
-"classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1FirstOrderSmoother.html#a6f0b99311e6e53296b56919502a21d14":[4,0,0,2,5,2],
+"classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1FirstOrderSmoother.html#a63dc5c683a9924663858b98756dd5c08":[4,0,0,2,5,2],
+"classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1FirstOrderSmoother.html#a6f0b99311e6e53296b56919502a21d14":[4,0,0,2,5,4],
 "classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1FirstOrderSmoother.html#a9464dcf64160a6659d3a7d26443f286f":[4,0,0,2,5,1],
-"classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1FirstOrderSmoother.html#acbe9d4f91d2b600ed4749d6f0fdfebd5":[4,0,0,2,5,5],
-"classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1FirstOrderSmoother.html#ace252466bcbce45458b55e602fa4eed2":[4,0,0,2,5,4],
+"classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1FirstOrderSmoother.html#acbe9d4f91d2b600ed4749d6f0fdfebd5":[4,0,0,2,5,7],
+"classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1FirstOrderSmoother.html#ace252466bcbce45458b55e602fa4eed2":[4,0,0,2,5,6],
+"classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1FirstOrderSmoother.html#aedc679ee3bd55054c38c180b3ee812a1":[4,0,0,2,5,3],
 "classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1FixedBaseDynamics.html":[4,0,0,2,6],
 "classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1FixedBaseDynamics.html#a237593ed910586b838e84b738bc28dbe":[4,0,0,2,6,5],
 "classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1FixedBaseDynamics.html#a59f30d1650fc527b1158567055b0a2df":[4,0,0,2,6,3],
@@ -247,7 +249,5 @@ var NAVTREEINDEX4 =
 "classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1AccelerometerMeasurementDynamics.html#a9ea35db69e1605d40708c6dd3368f2bf":[4,0,0,3,1,0,7],
 "classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1AccelerometerMeasurementDynamics.html#aa9b00b61aa65cc26a34445770caa48fa":[4,0,0,3,1,0,1],
 "classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1AccelerometerMeasurementDynamics.html#aac83a55f7a01a6620da30a479894a4a6":[4,0,0,3,1,0,6],
-"classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1AccelerometerMeasurementDynamics.html#ad962443fe4ccbee6e0d9f92eeb371185":[4,0,0,3,1,0,2],
-"classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1AccelerometerMeasurementDynamics.html#aef3f707d1e8fd37079c8fa506012e84c":[4,0,0,3,1,0,3],
-"classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1ConstantMeasurementModel.html":[4,0,0,3,1,1]
+"classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1AccelerometerMeasurementDynamics.html#ad962443fe4ccbee6e0d9f92eeb371185":[4,0,0,3,1,0,2]
 };

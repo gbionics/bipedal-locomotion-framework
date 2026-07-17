@@ -1,5 +1,7 @@
 var NAVTREEINDEX14 =
 {
+"structBipedalLocomotion_1_1RobotInterface_1_1SensorBridgeOptions.html":[4,0,0,13,9],
+"structBipedalLocomotion_1_1RobotInterface_1_1SensorBridgeOptions.html#a0d50eca4e63092dd445e1ba8272046f7":[4,0,0,13,9,13],
 "structBipedalLocomotion_1_1RobotInterface_1_1SensorBridgeOptions.html#a0f81c5a2b2e5b264377357e1e0a79747":[4,0,0,13,9,10],
 "structBipedalLocomotion_1_1RobotInterface_1_1SensorBridgeOptions.html#a1abe9e5376d4534c4f8414cc08ae19a7":[4,0,0,13,9,4],
 "structBipedalLocomotion_1_1RobotInterface_1_1SensorBridgeOptions.html#a4570c2a27e0c3288f690d35070ace64f":[4,0,0,13,9,14],
@@ -191,6 +193,7 @@ var NAVTREEINDEX14 =
 "tests_2ButterworthLowPassFilter_8cpp.html":[5,0,3,2,0],
 "tests_2ButterworthLowPassFilter_8cpp.html#aacfc2a1609a28a2a9fae00453710124d":[5,0,3,2,0,0],
 "tests_2FirstOrderSmoother_8cpp.html":[5,0,3,2,1],
+"tests_2FirstOrderSmoother_8cpp.html#a5d9b1bee5e1b78e9a5b6046386b57363":[5,0,3,2,1,1],
 "tests_2FirstOrderSmoother_8cpp.html#aecf0abe7667a6ea6e22c1c503d0f471c":[5,0,3,2,1,0],
 "tests_2MultiStateWeightProvider_8cpp.html":[5,0,3,2,5],
 "tests_2MultiStateWeightProvider_8cpp.html#a90e2e66331584ffeeb86ac6a0c869b55":[5,0,3,2,5,0],

@@ -1,5 +1,7 @@
 var NAVTREEINDEX12 =
 {
+"structBipedalLocomotion_1_1Contacts_1_1ContactPhase.html#a979ff853067cbeb11a85188d6373c09c":[4,0,0,1,10,3],
+"structBipedalLocomotion_1_1Contacts_1_1ContactPhase.html#aca8318ae58bea8a0a472c519373563fe":[4,0,0,1,10,0],
 "structBipedalLocomotion_1_1Contacts_1_1ContactPhase.html#adfd2902578bc798418a6434829c0f979":[4,0,0,1,10,4],
 "structBipedalLocomotion_1_1Contacts_1_1ContactPhase.html#ae54824a272191b93524822d2fc21170f":[4,0,0,1,10,1],
 "structBipedalLocomotion_1_1Contacts_1_1ContactWrench.html":[4,0,0,1,6],
@@ -247,7 +249,5 @@ var NAVTREEINDEX12 =
 "structBipedalLocomotion_1_1ML_1_1MANNInput.html#a3575b85707067e6182905a2778bb7860":[4,0,0,8,0,3],
 "structBipedalLocomotion_1_1ML_1_1MANNInput.html#a4a8fefefd25e0aafe5a08174debf4c2d":[4,0,0,8,0,2],
 "structBipedalLocomotion_1_1ML_1_1MANNInput.html#a7a792a72332b672c0c8b74f0ff0ce584":[4,0,0,8,0,1],
-"structBipedalLocomotion_1_1ML_1_1MANNOutput.html":[4,0,0,8,1],
-"structBipedalLocomotion_1_1ML_1_1MANNOutput.html#a3fdedda9b78f87c9982408712eb7ab61":[4,0,0,8,1,0],
-"structBipedalLocomotion_1_1ML_1_1MANNOutput.html#a7b1428e7e29484c448463dfe45598cdd":[4,0,0,8,1,4]
+"structBipedalLocomotion_1_1ML_1_1MANNOutput.html":[4,0,0,8,1]
 };

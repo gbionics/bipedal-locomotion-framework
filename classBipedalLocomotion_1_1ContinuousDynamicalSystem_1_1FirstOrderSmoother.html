@@ -126,6 +126,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a9464dcf64160a6659d3a7d26443f286f"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1FirstOrderSmoother.html#a9464dcf64160a6659d3a7d26443f286f">reset</a> (Eigen::Ref&lt; const Eigen::VectorXd &gt; initialState)</td></tr>
 <tr class="memdesc:a9464dcf64160a6659d3a7d26443f286f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the state of the smoother.  <a href="classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1FirstOrderSmoother.html#a9464dcf64160a6659d3a7d26443f286f">More...</a><br /></td></tr>
 <tr class="separator:a9464dcf64160a6659d3a7d26443f286f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a63dc5c683a9924663858b98756dd5c08"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1FirstOrderSmoother.html#a63dc5c683a9924663858b98756dd5c08">setSettlingTime</a> (const double settlingTime)</td></tr>
+<tr class="memdesc:a63dc5c683a9924663858b98756dd5c08"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set (or update) the settling time of the smoother.  <a href="classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1FirstOrderSmoother.html#a63dc5c683a9924663858b98756dd5c08">More...</a><br /></td></tr>
+<tr class="separator:a63dc5c683a9924663858b98756dd5c08"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aedc679ee3bd55054c38c180b3ee812a1"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1FirstOrderSmoother.html#aedc679ee3bd55054c38c180b3ee812a1">getSettlingTime</a> () const</td></tr>
+<tr class="memdesc:aedc679ee3bd55054c38c180b3ee812a1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the settling time currently used by the smoother.  <a href="classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1FirstOrderSmoother.html#aedc679ee3bd55054c38c180b3ee812a1">More...</a><br /></td></tr>
+<tr class="separator:aedc679ee3bd55054c38c180b3ee812a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6f0b99311e6e53296b56919502a21d14"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1FirstOrderSmoother.html#a6f0b99311e6e53296b56919502a21d14">advance</a> () override</td></tr>
 <tr class="memdesc:a6f0b99311e6e53296b56919502a21d14"><td class="mdescLeft">&#160;</td><td class="mdescRight">Perform one integration step using the input set by the <a class="el" href="classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1FirstOrderSmoother.html#ace252466bcbce45458b55e602fa4eed2" title="Set the input of the smoother.">FirstOrderSmoother::setInput</a> method.  <a href="classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1FirstOrderSmoother.html#a6f0b99311e6e53296b56919502a21d14">More...</a><br /></td></tr>
 <tr class="separator:a6f0b99311e6e53296b56919502a21d14"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -207,7 +213,7 @@ using&#160;</td><td class="memItemRight" valign="bottom"><b>Output</b> = _Output
 <p>The system is described by the following ode </p><p class="formulaDsp">
 \[ \dot{x} = a (-x + u) \]
 </p>
-<p> where the \(a\) is given by \(a = 3.0/T_{s_5}\). \(T_{s_5}\) is the settling time at 5%. The linear system is propagated with a Forward Euler integrator. </p>
+<p> where the \(a\) is given by \(a = 3.0/T_{s_5}\). \(T_{s_5}\) is the settling time at 5%. The linear system is propagated with a Forward Euler integrator. </p><dl class="section note"><dt>Note</dt><dd>The settling time can be time-varying. Indeed, it can be updated at run time by calling <a class="el" href="classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1FirstOrderSmoother.html#a63dc5c683a9924663858b98756dd5c08" title="Set (or update) the settling time of the smoother.">FirstOrderSmoother::setSettlingTime()</a>. This is useful, for instance, when the desired smoothness of the output needs to change while the smoother is running. </dd></dl>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a472ed1dcb0f10834fcdd01abf77eaefc"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a472ed1dcb0f10834fcdd01abf77eaefc">&#9670;&nbsp;</a></span>initialize()</h2>
@@ -248,7 +254,9 @@ using&#160;</td><td class="memItemRight" valign="bottom"><b>Output</b> = _Output
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyCenter"><code>settling_time</code>   </td><td class="markdownTableBodyCenter"><code>double</code>   </td><td class="markdownTableBodyCenter">5% settling time (The settling time, \(T_s\), is the time required for the system output to fall within a certain percentage (i.e. 5%) of the steady-state value for a step input.)   </td><td class="markdownTableBodyCenter">Yes   </td></tr>
 </table>
-</dd></dl>
+</dd>
+<dd>
+the <code>settling_time</code> set here is only the initial value. It can be changed at run time, i.e. it can be time-varying, by calling <a class="el" href="classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1FirstOrderSmoother.html#a63dc5c683a9924663858b98756dd5c08" title="Set (or update) the settling time of the smoother.">FirstOrderSmoother::setSettlingTime()</a>. </dd></dl>
 <dl class="section return"><dt>Returns</dt><dd>true in case of success/false otherwise. </dd></dl>
 
 <p>Reimplemented from <a class="el" href="classBipedalLocomotion_1_1System_1_1Advanceable.html#a6db247d3db83217a16e963d01f6bcb77">BipedalLocomotion::System::Advanceable&lt; Eigen::VectorXd, Eigen::VectorXd &gt;</a>.</p>
@@ -279,6 +287,53 @@ using&#160;</td><td class="memItemRight" valign="bottom"><b>Output</b> = _Output
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>true in case of success, false otherwise. </dd></dl>
+
+</div>
+</div>
+<a id="a63dc5c683a9924663858b98756dd5c08"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a63dc5c683a9924663858b98756dd5c08">&#9670;&nbsp;</a></span>setSettlingTime()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool FirstOrderSmoother::setSettlingTime </td>
+          <td>(</td>
+          <td class="paramtype">const double&#160;</td>
+          <td class="paramname"><em>settlingTime</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Set (or update) the settling time of the smoother. </p>
+<p>This method can be called at any time after <a class="el" href="classBipedalLocomotion_1_1ContinuousDynamicalSystem_1_1FirstOrderSmoother.html#a9464dcf64160a6659d3a7d26443f286f" title="Set the state of the smoother.">FirstOrderSmoother::reset()</a> to make the settling time time-varying. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">settlingTime</td><td>the new 5% settling time. It must be strictly positive. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true in case of success, false otherwise. </dd></dl>
+
+</div>
+</div>
+<a id="aedc679ee3bd55054c38c180b3ee812a1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aedc679ee3bd55054c38c180b3ee812a1">&#9670;&nbsp;</a></span>getSettlingTime()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double FirstOrderSmoother::getSettlingTime </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get the settling time currently used by the smoother. </p>
+<dl class="section return"><dt>Returns</dt><dd>the 5% settling time. </dd></dl>
 
 </div>
 </div>
