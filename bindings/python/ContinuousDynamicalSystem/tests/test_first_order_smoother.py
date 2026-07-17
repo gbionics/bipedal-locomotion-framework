@@ -47,13 +47,13 @@ def test_first_order_smoother():
     assert smoother.set_settling_time(updated_settling_time)
     assert smoother.get_settling_time() == updated_settling_time
 
-    state_at_switch = smoother.get_output()
+    state_at_switch = smoother.get_output().copy()
     a = 3.0 / updated_settling_time
 
     def close_form_solution(t):
         return np.ones(2) - (np.ones(2) - state_at_switch) * np.exp(-a * t)
 
-    for i in range(500):
+    for i in range(1000):
         output = smoother.get_output()
         assert output == pytest.approx(close_form_solution(i * dT.total_seconds()), abs=tolerance)
         assert smoother.advance()
