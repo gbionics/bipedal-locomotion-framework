@@ -15,9 +15,16 @@ using namespace BipedalLocomotion::GenericContainer;
 using namespace BipedalLocomotion::Perception;
 using namespace BipedalLocomotion::Conversions;
 
+#include <opencv2/core/version.hpp>
+#if CV_VERSION_MAJOR >= 5
+#include <opencv2/objdetect/aruco_detector.hpp>
+#include <opencv2/objdetect/aruco_dictionary.hpp>
+#else
 #include <opencv2/aruco.hpp>
+#endif
 #include <opencv2/calib3d.hpp>
 #include <opencv2/core/eigen.hpp>
+#include <opencv2/imgproc.hpp>
 
 class ArucoDetector::Impl
 {
@@ -29,6 +36,9 @@ public:
 
     // parameters
     cv::Ptr<cv::aruco::Dictionary> dictionary; /**< container with detected markers data */
+#if CV_VERSION_MAJOR >= 5
+    std::unique_ptr<cv::aruco::ArucoDetector> arucoDetector;
+#endif
     double markerLength; /**< marker length*/
     cv::Mat cameraMatrix; /**< camera calibration matrix*/
     cv::Mat distCoeff; /**< camera distortion coefficients*/
@@ -125,6 +135,10 @@ bool ArucoDetector::initialize(std::weak_ptr<const IParametersHandler> handler)
 #if (CV_VERSION_MAJOR >= 5) || (CV_VERSION_MAJOR == 4 && CV_VERSION_MINOR >= 7)
     m_pimpl->dictionary = cv::makePtr<cv::aruco::Dictionary>();
     *(m_pimpl->dictionary) = cv::aruco::getPredefinedDictionary(m_pimpl->availableDict.at(dictName));
+#if CV_VERSION_MAJOR >= 5
+    m_pimpl->arucoDetector
+        = std::make_unique<cv::aruco::ArucoDetector>(*(m_pimpl->dictionary));
+#endif
 #else
     m_pimpl->dictionary = cv::aruco::getPredefinedDictionary(m_pimpl->availableDict.at(dictName));
 #endif
@@ -201,20 +215,50 @@ bool ArucoDetector::advance()
     }
 
     m_pimpl->resetBuffers();
-    std::vector<std::vector<cv::Point2f>> detectedmarkerCorners;
+#if CV_VERSION_MAJOR >= 5
+    m_pimpl->arucoDetector->detectMarkers(m_pimpl->currentImg,
+                                          m_pimpl->currentDetectedMarkerCorners,
+                                          m_pimpl->currentDetectedMarkerIds);
+#else
     cv::aruco::detectMarkers(m_pimpl->currentImg,
                              m_pimpl->dictionary,
                              m_pimpl->currentDetectedMarkerCorners,
                              m_pimpl->currentDetectedMarkerIds);
+#endif
 
     if (m_pimpl->currentDetectedMarkerIds.size() > 0)
     {
+#if CV_VERSION_MAJOR >= 5
+        const float halfLength = static_cast<float>(m_pimpl->markerLength / 2.0);
+        const std::vector<cv::Point3f> markerPoints{{-halfLength, halfLength, 0.0F},
+                                                    {halfLength, halfLength, 0.0F},
+                                                    {halfLength, -halfLength, 0.0F},
+                                                    {-halfLength, -halfLength, 0.0F}};
+
+        m_pimpl->currentDetectedMarkersRotVecs.resize(
+            m_pimpl->currentDetectedMarkerCorners.size());
+        m_pimpl->currentDetectedMarkersTransVecs.resize(
+            m_pimpl->currentDetectedMarkerCorners.size());
+
+        for (std::size_t idx = 0; idx < m_pimpl->currentDetectedMarkerCorners.size(); idx++)
+        {
+            cv::solvePnP(markerPoints,
+                         m_pimpl->currentDetectedMarkerCorners[idx],
+                         m_pimpl->cameraMatrix,
+                         m_pimpl->distCoeff,
+                         m_pimpl->currentDetectedMarkersRotVecs[idx],
+                         m_pimpl->currentDetectedMarkersTransVecs[idx],
+                         false,
+                         cv::SOLVEPNP_ITERATIVE);
+        }
+#else
         cv::aruco::estimatePoseSingleMarkers(m_pimpl->currentDetectedMarkerCorners,
                                              m_pimpl->markerLength,
                                              m_pimpl->cameraMatrix,
                                              m_pimpl->distCoeff,
                                              m_pimpl->currentDetectedMarkersRotVecs,
                                              m_pimpl->currentDetectedMarkersTransVecs);
+#endif
 
         for (std::size_t idx = 0; idx < m_pimpl->currentDetectedMarkerIds.size(); idx++)
         {
