@@ -209,7 +209,7 @@ framework_dependent_option(FRAMEWORK_COMPILE_RobotInterface
   "" OFF)
 
 framework_dependent_option(FRAMEWORK_COMPILE_FloatingBaseEstimators
-  "Compile FloatingBaseEstimators libraries?" ON
+  "Compile FloatingBaseEstimators libraries?" OFF
   "FRAMEWORK_USE_manif;FRAMEWORK_COMPILE_Contact" OFF)
 
 framework_dependent_option(FRAMEWORK_COMPILE_ManifConversions
@@ -217,7 +217,7 @@ framework_dependent_option(FRAMEWORK_COMPILE_ManifConversions
   "FRAMEWORK_USE_manif" OFF)
 
 framework_dependent_option(FRAMEWORK_COMPILE_RobotDynamicsEstimator
-  "Compile RobotDynamicsEstimator libraries?" ON
+  "Compile RobotDynamicsEstimator libraries?" OFF
   "FRAMEWORK_COMPILE_System;FRAMEWORK_COMPILE_ManifConversions;FRAMEWORK_USE_manif;FRAMEWORK_USE_BayesFilters" OFF)
 
 framework_dependent_option(FRAMEWORK_COMPILE_matioCppConversions
@@ -293,7 +293,7 @@ framework_dependent_option(FRAMEWORK_COMPILE_YarpRobotLoggerDevice
   "FRAMEWORK_COMPILE_RobotInterface;FRAMEWORK_COMPILE_YarpImplementation;FRAMEWORK_COMPILE_Camera;FRAMEWORK_COMPILE_YarpUtilities;FRAMEWORK_USE_robometry;FRAMEWORK_USE_trintrin" OFF)
 
 framework_dependent_option(FRAMEWORK_COMPILE_JointTorqueControlDevice
-  "Do you want to generate and compile the YarpRobotLoggerDevice?" ON
+  "Do you want to generate and compile the YarpRobotLoggerDevice?" OFF
   "FRAMEWORK_COMPILE_YarpImplementation;FRAMEWORK_COMPILE_YarpUtilities;FRAMEWORK_COMPILE_RobotInterface;FRAMEWORK_COMPILE_Math;FRAMEWORK_COMPILE_ContinuousDynamicalSystem;FRAMEWORK_USE_onnxruntime" OFF)
 
 framework_dependent_option(FRAMEWORK_COMPILE_VectorsCollectionWrapper
