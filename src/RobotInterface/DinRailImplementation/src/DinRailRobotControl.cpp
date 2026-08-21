@@ -41,12 +41,6 @@ struct DinRailRobotControl::Impl
     std::vector<double> torqueBuffer;
     std::vector<double> stiffnessBuffer;
     std::vector<double> dampingBuffer;
-
-    /**
-     * True after the first successful full setImpedanceSetPoints() call.
-     * The subset overload requires the cache to be initialised before use.
-     */
-    bool cacheInitialized{false};
 };
 
 DinRailRobotControl::DinRailRobotControl()
@@ -174,7 +168,6 @@ bool DinRailRobotControl::setImpedanceSetPoints(Eigen::Ref<const Eigen::VectorXd
         }
         m_pimpl->torqueBuffer[i] = torque[static_cast<Eigen::Index>(i)];
     }
-    m_pimpl->cacheInitialized = true;
 
     // Build non-owning VectorProxy views over the converted buffers.
     // VectorProxy<const double>::Ref can be constructed from any contiguous
