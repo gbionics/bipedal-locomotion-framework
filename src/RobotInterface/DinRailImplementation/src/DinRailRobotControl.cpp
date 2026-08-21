@@ -38,8 +38,15 @@ struct DinRailRobotControl::Impl
      */
     std::vector<double> posBuffer;
     std::vector<double> velBuffer;
+    std::vector<double> torqueBuffer;
     std::vector<double> stiffnessBuffer;
     std::vector<double> dampingBuffer;
+
+    /**
+     * True after the first successful full setImpedanceSetPoints() call.
+     * The subset overload requires the cache to be initialised before use.
+     */
+    bool cacheInitialized{false};
 };
 
 DinRailRobotControl::DinRailRobotControl()
@@ -103,10 +110,11 @@ bool DinRailRobotControl::setDriver(std::shared_ptr<yarp::dev::PolyDriver> robot
     }
 
     // Pre-allocate conversion buffers.
-    m_pimpl->posBuffer.resize(m_pimpl->actuatedDOFs);
-    m_pimpl->velBuffer.resize(m_pimpl->actuatedDOFs);
-    m_pimpl->stiffnessBuffer.resize(m_pimpl->actuatedDOFs);
-    m_pimpl->dampingBuffer.resize(m_pimpl->actuatedDOFs);
+    m_pimpl->posBuffer.resize(m_pimpl->actuatedDOFs, 0.0);
+    m_pimpl->velBuffer.resize(m_pimpl->actuatedDOFs, 0.0);
+    m_pimpl->torqueBuffer.resize(m_pimpl->actuatedDOFs, 0.0);
+    m_pimpl->stiffnessBuffer.resize(m_pimpl->actuatedDOFs, 0.0);
+    m_pimpl->dampingBuffer.resize(m_pimpl->actuatedDOFs, 0.0);
 
     return true;
 }
@@ -164,7 +172,9 @@ bool DinRailRobotControl::setImpedanceSetPoints(Eigen::Ref<const Eigen::VectorXd
             m_pimpl->stiffnessBuffer[i] = stiffness[static_cast<Eigen::Index>(i)];
             m_pimpl->dampingBuffer[i] = damping[static_cast<Eigen::Index>(i)];
         }
+        m_pimpl->torqueBuffer[i] = torque[static_cast<Eigen::Index>(i)];
     }
+    m_pimpl->cacheInitialized = true;
 
     // Build non-owning VectorProxy views over the converted buffers.
     // VectorProxy<const double>::Ref can be constructed from any contiguous
@@ -172,7 +182,7 @@ bool DinRailRobotControl::setImpedanceSetPoints(Eigen::Ref<const Eigen::VectorXd
     // Eigen::Ref<const Eigen::VectorXd>.
     if (!m_pimpl->impedanceInterface->setSetPoints(m_pimpl->posBuffer,
                                                    m_pimpl->velBuffer,
-                                                   torque,
+                                                   m_pimpl->torqueBuffer,
                                                    m_pimpl->stiffnessBuffer,
                                                    m_pimpl->dampingBuffer))
     {
@@ -181,4 +191,110 @@ bool DinRailRobotControl::setImpedanceSetPoints(Eigen::Ref<const Eigen::VectorXd
     }
 
     return true;
+}
+
+bool DinRailRobotControl::setImpedanceSetPoints(Eigen::Ref<const Eigen::VectorXd> position,
+                                                Eigen::Ref<const Eigen::VectorXd> velocity,
+                                                Eigen::Ref<const Eigen::VectorXd> torque,
+                                                Eigen::Ref<const Eigen::VectorXd> stiffness,
+                                                Eigen::Ref<const Eigen::VectorXd> damping,
+                                                const std::vector<int>& jointIndices)
+{
+    constexpr auto errorPrefix = "[DinRailRobotControl::setImpedanceSetPoints (subset)]";
+
+    if (m_pimpl->impedanceInterface == nullptr)
+    {
+        log()->error("{} The impedance interface is not ready. Did you call setDriver()?",
+                     errorPrefix);
+        return false;
+    }
+
+    if (!m_pimpl->cacheInitialized)
+    {
+        log()->error("{} Cache not initialised. Call the full setImpedanceSetPoints() overload "
+                     "at least once before using the subset overload.",
+                     errorPrefix);
+        return false;
+    }
+
+    const auto nSubset = static_cast<Eigen::Index>(jointIndices.size());
+
+    if (position.size() != nSubset || velocity.size() != nSubset || torque.size() != nSubset
+        || stiffness.size() != nSubset || damping.size() != nSubset)
+    {
+        log()->error("{} Input vector size mismatch. Expected {} (= jointIndices.size()) for all "
+                     "inputs. Got position={}, velocity={}, torque={}, stiffness={}, damping={}.",
+                     errorPrefix,
+                     nSubset,
+                     position.size(),
+                     velocity.size(),
+                     torque.size(),
+                     stiffness.size(),
+                     damping.size());
+        return false;
+    }
+
+    // Update only the indexed entries in the persistent full-size buffers.
+    constexpr double radToDeg = 180.0 / M_PI;
+    constexpr double degToRad = M_PI / 180.0;
+    for (Eigen::Index i = 0; i < nSubset; ++i)
+    {
+        const auto j = static_cast<std::size_t>(jointIndices[static_cast<std::size_t>(i)]);
+        if (m_pimpl->jointTypes[j] == JointType::REVOLUTE)
+        {
+            m_pimpl->posBuffer[j]       = radToDeg * position(i);
+            m_pimpl->velBuffer[j]       = radToDeg * velocity(i);
+            m_pimpl->stiffnessBuffer[j] = degToRad * stiffness(i);
+            m_pimpl->dampingBuffer[j]   = degToRad * damping(i);
+        } else
+        {
+            m_pimpl->posBuffer[j]       = position(i);
+            m_pimpl->velBuffer[j]       = velocity(i);
+            m_pimpl->stiffnessBuffer[j] = stiffness(i);
+            m_pimpl->dampingBuffer[j]   = damping(i);
+        }
+        m_pimpl->torqueBuffer[j] = torque(i);
+    }
+
+    // Forward the full (updated) cached buffers to the hardware.
+    if (!m_pimpl->impedanceInterface->setSetPoints(m_pimpl->posBuffer,
+                                                   m_pimpl->velBuffer,
+                                                   m_pimpl->torqueBuffer,
+                                                   m_pimpl->stiffnessBuffer,
+                                                   m_pimpl->dampingBuffer))
+    {
+        log()->error("{} Failed to set impedance setpoints.", errorPrefix);
+        return false;
+    }
+
+    return true;
+}
+
+bool DinRailRobotControl::setImpedanceSetPoints(Eigen::Ref<const Eigen::VectorXd> position,
+                                                Eigen::Ref<const Eigen::VectorXd> velocity,
+                                                Eigen::Ref<const Eigen::VectorXd> torque,
+                                                Eigen::Ref<const Eigen::VectorXd> stiffness,
+                                                Eigen::Ref<const Eigen::VectorXd> damping,
+                                                const std::vector<std::string>& jointNames)
+{
+    constexpr auto errorPrefix = "[DinRailRobotControl::setImpedanceSetPoints (names)]";
+
+    const std::vector<std::string> controlledJoints = getJointList();
+
+    std::vector<int> jointIndices;
+    jointIndices.reserve(jointNames.size());
+    for (const auto& name : jointNames)
+    {
+        const auto it = std::find(controlledJoints.begin(), controlledJoints.end(), name);
+        if (it == controlledJoints.end())
+        {
+            log()->error("{} Joint '{}' not found in the controlled joint list.",
+                         errorPrefix, name);
+            return false;
+        }
+        jointIndices.push_back(
+            static_cast<int>(std::distance(controlledJoints.begin(), it)));
+    }
+
+    return setImpedanceSetPoints(position, velocity, torque, stiffness, damping, jointIndices);
 }
