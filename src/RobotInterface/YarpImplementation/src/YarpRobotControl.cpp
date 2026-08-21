@@ -382,6 +382,12 @@ struct YarpRobotControl::Impl
         this->controlModesYarp.resize(this->actuatedDOFs);
         this->axesName.resize(this->actuatedDOFs);
 
+        // reserve vector for subset control
+        this->subsetCurrentPos.resize(this->actuatedDOFs);
+        this->subsetRefSpeeds.reserve(this->actuatedDOFs);
+        this->subsetRefs.resize(this->actuatedDOFs);
+        this->subsetJointIndices.reserve(this->actuatedDOFs);
+
         // populate the axesName vector
         for (int i = 0; i < this->actuatedDOFs; i++)
         {

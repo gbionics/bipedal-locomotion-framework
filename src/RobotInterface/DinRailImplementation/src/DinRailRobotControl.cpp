@@ -203,6 +203,12 @@ bool DinRailRobotControl::setDriver(std::shared_ptr<yarp::dev::PolyDriver> robot
     m_pimpl->stiffnessBuffer.resize(m_pimpl->actuatedDOFs, 0.0);
     m_pimpl->dampingBuffer.resize(m_pimpl->actuatedDOFs, 0.0);
 
+    m_pimpl->subsetPos.reserve(m_pimpl->actuatedDOFs);
+    m_pimpl->subsetVel.reserve(m_pimpl->actuatedDOFs);
+    m_pimpl->subsetTorque.reserve(m_pimpl->actuatedDOFs);
+    m_pimpl->subsetStiffness.reserve(m_pimpl->actuatedDOFs);
+    m_pimpl->subsetDamping.reserve(m_pimpl->actuatedDOFs);
+
     return true;
 }
 
