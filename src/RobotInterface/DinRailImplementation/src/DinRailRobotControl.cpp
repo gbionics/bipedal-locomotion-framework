@@ -209,14 +209,6 @@ bool DinRailRobotControl::setImpedanceSetPoints(Eigen::Ref<const Eigen::VectorXd
         return false;
     }
 
-    if (!m_pimpl->cacheInitialized)
-    {
-        log()->error("{} Cache not initialised. Call the full setImpedanceSetPoints() overload "
-                     "at least once before using the subset overload.",
-                     errorPrefix);
-        return false;
-    }
-
     const auto nSubset = static_cast<Eigen::Index>(jointIndices.size());
 
     if (position.size() != nSubset || velocity.size() != nSubset || torque.size() != nSubset
@@ -234,34 +226,37 @@ bool DinRailRobotControl::setImpedanceSetPoints(Eigen::Ref<const Eigen::VectorXd
         return false;
     }
 
-    // Update only the indexed entries in the persistent full-size buffers.
+    // Convert to hardware units into subset-sized local buffers.
+    // The persistent cache is not touched; only the requested joints are sent.
     constexpr double radToDeg = 180.0 / M_PI;
     constexpr double degToRad = M_PI / 180.0;
+    std::vector<double> posSubset(nSubset), velSubset(nSubset), torqueSubset(nSubset),
+        stiffSubset(nSubset), dampSubset(nSubset);
     for (Eigen::Index i = 0; i < nSubset; ++i)
     {
         const auto j = static_cast<std::size_t>(jointIndices[static_cast<std::size_t>(i)]);
         if (m_pimpl->jointTypes[j] == JointType::REVOLUTE)
         {
-            m_pimpl->posBuffer[j]       = radToDeg * position(i);
-            m_pimpl->velBuffer[j]       = radToDeg * velocity(i);
-            m_pimpl->stiffnessBuffer[j] = degToRad * stiffness(i);
-            m_pimpl->dampingBuffer[j]   = degToRad * damping(i);
+            posSubset[i]   = radToDeg * position(i);
+            velSubset[i]   = radToDeg * velocity(i);
+            stiffSubset[i] = degToRad * stiffness(i);
+            dampSubset[i]  = degToRad * damping(i);
         } else
         {
-            m_pimpl->posBuffer[j]       = position(i);
-            m_pimpl->velBuffer[j]       = velocity(i);
-            m_pimpl->stiffnessBuffer[j] = stiffness(i);
-            m_pimpl->dampingBuffer[j]   = damping(i);
+            posSubset[i]   = position(i);
+            velSubset[i]   = velocity(i);
+            stiffSubset[i] = stiffness(i);
+            dampSubset[i]  = damping(i);
         }
-        m_pimpl->torqueBuffer[j] = torque(i);
+        torqueSubset[i] = torque(i);
     }
 
-    // Forward the full (updated) cached buffers to the hardware.
-    if (!m_pimpl->impedanceInterface->setSetPoints(m_pimpl->posBuffer,
-                                                   m_pimpl->velBuffer,
-                                                   m_pimpl->torqueBuffer,
-                                                   m_pimpl->stiffnessBuffer,
-                                                   m_pimpl->dampingBuffer))
+    if (!m_pimpl->impedanceInterface->setSetPoints(jointIndices,
+                                                   posSubset,
+                                                   velSubset,
+                                                   torqueSubset,
+                                                   stiffSubset,
+                                                   dampSubset))
     {
         log()->error("{} Failed to set impedance setpoints.", errorPrefix);
         return false;
