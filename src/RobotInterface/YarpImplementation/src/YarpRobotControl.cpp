@@ -8,6 +8,7 @@
 #include <algorithm>
 #include <cmath>
 #include <future>
+#include <mutex>
 #include <thread>
 #include <unordered_map>
 
@@ -99,6 +100,14 @@ struct YarpRobotControl::Impl
                                             interfaces. */
     std::size_t readingTimeout{500}; /**< Timeout used while reading from the yarp interfaces in
                                         microseconds. */
+
+    /** Protects the scratch buffers below; acquired by the public subset-control API before any
+     *  call to setReferencesSubset(), so that method itself does not need to lock. */
+    std::mutex subsetMutex;
+    Eigen::VectorXd subsetCurrentPos; /**< Scratch: current joint positions for subset position mode. */
+    std::vector<double> subsetRefSpeeds; /**< Scratch: reference speeds for subset position mode. */
+    Eigen::VectorXd subsetRefs; /**< Scratch: converted reference values for subset calls. */
+    std::vector<int> subsetJointIndices; /**< Scratch: joint indices for name-based subset calls. */
 
     static IRobotControl::ControlMode
     YarpControlModeToControlMode(const yarp::conf::vocab32_t& controlModeYarp)
@@ -846,7 +855,7 @@ struct YarpRobotControl::Impl
         // For Position mode: compute reference speeds
         if (controlMode == IRobotControl::ControlMode::Position)
         {
-            Eigen::VectorXd currentPos(n);
+            this->subsetCurrentPos.resize(n);
             if (currentJointValues.has_value())
             {
                 if (currentJointValues->size() != n)
@@ -858,7 +867,7 @@ struct YarpRobotControl::Impl
                         n);
                     return false;
                 }
-                currentPos = *currentJointValues;
+                this->subsetCurrentPos = *currentJointValues;
             } else
             {
                 if (!this->getJointPos())
@@ -868,16 +877,16 @@ struct YarpRobotControl::Impl
                 }
                 for (int i = 0; i < n; i++)
                 {
-                    currentPos[i] = this->positionFeedback[jointIndices[i]];
+                    this->subsetCurrentPos[i] = this->positionFeedback[jointIndices[i]];
                 }
             }
 
             const double positioningDurationSeconds
                 = std::chrono::duration<double>(this->positioningDuration).count();
-            std::vector<double> refSpeeds(n);
+            this->subsetRefSpeeds.resize(n);
             for (int i = 0; i < n; i++)
             {
-                const double jointError = std::abs(jointValues[i] - currentPos[i]);
+                const double jointError = std::abs(jointValues[i] - this->subsetCurrentPos[i]);
                 double scaling, minVelocity;
                 if (this->jointsTypeList[jointIndices[i]] == JointType::REVOLUTE)
                 {
@@ -888,13 +897,13 @@ struct YarpRobotControl::Impl
                     scaling = 1.0;
                     minVelocity = 10.0; // mm/s
                 }
-                refSpeeds[i] = std::max(minVelocity,
+                this->subsetRefSpeeds[i] = std::max(minVelocity,
                                         scaling * (jointError / positioningDurationSeconds));
             }
 
             if (!this->positionInterface->setRefSpeeds(n,
                                                        jointIndices.data(),
-                                                       refSpeeds.data()))
+                                                       this->subsetRefSpeeds.data()))
             {
                 log()->error("{} Unable to set the reference speed for the position control joints.",
                              errorPrefix);
@@ -905,7 +914,7 @@ struct YarpRobotControl::Impl
         }
 
         // Build desired values with unit conversion
-        Eigen::VectorXd refs(n);
+        this->subsetRefs.resize(n);
         for (int i = 0; i < n; i++)
         {
             double scaling = 1.0;
@@ -914,10 +923,10 @@ struct YarpRobotControl::Impl
             {
                 scaling = 180.0 / M_PI;
             }
-            refs[i] = scaling * jointValues[i];
+            this->subsetRefs[i] = scaling * jointValues[i];
         }
 
-        if (!this->control(controlMode)(n, jointIndices.data(), refs.data()))
+        if (!this->control(controlMode)(n, jointIndices.data(), this->subsetRefs.data()))
         {
             log()->error("{} Unable to set the desired joint values.", errorPrefix);
             return false;
@@ -1165,6 +1174,7 @@ bool YarpRobotControl::setReferences(
     const IRobotControl::ControlMode& controlMode,
     std::optional<Eigen::Ref<const Eigen::VectorXd>> currentJointValues)
 {
+    std::lock_guard<std::mutex> lock(m_pimpl->subsetMutex);
     return m_pimpl->setReferencesSubset(desiredJointValues,
                                         jointIndices,
                                         controlMode,
@@ -1179,8 +1189,9 @@ bool YarpRobotControl::setReferences(
 {
     constexpr auto errorPrefix = "[YarpRobotControl::setReferences]";
 
-    std::vector<int> jointIndices;
-    jointIndices.reserve(jointNames.size());
+    std::lock_guard<std::mutex> lock(m_pimpl->subsetMutex);
+    m_pimpl->subsetJointIndices.clear();
+    m_pimpl->subsetJointIndices.reserve(jointNames.size());
     for (const auto& name : jointNames)
     {
         const auto it
@@ -1190,12 +1201,12 @@ bool YarpRobotControl::setReferences(
             log()->error("{} Joint '{}' not found in the joint list.", errorPrefix, name);
             return false;
         }
-        jointIndices.push_back(
+        m_pimpl->subsetJointIndices.push_back(
             static_cast<int>(std::distance(m_pimpl->axesName.begin(), it)));
     }
 
     return m_pimpl->setReferencesSubset(desiredJointValues,
-                                        jointIndices,
+                                        m_pimpl->subsetJointIndices,
                                         controlMode,
                                         currentJointValues);
 }

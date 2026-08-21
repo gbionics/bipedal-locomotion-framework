@@ -7,6 +7,7 @@
 
 #include <cmath>
 #include <memory>
+#include <mutex>
 #include <vector>
 
 #include <yarp/dev/IAxisInfo.h>
@@ -41,6 +42,98 @@ struct DinRailRobotControl::Impl
     std::vector<double> torqueBuffer;
     std::vector<double> stiffnessBuffer;
     std::vector<double> dampingBuffer;
+
+    /**
+     * Scratch buffers for the subset overload of setImpedanceSetPoints().
+     * Protected by subsetMutex; acquired by the public API before calling
+     * setSetPointsSubset(), so that internal method itself does not need to lock.
+     */
+    std::mutex subsetMutex;
+    std::vector<double> subsetPos;
+    std::vector<double> subsetVel;
+    std::vector<double> subsetTorque;
+    std::vector<double> subsetStiffness;
+    std::vector<double> subsetDamping;
+    std::vector<int> subsetIndices;
+
+    /**
+     * Internal (non-locking) implementation of the subset impedance setpoint call.
+     * Caller must hold subsetMutex before invoking this method.
+     */
+    bool setSetPointsSubset(Eigen::Ref<const Eigen::VectorXd> position,
+                            Eigen::Ref<const Eigen::VectorXd> velocity,
+                            Eigen::Ref<const Eigen::VectorXd> torque,
+                            Eigen::Ref<const Eigen::VectorXd> stiffness,
+                            Eigen::Ref<const Eigen::VectorXd> damping,
+                            const std::vector<int>& jointIndices)
+    {
+        constexpr auto errorPrefix = "[DinRailRobotControl::setImpedanceSetPoints (subset)]";
+
+        if (this->impedanceInterface == nullptr)
+        {
+            log()->error("{} The impedance interface is not ready. Did you call setDriver()?",
+                         errorPrefix);
+            return false;
+        }
+
+        const auto nSubset = static_cast<Eigen::Index>(jointIndices.size());
+
+        if (position.size() != nSubset || velocity.size() != nSubset || torque.size() != nSubset
+            || stiffness.size() != nSubset || damping.size() != nSubset)
+        {
+            log()->error("{} Input vector size mismatch. Expected {} (= jointIndices.size()) for all "
+                         "inputs. Got position={}, velocity={}, torque={}, stiffness={}, damping={}.",
+                         errorPrefix,
+                         nSubset,
+                         position.size(),
+                         velocity.size(),
+                         torque.size(),
+                         stiffness.size(),
+                         damping.size());
+            return false;
+        }
+
+        // Resize scratch buffers (no allocation if capacity is sufficient).
+        this->subsetPos.resize(nSubset);
+        this->subsetVel.resize(nSubset);
+        this->subsetTorque.resize(nSubset);
+        this->subsetStiffness.resize(nSubset);
+        this->subsetDamping.resize(nSubset);
+
+        constexpr double radToDeg = 180.0 / M_PI;
+        constexpr double degToRad = M_PI / 180.0;
+        for (Eigen::Index i = 0; i < nSubset; ++i)
+        {
+            const auto j = static_cast<std::size_t>(jointIndices[static_cast<std::size_t>(i)]);
+            if (this->jointTypes[j] == JointType::REVOLUTE)
+            {
+                this->subsetPos[i]       = radToDeg * position(i);
+                this->subsetVel[i]       = radToDeg * velocity(i);
+                this->subsetStiffness[i] = degToRad * stiffness(i);
+                this->subsetDamping[i]   = degToRad * damping(i);
+            } else
+            {
+                this->subsetPos[i]       = position(i);
+                this->subsetVel[i]       = velocity(i);
+                this->subsetStiffness[i] = stiffness(i);
+                this->subsetDamping[i]   = damping(i);
+            }
+            this->subsetTorque[i] = torque(i);
+        }
+
+        if (!this->impedanceInterface->setSetPoints(jointIndices,
+                                                    this->subsetPos,
+                                                    this->subsetVel,
+                                                    this->subsetTorque,
+                                                    this->subsetStiffness,
+                                                    this->subsetDamping))
+        {
+            log()->error("{} Failed to set impedance setpoints.", errorPrefix);
+            return false;
+        }
+
+        return true;
+    }
 };
 
 DinRailRobotControl::DinRailRobotControl()
@@ -193,69 +286,8 @@ bool DinRailRobotControl::setImpedanceSetPoints(Eigen::Ref<const Eigen::VectorXd
                                                 Eigen::Ref<const Eigen::VectorXd> damping,
                                                 const std::vector<int>& jointIndices)
 {
-    constexpr auto errorPrefix = "[DinRailRobotControl::setImpedanceSetPoints (subset)]";
-
-    if (m_pimpl->impedanceInterface == nullptr)
-    {
-        log()->error("{} The impedance interface is not ready. Did you call setDriver()?",
-                     errorPrefix);
-        return false;
-    }
-
-    const auto nSubset = static_cast<Eigen::Index>(jointIndices.size());
-
-    if (position.size() != nSubset || velocity.size() != nSubset || torque.size() != nSubset
-        || stiffness.size() != nSubset || damping.size() != nSubset)
-    {
-        log()->error("{} Input vector size mismatch. Expected {} (= jointIndices.size()) for all "
-                     "inputs. Got position={}, velocity={}, torque={}, stiffness={}, damping={}.",
-                     errorPrefix,
-                     nSubset,
-                     position.size(),
-                     velocity.size(),
-                     torque.size(),
-                     stiffness.size(),
-                     damping.size());
-        return false;
-    }
-
-    // Convert to hardware units into subset-sized local buffers.
-    // The persistent cache is not touched; only the requested joints are sent.
-    constexpr double radToDeg = 180.0 / M_PI;
-    constexpr double degToRad = M_PI / 180.0;
-    std::vector<double> posSubset(nSubset), velSubset(nSubset), torqueSubset(nSubset),
-        stiffSubset(nSubset), dampSubset(nSubset);
-    for (Eigen::Index i = 0; i < nSubset; ++i)
-    {
-        const auto j = static_cast<std::size_t>(jointIndices[static_cast<std::size_t>(i)]);
-        if (m_pimpl->jointTypes[j] == JointType::REVOLUTE)
-        {
-            posSubset[i]   = radToDeg * position(i);
-            velSubset[i]   = radToDeg * velocity(i);
-            stiffSubset[i] = degToRad * stiffness(i);
-            dampSubset[i]  = degToRad * damping(i);
-        } else
-        {
-            posSubset[i]   = position(i);
-            velSubset[i]   = velocity(i);
-            stiffSubset[i] = stiffness(i);
-            dampSubset[i]  = damping(i);
-        }
-        torqueSubset[i] = torque(i);
-    }
-
-    if (!m_pimpl->impedanceInterface->setSetPoints(jointIndices,
-                                                   posSubset,
-                                                   velSubset,
-                                                   torqueSubset,
-                                                   stiffSubset,
-                                                   dampSubset))
-    {
-        log()->error("{} Failed to set impedance setpoints.", errorPrefix);
-        return false;
-    }
-
-    return true;
+    std::lock_guard<std::mutex> lock(m_pimpl->subsetMutex);
+    return m_pimpl->setSetPointsSubset(position, velocity, torque, stiffness, damping, jointIndices);
 }
 
 bool DinRailRobotControl::setImpedanceSetPoints(Eigen::Ref<const Eigen::VectorXd> position,
@@ -269,8 +301,9 @@ bool DinRailRobotControl::setImpedanceSetPoints(Eigen::Ref<const Eigen::VectorXd
 
     const std::vector<std::string> controlledJoints = getJointList();
 
-    std::vector<int> jointIndices;
-    jointIndices.reserve(jointNames.size());
+    std::lock_guard<std::mutex> lock(m_pimpl->subsetMutex);
+    m_pimpl->subsetIndices.clear();
+    m_pimpl->subsetIndices.reserve(jointNames.size());
     for (const auto& name : jointNames)
     {
         const auto it = std::find(controlledJoints.begin(), controlledJoints.end(), name);
@@ -280,9 +313,9 @@ bool DinRailRobotControl::setImpedanceSetPoints(Eigen::Ref<const Eigen::VectorXd
                          errorPrefix, name);
             return false;
         }
-        jointIndices.push_back(
+        m_pimpl->subsetIndices.push_back(
             static_cast<int>(std::distance(controlledJoints.begin(), it)));
     }
 
-    return setImpedanceSetPoints(position, velocity, torque, stiffness, damping, jointIndices);
+    return m_pimpl->setSetPointsSubset(position, velocity, torque, stiffness, damping, m_pimpl->subsetIndices);
 }
