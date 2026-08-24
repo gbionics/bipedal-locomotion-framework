@@ -147,13 +147,6 @@ bool JointLimitsTask::initialize(
         return false;
     }
 
-    if (m_klim.minCoeff() < 0 || m_klim.maxCoeff() > 1)
-    {
-        log()->error("{} 'klim' parameter must contains only positive numbers lower than 1.",
-                     errorPrefix);
-        return false;
-    }
-
     if (m_klim.size() != m_kinDyn->getNrOfDegreesOfFreedom())
     {
         log()->error("{} The size of the 'klim' parameter does not match with the number of "
@@ -161,6 +154,13 @@ bool JointLimitsTask::initialize(
                      errorPrefix,
                      m_kinDyn->getNrOfDegreesOfFreedom(),
                      m_klim.size());
+        return false;
+    }
+
+    if (m_klim.minCoeff() < 0 || m_klim.maxCoeff() > 1)
+    {
+        log()->error("{} 'klim' parameter must contains only positive numbers lower than 1.",
+                     errorPrefix);
         return false;
     }
 
@@ -238,18 +238,24 @@ bool JointLimitsTask::update()
 
         for (int i = 0; i < m_upperLimits.size(); i++)
         {
-            if (m_upperLimits[i] == OsqpEigen::INFTY)
+            if (m_upperLimits[i] != OsqpEigen::INFTY)
             {
                 upperLimitPart(i) = m_klim(i) * (m_upperLimits(i) - m_jointPosition(i)) //
                                     / dT;
+            } else
+            {
+                upperLimitPart(i) = OsqpEigen::INFTY;
             }
         }
         for (int i = 0; i < m_lowerLimits.size(); i++)
         {
-            if (m_lowerLimits[i] == -OsqpEigen::INFTY)
+            if (m_lowerLimits[i] != -OsqpEigen::INFTY)
             {
-                lowerLimitPart(i) = m_klim(i) * (m_lowerLimits(i) - m_jointPosition(i)) //
+                lowerLimitPart(i) = m_klim(i) * (m_jointPosition(i) - m_lowerLimits(i)) //
                                     / dT;
+            } else
+            {
+                lowerLimitPart(i) = OsqpEigen::INFTY;
             }
         }
     }

@@ -390,6 +390,7 @@ bool QPInverseKinematics::finalize(const System::VariablesHandler& handler)
     }
 
     m_pimpl->isFinalized = true;
+    m_pimpl->isFirstIteration = true;
 
     return true;
 }
@@ -488,6 +489,16 @@ bool QPInverseKinematics::advance()
         }
 
         index += constraint.get().task->size();
+    }
+
+    if (index != m_pimpl->numberOfConstraints)
+    {
+        log()->error("{} The number of constraints changed. Please call finalize() again. "
+                     "Expected number of constraints: {}. Computed number of constraints: {}.",
+                     logPrefix,
+                     m_pimpl->numberOfConstraints,
+                     index);
+        return false;
     }
 
     // update the solver
