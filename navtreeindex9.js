@@ -1,5 +1,7 @@
 var NAVTREEINDEX9 =
 {
+"classBipedalLocomotion_1_1RobotInterface_1_1YarpSensorBridge.html#a8b733ed49d5e8f0fe72ea2d9e5112909":[4,0,0,13,18,57],
+"classBipedalLocomotion_1_1RobotInterface_1_1YarpSensorBridge.html#a90807c7451d1bec1cdb2fda20d329cd1":[4,0,0,13,18,17],
 "classBipedalLocomotion_1_1RobotInterface_1_1YarpSensorBridge.html#a937e0e3b27108c656b6d6ad6b32d7ed8":[4,0,0,13,18,47],
 "classBipedalLocomotion_1_1RobotInterface_1_1YarpSensorBridge.html#a99dedf5f3afbdc4464c8c21cebbeff70":[4,0,0,13,18,13],
 "classBipedalLocomotion_1_1RobotInterface_1_1YarpSensorBridge.html#a9b97bfe14f49d2a8f9cd7d92986b98f2":[4,0,0,13,18,19],
@@ -247,7 +249,5 @@ var NAVTREEINDEX9 =
 "classBipedalLocomotion_1_1TSID_1_1FeasibleContactWrenchTask.html":[4,0,0,18,3],
 "classBipedalLocomotion_1_1TSID_1_1FeasibleContactWrenchTask.html#a2c520e7f24c2bc4e7e8fc8e34f942a7c":[4,0,0,18,3,5],
 "classBipedalLocomotion_1_1TSID_1_1FeasibleContactWrenchTask.html#a3165f77b5e7a31a3a02fd9c8beef3527":[4,0,0,18,3,4],
-"classBipedalLocomotion_1_1TSID_1_1FeasibleContactWrenchTask.html#a39986e98124ae0cc9501db4717e76d27":[4,0,0,18,3,7],
-"classBipedalLocomotion_1_1TSID_1_1FeasibleContactWrenchTask.html#aa5423a3326d69185fb61d2adeae8dc52":[4,0,0,18,3,0],
-"classBipedalLocomotion_1_1TSID_1_1FeasibleContactWrenchTask.html#aaa5100282788581300e70dad652fbb88":[4,0,0,18,3,6]
+"classBipedalLocomotion_1_1TSID_1_1FeasibleContactWrenchTask.html#a39986e98124ae0cc9501db4717e76d27":[4,0,0,18,3,7]
 };

@@ -1,5 +1,7 @@
 var NAVTREEINDEX8 =
 {
+"classBipedalLocomotion_1_1Planners_1_1SwingFootPlanner.html":[4,0,0,11,6],
+"classBipedalLocomotion_1_1Planners_1_1SwingFootPlanner.html#a4e14a72e8773f9da946944beea5a9703":[4,0,0,11,6,5],
 "classBipedalLocomotion_1_1Planners_1_1SwingFootPlanner.html#a51830d4784d0b13177e601d08818d124":[4,0,0,11,6,4],
 "classBipedalLocomotion_1_1Planners_1_1SwingFootPlanner.html#a6671b3cdd30ae942cc7208197bd45f41":[4,0,0,11,6,2],
 "classBipedalLocomotion_1_1Planners_1_1SwingFootPlanner.html#ac4025b512845b15ffddbcc7d70e8a646":[4,0,0,11,6,0],
@@ -247,7 +249,5 @@ var NAVTREEINDEX8 =
 "classBipedalLocomotion_1_1RobotInterface_1_1YarpSensorBridge.html#a7ad5c19415dc703f73d1cd86173e3da3":[4,0,0,13,18,14],
 "classBipedalLocomotion_1_1RobotInterface_1_1YarpSensorBridge.html#a820d98e47b2d332a5a2cf89bb6cd326b":[4,0,0,13,18,8],
 "classBipedalLocomotion_1_1RobotInterface_1_1YarpSensorBridge.html#a85b228b415b8e5952539fe9987cfc6de":[4,0,0,13,18,10],
-"classBipedalLocomotion_1_1RobotInterface_1_1YarpSensorBridge.html#a89ab19c2c01cbab3b52c6cff50422275":[4,0,0,13,18,53],
-"classBipedalLocomotion_1_1RobotInterface_1_1YarpSensorBridge.html#a8b733ed49d5e8f0fe72ea2d9e5112909":[4,0,0,13,18,57],
-"classBipedalLocomotion_1_1RobotInterface_1_1YarpSensorBridge.html#a90807c7451d1bec1cdb2fda20d329cd1":[4,0,0,13,18,17]
+"classBipedalLocomotion_1_1RobotInterface_1_1YarpSensorBridge.html#a89ab19c2c01cbab3b52c6cff50422275":[4,0,0,13,18,53]
 };

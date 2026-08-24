@@ -1,5 +1,7 @@
 var NAVTREEINDEX13 =
 {
+"structBipedalLocomotion_1_1ML_1_1MANNInput.html#a7a792a72332b672c0c8b74f0ff0ce584":[4,0,0,8,0,1],
+"structBipedalLocomotion_1_1ML_1_1MANNOutput.html":[4,0,0,8,1],
 "structBipedalLocomotion_1_1ML_1_1MANNOutput.html#a3fdedda9b78f87c9982408712eb7ab61":[4,0,0,8,1,0],
 "structBipedalLocomotion_1_1ML_1_1MANNOutput.html#a7b1428e7e29484c448463dfe45598cdd":[4,0,0,8,1,4],
 "structBipedalLocomotion_1_1ML_1_1MANNOutput.html#ab9d45f4b1903bace0492b87e6fc05b4b":[4,0,0,8,1,3],
@@ -247,7 +249,5 @@ var NAVTREEINDEX13 =
 "structBipedalLocomotion_1_1RobotInterface_1_1PolyDriverDescriptor.html#ab97d9fa94d06f4f5c53e8fd2b9243eba":[4,0,0,13,16,3],
 "structBipedalLocomotion_1_1RobotInterface_1_1PolyDriverDescriptor.html#ad61523b1c0f0c1600f2d1e1c0f2996ec":[4,0,0,13,16,2],
 "structBipedalLocomotion_1_1RobotInterface_1_1PolyDriverDescriptor.html#afa368e7690c9efe7e5caf06ef878f6c0":[4,0,0,13,16,0],
-"structBipedalLocomotion_1_1RobotInterface_1_1SensorBridgeMetaData.html":[4,0,0,13,12],
-"structBipedalLocomotion_1_1RobotInterface_1_1SensorBridgeMetaData.html#a31e3d77b006c0af05953dd8c6b0f4b71":[4,0,0,13,12,0],
-"structBipedalLocomotion_1_1RobotInterface_1_1SensorBridgeMetaData.html#af28510fbc98c0a4b425c83a6f91c4e13":[4,0,0,13,12,1]
+"structBipedalLocomotion_1_1RobotInterface_1_1SensorBridgeMetaData.html":[4,0,0,13,12]
 };

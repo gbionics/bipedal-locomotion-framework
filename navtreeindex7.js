@@ -1,5 +1,7 @@
 var NAVTREEINDEX7 =
 {
+"classBipedalLocomotion_1_1ML_1_1VelMANNTrajectoryGenerator.html#afee89888c7b641910a8ad3ae5dbc39f1":[4,0,0,8,23,2],
+"classBipedalLocomotion_1_1Math_1_1CARE.html":[4,0,0,7,0],
 "classBipedalLocomotion_1_1Math_1_1CARE.html#a1b8fc732dbc978b977343f57c401ed8f":[4,0,0,7,0,5],
 "classBipedalLocomotion_1_1Math_1_1CARE.html#a8d3ae5b6ce41a7e787b9e87ef317e2c2":[4,0,0,7,0,2],
 "classBipedalLocomotion_1_1Math_1_1CARE.html#a8f01a273766b4eecdb875b75f3a3ae8b":[4,0,0,7,0,1],
@@ -247,7 +249,5 @@ var NAVTREEINDEX7 =
 "classBipedalLocomotion_1_1Planners_1_1SO3Planner.html#a9e1bc5e248e0f83cddae20277200ca12":[4,0,0,11,4,6],
 "classBipedalLocomotion_1_1Planners_1_1SO3Planner.html#acdf5026823d28b0bec14badad5617599":[4,0,0,11,4,7],
 "classBipedalLocomotion_1_1Planners_1_1SO3Planner.html#ad04c074445143dbdafacded0a4cf003a":[4,0,0,11,4,2],
-"classBipedalLocomotion_1_1Planners_1_1SO3Planner.html#ae3e6f24567865a4e663d511ab33e036e":[4,0,0,11,4,1],
-"classBipedalLocomotion_1_1Planners_1_1SwingFootPlanner.html":[4,0,0,11,6],
-"classBipedalLocomotion_1_1Planners_1_1SwingFootPlanner.html#a4e14a72e8773f9da946944beea5a9703":[4,0,0,11,6,5]
+"classBipedalLocomotion_1_1Planners_1_1SO3Planner.html#ae3e6f24567865a4e663d511ab33e036e":[4,0,0,11,4,1]
 };

@@ -1,5 +1,7 @@
 var NAVTREEINDEX3 =
 {
+"UkfMeasurement_8h.html":[5,0,5,0,0,2,10],
+"UkfModel_8cpp.html":[5,0,5,1,15],
 "UkfModel_8h.html":[5,0,5,0,0,2,11],
 "UkfState_8cpp.html":[5,0,5,1,16],
 "UkfState_8h.html":[5,0,5,0,0,2,12],
@@ -247,7 +249,5 @@ var NAVTREEINDEX3 =
 "classBipedalLocomotion_1_1Contacts_1_1ContactPhaseList.html#afc551778d17a186109575a66e4a8e75b":[4,0,0,1,11,6],
 "classBipedalLocomotion_1_1Contacts_1_1FixedFootDetector.html":[4,0,0,1,1],
 "classBipedalLocomotion_1_1Contacts_1_1FixedFootDetector.html#a0433e6852e9602ec99dbe1cd81466f63":[4,0,0,1,1,1],
-"classBipedalLocomotion_1_1Contacts_1_1FixedFootDetector.html#a204fbdde81fc018d6c2ac3c222b76bc5":[4,0,0,1,1,0],
-"classBipedalLocomotion_1_1Contacts_1_1FixedFootDetector.html#a314559d7c65628a967a60ee49f4325d8":[4,0,0,1,1,5],
-"classBipedalLocomotion_1_1Contacts_1_1FixedFootDetector.html#a73b9ce87c5c9a496873737cbd90f48ba":[4,0,0,1,1,4]
+"classBipedalLocomotion_1_1Contacts_1_1FixedFootDetector.html#a204fbdde81fc018d6c2ac3c222b76bc5":[4,0,0,1,1,0]
 };

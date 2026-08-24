@@ -106,16 +106,20 @@ $(document).ready(function(){initNavTree('JointLimitsTaskTest_8cpp.html',''); in
 
 <div class="header">
   <div class="summary">
-<a href="#func-members">Functions</a>  </div>
+<a href="#func-members">Functions</a> &#124;
+<a href="#var-members">Variables</a>  </div>
   <div class="headertitle">
 <div class="title">JointLimitsTaskTest.cpp File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><code>#include &lt;chrono&gt;</code><br />
+<code>#include &lt;cmath&gt;</code><br />
 <code>#include &lt;catch2/catch_test_macros.hpp&gt;</code><br />
+<code>#include &lt;catch2/catch_approx.hpp&gt;</code><br />
 <code>#include &lt;<a class="el" href="StdImplementation_8h.html">BipedalLocomotion/ParametersHandler/StdImplementation.h</a>&gt;</code><br />
 <code>#include &lt;<a class="el" href="VariablesHandler_8h.html">BipedalLocomotion/System/VariablesHandler.h</a>&gt;</code><br />
 <code>#include &lt;<a class="el" href="JointLimitsTask_8h.html">BipedalLocomotion/IK/JointLimitsTask.h</a>&gt;</code><br />
+<code>#include &lt;OsqpEigen/Constants.hpp&gt;</code><br />
 <code>#include &lt;iDynTree/EigenHelpers.h&gt;</code><br />
 <code>#include &lt;iDynTree/ModelTestUtils.h&gt;</code><br />
 <code>#include &lt;Eigen/Dense&gt;</code><br />
@@ -125,6 +129,114 @@ Functions</h2></td></tr>
 <tr class="memitem:a8da86522326c74c7d794654583b83e9f"><td class="memItemLeft" align="right" valign="top"><a id="a8da86522326c74c7d794654583b83e9f"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>TEST_CASE</b> (&quot;Joint Regularization task&quot;)</td></tr>
 <tr class="separator:a8da86522326c74c7d794654583b83e9f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a25164542f4b536d6d90733c100b2139d"><td class="memItemLeft" align="right" valign="top"><a id="a25164542f4b536d6d90733c100b2139d"></a>
+parameterHandler&#160;</td><td class="memItemRight" valign="bottom"><b>setParameter</b> (&quot;robot_velocity_variable_name&quot;, robotVelocity)</td></tr>
+<tr class="separator:a25164542f4b536d6d90733c100b2139d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae5e5677a077014596368ddf96812432c"><td class="memItemLeft" align="right" valign="top"><a id="ae5e5677a077014596368ddf96812432c"></a>
+parameterHandler&#160;</td><td class="memItemRight" valign="bottom"><b>setParameter</b> (&quot;sampling_time&quot;, dt)</td></tr>
+<tr class="separator:ae5e5677a077014596368ddf96812432c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6d39def031f6f9abd4504ecbbf2ea35d"><td class="memItemLeft" align="right" valign="top"><a id="a6d39def031f6f9abd4504ecbbf2ea35d"></a>
+parameterHandler&#160;</td><td class="memItemRight" valign="bottom"><b>setParameter</b> (&quot;use_model_limits&quot;, true)</td></tr>
+<tr class="separator:a6d39def031f6f9abd4504ecbbf2ea35d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7174cb564bcd5dc1316fbc2796dd7481"><td class="memItemLeft" align="right" valign="top"><a id="a7174cb564bcd5dc1316fbc2796dd7481"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>REQUIRE</b> (kinDyn-&gt;setFrameVelocityRepresentation(iDynTree::FrameVelocityRepresentation::MIXED_REPRESENTATION))</td></tr>
+<tr class="separator:a7174cb564bcd5dc1316fbc2796dd7481"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aac1d955035c750dca0459d2fe1736ce7"><td class="memItemLeft" align="right" valign="top"><a id="aac1d955035c750dca0459d2fe1736ce7"></a>
+std::vector&lt; bool &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>hasLimits</b> (model.getNrOfDOFs(), false)</td></tr>
+<tr class="separator:aac1d955035c750dca0459d2fe1736ce7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac034ff9ee918de314c48efd62557abab"><td class="memItemLeft" align="right" valign="top"><a id="ac034ff9ee918de314c48efd62557abab"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>for</b> (std::size_t jointIdx=0;jointIdx&lt; model.getNrOfJoints();jointIdx++)</td></tr>
+<tr class="separator:ac034ff9ee918de314c48efd62557abab"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a15e7c11822a1b8b02bdced8e4af2321b"><td class="memItemLeft" align="right" valign="top"><a id="a15e7c11822a1b8b02bdced8e4af2321b"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>REQUIRE</b> (kinDyn-&gt;loadRobotModel(model))</td></tr>
+<tr class="separator:a15e7c11822a1b8b02bdced8e4af2321b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a96ae8b88450ee2aec8d0c063c4a8df7e"><td class="memItemLeft" align="right" valign="top"><a id="a96ae8b88450ee2aec8d0c063c4a8df7e"></a>
+iDynTree::VectorDynSize&#160;</td><td class="memItemRight" valign="bottom"><b>jointsPos</b> (model.getNrOfDOFs())</td></tr>
+<tr class="separator:a96ae8b88450ee2aec8d0c063c4a8df7e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a126d2935f4369fd2abadd9630303ca80"><td class="memItemLeft" align="right" valign="top"><a id="a126d2935f4369fd2abadd9630303ca80"></a>
+iDynTree::VectorDynSize&#160;</td><td class="memItemRight" valign="bottom"><b>jointsVel</b> (model.getNrOfDOFs())</td></tr>
+<tr class="separator:a126d2935f4369fd2abadd9630303ca80"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4a3b2fb131074656a3150edfd34b6306"><td class="memItemLeft" align="right" valign="top"><a id="a4a3b2fb131074656a3150edfd34b6306"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>for</b> (auto &amp;joint :jointsPos)</td></tr>
+<tr class="separator:a4a3b2fb131074656a3150edfd34b6306"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a062873fb1207c00584b2454a2a1a50b1"><td class="memItemLeft" align="right" valign="top"><a id="a062873fb1207c00584b2454a2a1a50b1"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>for</b> (auto &amp;joint :jointsVel)</td></tr>
+<tr class="separator:a062873fb1207c00584b2454a2a1a50b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad300c5414c621e51a95b40c2784a2e78"><td class="memItemLeft" align="right" valign="top"><a id="ad300c5414c621e51a95b40c2784a2e78"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>for</b> (auto &amp;element :gravity)</td></tr>
+<tr class="separator:ad300c5414c621e51a95b40c2784a2e78"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a268dcfcc12fc86a169cde95649d6d9c0"><td class="memItemLeft" align="right" valign="top"><a id="a268dcfcc12fc86a169cde95649d6d9c0"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>REQUIRE</b> (kinDyn-&gt;setRobotState(worldBasePos, jointsPos, baseVel, jointsVel, gravity))</td></tr>
+<tr class="separator:a268dcfcc12fc86a169cde95649d6d9c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0285555d0c8b1da0f11f61e7228e8e2b"><td class="memItemLeft" align="right" valign="top"><a id="a0285555d0c8b1da0f11f61e7228e8e2b"></a>
+variablesHandler&#160;</td><td class="memItemRight" valign="bottom"><b>addVariable</b> (robotVelocity, model.getNrOfDOFs()+6)</td></tr>
+<tr class="separator:a0285555d0c8b1da0f11f61e7228e8e2b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa7f4722baf891585943bd93f465fbed7"><td class="memItemLeft" align="right" valign="top"><a id="aa7f4722baf891585943bd93f465fbed7"></a>
+Eigen::VectorXd&#160;</td><td class="memItemRight" valign="bottom"><b>klim</b> (model.getNrOfDOFs())</td></tr>
+<tr class="separator:aa7f4722baf891585943bd93f465fbed7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a592d33d7be7be2cfc0152ce25c05f284"><td class="memItemLeft" align="right" valign="top"><a id="a592d33d7be7be2cfc0152ce25c05f284"></a>
+klim&#160;</td><td class="memItemRight" valign="bottom"><b>setConstant</b> (0.7)</td></tr>
+<tr class="separator:a592d33d7be7be2cfc0152ce25c05f284"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6058e8d9795f6b46a267254705b91da0"><td class="memItemLeft" align="right" valign="top"><a id="a6058e8d9795f6b46a267254705b91da0"></a>
+parameterHandler&#160;</td><td class="memItemRight" valign="bottom"><b>setParameter</b> (&quot;klim&quot;, klim)</td></tr>
+<tr class="separator:a6058e8d9795f6b46a267254705b91da0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad591f9d7c02d5d3bce7bec04eadf5575"><td class="memItemLeft" align="right" valign="top"><a id="ad591f9d7c02d5d3bce7bec04eadf5575"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>REQUIRE</b> (task.setKinDyn(kinDyn))</td></tr>
+<tr class="separator:ad591f9d7c02d5d3bce7bec04eadf5575"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae0e4c1add418f44a339e3faf37c4b80a"><td class="memItemLeft" align="right" valign="top"><a id="ae0e4c1add418f44a339e3faf37c4b80a"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>REQUIRE</b> (task.initialize(parameterHandler))</td></tr>
+<tr class="separator:ae0e4c1add418f44a339e3faf37c4b80a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a67f660ac517936903d70e5df83be5b41"><td class="memItemLeft" align="right" valign="top"><a id="a67f660ac517936903d70e5df83be5b41"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>REQUIRE</b> (task.setVariablesHandler(variablesHandler))</td></tr>
+<tr class="separator:a67f660ac517936903d70e5df83be5b41"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acfb872013de34317e5bbbe99238046b3"><td class="memItemLeft" align="right" valign="top"><a id="acfb872013de34317e5bbbe99238046b3"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>REQUIRE</b> (task.update())</td></tr>
+<tr class="separator:acfb872013de34317e5bbbe99238046b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:afdf084c03cfaeb31df31e06feccdf418"><td class="memItemLeft" align="right" valign="top"><a id="afdf084c03cfaeb31df31e06feccdf418"></a>
+const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>robotVelocity</b> = &quot;robotVelocity&quot;</td></tr>
+<tr class="separator:afdf084c03cfaeb31df31e06feccdf418"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acc0dd0ccebcf3201b751283c9d891dfc"><td class="memItemLeft" align="right" valign="top"><a id="acc0dd0ccebcf3201b751283c9d891dfc"></a>
+constexpr std::chrono::nanoseconds&#160;</td><td class="memItemRight" valign="bottom"><b>dt</b> = 10ms</td></tr>
+<tr class="separator:acc0dd0ccebcf3201b751283c9d891dfc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9a27a451bb64e149ef45fabf9c7c2ee0"><td class="memItemLeft" align="right" valign="top"><a id="a9a27a451bb64e149ef45fabf9c7c2ee0"></a>
+const double&#160;</td><td class="memItemRight" valign="bottom"><b>dtSeconds</b> = std::chrono::duration&lt;double&gt;(dt).count()</td></tr>
+<tr class="separator:a9a27a451bb64e149ef45fabf9c7c2ee0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3ab1c6690f5b0b18df6b3f6e3e1e637d"><td class="memItemLeft" align="right" valign="top"><a id="a3ab1c6690f5b0b18df6b3f6e3e1e637d"></a>
+constexpr double&#160;</td><td class="memItemRight" valign="bottom"><b>lowerLimit</b> = -1.0</td></tr>
+<tr class="separator:a3ab1c6690f5b0b18df6b3f6e3e1e637d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8230053ef453af144dea96d7b7370302"><td class="memItemLeft" align="right" valign="top"><a id="a8230053ef453af144dea96d7b7370302"></a>
+constexpr double&#160;</td><td class="memItemRight" valign="bottom"><b>upperLimit</b> = 1.0</td></tr>
+<tr class="separator:a8230053ef453af144dea96d7b7370302"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a61992ca36fba92e770c0cf81083eff20"><td class="memItemLeft" align="right" valign="top"><a id="a61992ca36fba92e770c0cf81083eff20"></a>
+auto&#160;</td><td class="memItemRight" valign="bottom"><b>kinDyn</b> = std::make_shared&lt;iDynTree::KinDynComputations&gt;()</td></tr>
+<tr class="separator:a61992ca36fba92e770c0cf81083eff20"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac8f27f8beee16bfcbea596cba29cf087"><td class="memItemLeft" align="right" valign="top"><a id="ac8f27f8beee16bfcbea596cba29cf087"></a>
+auto&#160;</td><td class="memItemRight" valign="bottom"><b>parameterHandler</b> = std::make_shared&lt;<a class="el" href="classBipedalLocomotion_1_1ParametersHandler_1_1StdImplementation.html">StdImplementation</a>&gt;()</td></tr>
+<tr class="separator:ac8f27f8beee16bfcbea596cba29cf087"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a085518f335e3e2c4035de8b2333ffc85"><td class="memItemLeft" align="right" valign="top"><a id="a085518f335e3e2c4035de8b2333ffc85"></a>
+iDynTree::Model&#160;</td><td class="memItemRight" valign="bottom"><b>model</b> = iDynTree::getRandomModel(15)</td></tr>
+<tr class="separator:a085518f335e3e2c4035de8b2333ffc85"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a129d56ac165946928717a3a8f5a111ab"><td class="memItemLeft" align="right" valign="top"><a id="a129d56ac165946928717a3a8f5a111ab"></a>
+const auto&#160;</td><td class="memItemRight" valign="bottom"><b>worldBasePos</b> = iDynTree::getRandomTransform()</td></tr>
+<tr class="separator:a129d56ac165946928717a3a8f5a111ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaae2fbfc41d2bc71841c7825dbb4b4f7"><td class="memItemLeft" align="right" valign="top"><a id="aaae2fbfc41d2bc71841c7825dbb4b4f7"></a>
+const auto&#160;</td><td class="memItemRight" valign="bottom"><b>baseVel</b> = iDynTree::getRandomTwist()</td></tr>
+<tr class="separator:aaae2fbfc41d2bc71841c7825dbb4b4f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad8847bb8a2b58dab7d0d1b9e0c16414d"><td class="memItemLeft" align="right" valign="top"><a id="ad8847bb8a2b58dab7d0d1b9e0c16414d"></a>
+iDynTree::Vector3&#160;</td><td class="memItemRight" valign="bottom"><b>gravity</b></td></tr>
+<tr class="separator:ad8847bb8a2b58dab7d0d1b9e0c16414d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5a0fd4b9db469fd0466eccae8c568ff3"><td class="memItemLeft" align="right" valign="top"><a id="a5a0fd4b9db469fd0466eccae8c568ff3"></a>
+<a class="el" href="classBipedalLocomotion_1_1System_1_1VariablesHandler.html">VariablesHandler</a>&#160;</td><td class="memItemRight" valign="bottom"><b>variablesHandler</b></td></tr>
+<tr class="separator:a5a0fd4b9db469fd0466eccae8c568ff3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aae30139a19e042cb2d7c0e7b36937f93"><td class="memItemLeft" align="right" valign="top"><a id="aae30139a19e042cb2d7c0e7b36937f93"></a>
+<a class="el" href="classBipedalLocomotion_1_1IK_1_1JointLimitsTask.html">JointLimitsTask</a>&#160;</td><td class="memItemRight" valign="bottom"><b>task</b></td></tr>
+<tr class="separator:aae30139a19e042cb2d7c0e7b36937f93"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad1ff0e6fcdbb8739e43b5343de7cca6d"><td class="memItemLeft" align="right" valign="top"><a id="ad1ff0e6fcdbb8739e43b5343de7cca6d"></a>
+Eigen::Ref&lt; const Eigen::VectorXd &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>b</b> = task.getB()</td></tr>
+<tr class="separator:ad1ff0e6fcdbb8739e43b5343de7cca6d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><dl class="section author"><dt>Authors</dt><dd>Giulio Romualdi </dd></dl>
