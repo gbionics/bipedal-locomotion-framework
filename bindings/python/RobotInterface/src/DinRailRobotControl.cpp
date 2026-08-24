@@ -36,13 +36,46 @@ void CreateDinRailRobotControl(pybind11::module& module)
             },
             py::arg("handler"))
         .def("set_driver", &DinRailRobotControl::setDriver, py::arg("driver"))
-        .def("set_impedance_set_points", //
-             &DinRailRobotControl::setImpedanceSetPoints,
+        .def("set_impedance_set_points",
+             py::overload_cast<Eigen::Ref<const Eigen::VectorXd>,
+                               Eigen::Ref<const Eigen::VectorXd>,
+                               Eigen::Ref<const Eigen::VectorXd>,
+                               Eigen::Ref<const Eigen::VectorXd>,
+                               Eigen::Ref<const Eigen::VectorXd>>(
+                 &DinRailRobotControl::setImpedanceSetPoints),
              py::arg("position"),
              py::arg("velocity"),
              py::arg("torque"),
              py::arg("stiffness"),
-             py::arg("damping"));
+             py::arg("damping"))
+        .def("set_impedance_set_points_subset",
+             py::overload_cast<Eigen::Ref<const Eigen::VectorXd>,
+                               Eigen::Ref<const Eigen::VectorXd>,
+                               Eigen::Ref<const Eigen::VectorXd>,
+                               Eigen::Ref<const Eigen::VectorXd>,
+                               Eigen::Ref<const Eigen::VectorXd>,
+                               const std::vector<int>&>(
+                 &DinRailRobotControl::setImpedanceSetPoints),
+             py::arg("position"),
+             py::arg("velocity"),
+             py::arg("torque"),
+             py::arg("stiffness"),
+             py::arg("damping"),
+             py::arg("joint_indices"))
+        .def("set_impedance_set_points_by_name",
+             py::overload_cast<Eigen::Ref<const Eigen::VectorXd>,
+                               Eigen::Ref<const Eigen::VectorXd>,
+                               Eigen::Ref<const Eigen::VectorXd>,
+                               Eigen::Ref<const Eigen::VectorXd>,
+                               Eigen::Ref<const Eigen::VectorXd>,
+                               const std::vector<std::string>&>(
+                 &DinRailRobotControl::setImpedanceSetPoints),
+             py::arg("position"),
+             py::arg("velocity"),
+             py::arg("torque"),
+             py::arg("stiffness"),
+             py::arg("damping"),
+             py::arg("joint_names"));
 }
 
 } // namespace RobotInterface

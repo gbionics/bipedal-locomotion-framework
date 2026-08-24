@@ -9,6 +9,7 @@
 #define BIPEDAL_LOCOMOTION_ROBOT_INTERFACE_DINRAIL_ROBOT_CONTROL_H
 
 #include <memory>
+#include <vector>
 
 #include <Eigen/Dense>
 
@@ -104,6 +105,60 @@ public:
                                Eigen::Ref<const Eigen::VectorXd> torque,
                                Eigen::Ref<const Eigen::VectorXd> stiffness,
                                Eigen::Ref<const Eigen::VectorXd> damping);
+
+    /**
+     * Set impedance control setpoints (MIT mode) for a subset of joints.
+     *
+     * Mirrors the behaviour of IRobotControl::setReferences() with joint indices:
+     * only the joints listed in @p jointIndices are updated; all other joints
+     * retain the values they were last commanded with.
+     *
+     * Each input vector must have exactly `jointIndices.size()` elements.  The
+     * same radian-to-degree conversion rules as the full overload apply.
+     *
+     * @param position   Position setpoints for the subset joints [rad].
+     * @param velocity   Velocity setpoints for the subset joints [rad/s].
+     * @param torque     Torque feedforward setpoints for the subset joints [Nm].
+     * @param stiffness  Stiffness setpoints for the subset joints [Nm/rad].
+     * @param damping    Damping setpoints for the subset joints [Nms/rad].
+     * @param jointIndices Indices (into the full control-board joint list) of the
+     *                     joints to update.
+     * @return True on success, false otherwise.
+     * @note The full overload must be called at least once before this overload
+     *       is used, so that the cached state for the non-indexed joints is
+     *       properly initialised.
+     */
+    bool setImpedanceSetPoints(Eigen::Ref<const Eigen::VectorXd> position,
+                               Eigen::Ref<const Eigen::VectorXd> velocity,
+                               Eigen::Ref<const Eigen::VectorXd> torque,
+                               Eigen::Ref<const Eigen::VectorXd> stiffness,
+                               Eigen::Ref<const Eigen::VectorXd> damping,
+                               const std::vector<int>& jointIndices);
+
+    /**
+     * Set impedance control setpoints (MIT mode) for a subset of joints identified by name.
+     *
+     * Resolves each name in @p jointNames to its index in the controlled joint list and
+     * delegates to the index-based overload.  All other joints retain their last commanded
+     * setpoints.  Each input vector must have exactly `jointNames.size()` elements.
+     * The same unit-conversion rules as the full overload apply.
+     *
+     * @param position   Position setpoints for the named joints [rad].
+     * @param velocity   Velocity setpoints for the named joints [rad/s].
+     * @param torque     Torque feedforward setpoints for the named joints [Nm].
+     * @param stiffness  Stiffness setpoints for the named joints [Nm/rad].
+     * @param damping    Damping setpoints for the named joints [Nms/rad].
+     * @param jointNames Names of the joints to update (must be in the controlled joint list).
+     * @return True on success, false if any name is not found or inputs are inconsistent.
+     * @note The full overload must be called at least once before this overload
+     *       is used.
+     */
+    bool setImpedanceSetPoints(Eigen::Ref<const Eigen::VectorXd> position,
+                               Eigen::Ref<const Eigen::VectorXd> velocity,
+                               Eigen::Ref<const Eigen::VectorXd> torque,
+                               Eigen::Ref<const Eigen::VectorXd> stiffness,
+                               Eigen::Ref<const Eigen::VectorXd> damping,
+                               const std::vector<std::string>& jointNames);
 };
 
 } // namespace RobotInterface
