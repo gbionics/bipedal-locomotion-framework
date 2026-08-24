@@ -25,7 +25,7 @@ add_bipedal_test(
 add_bipedal_test(
   NAME JointsLimitsTaskIK
   SOURCES JointLimitsTaskTest.cpp
-  LINKS BipedalLocomotion::IK)
+  LINKS BipedalLocomotion::IK OsqpEigen::OsqpEigen)
 
 add_bipedal_test(
   NAME CoMTaskIK
