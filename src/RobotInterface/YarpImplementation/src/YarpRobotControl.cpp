@@ -31,6 +31,12 @@
 
 using namespace BipedalLocomotion::RobotInterface;
 
+namespace
+{
+constexpr double RevolutePositionMinVelocity = 3.0; // deg/s
+constexpr double PrismaticPositionMinVelocity = 10.0; // mm/s
+}
+
 struct YarpRobotControl::Impl
 {
     /**
@@ -660,11 +666,11 @@ struct YarpRobotControl::Impl
                     if (this->jointsTypeList[i] == JointType::REVOLUTE)
                     {
                         scaling = 180 / M_PI;
-                        minVelocity = 3.0; // Degrees/sec
+                        minVelocity = RevolutePositionMinVelocity;
                     }
                     else {
                         scaling = 1;
-                        minVelocity = 10; // mm/sec
+                        minVelocity = PrismaticPositionMinVelocity;
                     }
                     this->positionControlRefSpeeds[i]
                         = std::max(minVelocity,
@@ -897,11 +903,11 @@ struct YarpRobotControl::Impl
                 if (this->jointsTypeList[jointIndices[i]] == JointType::REVOLUTE)
                 {
                     scaling = 180.0 / M_PI;
-                    minVelocity = 3.0; // deg/s
+                    minVelocity = RevolutePositionMinVelocity;
                 } else
                 {
                     scaling = 1.0;
-                    minVelocity = 10.0; // mm/s
+                    minVelocity = PrismaticPositionMinVelocity;
                 }
                 this->subsetRefSpeeds[i] = std::max(minVelocity,
                                         scaling * (jointError / positioningDurationSeconds));
