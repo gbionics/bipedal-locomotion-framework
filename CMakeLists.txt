@@ -6,7 +6,7 @@ cmake_minimum_required(VERSION 3.18.0)
 
 ## MAIN project
 project(BipedalLocomotionFramework
-  VERSION 0.26.0)
+  VERSION 0.27.0)
 
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
 
