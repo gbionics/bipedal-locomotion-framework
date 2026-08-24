@@ -93,6 +93,12 @@ PolyDriverDescriptor BipedalLocomotion::RobotInterface::constructRemoteControlBo
     yarp::os::Property& remoteControlBoardsOpts = options.addGroup("REMOTE_CONTROLBOARD_OPTIONS");
     remoteControlBoardsOpts.put("writeStrict", "on");
 
+    std::string carrier;
+    if (ptr->getParameter("carrier", carrier))
+    {
+        remoteControlBoardsOpts.put("carrier", carrier);
+    }
+
     PolyDriverDescriptor device("remoteControlBoards", std::make_shared<yarp::dev::PolyDriver>());
 
     if (!device.poly->open(options) && !device.poly->isValid())
