@@ -137,6 +137,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a3d4ea60f650fa1363c1489efea5921f6"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1RobotInterface_1_1DinRailRobotControl.html#a3d4ea60f650fa1363c1489efea5921f6">setImpedanceSetPoints</a> (Eigen::Ref&lt; const Eigen::VectorXd &gt; position, Eigen::Ref&lt; const Eigen::VectorXd &gt; velocity, Eigen::Ref&lt; const Eigen::VectorXd &gt; torque, Eigen::Ref&lt; const Eigen::VectorXd &gt; stiffness, Eigen::Ref&lt; const Eigen::VectorXd &gt; damping)</td></tr>
 <tr class="memdesc:a3d4ea60f650fa1363c1489efea5921f6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set all impedance control setpoints (MIT mode) for all controlled joints.  <a href="classBipedalLocomotion_1_1RobotInterface_1_1DinRailRobotControl.html#a3d4ea60f650fa1363c1489efea5921f6">More...</a><br /></td></tr>
 <tr class="separator:a3d4ea60f650fa1363c1489efea5921f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8345ab868fbba88e1308ef174689ef77"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1RobotInterface_1_1DinRailRobotControl.html#a8345ab868fbba88e1308ef174689ef77">setImpedanceSetPoints</a> (Eigen::Ref&lt; const Eigen::VectorXd &gt; position, Eigen::Ref&lt; const Eigen::VectorXd &gt; velocity, Eigen::Ref&lt; const Eigen::VectorXd &gt; torque, Eigen::Ref&lt; const Eigen::VectorXd &gt; stiffness, Eigen::Ref&lt; const Eigen::VectorXd &gt; damping, const std::vector&lt; int &gt; &amp;jointIndices)</td></tr>
+<tr class="memdesc:a8345ab868fbba88e1308ef174689ef77"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set impedance control setpoints (MIT mode) for a subset of joints.  <a href="classBipedalLocomotion_1_1RobotInterface_1_1DinRailRobotControl.html#a8345ab868fbba88e1308ef174689ef77">More...</a><br /></td></tr>
+<tr class="separator:a8345ab868fbba88e1308ef174689ef77"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2a0170d183ad764b2239fc47d7396b60"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1RobotInterface_1_1DinRailRobotControl.html#a2a0170d183ad764b2239fc47d7396b60">setImpedanceSetPoints</a> (Eigen::Ref&lt; const Eigen::VectorXd &gt; position, Eigen::Ref&lt; const Eigen::VectorXd &gt; velocity, Eigen::Ref&lt; const Eigen::VectorXd &gt; torque, Eigen::Ref&lt; const Eigen::VectorXd &gt; stiffness, Eigen::Ref&lt; const Eigen::VectorXd &gt; damping, const std::vector&lt; std::string &gt; &amp;jointNames)</td></tr>
+<tr class="memdesc:a2a0170d183ad764b2239fc47d7396b60"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set impedance control setpoints (MIT mode) for a subset of joints identified by name.  <a href="classBipedalLocomotion_1_1RobotInterface_1_1DinRailRobotControl.html#a2a0170d183ad764b2239fc47d7396b60">More...</a><br /></td></tr>
+<tr class="separator:a2a0170d183ad764b2239fc47d7396b60"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classBipedalLocomotion_1_1RobotInterface_1_1YarpRobotControl"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classBipedalLocomotion_1_1RobotInterface_1_1YarpRobotControl')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classBipedalLocomotion_1_1RobotInterface_1_1YarpRobotControl.html">BipedalLocomotion::RobotInterface::YarpRobotControl</a></td></tr>
 <tr class="memitem:a3d42952c6150c8865f0fb59d68067db7 inherit pub_methods_classBipedalLocomotion_1_1RobotInterface_1_1YarpRobotControl"><td class="memItemLeft" align="right" valign="top"><a id="a3d42952c6150c8865f0fb59d68067db7"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1RobotInterface_1_1YarpRobotControl.html#a3d42952c6150c8865f0fb59d68067db7">YarpRobotControl</a> ()</td></tr>
@@ -165,6 +171,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a9c850b967e0442ef72c30797365e004b inherit pub_methods_classBipedalLocomotion_1_1RobotInterface_1_1YarpRobotControl"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1RobotInterface_1_1YarpRobotControl.html#a9c850b967e0442ef72c30797365e004b">setReferences</a> (Eigen::Ref&lt; const Eigen::VectorXd &gt; desiredJointValues, const <a class="el" href="classBipedalLocomotion_1_1RobotInterface_1_1IRobotControl.html#a4d0ff64a201bf8ed884da1c41e3497bc">IRobotControl::ControlMode</a> &amp;mode, std::optional&lt; Eigen::Ref&lt; const Eigen::VectorXd &gt;&gt; currentJointValues={}) final</td></tr>
 <tr class="memdesc:a9c850b967e0442ef72c30797365e004b inherit pub_methods_classBipedalLocomotion_1_1RobotInterface_1_1YarpRobotControl"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the desired reference.  <a href="classBipedalLocomotion_1_1RobotInterface_1_1YarpRobotControl.html#a9c850b967e0442ef72c30797365e004b">More...</a><br /></td></tr>
 <tr class="separator:a9c850b967e0442ef72c30797365e004b inherit pub_methods_classBipedalLocomotion_1_1RobotInterface_1_1YarpRobotControl"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaeb79d3f9df3031ff1fcf35eb50fb651 inherit pub_methods_classBipedalLocomotion_1_1RobotInterface_1_1YarpRobotControl"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1RobotInterface_1_1YarpRobotControl.html#aaeb79d3f9df3031ff1fcf35eb50fb651">setReferences</a> (Eigen::Ref&lt; const Eigen::VectorXd &gt; desiredJointValues, const std::vector&lt; int &gt; &amp;jointIndices, const <a class="el" href="classBipedalLocomotion_1_1RobotInterface_1_1IRobotControl.html#a4d0ff64a201bf8ed884da1c41e3497bc">IRobotControl::ControlMode</a> &amp;controlMode, std::optional&lt; Eigen::Ref&lt; const Eigen::VectorXd &gt;&gt; currentJointValues={}) final</td></tr>
+<tr class="memdesc:aaeb79d3f9df3031ff1fcf35eb50fb651 inherit pub_methods_classBipedalLocomotion_1_1RobotInterface_1_1YarpRobotControl"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the desired reference for a subset of joints identified by their indices.  <a href="classBipedalLocomotion_1_1RobotInterface_1_1YarpRobotControl.html#aaeb79d3f9df3031ff1fcf35eb50fb651">More...</a><br /></td></tr>
+<tr class="separator:aaeb79d3f9df3031ff1fcf35eb50fb651 inherit pub_methods_classBipedalLocomotion_1_1RobotInterface_1_1YarpRobotControl"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a87640a0d723f5d806a8405cc5efde1f1 inherit pub_methods_classBipedalLocomotion_1_1RobotInterface_1_1YarpRobotControl"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1RobotInterface_1_1YarpRobotControl.html#a87640a0d723f5d806a8405cc5efde1f1">setReferences</a> (Eigen::Ref&lt; const Eigen::VectorXd &gt; desiredJointValues, const std::vector&lt; std::string &gt; &amp;jointNames, const <a class="el" href="classBipedalLocomotion_1_1RobotInterface_1_1IRobotControl.html#a4d0ff64a201bf8ed884da1c41e3497bc">IRobotControl::ControlMode</a> &amp;controlMode, std::optional&lt; Eigen::Ref&lt; const Eigen::VectorXd &gt;&gt; currentJointValues={}) final</td></tr>
+<tr class="memdesc:a87640a0d723f5d806a8405cc5efde1f1 inherit pub_methods_classBipedalLocomotion_1_1RobotInterface_1_1YarpRobotControl"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the desired reference for a subset of joints identified by their names.  <a href="classBipedalLocomotion_1_1RobotInterface_1_1YarpRobotControl.html#a87640a0d723f5d806a8405cc5efde1f1">More...</a><br /></td></tr>
+<tr class="separator:a87640a0d723f5d806a8405cc5efde1f1 inherit pub_methods_classBipedalLocomotion_1_1RobotInterface_1_1YarpRobotControl"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a04322c86da47372afd5b41ba274d566e inherit pub_methods_classBipedalLocomotion_1_1RobotInterface_1_1YarpRobotControl"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1RobotInterface_1_1YarpRobotControl.html#a04322c86da47372afd5b41ba274d566e">getJointList</a> () const final</td></tr>
 <tr class="memdesc:a04322c86da47372afd5b41ba274d566e inherit pub_methods_classBipedalLocomotion_1_1RobotInterface_1_1YarpRobotControl"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the list of the controlled joints.  <a href="classBipedalLocomotion_1_1RobotInterface_1_1YarpRobotControl.html#a04322c86da47372afd5b41ba274d566e">More...</a><br /></td></tr>
 <tr class="separator:a04322c86da47372afd5b41ba274d566e inherit pub_methods_classBipedalLocomotion_1_1RobotInterface_1_1YarpRobotControl"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -294,7 +306,7 @@ using&#160;</td><td class="memItemRight" valign="bottom"><b>weak_ptr</b> = std::
 </div>
 </div>
 <a id="a3d4ea60f650fa1363c1489efea5921f6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3d4ea60f650fa1363c1489efea5921f6">&#9670;&nbsp;</a></span>setImpedanceSetPoints()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a3d4ea60f650fa1363c1489efea5921f6">&#9670;&nbsp;</a></span>setImpedanceSetPoints() <span class="overload">[1/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -350,6 +362,143 @@ using&#160;</td><td class="memItemRight" valign="bottom"><b>weak_ptr</b> = std::
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>True on success, false otherwise. </dd></dl>
+
+</div>
+</div>
+<a id="a8345ab868fbba88e1308ef174689ef77"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8345ab868fbba88e1308ef174689ef77">&#9670;&nbsp;</a></span>setImpedanceSetPoints() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool DinRailRobotControl::setImpedanceSetPoints </td>
+          <td>(</td>
+          <td class="paramtype">Eigen::Ref&lt; const Eigen::VectorXd &gt;&#160;</td>
+          <td class="paramname"><em>position</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Eigen::Ref&lt; const Eigen::VectorXd &gt;&#160;</td>
+          <td class="paramname"><em>velocity</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Eigen::Ref&lt; const Eigen::VectorXd &gt;&#160;</td>
+          <td class="paramname"><em>torque</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Eigen::Ref&lt; const Eigen::VectorXd &gt;&#160;</td>
+          <td class="paramname"><em>stiffness</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Eigen::Ref&lt; const Eigen::VectorXd &gt;&#160;</td>
+          <td class="paramname"><em>damping</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::vector&lt; int &gt; &amp;&#160;</td>
+          <td class="paramname"><em>jointIndices</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Set impedance control setpoints (MIT mode) for a subset of joints. </p>
+<p>Mirrors the behaviour of <a class="el" href="classBipedalLocomotion_1_1RobotInterface_1_1IRobotControl.html#ade3791093f875c8a242c0e84dcc5a40b" title="Set the desired reference.">IRobotControl::setReferences()</a> with joint indices: only the joints listed in <code>jointIndices</code> are updated; all other joints retain the values they were last commanded with.</p>
+<p>Each input vector must have exactly <code>jointIndices.size()</code> elements. The same radian-to-degree conversion rules as the full overload apply.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">position</td><td>Position setpoints for the subset joints [rad]. </td></tr>
+    <tr><td class="paramname">velocity</td><td>Velocity setpoints for the subset joints [rad/s]. </td></tr>
+    <tr><td class="paramname">torque</td><td>Torque feedforward setpoints for the subset joints [Nm]. </td></tr>
+    <tr><td class="paramname">stiffness</td><td>Stiffness setpoints for the subset joints [Nm/rad]. </td></tr>
+    <tr><td class="paramname">damping</td><td>Damping setpoints for the subset joints [Nms/rad]. </td></tr>
+    <tr><td class="paramname">jointIndices</td><td>Indices (into the full control-board joint list) of the joints to update. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>True on success, false otherwise. </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>The full overload must be called at least once before this overload is used, so that the cached state for the non-indexed joints is properly initialised. </dd></dl>
+
+</div>
+</div>
+<a id="a2a0170d183ad764b2239fc47d7396b60"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2a0170d183ad764b2239fc47d7396b60">&#9670;&nbsp;</a></span>setImpedanceSetPoints() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool DinRailRobotControl::setImpedanceSetPoints </td>
+          <td>(</td>
+          <td class="paramtype">Eigen::Ref&lt; const Eigen::VectorXd &gt;&#160;</td>
+          <td class="paramname"><em>position</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Eigen::Ref&lt; const Eigen::VectorXd &gt;&#160;</td>
+          <td class="paramname"><em>velocity</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Eigen::Ref&lt; const Eigen::VectorXd &gt;&#160;</td>
+          <td class="paramname"><em>torque</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Eigen::Ref&lt; const Eigen::VectorXd &gt;&#160;</td>
+          <td class="paramname"><em>stiffness</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Eigen::Ref&lt; const Eigen::VectorXd &gt;&#160;</td>
+          <td class="paramname"><em>damping</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::vector&lt; std::string &gt; &amp;&#160;</td>
+          <td class="paramname"><em>jointNames</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Set impedance control setpoints (MIT mode) for a subset of joints identified by name. </p>
+<p>Resolves each name in <code>jointNames</code> to its index in the controlled joint list and delegates to the index-based overload. All other joints retain their last commanded setpoints. Each input vector must have exactly <code>jointNames.size()</code> elements. The same unit-conversion rules as the full overload apply.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">position</td><td>Position setpoints for the named joints [rad]. </td></tr>
+    <tr><td class="paramname">velocity</td><td>Velocity setpoints for the named joints [rad/s]. </td></tr>
+    <tr><td class="paramname">torque</td><td>Torque feedforward setpoints for the named joints [Nm]. </td></tr>
+    <tr><td class="paramname">stiffness</td><td>Stiffness setpoints for the named joints [Nm/rad]. </td></tr>
+    <tr><td class="paramname">damping</td><td>Damping setpoints for the named joints [Nms/rad]. </td></tr>
+    <tr><td class="paramname">jointNames</td><td>Names of the joints to update (must be in the controlled joint list). </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>True on success, false if any name is not found or inputs are inconsistent. </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>The full overload must be called at least once before this overload is used. </dd></dl>
 
 </div>
 </div>

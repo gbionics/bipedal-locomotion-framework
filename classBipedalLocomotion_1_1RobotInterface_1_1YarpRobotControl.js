@@ -11,6 +11,8 @@ var classBipedalLocomotion_1_1RobotInterface_1_1YarpRobotControl =
     [ "setControlModeAsync", "classBipedalLocomotion_1_1RobotInterface_1_1YarpRobotControl.html#ae99d9ae79276011d9e3b15f139719172", null ],
     [ "setReferences", "classBipedalLocomotion_1_1RobotInterface_1_1YarpRobotControl.html#a46fe5ecd2b47d3be7e43d1fa5473635e", null ],
     [ "setReferences", "classBipedalLocomotion_1_1RobotInterface_1_1YarpRobotControl.html#a9c850b967e0442ef72c30797365e004b", null ],
+    [ "setReferences", "classBipedalLocomotion_1_1RobotInterface_1_1YarpRobotControl.html#aaeb79d3f9df3031ff1fcf35eb50fb651", null ],
+    [ "setReferences", "classBipedalLocomotion_1_1RobotInterface_1_1YarpRobotControl.html#a87640a0d723f5d806a8405cc5efde1f1", null ],
     [ "getJointList", "classBipedalLocomotion_1_1RobotInterface_1_1YarpRobotControl.html#a04322c86da47372afd5b41ba274d566e", null ],
     [ "getJointLimits", "classBipedalLocomotion_1_1RobotInterface_1_1YarpRobotControl.html#a36a169490dbfb22446dc4dd66061fc3f", null ],
     [ "isValid", "classBipedalLocomotion_1_1RobotInterface_1_1YarpRobotControl.html#a7dae60513310f255be95c8f8729ec81c", null ]

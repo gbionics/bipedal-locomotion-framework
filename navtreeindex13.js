@@ -1,5 +1,11 @@
 var NAVTREEINDEX13 =
 {
+"structBipedalLocomotion_1_1ML_1_1MANNFootState.html#acb798f39cc2a73a447111fe677c6a6de":[4,0,0,8,3,2],
+"structBipedalLocomotion_1_1ML_1_1MANNInput.html":[4,0,0,8,0],
+"structBipedalLocomotion_1_1ML_1_1MANNInput.html#a05bd30d54f2dade752815bf244d1fdd8":[4,0,0,8,0,0],
+"structBipedalLocomotion_1_1ML_1_1MANNInput.html#a23ea4272e01ffaf092032b206d6c6b60":[4,0,0,8,0,4],
+"structBipedalLocomotion_1_1ML_1_1MANNInput.html#a3575b85707067e6182905a2778bb7860":[4,0,0,8,0,3],
+"structBipedalLocomotion_1_1ML_1_1MANNInput.html#a4a8fefefd25e0aafe5a08174debf4c2d":[4,0,0,8,0,2],
 "structBipedalLocomotion_1_1ML_1_1MANNInput.html#a7a792a72332b672c0c8b74f0ff0ce584":[4,0,0,8,0,1],
 "structBipedalLocomotion_1_1ML_1_1MANNOutput.html":[4,0,0,8,1],
 "structBipedalLocomotion_1_1ML_1_1MANNOutput.html#a3fdedda9b78f87c9982408712eb7ab61":[4,0,0,8,1,0],
@@ -243,11 +249,5 @@ var NAVTREEINDEX13 =
 "structBipedalLocomotion_1_1RobotInterface_1_1PCLBridgeMetaData.html#a82396711aeecd07721acf9962cb33975":[4,0,0,13,6,0],
 "structBipedalLocomotion_1_1RobotInterface_1_1PCLDeviceLists.html":[4,0,0,13,5],
 "structBipedalLocomotion_1_1RobotInterface_1_1PCLDeviceLists.html#adfca4f208a96de34dd4b157775f29073":[4,0,0,13,5,0],
-"structBipedalLocomotion_1_1RobotInterface_1_1PolyDriverDescriptor.html":[4,0,0,13,16],
-"structBipedalLocomotion_1_1RobotInterface_1_1PolyDriverDescriptor.html#a606f5f10f90b91288f922dd3206c74ef":[4,0,0,13,16,4],
-"structBipedalLocomotion_1_1RobotInterface_1_1PolyDriverDescriptor.html#a9a0cc8bba732abe150d1e74765f21d95":[4,0,0,13,16,1],
-"structBipedalLocomotion_1_1RobotInterface_1_1PolyDriverDescriptor.html#ab97d9fa94d06f4f5c53e8fd2b9243eba":[4,0,0,13,16,3],
-"structBipedalLocomotion_1_1RobotInterface_1_1PolyDriverDescriptor.html#ad61523b1c0f0c1600f2d1e1c0f2996ec":[4,0,0,13,16,2],
-"structBipedalLocomotion_1_1RobotInterface_1_1PolyDriverDescriptor.html#afa368e7690c9efe7e5caf06ef878f6c0":[4,0,0,13,16,0],
-"structBipedalLocomotion_1_1RobotInterface_1_1SensorBridgeMetaData.html":[4,0,0,13,12]
+"structBipedalLocomotion_1_1RobotInterface_1_1PolyDriverDescriptor.html":[4,0,0,13,16]
 };

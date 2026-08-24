@@ -18,6 +18,8 @@ var classBipedalLocomotion_1_1RobotInterface_1_1IRobotControl =
     [ "checkMotionDone", "classBipedalLocomotion_1_1RobotInterface_1_1IRobotControl.html#a1d8c631649d6111f17a9ba821f550497", null ],
     [ "setReferences", "classBipedalLocomotion_1_1RobotInterface_1_1IRobotControl.html#ade3791093f875c8a242c0e84dcc5a40b", null ],
     [ "setReferences", "classBipedalLocomotion_1_1RobotInterface_1_1IRobotControl.html#ad8e86bfcea12e99fa5c077d4f01d7ef1", null ],
+    [ "setReferences", "classBipedalLocomotion_1_1RobotInterface_1_1IRobotControl.html#a20e20f0702fe134b286ecfe87e6dd167", null ],
+    [ "setReferences", "classBipedalLocomotion_1_1RobotInterface_1_1IRobotControl.html#ae504eb1c9e8d21a58e0ae5d66a49e4cb", null ],
     [ "setControlMode", "classBipedalLocomotion_1_1RobotInterface_1_1IRobotControl.html#a1510d2b72ba39e075a078b2275c7a988", null ],
     [ "setControlMode", "classBipedalLocomotion_1_1RobotInterface_1_1IRobotControl.html#a5ae1dad766c79a234c67b53823bbd77a", null ],
     [ "setControlModeAsync", "classBipedalLocomotion_1_1RobotInterface_1_1IRobotControl.html#a1970510914cde2aca6afde023c57692e", null ],

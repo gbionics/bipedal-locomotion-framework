@@ -150,6 +150,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a9c850b967e0442ef72c30797365e004b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1RobotInterface_1_1YarpRobotControl.html#a9c850b967e0442ef72c30797365e004b">setReferences</a> (Eigen::Ref&lt; const Eigen::VectorXd &gt; desiredJointValues, const <a class="el" href="classBipedalLocomotion_1_1RobotInterface_1_1IRobotControl.html#a4d0ff64a201bf8ed884da1c41e3497bc">IRobotControl::ControlMode</a> &amp;mode, std::optional&lt; Eigen::Ref&lt; const Eigen::VectorXd &gt;&gt; currentJointValues={}) final</td></tr>
 <tr class="memdesc:a9c850b967e0442ef72c30797365e004b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the desired reference.  <a href="classBipedalLocomotion_1_1RobotInterface_1_1YarpRobotControl.html#a9c850b967e0442ef72c30797365e004b">More...</a><br /></td></tr>
 <tr class="separator:a9c850b967e0442ef72c30797365e004b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaeb79d3f9df3031ff1fcf35eb50fb651"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1RobotInterface_1_1YarpRobotControl.html#aaeb79d3f9df3031ff1fcf35eb50fb651">setReferences</a> (Eigen::Ref&lt; const Eigen::VectorXd &gt; desiredJointValues, const std::vector&lt; int &gt; &amp;jointIndices, const <a class="el" href="classBipedalLocomotion_1_1RobotInterface_1_1IRobotControl.html#a4d0ff64a201bf8ed884da1c41e3497bc">IRobotControl::ControlMode</a> &amp;controlMode, std::optional&lt; Eigen::Ref&lt; const Eigen::VectorXd &gt;&gt; currentJointValues={}) final</td></tr>
+<tr class="memdesc:aaeb79d3f9df3031ff1fcf35eb50fb651"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the desired reference for a subset of joints identified by their indices.  <a href="classBipedalLocomotion_1_1RobotInterface_1_1YarpRobotControl.html#aaeb79d3f9df3031ff1fcf35eb50fb651">More...</a><br /></td></tr>
+<tr class="separator:aaeb79d3f9df3031ff1fcf35eb50fb651"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a87640a0d723f5d806a8405cc5efde1f1"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1RobotInterface_1_1YarpRobotControl.html#a87640a0d723f5d806a8405cc5efde1f1">setReferences</a> (Eigen::Ref&lt; const Eigen::VectorXd &gt; desiredJointValues, const std::vector&lt; std::string &gt; &amp;jointNames, const <a class="el" href="classBipedalLocomotion_1_1RobotInterface_1_1IRobotControl.html#a4d0ff64a201bf8ed884da1c41e3497bc">IRobotControl::ControlMode</a> &amp;controlMode, std::optional&lt; Eigen::Ref&lt; const Eigen::VectorXd &gt;&gt; currentJointValues={}) final</td></tr>
+<tr class="memdesc:a87640a0d723f5d806a8405cc5efde1f1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the desired reference for a subset of joints identified by their names.  <a href="classBipedalLocomotion_1_1RobotInterface_1_1YarpRobotControl.html#a87640a0d723f5d806a8405cc5efde1f1">More...</a><br /></td></tr>
+<tr class="separator:a87640a0d723f5d806a8405cc5efde1f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a04322c86da47372afd5b41ba274d566e"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1RobotInterface_1_1YarpRobotControl.html#a04322c86da47372afd5b41ba274d566e">getJointList</a> () const final</td></tr>
 <tr class="memdesc:a04322c86da47372afd5b41ba274d566e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the list of the controlled joints.  <a href="classBipedalLocomotion_1_1RobotInterface_1_1YarpRobotControl.html#a04322c86da47372afd5b41ba274d566e">More...</a><br /></td></tr>
 <tr class="separator:a04322c86da47372afd5b41ba274d566e"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -486,7 +492,7 @@ using&#160;</td><td class="memItemRight" valign="bottom"><b>weak_ptr</b> = std::
 </div>
 </div>
 <a id="a46fe5ecd2b47d3be7e43d1fa5473635e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a46fe5ecd2b47d3be7e43d1fa5473635e">&#9670;&nbsp;</a></span>setReferences() <span class="overload">[1/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a46fe5ecd2b47d3be7e43d1fa5473635e">&#9670;&nbsp;</a></span>setReferences() <span class="overload">[1/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -542,7 +548,7 @@ using&#160;</td><td class="memItemRight" valign="bottom"><b>weak_ptr</b> = std::
 </div>
 </div>
 <a id="a9c850b967e0442ef72c30797365e004b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9c850b967e0442ef72c30797365e004b">&#9670;&nbsp;</a></span>setReferences() <span class="overload">[2/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a9c850b967e0442ef72c30797365e004b">&#9670;&nbsp;</a></span>setReferences() <span class="overload">[2/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -594,6 +600,132 @@ using&#160;</td><td class="memItemRight" valign="bottom"><b>weak_ptr</b> = std::
 <dl class="section warning"><dt>Warning</dt><dd>Call this function if you want to control all the joint with the same control mode. Otherwise call setReferences(Eigen::Ref&lt;const Eigen::VectorXd&gt;, const std::vector&lt;IRobotControl::ControlMode&gt;&amp;). </dd></dl>
 
 <p>Implements <a class="el" href="classBipedalLocomotion_1_1RobotInterface_1_1IRobotControl.html#ad8e86bfcea12e99fa5c077d4f01d7ef1">BipedalLocomotion::RobotInterface::IRobotControl</a>.</p>
+
+</div>
+</div>
+<a id="aaeb79d3f9df3031ff1fcf35eb50fb651"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaeb79d3f9df3031ff1fcf35eb50fb651">&#9670;&nbsp;</a></span>setReferences() <span class="overload">[3/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool YarpRobotControl::setReferences </td>
+          <td>(</td>
+          <td class="paramtype">Eigen::Ref&lt; const Eigen::VectorXd &gt;&#160;</td>
+          <td class="paramname"><em>desiredJointValues</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::vector&lt; int &gt; &amp;&#160;</td>
+          <td class="paramname"><em>jointIndices</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classBipedalLocomotion_1_1RobotInterface_1_1IRobotControl.html#a4d0ff64a201bf8ed884da1c41e3497bc">IRobotControl::ControlMode</a> &amp;&#160;</td>
+          <td class="paramname"><em>controlMode</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::optional&lt; Eigen::Ref&lt; const Eigen::VectorXd &gt;&gt;&#160;</td>
+          <td class="paramname"><em>currentJointValues</em> = <code>{}</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">final</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Set the desired reference for a subset of joints identified by their indices. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">desiredJointValues</td><td>desired joint values for the subset (size must match jointIndices). </td></tr>
+    <tr><td class="paramname">jointIndices</td><td>indices of the joints to control (into the full joint list). </td></tr>
+    <tr><td class="paramname">controlMode</td><td>control mode for all the subset joints. </td></tr>
+    <tr><td class="paramname">currentJointValues</td><td>current joint values for the subset (same size as desiredJointValues). If not provided, the values are read from the hardware. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>True/False in case of success/failure. </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>In case of position control the values have to be expressed in rad, in case of velocity control in rad/s. If the robot is controlled in torques, the desired joint values are expressed in Nm. </dd></dl>
+
+<p>Implements <a class="el" href="classBipedalLocomotion_1_1RobotInterface_1_1IRobotControl.html#a20e20f0702fe134b286ecfe87e6dd167">BipedalLocomotion::RobotInterface::IRobotControl</a>.</p>
+
+</div>
+</div>
+<a id="a87640a0d723f5d806a8405cc5efde1f1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a87640a0d723f5d806a8405cc5efde1f1">&#9670;&nbsp;</a></span>setReferences() <span class="overload">[4/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool YarpRobotControl::setReferences </td>
+          <td>(</td>
+          <td class="paramtype">Eigen::Ref&lt; const Eigen::VectorXd &gt;&#160;</td>
+          <td class="paramname"><em>desiredJointValues</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::vector&lt; std::string &gt; &amp;&#160;</td>
+          <td class="paramname"><em>jointNames</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classBipedalLocomotion_1_1RobotInterface_1_1IRobotControl.html#a4d0ff64a201bf8ed884da1c41e3497bc">IRobotControl::ControlMode</a> &amp;&#160;</td>
+          <td class="paramname"><em>controlMode</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::optional&lt; Eigen::Ref&lt; const Eigen::VectorXd &gt;&gt;&#160;</td>
+          <td class="paramname"><em>currentJointValues</em> = <code>{}</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">final</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Set the desired reference for a subset of joints identified by their names. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">desiredJointValues</td><td>desired joint values for the subset (size must match jointNames). </td></tr>
+    <tr><td class="paramname">jointNames</td><td>names of the joints to control. </td></tr>
+    <tr><td class="paramname">controlMode</td><td>control mode for all the subset joints. </td></tr>
+    <tr><td class="paramname">currentJointValues</td><td>current joint values for the subset (same size as desiredJointValues). If not provided, the values are read from the hardware. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>True/False in case of success/failure. </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>In case of position control the values have to be expressed in rad, in case of velocity control in rad/s. If the robot is controlled in torques, the desired joint values are expressed in Nm. </dd></dl>
+
+<p>Implements <a class="el" href="classBipedalLocomotion_1_1RobotInterface_1_1IRobotControl.html#ae504eb1c9e8d21a58e0ae5d66a49e4cb">BipedalLocomotion::RobotInterface::IRobotControl</a>.</p>
 
 </div>
 </div>
