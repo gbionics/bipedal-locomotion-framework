@@ -1826,6 +1826,90 @@ void YarpRobotLoggerDevice::recordVideo(const std::string& cameraName, VideoWrit
 {
     constexpr auto logPrefix = "[YarpRobotLoggerDevice::recordVideo]";
 
+    // Start the encoder thread. It pops CapturedFrames from the queue and
+    // writes them to disk / video, decoupled from the capture deadline loop.
+    writer.encodeThreadRunning = true;
+    writer.encodeThread = std::thread([this, &writer, cameraName]() {
+        while (true)
+        {
+            VideoWriter::CapturedFrame frame;
+            {
+                std::unique_lock<std::mutex> lock(writer.encoderQueueMutex);
+                writer.encoderQueueCv.wait(lock, [&]() {
+                    return !writer.encoderQueue.empty() || !writer.encodeThreadRunning;
+                });
+                if (writer.encoderQueue.empty())
+                {
+                    // encodeThreadRunning is false and the queue is fully drained.
+                    break;
+                }
+                frame = std::move(writer.encoderQueue.front());
+                writer.encoderQueue.pop();
+            }
+
+            const double timestampSeconds
+                = std::chrono::duration<double>(frame.timestamp).count();
+
+            // RGB channel
+            if (writer.rgb != nullptr && !frame.rgb.empty())
+            {
+                if (writer.rgb->saveMode == VideoWriter::SaveMode::Video)
+                {
+                    std::lock_guard<std::mutex> imgLock(writer.rgb->mutex);
+                    writer.rgb->writer->write(frame.rgb);
+                } else
+                {
+                    assert(writer.rgb->saveMode == VideoWriter::SaveMode::Frame);
+                    const std::filesystem::path imgPath
+                        = writer.rgb->framesPath
+                          / ("img_" + std::to_string(frame.frameIndex) + ".png");
+
+                    // Disk I/O before acquiring m_bufferManagerMutex
+                    cv::imwrite(imgPath.string(), frame.rgb);
+                    {
+                        std::lock_guard lock(m_bufferManagerMutex);
+                        // TODO here we may save the frame itself
+                        m_bufferManager.push_back(frame.frameIndex,
+                                                   timestampSeconds,
+                                                   "camera::" + cameraName + "::rgb");
+                    }
+                }
+            }
+
+            // Depth channel
+            if (writer.depth != nullptr && !frame.depth.empty())
+            {
+                if (writer.depth->saveMode == VideoWriter::SaveMode::Video)
+                {
+                    // convert to 8-bit as required by the video writer
+                    cv::Mat image8Bit;
+                    frame.depth.convertTo(image8Bit, CV_8UC1);
+                    std::lock_guard<std::mutex> imgLock(writer.depth->mutex);
+                    writer.depth->writer->write(image8Bit);
+                } else
+                {
+                    assert(writer.depth->saveMode == VideoWriter::SaveMode::Frame);
+                    const std::filesystem::path imgPath
+                        = writer.depth->framesPath
+                          / ("img_" + std::to_string(frame.frameIndex) + ".png");
+
+                    cv::Mat image16Bit;
+                    frame.depth.convertTo(image16Bit, CV_16UC1);
+
+                    // Disk I/O before acquiring m_bufferManagerMutex
+                    cv::imwrite(imgPath.string(), image16Bit);
+                    {
+                        std::lock_guard lock(m_bufferManagerMutex);
+                        // TODO here we may save the frame itself
+                        m_bufferManager.push_back(frame.frameIndex,
+                                                   timestampSeconds,
+                                                   "camera::" + cameraName + "::depth");
+                    }
+                }
+            }
+        }
+    });
+
     auto time = BipedalLocomotion::clock().now();
     auto oldTime = time;
     auto wakeUpTime = time;
@@ -1838,8 +1922,9 @@ void YarpRobotLoggerDevice::recordVideo(const std::string& cameraName, VideoWrit
         // detect if a clock has been reset
         oldTime = time;
         time = BipedalLocomotion::clock().now();
-        // if the current time is lower than old time, the timer has been reset.
-        if ((time - oldTime).count() < 1e-12)
+        // Use a direct time comparison; .count() < 1e-12 silently passes
+        // when time == oldTime because .count() returns integer nanoseconds.
+        if (time < oldTime)
         {
             wakeUpTime = time;
         }
@@ -1875,114 +1960,84 @@ void YarpRobotLoggerDevice::recordVideo(const std::string& cameraName, VideoWrit
             break;
         }
 
-        // get the frame from the camera
+        // Capture into a local CapturedFrame; no disk I/O here.
+        VideoWriter::CapturedFrame capturedFrame;
+        capturedFrame.timestamp = time;
+        capturedFrame.frameIndex = writer.frameIndex.load();
+
         if (writer.rgb != nullptr)
         {
-            if (!m_cameraBridge->getColorImage(cameraName, writer.rgb->frame))
+            if (!m_cameraBridge->getColorImage(cameraName, capturedFrame.rgb))
             {
                 log()->info("{} Unable to get the frame of the camera named: {}. The "
-                            "previous "
-                            "frame "
-                            "will be used.",
+                            "previous frame will be used.",
                             logPrefix,
                             cameraName);
-            }
-
-            std::lock_guard<std::mutex> lock(writer.rgb->mutex);
-
-            // save the frame in the video writer
-            if (writer.rgb->saveMode == VideoWriter::SaveMode::Video)
-            {
-                writer.rgb->writer->write(writer.rgb->frame);
-            } else
-            {
-                assert(writer.rgb->saveMode == VideoWriter::SaveMode::Frame);
-
-                unsigned int frameIndex = writer.frameIndex.load();
-                const std::filesystem::path imgPath
-                    = writer.rgb->framesPath / ("img_" + std::to_string(frameIndex) + ".png");
-
-                cv::imwrite(imgPath.string(), writer.rgb->frame);
-
-                // lock the the buffered manager mutex
-                std::lock_guard lock(m_bufferManagerMutex);
-
-                // TODO here we may save the frame itself
-                m_bufferManager.push_back(frameIndex,
-                                            std::chrono::duration<double>(time).count(),
-                                            "camera::" + cameraName + "::rgb");
             }
         }
 
         if (writer.depth != nullptr)
         {
-            if (!m_cameraBridge->getDepthImage(cameraName, writer.depth->frame))
+            if (!m_cameraBridge->getDepthImage(cameraName, capturedFrame.depth))
             {
                 log()->info("{} Unable to get the frame of the camera named: {}. The "
-                            "previous "
-                            "frame "
-                            "will be used.",
+                            "previous frame will be used.",
                             logPrefix,
                             cameraName);
-
             } else
             {
-                // If a new frame arrived the we should scale it
-                writer.depth->frame = writer.depth->frame * writer.depthScale;
-            }
-
-            std::lock_guard<std::mutex> lock(writer.depth->mutex);
-
-            if (writer.depth->saveMode == VideoWriter::SaveMode::Video)
-            {
-                // we need to convert the image to 8bit this is required by the video writer
-                cv::Mat image8Bit;
-                writer.depth->frame.convertTo(image8Bit, CV_8UC1);
-
-                // save the frame in the video writer
-                writer.depth->writer->write(image8Bit);
-            } else
-            {
-                assert(writer.depth->saveMode == VideoWriter::SaveMode::Frame);
-
-                unsigned int frameIndex = writer.frameIndex.load();
-                const std::filesystem::path imgPath
-                    = writer.depth->framesPath / ("img_" + std::to_string(frameIndex) + ".png");
-
-                // convert the image into 16bit grayscale image
-                cv::Mat image16Bit;
-                writer.depth->frame.convertTo(image16Bit, CV_16UC1);
-                cv::imwrite(imgPath.string(), image16Bit);
-
-                // lock the the buffered manager mutex
-                std::lock_guard lock(m_bufferManagerMutex);
-
-                // TODO here we may save the frame itself
-                m_bufferManager.push_back(frameIndex,
-                                            std::chrono::duration<double>(time).count(),
-                                            "camera::" + cameraName + "::depth");
+                // If a new frame arrived then we should scale it
+                capturedFrame.depth = capturedFrame.depth * writer.depthScale;
             }
         }
+
+        // Push to encoder queue; drop oldest frame if the queue is full.
+        {
+            std::lock_guard<std::mutex> queueLock(writer.encoderQueueMutex);
+            if (writer.encoderQueue.size() >= VideoWriter::kMaxQueueDepth)
+            {
+                writer.encoderQueue.pop();
+                writer.droppedFrames++;
+            }
+            writer.encoderQueue.push(std::move(capturedFrame));
+        }
+        writer.encoderQueueCv.notify_one();
 
         // increase the index
         writer.frameIndex++;
 
-        // release the CPU
+        // Fix 2: rate-limit the overrun log to at most once per second.
         BipedalLocomotion::clock().yield();
-        auto endTime = BipedalLocomotion::clock().now();
+        const auto endTime = BipedalLocomotion::clock().now();
         if (wakeUpTime < endTime)
         {
-            log()->info("{} The video thread spent more time than expected to save the camera "
-                        "named: {}. Expected: {}. Measured: {}. Nominal: {}.",
-                        logPrefix,
-                        cameraName,
-                        std::chrono::duration<double>(wakeUpTime - time),
-                        std::chrono::duration<double>(endTime - time),
-                        std::chrono::duration<double>(recordVideoPeriod));
+            writer.overrunsSinceLastLog++;
+            const auto wallNow = std::chrono::steady_clock::now();
+            if ((wallNow - writer.lastOverrunLog) >= std::chrono::seconds(1))
+            {
+                log()->warn("{} The video thread overran {} time(s) in the last second for "
+                            "camera {}. Last overrun: expected {}. Measured {}. Nominal {}.",
+                            logPrefix,
+                            writer.overrunsSinceLastLog,
+                            cameraName,
+                            std::chrono::duration<double>(wakeUpTime - time),
+                            std::chrono::duration<double>(endTime - time),
+                            std::chrono::duration<double>(recordVideoPeriod));
+                writer.overrunsSinceLastLog = 0;
+                writer.lastOverrunLog = wallNow;
+            }
         }
 
         // sleep
         BipedalLocomotion::clock().sleepUntil(wakeUpTime);
+    }
+
+    // Signal the encoder thread to drain and exit, then join it.
+    writer.encodeThreadRunning = false;
+    writer.encoderQueueCv.notify_all();
+    if (writer.encodeThread.joinable())
+    {
+        writer.encodeThread.join();
     }
 }
 
@@ -1992,6 +2047,45 @@ void YarpRobotLoggerDevice::saveExogenousImages(
     ExogenousSignal<yarp::sig::ImageOf<yarp::sig::PixelRgb>>& signal)
 {
     constexpr auto logPrefix = "[YarpRobotLoggerDevice::saveExogenousImages]";
+
+    // Start encoder thread that consumes from the queue and writes to disk.
+    writer.encodeThreadRunning = true;
+    writer.encodeThread = std::thread([this, &writer, signalName]() {
+        while (true)
+        {
+            VideoWriter::CapturedFrame frame;
+            {
+                std::unique_lock<std::mutex> lock(writer.encoderQueueMutex);
+                writer.encoderQueueCv.wait(lock, [&]() {
+                    return !writer.encoderQueue.empty() || !writer.encodeThreadRunning;
+                });
+                if (writer.encoderQueue.empty())
+                {
+                    break;
+                }
+                frame = std::move(writer.encoderQueue.front());
+                writer.encoderQueue.pop();
+            }
+
+            if (!frame.rgb.empty())
+            {
+                const std::filesystem::path imgPath
+                    = writer.rgb->framesPath
+                      / ("img_" + std::to_string(frame.frameIndex) + ".png");
+
+                // Fix 4: disk I/O before acquiring m_bufferManagerMutex
+                cv::imwrite(imgPath.string(), frame.rgb);
+                {
+                    std::lock_guard bufferLock(m_bufferManagerMutex);
+                    // TODO here we may save the frame itself
+                    m_bufferManager.push_back(
+                        frame.frameIndex,
+                        std::chrono::duration<double>(frame.timestamp).count(),
+                        "exogenous_images::" + signalName + "::rgb");
+                }
+            }
+        }
+    });
 
     writer.recordVideoIsRunning = true;
 
@@ -2023,7 +2117,12 @@ void YarpRobotLoggerDevice::saveExogenousImages(
 
         if (yarpImage != nullptr)
         {
-            // Convert the frame from yarp to cv
+            VideoWriter::CapturedFrame capturedFrame;
+            capturedFrame.timestamp = time;
+            capturedFrame.frameIndex = writer.frameIndex.load();
+
+            // Convert the frame from yarp to cv; cvtColor into capturedFrame.rgb
+            // produces an independent deep-copy (no reference into YARP buffer).
             auto colorImg = cv::Mat(yarpImage->height(),
                                     yarpImage->width(),
                                     yarp::cv::type_code<yarp::sig::PixelRgb>::value,
@@ -2031,28 +2130,30 @@ void YarpRobotLoggerDevice::saveExogenousImages(
                                     yarpImage->getRowSize());
 
             // Convert from RGB to BGR for OpenCV compatibility
-            cv::cvtColor(colorImg, colorImg, cv::COLOR_RGB2BGR);
+            cv::cvtColor(colorImg, capturedFrame.rgb, cv::COLOR_RGB2BGR);
 
-            // Lock the image saver mutex
-            std::lock_guard<std::mutex> imageLock(writer.rgb->mutex);
+            // Push to encoder queue; drop oldest frame if the queue is full.
+            {
+                std::lock_guard<std::mutex> queueLock(writer.encoderQueueMutex);
+                if (writer.encoderQueue.size() >= VideoWriter::kMaxQueueDepth)
+                {
+                    writer.encoderQueue.pop();
+                    writer.droppedFrames++;
+                }
+                writer.encoderQueue.push(std::move(capturedFrame));
+            }
+            writer.encoderQueueCv.notify_one();
 
-            unsigned int frameIndex = writer.frameIndex.load();
-            // Save the frame
-            const std::filesystem::path imgPath
-                = writer.rgb->framesPath
-                  / ("img_" + std::to_string(frameIndex)
-                     + ".png");
-            cv::imwrite(imgPath.string(), colorImg);
-
-            // lock the the buffered manager mutex
-            std::lock_guard bufferLock(m_bufferManagerMutex);
-
-            // TODO here we may save the frame itself
-            m_bufferManager.push_back(frameIndex,
-                                      std::chrono::duration<double>(time).count(),
-                                      "exogenous_images::" + signal.signalName + "::rgb");
             writer.frameIndex++;
         }
+    }
+
+    // Signal the encoder thread to drain and exit, then join it.
+    writer.encodeThreadRunning = false;
+    writer.encoderQueueCv.notify_all();
+    if (writer.encodeThread.joinable())
+    {
+        writer.encodeThread.join();
     }
 }
 
