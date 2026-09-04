@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE robot PUBLIC "-//YARP//DTD yarprobotinterface 3.1//EN" "http://www.yarp.it/DTD/yarprobotinterfaceV3.1.dtd">
+<!-- Copyright (C) 2019 Istituto Italiano di Tecnologia (IIT). All rights reserved.
+This software may be modified and distributed under the terms of the
+BSD-3-Clause license. -->
+<robot name="robot-dynamics-estimator"
+    build="0"
+    portprefix="/robot-dynamics-estimator"
+    prefix="robot-dynamics-estimator">
+<devices>
+<device xmlns:xi="http://www.w3.org/2001/XInclude" name="robot-dynamics-estimator" type="RobotDynamicsEstimatorDevice">
+    <group name="GENERAL">
+        <param name="sampling_time">0.01</param>
+        <param name="port_prefix">/robot-dynamics-estimator</param>
+    </group>
+
+    <group name="MODEL">
+        <param name="model_file">model.urdf</param>
+        <param name="base_link">root_link</param>
+        <param name="joint_list">("r_hip_pitch", "r_hip_roll", "r_hip_yaw", "r_knee", "r_ankle_pitch", "r_ankle_roll")</param>
+        <param name="gear_ratio">(100.0, -160.0, 100.0, 100.0, 100.0, 160.0)</param>
+        <param name="torque_constant">(0.111, 0.047, 0.047, 0.111, 0.111, 0.025)</param>
+
+        <group name="FT">
+            <param name="names">("r_leg_ft", "r_foot_front_ft", "r_foot_rear_ft")</param>
+            <param name="frames">("r_leg_ft", "r_foot_front_ft", "r_foot_rear_ft")</param>
+            <param name="associated_joints">("r_leg_ft_sensor", "r_foot_front_ft_sensor", "r_foot_rear_ft_sensor")</param>
+        </group>
+
+        <group name="ACCELEROMETER">
+            <param name="names">("imu_accelerometer")</param>
+            <param name="frames">("imu_frame")</param>
+        </group>
+
+        <group name="GYROSCOPE">
+            <param name="names">("imu_gyroscope")</param>
+            <param name="frames">("imu_frame")</param>
+        </group>
+
+        <group name="EXTERNAL_CONTACT">
+            <param name="frames">("r_sole")</param>
+        </group>
+    </group>
+
+    <group name="RobotSensorBridge">
+        <param name="check_for_nan">false</param>
+        <param name="stream_joint_states">true</param>
+        <param name="stream_inertials">false</param>
+        <param name="stream_forcetorque_sensors">true</param>
+        <param name="stream_motor_states">true</param>
+
+        <group name="RemoteControlBoardRemapper">
+          <param name="joints_list">("r_hip_pitch", "r_hip_roll", "r_hip_yaw", "r_knee", "r_ankle_pitch", "r_ankle_roll")</param>
+        </group>
+
+        <group name="SixAxisForceTorqueSensors">
+          <param name="sixaxis_forcetorque_sensors_list">("r_leg_ft", "r_foot_front_ft", "r_foot_rear_ft")</param>
+        </group>
+    </group>
+
+    <group name="UKF">
+        <param name="alpha">1.0</param>
+        <param name="beta">2.0</param>
+        <param name="kappa">0.0</param>
+        <group name="UKF_STATE">
+            <!--param name="dynamics_list">
+                ("JOINT_VELOCITY", "MOTOR_TORQUE", "FRICTION_TORQUE", "RIGHT_LEG_FT", "RIGHT_FOOT_FRONT_FT", "RIGHT_FOOT_REAR_FT",
+                 "RIGHT_LEG_FT_BIAS", "RIGHT_FOOT_FRONT_FT_BIAS", "RIGHT_FOOT_REAR_FT_BIAS",
+                 "RIGHT_LEG_ACC_BIAS", "RIGHT_FOOT_FRONT_ACC_BIAS", "RIGHT_FOOT_REAR_ACC_BIAS",
+                 "RIGHT_LEG_GYRO_BIAS", "RIGHT_FOOT_FRONT_GYRO_BIAS", "RIGHT_FOOT_REAR_GYRO_BIAS")
+             </param-->
+             <param name="dynamics_list">
+                 ("JOINT_VELOCITY", "MOTOR_TORQUE", "FRICTION_TORQUE", "RIGHT_LEG_FT", "RIGHT_FOOT_FRONT_FT", "RIGHT_FOOT_REAR_FT")
+              </param>
+             <!-- Available models = ["ZeroVelocityStateDynamics", "JointVelocityStateDynamics"] -->
+             <group name="JOINT_VELOCITY">
+                <param name="name">ds</param>
+                <param name="elements">("r_hip_pitch", "r_hip_roll", "r_hip_yaw", "r_knee", "r_ankle_pitch", "r_ankle_roll")</param>
+                <param name="covariance">(1e-3, 1e-3, 1e-3, 1e-3, 1e-3, 1e-3)</param>
+                <param name="initial_covariance">(0.01, 0.01, 0.01, 0.01, 0.01, 0.01)</param>
+                <param name="dynamic_model">JointVelocityStateDynamics</param>
+             </group>
+             <group name="MOTOR_TORQUE">
+                <param name="name">tau_m</param>
+                <param name="elements">("r_hip_pitch", "r_hip_roll", "r_hip_yaw", "r_knee", "r_ankle_pitch", "r_ankle_roll")</param>
+                <param name="covariance">(1e-3, 1e-3, 1e-3, 1e-3, 1e-3, 1e-3)</param>
+                <param name="initial_covariance">(0.01, 0.01, 0.01, 0.01, 0.01, 0.01)</param>
+                <param name="dynamic_model">ZeroVelocityStateDynamics</param>
+             </group>
+             <group name="FRICTION_TORQUE">
+                <param name="name">tau_F</param>
+                <param name="elements">("r_hip_pitch", "r_hip_roll", "r_hip_yaw", "r_knee", "r_ankle_pitch", "r_ankle_roll")</param>
+                <param name="covariance">(1e-1, 1e-1, 1e-1, 1e-1, 1e-1, 1e-1)</param>
+                <param name="initial_covariance">(0.01, 0.01, 0.01, 0.01, 0.01, 0.01)</param>
+                <param name="dynamic_model">ZeroVelocityStateDynamics</param>
+             </group>
+             <group name="RIGHT_LEG_FT">
+                <param name="name">r_leg_ft</param>
+                <param name="covariance">(1e-3, 1e-3, 1e-3, 1e-4, 1e-4, 1e-4)</param>
+                <param name="initial_covariance">(0.01, 0.01, 0.01, 0.01, 0.01, 0.01)</param>
+                <param name="dynamic_model">ZeroVelocityStateDynamics</param>
+             </group>
+             <group name="RIGHT_FOOT_FRONT_FT">
+                <param name="name">r_foot_front_ft</param>
+                <param name="covariance">(1e-3, 1e-3, 1e-3, 1e-6, 1e-6, 1e-6)</param>
+                <param name="initial_covariance">(0.01, 0.01, 0.01, 0.01, 0.01, 0.01)</param>
+                <param name="dynamic_model">ZeroVelocityStateDynamics</param>
+             </group>
+             <group name="RIGHT_FOOT_REAR_FT">
+                <param name="name">r_foot_rear_ft</param>
+                <param name="covariance">(1e-3, 1e-3, 1e-3, 1e-6, 1e-6, 1e-6)</param>
+                <param name="initial_covariance">(0.01, 0.01, 0.01, 0.01, 0.01, 0.01)</param>
+                <param name="dynamic_model">ZeroVelocityStateDynamics</param>
+             </group>
+        </group>
+
+        <group name="UKF_MEASUREMENT">
+            <!--param name="dynamics_list">
+                ("JOINT_VELOCITY", "MOTOR_CURRENT",
+                 "RIGHT_LEG_FT", "RIGHT_FOOT_FRONT_FT", "RIGHT_FOOT_REAR_FT",
+                 "RIGHT_LEG_ACC", "RIGHT_FOOT_FRONT_ACC", "RIGHT_FOOT_REAR_ACC",
+                 "RIGHT_LEG_GYRO", "RIGHT_FOOT_FRONT_GYRO", "RIGHT_FOOT_REAR_GYRO")
+             </param-->
+             <param name="dynamics_list">
+                 ("JOINT_VELOCITY", "MOTOR_CURRENT",
+                  "RIGHT_LEG_FT", "RIGHT_FOOT_FRONT_FT", "RIGHT_FOOT_REAR_FT")
+              </param>
+             <!-- Available models = ["ConstantMeasurementModel", "AccelerometerMeasurementDynamics",
+                                      "GyroscopeMeasurementDynamics", "MotorCurrentMeasurementDynamics"] -->
+             <group name="JOINT_VELOCITY">
+                <param name="name">ds</param>
+                <param name="covariance">(1e-1, 1e-1, 1e-1, 1e-1, 1e-1, 1e-1)</param>
+                <param name="dynamic_model">ConstantMeasurementModel</param>
+             </group>
+             <group name="MOTOR_CURRENT">
+                <param name="name">i_m</param>
+                <param name="covariance">(1e-2, 1e-2, 1e-1, 1e-1, 1e-1, 1e-1)</param>
+                <param name="gear_ratio">(100.0, -160.0, 100.0, 100.0, 100.0, 160.0)</param>
+                <param name="torque_constant">(0.111, 0.047, 0.047, 0.111, 0.111, 0.025)</param>
+                <param name="dynamic_model">MotorCurrentMeasurementDynamics</param>
+             </group>
+             <group name="RIGHT_LEG_FT">
+                <param name="name">r_leg_ft</param>
+                <param name="covariance">(1e-1, 1e-1, 1e-1, 1e-1, 1e-1, 1e-1)</param>
+                <param name="use_bias">false</param>
+                <param name="dynamic_model">ConstantMeasurementModel</param>
+             </group>
+             <group name="RIGHT_FOOT_FRONT_FT">
+                <param name="name">r_foot_front_ft</param>
+                <param name="covariance">(1e-1, 1e-1, 1e-1, 1e-1, 1e-1, 1e-1)</param>
+                <param name="use_bias">false</param>
+                <param name="dynamic_model">ConstantMeasurementModel</param>
+             </group>
+             <group name="RIGHT_FOOT_REAR_FT">
+                <param name="name">r_foot_rear_ft</param>
+                <param name="covariance">(1e-1, 1e-1, 1e-1, 1e-1, 1e-1, 1e-1)</param>
+                <param name="use_bias">false</param>
+                <param name="dynamic_model">ConstantMeasurementModel</param>
+             </group>
+        </group>
+    </group>
+
+    <!-- ATTACH -->
+    <action phase="startup" level="15" type="attach">
+        <paramlist name="networks">
+            <elem name="all_joints">all_joints_mc</elem>
+            <elem name="mas-remapper">mas-remapper</elem>
+        </paramlist>
+    </action>
+
+    <action phase="shutdown" level="2" type="detach" />
+    <!-- FINISH ATTACH-->
+
+</device>
+</devices>
+</robot>
