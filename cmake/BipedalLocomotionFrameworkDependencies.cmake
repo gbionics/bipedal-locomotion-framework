@@ -161,7 +161,7 @@ framework_dependent_option(FRAMEWORK_COMPILE_YarpImplementation
   "FRAMEWORK_COMPILE_YarpUtilities" OFF)
 
 framework_dependent_option(FRAMEWORK_COMPILE_DinRailImplementation
-  "Compile the DinRail implementation of RobotInterface?" ON
+  "Compile all the DinRail implementations?" ON
   "FRAMEWORK_COMPILE_YarpImplementation;FRAMEWORK_USE_dinrail" OFF)
 
 framework_dependent_option(FRAMEWORK_COMPILE_TomlImplementation

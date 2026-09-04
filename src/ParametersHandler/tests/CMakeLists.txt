@@ -28,3 +28,26 @@ if(FRAMEWORK_COMPILE_TomlImplementation)
     LINKS BipedalLocomotion::ParametersHandlerTomlImplementation)
 
 endif()
+
+if(FRAMEWORK_COMPILE_DinRailImplementation)
+
+  add_bipedal_test(
+    NAME ParametersHandlerDinRail
+    SOURCES ParametersHandlerDinRailTest.cpp
+    LINKS BipedalLocomotion::ParametersHandlerDinRailImplementation)
+
+endif()
+
+if(FRAMEWORK_COMPILE_DinRailImplementation AND FRAMEWORK_COMPILE_YarpImplementation)
+
+  find_package(dinrail REQUIRED COMPONENTS yarp)
+
+  add_bipedal_test(
+    NAME ParametersHandlerDinRailYarp
+    SOURCES ParametersHandlerDinRailYarpTest.cpp
+    LINKS BipedalLocomotion::ParametersHandlerDinRailImplementation
+          BipedalLocomotion::ParametersHandlerYarpImplementation
+          dinrail::dinrail-yarp-conversions
+          YARP::YARP_robotinterface)
+
+endif()
