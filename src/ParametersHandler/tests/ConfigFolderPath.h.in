@@ -8,11 +8,33 @@
 #ifndef CONFIG_FOLDERPATH_H_IN
 #define CONFIG_FOLDERPATH_H_IN
 
-#define SOURCE_CONFIG_DIR "@CMAKE_CURRENT_SOURCE_DIR@"
+#include <string>
+
+#define SOURCE_CONFIG_DIR "@CMAKE_CURRENT_SOURCE_DIR@/data"
+
+inline std::string getConfigPath(const std::string& fileName)
+{
+    return std::string(SOURCE_CONFIG_DIR) + "/" + fileName;
+}
 
 inline std::string getConfigPath()
 {
-    return std::string(SOURCE_CONFIG_DIR) + "/config.ini";
+    return getConfigPath("config.ini");
+}
+
+inline std::string getOpenXRJoypadConfigPath()
+{
+    return getConfigPath("openXRjoypad.ini");
+}
+
+inline std::string getRobotDynamicsEstimatorConfigPath()
+{
+    return getConfigPath("robot-dynamics-estimator.xml");
+}
+
+inline std::string getQpIKBLFConfigPath()
+{
+    return getConfigPath("qpIKBLF.ini");
 }
 
 #endif // CONFIG_FOLDERPATH_H_IN
