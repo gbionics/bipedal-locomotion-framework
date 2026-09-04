@@ -41,7 +41,10 @@ template <typename T> bool isValueValid(const yarp::os::Value& value)
     }
     if constexpr (std::is_same<T, double>::value)
     {
-        return value.isFloat64();
+        // YARP stores integral and floating-point tokens using different types. An integer is
+        // nevertheless a valid value for a double parameter and asFloat64() performs the
+        // corresponding numeric conversion.
+        return value.isFloat64() || value.isInt32();
     }
     if constexpr (std::is_same<T, float>::value)
     {

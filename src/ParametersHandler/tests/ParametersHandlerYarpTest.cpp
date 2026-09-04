@@ -224,6 +224,12 @@ TEST_CASE("Get parameters")
         }
 
         {
+            std::vector<double> element;
+            REQUIRE(cartoonsGroup->getParameter("fingersScaling", element));
+            REQUIRE(element == std::vector<double>{1.0, 2.0, 3.5, 3.5, 3.5});
+        }
+
+        {
             std::string element;
             REQUIRE(cartoonsGroup->getParameter("John", element));
             REQUIRE(element == "Doe");
