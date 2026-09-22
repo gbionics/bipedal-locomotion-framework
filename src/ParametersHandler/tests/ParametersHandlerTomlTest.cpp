@@ -34,7 +34,8 @@ TEST_CASE("Get parameters")
        "Fibonacci Numbers" = [1, 1, 2, 3, 5, 8, 13, 21]
        flag = true
        flags = [true, false, false, true, true, true]
-       time = 13:34:43.014532)"sv;
+       time = 13:34:43.014532
+       duration_as_double = 0.3)"sv;
 
     toml::table tbl = toml::parse(some_toml);
 
@@ -89,6 +90,16 @@ TEST_CASE("Get parameters")
         parameterHandler->setParameter("time", element);
         REQUIRE(parameterHandler->getParameter("time", retrievedElement));
         REQUIRE(element == retrievedElement);
+    }
+
+    SECTION("Get std::chrono::nanoseconds from double")
+    {
+        using namespace std::chrono_literals;
+        // 0.3 is not exactly representable in binary floating point (it is slightly below
+        // 0.3), so duration_cast would truncate it to 299999999ns instead of rounding to 300ms.
+        std::chrono::nanoseconds element;
+        REQUIRE(parameterHandler->getParameter("duration_as_double", element));
+        REQUIRE(element == 300ms);
     }
 
 
