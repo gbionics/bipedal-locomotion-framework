@@ -166,7 +166,9 @@ bool YarpImplementation::getParameter(const std::string& parameterName,
     double doubleParam;
     if (getParameterPrivate(parameterName, doubleParam))
     {
-        parameter = std::chrono::duration_cast<std::chrono::nanoseconds>(
+        // Rounded, not truncated: most decimal literals are not representable in binary, so
+        // duration_cast would turn 0.3 into 299999999ns instead of 300ms.
+        parameter = std::chrono::round<std::chrono::nanoseconds>(
             std::chrono::duration<double>(doubleParam));
         return true;
     }
@@ -239,10 +241,12 @@ bool YarpImplementation::getParameter(
     std::vector<double> doubleParam;
     if (this->getParameter(parameterName, doubleParam))
     {
+        // Rounded, not truncated: most decimal literals are not representable in binary, so
+        // duration_cast would turn 0.3 into 299999999ns instead of 300ms.
         return convertVectorParamToVectorChrono(doubleParam,
                                                 [](const double& tempParam,
                                                    std::chrono::nanoseconds& element) -> bool {
-                                                    element = std::chrono::duration_cast<
+                                                    element = std::chrono::round<
                                                         std::chrono::nanoseconds>(
                                                         std::chrono::duration<double>(tempParam));
                                                     return true;

@@ -42,7 +42,9 @@ bool TomlImplementation::getParameterPrivate(const std::string& parameterName, T
 
         if (paramToml.is<double>())
         {
-            parameter = std::chrono::duration_cast<std::chrono::nanoseconds>(
+            // Rounded, not truncated: most decimal literals are not representable in binary, so
+            // duration_cast would turn 0.3 into 299999999ns instead of 300ms.
+            parameter = std::chrono::round<std::chrono::nanoseconds>(
                 std::chrono::duration<double>(paramToml.value<double>().value()));
             return true;
         }
@@ -176,7 +178,7 @@ bool TomlImplementation::getParameterPrivate(const std::string& parameterName, T
                                    + time.nanosecond * 1ns;
                 } else // in this case is a double
                 {
-                    parameter[i] = std::chrono::duration_cast<std::chrono::nanoseconds>(
+                    parameter[i] = std::chrono::round<std::chrono::nanoseconds>(
                         std::chrono::duration<double>(array[i].value<double>().value()));
                 }
             } else
