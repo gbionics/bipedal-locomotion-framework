@@ -39,7 +39,9 @@ TEST_CASE("Get parameters")
     std::shared_ptr<YarpImplementation> originalHandler = std::make_shared<YarpImplementation>();
     IParametersHandler::shared_ptr parameterHandler = originalHandler;
     std::chrono::nanoseconds time = 13h + 39min + 51s + 523ms;
-    double timeAsDouble = 0.01;
+    // 0.3 is not exactly representable in binary floating point (it is slightly below
+    // 0.3), so it exercises the duration_cast-vs-round rounding fix.
+    double timeAsDouble = 0.3;
 
     parameterHandler->setParameter("answer_to_the_ultimate_question_of_life", 42);
     parameterHandler->setParameter("pi", 3.14);
@@ -294,7 +296,7 @@ TEST_CASE("Get parameters")
         {
             std::chrono::nanoseconds element;
             REQUIRE(parameterHandler->getParameter("time_as_double", element));
-            REQUIRE(element == std::chrono::duration<double>(0.05));
+            REQUIRE(element == 300ms);
         }
 
         IParametersHandler::shared_ptr cartoonsGroup = parameterHandler->getGroup("CARTOONS").lock();
@@ -340,11 +342,9 @@ TEST_CASE("Get parameters")
 
             using namespace std::chrono_literals;
 
-            // these are copied from the ini file
-            REQUIRE(
-                element
-                == std::vector<std::chrono::nanoseconds>{std::chrono::duration_cast<std::chrono::nanoseconds>(0.03s),
-                                                         std::chrono::duration_cast<std::chrono::nanoseconds>(1.8s)});
+            // these are copied from the ini file. 0.03s is rounded (not truncated) to 30ms,
+            // since duration_cast would have truncated it to 29999999ns.
+            REQUIRE(element == std::vector<std::chrono::nanoseconds>{30ms, 1800ms});
         }
     }
 
