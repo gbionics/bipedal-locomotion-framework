@@ -46,7 +46,8 @@ var dir_1a41e7752d0b8c023e1d3ecf18af98b7 =
     ] ],
     [ "TimeProfiler.h", "TimeProfiler_8h.html", [
       [ "Timer", "classBipedalLocomotion_1_1System_1_1Timer.html", "classBipedalLocomotion_1_1System_1_1Timer" ],
-      [ "TimeProfiler", "classBipedalLocomotion_1_1System_1_1TimeProfiler.html", "classBipedalLocomotion_1_1System_1_1TimeProfiler" ]
+      [ "TimeProfiler", "classBipedalLocomotion_1_1System_1_1TimeProfiler.html", "classBipedalLocomotion_1_1System_1_1TimeProfiler" ],
+      [ "ScopedTimer", "classBipedalLocomotion_1_1System_1_1ScopedTimer.html", "classBipedalLocomotion_1_1System_1_1ScopedTimer" ]
     ] ],
     [ "VariablesHandler.h", "VariablesHandler_8h.html", [
       [ "VariablesHandler", "classBipedalLocomotion_1_1System_1_1VariablesHandler.html", "classBipedalLocomotion_1_1System_1_1VariablesHandler" ],

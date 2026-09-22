@@ -120,10 +120,9 @@ $(document).ready(function(){initNavTree('classBipedalLocomotion_1_1System_1_1Ti
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ae9c10cf5aa368712c248156bf2800786"><td class="memItemLeft" align="right" valign="top"><a id="ae9c10cf5aa368712c248156bf2800786"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1System_1_1Timer.html#ae9c10cf5aa368712c248156bf2800786">resetAverageDuration</a> ()</td></tr>
-<tr class="memdesc:ae9c10cf5aa368712c248156bf2800786"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reset the average duration. <br /></td></tr>
-<tr class="separator:ae9c10cf5aa368712c248156bf2800786"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9020542d73357a4eef512eefaf57524b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1System_1_1Timer.html#a9020542d73357a4eef512eefaf57524b">reset</a> ()</td></tr>
+<tr class="memdesc:a9020542d73357a4eef512eefaf57524b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reset the statistics, i.e.  <a href="classBipedalLocomotion_1_1System_1_1Timer.html#a9020542d73357a4eef512eefaf57524b">More...</a><br /></td></tr>
+<tr class="separator:a9020542d73357a4eef512eefaf57524b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8fb4ff0ca7df26acb475b60221790755"><td class="memItemLeft" align="right" valign="top"><a id="a8fb4ff0ca7df26acb475b60221790755"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1System_1_1Timer.html#a8fb4ff0ca7df26acb475b60221790755">setInitTime</a> ()</td></tr>
 <tr class="memdesc:a8fb4ff0ca7df26acb475b60221790755"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set initial time. <br /></td></tr>
@@ -132,25 +131,73 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1System_1_1Timer.html#a0701e3a1dddf03a08119c3e6de7b79c8">setEndTime</a> ()</td></tr>
 <tr class="memdesc:a0701e3a1dddf03a08119c3e6de7b79c8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set final time. <br /></td></tr>
 <tr class="separator:a0701e3a1dddf03a08119c3e6de7b79c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a34112da462a0d077a5063cb11c105d01"><td class="memItemLeft" align="right" valign="top"><a id="a34112da462a0d077a5063cb11c105d01"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1System_1_1Timer.html#a34112da462a0d077a5063cb11c105d01">evaluateDuration</a> ()</td></tr>
-<tr class="memdesc:a34112da462a0d077a5063cb11c105d01"><td class="mdescLeft">&#160;</td><td class="mdescRight">Evaluate the average duration. <br /></td></tr>
+<tr class="memitem:a34112da462a0d077a5063cb11c105d01"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1System_1_1Timer.html#a34112da462a0d077a5063cb11c105d01">evaluateDuration</a> ()</td></tr>
+<tr class="memdesc:a34112da462a0d077a5063cb11c105d01"><td class="mdescLeft">&#160;</td><td class="mdescRight">Accumulate the interval between the last <a class="el" href="classBipedalLocomotion_1_1System_1_1Timer.html#a8fb4ff0ca7df26acb475b60221790755" title="Set initial time.">setInitTime()</a> and <a class="el" href="classBipedalLocomotion_1_1System_1_1Timer.html#a0701e3a1dddf03a08119c3e6de7b79c8" title="Set final time.">setEndTime()</a> and update the maximum.  <a href="classBipedalLocomotion_1_1System_1_1Timer.html#a34112da462a0d077a5063cb11c105d01">More...</a><br /></td></tr>
 <tr class="separator:a34112da462a0d077a5063cb11c105d01"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a58b49db7b2c39fd7c82fc2254fbeec22"><td class="memItemLeft" align="right" valign="top">const std::chrono::nanoseconds &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1System_1_1Timer.html#a58b49db7b2c39fd7c82fc2254fbeec22">getAverageDuration</a> () const</td></tr>
-<tr class="memdesc:a58b49db7b2c39fd7c82fc2254fbeec22"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the average duration.  <a href="classBipedalLocomotion_1_1System_1_1Timer.html#a58b49db7b2c39fd7c82fc2254fbeec22">More...</a><br /></td></tr>
-<tr class="separator:a58b49db7b2c39fd7c82fc2254fbeec22"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acdf9ba1b054aa553129bb8143dc20a16"><td class="memItemLeft" align="right" valign="top">std::chrono::nanoseconds&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1System_1_1Timer.html#acdf9ba1b054aa553129bb8143dc20a16">getAverageDuration</a> () const</td></tr>
+<tr class="memdesc:acdf9ba1b054aa553129bb8143dc20a16"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the mean of the samples accumulated since the last reset.  <a href="classBipedalLocomotion_1_1System_1_1Timer.html#acdf9ba1b054aa553129bb8143dc20a16">More...</a><br /></td></tr>
+<tr class="separator:acdf9ba1b054aa553129bb8143dc20a16"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a06381df345f11a318bfbd7a9eeb0cfd4"><td class="memItemLeft" align="right" valign="top">const std::chrono::nanoseconds &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1System_1_1Timer.html#a06381df345f11a318bfbd7a9eeb0cfd4">getMaxDuration</a> () const</td></tr>
+<tr class="memdesc:a06381df345f11a318bfbd7a9eeb0cfd4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the longest sample accumulated since the last reset.  <a href="classBipedalLocomotion_1_1System_1_1Timer.html#a06381df345f11a318bfbd7a9eeb0cfd4">More...</a><br /></td></tr>
+<tr class="separator:a06381df345f11a318bfbd7a9eeb0cfd4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4f3f73c60918517e4faeb36ffbad11b8"><td class="memItemLeft" align="right" valign="top">const std::chrono::nanoseconds &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1System_1_1Timer.html#a4f3f73c60918517e4faeb36ffbad11b8">getTotalDuration</a> () const</td></tr>
+<tr class="memdesc:a4f3f73c60918517e4faeb36ffbad11b8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the sum of the samples accumulated since the last reset.  <a href="classBipedalLocomotion_1_1System_1_1Timer.html#a4f3f73c60918517e4faeb36ffbad11b8">More...</a><br /></td></tr>
+<tr class="separator:a4f3f73c60918517e4faeb36ffbad11b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aea870f9e1a9f61ab4560d8711b4b20f0"><td class="memItemLeft" align="right" valign="top">unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1System_1_1Timer.html#aea870f9e1a9f61ab4560d8711b4b20f0">getSamples</a> () const</td></tr>
+<tr class="memdesc:aea870f9e1a9f61ab4560d8711b4b20f0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get how many samples have been accumulated since the last reset.  <a href="classBipedalLocomotion_1_1System_1_1Timer.html#aea870f9e1a9f61ab4560d8711b4b20f0">More...</a><br /></td></tr>
+<tr class="separator:aea870f9e1a9f61ab4560d8711b4b20f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p><a class="el" href="classBipedalLocomotion_1_1System_1_1Timer.html" title="Timer is a simple class that can be used to measure the time between two events.">Timer</a> is a simple class that can be used to measure the time between two events. </p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
-<a id="a58b49db7b2c39fd7c82fc2254fbeec22"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a58b49db7b2c39fd7c82fc2254fbeec22">&#9670;&nbsp;</a></span>getAverageDuration()</h2>
+<a id="a9020542d73357a4eef512eefaf57524b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9020542d73357a4eef512eefaf57524b">&#9670;&nbsp;</a></span>reset()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">const std::chrono::nanoseconds &amp; Timer::getAverageDuration </td>
+          <td class="memname">void Timer::reset </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Reset the statistics, i.e. </p>
+<p>the accumulated duration, the maximum and the sample count. </p>
+
+</div>
+</div>
+<a id="a34112da462a0d077a5063cb11c105d01"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a34112da462a0d077a5063cb11c105d01">&#9670;&nbsp;</a></span>evaluateDuration()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Timer::evaluateDuration </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Accumulate the interval between the last <a class="el" href="classBipedalLocomotion_1_1System_1_1Timer.html#a8fb4ff0ca7df26acb475b60221790755" title="Set initial time.">setInitTime()</a> and <a class="el" href="classBipedalLocomotion_1_1System_1_1Timer.html#a0701e3a1dddf03a08119c3e6de7b79c8" title="Set final time.">setEndTime()</a> and update the maximum. </p>
+<dl class="section note"><dt>Note</dt><dd>A cycle in which the timer has not been closed contributes no sample, instead of counting the previous interval twice. </dd></dl>
+
+</div>
+</div>
+<a id="acdf9ba1b054aa553129bb8143dc20a16"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acdf9ba1b054aa553129bb8143dc20a16">&#9670;&nbsp;</a></span>getAverageDuration()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::chrono::nanoseconds Timer::getAverageDuration </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -158,8 +205,68 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
       </table>
 </div><div class="memdoc">
 
-<p>Get the average duration. </p>
-<dl class="section return"><dt>Returns</dt><dd>average duration. </dd></dl>
+<p>Get the mean of the samples accumulated since the last reset. </p>
+<dl class="section return"><dt>Returns</dt><dd>average duration, zero when no sample has been accumulated. </dd></dl>
+
+</div>
+</div>
+<a id="a06381df345f11a318bfbd7a9eeb0cfd4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a06381df345f11a318bfbd7a9eeb0cfd4">&#9670;&nbsp;</a></span>getMaxDuration()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const std::chrono::nanoseconds &amp; Timer::getMaxDuration </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get the longest sample accumulated since the last reset. </p>
+<dl class="section return"><dt>Returns</dt><dd>maximum duration, zero when no sample has been accumulated. </dd></dl>
+
+</div>
+</div>
+<a id="a4f3f73c60918517e4faeb36ffbad11b8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4f3f73c60918517e4faeb36ffbad11b8">&#9670;&nbsp;</a></span>getTotalDuration()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const std::chrono::nanoseconds &amp; Timer::getTotalDuration </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get the sum of the samples accumulated since the last reset. </p>
+<dl class="section return"><dt>Returns</dt><dd>total duration. </dd></dl>
+
+</div>
+</div>
+<a id="aea870f9e1a9f61ab4560d8711b4b20f0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aea870f9e1a9f61ab4560d8711b4b20f0">&#9670;&nbsp;</a></span>getSamples()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned int Timer::getSamples </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get how many samples have been accumulated since the last reset. </p>
+<dl class="section return"><dt>Returns</dt><dd>number of samples. </dd></dl>
 
 </div>
 </div>

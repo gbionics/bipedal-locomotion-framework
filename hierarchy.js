@@ -394,6 +394,7 @@ var hierarchy =
     [ "BipedalLocomotion::Math::SchmittTriggerOutput", "structBipedalLocomotion_1_1Math_1_1SchmittTriggerOutput.html", [
       [ "BipedalLocomotion::Math::SchmittTriggerState", "structBipedalLocomotion_1_1Math_1_1SchmittTriggerState.html", null ]
     ] ],
+    [ "BipedalLocomotion::System::ScopedTimer", "classBipedalLocomotion_1_1System_1_1ScopedTimer.html", null ],
     [ "BipedalLocomotion::Estimators::RobotDynamicsEstimator::Sensor", "structBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1Sensor.html", [
       [ "BipedalLocomotion::Estimators::RobotDynamicsEstimator::FTSensor", "structBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1FTSensor.html", null ]
     ] ],

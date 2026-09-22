@@ -255,6 +255,7 @@ var annotated_dup =
         [ "StdClockFactory", "classBipedalLocomotion_1_1System_1_1StdClockFactory.html", "classBipedalLocomotion_1_1System_1_1StdClockFactory" ],
         [ "Timer", "classBipedalLocomotion_1_1System_1_1Timer.html", "classBipedalLocomotion_1_1System_1_1Timer" ],
         [ "TimeProfiler", "classBipedalLocomotion_1_1System_1_1TimeProfiler.html", "classBipedalLocomotion_1_1System_1_1TimeProfiler" ],
+        [ "ScopedTimer", "classBipedalLocomotion_1_1System_1_1ScopedTimer.html", "classBipedalLocomotion_1_1System_1_1ScopedTimer" ],
         [ "VariablesHandler", "classBipedalLocomotion_1_1System_1_1VariablesHandler.html", "classBipedalLocomotion_1_1System_1_1VariablesHandler" ],
         [ "WeightProvider", "structBipedalLocomotion_1_1System_1_1WeightProvider.html", null ],
         [ "WeightProviderFactory", "classBipedalLocomotion_1_1System_1_1WeightProviderFactory.html", "classBipedalLocomotion_1_1System_1_1WeightProviderFactory" ],
