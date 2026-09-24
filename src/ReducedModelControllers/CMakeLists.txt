@@ -14,4 +14,11 @@ if(FRAMEWORK_COMPILE_ReducedModelControllers)
     PRIVATE_LINK_LIBRARIES casadi::casadi BipedalLocomotion::Math BipedalLocomotion::TextLogging BipedalLocomotion::CasadiConversions
     SUBDIRECTORIES         tests)
 
+  # Used to run the solver single-threaded, which is faster for the size of the MPC problem.
+  find_package(OpenMP QUIET COMPONENTS CXX)
+  if(OpenMP_CXX_FOUND)
+    target_link_libraries(ReducedModelControllers PRIVATE $<BUILD_INTERFACE:OpenMP::OpenMP_CXX>)
+    target_compile_definitions(ReducedModelControllers PRIVATE BLF_CENTROIDAL_MPC_USE_OPENMP)
+  endif()
+
 endif()

@@ -5,10 +5,16 @@
  * distributed under the terms of the BSD-3-Clause license.
  */
 #include <chrono>
+#include <limits>
 #include <string>
 #include <unordered_map>
 
 #include <casadi/casadi.hpp>
+#include <casadi/config.h>
+
+#ifdef BLF_CENTROIDAL_MPC_USE_OPENMP
+#include <omp.h>
+#endif
 
 #include <BipedalLocomotion/Contacts/Contact.h>
 #include <BipedalLocomotion/Conversions/CasadiConversions.h>
@@ -20,36 +26,35 @@
 using namespace BipedalLocomotion::ReducedModelControllers;
 using namespace BipedalLocomotion::Contacts;
 
-#define STR_(x) #x
-#define STR(x) STR_(x)
-
-bool casadiVersionIsAtLeast360()
-{
-    std::string str;
-    std::stringstream ss(STR(casadi_VERSION));
-
-    // Use while loop to check the getline() function condition.
-    int index = 0;
-    while (getline(ss, str, '.'))
-    {
-        if (index == 0 && stoi(str) < 3)
-        {
-            return false;
-        }
-        if (index == 1 && stoi(str) < 6)
-        {
-            return false;
-        }
-        index++;
-    }
-
-    return true;
-}
+constexpr bool casadiVersionIsAtLeast360
+    = (CASADI_MAJOR_VERSION > 3) || (CASADI_MAJOR_VERSION == 3 && CASADI_MINOR_VERSION >= 6);
 
 inline double chronoToSeconds(const std::chrono::nanoseconds& d)
 {
     return std::chrono::duration<double>(d).count();
 }
+
+/**
+ * Limit the OpenMP threads of the calling thread for the lifetime of the object. For problems of
+ * the size of the MPC the OpenMP version of the linear solver (e.g., MUMPS) is much slower than the
+ * sequential one.
+ */
+struct SingleThreadedOpenMPScope
+{
+#ifdef BLF_CENTROIDAL_MPC_USE_OPENMP
+    const int previousNumberOfThreads{omp_get_max_threads()};
+
+    SingleThreadedOpenMPScope()
+    {
+        omp_set_num_threads(1);
+    }
+
+    ~SingleThreadedOpenMPScope()
+    {
+        omp_set_num_threads(previousNumberOfThreads);
+    }
+#endif
+};
 
 std::vector<std::string> extractVariablesName(const std::vector<casadi::MX>& variables)
 {
@@ -293,7 +298,7 @@ struct CentroidalMPC::Impl
         int numberOfCorners;
         if (!ptr->getParameter("number_of_corners", numberOfCorners))
         {
-            log()->error("{} Unable to get the number of corners.");
+            log()->error("{} Unable to get the number of corners.", errorPrefix);
             return false;
         }
         contact.corners.resize(numberOfCorners);
@@ -551,6 +556,35 @@ struct CentroidalMPC::Impl
                                 {"error"});
     }
 
+    casadi::Function frictionConeConstraint()
+    {
+        // Assumption: the Eigen matrix is stored as column-major
+        const Eigen::MatrixXd A = this->frictionCone.getA();
+        casadi::DM frictionConeMatrix = casadi::DM::zeros(A.rows(), A.cols());
+        std::memcpy(frictionConeMatrix.ptr(), A.data(), sizeof(double) * A.size());
+
+        casadi::MX orientation = casadi::MX::sym("contact_orientation", 3 * 3);
+        casadi::MX isEnabled = casadi::MX::sym("is_enabled");
+        casadi::MX force = casadi::MX::sym("force", 3);
+
+        // The force of a non active contact does not enter the dynamics, hence the constraint is
+        // disabled to avoid a degenerate apex of the cone. The linearized cone is a pyramid, so it
+        // already implies a non-negative normal force in the contact frame.
+        casadi::MX rhs = isEnabled
+                         * casadi::MX::mtimes(frictionConeMatrix,
+                                              casadi::MX::mtimes(casadi::MX::reshape(orientation,
+                                                                                     3,
+                                                                                     3)
+                                                                     .T(),
+                                                                 force));
+
+        return casadi::Function("friction_cone",
+                                {orientation, isEnabled, force},
+                                {rhs},
+                                extractVariablesName({orientation, isEnabled, force}),
+                                {"constraint"});
+    }
+
     void resizeControllerInputs()
     {
         constexpr int vector3Size = 3;
@@ -649,7 +683,7 @@ struct CentroidalMPC::Impl
                 = &this->vectorizedOptiInputs.back();
 
             // The orientation is stored as a vectorized version of the rotation matrix
-            this->vectorizedOptiInputs.push_back(casadi::DM::zeros(9, this->optiSettings.horizon));
+            this->vectorizedOptiInputs.push_back(casadi::DM::zeros(9, stateHorizon));
             this->controllerInputs.contacts[key].orientation = &this->vectorizedOptiInputs.back();
 
             // Maximum admissible contact force. It is expressed in the contact body frame
@@ -716,8 +750,9 @@ struct CentroidalMPC::Impl
             c.linearVelocity = this->opti.variable(vector3Size, this->optiSettings.horizon);
 
             // the orientation is a parameter. The orientation is stored as a vectorized version of
-            // the rotation matrix
-            c.orientation = this->opti.parameter(9, this->optiSettings.horizon);
+            // the rotation matrix. The last column is used only to express the bounding box of the
+            // contact position at the end of the horizon.
+            c.orientation = this->opti.parameter(9, stateHorizon);
 
             // Upper limit of the position of the contact. It is expressed in the contact body frame
             c.upperLimitPosition = this->opti.parameter(vector3Size, this->optiSettings.horizon);
@@ -781,6 +816,7 @@ struct CentroidalMPC::Impl
             solverOptions["max_iter"] = this->optiSettings.ipoptMaxIteration;
             solverOptions["tol"] = this->optiSettings.ipoptTolerance;
             solverOptions["linear_solver"] = this->optiSettings.ipoptLinearSolver;
+            solverOptions["sb"] = "yes";
             casadiOptions["expand"] = true;
             casadiOptions["error_on_fail"] = true;
 
@@ -810,8 +846,6 @@ struct CentroidalMPC::Impl
         casadiOptions["qpsol"] = "osqp";
 
         solverOptions["error_on_fail"] = false;
-
-        osqpOptions["verbose"] = false;
         solverOptions["osqp"] = osqpOptions;
 
         casadiOptions["qpsol_options"] = solverOptions;
@@ -855,7 +889,7 @@ struct CentroidalMPC::Impl
         for (const auto& [key, contact] : this->optiVariables.contacts)
         {
             odeInput.push_back(contact.position(Sl(), Sl(0, -1)));
-            odeInput.push_back(contact.orientation);
+            odeInput.push_back(contact.orientation(Sl(), Sl(0, -1)));
             odeInput.push_back(contact.isEnabled);
             odeInput.push_back(contact.linearVelocity);
 
@@ -895,53 +929,29 @@ struct CentroidalMPC::Impl
 
         // add constraints for the contacts
         auto contactPositionErrorMap = this->contactPositionError().map(this->optiSettings.horizon);
-
-        // convert the eigen matrix into casadi
-        // please check https://github.com/casadi/casadi/issues/2563 and
-        // https://groups.google.com/forum/#!topic/casadi-users/npPcKItdLN8
-        // Assumption: the matrices are stored as column-major
-        casadi::DM frictionConeMatrix = casadi::DM::zeros(frictionCone.getA().rows(), //
-                                                          frictionCone.getA().cols());
-
-        std::memcpy(frictionConeMatrix.ptr(),
-                    frictionCone.getA().data(),
-                    sizeof(double) * frictionCone.getA().rows() * frictionCone.getA().cols());
-
-        const casadi::DM zero = casadi::DM::zeros(frictionCone.getA().rows(), 1);
-        casadi::MX rotatedFrictionCone;
+        auto frictionConeMap = this->frictionConeConstraint().map(this->optiSettings.horizon);
 
         for (const auto& [key, contact] : this->optiVariables.contacts)
         {
+            // The bounding box of the position at instant k + 1 is expressed in the frame of the
+            // contact at the same instant. The limits are set to infinity by setContactPhaseList
+            // when the constraint is redundant.
             auto error
                 = contactPositionErrorMap({extractFutureValuesFromState(contact.position),
                                            extractFutureValuesFromState(contact.nominalPosition),
-                                           contact.orientation});
+                                           extractFutureValuesFromState(contact.orientation)});
 
             this->opti.subject_to(contact.lowerLimitPosition <= error[0]
                                   <= contact.upperLimitPosition);
 
-            for (int i = 0; i < this->optiSettings.horizon; i++)
+            // TODO please if you want to add heel to toe motion you should define a
+            // contact.maximumNormalForce for each corner. At this stage is too premature.
+            for (const auto& corner : contact.corners)
             {
-                rotatedFrictionCone
-                    = casadi::MX::mtimes(frictionConeMatrix, //
-                                         casadi::MX::reshape(contact.orientation(Sl(), i), 3, 3)
-                                             .T());
-
-                // TODO please if you want to add heel to toe motion you should define a
-                // contact.maximumNormalForce for each corner. At this stage is too premature.
-                for (const auto& corner : contact.corners)
-                {
-                    this->opti.subject_to(casadi::MX::mtimes(rotatedFrictionCone, //
-                                                             corner.force(Sl(), i))
-                                          <= zero);
-
-                    // limit on the normal force
-                    this->opti.subject_to(
-                        0 <= casadi::MX::mtimes(casadi::MX::reshape(contact.orientation(Sl(), i),
-                                                                    3,
-                                                                    3),
-                                                corner.force(Sl(), i))(2));
-                }
+                auto frictionCone = frictionConeMap(
+                    {contact.orientation(Sl(), Sl(0, -1)), contact.isEnabled, corner.force});
+                // opti requires a vector for element-wise inequalities
+                this->opti.subject_to(casadi::MX::vec(frictionCone[0]) <= 0);
             }
         }
 
@@ -969,6 +979,11 @@ struct CentroidalMPC::Impl
         {
             cost += this->weights.contactPosition
                     * casadi::MX::sumsqr(contact.nominalPosition - contact.position);
+
+            // The velocity of an active contact does not affect the problem. Penalizing it keeps
+            // the Hessian non-singular without changing the solution.
+            cost += casadi::MX::sumsqr(casadi::MX::repmat(contact.isEnabled, 3, 1)
+                                       * contact.linearVelocity);
 
             averageForce = casadi::MX::vertcat(
                 {contact.isEnabled * contact.corners[0].force(0, Sl()) / contact.corners.size(),
@@ -1086,7 +1101,7 @@ struct CentroidalMPC::Impl
         concatenateOutput(this->optiVariables.angularMomentum, "angular_momentum");
 
         casadi::Dict toFunctionOptions, jitOptions;
-        if (casadiVersionIsAtLeast360())
+        if constexpr (casadiVersionIsAtLeast360)
         {
             toFunctionOptions["cse"] = this->optiSettings.isCseEnabled;
         }
@@ -1158,6 +1173,7 @@ bool CentroidalMPC::advance()
     std::vector<casadi::DM> controllerOutput;
     try
     {
+        SingleThreadedOpenMPScope singleThreadedScope;
         controllerOutput = m_pimpl->controller(m_pimpl->vectorizedOptiInputs);
     } catch (const std::exception& e)
     {
@@ -1173,7 +1189,16 @@ bool CentroidalMPC::advance()
     ContactListMap contactListMap = m_pimpl->output.contactPhaseList.lists();
     for (auto& [key, contact] : m_pimpl->output.contacts)
     {
-        ContactList& contactList = contactListMap.at(key);
+        auto contactListIt = contactListMap.find(key);
+        if (contactListIt == contactListMap.end())
+        {
+            log()->error("{} Unable to find the contact list named {}. Please call "
+                         "setContactPhaseList() before advance().",
+                         errorPrefix,
+                         key);
+            return false;
+        }
+        ContactList& contactList = contactListIt->second;
 
         // this is required for toEigen
         using namespace BipedalLocomotion::Conversions;
@@ -1357,7 +1382,7 @@ bool CentroidalMPC::setReferenceTrajectory(const std::vector<Eigen::Vector3d>& c
     return true;
 }
 
-bool CentroidalMPC::setGravity(const Eigen::Ref<Eigen::Vector3d>& gravity)
+bool CentroidalMPC::setGravity(Eigen::Ref<const Eigen::Vector3d> gravity)
 {
     constexpr auto errorPrefix = "[CentroidalMPC::setGravity]";
     assert(m_pimpl);
@@ -1375,7 +1400,7 @@ bool CentroidalMPC::setGravity(const Eigen::Ref<Eigen::Vector3d>& gravity)
     toEigen(*inputs.gravity) = gravity;
 
     return true;
-};
+}
 
 bool CentroidalMPC::setState(Eigen::Ref<const Eigen::Vector3d> com,
                              Eigen::Ref<const Eigen::Vector3d> dcom,
@@ -1510,20 +1535,18 @@ bool CentroidalMPC::setContactPhaseList(const Contacts::ContactPhaseList& contac
         return false;
     }
 
-    // find the contactPhase associated to the end time
-    auto finalPhase = contactPhaseList.getPresentPhase(absoluteTimeHorizon);
-    // if the list is not found the latest contact phase is considered
-    if (finalPhase == contactPhaseList.end())
-    {
-        finalPhase = std::prev(contactPhaseList.end());
-        return false;
-    }
+    // find the contactPhase associated to the end time. getPresentPhase returns the latest phase
+    // if the time is after the end of the list, and the initial phase exists, so this is valid.
+    const auto finalPhase = contactPhaseList.getPresentPhase(absoluteTimeHorizon);
 
     int index = 0;
     for (auto it = initialPhase; it != std::next(finalPhase); std::advance(it, 1))
     {
         const std::chrono::nanoseconds tInitial = std::max(m_pimpl->currentTime, it->beginTime);
-        const std::chrono::nanoseconds tFinal = std::min(absoluteTimeHorizon, it->endTime);
+
+        // the final phase is extended up to the end of the horizon
+        const std::chrono::nanoseconds tFinal
+            = it == finalPhase ? absoluteTimeHorizon : std::min(absoluteTimeHorizon, it->endTime);
 
         const std::chrono::nanoseconds duration = tFinal - tInitial;
         const int numberOfSamples = duration / m_pimpl->optiSettings.samplingTime;
@@ -1546,7 +1569,9 @@ bool CentroidalMPC::setContactPhaseList(const Contacts::ContactPhaseList& contac
 
             // this is required to reshape the matrix into a vector
             const Eigen::Matrix3d orientation = contact->pose.quat().toRotationMatrix();
-            toEigen(*(inputContact->second.orientation)).middleCols(index, numberOfSamples).colwise()
+            toEigen(*(inputContact->second.orientation))
+                .middleCols(index, numberOfSamples + 1)
+                .colwise()
                 = Eigen::Map<const Eigen::VectorXd>(orientation.data(), orientation.size());
 
             constexpr double isEnabled = 1;
@@ -1576,14 +1601,36 @@ bool CentroidalMPC::setContactPhaseList(const Contacts::ContactPhaseList& contac
         }
     }
 
-    // TODO this part can be improved. For instance you do not need to fill the vectors every time.
+    // The position of an active contact is constant, hence the bounding box is enforced only when
+    // the contact is established (i.e., at the first active sample after a swing phase). In all
+    // the other instants the constraint is either redundant or meaningless, and keeping it would
+    // make the constraint Jacobian rank deficient.
+    constexpr double infinity = std::numeric_limits<double>::infinity();
+    const int horizon = m_pimpl->optiSettings.horizon;
     for (auto& [key, contact] : inputs.contacts)
     {
         using namespace BipedalLocomotion::Conversions;
 
         const auto& boundingBox = m_pimpl->contactBoundingBoxes.at(key);
-        toEigen(*contact.upperLimitPosition).colwise() = boundingBox.upperLimit;
-        toEigen(*contact.lowerLimitPosition).colwise() = boundingBox.lowerLimit;
+        const auto isEnabled = toEigen(*contact.isEnabled);
+        auto upperLimit = toEigen(*contact.upperLimitPosition);
+        auto lowerLimit = toEigen(*contact.lowerLimitPosition);
+        const bool isActiveAtTheEnd = finalPhase->activeContacts.count(key) > 0;
+
+        for (int i = 0; i < horizon; i++)
+        {
+            const bool isActiveAtNextSample
+                = (i + 1 < horizon) ? isEnabled(i + 1) > 0.5 : isActiveAtTheEnd;
+            if (isEnabled(i) < 0.5 && isActiveAtNextSample)
+            {
+                upperLimit.col(i) = boundingBox.upperLimit;
+                lowerLimit.col(i) = boundingBox.lowerLimit;
+            } else
+            {
+                upperLimit.col(i).setConstant(infinity);
+                lowerLimit.col(i).setConstant(-infinity);
+            }
+        }
     }
 
     // we store the contact phase list for the output

@@ -5,8 +5,11 @@
  * distributed under the terms of the BSD-3-Clause license.
  */
 
+#include <algorithm>
 #include <chrono>
 #include <fstream>
+#include <iostream>
+#include <numeric>
 #include <vector>
 
 // Catch2
@@ -81,6 +84,25 @@ void writeResultsToFile(const CentroidalMPC& mpc,
                       << angularMomentum.transpose() << " " << elapsedTime.count() << std::endl;
 }
 
+void printTimingStatistics(const std::string& label, std::vector<std::chrono::nanoseconds> samples)
+{
+    REQUIRE_FALSE(samples.empty());
+    std::sort(samples.begin(), samples.end());
+
+    auto toMs = [](const std::chrono::nanoseconds& t) {
+        return std::chrono::duration<double, std::milli>(t).count();
+    };
+
+    const auto total = std::accumulate(samples.begin(), samples.end(), std::chrono::nanoseconds{0});
+    const std::size_t n = samples.size();
+    const std::size_t p95Index = std::min(n - 1, static_cast<std::size_t>(0.95 * n));
+
+    std::cout << "[" << label << "] advance() over " << n << " iterations [ms]:"
+              << " mean " << toMs(total) / n << " | median " << toMs(samples[n / 2]) << " | min "
+              << toMs(samples.front()) << " | p95 " << toMs(samples[p95Index]) << " | max "
+              << toMs(samples.back()) << " | total " << toMs(total) << std::endl;
+}
+
 TEST_CASE("CentroidalMPC")
 {
 
@@ -131,7 +153,12 @@ TEST_CASE("CentroidalMPC")
 
     CentroidalMPC mpc;
 
+    const auto initBegin = std::chrono::steady_clock::now();
     REQUIRE(mpc.initialize(handler));
+    const auto initEnd = std::chrono::steady_clock::now();
+    std::cout << "[CentroidalMPC] initialize() [ms]: "
+              << std::chrono::duration<double, std::milli>(initEnd - initBegin).count()
+              << std::endl;
 
     BipedalLocomotion::Contacts::ContactPhaseList phaseList;
     BipedalLocomotion::Contacts::ContactListMap contactListMap;
@@ -302,9 +329,9 @@ TEST_CASE("CentroidalMPC")
     }
 
     int controllerIndex = 0;
-    int index = 0;
 
     std::chrono::nanoseconds elapsedTime = 0s;
+    std::vector<std::chrono::nanoseconds> advanceTimes;
     std::chrono::nanoseconds currentTime = 0s;
     auto phaseIt = phaseList.getPresentPhase(currentTime);
 
@@ -343,8 +370,7 @@ TEST_CASE("CentroidalMPC")
             REQUIRE(mpc.advance());
             std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
             elapsedTime = std::chrono::duration_cast<std::chrono::nanoseconds>(end - begin);
-            index++;
-            currentTime += dT;
+            advanceTimes.push_back(elapsedTime);
         }
 
         if (i == 0 && saveDataset)
@@ -379,6 +405,8 @@ TEST_CASE("CentroidalMPC")
     {
         centroidalMPCData.close();
     }
+
+    printTimingStatistics("CentroidalMPC", advanceTimes);
 
     const auto& [com, dcom, angularMomentum] = system->getState();
 

@@ -179,7 +179,7 @@ public:
      * @param gravity gravity vector.
      * @return True in case of success, false otherwise.
      */
-    bool setGravity(const Eigen::Ref<Eigen::Vector3d>& gravity);
+    bool setGravity(Eigen::Ref<const Eigen::Vector3d> gravity);
 
     /**
      * Get the output of the controller
