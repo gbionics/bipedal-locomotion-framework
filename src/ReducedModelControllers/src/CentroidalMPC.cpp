@@ -68,18 +68,6 @@ std::vector<std::string> extractVariablesName(const std::vector<casadi::MX>& var
     return variablesName;
 }
 
-template <class T> inline auto extractFutureValuesFromState(T& variable)
-{
-    using Sl = casadi::Slice;
-    return variable(Sl(), Sl(1, variable.columns()));
-}
-
-template <class T> inline auto extractFutureValuesFromState(const T& variable)
-{
-    using Sl = casadi::Slice;
-    return variable(Sl(), Sl(1, variable.columns()));
-}
-
 struct CentroidalMPC::Impl
 {
     casadi::Opti opti; /**< CasADi opti stack */
@@ -104,6 +92,8 @@ struct CentroidalMPC::Impl
     {
         casadi::DM position;
         casadi::MX force;
+        casadi::MX previousForce; /**< Only for fatrop. Column k is a copy of force(:, k). */
+        casadi::MX forceLinearizationPoint; /**< Only for sqp. */
 
         std::string cornerName;
 
@@ -185,6 +175,7 @@ struct CentroidalMPC::Impl
         casadi::MX nominalPosition;
         casadi::MX upperLimitPosition;
         casadi::MX lowerLimitPosition;
+        casadi::MX positionLinearizationPoint; /**< Only for sqp. */
     };
 
     struct OptimizationSettings
@@ -194,6 +185,7 @@ struct CentroidalMPC::Impl
         double ipoptTolerance{1e-8}; /**< Tolerance of ipopt
                                         (https://coin-or.github.io/Ipopt/OPTIONS.html#OPT_tol) */
         int ipoptMaxIteration{3000}; /**< Maximum number of iteration */
+        double fatropTolerance{1e-8}; /**< Convergence tolerance of fatrop */
 
         int horizon; /**<Number of samples used in the horizon */
         std::chrono::nanoseconds samplingTime; /**< Sampling time of the planner */
@@ -204,8 +196,11 @@ struct CentroidalMPC::Impl
                                        enabled. */
 
         std::string solverName{"ipopt"}; /**< Name of the solver used by the MPC. */
-        bool isJITEnabled{false}; /**< True if the JIT compilation is enabled. */
-        int numberOfQPIterations{10}; /**< Number of QP iteration. */
+        int numberOfQPIterations{1}; /**< Maximum number of QPs solved at each advance by the sqp
+                                        solver. 1 corresponds to the real-time iteration scheme. */
+        double sqpTolerance{1e-4}; /**< The sqp stops when the step is smaller than this value. */
+        double osqpTolerance{1e-5}; /**< Absolute and relative tolerance of osqp. */
+        int osqpMaxIteration{4000}; /**< Maximum number of iterations of osqp. */
     };
 
     OptimizationSettings optiSettings; /**< Settings */
@@ -228,6 +223,7 @@ struct CentroidalMPC::Impl
         casadi::MX externalForce;
         casadi::MX externalTorque;
         casadi::MX gravity;
+        casadi::MX comLinearizationPoint; /**< Only for sqp. */
     };
     OptimizationVariables optiVariables; /**< Optimization variables */
 
@@ -269,6 +265,49 @@ struct CentroidalMPC::Impl
         casadi::DM* angularMomentum;
     };
     InitialGuess initialGuess;
+
+    /**
+     * Current iterate of the sqp solver. It is used both as linearization point and as warm start
+     * of osqp. After each advance it is shifted of one sample (real-time iteration scheme).
+     */
+    struct SqpContactIterate
+    {
+        casadi::DM* position;
+        casadi::DM* linearVelocity;
+        std::vector<casadi::DM*> force;
+        casadi::DM* positionLinearizationPoint;
+        std::vector<casadi::DM*> forceLinearizationPoint;
+    };
+
+    struct SqpIterate
+    {
+        casadi::DM* com;
+        casadi::DM* dcom;
+        casadi::DM* angularMomentum;
+        casadi::DM* comLinearizationPoint;
+        std::map<std::string, SqpContactIterate> contacts;
+        casadi::DM* multipliers;
+        bool isValid{false};
+    };
+    SqpIterate sqpIterate;
+
+    /**
+     * Rows of the constraints multipliers to be copied from the next stage when the sqp iterate is
+     * shifted.
+     */
+    struct MultipliersShift
+    {
+        casadi_int destination;
+        casadi_int source;
+        casadi_int size;
+    };
+    std::vector<MultipliersShift> multipliersShift;
+
+    bool isSqp() const
+    {
+        return this->optiSettings.solverName == "sqp";
+    }
+
 
     std::vector<casadi::DM> vectorizedOptiInputs;
 
@@ -428,10 +467,11 @@ struct CentroidalMPC::Impl
         {
             return false;
         }
-        if (this->optiSettings.solverName != "ipopt" && this->optiSettings.solverName != "sqp")
+        if (this->optiSettings.solverName != "ipopt" && this->optiSettings.solverName != "sqp"
+            && this->optiSettings.solverName != "fatrop")
         {
             log()->error("{} The solver name '{}' is not supported. The supported solvers are "
-                         "'ipopt' and 'sqp'.",
+                         "'ipopt', 'fatrop' and 'sqp'.",
                          logPrefix,
                          this->optiSettings.solverName);
             return false;
@@ -442,23 +482,35 @@ struct CentroidalMPC::Impl
             getOptionalParameter(ptr, "linear_solver", this->optiSettings.ipoptLinearSolver);
             getOptionalParameter(ptr, "ipopt_tolerance", this->optiSettings.ipoptTolerance);
             getOptionalParameter(ptr, "ipopt_max_iteration", this->optiSettings.ipoptMaxIteration);
+        } else if (this->optiSettings.solverName == "fatrop")
+        {
+            getOptionalParameter(ptr, "fatrop_tolerance", this->optiSettings.fatropTolerance);
         } else
         {
-            getOptionalParameter(ptr, "jit_compilation", this->optiSettings.isJITEnabled);
             getOptionalParameter(ptr,
                                  "number_of_qp_iterations",
                                  this->optiSettings.numberOfQPIterations);
+            getOptionalParameter(ptr, "sqp_tolerance", this->optiSettings.sqpTolerance);
+            getOptionalParameter(ptr, "osqp_tolerance", this->optiSettings.osqpTolerance);
+            getOptionalParameter(ptr, "osqp_max_iteration", this->optiSettings.osqpMaxIteration);
         }
 
         getOptionalParameter(ptr, "solver_verbosity", this->optiSettings.solverVerbosity);
         getOptionalParameter(ptr, "is_warm_start_enabled", this->optiSettings.isWarmStartEnabled);
         getOptionalParameter(ptr, "is_cse_enabled", this->optiSettings.isCseEnabled);
 
+        // the sqp solver is always warm started with the previous solution
+        if (this->isSqp())
+        {
+            this->optiSettings.isWarmStartEnabled = false;
+        }
+
         return ok;
     }
 
     casadi::Function ode()
     {
+        const bool isLinearized = this->isSqp();
         // Convert DiscreteGeometryContact into a casadiContact object
         std::map<std::string, CasadiContact> casadiContacts;
 
@@ -495,6 +547,14 @@ struct CentroidalMPC::Impl
         input.push_back(angularMomentum);
         input.push_back(gravity);
 
+        // In the sqp the bilinear term of the angular momentum dynamics is linearized around
+        // the current iterate, so that each subproblem is a convex QP (Gauss-Newton).
+        casadi::MX comLinearizationPoint = casadi::MX::sym("com_linearization_point", 3);
+        if (isLinearized)
+        {
+            input.push_back(comLinearizationPoint);
+        }
+
         for (const auto& [key, contact] : casadiContacts)
         {
             input.push_back(contact.position);
@@ -502,18 +562,40 @@ struct CentroidalMPC::Impl
             input.push_back(contact.isEnabled);
             input.push_back(contact.linearVelocity);
 
+            casadi::MX positionLinearizationPoint
+                = casadi::MX::sym(key + "_position_linearization_point", 3);
+            if (isLinearized)
+            {
+                input.push_back(positionLinearizationPoint);
+            }
+
             for (const auto& corner : contact.corners)
             {
                 using namespace casadi;
                 ddcom += contact.isEnabled / mass * corner.force;
+
+                const MX cornerPosition
+                    = MX::mtimes(MX::reshape(contact.orientation, 3, 3), corner.position);
+                const MX leverArm = cornerPosition + contact.position - com;
+                input.push_back(corner.force);
+
+                if (!isLinearized)
+                {
+                    angularMomentumDerivative
+                        += contact.isEnabled * MX::cross(leverArm, corner.force);
+                    continue;
+                }
+
+                const MX forceLinearizationPoint
+                    = MX::sym(corner.cornerName + "_force_linearization_point", 3);
+                const MX leverArmLinearizationPoint
+                    = cornerPosition + positionLinearizationPoint - comLinearizationPoint;
                 angularMomentumDerivative
                     += contact.isEnabled
-                       * MX::cross(MX::mtimes(MX::reshape(contact.orientation, 3, 3),
-                                              corner.position)
-                                       + contact.position - com,
-                                   corner.force);
-
-                input.push_back(corner.force);
+                       * (MX::cross(leverArmLinearizationPoint, corner.force)
+                          + MX::cross(leverArm - leverArmLinearizationPoint,
+                                      forceLinearizationPoint));
+                input.push_back(forceLinearizationPoint);
             }
         }
 
@@ -626,6 +708,18 @@ struct CentroidalMPC::Impl
             }
         }
 
+        if (this->isSqp())
+        {
+            // com, dcom, angular momentum and com linearization point + for each contact the
+            // position, the velocity, the position linearization point and for each corner the
+            // force and the force linearization point
+            vectorizedOptiInputsSize += 5; // +1 for the multipliers added by createController
+            for (const auto& [key, contact] : this->output.contacts)
+            {
+                vectorizedOptiInputsSize += 3 + 2 * contact.corners.size();
+            }
+        }
+
         // we reserve in advance so the push_back will not invalidate the pointers
         // Indeed the standard guarantees that if the new size() is greater than capacity() then all
         // iterators and references (including the end() iterator) are invalidated. Otherwise only
@@ -718,18 +812,45 @@ struct CentroidalMPC::Impl
             }
         }
 
-        assert(vectorizedOptiInputsSize == this->vectorizedOptiInputs.size());
+        if (this->isSqp())
+        {
+            auto addInput = [this](int rows, int cols) {
+                this->vectorizedOptiInputs.push_back(casadi::DM::zeros(rows, cols));
+                return &this->vectorizedOptiInputs.back();
+            };
+            const int horizon = this->optiSettings.horizon;
+
+            this->sqpIterate.com = addInput(vector3Size, stateHorizon);
+            this->sqpIterate.dcom = addInput(vector3Size, stateHorizon);
+            this->sqpIterate.angularMomentum = addInput(vector3Size, stateHorizon);
+            this->sqpIterate.comLinearizationPoint = addInput(vector3Size, stateHorizon);
+            for (const auto& [key, contact] : this->output.contacts)
+            {
+                auto& c = this->sqpIterate.contacts[key];
+                c.position = addInput(vector3Size, stateHorizon);
+                c.linearVelocity = addInput(vector3Size, horizon);
+                for (std::size_t i = 0; i < contact.corners.size(); i++)
+                {
+                    c.force.push_back(addInput(vector3Size, horizon));
+                }
+                c.positionLinearizationPoint = addInput(vector3Size, stateHorizon);
+                for (std::size_t i = 0; i < contact.corners.size(); i++)
+                {
+                    c.forceLinearizationPoint.push_back(addInput(vector3Size, horizon));
+                }
+            }
+        }
+
+        assert(vectorizedOptiInputsSize
+               == this->vectorizedOptiInputs.size() + (this->isSqp() ? 1 : 0));
     }
 
     void populateOptiVariables()
     {
         constexpr int vector3Size = 3;
-        const int stateHorizon = this->optiSettings.horizon + 1;
-
-        // create the variables for the state
-        this->optiVariables.com = this->opti.variable(vector3Size, stateHorizon);
-        this->optiVariables.dcom = this->opti.variable(vector3Size, stateHorizon);
-        this->optiVariables.angularMomentum = this->opti.variable(vector3Size, stateHorizon);
+        const int horizon = this->optiSettings.horizon;
+        const int stateHorizon = horizon + 1;
+        const bool usePreviousForceState = this->optiSettings.solverName == "fatrop";
 
         // the casadi contacts depends on the maximum number of contacts
         for (const auto& [key, contact] : this->output.contacts)
@@ -743,25 +864,19 @@ struct CentroidalMPC::Impl
             // each contact has a different number of corners
             c.corners.resize(contact.corners.size());
 
-            // the position of the contact is an optimization variable
-            c.position = this->opti.variable(vector3Size, stateHorizon);
-
-            // the linear velocity of the contact is an optimization variable
-            c.linearVelocity = this->opti.variable(vector3Size, this->optiSettings.horizon);
-
             // the orientation is a parameter. The orientation is stored as a vectorized version of
             // the rotation matrix. The last column is used only to express the bounding box of the
             // contact position at the end of the horizon.
             c.orientation = this->opti.parameter(9, stateHorizon);
 
             // Upper limit of the position of the contact. It is expressed in the contact body frame
-            c.upperLimitPosition = this->opti.parameter(vector3Size, this->optiSettings.horizon);
+            c.upperLimitPosition = this->opti.parameter(vector3Size, horizon);
 
             // Lower limit of the position of the contact. It is expressed in the contact body frame
-            c.lowerLimitPosition = this->opti.parameter(vector3Size, this->optiSettings.horizon);
+            c.lowerLimitPosition = this->opti.parameter(vector3Size, horizon);
 
             // Maximum admissible contact force. It is expressed in the contact body frame
-            c.isEnabled = this->opti.parameter(1, this->optiSettings.horizon);
+            c.isEnabled = this->opti.parameter(1, horizon);
 
             // The nominal contact position is a parameter that regularize the solution
             c.nominalPosition = this->opti.parameter(vector3Size, stateHorizon);
@@ -770,12 +885,74 @@ struct CentroidalMPC::Impl
 
             for (int j = 0; j < contact.corners.size(); j++)
             {
-                c.corners[j].force = this->opti.variable(vector3Size, this->optiSettings.horizon);
-
                 c.corners[j].position
                     = casadi::DM(std::vector<double>(contact.corners[j].position.data(),
                                                      contact.corners[j].position.data()
                                                          + contact.corners[j].position.size()));
+            }
+        }
+
+        // The decision variables are created stage by stage, i.e., [x_0, u_0, x_1, u_1, ..., x_N]
+        // where x_k contains the CoM, its velocity, the angular momentum and the contact positions
+        // and u_k the contact velocities and forces. This ordering is required by structure
+        // exploiting solvers (e.g., fatrop) and does not affect the others.
+        std::vector<casadi::MX> com, dcom, angularMomentum;
+        std::map<std::string, std::vector<casadi::MX>> position, linearVelocity;
+        std::map<std::string, std::vector<std::vector<casadi::MX>>> force, previousForce;
+        for (int k = 0; k < stateHorizon; k++)
+        {
+            com.push_back(this->opti.variable(vector3Size));
+            dcom.push_back(this->opti.variable(vector3Size));
+            angularMomentum.push_back(this->opti.variable(vector3Size));
+            for (const auto& [key, contact] : this->optiVariables.contacts)
+            {
+                position[key].push_back(this->opti.variable(vector3Size));
+            }
+
+            // fatrop requires a stage-wise separable cost. The force of the previous stage is
+            // added to the state to express the rate of change of the force.
+            if (usePreviousForceState && k > 0 && k < horizon)
+            {
+                for (const auto& [key, contact] : this->optiVariables.contacts)
+                {
+                    previousForce[key].resize(contact.corners.size());
+                    for (auto& cornerForce : previousForce[key])
+                    {
+                        cornerForce.push_back(this->opti.variable(vector3Size));
+                    }
+                }
+            }
+
+            if (k == horizon)
+            {
+                break;
+            }
+
+            for (const auto& [key, contact] : this->optiVariables.contacts)
+            {
+                linearVelocity[key].push_back(this->opti.variable(vector3Size));
+                force[key].resize(contact.corners.size());
+                for (auto& cornerForce : force[key])
+                {
+                    cornerForce.push_back(this->opti.variable(vector3Size));
+                }
+            }
+        }
+
+        this->optiVariables.com = casadi::MX::horzcat(com);
+        this->optiVariables.dcom = casadi::MX::horzcat(dcom);
+        this->optiVariables.angularMomentum = casadi::MX::horzcat(angularMomentum);
+        for (auto& [key, c] : this->optiVariables.contacts)
+        {
+            c.position = casadi::MX::horzcat(position[key]);
+            c.linearVelocity = casadi::MX::horzcat(linearVelocity[key]);
+            for (int j = 0; j < c.corners.size(); j++)
+            {
+                c.corners[j].force = casadi::MX::horzcat(force[key][j]);
+                if (usePreviousForceState)
+                {
+                    c.corners[j].previousForce = casadi::MX::horzcat(previousForce[key][j]);
+                }
             }
         }
 
@@ -790,6 +967,20 @@ struct CentroidalMPC::Impl
         this->optiVariables.externalTorque = this->opti.parameter(vector3Size, //
                                                                   this->optiSettings.horizon);
         this->optiVariables.gravity = this->opti.parameter(vector3Size);
+
+        if (this->isSqp())
+        {
+            this->optiVariables.comLinearizationPoint
+                = this->opti.parameter(vector3Size, stateHorizon);
+            for (auto& [key, c] : this->optiVariables.contacts)
+            {
+                c.positionLinearizationPoint = this->opti.parameter(vector3Size, stateHorizon);
+                for (auto& corner : c.corners)
+                {
+                    corner.forceLinearizationPoint = this->opti.parameter(vector3Size, horizon);
+                }
+            }
+        }
     }
 
     /**
@@ -824,49 +1015,46 @@ struct CentroidalMPC::Impl
             return;
         }
 
-        // if not ipopt it is sqpmethod
+        if (this->optiSettings.solverName == "fatrop")
+        {
+            solverOptions["print_level"] = this->optiSettings.solverVerbosity;
+            solverOptions["tol"] = this->optiSettings.fatropTolerance;
+            // the default value (1e2) leads to more iterations for this problem
+            solverOptions["mu_init"] = 1e-1;
+
+            casadiOptions["print_time"] = this->optiSettings.solverVerbosity != 0;
+            casadiOptions["expand"] = true;
+            casadiOptions["error_on_fail"] = true;
+            casadiOptions["structure_detection"] = "auto";
+            casadiOptions["fatrop"] = solverOptions;
+
+            this->opti.solver("fatrop", casadiOptions);
+            return;
+        }
+
+        // sqp: each subproblem is a convex QP solved by osqp
         casadi::Dict osqpOptions;
-        if (this->optiSettings.solverVerbosity != 0)
-        {
-            casadiOptions["print_header"] = true;
-            casadiOptions["print_iteration"] = true;
-            casadiOptions["print_status"] = true;
-            casadiOptions["print_time"] = true;
-            osqpOptions["verbose"] = true;
-        } else
-        {
-            casadiOptions["print_header"] = false;
-            casadiOptions["print_iteration"] = false;
-            casadiOptions["print_status"] = false;
-            casadiOptions["print_time"] = false;
-            osqpOptions["verbose"] = false;
-        }
-        casadiOptions["error_on_fail"] = false;
+        osqpOptions["verbose"] = this->optiSettings.solverVerbosity != 0;
+        osqpOptions["eps_abs"] = this->optiSettings.osqpTolerance;
+        osqpOptions["eps_rel"] = this->optiSettings.osqpTolerance;
+        osqpOptions["max_iter"] = this->optiSettings.osqpMaxIteration;
+        osqpOptions["polish"] = true;
+
         casadiOptions["expand"] = true;
-        casadiOptions["qpsol"] = "osqp";
-
-        solverOptions["error_on_fail"] = false;
-        solverOptions["osqp"] = osqpOptions;
-
-        casadiOptions["qpsol_options"] = solverOptions;
-        casadiOptions["max_iter"] = this->optiSettings.numberOfQPIterations;
-
-        if (this->optiSettings.isJITEnabled)
-        {
-            casadiOptions["jit"] = true;
-            casadiOptions["compiler"] = "shell";
-
-            casadi::Dict jitOptions;
-            jitOptions["flags"] = {"-O3"};
-            jitOptions["verbose"] = true;
-            casadiOptions["jit_options"] = jitOptions;
-        }
-        this->opti.solver("sqpmethod", casadiOptions);
+        casadiOptions["error_on_fail"] = false;
+        casadiOptions["warm_start_primal"] = true;
+        casadiOptions["warm_start_dual"] = true;
+        this->opti.solver("osqp", casadiOptions, osqpOptions);
     }
 
     casadi::Function createController()
     {
         using Sl = casadi::Slice;
+
+        if (this->isSqp())
+        {
+            this->opti = casadi::Opti("conic");
+        }
 
         this->populateOptiVariables();
 
@@ -877,82 +1065,146 @@ struct CentroidalMPC::Impl
         auto& externalForce = this->optiVariables.externalForce;
         auto& externalTorque = this->optiVariables.externalTorque;
         auto& gravity = this->optiVariables.gravity;
+        auto& contacts = this->optiVariables.contacts;
+        const int horizon = this->optiSettings.horizon;
+        const bool usePreviousForceState = this->optiSettings.solverName == "fatrop";
 
-        // prepare the input of the ode
-        std::vector<casadi::MX> odeInput;
-        odeInput.push_back(externalForce);
-        odeInput.push_back(externalTorque);
-        odeInput.push_back(com(Sl(), Sl(0, -1)));
-        odeInput.push_back(dcom(Sl(), Sl(0, -1)));
-        odeInput.push_back(angularMomentum(Sl(), Sl(0, -1)));
-        odeInput.push_back(gravity);
-        for (const auto& [key, contact] : this->optiVariables.contacts)
+        auto dynamics = this->ode();
+        auto contactPositionError = this->contactPositionError();
+        auto frictionConeConstraint = this->frictionConeConstraint();
+
+        // The bounding box of the position at instant k is expressed in the frame of the contact at
+        // the same instant. The limits are set to infinity by setContactPhaseList when the
+        // constraint is redundant.
+        // each constraint is labeled with a name and a stage to shift the multipliers in the sqp
+        struct ConstraintBlock
         {
-            odeInput.push_back(contact.position(Sl(), Sl(0, -1)));
-            odeInput.push_back(contact.orientation(Sl(), Sl(0, -1)));
-            odeInput.push_back(contact.isEnabled);
-            odeInput.push_back(contact.linearVelocity);
+            casadi_int offset;
+            casadi_int size;
+        };
+        std::map<std::pair<std::string, int>, ConstraintBlock> constraintBlocks;
+        casadi_int numberOfConstraints = 0;
+        auto addConstraint = [&](const casadi::MX& constraint,
+                                 casadi_int size,
+                                 const std::string& name,
+                                 int k) {
+            this->opti.subject_to(constraint);
+            constraintBlocks[{name, k}] = {numberOfConstraints, size};
+            numberOfConstraints += size;
+        };
 
-            for (const auto& corner : contact.corners)
+        auto addBoundingBoxConstraint = [&](const CasadiContactWithConstraints& contact, int k) {
+            auto error = contactPositionError({contact.position(Sl(), k),
+                                               contact.nominalPosition(Sl(), k),
+                                               contact.orientation(Sl(), k)});
+            addConstraint(contact.lowerLimitPosition(Sl(), k - 1) <= error[0]
+                              <= contact.upperLimitPosition(Sl(), k - 1),
+                          error[0].numel(),
+                          "bounding_box_" + contact.contactName,
+                          k);
+        };
+
+        // The constraints are added stage by stage, i.e., [dynamics_0, path_0, dynamics_1, ...],
+        // as required by structure exploiting solvers (e.g., fatrop).
+        for (int k = 0; k < horizon; k++)
+        {
+            std::vector<casadi::MX> odeInput{externalForce(Sl(), k),
+                                             externalTorque(Sl(), k),
+                                             com(Sl(), k),
+                                             dcom(Sl(), k),
+                                             angularMomentum(Sl(), k),
+                                             gravity};
+            if (this->isSqp())
             {
-                odeInput.push_back(corner.force);
+                odeInput.push_back(this->optiVariables.comLinearizationPoint(Sl(), k));
+            }
+            for (const auto& [key, contact] : contacts)
+            {
+                odeInput.push_back(contact.position(Sl(), k));
+                odeInput.push_back(contact.orientation(Sl(), k));
+                odeInput.push_back(contact.isEnabled(Sl(), k));
+                odeInput.push_back(contact.linearVelocity(Sl(), k));
+                if (this->isSqp())
+                {
+                    odeInput.push_back(contact.positionLinearizationPoint(Sl(), k));
+                }
+                for (const auto& corner : contact.corners)
+                {
+                    odeInput.push_back(corner.force(Sl(), k));
+                    if (this->isSqp())
+                    {
+                        odeInput.push_back(corner.forceLinearizationPoint(Sl(), k));
+                    }
+                }
+            }
+            const auto next = dynamics(odeInput);
+
+            // the order must match the one of the state variables
+            std::vector<casadi::MX> gap{com(Sl(), k + 1) - next[0],
+                                        dcom(Sl(), k + 1) - next[1],
+                                        angularMomentum(Sl(), k + 1) - next[2]};
+            std::size_t contactIndex = 3;
+            for (const auto& [key, contact] : contacts)
+            {
+                gap.push_back(contact.position(Sl(), k + 1) - next[contactIndex++]);
+            }
+            if (usePreviousForceState && k + 1 < horizon)
+            {
+                for (const auto& [key, contact] : contacts)
+                {
+                    for (const auto& corner : contact.corners)
+                    {
+                        gap.push_back(corner.previousForce(Sl(), k) - corner.force(Sl(), k));
+                    }
+                }
+            }
+            const casadi::MX gapVector = casadi::MX::vertcat(gap);
+            addConstraint(gapVector == 0, gapVector.numel(), "dynamics", k);
+
+            if (k == 0)
+            {
+                // set the feedback
+                addConstraint(this->optiVariables.comCurrent == com(Sl(), 0), 3, "com_0", 0);
+                addConstraint(this->optiVariables.dcomCurrent == dcom(Sl(), 0), 3, "dcom_0", 0);
+                addConstraint(this->optiVariables.angularMomentumCurrent
+                                  == angularMomentum(Sl(), 0),
+                              3,
+                              "angular_momentum_0",
+                              0);
+                for (const auto& [key, contact] : contacts)
+                {
+                    addConstraint(contact.currentPosition == contact.position(Sl(), 0),
+                                  3,
+                                  key + "_0",
+                                  0);
+                }
+            }
+
+            for (const auto& [key, contact] : contacts)
+            {
+                if (k > 0)
+                {
+                    addBoundingBoxConstraint(contact, k);
+                }
+
+                // TODO please if you want to add heel to toe motion you should define a
+                // contact.maximumNormalForce for each corner. At this stage is too premature.
+                for (const auto& corner : contact.corners)
+                {
+                    addConstraint(frictionConeConstraint({contact.orientation(Sl(), k),
+                                                          contact.isEnabled(Sl(), k),
+                                                          corner.force(Sl(), k)})[0]
+                                      <= 0,
+                                  this->frictionCone.getA().rows(),
+                                  "friction_cone_" + corner.cornerName,
+                                  k);
+                }
             }
         }
 
-        // set the feedback
-        this->opti.subject_to(this->optiVariables.comCurrent == com(Sl(), 0));
-        this->opti.subject_to(this->optiVariables.dcomCurrent == dcom(Sl(), 0));
-        this->opti.subject_to(this->optiVariables.angularMomentumCurrent
-                              == angularMomentum(Sl(), 0));
-        for (const auto& [key, contact] : this->optiVariables.contacts)
+        for (const auto& [key, contact] : contacts)
         {
-            this->opti.subject_to(this->optiVariables.contacts.at(key).currentPosition
-                                  == contact.position(Sl(), 0));
-        }
-
-        // set the dynamics
-        // map computes the multiple shooting method
-        auto dynamics = this->ode().map(this->optiSettings.horizon);
-        auto fullTrajectory = dynamics(odeInput);
-        this->opti.subject_to(extractFutureValuesFromState(com) == fullTrajectory[0]);
-        this->opti.subject_to(extractFutureValuesFromState(dcom) == fullTrajectory[1]);
-        this->opti.subject_to(extractFutureValuesFromState(angularMomentum) == fullTrajectory[2]);
-
-        // footstep dynamics
-        std::size_t contactIndex = 0;
-        for (const auto& [key, contact] : this->optiVariables.contacts)
-        {
-            this->opti.subject_to(extractFutureValuesFromState(contact.position)
-                                  == fullTrajectory[3 + contactIndex]);
-            contactIndex++;
-        }
-
-        // add constraints for the contacts
-        auto contactPositionErrorMap = this->contactPositionError().map(this->optiSettings.horizon);
-        auto frictionConeMap = this->frictionConeConstraint().map(this->optiSettings.horizon);
-
-        for (const auto& [key, contact] : this->optiVariables.contacts)
-        {
-            // The bounding box of the position at instant k + 1 is expressed in the frame of the
-            // contact at the same instant. The limits are set to infinity by setContactPhaseList
-            // when the constraint is redundant.
-            auto error
-                = contactPositionErrorMap({extractFutureValuesFromState(contact.position),
-                                           extractFutureValuesFromState(contact.nominalPosition),
-                                           extractFutureValuesFromState(contact.orientation)});
-
-            this->opti.subject_to(contact.lowerLimitPosition <= error[0]
-                                  <= contact.upperLimitPosition);
-
-            // TODO please if you want to add heel to toe motion you should define a
-            // contact.maximumNormalForce for each corner. At this stage is too premature.
-            for (const auto& corner : contact.corners)
-            {
-                auto frictionCone = frictionConeMap(
-                    {contact.orientation(Sl(), Sl(0, -1)), contact.isEnabled, corner.force});
-                // opti requires a vector for element-wise inequalities
-                this->opti.subject_to(casadi::MX::vec(frictionCone[0]) <= 0);
-            }
+            addBoundingBoxConstraint(contact, horizon);
         }
 
         // create the cost function
@@ -1000,7 +1252,10 @@ struct CentroidalMPC::Impl
 
             for (const auto& corner : contact.corners)
             {
-                auto forceRateOfChange = casadi::MX::diff(corner.force.T()).T();
+                const casadi::MX forceRateOfChange
+                    = usePreviousForceState
+                          ? corner.force(Sl(), Sl(1, horizon)) - corner.previousForce
+                          : casadi::MX::diff(corner.force.T()).T();
 
                 cost += this->weights.contactForceSymmetry
                         * casadi::MX::sumsqr(corner.force - averageForce);
@@ -1100,6 +1355,54 @@ struct CentroidalMPC::Impl
         concatenateOutput(this->optiVariables.dcom, "dcom");
         concatenateOutput(this->optiVariables.angularMomentum, "angular_momentum");
 
+        // the order must match the one of resizeControllerInputs
+        if (this->isSqp())
+        {
+            concatenateInput(this->optiVariables.com, "com_iterate");
+            concatenateInput(this->optiVariables.dcom, "dcom_iterate");
+            concatenateInput(this->optiVariables.angularMomentum, "angular_momentum_iterate");
+            concatenateInput(this->optiVariables.comLinearizationPoint, "com_linearization_point");
+            for (const auto& [key, contact] : this->optiVariables.contacts)
+            {
+                const std::string prefix = "contact_" + key;
+                concatenateInput(contact.position, prefix + "_position_iterate");
+                concatenateInput(contact.linearVelocity, prefix + "_linear_velocity_iterate");
+                for (std::size_t i = 0; i < contact.corners.size(); i++)
+                {
+                    concatenateInput(contact.corners[i].force,
+                                     prefix + "_corner_" + std::to_string(i) + "_force_iterate");
+                }
+                concatenateInput(contact.positionLinearizationPoint,
+                                 prefix + "_position_linearization_point");
+                for (std::size_t i = 0; i < contact.corners.size(); i++)
+                {
+                    concatenateInput(contact.corners[i].forceLinearizationPoint,
+                                     prefix + "_corner_" + std::to_string(i)
+                                         + "_force_linearization_point");
+                }
+
+                concatenateOutput(contact.linearVelocity, prefix + "_linear_velocity");
+            }
+
+            const casadi::MX multipliers = this->opti.lam_g();
+            assert(multipliers.numel() == numberOfConstraints);
+            this->vectorizedOptiInputs.push_back(casadi::DM::zeros(multipliers.sparsity()));
+            this->sqpIterate.multipliers = &this->vectorizedOptiInputs.back();
+            concatenateInput(multipliers, "multipliers_iterate");
+            concatenateOutput(multipliers, "multipliers");
+
+            this->multipliersShift.clear();
+            for (const auto& [label, block] : constraintBlocks)
+            {
+                const auto next = constraintBlocks.find({label.first, label.second + 1});
+                if (next != constraintBlocks.end() && next->second.size == block.size)
+                {
+                    this->multipliersShift.push_back(
+                        {block.offset, next->second.offset, block.size});
+                }
+            }
+        }
+
         casadi::Dict toFunctionOptions, jitOptions;
         if constexpr (casadiVersionIsAtLeast360)
         {
@@ -1108,6 +1411,169 @@ struct CentroidalMPC::Impl
 
         return this->opti
             .to_function("controller", input, output, inputName, outputName, toFunctionOptions);
+    }
+
+    /**
+     * Initialize the sqp iterate with the references, the nominal contacts and gravity-compensating
+     * contact forces.
+     */
+    void initializeSqpIterate()
+    {
+        using namespace BipedalLocomotion::Conversions;
+        const double dT = chronoToSeconds(this->optiSettings.samplingTime);
+        const int horizon = this->optiSettings.horizon;
+
+        toEigen(*this->sqpIterate.com) = toEigen(*this->controllerInputs.comReference);
+        auto dcom = toEigen(*this->sqpIterate.dcom);
+        const auto comReference = toEigen(*this->controllerInputs.comReference);
+        dcom.leftCols(horizon) = (comReference.rightCols(horizon) - comReference.leftCols(horizon)) / dT;
+        dcom.rightCols<1>() = dcom.col(horizon - 1);
+        toEigen(*this->sqpIterate.angularMomentum)
+            = toEigen(*this->controllerInputs.angularMomentumReference);
+
+        Eigen::VectorXd numberOfActiveCorners = Eigen::VectorXd::Zero(horizon);
+        for (const auto& [key, contact] : this->output.contacts)
+        {
+            numberOfActiveCorners += static_cast<double>(contact.corners.size())
+                                     * toEigen(*this->controllerInputs.contacts[key].isEnabled)
+                                           .transpose();
+        }
+
+        const Eigen::Vector3d gravity = toEigen(*this->controllerInputs.gravity);
+        for (auto& [key, c] : this->sqpIterate.contacts)
+        {
+            const auto isEnabled = toEigen(*this->controllerInputs.contacts[key].isEnabled);
+            toEigen(*c.position) = toEigen(*this->controllerInputs.contacts[key].nominalPosition);
+            toEigen(*c.linearVelocity).setZero();
+            toEigen(*this->sqpIterate.multipliers).setZero();
+            for (auto* force : c.force)
+            {
+                auto f = toEigen(*force);
+                for (int k = 0; k < horizon; k++)
+                {
+                    f.col(k) = (isEnabled(k) > 0.5 && numberOfActiveCorners(k) > 0)
+                                   ? Eigen::Vector3d(-gravity / numberOfActiveCorners(k))
+                                   : Eigen::Vector3d::Zero();
+                }
+            }
+        }
+        this->sqpIterate.isValid = true;
+    }
+
+    void setSqpLinearizationPoint()
+    {
+        *this->sqpIterate.comLinearizationPoint = *this->sqpIterate.com;
+        for (auto& [key, c] : this->sqpIterate.contacts)
+        {
+            *c.positionLinearizationPoint = *c.position;
+            for (std::size_t i = 0; i < c.force.size(); i++)
+            {
+                *c.forceLinearizationPoint[i] = *c.force[i];
+            }
+        }
+    }
+
+    /**
+     * Store the solution of the QP as new iterate.
+     * @return the infinity norm of the step or a negative number if the solution is not valid.
+     */
+    double updateSqpIterate(const std::vector<casadi::DM>& solution)
+    {
+        using namespace BipedalLocomotion::Conversions;
+        double step = 0;
+        auto update = [&step](casadi::DM& iterate, const casadi::DM& value) {
+            step = std::max(step, (toEigen(iterate) - toEigen(value)).lpNorm<Eigen::Infinity>());
+            iterate = value;
+        };
+
+        // the order is the one of the outputs in createController
+        auto it = solution.cbegin();
+        for (auto& [key, c] : this->sqpIterate.contacts)
+        {
+            std::advance(it, 1); // is enabled
+            update(*c.position, *it++);
+            std::advance(it, 1); // orientation
+            for (auto* force : c.force)
+            {
+                update(*force, *it++);
+            }
+        }
+        update(*this->sqpIterate.com, *it++);
+        update(*this->sqpIterate.dcom, *it++);
+        update(*this->sqpIterate.angularMomentum, *it++);
+        for (auto& [key, c] : this->sqpIterate.contacts)
+        {
+            update(*c.linearVelocity, *it++);
+        }
+        *this->sqpIterate.multipliers = *it;
+
+        return std::isfinite(step) ? step : -1;
+    }
+
+    /**
+     * Shift the iterate of one sample to warm start the next control cycle.
+     */
+    void shiftSqpIterate()
+    {
+        using namespace BipedalLocomotion::Conversions;
+        auto shift = [](casadi::DM& value) {
+            auto v = toEigen(value);
+            const int n = v.cols() - 1;
+            v.leftCols(n) = v.rightCols(n).eval();
+        };
+
+        shift(*this->sqpIterate.com);
+        shift(*this->sqpIterate.dcom);
+        shift(*this->sqpIterate.angularMomentum);
+        for (auto& [key, c] : this->sqpIterate.contacts)
+        {
+            shift(*c.position);
+            shift(*c.linearVelocity);
+            for (auto* force : c.force)
+            {
+                shift(*force);
+            }
+        }
+
+        auto multipliers = toEigen(*this->sqpIterate.multipliers);
+        const Eigen::VectorXd previousMultipliers = multipliers;
+        for (const auto& block : this->multipliersShift)
+        {
+            multipliers.middleRows(block.destination, block.size)
+                = previousMultipliers.middleRows(block.source, block.size);
+        }
+    }
+
+    bool solveSqp(std::vector<casadi::DM>& solution)
+    {
+        // when the iterate is (re)initialized the sqp runs until convergence to get a good
+        // linearization point for the next control cycles
+        constexpr int maxNumberOfQPIterationsAtInitialization = 20;
+        int numberOfQPIterations = this->optiSettings.numberOfQPIterations;
+        if (!this->sqpIterate.isValid)
+        {
+            this->initializeSqpIterate();
+            numberOfQPIterations
+                = std::max(numberOfQPIterations, maxNumberOfQPIterationsAtInitialization);
+        }
+
+        for (int i = 0; i < numberOfQPIterations; i++)
+        {
+            this->setSqpLinearizationPoint();
+            solution = this->controller(this->vectorizedOptiInputs);
+            const double step = this->updateSqpIterate(solution);
+            if (step < 0)
+            {
+                this->sqpIterate.isValid = false;
+                return false;
+            }
+            if (step < this->optiSettings.sqpTolerance)
+            {
+                break;
+            }
+        }
+
+        return true;
     }
 };
 
@@ -1174,7 +1640,17 @@ bool CentroidalMPC::advance()
     try
     {
         SingleThreadedOpenMPScope singleThreadedScope;
-        controllerOutput = m_pimpl->controller(m_pimpl->vectorizedOptiInputs);
+        if (m_pimpl->isSqp())
+        {
+            if (!m_pimpl->solveSqp(controllerOutput))
+            {
+                log()->error("{} The sqp returned an invalid solution.", errorPrefix);
+                return false;
+            }
+        } else
+        {
+            controllerOutput = m_pimpl->controller(m_pimpl->vectorizedOptiInputs);
+        }
     } catch (const std::exception& e)
     {
         log()->error("{} Unable to solve the problem. The following exception has been thrown {}.",
@@ -1314,6 +1790,11 @@ bool CentroidalMPC::advance()
     {
         using namespace BipedalLocomotion::Conversions;
         m_pimpl->output.angularMomentumTrajectory[i] = toEigen(*it).col(i);
+    }
+
+    if (m_pimpl->isSqp())
+    {
+        m_pimpl->shiftSqpIterate();
     }
 
     // advance the time

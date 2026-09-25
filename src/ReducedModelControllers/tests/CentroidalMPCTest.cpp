@@ -14,6 +14,7 @@
 
 // Catch2
 #include <catch2/catch_test_macros.hpp>
+#include <catch2/generators/catch_generators.hpp>
 
 #include <BipedalLocomotion/Contacts/ContactPhaseList.h>
 #include <BipedalLocomotion/ContinuousDynamicalSystem/CentroidalDynamics.h>
@@ -105,6 +106,8 @@ void printTimingStatistics(const std::string& label, std::vector<std::chrono::na
 
 TEST_CASE("CentroidalMPC")
 {
+    const std::string solverName = GENERATE("ipopt", "fatrop", "sqp");
+    const std::string label = "CentroidalMPC - " + solverName;
 
     constexpr bool saveDataset = false;
 
@@ -118,7 +121,7 @@ TEST_CASE("CentroidalMPC")
     handler->setParameter("number_of_slices", 1);
     handler->setParameter("static_friction_coefficient", 0.33);
     handler->setParameter("solver_verbosity", 0);
-    handler->setParameter("solver_name", "ipopt");
+    handler->setParameter("solver_name", solverName);
     handler->setParameter("linear_solver", "mumps");
     handler->setParameter("is_warm_start_enabled", true);
 
@@ -156,7 +159,7 @@ TEST_CASE("CentroidalMPC")
     const auto initBegin = std::chrono::steady_clock::now();
     REQUIRE(mpc.initialize(handler));
     const auto initEnd = std::chrono::steady_clock::now();
-    std::cout << "[CentroidalMPC] initialize() [ms]: "
+    std::cout << "[" << label << "] initialize() [ms]: "
               << std::chrono::duration<double, std::milli>(initEnd - initBegin).count()
               << std::endl;
 
@@ -325,7 +328,7 @@ TEST_CASE("CentroidalMPC")
     std::ofstream centroidalMPCData;
     if (saveDataset)
     {
-        centroidalMPCData.open("CentroidalMPCUnitTest.txt");
+        centroidalMPCData.open("CentroidalMPCUnitTest_" + solverName + ".txt");
     }
 
     int controllerIndex = 0;
@@ -406,7 +409,7 @@ TEST_CASE("CentroidalMPC")
         centroidalMPCData.close();
     }
 
-    printTimingStatistics("CentroidalMPC", advanceTimes);
+    printTimingStatistics(label, advanceTimes);
 
     const auto& [com, dcom, angularMomentum] = system->getState();
 
