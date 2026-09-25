@@ -5,9 +5,11 @@
  * distributed under the terms of the BSD-3-Clause license.
  */
 
+#include <algorithm>
 #include <cmath>
 #include <memory>
 #include <mutex>
+#include <string>
 #include <vector>
 
 #include <yarp/dev/IAxisInfo.h>
@@ -29,6 +31,9 @@ struct DinRailRobotControl::Impl
 
     /** Joint type list (revolute vs prismatic), populated in setDriver(). */
     std::vector<JointType> jointTypes;
+
+    /** Names of the controlled joints, populated in setDriver(). */
+    std::vector<std::string> jointNames;
 
     /** Number of actuated degrees of freedom. */
     std::size_t actuatedDOFs{0};
@@ -91,6 +96,18 @@ struct DinRailRobotControl::Impl
                          stiffness.size(),
                          damping.size());
             return false;
+        }
+
+        for (const int idx : jointIndices)
+        {
+            if (idx < 0 || static_cast<std::size_t>(idx) >= this->actuatedDOFs)
+            {
+                log()->error("{} Joint index {} is out of range [0, {}).",
+                             errorPrefix,
+                             idx,
+                             this->actuatedDOFs);
+                return false;
+            }
         }
 
         // Resize scratch buffers (no allocation if capacity is sufficient).
@@ -208,6 +225,9 @@ bool DinRailRobotControl::setDriver(std::shared_ptr<yarp::dev::PolyDriver> robot
     m_pimpl->subsetTorque.reserve(m_pimpl->actuatedDOFs);
     m_pimpl->subsetStiffness.reserve(m_pimpl->actuatedDOFs);
     m_pimpl->subsetDamping.reserve(m_pimpl->actuatedDOFs);
+    m_pimpl->subsetIndices.reserve(m_pimpl->actuatedDOFs);
+
+    m_pimpl->jointNames = getJointList();
 
     return true;
 }
@@ -305,11 +325,10 @@ bool DinRailRobotControl::setImpedanceSetPoints(Eigen::Ref<const Eigen::VectorXd
 {
     constexpr auto errorPrefix = "[DinRailRobotControl::setImpedanceSetPoints (names)]";
 
-    const std::vector<std::string> controlledJoints = getJointList();
+    const auto& controlledJoints = m_pimpl->jointNames;
 
     std::lock_guard<std::mutex> lock(m_pimpl->subsetMutex);
     m_pimpl->subsetIndices.clear();
-    m_pimpl->subsetIndices.reserve(jointNames.size());
     for (const auto& name : jointNames)
     {
         const auto it = std::find(controlledJoints.begin(), controlledJoints.end(), name);
