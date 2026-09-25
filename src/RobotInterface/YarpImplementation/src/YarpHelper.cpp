@@ -101,7 +101,7 @@ PolyDriverDescriptor BipedalLocomotion::RobotInterface::constructRemoteControlBo
 
     PolyDriverDescriptor device("remoteControlBoards", std::make_shared<yarp::dev::PolyDriver>());
 
-    if (!device.poly->open(options) && !device.poly->isValid())
+    if (!device.poly->open(options) || !device.poly->isValid())
     {
         log()->error("{} Could not open polydriver object.", errorPrefix);
         return PolyDriverDescriptor();
@@ -151,7 +151,7 @@ PolyDriverDescriptor BipedalLocomotion::RobotInterface::constructGenericSensorCl
 
     PolyDriverDescriptor device(description, std::make_shared<yarp::dev::PolyDriver>());
 
-    if (!device.poly->open(options) && !device.poly->isValid())
+    if (!device.poly->open(options) || !device.poly->isValid())
     {
         log()->error("{} Could not open polydriver object.", errorPrefix);
         return PolyDriverDescriptor();
@@ -219,7 +219,7 @@ PolyDriverDescriptor BipedalLocomotion::RobotInterface::constructMultipleAnalogS
 
     PolyDriverDescriptor device(description, std::make_shared<yarp::dev::PolyDriver>());
 
-    if (!device.poly->open(options) && !device.poly->isValid())
+    if (!device.poly->open(options) || !device.poly->isValid())
     {
         log()->error("{} Could not open polydriver object.", errorPrefix);
         return PolyDriverDescriptor();
@@ -275,7 +275,7 @@ PolyDriverDescriptor BipedalLocomotion::RobotInterface::constructMultipleAnalogS
 
     PolyDriverDescriptor device(description, std::make_shared<yarp::dev::PolyDriver>());
 
-    if (!device.poly->open(options) && !device.poly->isValid())
+    if (!device.poly->open(options) || !device.poly->isValid())
     {
         log()->error("{} Could not open polydriver object.", errorPrefix);
         return PolyDriverDescriptor();
@@ -392,7 +392,7 @@ PolyDriverDescriptor BipedalLocomotion::RobotInterface::constructRDGBSensorClien
 
     PolyDriverDescriptor device(name, std::make_shared<yarp::dev::PolyDriver>());
 
-    if (!device.poly->open(options) && !device.poly->isValid())
+    if (!device.poly->open(options) || !device.poly->isValid())
     {
         log()->error("{} Could not open polydriver object.", errorPrefix);
         return PolyDriverDescriptor();
