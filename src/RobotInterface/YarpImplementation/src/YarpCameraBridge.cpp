@@ -85,7 +85,7 @@ struct YarpCameraBridge::Impl
                 return false;
             }
 
-            time = BipedalLocomotion::clock().now().count();
+            time = std::chrono::duration<double>(BipedalLocomotion::clock().now()).count();
             return true;
         }
     };
@@ -134,7 +134,7 @@ struct YarpCameraBridge::Impl
                 return false;
             }
 
-            time = BipedalLocomotion::clock().now().count();
+            time = std::chrono::duration<double>(BipedalLocomotion::clock().now()).count();
             return true;
         }
     };
@@ -539,7 +539,9 @@ bool YarpCameraBridge::setDriversList(const yarp::dev::PolyDriverList& deviceDri
                 log()->error("{} Mismatch between the rgb and depth width or the rgb height and "
                              "the depth height. For the camera {}. YarpCameraBridge do not support "
                              "cameras having a different resolutions. The support will be added in "
-                             "the future.");
+                             "the future.",
+                             logPrefix,
+                             cameraName);
                 return false;
             }
             m_pimpl->metaData.bridgeOptions.rgbdImgDimensions[cameraName]
@@ -623,7 +625,10 @@ bool YarpCameraBridge::getColorImage(
         }
 
         colorImg = yarp::cv::toCvMat(rgbImage->second.image);
-        receiveTimeInSeconds = rgbImage->second.time;
+        if (receiveTimeInSeconds)
+        {
+            receiveTimeInSeconds.value().get() = rgbImage->second.time;
+        }
     } else
     {
         auto flexImage = m_pimpl->flexImages.find(camName);
@@ -672,14 +677,17 @@ bool YarpCameraBridge::getColorImage(
             }
         } else
         {
-            log()->error("[YarpCameraBridge::getColorImage] Unable he convert the yarp image into "
+            log()->error("[YarpCameraBridge::getColorImage] Unable to convert the yarp image into "
                          "opencv for the camera named: {}. Only VOCAB_PIXEL_BGR and "
                          "VOCAB_PIXEL_RGB are supported.",
                          camName);
             return false;
         }
 
-        receiveTimeInSeconds = flexImage->second.time;
+        if (receiveTimeInSeconds)
+        {
+            receiveTimeInSeconds.value().get() = flexImage->second.time;
+        }
     }
 
     if (colorImg.rows <= 0 || colorImg.cols <= 0)
@@ -705,18 +713,22 @@ bool YarpCameraBridge::getDepthImage(
 
     // check if the camera name is a standard camera or a depth camera
     auto depthImage = m_pimpl->depthImages.find(camName);
-    if (depthImage != m_pimpl->depthImages.end())
+    if (depthImage == m_pimpl->depthImages.end())
     {
-        //
-        if (!depthImage->second.readCameraImage(camName,
-                                                m_pimpl->wholeBodyRGBDInterface.at(camName)))
-        {
-            log()->error("{} {} could not read image.", prefix, camName);
-            return false;
-        }
+        log()->error("{} Unable to find the camera named {}.", prefix, camName);
+        return false;
+    }
 
-        depthImg = yarp::cv::toCvMat(depthImage->second.image);
-        receiveTimeInSeconds = depthImage->second.time;
+    if (!depthImage->second.readCameraImage(camName, m_pimpl->wholeBodyRGBDInterface.at(camName)))
+    {
+        log()->error("{} {} could not read image.", prefix, camName);
+        return false;
+    }
+
+    depthImg = yarp::cv::toCvMat(depthImage->second.image);
+    if (receiveTimeInSeconds)
+    {
+        receiveTimeInSeconds.value().get() = depthImage->second.time;
     }
 
     if (depthImg.rows <= 0 || depthImg.cols <= 0)
