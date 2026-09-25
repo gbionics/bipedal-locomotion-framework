@@ -409,102 +409,48 @@ bool YarpSensorBridge::getJointPosition(const std::string& jointName,
                                         double& jointPosition,
                                         OptionalDoubleRef receiveTimeInSeconds)
 {
-    constexpr auto logPrefix = "[YarpSensorBridge::getJointPosition]";
-    int idx;
-    if (!m_pimpl->getIndexFromVector(m_pimpl->metaData.sensorsList.jointsList, jointName, idx))
-    {
-        log()->error("{} {} could not be found in the configured list of joints.",
-                     logPrefix,
-                     jointName);
-        return false;
-    }
-
-    jointPosition = m_pimpl->controlBoardRemapperMeasures.jointPositions[idx];
-
-    if (receiveTimeInSeconds)
-    {
-        receiveTimeInSeconds.value().get()
-            = m_pimpl->controlBoardRemapperMeasures.receivedTimeInSeconds;
-    }
-    return true;
+    return m_pimpl->getControlBoardMeasure("[YarpSensorBridge::getJointPosition]",
+                                           m_pimpl->controlBoardRemapperInterfaces.encoders,
+                                           m_pimpl->metaData.bridgeOptions.isJointSensorsEnabled,
+                                           m_pimpl->controlBoardRemapperMeasures.jointPositions,
+                                           jointName,
+                                           jointPosition,
+                                           receiveTimeInSeconds);
 }
 
 bool YarpSensorBridge::getJointPositions(Eigen::Ref<Eigen::VectorXd> jointPositions,
                                          OptionalDoubleRef receiveTimeInSeconds)
 {
-    if (!m_pimpl->checkControlBoardSensor("[YarpSensorBridge::getJointPositions]",
-                                          m_pimpl->controlBoardRemapperInterfaces.encoders,
-                                          m_pimpl->metaData.bridgeOptions.isJointSensorsEnabled,
-                                          m_pimpl->controlBoardRemapperMeasures.jointPositions))
-    {
-        return false;
-    }
-    jointPositions = m_pimpl->controlBoardRemapperMeasures.jointPositions;
-    if (receiveTimeInSeconds)
-    {
-        receiveTimeInSeconds.value().get()
-            = m_pimpl->controlBoardRemapperMeasures.receivedTimeInSeconds;
-    }
-    return true;
+    return m_pimpl->getControlBoardMeasures("[YarpSensorBridge::getJointPositions]",
+                                            m_pimpl->controlBoardRemapperInterfaces.encoders,
+                                            m_pimpl->metaData.bridgeOptions.isJointSensorsEnabled,
+                                            m_pimpl->controlBoardRemapperMeasures.jointPositions,
+                                            jointPositions,
+                                            receiveTimeInSeconds);
 }
 
 bool YarpSensorBridge::getJointVelocity(const std::string& jointName,
                                         double& jointVelocity,
                                         OptionalDoubleRef receiveTimeInSeconds)
 {
-    constexpr auto logPrefix = "[YarpSensorBridge::getJointVelocity]";
-    if (!m_pimpl->checkControlBoardSensor(logPrefix,
-                                          m_pimpl->controlBoardRemapperInterfaces.encoders,
-                                          m_pimpl->metaData.bridgeOptions.isJointSensorsEnabled,
-                                          m_pimpl->controlBoardRemapperMeasures.jointVelocities))
-    {
-        return false;
-    }
-    int idx;
-    if (!m_pimpl->getIndexFromVector(m_pimpl->metaData.sensorsList.jointsList, jointName, idx))
-    {
-        log()->error("{} {} could not be found in the configured list of joints.",
-                     logPrefix,
-                     jointName);
-        return false;
-    }
-
-    jointVelocity = m_pimpl->controlBoardRemapperMeasures.jointVelocities[idx];
-    if (receiveTimeInSeconds)
-    {
-        receiveTimeInSeconds.value().get()
-            = m_pimpl->controlBoardRemapperMeasures.receivedTimeInSeconds;
-    }
-    return true;
+    return m_pimpl->getControlBoardMeasure("[YarpSensorBridge::getJointVelocity]",
+                                           m_pimpl->controlBoardRemapperInterfaces.encoders,
+                                           m_pimpl->metaData.bridgeOptions.isJointSensorsEnabled,
+                                           m_pimpl->controlBoardRemapperMeasures.jointVelocities,
+                                           jointName,
+                                           jointVelocity,
+                                           receiveTimeInSeconds);
 }
 
 bool YarpSensorBridge::getJointVelocities(Eigen::Ref<Eigen::VectorXd> jointVelocties,
                                           OptionalDoubleRef receiveTimeInSeconds)
 {
-    if (!m_pimpl->checkControlBoardSensor("[YarpSensorBridge::getJointVelocities]",
-                                          m_pimpl->controlBoardRemapperInterfaces.encoders,
-                                          m_pimpl->metaData.bridgeOptions.isJointSensorsEnabled,
-                                          m_pimpl->controlBoardRemapperMeasures.jointVelocities))
-    {
-        return false;
-    }
-
-    if (jointVelocties.size() != m_pimpl->controlBoardRemapperMeasures.jointVelocities.size())
-    {
-        log()->error("[YarpSensorBridge::getJointVelocities] The size of the input vector does not "
-                     "match the number of joints.");
-        return false;
-    }
-
-    jointVelocties = m_pimpl->controlBoardRemapperMeasures.jointVelocities;
-
-    if (receiveTimeInSeconds)
-    {
-        receiveTimeInSeconds.value().get()
-            = m_pimpl->controlBoardRemapperMeasures.receivedTimeInSeconds;
-    }
-
-    return true;
+    return m_pimpl->getControlBoardMeasures("[YarpSensorBridge::getJointVelocities]",
+                                            m_pimpl->controlBoardRemapperInterfaces.encoders,
+                                            m_pimpl->metaData.bridgeOptions.isJointSensorsEnabled,
+                                            m_pimpl->controlBoardRemapperMeasures.jointVelocities,
+                                            jointVelocties,
+                                            receiveTimeInSeconds);
 }
 
 bool YarpSensorBridge::getJointAcceleration(const std::string& jointName,
@@ -519,30 +465,19 @@ bool YarpSensorBridge::getJointAcceleration(const std::string& jointName,
         return false;
     }
 
-    int idx;
-    if (!m_pimpl->getIndexFromVector(m_pimpl->metaData.sensorsList.jointsList, jointName, idx))
-    {
-        log()->error("{} {} could not be found in the configured list of joints.",
-                     logPrefix,
-                     jointName);
-        return false;
-    }
-
-    jointAcceleration = m_pimpl->controlBoardRemapperMeasures.jointAccelerations[idx];
-
-    if (receiveTimeInSeconds)
-    {
-        receiveTimeInSeconds.value().get()
-            = m_pimpl->controlBoardRemapperMeasures.receivedTimeInSeconds;
-    }
-
-    return true;
+    return m_pimpl->getControlBoardMeasure(logPrefix,
+                                           m_pimpl->controlBoardRemapperInterfaces.encoders,
+                                           m_pimpl->metaData.bridgeOptions.isJointSensorsEnabled,
+                                           m_pimpl->controlBoardRemapperMeasures.jointAccelerations,
+                                           jointName,
+                                           jointAcceleration,
+                                           receiveTimeInSeconds);
 }
 
 bool YarpSensorBridge::getJointAccelerations(Eigen::Ref<Eigen::VectorXd> jointAccelerations,
                                              OptionalDoubleRef receiveTimeInSeconds)
 {
-    constexpr auto logPrefix = "[YarpSensorBridge::getJointAcceleration]";
+    constexpr auto logPrefix = "[YarpSensorBridge::getJointAccelerations]";
 
     if (!m_pimpl->streamJointAccelerations)
     {
@@ -550,29 +485,12 @@ bool YarpSensorBridge::getJointAccelerations(Eigen::Ref<Eigen::VectorXd> jointAc
         return false;
     }
 
-    if (!m_pimpl->checkControlBoardSensor(logPrefix,
-                                          m_pimpl->controlBoardRemapperInterfaces.encoders,
-                                          m_pimpl->metaData.bridgeOptions.isJointSensorsEnabled,
-                                          m_pimpl->controlBoardRemapperMeasures.jointAccelerations))
-    {
-        return false;
-    }
-
-    if (jointAccelerations.size()
-        != m_pimpl->controlBoardRemapperMeasures.jointAccelerations.size())
-    {
-        log()->error("{} The size of the input vector does not match the number of joints.",
-                     logPrefix);
-        return false;
-    }
-
-    jointAccelerations = m_pimpl->controlBoardRemapperMeasures.jointAccelerations;
-    if (receiveTimeInSeconds)
-    {
-        receiveTimeInSeconds.value().get()
-            = m_pimpl->controlBoardRemapperMeasures.receivedTimeInSeconds;
-    }
-    return true;
+    return m_pimpl->getControlBoardMeasures(logPrefix,
+                                            m_pimpl->controlBoardRemapperInterfaces.encoders,
+                                            m_pimpl->metaData.bridgeOptions.isJointSensorsEnabled,
+                                            m_pimpl->controlBoardRemapperMeasures.jointAccelerations,
+                                            jointAccelerations,
+                                            receiveTimeInSeconds);
 }
 
 bool YarpSensorBridge::getLinearAccelerometerMeasurement(const std::string& accName,
@@ -727,511 +645,216 @@ bool YarpSensorBridge::getMotorCurrent(const std::string& jointName,
                                        double& motorCurrent,
                                        OptionalDoubleRef receiveTimeInSeconds)
 {
-    if (!m_pimpl->checkControlBoardSensor("[YarpSensorBridge::getMotorCurrent]",
-                                          m_pimpl->controlBoardRemapperInterfaces.currsensors,
-                                          m_pimpl->metaData.bridgeOptions.isMotorSensorsEnabled,
-                                          m_pimpl->controlBoardRemapperMeasures.motorCurrents))
-    {
-        return false;
-    }
-
-    int idx;
-    if (!m_pimpl->getIndexFromVector(m_pimpl->metaData.sensorsList.jointsList, jointName, idx))
-    {
-        log()->error("[YarpSensorBridge::getJointCurrent] {} could not be found in the configured "
-                     "list of joints.",
-                     jointName);
-        return false;
-    }
-
-    motorCurrent = m_pimpl->controlBoardRemapperMeasures.motorCurrents[idx];
-
-    if (receiveTimeInSeconds)
-        receiveTimeInSeconds.value().get()
-            = m_pimpl->controlBoardRemapperMeasures.receivedTimeInSeconds;
-
-    return true;
+    return m_pimpl->getControlBoardMeasure("[YarpSensorBridge::getMotorCurrent]",
+                                           m_pimpl->controlBoardRemapperInterfaces.currsensors,
+                                           m_pimpl->metaData.bridgeOptions.isMotorSensorsEnabled,
+                                           m_pimpl->controlBoardRemapperMeasures.motorCurrents,
+                                           jointName,
+                                           motorCurrent,
+                                           receiveTimeInSeconds);
 }
 
 bool YarpSensorBridge::getMotorCurrents(Eigen::Ref<Eigen::VectorXd> motorCurrents,
                                         OptionalDoubleRef receiveTimeInSeconds)
 {
-    if (!m_pimpl->checkControlBoardSensor("[YarpSensorBridge::getMotorCurrents]",
-                                          m_pimpl->controlBoardRemapperInterfaces.currsensors,
-                                          m_pimpl->metaData.bridgeOptions.isMotorSensorsEnabled,
-                                          m_pimpl->controlBoardRemapperMeasures.motorCurrents))
-    {
-        return false;
-    }
-
-    if (motorCurrents.size() != m_pimpl->controlBoardRemapperMeasures.motorCurrents.size())
-    {
-        log()->error("[YarpSensorBridge::getMotorCurrents] The size of the input vector does not "
-                     "match the number of motor currents.");
-        return false;
-    }
-
-    motorCurrents = m_pimpl->controlBoardRemapperMeasures.motorCurrents;
-
-    if (receiveTimeInSeconds)
-        receiveTimeInSeconds.value().get()
-            = m_pimpl->controlBoardRemapperMeasures.receivedTimeInSeconds;
-
-    return true;
+    return m_pimpl->getControlBoardMeasures("[YarpSensorBridge::getMotorCurrents]",
+                                            m_pimpl->controlBoardRemapperInterfaces.currsensors,
+                                            m_pimpl->metaData.bridgeOptions.isMotorSensorsEnabled,
+                                            m_pimpl->controlBoardRemapperMeasures.motorCurrents,
+                                            motorCurrents,
+                                            receiveTimeInSeconds);
 }
 
 bool YarpSensorBridge::getMotorPWM(const std::string& jointName,
                                    double& motorPWM,
                                    OptionalDoubleRef receiveTimeInSeconds)
 {
-    if (!m_pimpl->checkControlBoardSensor("[YarpSensorBridge::getMotorPWM]",
-                                          m_pimpl->controlBoardRemapperInterfaces.amp,
-                                          m_pimpl->metaData.bridgeOptions.isPWMControlEnabled,
-                                          m_pimpl->controlBoardRemapperMeasures.motorPWMs))
-    {
-        return false;
-    }
-
-    int idx;
-    if (!m_pimpl->getIndexFromVector(m_pimpl->metaData.sensorsList.jointsList, jointName, idx))
-    {
-        log()->error("[YarpSensorBridge::getMotorPWM] {} could not be found in the configured "
-                     "list of joints.",
-                     jointName);
-        return false;
-    }
-
-    motorPWM = m_pimpl->controlBoardRemapperMeasures.motorPWMs[idx];
-
-    if (receiveTimeInSeconds)
-        receiveTimeInSeconds.value().get()
-            = m_pimpl->controlBoardRemapperMeasures.receivedTimeInSeconds;
-
-    return true;
+    return m_pimpl->getControlBoardMeasure("[YarpSensorBridge::getMotorPWM]",
+                                           m_pimpl->controlBoardRemapperInterfaces.amp,
+                                           m_pimpl->metaData.bridgeOptions.isPWMControlEnabled,
+                                           m_pimpl->controlBoardRemapperMeasures.motorPWMs,
+                                           jointName,
+                                           motorPWM,
+                                           receiveTimeInSeconds);
 }
 
 bool YarpSensorBridge::getMotorPWMs(Eigen::Ref<Eigen::VectorXd> motorPWMs,
                                     OptionalDoubleRef receiveTimeInSeconds)
 {
-    if (!m_pimpl->checkControlBoardSensor("[YarpSensorBridge::getMotorPWMs]",
-                                          m_pimpl->controlBoardRemapperInterfaces.amp,
-                                          m_pimpl->metaData.bridgeOptions.isPWMControlEnabled,
-                                          m_pimpl->controlBoardRemapperMeasures.motorPWMs))
-    {
-        return false;
-    }
-
-    if (motorPWMs.size() != m_pimpl->controlBoardRemapperMeasures.motorPWMs.size())
-    {
-        log()->error("[YarpSensorBridge::getMotorPWMs] The size of the input vector does not match "
-                     "the number of motor PWMs.");
-        return false;
-    }
-
-    motorPWMs = m_pimpl->controlBoardRemapperMeasures.motorPWMs;
-
-    if (receiveTimeInSeconds)
-        receiveTimeInSeconds.value().get()
-            = m_pimpl->controlBoardRemapperMeasures.receivedTimeInSeconds;
-
-    return true;
+    return m_pimpl->getControlBoardMeasures("[YarpSensorBridge::getMotorPWMs]",
+                                            m_pimpl->controlBoardRemapperInterfaces.amp,
+                                            m_pimpl->metaData.bridgeOptions.isPWMControlEnabled,
+                                            m_pimpl->controlBoardRemapperMeasures.motorPWMs,
+                                            motorPWMs,
+                                            receiveTimeInSeconds);
 }
 
 bool YarpSensorBridge::getJointTorque(const std::string& jointName,
                                       double& jointTorque,
                                       OptionalDoubleRef receiveTimeInSeconds)
 {
-    if (!m_pimpl->checkControlBoardSensor("[YarpSensorBridge::getJointTorque]",
-                                          m_pimpl->controlBoardRemapperInterfaces.torques,
-                                          m_pimpl->metaData.bridgeOptions.isJointSensorsEnabled,
-                                          m_pimpl->controlBoardRemapperMeasures.jointTorques))
-    {
-        return false;
-    }
-
-    int idx;
-    if (!m_pimpl->getIndexFromVector(m_pimpl->metaData.sensorsList.jointsList, jointName, idx))
-    {
-        log()->error("[YarpSensorBridge::getJointTorque] {} could not be found in the configured "
-                     "list of joints.",
-                     jointName);
-        return false;
-    }
-
-    jointTorque = m_pimpl->controlBoardRemapperMeasures.jointTorques[idx];
-
-    if (receiveTimeInSeconds)
-        receiveTimeInSeconds.value().get()
-            = m_pimpl->controlBoardRemapperMeasures.receivedTimeInSeconds;
-
-    return true;
+    return m_pimpl->getControlBoardMeasure("[YarpSensorBridge::getJointTorque]",
+                                           m_pimpl->controlBoardRemapperInterfaces.torques,
+                                           m_pimpl->metaData.bridgeOptions.isJointSensorsEnabled,
+                                           m_pimpl->controlBoardRemapperMeasures.jointTorques,
+                                           jointName,
+                                           jointTorque,
+                                           receiveTimeInSeconds);
 }
 
 bool YarpSensorBridge::getJointTorques(Eigen::Ref<Eigen::VectorXd> jointTorques,
                                        OptionalDoubleRef receiveTimeInSeconds)
 {
-    if (!m_pimpl->checkControlBoardSensor("[YarpSensorBridge::getJointTorques]",
-                                          m_pimpl->controlBoardRemapperInterfaces.torques,
-                                          m_pimpl->metaData.bridgeOptions.isJointSensorsEnabled,
-                                          m_pimpl->controlBoardRemapperMeasures.jointTorques))
-    {
-        return false;
-    }
-
-    if (jointTorques.size() != m_pimpl->controlBoardRemapperMeasures.jointTorques.size())
-    {
-        log()->error("[YarpSensorBridge::getJointTorques] The size of the input vector does not "
-                     "match the number of joint torques.");
-        return false;
-    }
-
-    jointTorques = m_pimpl->controlBoardRemapperMeasures.jointTorques;
-
-    if (receiveTimeInSeconds)
-        receiveTimeInSeconds.value().get()
-            = m_pimpl->controlBoardRemapperMeasures.receivedTimeInSeconds;
-
-    return true;
+    return m_pimpl->getControlBoardMeasures("[YarpSensorBridge::getJointTorques]",
+                                            m_pimpl->controlBoardRemapperInterfaces.torques,
+                                            m_pimpl->metaData.bridgeOptions.isJointSensorsEnabled,
+                                            m_pimpl->controlBoardRemapperMeasures.jointTorques,
+                                            jointTorques,
+                                            receiveTimeInSeconds);
 }
 
 bool YarpSensorBridge::getPidPosition(const std::string& jointName,
                                       double& pidPosition,
                                       OptionalDoubleRef receiveTimeInSeconds)
 {
-    if (!m_pimpl->checkControlBoardSensor("[YarpSensorBridge::getPidPosition]",
-                                          m_pimpl->controlBoardRemapperInterfaces.pids,
-                                          m_pimpl->metaData.bridgeOptions.isPIDsEnabled,
-                                          m_pimpl->controlBoardRemapperMeasures.pidPositions))
-    {
-        return false;
-    }
-
-    int idx;
-    if (!m_pimpl->getIndexFromVector(m_pimpl->metaData.sensorsList.jointsList, jointName, idx))
-    {
-        log()->error("[YarpSensorBridge::getPidPosition] {} could not be found in the configured "
-                     "list of motors.",
-                     jointName);
-        return false;
-    }
-
-    pidPosition = m_pimpl->controlBoardRemapperMeasures.pidPositions[idx];
-
-    if (receiveTimeInSeconds)
-        receiveTimeInSeconds.value().get()
-            = m_pimpl->controlBoardRemapperMeasures.receivedTimeInSeconds;
-
-    return true;
+    return m_pimpl->getControlBoardMeasure("[YarpSensorBridge::getPidPosition]",
+                                           m_pimpl->controlBoardRemapperInterfaces.pids,
+                                           m_pimpl->metaData.bridgeOptions.isPIDsEnabled,
+                                           m_pimpl->controlBoardRemapperMeasures.pidPositions,
+                                           jointName,
+                                           pidPosition,
+                                           receiveTimeInSeconds);
 }
 
 bool YarpSensorBridge::getPidPositions(Eigen::Ref<Eigen::VectorXd> pidPositions,
                                        OptionalDoubleRef receiveTimeInSeconds)
 {
-    if (!m_pimpl->checkControlBoardSensor("[YarpSensorBridge::getPidPositions]",
-                                          m_pimpl->controlBoardRemapperInterfaces.pids,
-                                          m_pimpl->metaData.bridgeOptions.isPIDsEnabled,
-                                          m_pimpl->controlBoardRemapperMeasures.pidPositions))
-    {
-        return false;
-    }
-
-    if (pidPositions.size() != m_pimpl->controlBoardRemapperMeasures.pidPositions.size())
-    {
-        log()->error("[YarpSensorBridge::getPidPositions] The size of the input vector does not "
-                     "match the number of pid positions.");
-        return false;
-    }
-
-    pidPositions = m_pimpl->controlBoardRemapperMeasures.pidPositions;
-
-    if (receiveTimeInSeconds)
-        receiveTimeInSeconds.value().get()
-            = m_pimpl->controlBoardRemapperMeasures.receivedTimeInSeconds;
-
-    return true;
+    return m_pimpl->getControlBoardMeasures("[YarpSensorBridge::getPidPositions]",
+                                            m_pimpl->controlBoardRemapperInterfaces.pids,
+                                            m_pimpl->metaData.bridgeOptions.isPIDsEnabled,
+                                            m_pimpl->controlBoardRemapperMeasures.pidPositions,
+                                            pidPositions,
+                                            receiveTimeInSeconds);
 }
 
 bool YarpSensorBridge::getPidPositionError(const std::string& jointName,
                                            double& pidPositionError,
                                            OptionalDoubleRef receiveTimeInSeconds)
 {
-    if (!m_pimpl->checkControlBoardSensor("[YarpSensorBridge::getPidPositionError]",
-                                          m_pimpl->controlBoardRemapperInterfaces.pids,
-                                          m_pimpl->metaData.bridgeOptions.isPIDsEnabled,
-                                          m_pimpl->controlBoardRemapperMeasures.pidPositionErrors))
-    {
-        return false;
-    }
-
-    int idx;
-    if (!m_pimpl->getIndexFromVector(m_pimpl->metaData.sensorsList.jointsList, jointName, idx))
-    {
-        log()->error("[YarpSensorBridge::getPidPositionError] {} could not be found in the "
-                     "configured "
-                     "list of motors.",
-                     jointName);
-        return false;
-    }
-
-    pidPositionError = m_pimpl->controlBoardRemapperMeasures.pidPositionErrors[idx];
-
-    if (receiveTimeInSeconds)
-        receiveTimeInSeconds.value().get()
-            = m_pimpl->controlBoardRemapperMeasures.receivedTimeInSeconds;
-
-    return true;
+    return m_pimpl->getControlBoardMeasure("[YarpSensorBridge::getPidPositionError]",
+                                           m_pimpl->controlBoardRemapperInterfaces.pids,
+                                           m_pimpl->metaData.bridgeOptions.isPIDsEnabled,
+                                           m_pimpl->controlBoardRemapperMeasures.pidPositionErrors,
+                                           jointName,
+                                           pidPositionError,
+                                           receiveTimeInSeconds);
 }
 
 bool YarpSensorBridge::getPidPositionErrors(Eigen::Ref<Eigen::VectorXd> pidPositionErrors,
                                             OptionalDoubleRef receiveTimeInSeconds)
 {
-    if (!m_pimpl->checkControlBoardSensor("[YarpSensorBridge::getPidPositionErrors]",
-                                          m_pimpl->controlBoardRemapperInterfaces.pids,
-                                          m_pimpl->metaData.bridgeOptions.isPIDsEnabled,
-                                          m_pimpl->controlBoardRemapperMeasures.pidPositionErrors))
-    {
-        return false;
-    }
-
-    if (pidPositionErrors.size() != m_pimpl->controlBoardRemapperMeasures.pidPositionErrors.size())
-    {
-        log()->error("[YarpSensorBridge::getPidPositionErrors] The size of the input vector does "
-                     "not match the number of pid position errors.");
-        return false;
-    }
-
-    pidPositionErrors = m_pimpl->controlBoardRemapperMeasures.pidPositionErrors;
-
-    if (receiveTimeInSeconds)
-        receiveTimeInSeconds.value().get()
-            = m_pimpl->controlBoardRemapperMeasures.receivedTimeInSeconds;
-
-    return true;
+    return m_pimpl->getControlBoardMeasures("[YarpSensorBridge::getPidPositionErrors]",
+                                            m_pimpl->controlBoardRemapperInterfaces.pids,
+                                            m_pimpl->metaData.bridgeOptions.isPIDsEnabled,
+                                            m_pimpl->controlBoardRemapperMeasures.pidPositionErrors,
+                                            pidPositionErrors,
+                                            receiveTimeInSeconds);
 }
 
 bool YarpSensorBridge::getMotorPosition(const std::string& jointName,
                                         double& motorPosition,
                                         OptionalDoubleRef receiveTimeInSeconds)
 {
-    if (!m_pimpl->checkControlBoardSensor("[YarpSensorBridge::getMotorPosition]",
-                                          m_pimpl->controlBoardRemapperInterfaces.motorEncoders,
-                                          m_pimpl->metaData.bridgeOptions.isMotorSensorsEnabled,
-                                          m_pimpl->controlBoardRemapperMeasures.motorPositions))
-    {
-        return false;
-    }
-
-    int idx;
-    if (!m_pimpl->getIndexFromVector(m_pimpl->metaData.sensorsList.jointsList, jointName, idx))
-    {
-        log()->error("[YarpSensorBridge::getMotorPosition] {} could not be found in the configured "
-                     "list of motors.",
-                     jointName);
-        return false;
-    }
-
-    motorPosition = m_pimpl->controlBoardRemapperMeasures.motorPositions[idx];
-
-    if (receiveTimeInSeconds)
-        receiveTimeInSeconds.value().get()
-            = m_pimpl->controlBoardRemapperMeasures.receivedTimeInSeconds;
-
-    return true;
+    return m_pimpl->getControlBoardMeasure("[YarpSensorBridge::getMotorPosition]",
+                                           m_pimpl->controlBoardRemapperInterfaces.motorEncoders,
+                                           m_pimpl->metaData.bridgeOptions.isMotorSensorsEnabled,
+                                           m_pimpl->controlBoardRemapperMeasures.motorPositions,
+                                           jointName,
+                                           motorPosition,
+                                           receiveTimeInSeconds);
 }
 
 bool YarpSensorBridge::getMotorPositions(Eigen::Ref<Eigen::VectorXd> motorPositions,
                                          OptionalDoubleRef receiveTimeInSeconds)
 {
-    if (!m_pimpl->checkControlBoardSensor("[YarpSensorBridge::getMotorPositions]",
-                                          m_pimpl->controlBoardRemapperInterfaces.motorEncoders,
-                                          m_pimpl->metaData.bridgeOptions.isMotorSensorsEnabled,
-                                          m_pimpl->controlBoardRemapperMeasures.motorPositions))
-    {
-        return false;
-    }
-
-    if (motorPositions.size() != m_pimpl->controlBoardRemapperMeasures.motorPositions.size())
-    {
-        log()->error("[YarpSensorBridge::getMotorPositions] The size of the input vector does not "
-                     "match the number of motor positions.");
-        return false;
-    }
-
-    motorPositions = m_pimpl->controlBoardRemapperMeasures.motorPositions;
-
-    if (receiveTimeInSeconds)
-        receiveTimeInSeconds.value().get()
-            = m_pimpl->controlBoardRemapperMeasures.receivedTimeInSeconds;
-
-    return true;
+    return m_pimpl->getControlBoardMeasures("[YarpSensorBridge::getMotorPositions]",
+                                            m_pimpl->controlBoardRemapperInterfaces.motorEncoders,
+                                            m_pimpl->metaData.bridgeOptions.isMotorSensorsEnabled,
+                                            m_pimpl->controlBoardRemapperMeasures.motorPositions,
+                                            motorPositions,
+                                            receiveTimeInSeconds);
 }
 
 bool YarpSensorBridge::getMotorVelocity(const std::string& jointName,
                                         double& motorVelocity,
                                         OptionalDoubleRef receiveTimeInSeconds)
 {
-    if (!m_pimpl->checkControlBoardSensor("[YarpSensorBridge::getMotorVelocity]",
-                                          m_pimpl->controlBoardRemapperInterfaces.motorEncoders,
-                                          m_pimpl->metaData.bridgeOptions.isMotorSensorsEnabled,
-                                          m_pimpl->controlBoardRemapperMeasures.motorVelocities))
-    {
-        return false;
-    }
-
-    int idx;
-    if (!m_pimpl->getIndexFromVector(m_pimpl->metaData.sensorsList.jointsList, jointName, idx))
-    {
-        log()->error("[YarpSensorBridge::getMotorVelocity] {} could not be found in the configured "
-                     "list of motors.",
-                     jointName);
-        return false;
-    }
-
-    motorVelocity = m_pimpl->controlBoardRemapperMeasures.motorVelocities[idx];
-
-    if (receiveTimeInSeconds)
-        receiveTimeInSeconds.value().get()
-            = m_pimpl->controlBoardRemapperMeasures.receivedTimeInSeconds;
-
-    return true;
+    return m_pimpl->getControlBoardMeasure("[YarpSensorBridge::getMotorVelocity]",
+                                           m_pimpl->controlBoardRemapperInterfaces.motorEncoders,
+                                           m_pimpl->metaData.bridgeOptions.isMotorSensorsEnabled,
+                                           m_pimpl->controlBoardRemapperMeasures.motorVelocities,
+                                           jointName,
+                                           motorVelocity,
+                                           receiveTimeInSeconds);
 }
 
 bool YarpSensorBridge::getMotorVelocities(Eigen::Ref<Eigen::VectorXd> motorVelocties,
                                           OptionalDoubleRef receiveTimeInSeconds)
 {
-    if (!m_pimpl->checkControlBoardSensor("[YarpSensorBridge::getMotorVelocities]",
-                                          m_pimpl->controlBoardRemapperInterfaces.motorEncoders,
-                                          m_pimpl->metaData.bridgeOptions.isMotorSensorsEnabled,
-                                          m_pimpl->controlBoardRemapperMeasures.motorVelocities))
-    {
-        return false;
-    }
-
-    if (motorVelocties.size() != m_pimpl->controlBoardRemapperMeasures.motorVelocities.size())
-    {
-        log()->error("[YarpSensorBridge::getMotorVelocities] The size of the input vector does not "
-                     "match the number of motor velocities.");
-        return false;
-    }
-
-    motorVelocties = m_pimpl->controlBoardRemapperMeasures.motorVelocities;
-
-    if (receiveTimeInSeconds)
-        receiveTimeInSeconds.value().get()
-            = m_pimpl->controlBoardRemapperMeasures.receivedTimeInSeconds;
-
-    return true;
+    return m_pimpl->getControlBoardMeasures("[YarpSensorBridge::getMotorVelocities]",
+                                            m_pimpl->controlBoardRemapperInterfaces.motorEncoders,
+                                            m_pimpl->metaData.bridgeOptions.isMotorSensorsEnabled,
+                                            m_pimpl->controlBoardRemapperMeasures.motorVelocities,
+                                            motorVelocties,
+                                            receiveTimeInSeconds);
 }
 
 bool YarpSensorBridge::getMotorAcceleration(const std::string& jointName,
                                             double& motorAcceleration,
                                             OptionalDoubleRef receiveTimeInSeconds)
 {
-    if (!m_pimpl->checkControlBoardSensor("[YarpSensorBridge::getMotorAcceleration]",
-                                          m_pimpl->controlBoardRemapperInterfaces.motorEncoders,
-                                          m_pimpl->metaData.bridgeOptions.isMotorSensorsEnabled,
-                                          m_pimpl->controlBoardRemapperMeasures.motorAccelerations))
-    {
-        return false;
-    }
-
-    int idx;
-    if (!m_pimpl->getIndexFromVector(m_pimpl->metaData.sensorsList.jointsList, jointName, idx))
-    {
-        log()->error("[YarpSensorBridge::getMotorPosition] {} could not be found in the configured "
-                     "list of motors.",
-                     jointName);
-        return false;
-    }
-
-    motorAcceleration = m_pimpl->controlBoardRemapperMeasures.motorAccelerations[idx];
-
-    if (receiveTimeInSeconds)
-        receiveTimeInSeconds.value().get()
-            = m_pimpl->controlBoardRemapperMeasures.receivedTimeInSeconds;
-
-    return true;
+    return m_pimpl->getControlBoardMeasure("[YarpSensorBridge::getMotorAcceleration]",
+                                           m_pimpl->controlBoardRemapperInterfaces.motorEncoders,
+                                           m_pimpl->metaData.bridgeOptions.isMotorSensorsEnabled,
+                                           m_pimpl->controlBoardRemapperMeasures.motorAccelerations,
+                                           jointName,
+                                           motorAcceleration,
+                                           receiveTimeInSeconds);
 }
 
 bool YarpSensorBridge::getMotorAccelerations(Eigen::Ref<Eigen::VectorXd> motorAccelerations,
                                              OptionalDoubleRef receiveTimeInSeconds)
 {
-    if (!m_pimpl->checkControlBoardSensor("[YarpSensorBridge::getMotorAccelerations]",
-                                          m_pimpl->controlBoardRemapperInterfaces.motorEncoders,
-                                          m_pimpl->metaData.bridgeOptions.isMotorSensorsEnabled,
-                                          m_pimpl->controlBoardRemapperMeasures.motorAccelerations))
-    {
-        return false;
-    }
-
-    if (motorAccelerations.size()
-        != m_pimpl->controlBoardRemapperMeasures.motorAccelerations.size())
-    {
-        log()->error("[YarpSensorBridge::getMotorAccelerations] The size of the input vector does "
-                     "not match the number of motor accelerations.");
-        return false;
-    }
-
-    motorAccelerations = m_pimpl->controlBoardRemapperMeasures.motorAccelerations;
-
-    if (receiveTimeInSeconds)
-        receiveTimeInSeconds.value().get()
-            = m_pimpl->controlBoardRemapperMeasures.receivedTimeInSeconds;
-
-    return true;
+    return m_pimpl->getControlBoardMeasures("[YarpSensorBridge::getMotorAccelerations]",
+                                            m_pimpl->controlBoardRemapperInterfaces.motorEncoders,
+                                            m_pimpl->metaData.bridgeOptions.isMotorSensorsEnabled,
+                                            m_pimpl->controlBoardRemapperMeasures.motorAccelerations,
+                                            motorAccelerations,
+                                            receiveTimeInSeconds);
 }
 
 bool YarpSensorBridge::getMotorTemperature(const std::string& jointName,
-                                           double& motorTorque,
+                                           double& motorTemperature,
                                            OptionalDoubleRef receiveTimeInSeconds)
 {
-    if (!m_pimpl->checkControlBoardSensor("[YarpSensorBridge::getMotorTorque]",
-                                          m_pimpl->controlBoardRemapperInterfaces.motor,
-                                          m_pimpl->metaData.bridgeOptions.isMotorSensorsEnabled,
-                                          m_pimpl->controlBoardRemapperMeasures.motorTemperatures))
-    {
-        return false;
-    }
-
-    int idx;
-    if (!m_pimpl->getIndexFromVector(m_pimpl->metaData.sensorsList.jointsList, jointName, idx))
-    {
-        log()->error("[YarpSensorBridge::getMotorTorque] {} could not be found in the configured "
-                     "list of motors.",
-                     jointName);
-        return false;
-    }
-
-    motorTorque = m_pimpl->controlBoardRemapperMeasures.motorTemperatures[idx];
-    if (receiveTimeInSeconds)
-        receiveTimeInSeconds.value().get()
-            = m_pimpl->controlBoardRemapperMeasures.receivedTimeInSeconds;
-
-    return true;
+    return m_pimpl->getControlBoardMeasure(
+        "[YarpSensorBridge::getMotorTemperature]",
+        m_pimpl->controlBoardRemapperInterfaces.motor,
+        m_pimpl->metaData.bridgeOptions.isMotorTemperatureSensorEnabled,
+        m_pimpl->controlBoardRemapperMeasures.motorTemperatures,
+        jointName,
+        motorTemperature,
+        receiveTimeInSeconds);
 }
 
 bool YarpSensorBridge::getMotorTemperatures(Eigen::Ref<Eigen::VectorXd> motorTemperatures,
                                             OptionalDoubleRef receiveTimeInSeconds)
 {
-    if (!m_pimpl->checkControlBoardSensor("[YarpSensorBridge::getMotorTemperatures]",
-                                          m_pimpl->controlBoardRemapperInterfaces.motor,
-                                          m_pimpl->metaData.bridgeOptions.isMotorSensorsEnabled,
-                                          m_pimpl->controlBoardRemapperMeasures.motorTemperatures))
-    {
-        return false;
-    }
-
-    if (motorTemperatures.size() != m_pimpl->controlBoardRemapperMeasures.motorTemperatures.size())
-    {
-        log()->error("[YarpSensorBridge::getMotorTemperatures] The size of the input vector does "
-                     "not match the number of motor temperatures.");
-        return false;
-    }
-
-    motorTemperatures = m_pimpl->controlBoardRemapperMeasures.motorTemperatures;
-    if (receiveTimeInSeconds)
-        receiveTimeInSeconds.value().get()
-            = m_pimpl->controlBoardRemapperMeasures.receivedTimeInSeconds;
-
-    return true;
+    return m_pimpl->getControlBoardMeasures(
+        "[YarpSensorBridge::getMotorTemperatures]",
+        m_pimpl->controlBoardRemapperInterfaces.motor,
+        m_pimpl->metaData.bridgeOptions.isMotorTemperatureSensorEnabled,
+        m_pimpl->controlBoardRemapperMeasures.motorTemperatures,
+        motorTemperatures,
+        receiveTimeInSeconds);
 }

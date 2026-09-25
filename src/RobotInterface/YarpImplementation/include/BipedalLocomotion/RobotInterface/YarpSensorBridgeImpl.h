@@ -808,9 +808,9 @@ struct YarpSensorBridge::Impl
     }
 
     template <typename ControlBoardInterface>
-    bool checkControlBoardSensor(const std::string logPrefix,
+    bool checkControlBoardSensor(std::string_view logPrefix,
                                  ControlBoardInterface* interface,
-                                 const bool& streamConfig,
+                                 const bool streamConfig,
                                  Eigen::Ref<const Eigen::VectorXd> measureBuffer)
     {
         if (!checkValid(logPrefix))
@@ -832,14 +832,84 @@ struct YarpSensorBridge::Impl
             log()->error("{} Failed to attach to relevant drivers. Unable to retrieve "
                          "measurements.",
                          logPrefix);
+            return false;
         }
 
         if (measureBuffer.size() == 0)
         {
             log()->error("{} Measurement buffers seem empty. Unable to retrieve measurements.",
                          logPrefix);
+            return false;
         }
 
+        return true;
+    }
+
+    /**
+     * Get a single joint entry of a control board measurement buffer.
+     */
+    template <typename ControlBoardInterface>
+    bool getControlBoardMeasure(std::string_view logPrefix,
+                                ControlBoardInterface* interface,
+                                const bool streamConfig,
+                                const Eigen::VectorXd& measureBuffer,
+                                const std::string& jointName,
+                                double& measure,
+                                OptionalDoubleRef receiveTimeInSeconds)
+    {
+        if (!checkControlBoardSensor(logPrefix, interface, streamConfig, measureBuffer))
+        {
+            return false;
+        }
+
+        int idx;
+        if (!getIndexFromVector(metaData.sensorsList.jointsList, jointName, idx))
+        {
+            log()->error("{} {} could not be found in the configured list of joints.",
+                         logPrefix,
+                         jointName);
+            return false;
+        }
+
+        measure = measureBuffer[idx];
+        if (receiveTimeInSeconds)
+        {
+            receiveTimeInSeconds.value().get() = controlBoardRemapperMeasures.receivedTimeInSeconds;
+        }
+        return true;
+    }
+
+    /**
+     * Get a full control board measurement buffer.
+     */
+    template <typename ControlBoardInterface>
+    bool getControlBoardMeasures(std::string_view logPrefix,
+                                 ControlBoardInterface* interface,
+                                 const bool streamConfig,
+                                 const Eigen::VectorXd& measureBuffer,
+                                 Eigen::Ref<Eigen::VectorXd> measures,
+                                 OptionalDoubleRef receiveTimeInSeconds)
+    {
+        if (!checkControlBoardSensor(logPrefix, interface, streamConfig, measureBuffer))
+        {
+            return false;
+        }
+
+        if (measures.size() != measureBuffer.size())
+        {
+            log()->error("{} The size of the input vector does not match the number of joints. "
+                         "Expected: {}. Received: {}.",
+                         logPrefix,
+                         measureBuffer.size(),
+                         measures.size());
+            return false;
+        }
+
+        measures = measureBuffer;
+        if (receiveTimeInSeconds)
+        {
+            receiveTimeInSeconds.value().get() = controlBoardRemapperMeasures.receivedTimeInSeconds;
+        }
         return true;
     }
 
@@ -915,7 +985,8 @@ struct YarpSensorBridge::Impl
         if (!metaData.bridgeOptions.isJointSensorsEnabled
             && !metaData.bridgeOptions.isPWMControlEnabled
             && !metaData.bridgeOptions.isMotorSensorsEnabled
-            && !metaData.bridgeOptions.isPIDsEnabled)
+            && !metaData.bridgeOptions.isPIDsEnabled
+            && !metaData.bridgeOptions.isMotorTemperatureSensorEnabled)
         {
             // do nothing
             return true;
@@ -989,15 +1060,15 @@ struct YarpSensorBridge::Impl
 
         log()->error("{} Could not find a remapped remote control board with the desired "
                      "interfaces. Here the status of the interfaces. "
-                     "Joint sensors: {}, "
-                     "Motor sensors: {}, ",
-                     "PID sensors: {}, ",
-                     "PWM sensors: {}.",
+                     "Joint sensors: {}, Motor sensors: {}, PID sensors: {}, PWM sensors: {}, "
+                     "Motor temperature sensors: {}.",
                      logPrefix,
                      getSensorStatus(metaData.bridgeOptions.isJointSensorsEnabled, okJointsSensor),
                      getSensorStatus(metaData.bridgeOptions.isMotorSensorsEnabled, okMotorsSensor),
                      getSensorStatus(metaData.bridgeOptions.isPIDsEnabled, okPID),
-                     getSensorStatus(metaData.bridgeOptions.isPWMControlEnabled, okPWM));
+                     getSensorStatus(metaData.bridgeOptions.isPWMControlEnabled, okPWM),
+                     getSensorStatus(metaData.bridgeOptions.isMotorTemperatureSensorEnabled,
+                                     okMotorTemperature));
 
         return false;
     }
@@ -1109,11 +1180,25 @@ struct YarpSensorBridge::Impl
     {
         constexpr auto logPrefix = "[YarpSensorBridge::Impl::compareControlBoardJointsList]";
 
+        // the joint list and the buffers are handled by the joint sensors stream
+        if (controlBoardRemapperInterfaces.axis == nullptr
+            || controlBoardRemapperInterfaces.encoders == nullptr)
+        {
+            log()->error("{} The IAxisInfo and IEncodersTimed interfaces are required. Please "
+                         "enable 'stream_joint_states'.",
+                         logPrefix);
+            return false;
+        }
+
         // get the names of all the joints available in the attached remote control board remapper
         std::vector<std::string> controlBoardJoints;
         std::vector<JointType> controlBoardJointTypes;
-        int controlBoardDOFs;
-        controlBoardRemapperInterfaces.encoders->getAxes(&controlBoardDOFs);
+        int controlBoardDOFs{0};
+        if (!controlBoardRemapperInterfaces.encoders->getAxes(&controlBoardDOFs))
+        {
+            log()->error("{} Unable to get the number of axes.", logPrefix);
+            return false;
+        }
 
         std::string joint;
         yarp::dev::JointTypeEnum jType;
@@ -1145,7 +1230,59 @@ struct YarpSensorBridge::Impl
             metaData.bridgeOptions.nrJoints = metaData.sensorsList.jointsList.size();
         }
 
-        metaData.sensorsList.jointsTypeList = controlBoardJointTypes;
+        // the YARP interfaces write controlBoardDOFs values in buffers of size nrJoints
+        if (metaData.sensorsList.jointsList.size() != controlBoardJoints.size())
+        {
+            log()->error("{} The number of joints in the configuration ({}) is different from the "
+                         "number of joints exposed by the control board ({}).",
+                         logPrefix,
+                         metaData.sensorsList.jointsList.size(),
+                         controlBoardJoints.size());
+            return false;
+        }
+
+        // reset the control board buffers
+        this->resetControlBoardBuffers();
+
+        // check if the joints in the desired joint list are available in the controlboard joints
+        // list if available get the control board index at which the desired joint is available
+        // this is required in order to remap the control board joints on to the desired joints
+        metaData.sensorsList.jointsTypeList.resize(metaData.sensorsList.jointsList.size());
+        std::vector<bool> alreadyMapped(controlBoardJoints.size(), false);
+        for (int desiredDOF = 0; desiredDOF < metaData.sensorsList.jointsList.size(); desiredDOF++)
+        {
+            const auto& jointInSensorList = metaData.sensorsList.jointsList[desiredDOF];
+            auto& remappedJointIndex
+                = controlBoardRemapperMeasures.remappedJointIndices[desiredDOF];
+            // find the joint named jointInSensorList into the controlBoardJoints vector
+            const auto it = std::find(controlBoardJoints.begin(), //
+                                      controlBoardJoints.end(),
+                                      jointInSensorList);
+
+            // check if the joint is found
+            if (it == controlBoardJoints.end())
+            {
+                log()->error("{} Could not find the joint '{}' in the attached control board "
+                             "remapper.",
+                             logPrefix,
+                             jointInSensorList);
+                return false;
+            }
+
+            remappedJointIndex = std::distance(controlBoardJoints.begin(), it);
+            if (alreadyMapped[remappedJointIndex])
+            {
+                log()->error("{} The joint '{}' appears more than once in the joints list.",
+                             logPrefix,
+                             jointInSensorList);
+                return false;
+            }
+            alreadyMapped[remappedJointIndex] = true;
+
+            // the joint types are stored in the same order of the sensor bridge joints list
+            metaData.sensorsList.jointsTypeList[desiredDOF]
+                = controlBoardJointTypes[remappedJointIndex];
+        }
 
         this->allJointsArePrismatics
             = std::all_of(metaData.sensorsList.jointsTypeList.begin(),
@@ -1156,39 +1293,15 @@ struct YarpSensorBridge::Impl
                           metaData.sensorsList.jointsTypeList.end(), //
                           [](const auto& jointType) { return jointType == JointType::REVOLUTE; });
 
-        // reset the control board buffers
-        this->resetControlBoardBuffers();
-
-        // check if the joints in the desired joint list are available in the controlboard joints
-        // list if available get the control board index at which the desired joint is available
-        // this is required in order to remap the control board joints on to the desired joints
-        for (int desiredDOF = 0; desiredDOF < metaData.sensorsList.jointsList.size(); desiredDOF++)
+        // Eigen computes (P * v)[P.indices()[i]] = v[i], while we need
+        // (P * v)[i] = v[remappedJointIndices[i]], hence P stores the inverse mapping.
+        for (int desiredDOF = 0; desiredDOF < controlBoardRemapperMeasures.remappedJointIndices.size();
+             desiredDOF++)
         {
-            const auto& jointInSensorList = metaData.sensorsList.jointsList[desiredDOF];
-            auto& remappedJointIndex
-                = controlBoardRemapperMeasures.remappedJointIndices[desiredDOF];
-            // find the joint named jointInSensorList into the controlBoardJoints vector
-            const auto it = std::find_if(controlBoardJoints.begin(), //
-                                         controlBoardJoints.end(), //
-                                         [&](const auto& joint) { //
-                                             return jointInSensorList == joint;
-                                         });
-
-            // check if the joint is found
-            if (it != controlBoardJoints.end())
-            {
-                remappedJointIndex = std::distance(controlBoardJoints.begin(), it);
-            } else
-            {
-                log()->error("{} Could not find a desired joint from the configuration in the "
-                             "attached control board remapper.",
-                             logPrefix);
-                return false;
-            }
+            controlBoardRemapperMeasures.remappedJointPermutationMatrix
+                .indices()[controlBoardRemapperMeasures.remappedJointIndices[desiredDOF]]
+                = desiredDOF;
         }
-
-        controlBoardRemapperMeasures.remappedJointPermutationMatrix.indices()
-            = controlBoardRemapperMeasures.remappedJointIndices;
 
         log()->info("{} Found all joints with the remapped index", logPrefix);
         for (int idx = 0; idx < controlBoardRemapperMeasures.remappedJointIndices.size(); idx++)
@@ -1330,6 +1443,31 @@ struct YarpSensorBridge::Impl
     }
 
     /**
+     * Convert the revolute joint entries of an (already remapped) joint vector from deg to rad.
+     */
+    void convertRevoluteJointsToRadians(Eigen::Ref<Eigen::VectorXd> vec) const
+    {
+        if (allJointsArePrismatics)
+        {
+            return;
+        }
+
+        if (allJointsAreRevolutes)
+        {
+            vec *= M_PI / 180.0;
+            return;
+        }
+
+        for (Eigen::Index i = 0; i < vec.size(); ++i)
+        {
+            if (metaData.sensorsList.jointsTypeList[i] == JointType::REVOLUTE)
+            {
+                vec[i] *= M_PI / 180.0;
+            }
+        }
+    }
+
+    /**
      * Read a generic sensor stream and update internal measurement buffer
      */
     bool readGenericSensor(
@@ -1450,14 +1588,15 @@ struct YarpSensorBridge::Impl
         }
 
         measurementMap[sensorName].first = sensorMeasure;
-        measurementMap[sensorName].second = BipedalLocomotion::clock().now().count();
+        measurementMap[sensorName].second
+            = std::chrono::duration<double>(BipedalLocomotion::clock().now()).count();
 
         return true;
     }
 
     template <typename MASSensorType>
     bool readAllMASSensors(MASSensorType* interface,
-                           std::unordered_map<std::string, std::size_t> sensIdxMap,
+                           const std::unordered_map<std::string, std::size_t>& sensIdxMap,
                            std::unordered_map<std::string, StampedYARPVector>& measurementMap,
                            std::vector<std::string>& failedSensorReads,
                            bool checkForNan = false)
@@ -1558,69 +1697,18 @@ struct YarpSensorBridge::Impl
                     }
                 }
 
-                // Create aliases for clarity
                 auto& measures = controlBoardRemapperMeasures;
                 const auto& perm = measures.remappedJointPermutationMatrix;
 
-                // Helper lambda for uniform remapping and scaling.
-                auto remapAndScale = [&](auto& target,
-                                         const auto& source,
-                                         std::optional<double> scale = std::nullopt) {
-                    if (!scale.has_value())
-                    {
-                        target.noalias() = perm * source;
-                        return;
-                    }
-                    target.noalias() = perm * source * scale.value();
-                };
-
-                // Helper lambda for mixed joints: remap then convert each revolute joint.
-                auto remapAndConvertMixed = [&](auto& target, const auto& source) {
-                    target.noalias() = perm * source;
-                    for (int i = 0; i < target.size(); ++i)
-                    {
-                        // Convert only revolute joints from degrees to radians.
-                        if (metaData.sensorsList.jointsTypeList[i] == JointType::REVOLUTE)
-                        {
-                            target(i) = deg2rad(target(i));
-                        }
-                    }
-                };
-
-                // Process joint measures based on joint type configuration.
-                if (this->allJointsAreRevolutes)
+                measures.jointPositions.noalias() = perm * measures.jointPositionsUnordered;
+                measures.jointVelocities.noalias() = perm * measures.jointVelocitiesUnordered;
+                convertRevoluteJointsToRadians(measures.jointPositions);
+                convertRevoluteJointsToRadians(measures.jointVelocities);
+                if (streamJointAccelerations)
                 {
-                    remapAndScale(measures.jointPositions,
-                                  measures.jointPositionsUnordered,
-                                  M_PI / 180.0);
-                    remapAndScale(measures.jointVelocities,
-                                  measures.jointVelocitiesUnordered,
-                                  M_PI / 180.0);
-                    if (streamJointAccelerations)
-                    {
-                        remapAndScale(measures.jointAccelerations,
-                                      measures.jointAccelerationsUnordered,
-                                      M_PI / 180.0);
-                    }
-                } else if (this->allJointsArePrismatics)
-                {
-                    remapAndScale(measures.jointPositions, measures.jointPositionsUnordered);
-                    remapAndScale(measures.jointVelocities, measures.jointVelocitiesUnordered);
-                    if (streamJointAccelerations)
-                    {
-                        remapAndScale(measures.jointAccelerations,
-                                      measures.jointAccelerationsUnordered);
-                    }
-                } else // Mixed joints: some revolute and some prismatic.
-                {
-                    remapAndConvertMixed(measures.jointPositions, measures.jointPositionsUnordered);
-                    remapAndConvertMixed(measures.jointVelocities,
-                                         measures.jointVelocitiesUnordered);
-                    if (streamJointAccelerations)
-                    {
-                        remapAndConvertMixed(measures.jointAccelerations,
-                                             measures.jointAccelerationsUnordered);
-                    }
+                    measures.jointAccelerations.noalias()
+                        = perm * measures.jointAccelerationsUnordered;
+                    convertRevoluteJointsToRadians(measures.jointAccelerations);
                 }
             } else
             {
@@ -1875,10 +1963,12 @@ struct YarpSensorBridge::Impl
 
         controlBoardRemapperMeasures.pidPositions.noalias()
             = controlBoardRemapperMeasures.remappedJointPermutationMatrix
-              * controlBoardRemapperMeasures.pidPositionsUnordered * M_PI / 180;
+              * controlBoardRemapperMeasures.pidPositionsUnordered;
         controlBoardRemapperMeasures.pidPositionErrors.noalias()
             = controlBoardRemapperMeasures.remappedJointPermutationMatrix
-              * controlBoardRemapperMeasures.pidPositionErrorsUnordered * M_PI / 180;
+              * controlBoardRemapperMeasures.pidPositionErrorsUnordered;
+        convertRevoluteJointsToRadians(controlBoardRemapperMeasures.pidPositions);
+        convertRevoluteJointsToRadians(controlBoardRemapperMeasures.pidPositionErrors);
 
         return true;
     }
@@ -2018,6 +2108,7 @@ struct YarpSensorBridge::Impl
         constexpr auto logPrefix = "[YarpSensorBridge::Impl::readAllBatteries]";
 
         bool allReadCorrectly{true};
+        failedSensorReads.clear();
         for (const auto& [batteryName, batteryInterface] : batteryInterfaces)
         {
             double voltage{0.0}, current{0.0}, charge{0.0}, temperature{0.0};
@@ -2042,7 +2133,8 @@ struct YarpSensorBridge::Impl
             measure.first[1] = current;
             measure.first[2] = charge;
             measure.first[3] = temperature;
-            measure.second = BipedalLocomotion::clock().now().count() * 1e-9;
+            measure.second
+                = std::chrono::duration<double>(BipedalLocomotion::clock().now()).count();
         }
 
         return allReadCorrectly;
