@@ -121,8 +121,8 @@ checkandset_dependency(onnxruntime)
 blf_optional_find_package(trintrin QUIET)
 checkandset_dependency(trintrin)
 
-blf_optional_find_package(dinrail QUIET)
-checkandset_dependency(dinrail)
+blf_optional_find_package(dinrail QUIET OPTIONAL_COMPONENTS yarp)
+checkandset_dependency(dinrail OPTIONAL_COMPONENTS yarp)
 dependency_classifier(dinrail IS_USED ${FRAMEWORK_USE_dinrail} PUBLIC)
 
 ##########################      Test-related options       ##############################
@@ -145,6 +145,10 @@ framework_dependent_option(FRAMEWORK_RUN_MemoryAllocationMonitor_tests
 framework_dependent_option(FRAMEWORK_RUN_Valgrind_tests
   "Run Valgrind tests?" OFF
   "BUILD_TESTING;VALGRIND_FOUND" OFF)
+
+framework_dependent_option(FRAMEWORK_RUN_dinrail_yarp_tests
+  "Run tests requiring the dinrail YARP component?" ON
+  "BUILD_TESTING;FRAMEWORK_USE_dinrail;FRAMEWORK_USE_YARP;dinrail_yarp_FOUND" OFF)
 
 ##########################      Components       ##############################
 

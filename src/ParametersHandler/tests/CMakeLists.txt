@@ -38,9 +38,8 @@ if(FRAMEWORK_COMPILE_DinRailImplementation)
 
 endif()
 
-if(FRAMEWORK_COMPILE_DinRailImplementation AND FRAMEWORK_COMPILE_YarpImplementation)
-
-  find_package(dinrail REQUIRED COMPONENTS yarp)
+if(FRAMEWORK_COMPILE_DinRailImplementation AND FRAMEWORK_COMPILE_YarpImplementation
+   AND FRAMEWORK_RUN_dinrail_yarp_tests)
 
   add_bipedal_test(
     NAME ParametersHandlerDinRailYarp
