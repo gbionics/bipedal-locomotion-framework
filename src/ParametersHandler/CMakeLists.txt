@@ -9,4 +9,4 @@ add_bipedal_locomotion_library(
   PUBLIC_HEADERS        ${H_PREFIX}/IParametersHandler.h ${H_PREFIX}/StdImplementation.h ${H_PREFIX}/StdImplementation.tpp
   SOURCES                src/StdImplementation.cpp
   PUBLIC_LINK_LIBRARIES BipedalLocomotion::GenericContainer BipedalLocomotion::TextLogging
-  SUBDIRECTORIES        tests YarpImplementation TomlImplementation)
+  SUBDIRECTORIES        tests YarpImplementation TomlImplementation DinRailImplementation)

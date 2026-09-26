@@ -121,8 +121,8 @@ checkandset_dependency(onnxruntime)
 blf_optional_find_package(trintrin QUIET)
 checkandset_dependency(trintrin)
 
-blf_optional_find_package(dinrail QUIET)
-checkandset_dependency(dinrail)
+blf_optional_find_package(dinrail QUIET OPTIONAL_COMPONENTS yarp)
+checkandset_dependency(dinrail OPTIONAL_COMPONENTS yarp)
 dependency_classifier(dinrail IS_USED ${FRAMEWORK_USE_dinrail} PUBLIC)
 
 ##########################      Test-related options       ##############################
@@ -146,6 +146,10 @@ framework_dependent_option(FRAMEWORK_RUN_Valgrind_tests
   "Run Valgrind tests?" OFF
   "BUILD_TESTING;VALGRIND_FOUND" OFF)
 
+framework_dependent_option(FRAMEWORK_RUN_dinrail_yarp_tests
+  "Run tests requiring the dinrail YARP component?" ON
+  "BUILD_TESTING;FRAMEWORK_USE_dinrail;FRAMEWORK_USE_YARP;dinrail_yarp_FOUND" OFF)
+
 ##########################      Components       ##############################
 
 framework_dependent_option(FRAMEWORK_COMPILE_YarpUtilities
@@ -161,7 +165,7 @@ framework_dependent_option(FRAMEWORK_COMPILE_YarpImplementation
   "FRAMEWORK_COMPILE_YarpUtilities" OFF)
 
 framework_dependent_option(FRAMEWORK_COMPILE_DinRailImplementation
-  "Compile the DinRail implementation of RobotInterface?" ON
+  "Compile all the DinRail implementations?" ON
   "FRAMEWORK_COMPILE_YarpImplementation;FRAMEWORK_USE_dinrail" OFF)
 
 framework_dependent_option(FRAMEWORK_COMPILE_TomlImplementation
