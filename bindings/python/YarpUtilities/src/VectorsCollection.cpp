@@ -1,8 +1,8 @@
 /**
  * @file VectorsCollection.cpp
  * @authors Giulio Romualdi
- * @copyright 2022 Istituto Italiano di Tecnologia (IIT). This software may be modified and
- * distributed under the terms of the BSD-3-Clause license.
+ * @copyright 2022 Istituto Italiano di Tecnologia (IIT), 2026 Generative Bionics S.R.L.
+ * This software may be modified and distributed under the terms of the BSD-3-Clause license.
  */
 
 #include <pybind11/eigen.h>
@@ -92,7 +92,8 @@ void CreateVectorsCollectionClient(pybind11::module& module)
                  VectorsCollection collection = *collectionPtr;
                  return collection;
              })
-        .def("is_new_metadata_available", &VectorsCollectionClient::isNewMetadataAvailable);
+        .def("is_new_metadata_available", &VectorsCollectionClient::isNewMetadataAvailable)
+        .def("is_connected", &VectorsCollectionClient::isConnected);
 }
 
 void CreateVectorsCollectionMetadata(pybind11::module& module)

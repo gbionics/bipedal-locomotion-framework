@@ -15,7 +15,32 @@ To use the logger, launch the `yarprobotinterface` with the `launch-yarp-robot-l
 ```console
 yarprobotinterface --config launch-yarp-robot-logger.xml
 ```
-When you close the yarprobotinterface, the logger will save the logged data in a mat file. Additionally, a md file will contain information about the software version in the robot setup. If video recording is enabled, a mp4 file with the video recording will also be generated. All these files will be saved in the working directory in which `yarprobotinterface` has been launched.
+When you close the yarprobotinterface, the logger will save the logged data in a mat file. Additionally, a md file will contain information about the software version in the robot setup. If video recording is enabled, a mp4 file with the video recording will also be generated. All these files will be saved in the folder specified by the `log_folder` parameter of the `Telemetry` group (the working directory in which `yarprobotinterface` has been launched if not provided).
+
+## Use the logger as always-on telemetry
+The device can run in the same `yarprobotinterface` that opens the robot devices, attaching to them directly, and start recording as soon as the robot starts (`auto_start_logging` set to `true`).
+
+```xml
+<group name="Telemetry">
+  <!-- Folder where the files are saved. It is created if it does not exist. '~' is expanded. -->
+  <param name="log_folder">~/telemetry</param>
+  <!-- A new file is saved every save_period seconds -->
+  <param name="save_period">300.0</param>
+</group>
+```
+
+- The files are written by a separate thread while the data keeps being logged, so no sample is lost while saving.
+- The exogenous signals are monitored every second. When the application streaming a signal is closed the logger detects it, and it reconnects as soon as the port is available again. For each exogenous signal the channel `exogenous_signals_connection_id::<signal_name>` stores, for each logged sample, the index of the connection (1 for the first connection, 2 after the first reconnection, ...). If the structure of a signal changes after a reconnection (e.g., different vector size), the data is stored in a new channel with the suffix `_connection_<index>`.
+
+## Cameras
+Each camera stream is acquired and written by two separate threads, so a slow encoding does not affect the acquisition. For each saved image, the channel `camera::<camera>::<rgb|depth>` stores its index in the video (or frames folder) and its time. The index restarts from zero in each video, hence the time of the first image of `<file>_<camera>_rgb.mp4` is the time associated to the index `0` in `<file>.mat`.
+
+If FFmpeg is found at compile time:
+- the rgb videos are encoded in H.264 (`libx264`, `libopenh264` or `mpeg4`, the encoder can be chosen with the `video_encoder` parameter) and stored in fragmented mp4 files, readable also if the logger crashes;
+- the depth videos are stored with the lossless FFV1 codec (16 bit) in mkv files;
+- each image is stored with its own timestamp (variable frame rate), so the video is aligned with the other signals also if some images are dropped.
+
+Otherwise, the videos are stored with OpenCV (`video_codec_code` parameter) at a constant frame rate, repeating the last image to fill the gaps.
 
 ## How to log exogenous data
 The `YarpRobotLoggerDevice` can also log exogenous data, i.e., data not directly provided by the robot sensors and actuators. To do this:

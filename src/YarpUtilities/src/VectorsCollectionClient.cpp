@@ -1,8 +1,8 @@
 /**
  * @file VectorsCollectionClient.cpp
  * @authors Giulio Romualdi
- * @copyright 2023 Istituto Italiano di Tecnologia (IIT). This software may be modified and
- * distributed under the terms of the BSD-3-Clause license.
+ * @copyright 2023 Istituto Italiano di Tecnologia (IIT), 2026 Generative Bionics S.R.L.
+ * This software may be modified and distributed under the terms of the BSD-3-Clause license.
  */
 
  #include <BipedalLocomotion/TextLogging/Logger.h>
@@ -11,6 +11,7 @@
  #include <BipedalLocomotion/YarpUtilities/VectorsCollectionMetadata.h>
 
 #include <yarp/os/BufferedPort.h>
+#include <yarp/os/ContactStyle.h>
 #include <yarp/os/Network.h>
 #include <yarp/os/Port.h>
 
@@ -111,22 +112,41 @@ bool VectorsCollectionClient::disconnect()
         return true;
     }
 
-    if (!yarp::os::Network::disconnect(m_pimpl->remotePortName,
-                                       m_pimpl->localPortName)
-        || !yarp::os::Network::disconnect(m_pimpl->localRpcPortName, //
-                                          m_pimpl->remoteRpcPortName))
+    // Both disconnections are always attempted since the server may be gone already.
+    const bool okData = yarp::os::Network::disconnect(m_pimpl->remotePortName, //
+                                                      m_pimpl->localPortName);
+    const bool okRpc = yarp::os::Network::disconnect(m_pimpl->localRpcPortName, //
+                                                     m_pimpl->remoteRpcPortName);
+
+    m_pimpl->isConnected = false;
+    return okData && okRpc;
+}
+
+bool VectorsCollectionClient::isConnected() const
+{
+    if (!m_pimpl->isConnected)
     {
         return false;
     }
 
-    m_pimpl->isConnected = false;
-    return true;
+    yarp::os::ContactStyle style;
+    style.quiet = true;
+    style.timeout = 1.0;
+    return yarp::os::Network::isConnected(m_pimpl->remotePortName, //
+                                          m_pimpl->localPortName,
+                                          style);
 }
 
 bool VectorsCollectionClient::connect()
 {
     constexpr auto rpcCarrier = "tcp";
     m_pimpl->isConnected = false;
+
+    // The server may be a new instance (e.g., restarted application), so the metadata cached from
+    // a previous connection cannot be trusted anymore.
+    m_pimpl->cachedVersion = -1;
+    m_pimpl->newMetadataAvailable = false;
+    m_pimpl->cachedMetadata = VectorsCollectionMetadata();
 
     if (!yarp::os::Network::connect(m_pimpl->remotePortName,
                                     m_pimpl->localPortName,

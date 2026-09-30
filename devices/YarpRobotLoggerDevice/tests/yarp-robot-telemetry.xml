@@ -1,0 +1,73 @@
+<!-- Copyright (C) 2026 Generative Bionics S.R.L. All rights reserved.
+This software may be modified and distributed under the terms of the
+BSD-3-Clause license. -->
+
+<?xml version="1.0" encoding="UTF-8" ?>
+<device  xmlns:xi="http://www.w3.org/2001/XInclude" name="yarp-robot-telemetry" type="YarpRobotLoggerDevice">
+  <param name="sampling_period_in_s">0.01</param>
+
+  <param name="port_prefix">/yarp-robot-telemetry</param>
+  <param name="log_text">false</param>
+  <param name="log_code_status">false</param>
+  <param name="log_cameras">true</param>
+  <param name="log_robot_data">true</param>
+  <param name="auto_start_logging">true</param>
+  <param name="enable_real_time_logging">false</param>
+
+  <param name="rgb_cameras_fps">(30)</param>
+  <param name="rgb_cameras_rgb_save_mode">("video")</param>
+  <param name="rgbd_cameras_fps">(15)</param>
+  <param name="rgbd_cameras_depth_scale">(1000)</param>
+  <param name="rgbd_cameras_rgb_save_mode">("frame")</param>
+  <param name="rgbd_cameras_depth_save_mode">("video")</param>
+
+  <group name="RobotCameraBridge">
+    <param name="stream_cameras">true</param>
+    <group name="Cameras">
+      <param name="rgb_cameras_list">(sim_camera)</param>
+      <param name="rgbd_cameras_list">(sim_depth_camera)</param>
+    </group>
+  </group>
+
+  <group name="Telemetry">
+    <param name="log_folder">telemetry_test_logs</param>
+    <param name="save_period">2.0</param>
+  </group>
+
+  <group name="ExogenousSignals">
+    <param name="vectors_collection_exogenous_inputs">("test_signal")</param>
+    <param name="vectors_exogenous_inputs">()</param>
+
+    <group name="test_signal">
+      <param name="local">"/yarp-robot-telemetry/exogenous_signals/test_signal"</param>
+      <param name="remote">"/telemetry_test/logger"</param>
+      <param name="signal_name">"test_signal"</param>
+      <param name="carrier">"tcp"</param>
+    </group>
+  </group>
+
+  <group name="RobotSensorBridge">
+    <param name="check_for_nan">false</param>
+    <param name="stream_joint_states">true</param>
+    <param name="stream_motor_states">false</param>
+    <param name="stream_inertials">false</param>
+    <param name="stream_cartesian_wrenches">false</param>
+    <param name="stream_forcetorque_sensors">false</param>
+    <param name="stream_pids">false</param>
+    <param name="stream_motor_PWM">false</param>
+    <param name="stream_temperatures">false</param>
+  </group>
+
+  <!-- ATTACH -->
+  <action phase="startup" level="15" type="attach">
+    <paramlist name="networks">
+      <elem name="sim_controlboard">sim_controlboard</elem>
+      <elem name="sim_camera">sim_camera</elem>
+      <elem name="sim_depth_camera">sim_depth_camera</elem>
+    </paramlist>
+  </action>
+
+  <action phase="shutdown" level="2" type="detach" />
+  <!-- FINISH ATTACH-->
+
+</device>
