@@ -231,7 +231,7 @@ bool CamerasRecorder::setDriversList(const yarp::dev::PolyDriverList& poly)
     return true;
 }
 
-bool CamerasRecorder::start(DataStorage& storage)
+bool CamerasRecorder::start(std::shared_ptr<DataStorage> storage)
 {
     m_recorders.clear();
 
@@ -250,7 +250,7 @@ bool CamerasRecorder::start(DataStorage& storage)
         options.saveMode = stream.rgbSaveMode;
         options.isDepth = false;
         m_recorders.push_back(
-            std::make_unique<ImageRecorder>(options,
+            std::make_shared<ImageRecorder>(options,
                                             std::make_unique<CameraColorSource>(*m_bridge,
                                                                                 camera,
                                                                                 mutex),
@@ -262,10 +262,14 @@ bool CamerasRecorder::start(DataStorage& storage)
             options.channel = "camera::" + camera + "::depth";
             options.saveMode = stream.depthSaveMode;
             options.isDepth = true;
-            m_recorders.push_back(std::make_unique<ImageRecorder>(
-                options,
-                std::make_unique<CameraDepthSource>(*m_bridge, camera, mutex, stream.depthScale),
-                storage));
+            m_recorders.push_back(
+                std::make_shared<ImageRecorder>(options,
+                                                std::make_unique<CameraDepthSource>(*m_bridge,
+                                                                                    camera,
+                                                                                    mutex,
+                                                                                    stream
+                                                                                        .depthScale),
+                                                storage));
         }
     }
 
@@ -279,14 +283,9 @@ bool CamerasRecorder::start(DataStorage& storage)
     return true;
 }
 
-std::vector<ImageRecorder*> CamerasRecorder::recorders()
+const std::vector<std::shared_ptr<ImageRecorder>>& CamerasRecorder::recorders() const
 {
-    std::vector<ImageRecorder*> recorders;
-    for (auto& recorder : m_recorders)
-    {
-        recorders.push_back(recorder.get());
-    }
-    return recorders;
+    return m_recorders;
 }
 
 void CamerasRecorder::stop()

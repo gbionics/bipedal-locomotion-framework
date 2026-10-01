@@ -76,6 +76,7 @@ public:
      * |                Parameter Name              |   Type   |                                             Description                                       | Mandatory |
      * |:------------------------------------------:|:--------:|:---------------------------------------------------------------------------------------------:|:---------:|
      * |               `sampling_time`              | `double` |            Strictly positive number representing the sampling time in seconds                 |    Yes    |
+     * |                   `name`                   | `string` |                          Name associated to the runner (used in the logs)                     |    Yes    |
      * | `maximum_number_of_accepted_deadline_miss` |  `int`   | Number of accepted deadline miss. if negative the check is not considered. Default value `-1` |     No    |
      * @return true in case of success, false otherwise.
      */
@@ -183,6 +184,13 @@ bool AdvanceableRunner<_Advanceable>::setAdvanceable(std::unique_ptr<_Advanceabl
 {
     constexpr auto errorPrefix = "[AdvanceableRunner::setAdvanceable]";
 
+    if (m_isRunning)
+    {
+        log()->error("{} The advanceable cannot be changed while the runner is running.",
+                     errorPrefix);
+        return false;
+    }
+
     if (advanceable == nullptr)
     {
         log()->error("{} The advanceable is not valid.", errorPrefix);
@@ -197,6 +205,12 @@ template <class _Advanceable>
 bool AdvanceableRunner<_Advanceable>::setInputResource(std::shared_ptr<SharedResource<Input>> input)
 {
     constexpr auto logPrefix = "[AdvanceableRunner::setInputResource]";
+
+    if (m_isRunning)
+    {
+        log()->error("{} The input cannot be changed while the runner is running.", logPrefix);
+        return false;
+    }
 
     if (input == nullptr)
     {
@@ -215,9 +229,15 @@ bool AdvanceableRunner<_Advanceable>::setOutputResource(
 {
     constexpr auto logPrefix = "[AdvanceableRunner::setOutputResource]";
 
+    if (m_isRunning)
+    {
+        log()->error("{} The output cannot be changed while the runner is running.", logPrefix);
+        return false;
+    }
+
     if (output == nullptr)
     {
-        log()->error("{} The input is not valid.", logPrefix);
+        log()->error("{} The output is not valid.", logPrefix);
         return false;
     }
 
@@ -238,7 +258,7 @@ std::thread AdvanceableRunner<_Advanceable>::run(std::shared_ptr<Barrier> barrie
                     logPrefix,
                     m_info.name);
 
-        assert(false && "[AdvanceableRunner::run] The thread is already running.");
+        assert(false && "[AdvanceableRunner::run] The AdvanceableRunner is not initialized.");
         return std::thread();
     }
 
@@ -337,7 +357,8 @@ std::thread AdvanceableRunner<_Advanceable>::run(std::shared_ptr<Barrier> barrie
                 }
 
                 if (m_maximumNumberOfAcceptedDeadlineMiss >= 0
-                    && deadlineMiss > m_maximumNumberOfAcceptedDeadlineMiss)
+                    && deadlineMiss
+                           > static_cast<unsigned int>(m_maximumNumberOfAcceptedDeadlineMiss))
                 {
                     // we have to close the runner
                     m_isRunning = false;
@@ -369,7 +390,13 @@ std::thread AdvanceableRunner<_Advanceable>::run(std::shared_ptr<Barrier> barrie
                     m_info.name,
                     deadlineMiss);
 
-        return this->m_advanceable->close();
+        // the return value of the thread function is discarded by std::thread
+        if (!this->m_advanceable->close())
+        {
+            log()->error("{} - {} Unable to close the advanceable.", logPrefix, m_info.name);
+            return false;
+        }
+        return true;
     };
 
     return std::thread(function, barrier);

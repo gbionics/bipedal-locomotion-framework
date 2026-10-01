@@ -5,6 +5,7 @@ BSD-3-Clause license. -->
 <?xml version="1.0" encoding="UTF-8" ?>
 <device  xmlns:xi="http://www.w3.org/2001/XInclude" name="yarp-robot-logger" type="YarpRobotLoggerDevice">
   <param name="sampling_period_in_s">0.01</param>
+  <param name="robot_model_uri">package://ergoCub/robots/ergoCubSN001/model.urdf</param>
 
   <param name="port_prefix">/yarp-robot-logger</param>
   <param name="log_text">true</param>

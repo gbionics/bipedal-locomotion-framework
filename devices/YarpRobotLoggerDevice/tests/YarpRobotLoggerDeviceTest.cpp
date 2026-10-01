@@ -340,14 +340,29 @@ TEST_CASE("Telemetry with periodic save and exogenous signal reconnection")
                                 || getField(signal, "signal_connection_2").isFieldExisting("data");
 
         // Each mat file has its own videos. The images of a video are the ones whose index
-        // follows the first zero index in the mat file.
+        // follows the first zero index in the mat file. A file may have no image if it has been
+        // saved right after the previous one.
         const std::string prefix = (file.parent_path() / file.stem()).string();
-        CHECK(std::filesystem::exists(prefix + "_sim_camera_rgb.mp4"));
-        CHECK(std::filesystem::exists(prefix + "_sim_depth_camera_depth.mkv"));
+        const matioCpp::Struct camera = getField(root, "camera");
+        auto hasImages = [](const matioCpp::Struct& channel) {
+            return channel.isFieldExisting("data")
+                   && channel["data"].dimensions().size() == 3
+                   && channel["data"].dimensions()[2] > 0;
+        };
+        if (hasImages(getField(getField(camera, "sim_camera"), "rgb")))
+        {
+            CHECK(std::filesystem::exists(prefix + "_sim_camera_rgb.mp4"));
+        }
+        if (hasImages(getField(getField(camera, "sim_depth_camera"), "depth")))
+        {
+            CHECK(std::filesystem::exists(prefix + "_sim_depth_camera_depth.mkv"));
+        }
 
-        const matioCpp::Struct frames
-            = getField(getField(getField(root, "camera"), "sim_depth_camera"), "rgb");
-        REQUIRE(frames.isFieldExisting("data"));
+        const matioCpp::Struct frames = getField(getField(camera, "sim_depth_camera"), "rgb");
+        if (!hasImages(frames))
+        {
+            continue;
+        }
         auto indices = frames["data"].asMultiDimensionalArray<std::uint32_t>();
         const std::size_t numberOfRecords = indices.dimensions()[2];
         std::size_t first = 0;

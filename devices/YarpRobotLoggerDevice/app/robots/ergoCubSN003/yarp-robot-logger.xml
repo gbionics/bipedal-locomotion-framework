@@ -6,6 +6,7 @@ BSD-3-Clause license. -->
 <device  xmlns:xi="http://www.w3.org/2001/XInclude" name="yarp-robot-logger" type="YarpRobotLoggerDevice">
   <param name="robot">ergocub</param>
   <param name="sampling_period_in_s">0.01</param>
+  <param name="robot_model_uri">package://ergoCub/robots/ergoCubSN003/model.urdf</param>
 
   <param name="rgb_cameras_fps">(20)</param>
   <param name="rgb_cameras_rgb_save_mode">("video")</param>
@@ -15,7 +16,6 @@ BSD-3-Clause license. -->
   <param name="rgbd_cameras_depth_save_mode">()</param>
   <param name="rgbd_cameras_rgb_save_mode">()</param>
 
-  <param name="video_codec_code">mp4v</param>
   <param name="port_prefix">/yarp-robot-logger</param>
   <param name="log_text">true</param>
   <param name="text_logging_subnames">("ergocub-torso/yarprobotinterface")</param>

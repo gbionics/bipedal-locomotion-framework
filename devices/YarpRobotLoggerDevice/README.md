@@ -9,6 +9,12 @@ The logger is currently supported only for the robots listed in the [application
 - `yarp-robot-logger.xml`: Configuration parameters for the logger device.
 - `blf-yarp-robot-logger-interfaces`: Folder containing all interfaces used by the logger device to log data.
 
+The robot model associated to the logged data is set with the `robot_model_uri` parameter. Any URI supported by [`resolve-robotics-uri-py`](https://github.com/ami-iit/resolve-robotics-uri-py) can be used, e.g., `package://ergoCub/robots/ergoCubSN001/model.urdf`. The URI is stored in the `yarp_robot_name` field of the mat file and of the real time stream, and it is used by the [`robot-log-visualizer`](https://github.com/ami-iit/robot-log-visualizer) to load the model. The `YARP_ROBOT_NAME` environment variable is not used.
+
+```xml
+<param name="robot_model_uri">package://ergoCub/robots/ergoCubSN001/model.urdf</param>
+```
+
 ## How to Use the Logger
 To use the logger, launch the `yarprobotinterface` with the `launch-yarp-robot-logger.xml` configuration file:
 
@@ -35,12 +41,10 @@ The device can run in the same `yarprobotinterface` that opens the robot devices
 ## Cameras
 Each camera stream is acquired and written by two separate threads, so a slow encoding does not affect the acquisition. For each saved image, the channel `camera::<camera>::<rgb|depth>` stores its index in the video (or frames folder) and its time. The index restarts from zero in each video, hence the time of the first image of `<file>_<camera>_rgb.mp4` is the time associated to the index `0` in `<file>.mat`.
 
-If FFmpeg is found at compile time:
+The videos are written with [FFmpeg](https://ffmpeg.org/), which is required to compile the device:
 - the rgb videos are encoded in H.264 (`libx264`, `libopenh264` or `mpeg4`, the encoder can be chosen with the `video_encoder` parameter) and stored in fragmented mp4 files, readable also if the logger crashes;
 - the depth videos are stored with the lossless FFV1 codec (16 bit) in mkv files;
 - each image is stored with its own timestamp (variable frame rate), so the video is aligned with the other signals also if some images are dropped.
-
-Otherwise, the videos are stored with OpenCV (`video_codec_code` parameter) at a constant frame rate, repeating the last image to fill the gaps.
 
 ## How to log exogenous data
 The `YarpRobotLoggerDevice` can also log exogenous data, i.e., data not directly provided by the robot sensors and actuators. To do this:
