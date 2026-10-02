@@ -1,16 +1,21 @@
 /**
- * @copyright 2024 Istituto Italiano di Tecnologia (IIT). This software may be modified and
- * distributed under the terms of the BSD-3-Clause license.
+ * @copyright 2024 Istituto Italiano di Tecnologia (IIT), 2026 Generative Bionics S.R.L.
+ * This software may be modified and distributed under the terms of the BSD-3-Clause license.
  */
 
+#include <algorithm>
+#include <atomic>
 #include <cstdlib>
 #include <chrono>
 #include <filesystem>
 #include <random>
+#include <set>
 #include <thread>
 
 // BLF
+#include <BipedalLocomotion/ParametersHandler/StdImplementation.h>
 #include <BipedalLocomotion/TextLogging/Logger.h>
+#include <BipedalLocomotion/YarpUtilities/VectorsCollectionServer.h>
 
 // Catch2
 #include <catch2/catch_test_macros.hpp>
@@ -20,7 +25,10 @@
 #include <yarp/eigen/Eigen.h>
 #include <yarp/os/Bottle.h>
 #include <yarp/os/BufferedPort.h>
+#include <yarp/os/ConnectionWriter.h>
 #include <yarp/os/Network.h>
+#include <yarp/os/Port.h>
+#include <yarp/os/PortWriter.h>
 #include <yarp/robotinterface/XMLReader.h>
 #include <yarp/dev/IEncoders.h>
 #include <yarp/dev/MultipleAnalogSensorsInterfaces.h>
@@ -60,11 +68,12 @@ bool ensureYARPAndBLFYARPDevicesCanBeFound()
     std::string envVarListSeparator = ":";
 #endif
 
-    // Make sure that YARP devices can be found
-    std::string new_yarp_data_dirs_value = YARP_DATA_INSTALL_DIR_FULL;
+    // Make sure that BLF devices are available. The build directory comes first so that the
+    // devices under test are used instead of any installed version.
+    std::string new_yarp_data_dirs_value = std::string(CMAKE_BINARY_DIR) + "/share/yarp";
 
-    // Make sure that BLF devices are available
-    new_yarp_data_dirs_value = new_yarp_data_dirs_value + envVarListSeparator + CMAKE_BINARY_DIR + "/share/yarp";
+    // Make sure that YARP devices can be found
+    new_yarp_data_dirs_value = new_yarp_data_dirs_value + envVarListSeparator + YARP_DATA_INSTALL_DIR_FULL;
 
     return blf_setenv("YARP_DATA_DIRS", new_yarp_data_dirs_value);
 }
@@ -197,6 +206,11 @@ TEST_CASE("Launch simple logger")
 
     REQUIRE(savedLog.isOpen());
 
+    const matioCpp::Variable version = savedLog.read("version");
+    REQUIRE(version.isValid());
+    // in MAT 7.3 files the strings are read as UTF-16
+    REQUIRE(!version.asVector<char16_t>()().empty());
+
     matioCpp::Struct robotLoggerDeviceStruct = savedLog.read("robot_logger_device").asStruct();
 
     matioCpp::MultiDimensionalArray<double> jointPosLoggedData = robotLoggerDeviceStruct["joints_state"].asStruct()["positions"].asStruct()["data"].asMultiDimensionalArray<double>();
@@ -225,4 +239,258 @@ TEST_CASE("Launch simple logger")
 
     // The z component should be near to -9.8
     CHECK(std::abs(accelerometerLogged(2) - (-9.8)) <= 1.0);
+}
+
+/** Stream the signal and return the maximum time spent to send the data. */
+std::chrono::duration<double> streamExogenousSignal(const std::vector<std::string>& elementNames,
+                                                    std::chrono::milliseconds duration)
+{
+    auto params = std::make_shared<BipedalLocomotion::ParametersHandler::StdImplementation>();
+    params->setParameter("remote", "/telemetry_test/logger");
+
+    BipedalLocomotion::YarpUtilities::VectorsCollectionServer server;
+    REQUIRE(server.initialize(params));
+    REQUIRE(server.populateMetadata("signal", elementNames));
+    REQUIRE(server.finalizeMetadata());
+
+    const std::vector<double> data(elementNames.size(), 1.0);
+    std::chrono::duration<double> maxSendTime{0};
+    const auto end = std::chrono::steady_clock::now() + duration;
+    while (std::chrono::steady_clock::now() < end)
+    {
+        const auto start = std::chrono::steady_clock::now();
+        server.prepareData();
+        server.clearData();
+        server.populateData("signal", data);
+        // strict, so the send waits for the delivery of the previous data
+        server.sendData(true);
+        maxSendTime = std::max<std::chrono::duration<double>>(maxSendTime,
+                                                              std::chrono::steady_clock::now()
+                                                                  - start);
+        std::this_thread::sleep_for(std::chrono::milliseconds(10));
+    }
+    return maxSendTime;
+}
+
+/** Vector whose serialization takes longer than the timeout of a query to the port. */
+struct SlowVector : yarp::os::PortWriter
+{
+    yarp::sig::Vector data{2, 1.0};
+
+    bool write(yarp::os::ConnectionWriter& connection) const override
+    {
+        std::this_thread::sleep_for(std::chrono::milliseconds(1500));
+        return data.write(connection);
+    }
+};
+
+TEST_CASE("Telemetry with periodic save and exogenous signal reconnection")
+{
+    using namespace std::chrono_literals;
+
+    // this folder is set in yarp-robot-telemetry.xml
+    const std::filesystem::path logFolder = std::filesystem::current_path() / "telemetry_test_logs";
+    std::filesystem::remove_all(logFolder);
+
+    yarp::os::Network network;
+    yarp::os::NetworkBase::setLocalMode(true);
+    REQUIRE(ensureYARPAndBLFYARPDevicesCanBeFound());
+
+    const std::filesystem::path pathToXmlConfigurationFile
+        = std::filesystem::path(CMAKE_CURRENT_SOURCE_DIR) / "launch-yarp-robot-telemetry.xml";
+
+    yarp::robotinterface::XMLReader yarprobotinterfaceReader;
+    yarp::robotinterface::XMLReaderResult yarprobotinterfaceInstance
+        = yarprobotinterfaceReader.getRobotFromFile(pathToXmlConfigurationFile.string());
+    REQUIRE(yarprobotinterfaceInstance.parsingIsSuccessful);
+    REQUIRE(yarprobotinterfaceInstance.robot.enterPhase(yarp::robotinterface::ActionPhaseStartup));
+
+    // An application busy streaming does not answer to the queries of the other ports. The logger
+    // must not consider it disconnected.
+    yarp::os::Port busyPort;
+    REQUIRE(busyPort.open("/telemetry_test/busy_signal"));
+    std::atomic<bool> busyStreaming{true};
+    std::chrono::duration<double> busyMaxWriteTime{0};
+    std::thread busyWriter([&] {
+        const SlowVector message;
+        while (busyStreaming)
+        {
+            // a write without readers returns immediately, spinning would starve the port
+            if (busyPort.getOutputCount() == 0)
+            {
+                std::this_thread::sleep_for(10ms);
+                continue;
+            }
+            const auto start = std::chrono::steady_clock::now();
+            busyPort.write(message);
+            busyMaxWriteTime = std::max<std::chrono::duration<double>>(
+                busyMaxWriteTime,
+                std::chrono::steady_clock::now() - start);
+        }
+    });
+
+    // First session of the application streaming the exogenous signal
+    const auto firstSessionMaxSendTime = streamExogenousSignal({"a", "b"}, 3s);
+
+    // The application is closed. The logger should detect it.
+    std::this_thread::sleep_for(2s);
+
+    // Second session. The signal has a different structure.
+    const auto secondSessionMaxSendTime = streamExogenousSignal({"a", "b", "c"}, 3s);
+
+    busyStreaming = false;
+    busyWriter.join();
+    busyPort.close();
+
+    // The logger never blocks the applications streaming the signals
+    BipedalLocomotion::log()->info("Maximum send time: {} (first session), {} (second session), {} "
+                                   "(busy application).",
+                                   firstSessionMaxSendTime,
+                                   secondSessionMaxSendTime,
+                                   busyMaxWriteTime);
+    CHECK(firstSessionMaxSendTime < 100ms);
+    CHECK(secondSessionMaxSendTime < 100ms);
+    CHECK(busyMaxWriteTime < 1600ms);
+
+    REQUIRE(yarprobotinterfaceInstance.robot.enterPhase(yarp::robotinterface::ActionPhaseInterrupt1));
+    REQUIRE(yarprobotinterfaceInstance.robot.enterPhase(yarp::robotinterface::ActionPhaseShutdown));
+
+    std::vector<std::filesystem::path> matFiles;
+    for (const auto& entry : std::filesystem::directory_iterator(logFolder))
+    {
+        if (entry.is_regular_file() && entry.path().extension() == ".mat")
+        {
+            matFiles.push_back(entry.path());
+        }
+    }
+
+    // The data is saved every 2 seconds and when the device is closed
+    REQUIRE(matFiles.size() >= 3);
+
+    auto getField = [](const matioCpp::Struct& parent, const std::string& name) {
+        return parent.isFieldExisting(name) ? parent[name].asStruct() : matioCpp::Struct();
+    };
+
+    std::vector<double> jointTimestamps;
+    std::set<int> connectionIds;
+    std::set<int> busyConnectionIds;
+    std::vector<double> busyTimestamps;
+    bool firstStructureLogged = false;
+    bool secondStructureLogged = false;
+    for (const auto& file : matFiles)
+    {
+        matioCpp::File savedLog(file.string());
+        REQUIRE(savedLog.isOpen());
+        const matioCpp::Struct root = savedLog.read("robot_logger_device").asStruct();
+
+        const matioCpp::Struct positions
+            = getField(getField(root, "joints_state"), "positions");
+        if (positions.isFieldExisting("timestamps"))
+        {
+            const auto timestamps = positions["timestamps"].asVector<double>();
+            jointTimestamps.insert(jointTimestamps.end(), timestamps.begin(), timestamps.end());
+        }
+
+        const matioCpp::Struct connectionId
+            = getField(getField(root, "exogenous_signals_connection_id"), "test_signal");
+        if (connectionId.isFieldExisting("data"))
+        {
+            auto data = connectionId["data"].asMultiDimensionalArray<double>();
+            for (std::size_t i = 0; i < data.dimensions()[2]; i++)
+            {
+                connectionIds.insert(static_cast<int>(data({0, 0, i})));
+            }
+        }
+
+        const matioCpp::Struct busyConnectionId
+            = getField(getField(root, "exogenous_signals_connection_id"), "busy_signal");
+        if (busyConnectionId.isFieldExisting("data"))
+        {
+            auto data = busyConnectionId["data"].asMultiDimensionalArray<double>();
+            for (std::size_t i = 0; i < data.dimensions()[2]; i++)
+            {
+                busyConnectionIds.insert(static_cast<int>(data({0, 0, i})));
+            }
+        }
+        const matioCpp::Struct busySignal = getField(root, "busy_signal");
+        if (busySignal.isFieldExisting("timestamps"))
+        {
+            const auto timestamps = busySignal["timestamps"].asVector<double>();
+            busyTimestamps.insert(busyTimestamps.end(), timestamps.begin(), timestamps.end());
+        }
+
+        const matioCpp::Struct signal = getField(root, "test_signal");
+        firstStructureLogged = firstStructureLogged
+                               || getField(signal, "signal").isFieldExisting("data");
+        secondStructureLogged = secondStructureLogged
+                                || getField(signal, "signal_connection_2").isFieldExisting("data");
+
+        // Each mat file has its own videos. The images of a video are the ones whose index
+        // follows the first zero index in the mat file. A file may have no image if it has been
+        // saved right after the previous one.
+        const std::string prefix = (file.parent_path() / file.stem()).string();
+        const matioCpp::Struct camera = getField(root, "camera");
+        auto hasImages = [](const matioCpp::Struct& channel) {
+            return channel.isFieldExisting("data")
+                   && channel["data"].dimensions().size() == 3
+                   && channel["data"].dimensions()[2] > 0;
+        };
+        if (hasImages(getField(getField(camera, "sim_camera"), "rgb")))
+        {
+            CHECK(std::filesystem::exists(prefix + "_sim_camera_rgb.mp4"));
+        }
+        if (hasImages(getField(getField(camera, "sim_depth_camera"), "depth")))
+        {
+            CHECK(std::filesystem::exists(prefix + "_sim_depth_camera_depth.mkv"));
+        }
+
+        const matioCpp::Struct frames = getField(getField(camera, "sim_depth_camera"), "rgb");
+        if (!hasImages(frames))
+        {
+            continue;
+        }
+        auto indices = frames["data"].asMultiDimensionalArray<std::uint32_t>();
+        const std::size_t numberOfRecords = indices.dimensions()[2];
+        std::size_t first = 0;
+        while (first < numberOfRecords && indices({0, 0, first}) != 0)
+        {
+            first++;
+        }
+        REQUIRE(first < numberOfRecords);
+        const std::filesystem::path framesFolder = prefix + "_sim_depth_camera_rgb";
+        for (std::size_t i = first; i < numberOfRecords; i++)
+        {
+            const auto index = indices({0, 0, i});
+            CHECK(index == i - first);
+            CHECK(std::filesystem::exists(framesFolder / ("img_" + std::to_string(index) + ".png")));
+        }
+    }
+
+    // No robot data is lost while the files are written
+    REQUIRE(jointTimestamps.size() > 2);
+    std::sort(jointTimestamps.begin(), jointTimestamps.end());
+    double maxStep = 0;
+    for (std::size_t i = 1; i < jointTimestamps.size(); i++)
+    {
+        maxStep = std::max(maxStep, jointTimestamps[i] - jointTimestamps[i - 1]);
+    }
+    CHECK(maxStep < 0.1);
+
+    // Both the sessions of the exogenous signal are logged
+    CHECK(connectionIds == std::set<int>{1, 2});
+    CHECK(firstStructureLogged);
+    CHECK(secondStructureLogged);
+
+    // The busy application (8 s of streaming, a sample every 1.5 s) has been logged without
+    // disconnections
+    REQUIRE(busyTimestamps.size() > 1);
+    std::sort(busyTimestamps.begin(), busyTimestamps.end());
+    CHECK(busyTimestamps.back() - busyTimestamps.front() > 3.0);
+    CHECK(busyConnectionIds == std::set<int>{1});
+
+    // All the temporary video files have been renamed
+    for (const auto& entry : std::filesystem::directory_iterator(logFolder))
+    {
+        CHECK(entry.path().filename().string().rfind("output_", 0) == std::string::npos);
+    }
 }

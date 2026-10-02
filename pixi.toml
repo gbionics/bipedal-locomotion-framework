@@ -127,6 +127,7 @@ scipy = "*"
 icub-models = ">=1.23.4"
 cmake-package-check = "*"
 catch2 = "*"
+ffmpeg = "*"
 
 [target.linux.dependencies]
 mold = "*"

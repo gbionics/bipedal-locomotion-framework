@@ -1,0 +1,28 @@
+<!-- Copyright (C) 2026 Generative Bionics S.R.L. All rights reserved.
+This software may be modified and distributed under the terms of the
+BSD-3-Clause license. -->
+
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE robot PUBLIC "-//YARP//DTD yarprobotinterface 3.0//EN" "http://www.yarp.it/DTD/yarprobotinterfaceV3.0.dtd">
+
+<robot name="iCubGazeboV3" portprefix="icubSim" build="1" xmlns:xi="http://www.w3.org/2001/XInclude">
+    <devices>
+        <device xmlns:xi="http://www.w3.org/2001/XInclude" name="sim_controlboard" type="fakeMotionControl">
+                <group name="GENERAL">
+                <param name="AxisName">("sim_joint_1","sim_joint_2","sim_joint_3","sim_joint_4")</param>
+                        <param name="Joints">4</param>
+                </group>
+        </device>
+
+        <device name="sim_camera" type="fakeFrameGrabber">
+            <param name="width">320</param>
+            <param name="height">240</param>
+            <!-- fakeDepthCamera opens a fakeFrameGrabber with the default port name -->
+            <param name="fakeFrameGrabber_rpc_port">/sim_camera/rpc</param>
+        </device>
+
+        <device name="sim_depth_camera" type="fakeDepthCamera" />
+
+        <xi:include href="./yarp-robot-telemetry.xml" />
+    </devices>
+</robot>

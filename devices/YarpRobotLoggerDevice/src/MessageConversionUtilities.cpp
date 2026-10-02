@@ -3,7 +3,7 @@
  * distributed under the terms of the GNU Lesser General Public License v2.1 or any later version.
  */
 
- #include <BipedalLocomotion/MessageConversionUtilities.h>
+#include <BipedalLocomotion/MessageConversionUtilities.h>
 
 void BipedalLocomotion::extractMetadata(
     const trintrin::msgs::HumanState& message,
@@ -43,11 +43,9 @@ void BipedalLocomotion::extractMetadata(
         metadata.vectors[targetPrefix + "linear_velocity"] = {"x", "y", "z"};
         metadata.vectors[targetPrefix + "angular_velocity"] = {"x", "y", "z"};
         metadata.vectors[targetPrefix + "calibration_world_to_measurement_world" + treeDelim
-                         + "position"]
-            = {"x", "y", "z"};
+                         + "position"] = {"x", "y", "z"};
         metadata.vectors[targetPrefix + "calibration_world_to_measurement_world" + treeDelim
-                         + "orientation"]
-            = {"qx", "qy", "qz", "qw"};
+                         + "orientation"] = {"qx", "qy", "qz", "qw"};
         metadata.vectors[targetPrefix + "calibration_measurement_to_link" + treeDelim + "position"]
             = {"x", "y", "z"};
         metadata
@@ -246,18 +244,16 @@ void BipedalLocomotion::convertToVectorsCollection(
         collection.vectors[targetPrefix + "angular_velocity"]
             = {target.angularVelocity.x, target.angularVelocity.y, target.angularVelocity.z};
         collection.vectors[targetPrefix + "calibration_world_to_measurement_world" + treeDelim
-                           + "position"]
-            = {target.calibrationWorldToMeasurementWorld.position.x,
-               target.calibrationWorldToMeasurementWorld.position.y,
-               target.calibrationWorldToMeasurementWorld.position.z};
+                           + "position"] = {target.calibrationWorldToMeasurementWorld.position.x,
+                                            target.calibrationWorldToMeasurementWorld.position.y,
+                                            target.calibrationWorldToMeasurementWorld.position.z};
         collection.vectors[targetPrefix + "calibration_world_to_measurement_world" + treeDelim
                            + "orientation"]
             = {target.calibrationWorldToMeasurementWorld.orientation.imaginary.x,
                target.calibrationWorldToMeasurementWorld.orientation.imaginary.y,
                target.calibrationWorldToMeasurementWorld.orientation.imaginary.z,
                target.calibrationWorldToMeasurementWorld.orientation.w};
-        collection
-            .vectors[targetPrefix + "calibration_measurement_to_link" + treeDelim + "position"]
+        collection.vectors[targetPrefix + "calibration_measurement_to_link" + treeDelim + "position"]
             = {target.calibrationMeasurementToLink.position.x,
                target.calibrationMeasurementToLink.position.y,
                target.calibrationMeasurementToLink.position.z};
@@ -267,10 +263,9 @@ void BipedalLocomotion::convertToVectorsCollection(
                target.calibrationMeasurementToLink.orientation.imaginary.y,
                target.calibrationMeasurementToLink.orientation.imaginary.z,
                target.calibrationMeasurementToLink.orientation.w};
-        collection.vectors[targetPrefix + "position_scale_factor"]
-            = {target.positionScaleFactor.x,
-               target.positionScaleFactor.y,
-               target.positionScaleFactor.z};
+        collection.vectors[targetPrefix + "position_scale_factor"] = {target.positionScaleFactor.x,
+                                                                      target.positionScaleFactor.y,
+                                                                      target.positionScaleFactor.z};
     }
 }
 
@@ -283,8 +278,7 @@ void BipedalLocomotion::convertToVectorsCollection(
     for (auto& [name, acc] : message.accelerometers)
     {
         std::string accelerometerPrefix = p + name + treeDelim;
-        collection.vectors[accelerometerPrefix + "status"]
-            = {static_cast<double>(acc.info.status)};
+        collection.vectors[accelerometerPrefix + "status"] = {static_cast<double>(acc.info.status)};
         collection.vectors[accelerometerPrefix + "data"] = {acc.data.x, acc.data.y, acc.data.z};
     }
     for (auto& [name, emg] : message.emgSensors)
@@ -356,8 +350,7 @@ void BipedalLocomotion::convertToVectorsCollection(
     for (auto& [name, position] : message.positionSensors)
     {
         std::string positionPrefix = p + name + treeDelim;
-        collection.vectors[positionPrefix + "status"]
-            = {static_cast<double>(position.info.status)};
+        collection.vectors[positionPrefix + "status"] = {static_cast<double>(position.info.status)};
         collection.vectors[positionPrefix + "data"]
             = {position.data.x, position.data.y, position.data.z};
     }
@@ -377,8 +370,7 @@ void BipedalLocomotion::convertToVectorsCollection(
     {
         std::string torque3dPrefix = p + name + treeDelim;
         collection.vectors[torque3dPrefix + "status"] = {static_cast<double>(torque.info.status)};
-        collection.vectors[torque3dPrefix + "data"]
-            = {torque.data.x, torque.data.y, torque.data.z};
+        collection.vectors[torque3dPrefix + "data"] = {torque.data.x, torque.data.y, torque.data.z};
     }
     for (auto& [name, vlink] : message.virtualLinkKinSensors)
     {

@@ -1,8 +1,8 @@
 /**
  * @file VectorsCollectionClient.h
  * @authors Giulio Romualdi
- * @copyright 2023 Istituto Italiano di Tecnologia (IIT). This software may be modified and
- * distributed under the terms of the BSD-3-Clause license.
+ * @copyright 2023 Istituto Italiano di Tecnologia (IIT), 2026 Generative Bionics S.R.L.
+ * This software may be modified and distributed under the terms of the BSD-3-Clause license.
  */
 
 #ifndef BIPEDAL_LOCOMOTION_YARP_UTILITIES_VECTORS_COLLECTION_CLIENT_H
@@ -55,6 +55,7 @@ public:
 
     /**
      * Connect to the ports.
+     * @note The cached metadata are discarded, since the server may be a new instance.
      * @return true if the connection has been established successfully, false otherwise.
      */
     bool connect();
@@ -64,6 +65,16 @@ public:
      * @return true if the connection has been closed successfully, false otherwise.
      */
     bool disconnect();
+
+    /**
+     * Check if the data connection with the server is still alive.
+     * @note The server is not contacted, since it may block its streaming. The connection is alive
+     * if the local port has an input connection and the server registered in the name server is
+     * the one found at connection time. This function queries the name server, so it should not
+     * be called in a real-time loop.
+     * @return true if the client is connected to the server, false otherwise.
+     */
+    bool isConnected() const;
 
     /**
      * Check if new metadata is available.

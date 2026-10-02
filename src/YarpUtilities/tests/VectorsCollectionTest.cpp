@@ -7,6 +7,7 @@
 #include <BipedalLocomotion/YarpUtilities/VectorsCollectionClient.h>
 #include <BipedalLocomotion/YarpUtilities/VectorsCollectionServer.h>
 
+#include <atomic>
 #include <random>
 #include <thread>
 #if defined(_WIN32)
@@ -14,7 +15,10 @@
 #else
 #include <unistd.h> // for getpid()
 #endif
+#include <yarp/os/ConnectionWriter.h>
 #include <yarp/os/Network.h>
+#include <yarp/os/Port.h>
+#include <yarp/os/PortWriter.h>
 
 using namespace BipedalLocomotion::YarpUtilities;
 using namespace BipedalLocomotion::ParametersHandler;
@@ -858,4 +862,61 @@ TEST_CASE_METHOD(VectorsCollectionFixture,
 
     BipedalLocomotion::YarpUtilities::VectorsCollectionMetadata meta;
     REQUIRE_FALSE(client.getMetadata(meta));
+}
+
+/** Data whose serialization takes longer than the timeout of a query to the port. */
+struct SlowVectorsCollection : yarp::os::PortWriter
+{
+    VectorsCollection data;
+
+    bool write(yarp::os::ConnectionWriter& connection) const override
+    {
+        std::this_thread::sleep_for(std::chrono::milliseconds(1500));
+        return data.write(connection);
+    }
+};
+
+TEST_CASE_METHOD(VectorsCollectionFixture,
+                 "VectorsCollectionClient - isConnected does not contact a busy server")
+{
+    using namespace std::chrono_literals;
+
+    std::string serverName;
+    REQUIRE(serverHandler->getParameter("remote", serverName));
+
+    // the server ports are opened directly to stream slowly
+    yarp::os::Port dataPort;
+    yarp::os::Port rpcPort;
+    REQUIRE(dataPort.open(serverName + "/measures:o"));
+    REQUIRE(rpcPort.open(serverName + "/rpc:i"));
+
+    VectorsCollectionClient client;
+    REQUIRE(client.initialize(clientHandler));
+    REQUIRE(client.connect());
+
+    std::atomic<bool> streaming{true};
+    std::thread writer([&] {
+        const SlowVectorsCollection message;
+        while (streaming)
+        {
+            dataPort.write(message);
+        }
+    });
+    std::this_thread::sleep_for(200ms);
+
+    // CHECK is used since the writer thread must be joined
+    for (int i = 0; i < 3; i++)
+    {
+        const auto start = std::chrono::steady_clock::now();
+        CHECK(client.isConnected());
+        CHECK(std::chrono::steady_clock::now() - start < 500ms);
+    }
+
+    streaming = false;
+    writer.join();
+    dataPort.close();
+    rpcPort.close();
+    std::this_thread::sleep_for(200ms);
+
+    REQUIRE_FALSE(client.isConnected());
 }

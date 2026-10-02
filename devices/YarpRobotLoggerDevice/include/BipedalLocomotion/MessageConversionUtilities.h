@@ -10,8 +10,8 @@
 #include <BipedalLocomotion/YarpUtilities/VectorsCollectionMetadata.h>
 
 #include <trintrin/msgs/HumanState.h>
-#include <trintrin/msgs/WearableTargets.h>
 #include <trintrin/msgs/WearableData.h>
+#include <trintrin/msgs/WearableTargets.h>
 
 #include <Eigen/Core>
 
@@ -23,7 +23,8 @@ namespace BipedalLocomotion
 static const std::string treeDelim = "::";
 
 /**
- * @brief Extract metadata from a HumanState message and populate a VectorsCollectionMetadata object.
+ * @brief Extract metadata from a HumanState message and populate a VectorsCollectionMetadata
+ * object.
  *
  * @param message The input HumanState message containing the metadata.
  * @param prefix A string prefix to be added to the metadata keys.
@@ -34,7 +35,8 @@ void extractMetadata(const trintrin::msgs::HumanState& message,
                      BipedalLocomotion::YarpUtilities::VectorsCollectionMetadata& metadata);
 
 /**
- * @brief Extract metadata from a WearableTargets message and populate a VectorsCollectionMetadata object.
+ * @brief Extract metadata from a WearableTargets message and populate a VectorsCollectionMetadata
+ * object.
  *
  * @param message The input WearableTargets message containing the metadata.
  * @param prefix A string prefix to be added to the metadata keys.
@@ -45,7 +47,8 @@ void extractMetadata(const trintrin::msgs::WearableTargets& message,
                      BipedalLocomotion::YarpUtilities::VectorsCollectionMetadata& metadata);
 
 /**
- * @brief Extract metadata from a WearableData message and populate a VectorsCollectionMetadata object.
+ * @brief Extract metadata from a WearableData message and populate a VectorsCollectionMetadata
+ * object.
  *
  * @param message The input WearableData message containing the metadata.
  * @param prefix A string prefix to be added to the metadata keys.
@@ -96,6 +99,6 @@ void convertToVectorsCollection(const trintrin::msgs::WearableData& message,
  */
 Eigen::Vector3d trintrinVectorXYZToVector3(const trintrin::msgs::VectorXYZ& vec);
 
-}
+} // namespace BipedalLocomotion
 
 #endif // BIPEDAL_LOCOMOTION_FRAMEWORK_YARP_ROBOT_LOGGER_DEVICE_MESSAGE_CONVERSION_UTILITIES_H
