@@ -12,12 +12,14 @@
 #include <thread>
 #include <unordered_map>
 
+#include <matioCpp/matioCpp.h>
 #include <robometry/BufferManager.h>
 
 #include <BipedalLocomotion/TextLogging/Logger.h>
 #include <BipedalLocomotion/YarpUtilities/VectorsCollectionServer.h>
 
 #include <BipedalLocomotion/RobotLogger/TelemetryBuffer.h>
+#include <BipedalLocomotion/RobotLogger/Version.h>
 
 VISITABLE_STRUCT(BipedalLocomotion::TextLoggingEntry,
                  level,
@@ -46,6 +48,7 @@ namespace
 {
 constexpr auto realTimeRootName = "robot_realtime";
 constexpr auto timestampsName = "timestamps";
+constexpr auto versionName = "version";
 
 std::string realTimeName(const std::string& name)
 {
@@ -200,6 +203,15 @@ struct TelemetryBuffer::Impl
                         logPrefix,
                         logFolder.string());
             return false;
+        }
+
+        // robometry does not allow adding custom fields, the version is appended as a variable
+        {
+            matioCpp::File file(savedFileName + ".mat", matioCpp::FileMode::ReadAndWrite);
+            if (!file.isOpen() || !file.write(matioCpp::String(versionName, RobotLogger::version)))
+            {
+                log()->warn("{} Unable to write the version in {}.mat.", logPrefix, savedFileName);
+            }
         }
 
         log()->info("{} Data saved to file {}.mat in {}.",

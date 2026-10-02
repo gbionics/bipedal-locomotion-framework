@@ -11,6 +11,8 @@ The logger is currently supported only for the robots listed in the [application
 
 The robot model associated to the logged data is set with the `robot_model_uri` parameter. Any URI supported by [`resolve-robotics-uri-py`](https://github.com/ami-iit/resolve-robotics-uri-py) can be used, e.g., `package://ergoCub/robots/ergoCubSN001/model.urdf`. The URI is stored in the `yarp_robot_name` field of the mat file and of the real time stream, and it is used by the [`robot-log-visualizer`](https://github.com/ami-iit/robot-log-visualizer) to load the model. The `YARP_ROBOT_NAME` environment variable is not used.
 
+Each mat file also contains the `version` variable storing the version of `bipedal-locomotion-framework` used to create it, as returned by `git describe --tags --dirty` at build time (e.g., `0.27.0-7-ge5762801b-dirty`). The `robot-log-visualizer` loads the robot model only for files whose `version` is `0.28.0` or newer; files created with older versions (or without `version`) are opened without the robot model. Note that development builds after the `v0.27.0` tag report a `0.27.0-*` version until the `v0.28.0` tag is created.
+
 ```xml
 <param name="robot_model_uri">package://ergoCub/robots/ergoCubSN001/model.urdf</param>
 ```

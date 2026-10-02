@@ -68,7 +68,10 @@ public:
 
     /**
      * Check if the data connection with the server is still alive.
-     * @note This function queries the network, so it should not be called in a real-time loop.
+     * @note The server is not contacted, since it may block its streaming. The connection is alive
+     * if the local port has an input connection and the server registered in the name server is
+     * the one found at connection time. This function queries the name server, so it should not
+     * be called in a real-time loop.
      * @return true if the client is connected to the server, false otherwise.
      */
     bool isConnected() const;

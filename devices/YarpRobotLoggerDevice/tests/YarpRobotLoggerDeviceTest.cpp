@@ -4,6 +4,7 @@
  */
 
 #include <algorithm>
+#include <atomic>
 #include <cstdlib>
 #include <chrono>
 #include <filesystem>
@@ -24,7 +25,10 @@
 #include <yarp/eigen/Eigen.h>
 #include <yarp/os/Bottle.h>
 #include <yarp/os/BufferedPort.h>
+#include <yarp/os/ConnectionWriter.h>
 #include <yarp/os/Network.h>
+#include <yarp/os/Port.h>
+#include <yarp/os/PortWriter.h>
 #include <yarp/robotinterface/XMLReader.h>
 #include <yarp/dev/IEncoders.h>
 #include <yarp/dev/MultipleAnalogSensorsInterfaces.h>
@@ -202,6 +206,11 @@ TEST_CASE("Launch simple logger")
 
     REQUIRE(savedLog.isOpen());
 
+    const matioCpp::Variable version = savedLog.read("version");
+    REQUIRE(version.isValid());
+    // in MAT 7.3 files the strings are read as UTF-16
+    REQUIRE(!version.asVector<char16_t>()().empty());
+
     matioCpp::Struct robotLoggerDeviceStruct = savedLog.read("robot_logger_device").asStruct();
 
     matioCpp::MultiDimensionalArray<double> jointPosLoggedData = robotLoggerDeviceStruct["joints_state"].asStruct()["positions"].asStruct()["data"].asMultiDimensionalArray<double>();
@@ -232,8 +241,9 @@ TEST_CASE("Launch simple logger")
     CHECK(std::abs(accelerometerLogged(2) - (-9.8)) <= 1.0);
 }
 
-void streamExogenousSignal(const std::vector<std::string>& elementNames,
-                           std::chrono::milliseconds duration)
+/** Stream the signal and return the maximum time spent to send the data. */
+std::chrono::duration<double> streamExogenousSignal(const std::vector<std::string>& elementNames,
+                                                    std::chrono::milliseconds duration)
 {
     auto params = std::make_shared<BipedalLocomotion::ParametersHandler::StdImplementation>();
     params->setParameter("remote", "/telemetry_test/logger");
@@ -244,16 +254,35 @@ void streamExogenousSignal(const std::vector<std::string>& elementNames,
     REQUIRE(server.finalizeMetadata());
 
     const std::vector<double> data(elementNames.size(), 1.0);
+    std::chrono::duration<double> maxSendTime{0};
     const auto end = std::chrono::steady_clock::now() + duration;
     while (std::chrono::steady_clock::now() < end)
     {
+        const auto start = std::chrono::steady_clock::now();
         server.prepareData();
         server.clearData();
         server.populateData("signal", data);
-        server.sendData();
+        // strict, so the send waits for the delivery of the previous data
+        server.sendData(true);
+        maxSendTime = std::max<std::chrono::duration<double>>(maxSendTime,
+                                                              std::chrono::steady_clock::now()
+                                                                  - start);
         std::this_thread::sleep_for(std::chrono::milliseconds(10));
     }
+    return maxSendTime;
 }
+
+/** Vector whose serialization takes longer than the timeout of a query to the port. */
+struct SlowVector : yarp::os::PortWriter
+{
+    yarp::sig::Vector data{2, 1.0};
+
+    bool write(yarp::os::ConnectionWriter& connection) const override
+    {
+        std::this_thread::sleep_for(std::chrono::milliseconds(1500));
+        return data.write(connection);
+    }
+};
 
 TEST_CASE("Telemetry with periodic save and exogenous signal reconnection")
 {
@@ -276,14 +305,52 @@ TEST_CASE("Telemetry with periodic save and exogenous signal reconnection")
     REQUIRE(yarprobotinterfaceInstance.parsingIsSuccessful);
     REQUIRE(yarprobotinterfaceInstance.robot.enterPhase(yarp::robotinterface::ActionPhaseStartup));
 
+    // An application busy streaming does not answer to the queries of the other ports. The logger
+    // must not consider it disconnected.
+    yarp::os::Port busyPort;
+    REQUIRE(busyPort.open("/telemetry_test/busy_signal"));
+    std::atomic<bool> busyStreaming{true};
+    std::chrono::duration<double> busyMaxWriteTime{0};
+    std::thread busyWriter([&] {
+        const SlowVector message;
+        while (busyStreaming)
+        {
+            // a write without readers returns immediately, spinning would starve the port
+            if (busyPort.getOutputCount() == 0)
+            {
+                std::this_thread::sleep_for(10ms);
+                continue;
+            }
+            const auto start = std::chrono::steady_clock::now();
+            busyPort.write(message);
+            busyMaxWriteTime = std::max<std::chrono::duration<double>>(
+                busyMaxWriteTime,
+                std::chrono::steady_clock::now() - start);
+        }
+    });
+
     // First session of the application streaming the exogenous signal
-    streamExogenousSignal({"a", "b"}, 3s);
+    const auto firstSessionMaxSendTime = streamExogenousSignal({"a", "b"}, 3s);
 
     // The application is closed. The logger should detect it.
     std::this_thread::sleep_for(2s);
 
     // Second session. The signal has a different structure.
-    streamExogenousSignal({"a", "b", "c"}, 3s);
+    const auto secondSessionMaxSendTime = streamExogenousSignal({"a", "b", "c"}, 3s);
+
+    busyStreaming = false;
+    busyWriter.join();
+    busyPort.close();
+
+    // The logger never blocks the applications streaming the signals
+    BipedalLocomotion::log()->info("Maximum send time: {} (first session), {} (second session), {} "
+                                   "(busy application).",
+                                   firstSessionMaxSendTime,
+                                   secondSessionMaxSendTime,
+                                   busyMaxWriteTime);
+    CHECK(firstSessionMaxSendTime < 100ms);
+    CHECK(secondSessionMaxSendTime < 100ms);
+    CHECK(busyMaxWriteTime < 1600ms);
 
     REQUIRE(yarprobotinterfaceInstance.robot.enterPhase(yarp::robotinterface::ActionPhaseInterrupt1));
     REQUIRE(yarprobotinterfaceInstance.robot.enterPhase(yarp::robotinterface::ActionPhaseShutdown));
@@ -306,6 +373,8 @@ TEST_CASE("Telemetry with periodic save and exogenous signal reconnection")
 
     std::vector<double> jointTimestamps;
     std::set<int> connectionIds;
+    std::set<int> busyConnectionIds;
+    std::vector<double> busyTimestamps;
     bool firstStructureLogged = false;
     bool secondStructureLogged = false;
     for (const auto& file : matFiles)
@@ -331,6 +400,23 @@ TEST_CASE("Telemetry with periodic save and exogenous signal reconnection")
             {
                 connectionIds.insert(static_cast<int>(data({0, 0, i})));
             }
+        }
+
+        const matioCpp::Struct busyConnectionId
+            = getField(getField(root, "exogenous_signals_connection_id"), "busy_signal");
+        if (busyConnectionId.isFieldExisting("data"))
+        {
+            auto data = busyConnectionId["data"].asMultiDimensionalArray<double>();
+            for (std::size_t i = 0; i < data.dimensions()[2]; i++)
+            {
+                busyConnectionIds.insert(static_cast<int>(data({0, 0, i})));
+            }
+        }
+        const matioCpp::Struct busySignal = getField(root, "busy_signal");
+        if (busySignal.isFieldExisting("timestamps"))
+        {
+            const auto timestamps = busySignal["timestamps"].asVector<double>();
+            busyTimestamps.insert(busyTimestamps.end(), timestamps.begin(), timestamps.end());
         }
 
         const matioCpp::Struct signal = getField(root, "test_signal");
@@ -394,6 +480,13 @@ TEST_CASE("Telemetry with periodic save and exogenous signal reconnection")
     CHECK(connectionIds == std::set<int>{1, 2});
     CHECK(firstStructureLogged);
     CHECK(secondStructureLogged);
+
+    // The busy application (8 s of streaming, a sample every 1.5 s) has been logged without
+    // disconnections
+    REQUIRE(busyTimestamps.size() > 1);
+    std::sort(busyTimestamps.begin(), busyTimestamps.end());
+    CHECK(busyTimestamps.back() - busyTimestamps.front() > 3.0);
+    CHECK(busyConnectionIds == std::set<int>{1});
 
     // All the temporary video files have been renamed
     for (const auto& entry : std::filesystem::directory_iterator(logFolder))

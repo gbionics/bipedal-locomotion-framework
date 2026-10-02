@@ -11,7 +11,7 @@
  #include <BipedalLocomotion/YarpUtilities/VectorsCollectionMetadata.h>
 
 #include <yarp/os/BufferedPort.h>
-#include <yarp/os/ContactStyle.h>
+#include <yarp/os/Contact.h>
 #include <yarp/os/Network.h>
 #include <yarp/os/Port.h>
 
@@ -37,6 +37,7 @@ struct VectorsCollectionClient::Impl
     VectorsCollectionMetadata cachedMetadata; /**< Cached metadata. */
 
     bool isConnected{false}; /**< True if the client is connected. */
+    yarp::os::Contact remoteContact; /**< Contact of the server at connection time. */
 
     bool updateMetadata(int fromVersion); /**< Update the cached metadata. */
 };
@@ -124,17 +125,16 @@ bool VectorsCollectionClient::disconnect()
 
 bool VectorsCollectionClient::isConnected() const
 {
-    if (!m_pimpl->isConnected)
+    if (!m_pimpl->isConnected || m_pimpl->port.getInputCount() == 0)
     {
         return false;
     }
 
-    yarp::os::ContactStyle style;
-    style.quiet = true;
-    style.timeout = 1.0;
-    return yarp::os::Network::isConnected(m_pimpl->remotePortName, //
-                                          m_pimpl->localPortName,
-                                          style);
+
+    // a restarted server registers the port with a different contact
+    const yarp::os::Contact contact = yarp::os::Network::queryName(m_pimpl->remotePortName);
+    return contact.isValid() && contact.getHost() == m_pimpl->remoteContact.getHost()
+           && contact.getPort() == m_pimpl->remoteContact.getPort();
 }
 
 bool VectorsCollectionClient::connect()
@@ -148,7 +148,9 @@ bool VectorsCollectionClient::connect()
     m_pimpl->newMetadataAvailable = false;
     m_pimpl->cachedMetadata = VectorsCollectionMetadata();
 
-    if (!yarp::os::Network::connect(m_pimpl->remotePortName,
+    m_pimpl->remoteContact = yarp::os::Network::queryName(m_pimpl->remotePortName);
+    if (!m_pimpl->remoteContact.isValid()
+        || !yarp::os::Network::connect(m_pimpl->remotePortName,
                                     m_pimpl->localPortName,
                                     m_pimpl->carrier)
         || !yarp::os::Network::connect(m_pimpl->localRpcPortName, //

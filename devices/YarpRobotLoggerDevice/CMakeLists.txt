@@ -84,6 +84,24 @@ if(FRAMEWORK_COMPILE_YarpRobotLoggerDevice)
       FFmpeg::FFmpeg
     CONFIGURE_PACKAGE_NAME yarp_robot_logger_device)
 
+  if(TARGET YarpRobotLoggerDevice)
+    # The version is retrieved at build time to keep the dirty state of the repository up to date
+    find_package(Git QUIET)
+    set(YARP_ROBOT_LOGGER_VERSION_HEADER
+      "${CMAKE_CURRENT_BINARY_DIR}/generated/BipedalLocomotion/RobotLogger/Version.h")
+    add_custom_target(YarpRobotLoggerDeviceVersion
+      COMMAND ${CMAKE_COMMAND}
+        "-DGIT_EXECUTABLE=${GIT_EXECUTABLE}"
+        "-DSOURCE_DIR=${BipedalLocomotionFramework_SOURCE_DIR}"
+        "-DFALLBACK_VERSION=${BipedalLocomotionFramework_VERSION}"
+        "-DOUTPUT=${YARP_ROBOT_LOGGER_VERSION_HEADER}"
+        -P "${CMAKE_CURRENT_SOURCE_DIR}/cmake/GenerateVersionHeader.cmake"
+      BYPRODUCTS "${YARP_ROBOT_LOGGER_VERSION_HEADER}")
+    add_dependencies(YarpRobotLoggerDevice YarpRobotLoggerDeviceVersion)
+    target_include_directories(YarpRobotLoggerDevice PRIVATE
+      "${CMAKE_CURRENT_BINARY_DIR}/generated")
+  endif()
+
   install(FILES scripts/blf-logger-with-audio.sh
     PERMISSIONS OWNER_EXECUTE OWNER_WRITE OWNER_READ
     DESTINATION "${CMAKE_INSTALL_BINDIR}")

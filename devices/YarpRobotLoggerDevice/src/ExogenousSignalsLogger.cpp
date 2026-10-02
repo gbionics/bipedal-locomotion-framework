@@ -17,7 +17,7 @@
 
 #include <yarp/os/Bottle.h>
 #include <yarp/os/BufferedPort.h>
-#include <yarp/os/ContactStyle.h>
+#include <yarp/os/Contact.h>
 #include <yarp/os/Network.h>
 #include <yarp/sig/Image.h>
 #include <yarp/sig/Vector.h>
@@ -63,18 +63,25 @@ template <typename T> struct ExogenousSignal : ExogenousSignalBase
     std::string local;
     std::string carrier;
     yarp::os::BufferedPort<T> port;
+    yarp::os::Contact remoteContact; /**< Contact of the remote port at connection time. */
 
     bool connect()
     {
-        return yarp::os::Network::connect(remote, local, carrier);
+        remoteContact = yarp::os::Network::queryName(remote);
+        return remoteContact.isValid() && yarp::os::Network::connect(remote, local, carrier);
     }
 
-    bool isConnected() const
+    // The remote port is not contacted, since it may block the application streaming the signal.
+    bool isConnected()
     {
-        yarp::os::ContactStyle style;
-        style.quiet = true;
-        style.timeout = 1.0;
-        return yarp::os::Network::isConnected(remote, local, style);
+        if (port.getInputCount() == 0)
+        {
+            return false;
+        }
+        // a restarted application registers the port with a different contact
+        const yarp::os::Contact contact = yarp::os::Network::queryName(remote);
+        return contact.isValid() && contact.getHost() == remoteContact.getHost()
+               && contact.getPort() == remoteContact.getPort();
     }
 
     void disconnect()
