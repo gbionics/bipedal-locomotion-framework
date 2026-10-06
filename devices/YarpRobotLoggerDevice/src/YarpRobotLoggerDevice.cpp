@@ -1185,9 +1185,6 @@ bool BipedalLocomotion::YarpRobotLoggerDevice::startLogging()
         m_lookForNewLogsThread = std::thread([this] { this->lookForNewLogs(); });
     }
 
-    // run the thread for reading the exogenous signals
-    m_lookForNewExogenousSignalThread = std::thread([this] { this->lookForExogenousSignals(); });
-
     bool ok = m_bufferManager.setSaveCallback(
         [this](const std::string& filePrefix,
                const robometry::SaveCallbackSaveMethod& method) -> bool {
@@ -1219,6 +1216,11 @@ bool BipedalLocomotion::YarpRobotLoggerDevice::startLogging()
         log()->error("{} Unable to prepare the exogenous image logging.", logPrefix);
         return false;
     }
+
+    // run the thread for reading the exogenous signals. It must start after
+    // prepareExogenousImageLogging, since it spawns the threads that save the exogenous images
+    // using the image savers created there.
+    m_lookForNewExogenousSignalThread = std::thread([this] { this->lookForExogenousSignals(); });
 
     // prepare real time streaming
     if (!this->prepareRTStreaming())
