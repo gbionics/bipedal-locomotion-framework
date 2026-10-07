@@ -124,9 +124,12 @@ bipedal-locomotion-framework = { path = "." }
 ccache = "*"
 pytest = "*"
 scipy = "*"
+
+# Test dependencies
 icub-models = ">=1.23.4"
 cmake-package-check = "*"
 catch2 = "*"
+libdinrail-yarp = "*"
 
 [target.linux.dependencies]
 mold = "*"
