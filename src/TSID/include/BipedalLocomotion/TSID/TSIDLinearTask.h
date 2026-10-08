@@ -17,6 +17,15 @@
  * BLF_REGISTER_TSID_TASK is a macro that can be used to register an TSIDLinearTask. The key of the
  * task will be the stringified version of the Task C++ Type
  * @param _type the type of the task
+ * 
+ * For external libraries defining custom TSID tasks, you can also use:
+ * @code
+ * // Method 1: Use the macro (automatic registration)
+ * BLF_REGISTER_TSID_TASK(MyCustomTask);
+ * 
+ * // Method 2: Manual registration (in your library's initialization)
+ * TSIDLinearTaskFactory::registerBuilder<MyCustomTask>("MyCustomTask");
+ * @endcode
  */
 #define BLF_REGISTER_TSID_TASK(_type) BLF_REGISTER_TASK(_type, ::BipedalLocomotion::TSID::TSIDLinearTask)
 
