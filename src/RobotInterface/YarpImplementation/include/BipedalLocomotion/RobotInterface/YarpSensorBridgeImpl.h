@@ -183,6 +183,8 @@ struct YarpSensorBridge::Impl
                               */
     bool streamJointAccelerations{true}; /**< flag to enable reading joint accelerations from
                                             encoders */
+    bool discoverInertials{false}; /**< flag set to true if the inertial sensors are retrieved
+                                      from the attached devices */
     bool allJointsAreRevolutes{false}; /**< flag to indicate if all the joints are revolute */
     bool allJointsArePrismatics{false}; /**< flag to indicate if all the joints are prismatic */
 
@@ -316,7 +318,11 @@ struct YarpSensorBridge::Impl
         auto ptr = handler.lock();
         if (ptr == nullptr)
         {
-            return false;
+            log()->info("{} The group 'InertialSensors' is not provided. The inertial sensors will "
+                        "be retrieved from the attached devices.",
+                        logPrefix);
+            discoverInertials = true;
+            return true;
         }
 
         if (ptr->getParameter("accelerometers_list", metaData.sensorsList.linearAccelerometersList))
@@ -844,11 +850,58 @@ struct YarpSensorBridge::Impl
     }
 
     /**
+     * Fill the sensors list with the sensors of the first attached device exposing the MAS
+     * interface. The sensor type is enabled if at least a sensor is found.
+     */
+    template <typename MASSensorType>
+    void discoverMASSensors(const yarp::dev::PolyDriverList& devList,
+                            std::vector<std::string>& sensorList,
+                            bool& isEnabled)
+    {
+        for (int devIdx = 0; devIdx < devList.size(); devIdx++)
+        {
+            MASSensorType* sensorInterface{nullptr};
+            if (devList[devIdx]->poly->view(sensorInterface) && sensorInterface != nullptr)
+            {
+                sensorList = getAllSensorsInMASInterface(sensorInterface);
+                isEnabled = !sensorList.empty();
+                return;
+            }
+        }
+    }
+
+    /**
      *  Attach generic IMU sensor types and MAS inertials
      */
     bool attachAllInertials(const yarp::dev::PolyDriverList& devList)
     {
         constexpr auto logPrefix = "[YarpSensorBridge::Impl::attachAllInertials]";
+        if (discoverInertials)
+        {
+            auto& options = metaData.bridgeOptions;
+            auto& lists = metaData.sensorsList;
+            discoverMASSensors<yarp::dev::IThreeAxisLinearAccelerometers>(
+                devList,
+                lists.linearAccelerometersList,
+                options.isLinearAccelerometerEnabled);
+            discoverMASSensors<yarp::dev::IThreeAxisGyroscopes>(devList,
+                                                                lists.gyroscopesList,
+                                                                options.isGyroscopeEnabled);
+            discoverMASSensors<yarp::dev::IOrientationSensors>(devList,
+                                                               lists.orientationSensorsList,
+                                                               options.isOrientationSensorEnabled);
+            discoverMASSensors<yarp::dev::IThreeAxisMagnetometers>(devList,
+                                                                   lists.magnetometersList,
+                                                                   options.isMagnetometerEnabled);
+            log()->info("{} Inertial sensors found in the attached devices: {} accelerometers, {} "
+                        "gyroscopes, {} orientation sensors, {} magnetometers.",
+                        logPrefix,
+                        lists.linearAccelerometersList.size(),
+                        lists.gyroscopesList.size(),
+                        lists.orientationSensorsList.size(),
+                        lists.magnetometersList.size());
+        }
+
         if (metaData.bridgeOptions.isLinearAccelerometerEnabled)
         {
             std::string_view interfaceType{"IThreeAxisLinearAccelerometers"};
