@@ -15,6 +15,7 @@
 #include <matioCpp/matioCpp.h>
 #include <robometry/BufferManager.h>
 
+#include <BipedalLocomotion/ParametersHandler/StdImplementation.h>
 #include <BipedalLocomotion/TextLogging/Logger.h>
 #include <BipedalLocomotion/YarpUtilities/VectorsCollectionServer.h>
 
@@ -275,8 +276,10 @@ bool TelemetryBuffer::initialize(std::weak_ptr<const ParametersHandler::IParamet
     bool enableRealTimeLogging{false};
     if (!ptr->getParameter("enable_real_time_logging", enableRealTimeLogging))
     {
-        log()->error("{} Unable to get the parameter 'enable_real_time_logging'.", logPrefix);
-        return false;
+        log()->info("{} The parameter 'enable_real_time_logging' is not provided. Default value: "
+                    "{}.",
+                    logPrefix,
+                    enableRealTimeLogging);
     }
 
     robometry::BufferConfig config;
@@ -378,8 +381,23 @@ bool TelemetryBuffer::initialize(std::weak_ptr<const ParametersHandler::IParamet
         return true;
     }
 
+    std::weak_ptr<const ParametersHandler::IParametersHandler> realTimeGroup
+        = ptr->getGroup("REAL_TIME_STREAMING");
+    auto defaultRealTimeGroup = std::make_shared<ParametersHandler::StdImplementation>();
+    if (realTimeGroup.lock() == nullptr)
+    {
+        std::string portPrefix{"/yarp-robot-logger"};
+        ptr->getParameter("port_prefix", portPrefix);
+        defaultRealTimeGroup->setParameter("remote", portPrefix + "/rt_logging");
+        log()->info("{} The group 'REAL_TIME_STREAMING' is not provided. The data is streamed on "
+                    "{}.",
+                    logPrefix,
+                    portPrefix + "/rt_logging");
+        realTimeGroup = defaultRealTimeGroup;
+    }
+
     m_pimpl->realTimeServer = std::make_unique<YarpUtilities::VectorsCollectionServer>();
-    if (!m_pimpl->realTimeServer->initialize(ptr->getGroup("REAL_TIME_STREAMING")))
+    if (!m_pimpl->realTimeServer->initialize(realTimeGroup))
     {
         log()->error("{} Unable to initialize the real time streaming. Please check the group "
                      "'REAL_TIME_STREAMING'.",

@@ -54,16 +54,18 @@ public:
      * |      Parameter Name        |   Type   |                    Description                     | Mandatory |
      * |:--------------------------:|:--------:|:--------------------------------------------------:|:---------:|
      * |   `sampling_period_in_s`   | `double` | Period at which the data is pushed. Default 0.01.  |    No     |
-     * | `enable_real_time_logging` |  `bool`  |     Stream the numerical channels on a yarp port.  |    Yes    |
+     * | `enable_real_time_logging` |  `bool`  | Stream the numerical channels on a yarp port. Default false. | No |
      * |     `robot_model_uri`      | `string` | URI of the robot model, saved as `yarp_robot_name`.|    No     |
+     * |       `port_prefix`        | `string` | Used for the default real time port. Default `/yarp-robot-logger`. | No |
      * The optional group `Telemetry` contains:
      * |      Parameter Name        |   Type   |                    Description                     | Mandatory |
      * |:--------------------------:|:--------:|:--------------------------------------------------:|:---------:|
      * |        `log_folder`        | `string` | Folder of the files. Default the working directory.|    No     |
      * |       `save_period`        | `double` | Period of the periodic save in seconds. Default 1800.|  No     |
      * |    `save_periodically`     |  `bool`  |       Enable the periodic save. Default true.      |    No     |
-     * If `enable_real_time_logging` is true, the group `REAL_TIME_STREAMING` contains the
-     * parameters of YarpUtilities::VectorsCollectionServer.
+     * If `enable_real_time_logging` is true, the optional group `REAL_TIME_STREAMING` contains the
+     * parameters of YarpUtilities::VectorsCollectionServer. If it is not provided the data is
+     * streamed on `<port_prefix>/rt_logging`.
      * @return true in case of success, false otherwise.
      */
     bool initialize(std::weak_ptr<const ParametersHandler::IParametersHandler> handler);
