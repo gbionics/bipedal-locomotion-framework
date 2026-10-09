@@ -1,0 +1,58 @@
+<!-- Copyright (C) 2026 Generative Bionics S.R.L. All rights reserved.
+This software may be modified and distributed under the terms of the
+BSD-3-Clause license. -->
+
+<?xml version="1.0" encoding="UTF-8" ?>
+<device  xmlns:xi="http://www.w3.org/2001/XInclude" name="yarp-robot-telemetry" type="YarpRobotLoggerDevice">
+  <!-- Minimal configuration: the cameras and the inertial sensors are retrieved from the attached
+       devices and the other parameters take the default values. -->
+  <param name="robot_model_uri">package://ergoCub/robots/ergoCubSN001/model.urdf</param>
+
+  <param name="port_prefix">/yarp-robot-telemetry</param>
+  <param name="log_text">false</param>
+  <param name="log_code_status">false</param>
+  <param name="auto_start_logging">true</param>
+
+  <!-- a single value is used for all the cameras -->
+  <param name="rgbd_cameras_fps">15</param>
+  <param name="rgbd_cameras_rgb_save_mode">"frame"</param>
+
+  <group name="Telemetry">
+    <param name="log_folder">telemetry_test_logs</param>
+    <param name="save_period">2.0</param>
+  </group>
+
+  <group name="ExogenousSignals">
+    <param name="vectors_collection_exogenous_inputs">("test_signal")</param>
+    <param name="vectors_exogenous_inputs">("busy_signal")</param>
+
+    <group name="busy_signal">
+      <param name="remote">"/telemetry_test/busy_signal"</param>
+      <param name="carrier">"tcp"</param>
+    </group>
+
+    <group name="test_signal">
+      <param name="remote">"/telemetry_test/logger"</param>
+      <param name="carrier">"tcp"</param>
+    </group>
+  </group>
+
+  <group name="RobotSensorBridge">
+    <param name="stream_joint_states">true</param>
+    <param name="stream_inertials">true</param>
+  </group>
+
+  <!-- ATTACH -->
+  <action phase="startup" level="15" type="attach">
+    <paramlist name="networks">
+      <elem name="sim_controlboard">sim_controlboard</elem>
+      <elem name="sim_imu">sim_imu</elem>
+      <elem name="sim_camera">sim_camera</elem>
+      <elem name="sim_depth_camera">sim_depth_camera</elem>
+    </paramlist>
+  </action>
+
+  <action phase="shutdown" level="2" type="detach" />
+  <!-- FINISH ATTACH-->
+
+</device>

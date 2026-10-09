@@ -119,6 +119,8 @@ bool RealSense::initialize(
     }
     m_pimpl->metadata.bridgeOptions.rgbdImgDimensions
         = m_pimpl->metadata.bridgeOptions.rgbImgDimensions;
+    m_pimpl->metadata.bridgeOptions.depthImgDimensions
+        = m_pimpl->metadata.bridgeOptions.rgbImgDimensions;
 
     if (!ptr->getParameter("fps", m_pimpl->genericFPS))
     {
@@ -273,11 +275,11 @@ bool RealSense::getDepthImage(const std::string& camName,
 
     const std::size_t genericWidth
         = m_pimpl->metadata.bridgeOptions
-              .rgbdImgDimensions[m_pimpl->metadata.sensorsList.rgbdCamerasList[0]]
+              .depthImgDimensions[m_pimpl->metadata.sensorsList.rgbdCamerasList[0]]
               .first;
     const std::size_t genericHeight
         = m_pimpl->metadata.bridgeOptions
-              .rgbdImgDimensions[m_pimpl->metadata.sensorsList.rgbdCamerasList[0]]
+              .depthImgDimensions[m_pimpl->metadata.sensorsList.rgbdCamerasList[0]]
               .second;
 
     m_pimpl->frames = m_pimpl->pipe.wait_for_frames();
@@ -312,11 +314,11 @@ bool RealSense::getColorizedDepthImage(const std::string& camName,
 
     const std::size_t genericWidth
         = m_pimpl->metadata.bridgeOptions
-              .rgbdImgDimensions[m_pimpl->metadata.sensorsList.rgbdCamerasList[0]]
+              .depthImgDimensions[m_pimpl->metadata.sensorsList.rgbdCamerasList[0]]
               .first;
     const std::size_t genericHeight
         = m_pimpl->metadata.bridgeOptions
-              .rgbdImgDimensions[m_pimpl->metadata.sensorsList.rgbdCamerasList[0]]
+              .depthImgDimensions[m_pimpl->metadata.sensorsList.rgbdCamerasList[0]]
               .second;
 
     m_pimpl->frames = m_pimpl->pipe.wait_for_frames();

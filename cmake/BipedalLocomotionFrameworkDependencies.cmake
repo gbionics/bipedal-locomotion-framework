@@ -125,6 +125,9 @@ blf_optional_find_package(dinrail QUIET)
 checkandset_dependency(dinrail)
 dependency_classifier(dinrail IS_USED ${FRAMEWORK_USE_dinrail} PUBLIC)
 
+blf_optional_find_package(FFmpeg QUIET)
+checkandset_dependency(FFmpeg)
+
 ##########################      Test-related options       ##############################
 
 # MemoryAllocationMonitor require glibc >= 2.35
@@ -290,7 +293,7 @@ framework_dependent_option(FRAMEWORK_COMPILE_BalancingPositionControlApplication
 
 framework_dependent_option(FRAMEWORK_COMPILE_YarpRobotLoggerDevice
   "Do you want to generate and compile the YarpRobotLoggerDevice?" ON
-  "FRAMEWORK_COMPILE_RobotInterface;FRAMEWORK_COMPILE_YarpImplementation;FRAMEWORK_COMPILE_Camera;FRAMEWORK_COMPILE_YarpUtilities;FRAMEWORK_USE_robometry;FRAMEWORK_USE_trintrin" OFF)
+  "FRAMEWORK_COMPILE_RobotInterface;FRAMEWORK_COMPILE_YarpImplementation;FRAMEWORK_COMPILE_Camera;FRAMEWORK_COMPILE_YarpUtilities;FRAMEWORK_USE_robometry;FRAMEWORK_USE_trintrin;FRAMEWORK_USE_FFmpeg" OFF)
 
 framework_dependent_option(FRAMEWORK_COMPILE_JointTorqueControlDevice
   "Do you want to generate and compile the YarpRobotLoggerDevice?" ON

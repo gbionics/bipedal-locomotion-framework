@@ -69,6 +69,7 @@ jobs:
                              liburdfdom-dev python3-dev valgrind coinor-libipopt-dev \
                              libmatio-dev python3-pytest python3-numpy python3-scipy \
                              python3-setuptools  libspdlog-dev libopencv-dev libpcl-dev \
+                             libavformat-dev libavcodec-dev libavutil-dev libswscale-dev pkg-config \
                              python3-pybind11 nlohmann-json3-dev libassimp-dev libqhull-dev \
                              colcon python3-colcon-cmake  python3-colcon-metadata python3-colcon-output python3-colcon-package-information python3-colcon-package-selection vcstool
 

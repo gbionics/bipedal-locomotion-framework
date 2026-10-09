@@ -34,8 +34,7 @@ bool YarpSensorBridge::initialize(std::weak_ptr<const IParametersHandler> handle
 
     if (!ptr->getParameter("check_for_nan", m_pimpl->checkForNAN))
     {
-        log()->error("{} Unable to get check_for_nan.", logPrefix);
-        return false;
+        log()->info("{} Unable to get check_for_nan. Set to false by default.", logPrefix);
     }
 
     if (!ptr->getParameter("stream_joint_accelerations", m_pimpl->streamJointAccelerations))

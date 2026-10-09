@@ -1,8 +1,8 @@
 /**
  * @file VectorsCollectionClient.cpp
  * @authors Giulio Romualdi
- * @copyright 2023 Istituto Italiano di Tecnologia (IIT). This software may be modified and
- * distributed under the terms of the BSD-3-Clause license.
+ * @copyright 2023 Istituto Italiano di Tecnologia (IIT), 2026 Generative Bionics S.R.L.
+ * This software may be modified and distributed under the terms of the BSD-3-Clause license.
  */
 
  #include <BipedalLocomotion/TextLogging/Logger.h>
@@ -11,6 +11,7 @@
  #include <BipedalLocomotion/YarpUtilities/VectorsCollectionMetadata.h>
 
 #include <yarp/os/BufferedPort.h>
+#include <yarp/os/Contact.h>
 #include <yarp/os/Network.h>
 #include <yarp/os/Port.h>
 
@@ -36,6 +37,7 @@ struct VectorsCollectionClient::Impl
     VectorsCollectionMetadata cachedMetadata; /**< Cached metadata. */
 
     bool isConnected{false}; /**< True if the client is connected. */
+    yarp::os::Contact remoteContact; /**< Contact of the server at connection time. */
 
     bool updateMetadata(int fromVersion); /**< Update the cached metadata. */
 };
@@ -111,16 +113,28 @@ bool VectorsCollectionClient::disconnect()
         return true;
     }
 
-    if (!yarp::os::Network::disconnect(m_pimpl->remotePortName,
-                                       m_pimpl->localPortName)
-        || !yarp::os::Network::disconnect(m_pimpl->localRpcPortName, //
-                                          m_pimpl->remoteRpcPortName))
+    // Both disconnections are always attempted since the server may be gone already.
+    const bool okData = yarp::os::Network::disconnect(m_pimpl->remotePortName, //
+                                                      m_pimpl->localPortName);
+    const bool okRpc = yarp::os::Network::disconnect(m_pimpl->localRpcPortName, //
+                                                     m_pimpl->remoteRpcPortName);
+
+    m_pimpl->isConnected = false;
+    return okData && okRpc;
+}
+
+bool VectorsCollectionClient::isConnected() const
+{
+    if (!m_pimpl->isConnected || m_pimpl->port.getInputCount() == 0)
     {
         return false;
     }
 
-    m_pimpl->isConnected = false;
-    return true;
+
+    // a restarted server registers the port with a different contact
+    const yarp::os::Contact contact = yarp::os::Network::queryName(m_pimpl->remotePortName);
+    return contact.isValid() && contact.getHost() == m_pimpl->remoteContact.getHost()
+           && contact.getPort() == m_pimpl->remoteContact.getPort();
 }
 
 bool VectorsCollectionClient::connect()
@@ -128,7 +142,15 @@ bool VectorsCollectionClient::connect()
     constexpr auto rpcCarrier = "tcp";
     m_pimpl->isConnected = false;
 
-    if (!yarp::os::Network::connect(m_pimpl->remotePortName,
+    // The server may be a new instance (e.g., restarted application), so the metadata cached from
+    // a previous connection cannot be trusted anymore.
+    m_pimpl->cachedVersion = -1;
+    m_pimpl->newMetadataAvailable = false;
+    m_pimpl->cachedMetadata = VectorsCollectionMetadata();
+
+    m_pimpl->remoteContact = yarp::os::Network::queryName(m_pimpl->remotePortName);
+    if (!m_pimpl->remoteContact.isValid()
+        || !yarp::os::Network::connect(m_pimpl->remotePortName,
                                     m_pimpl->localPortName,
                                     m_pimpl->carrier)
         || !yarp::os::Network::connect(m_pimpl->localRpcPortName, //
