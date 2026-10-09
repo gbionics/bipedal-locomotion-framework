@@ -159,46 +159,79 @@ private:
     yarp::os::BufferedPort<yarp::sig::ImageOf<yarp::sig::PixelRgb>>& m_port;
 };
 
+struct SignalDescription
+{
+    std::string signalName;
+    std::string remote;
+    std::string local;
+    std::string carrier;
+};
+
+/**
+ * Read the description of the signal stored in the group named input. Only `remote` is required,
+ * `signal_name` defaults to the group name, `local` to
+ * `<port_prefix>/exogenous_signals/<signal_name>` and `carrier` to udp.
+ */
+bool getSignalDescription(const ParametersHandler::IParametersHandler& handler,
+                          const std::string& input,
+                          const std::string& portPrefix,
+                          SignalDescription& description)
+{
+    constexpr auto logPrefix = "[ExogenousSignalsLogger::initialize]";
+
+    auto group = handler.getGroup(input).lock();
+    if (group == nullptr || !group->getParameter("remote", description.remote))
+    {
+        log()->error("{} Unable to get the parameter 'remote' of the input {}.", logPrefix, input);
+        return false;
+    }
+
+    description.signalName = input;
+    group->getParameter("signal_name", description.signalName);
+    description.local = portPrefix + "/exogenous_signals/" + description.signalName;
+    group->getParameter("local", description.local);
+    description.carrier = "udp";
+    group->getParameter("carrier", description.carrier);
+    return true;
+}
+
+std::vector<std::string> getInputs(const ParametersHandler::IParametersHandler& handler,
+                                   const std::string& listName)
+{
+    std::vector<std::string> inputs;
+    if (!handler.getParameter(listName, inputs))
+    {
+        log()->debug("[ExogenousSignalsLogger::initialize] The parameter '{}' is not provided. "
+                     "Assuming none.",
+                     listName);
+    }
+    return inputs;
+}
+
 template <typename Signals>
 bool openSignals(const ParametersHandler::IParametersHandler& handler,
                  const std::string& listName,
-                 bool required,
+                 const std::string& portPrefix,
                  Signals& signals)
 {
     constexpr auto logPrefix = "[ExogenousSignalsLogger::initialize]";
 
-    std::vector<std::string> inputs;
-    if (!handler.getParameter(listName, inputs))
+    for (const auto& input : getInputs(handler, listName))
     {
-        if (required)
+        SignalDescription description;
+        if (!getSignalDescription(handler, input, portPrefix, description))
         {
-            log()->error("{} Unable to get the parameter '{}'.", logPrefix, listName);
-            return false;
-        }
-        log()->info("{} The parameter '{}' is not provided. Assuming none.", logPrefix, listName);
-        return true;
-    }
-
-    for (const auto& input : inputs)
-    {
-        auto group = handler.getGroup(input).lock();
-        std::string local, remote, carrier, signalName;
-        if (group == nullptr || !group->getParameter("local", local)
-            || !group->getParameter("remote", remote) || !group->getParameter("carrier", carrier)
-            || !group->getParameter("signal_name", signalName))
-        {
-            log()->error("{} Unable to get the parameters of the input {}.", logPrefix, input);
             return false;
         }
 
-        auto& signal = signals[remote];
-        signal.signalName = signalName;
-        signal.remote = remote;
-        signal.local = local;
-        signal.carrier = carrier;
-        if (!signal.port.open(local))
+        auto& signal = signals[description.remote];
+        signal.signalName = description.signalName;
+        signal.remote = description.remote;
+        signal.local = description.local;
+        signal.carrier = description.carrier;
+        if (!signal.port.open(description.local))
         {
-            log()->error("{} Unable to open the port {}.", logPrefix, local);
+            log()->error("{} Unable to open the port {}.", logPrefix, description.local);
             return false;
         }
     }
@@ -576,7 +609,8 @@ ExogenousSignalsLogger::~ExogenousSignalsLogger()
 
 bool ExogenousSignalsLogger::initialize(
     std::weak_ptr<const ParametersHandler::IParametersHandler> handler,
-    std::shared_ptr<TelemetryBuffer> buffer)
+    std::shared_ptr<TelemetryBuffer> buffer,
+    const std::string& portPrefix)
 {
     constexpr auto logPrefix = "[ExogenousSignalsLogger::initialize]";
 
@@ -594,43 +628,43 @@ bool ExogenousSignalsLogger::initialize(
         return true;
     }
 
-    std::vector<std::string> inputs;
-    if (!ptr->getParameter("vectors_collection_exogenous_inputs", inputs))
+    for (const auto& input : getInputs(*ptr, "vectors_collection_exogenous_inputs"))
     {
-        log()->error("{} Unable to get the parameter 'vectors_collection_exogenous_inputs'.",
-                     logPrefix);
-        return false;
-    }
-
-    for (const auto& input : inputs)
-    {
-        auto group = ptr->getGroup(input).lock();
-        std::string remote, signalName;
-        if (group == nullptr || !group->getParameter("remote", remote)
-            || !group->getParameter("signal_name", signalName))
+        SignalDescription description;
+        if (!getSignalDescription(*ptr, input, portPrefix, description))
         {
-            log()->error("{} Unable to get the parameters of the input {}.", logPrefix, input);
             return false;
         }
 
-        auto& signal = m_pimpl->vectorsCollectionSignals[remote];
-        signal.signalName = signalName;
-        if (!signal.client.initialize(group))
+        auto clientHandler = std::make_shared<ParametersHandler::StdImplementation>();
+        clientHandler->setParameter("remote", description.remote);
+        clientHandler->setParameter("local", description.local);
+        clientHandler->setParameter("carrier", description.carrier);
+
+        auto& signal = m_pimpl->vectorsCollectionSignals[description.remote];
+        signal.signalName = description.signalName;
+        if (!signal.client.initialize(clientHandler))
         {
             log()->error("{} Unable to initialize the client of the input {}.", logPrefix, input);
             return false;
         }
     }
 
-    if (!openSignals(*ptr, "vectors_exogenous_inputs", true, m_pimpl->vectorSignals)
-        || !openSignals(*ptr, "string_exogenous_inputs", false, m_pimpl->stringSignals)
-        || !openSignals(*ptr, "image_exogenous_inputs", false, m_pimpl->imageSignals)
-        || !openSignals(*ptr, "human_state_exogenous_inputs", false, m_pimpl->humanStateSignals)
+    if (!openSignals(*ptr, "vectors_exogenous_inputs", portPrefix, m_pimpl->vectorSignals)
+        || !openSignals(*ptr, "string_exogenous_inputs", portPrefix, m_pimpl->stringSignals)
+        || !openSignals(*ptr, "image_exogenous_inputs", portPrefix, m_pimpl->imageSignals)
+        || !openSignals(*ptr,
+                        "human_state_exogenous_inputs",
+                        portPrefix,
+                        m_pimpl->humanStateSignals)
         || !openSignals(*ptr,
                         "wearable_targets_exogenous_inputs",
-                        false,
+                        portPrefix,
                         m_pimpl->wearableTargetsSignals)
-        || !openSignals(*ptr, "wearable_data_exogenous_inputs", false, m_pimpl->wearableDataSignals))
+        || !openSignals(*ptr,
+                        "wearable_data_exogenous_inputs",
+                        portPrefix,
+                        m_pimpl->wearableDataSignals))
     {
         return false;
     }

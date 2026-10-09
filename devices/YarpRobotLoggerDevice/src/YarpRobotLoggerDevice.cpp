@@ -240,7 +240,7 @@ bool YarpRobotLoggerDevice::open(yarp::os::Searchable& config)
     }
 
     m_exogenousSignals = std::make_unique<ExogenousSignalsLogger>();
-    if (!m_exogenousSignals->initialize(params->getGroup("ExogenousSignals"), m_buffer))
+    if (!m_exogenousSignals->initialize(params->getGroup("ExogenousSignals"), m_buffer, portPrefix))
     {
         log()->error("{} Unable to initialize the exogenous signals.", logPrefix);
         return false;

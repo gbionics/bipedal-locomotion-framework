@@ -8,6 +8,7 @@
 #define BIPEDAL_LOCOMOTION_ROBOT_LOGGER_EXOGENOUS_SIGNALS_LOGGER_H
 
 #include <memory>
+#include <string>
 #include <vector>
 
 #include <BipedalLocomotion/ParametersHandler/IParametersHandler.h>
@@ -42,23 +43,29 @@ public:
      * @param handler pointer to the parameters handler of the group `ExogenousSignals`. If it is
      * not valid, no signal is logged.
      * @param buffer buffer where the signals are stored.
+     * @param portPrefix prefix of the default local port names.
      * @note The following parameters are used:
      * |            Parameter Name               |       Type       |                Description                 | Mandatory |
      * |:---------------------------------------:|:----------------:|:------------------------------------------:|:---------:|
-     * |  `vectors_collection_exogenous_inputs`  | `vector<string>` | Signals streamed with a VectorsCollectionServer. |  Yes  |
-     * |       `vectors_exogenous_inputs`        | `vector<string>` |    Signals streamed as yarp::sig::Vector.  |    Yes    |
+     * |  `vectors_collection_exogenous_inputs`  | `vector<string>` | Signals streamed with a VectorsCollectionServer. |  No   |
+     * |       `vectors_exogenous_inputs`        | `vector<string>` |    Signals streamed as yarp::sig::Vector.  |    No     |
      * |        `string_exogenous_inputs`        | `vector<string>` |    Signals streamed as yarp::os::Bottle.   |    No     |
      * |        `image_exogenous_inputs`         | `vector<string>` |       Signals streamed as rgb images.      |    No     |
      * |     `human_state_exogenous_inputs`      | `vector<string>` |  Signals streamed as trintrin HumanState.  |    No     |
      * |   `wearable_targets_exogenous_inputs`   | `vector<string>` | Signals streamed as trintrin WearableTargets. | No     |
      * |    `wearable_data_exogenous_inputs`     | `vector<string>` | Signals streamed as trintrin WearableData. |    No     |
-     * Each signal is described by a group containing `signal_name` and `remote`. The vectors
-     * collections contain the parameters of YarpUtilities::VectorsCollectionClient, the other
-     * signals contain `local` and `carrier`.
+     * Each signal is described by a group, named as the signal, containing:
+     * | Parameter Name |   Type   |                         Description                          | Mandatory |
+     * |:--------------:|:--------:|:------------------------------------------------------------:|:---------:|
+     * |    `remote`    | `string` | Port opened by the application streaming the signal.         |    Yes    |
+     * | `signal_name`  | `string` | Name of the signal in the logged data. Default: group name.  |    No     |
+     * |    `local`     | `string` | Default: `<portPrefix>/exogenous_signals/<signal_name>`.     |    No     |
+     * |   `carrier`    | `string` | Carrier of the connection. Default: `udp`.                   |    No     |
      * @return true in case of success, false otherwise.
      */
     bool initialize(std::weak_ptr<const ParametersHandler::IParametersHandler> handler,
-                    std::shared_ptr<TelemetryBuffer> buffer);
+                    std::shared_ptr<TelemetryBuffer> buffer,
+                    const std::string& portPrefix = "/yarp-robot-logger");
 
     // clang-format on
 
