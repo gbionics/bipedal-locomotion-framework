@@ -112,7 +112,8 @@ private:
     };
 
     bool setupRobotSensorBridge(std::weak_ptr<const ParametersHandler::IParametersHandler> params);
-    bool setupCameras(std::shared_ptr<const ParametersHandler::IParametersHandler> params);
+    bool setupCameras(std::shared_ptr<const ParametersHandler::IParametersHandler> params,
+                      std::weak_ptr<const ParametersHandler::IParametersHandler> cameraBridgeGroup);
     bool setupFrameTransforms(const yarp::os::Bottle& config);
 
     void
@@ -170,6 +171,8 @@ private:
     // cameras, disabled if the bridge is null. The recorders use the bridge.
     std::unique_ptr<RobotInterface::YarpCameraBridge> m_cameraBridge;
     std::vector<std::shared_ptr<RobotLogger::ImageRecorder>> m_cameraRecorders;
+    /** Set if the cameras are retrieved from the attached devices. */
+    std::shared_ptr<const ParametersHandler::IParametersHandler> m_cameraParams;
 
     // text logging
     bool m_logText{true};

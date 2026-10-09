@@ -7,6 +7,7 @@
 #include <algorithm>
 #include <cctype>
 #include <chrono>
+#include <optional>
 #include <sstream>
 
 #include <Eigen/Geometry>
@@ -14,6 +15,8 @@
 #include <process.hpp>
 
 #include <yarp/conf/version.h>
+#include <yarp/dev/IFrameGrabberImage.h>
+#include <yarp/dev/IRGBDSensor.h>
 #include <yarp/eigen/Eigen.h>
 #include <yarp/os/LogStream.h>
 #include <yarp/os/Network.h>
@@ -136,6 +139,63 @@ private:
     cv::Mat m_buffer;
 };
 
+/**
+ * Build the RobotCameraBridge group from the attached devices: the devices exposing IRGBDSensor
+ * are rgbd cameras, the ones exposing only IFrameGrabberImage are rgb cameras. It returns nullptr
+ * if there is no camera.
+ */
+std::shared_ptr<ParametersHandler::StdImplementation>
+getAttachedCameras(const yarp::dev::PolyDriverList& poly)
+{
+    std::vector<std::string> rgbCameras;
+    std::vector<std::string> rgbdCameras;
+    for (int i = 0; i < poly.size(); i++)
+    {
+        yarp::dev::IRGBDSensor* rgbdSensor{nullptr};
+        yarp::dev::IFrameGrabberImage* frameGrabber{nullptr};
+        if (poly[i]->poly->view(rgbdSensor) && rgbdSensor != nullptr)
+        {
+            rgbdCameras.push_back(poly[i]->key);
+        } else if (poly[i]->poly->view(frameGrabber) && frameGrabber != nullptr)
+        {
+            rgbCameras.push_back(poly[i]->key);
+        }
+    }
+
+    if (rgbCameras.empty() && rgbdCameras.empty())
+    {
+        return nullptr;
+    }
+
+    auto cameras = std::make_shared<ParametersHandler::StdImplementation>();
+    if (!rgbCameras.empty())
+    {
+        cameras->setParameter("rgb_cameras_list", rgbCameras);
+    }
+    if (!rgbdCameras.empty())
+    {
+        cameras->setParameter("rgbd_cameras_list", rgbdCameras);
+    }
+
+    auto group = std::make_shared<ParametersHandler::StdImplementation>();
+    group->setParameter("stream_cameras", true);
+    group->setGroup("Cameras", cameras);
+
+    auto join = [](const std::vector<std::string>& names) {
+        std::ostringstream stream;
+        for (std::size_t i = 0; i < names.size(); i++)
+        {
+            stream << (i == 0 ? "" : ", ") << names[i];
+        }
+        return stream.str();
+    };
+    log()->info("[YarpRobotLoggerDevice::attachAll] Cameras found in the attached devices. RGB: "
+                "[{}]. RGBD: [{}].",
+                join(rgbCameras),
+                join(rgbdCameras));
+    return group;
+}
+
 } // namespace
 
 YarpRobotLoggerDevice::YarpRobotLoggerDevice(double period,
@@ -209,7 +269,13 @@ bool YarpRobotLoggerDevice::open(yarp::os::Searchable& config)
 
     bool logCameras{true};
     getOptionalParameter("log_cameras", logCameras);
-    if (logCameras && !this->setupCameras(params))
+    if (logCameras && params->getGroup("RobotCameraBridge").lock() == nullptr)
+    {
+        log()->info("{} The group 'RobotCameraBridge' is not provided. The cameras will be "
+                    "retrieved from the attached devices.",
+                    logPrefix);
+        m_cameraParams = params;
+    } else if (logCameras && !this->setupCameras(params, params->getGroup("RobotCameraBridge")))
     {
         log()->error("{} Unable to setup the cameras. The cameras will not be logged.", logPrefix);
         m_cameraRecorders.clear();
@@ -483,11 +549,12 @@ bool YarpRobotLoggerDevice::setupRobotSensorBridge(
 }
 
 bool YarpRobotLoggerDevice::setupCameras(
-    std::shared_ptr<const ParametersHandler::IParametersHandler> params)
+    std::shared_ptr<const ParametersHandler::IParametersHandler> params,
+    std::weak_ptr<const ParametersHandler::IParametersHandler> cameraBridgeGroup)
 {
     constexpr auto logPrefix = "[YarpRobotLoggerDevice::setupCameras]";
 
-    auto group = params->getGroup("RobotCameraBridge").lock();
+    auto group = cameraBridgeGroup.lock();
     if (group == nullptr)
     {
         log()->error("{} The group 'RobotCameraBridge' is not provided.", logPrefix);
@@ -517,51 +584,53 @@ bool YarpRobotLoggerDevice::setupCameras(
               return true;
           };
 
+    // Each option is a list with one value per camera. A single value is used for all the cameras
+    // and a missing (or empty) option takes the default value.
+    auto getCameraOption
+        = [&params, logPrefix](const std::string& name, std::size_t size, auto defaultValue)
+        -> std::optional<std::vector<decltype(defaultValue)>> {
+        using Type = decltype(defaultValue);
+        std::vector<Type> values;
+        Type value;
+        if (!params->getParameter(name, values) || values.empty())
+        {
+            values = {params->getParameter(name, value) ? value : defaultValue};
+        }
+        if (values.size() == 1)
+        {
+            values.resize(size, values.front());
+        }
+        if (values.size() != size)
+        {
+            log()->error("{} The parameter '{}' must contain one value or one value per camera "
+                         "({}).",
+                         logPrefix,
+                         name,
+                         size);
+            return std::nullopt;
+        }
+        return values;
+    };
+
     auto addCameras = [&](const std::vector<std::string>& cameras, bool isRGBD) {
         const std::string prefix = isRGBD ? "rgbd_cameras_" : "rgb_cameras_";
-
-        std::vector<int> fps;
-        std::vector<std::string> rgbSaveModes;
-        if (!params->getParameter(prefix + "fps", fps)
-            || !params->getParameter(prefix + "rgb_save_mode", rgbSaveModes))
-        {
-            log()->error("{} Unable to get the parameters '{}fps' and '{}rgb_save_mode'.",
-                         logPrefix,
-                         prefix,
-                         prefix);
-            return false;
-        }
-
-        std::vector<int> depthScales;
-        std::vector<std::string> depthSaveModes;
-        if (isRGBD
-            && (!params->getParameter(prefix + "depth_scale", depthScales)
-                || !params->getParameter(prefix + "depth_save_mode", depthSaveModes)))
-        {
-            log()->error("{} Unable to get the parameters '{}depth_scale' and "
-                         "'{}depth_save_mode'.",
-                         logPrefix,
-                         prefix,
-                         prefix);
-            return false;
-        }
-
         const std::size_t size = cameras.size();
-        if (fps.size() != size || rgbSaveModes.size() != size
-            || (isRGBD && (depthScales.size() != size || depthSaveModes.size() != size)))
+
+        const auto fps = getCameraOption(prefix + "fps", size, 30);
+        const auto rgbSaveModes
+            = getCameraOption(prefix + "rgb_save_mode", size, std::string("video"));
+        const auto depthScales = getCameraOption(prefix + "depth_scale", size, 1000);
+        const auto depthSaveModes
+            = getCameraOption(prefix + "depth_save_mode", size, std::string("video"));
+        if (!fps || !rgbSaveModes || (isRGBD && (!depthScales || !depthSaveModes)))
         {
-            log()->error("{} The size of the '{}*' parameters must be equal to the number of "
-                         "cameras ({}).",
-                         logPrefix,
-                         prefix,
-                         size);
             return false;
         }
 
         for (std::size_t i = 0; i < size; i++)
         {
             const auto& camera = cameras[i];
-            if (fps[i] <= 0)
+            if ((*fps)[i] <= 0)
             {
                 log()->error("{} The fps of the camera {} must be positive.", logPrefix, camera);
                 return false;
@@ -569,7 +638,7 @@ bool YarpRobotLoggerDevice::setupCameras(
 
             auto handler = std::make_shared<ParametersHandler::StdImplementation>();
             handler->setParameter("name", camera);
-            handler->setParameter("fps", static_cast<double>(fps[i]));
+            handler->setParameter("fps", static_cast<double>((*fps)[i]));
             if (hasVideoEncoder)
             {
                 handler->setParameter("video_encoder", videoEncoder);
@@ -580,7 +649,7 @@ bool YarpRobotLoggerDevice::setupCameras(
 
             handler->setParameter("image_type", std::string("rgb"));
             handler->setParameter("channel", "camera::" + camera + "::rgb");
-            handler->setParameter("save_mode", rgbSaveModes[i]);
+            handler->setParameter("save_mode", (*rgbSaveModes)[i]);
             if (!addRecorder(handler,
                              std::make_unique<CameraColorSource>(*m_cameraBridge, camera, mutex)))
             {
@@ -591,12 +660,12 @@ bool YarpRobotLoggerDevice::setupCameras(
             {
                 handler->setParameter("image_type", std::string("depth"));
                 handler->setParameter("channel", "camera::" + camera + "::depth");
-                handler->setParameter("save_mode", depthSaveModes[i]);
+                handler->setParameter("save_mode", (*depthSaveModes)[i]);
                 if (!addRecorder(handler,
                                  std::make_unique<CameraDepthSource>(*m_cameraBridge,
                                                                      camera,
                                                                      mutex,
-                                                                     depthScales[i])))
+                                                                     (*depthScales)[i])))
                 {
                     return false;
                 }
@@ -666,6 +735,26 @@ bool YarpRobotLoggerDevice::attachAll(const yarp::dev::PolyDriverList& poly)
     {
         log()->error("{} Could not attach the drivers list to the sensor bridge.", logPrefix);
         return false;
+    }
+
+    if (m_cameraParams != nullptr && m_cameraBridge == nullptr)
+    {
+        auto cameras = getAttachedCameras(poly);
+        if (cameras == nullptr)
+        {
+            log()->info("{} No camera found in the attached devices.", logPrefix);
+        } else if (this->isRunning())
+        {
+            log()->warn("{} The cameras are not logged since the logger started before the attach "
+                        "phase. Please provide the group 'RobotCameraBridge'.",
+                        logPrefix);
+        } else if (!this->setupCameras(m_cameraParams, cameras))
+        {
+            log()->error("{} Unable to setup the cameras.", logPrefix);
+            m_cameraRecorders.clear();
+            m_cameraBridge.reset();
+            return false;
+        }
     }
 
     if (m_cameraBridge != nullptr && !m_cameraBridge->setDriversList(poly))
