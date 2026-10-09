@@ -320,8 +320,35 @@ struct YarpCameraBridge::Impl
                 }
             } else
             {
-                log()->info("{} 'rgb_image_width' and / or 'rgb_image_height' are not provided. "
+                log()->info("{} 'rgbd_image_width' and / or 'rgbd_image_height' are not provided. "
                             "The image size will be retrieved from the YARP interface.",
+                            logPrefix);
+            }
+
+            std::vector<int> depthWidth, depthHeight;
+            ok = ptr->getParameter("rgbd_depth_image_width", depthWidth);
+            ok = ok && ptr->getParameter("rgbd_depth_image_height", depthHeight);
+
+            if (ok)
+            {
+                if ((depthWidth.size() != metaData.sensorsList.rgbdCamerasList.size())
+                    || (depthHeight.size() != metaData.sensorsList.rgbdCamerasList.size()))
+                {
+                    log()->error("{} Parameters list size mismatch.", logPrefix);
+                    return false;
+                }
+
+                for (int idx = 0; idx < depthHeight.size(); idx++)
+                {
+                    std::pair<int, int> imgDimensions(depthWidth[idx], depthHeight[idx]);
+                    auto cameraName{metaData.sensorsList.rgbdCamerasList[idx]};
+                    metaData.bridgeOptions.depthImgDimensions[cameraName] = imgDimensions;
+                }
+            } else
+            {
+                log()->info("{} 'rgbd_depth_image_width' and / or 'rgbd_depth_image_height' are "
+                            "not provided. The depth image size will be retrieved from the YARP "
+                            "interface.",
                             logPrefix);
             }
         }
@@ -529,21 +556,18 @@ bool YarpCameraBridge::setDriversList(const yarp::dev::PolyDriverList& deviceDri
         }
     }
 
-    if (m_pimpl->metaData.bridgeOptions.rgbdImgDimensions.empty())
+    auto& options = m_pimpl->metaData.bridgeOptions;
+    for (const auto& [cameraName, interface] : m_pimpl->wholeBodyRGBDInterface)
     {
-        for (const auto& [cameraName, interface] : m_pimpl->wholeBodyRGBDInterface)
+        if (options.rgbdImgDimensions.find(cameraName) == options.rgbdImgDimensions.end())
         {
-            if ((interface->getRgbWidth() != interface->getDepthWidth())
-                || (interface->getRgbHeight() != interface->getDepthHeight()))
-            {
-                log()->error("{} Mismatch between the rgb and depth width or the rgb height and "
-                             "the depth height. For the camera {}. YarpCameraBridge do not support "
-                             "cameras having a different resolutions. The support will be added in "
-                             "the future.");
-                return false;
-            }
-            m_pimpl->metaData.bridgeOptions.rgbdImgDimensions[cameraName]
+            options.rgbdImgDimensions[cameraName]
                 = {interface->getRgbWidth(), interface->getRgbHeight()};
+        }
+        if (options.depthImgDimensions.find(cameraName) == options.depthImgDimensions.end())
+        {
+            options.depthImgDimensions[cameraName]
+                = {interface->getDepthWidth(), interface->getDepthHeight()};
         }
     }
 
@@ -555,9 +579,13 @@ bool YarpCameraBridge::setDriversList(const yarp::dev::PolyDriverList& deviceDri
         m_pimpl->rgbImages[cameraName].resize(dimension);
     }
 
-    for (const auto& [cameraName, dimension] : m_pimpl->metaData.bridgeOptions.rgbdImgDimensions)
+    for (const auto& [cameraName, dimension] : options.rgbdImgDimensions)
     {
         m_pimpl->flexImages[cameraName].resize(dimension);
+    }
+
+    for (const auto& [cameraName, dimension] : options.depthImgDimensions)
+    {
         m_pimpl->depthImages[cameraName].resize(dimension);
     }
 

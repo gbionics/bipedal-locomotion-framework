@@ -50,7 +50,8 @@ void CreateICameraBridge(pybind11::module& module)
         .def_readwrite("is_rgb_camera_enabled", &CameraBridgeOptions::isRGBCameraEnabled)
         .def_readwrite("is_rgbd_camera_enabled", &CameraBridgeOptions::isRGBDCameraEnabled)
         .def_readwrite("rgb_img_dimensions", &CameraBridgeOptions::rgbImgDimensions)
-        .def_readwrite("rgbd_img_dimension", &CameraBridgeOptions::rgbdImgDimensions);
+        .def_readwrite("rgbd_img_dimension", &CameraBridgeOptions::rgbdImgDimensions)
+        .def_readwrite("depth_img_dimensions", &CameraBridgeOptions::depthImgDimensions);
 
     py::class_<CameraLists>(module, "CameraLists")
         .def(py::init())

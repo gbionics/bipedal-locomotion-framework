@@ -34,9 +34,13 @@ struct CameraBridgeOptions
      * initialization */
     std::unordered_map<std::string, std::pair<std::size_t, std::size_t>> rgbImgDimensions;
 
-    /** Dimensions of the depth images available through rgbd camera streams, to be configured at
+    /** Dimensions of the color images available through rgbd camera streams, to be configured at
      * initialization */
     std::unordered_map<std::string, std::pair<std::size_t, std::size_t>> rgbdImgDimensions;
+
+    /** Dimensions of the depth images available through rgbd camera streams. They may differ from
+     * the ones of the color images. */
+    std::unordered_map<std::string, std::pair<std::size_t, std::size_t>> depthImgDimensions;
 };
 
 /**
