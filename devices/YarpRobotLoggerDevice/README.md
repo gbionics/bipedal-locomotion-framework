@@ -17,6 +17,43 @@ Each mat file also contains the `version` variable storing the version of `biped
 <param name="robot_model_uri">package://ergoCub/robots/ergoCubSN001/model.urdf</param>
 ```
 
+### Minimal configuration
+Most of the parameters are optional, and what is already described by the attached devices does not need to be repeated:
+- the joints are the ones of the attached control board, in the same order (`joints_list` is optional);
+- if the group `RobotSensorBridge/InertialSensors` is not provided, all the inertial sensors of the attached multiple analog sensors devices are logged;
+- if the group `RobotCameraBridge` is not provided, the attached devices exposing `IRGBDSensor` are logged as rgbd cameras and the ones exposing `IFrameGrabberImage` as rgb cameras. The camera options (`rgb_cameras_fps`, `rgb_cameras_rgb_save_mode`, `rgbd_cameras_fps`, `rgbd_cameras_rgb_save_mode`, `rgbd_cameras_depth_save_mode`, `rgbd_cameras_depth_scale`) accept a single value used for all the cameras, and their default values are `30`, `"video"` and `1000` (depth in millimeters);
+- for each exogenous signal only `remote` is required: `signal_name` defaults to the name of the group, `local` to `<port_prefix>/exogenous_signals/<signal_name>` and `carrier` to `udp`;
+- the real time streaming is disabled by default (`enable_real_time_logging`) and, if `REAL_TIME_STREAMING` is not provided, it uses the port `<port_prefix>/rt_logging`;
+- the `stream_*` flags of `RobotSensorBridge` are `false` by default (except `stream_joint_accelerations`), so only the enabled ones need to be listed.
+
+```xml
+<device name="yarp-robot-logger" type="YarpRobotLoggerDevice">
+  <param name="robot_model_uri">package://ergoCub/robots/ergoCubSN001/model.urdf</param>
+
+  <group name="ExogenousSignals">
+    <param name="vectors_collection_exogenous_inputs">("balancing")</param>
+    <group name="balancing">
+      <param name="remote">"/balancing-controller/logger"</param>
+    </group>
+  </group>
+
+  <group name="RobotSensorBridge">
+    <param name="stream_joint_states">true</param>
+    <param name="stream_motor_states">true</param>
+    <param name="stream_inertials">true</param>
+  </group>
+
+  <action phase="startup" level="15" type="attach">
+    <paramlist name="networks">
+      <elem name="all_joints">all_joints_mc</elem>
+      <elem name="imu">imu_client</elem>
+      <elem name="realsense">realsense</elem>
+    </paramlist>
+  </action>
+  <action phase="shutdown" level="2" type="detach" />
+</device>
+```
+
 ## How to Use the Logger
 To use the logger, launch the `yarprobotinterface` with the `launch-yarp-robot-logger.xml` configuration file:
 

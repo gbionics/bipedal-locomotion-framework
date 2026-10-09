@@ -14,6 +14,11 @@ BSD-3-Clause license. -->
                 </group>
         </device>
 
+        <device name="sim_imu" type="fakeIMU">
+            <param name="sensorName">sim_imu_sensor</param>
+            <param name="constantValue">true</param>
+        </device>
+
         <device name="sim_camera" type="fakeFrameGrabber">
             <param name="width">320</param>
             <param name="height">240</param>

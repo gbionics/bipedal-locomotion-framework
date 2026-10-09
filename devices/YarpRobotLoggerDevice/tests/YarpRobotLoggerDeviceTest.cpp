@@ -377,6 +377,9 @@ TEST_CASE("Telemetry with periodic save and exogenous signal reconnection")
     std::vector<double> busyTimestamps;
     bool firstStructureLogged = false;
     bool secondStructureLogged = false;
+    bool imuLogged = false;
+    bool rgbCameraLogged = false;
+    bool depthCameraLogged = false;
     for (const auto& file : matFiles)
     {
         matioCpp::File savedLog(file.string());
@@ -424,6 +427,9 @@ TEST_CASE("Telemetry with periodic save and exogenous signal reconnection")
                                || getField(signal, "signal").isFieldExisting("data");
         secondStructureLogged = secondStructureLogged
                                 || getField(signal, "signal_connection_2").isFieldExisting("data");
+        imuLogged = imuLogged
+                    || getField(getField(root, "accelerometers"), "sim_imu_sensor")
+                           .isFieldExisting("data");
 
         // Each mat file has its own videos. The images of a video are the ones whose index
         // follows the first zero index in the mat file. A file may have no image if it has been
@@ -437,10 +443,12 @@ TEST_CASE("Telemetry with periodic save and exogenous signal reconnection")
         };
         if (hasImages(getField(getField(camera, "sim_camera"), "rgb")))
         {
+            rgbCameraLogged = true;
             CHECK(std::filesystem::exists(prefix + "_sim_camera_rgb.mp4"));
         }
         if (hasImages(getField(getField(camera, "sim_depth_camera"), "depth")))
         {
+            depthCameraLogged = true;
             CHECK(std::filesystem::exists(prefix + "_sim_depth_camera_depth.mkv"));
         }
 
@@ -480,6 +488,11 @@ TEST_CASE("Telemetry with periodic save and exogenous signal reconnection")
     CHECK(connectionIds == std::set<int>{1, 2});
     CHECK(firstStructureLogged);
     CHECK(secondStructureLogged);
+
+    // The cameras and the inertial sensors are retrieved from the attached devices
+    CHECK(imuLogged);
+    CHECK(rgbCameraLogged);
+    CHECK(depthCameraLogged);
 
     // The busy application (8 s of streaming, a sample every 1.5 s) has been logged without
     // disconnections
