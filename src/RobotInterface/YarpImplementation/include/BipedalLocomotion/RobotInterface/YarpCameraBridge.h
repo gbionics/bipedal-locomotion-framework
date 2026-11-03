@@ -116,7 +116,10 @@ public:
      * @param[in] camName name of the camera
      * @param[out] colorImg image as cv Mat object
      * @param[out] receiveTime time at which the image was received by the bridge, according to
-     * BipedalLocomotion::clock()
+     * BipedalLocomotion::clock(). For RGBD cameras the frame is identified by its YARP envelope:
+     * reading again a frame already read returns its original receive time, hence a new frame is
+     * detected by a change of receiveTime. Frame grabbers do not provide the envelope, so every
+     * read is considered a new frame.
      *
      * @note colorImg may share memory with an internal buffer. The data remain valid until the
      * next read from the same camera. Clone colorImg if it must be stored.
@@ -133,7 +136,9 @@ public:
      * @param[in] camName name of the camera
      * @param[out] depthImg depth image as cv Mat object
      * @param[out] receiveTime time at which the image was received by the bridge, according to
-     * BipedalLocomotion::clock()
+     * BipedalLocomotion::clock(). The frame is identified by its YARP envelope: reading again a
+     * frame already read returns its original receive time, hence a new frame is detected by a
+     * change of receiveTime. Without an envelope every read is considered a new frame.
      *
      * @note depthImg may share memory with an internal buffer. The data remain valid until the
      * next depth read from the same camera. Clone depthImg if it must be stored.

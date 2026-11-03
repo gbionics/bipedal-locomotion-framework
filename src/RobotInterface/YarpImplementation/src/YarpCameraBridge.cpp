@@ -8,6 +8,7 @@
 #include <BipedalLocomotion/TextLogging/Logger.h>
 
 // YARP sig
+#include <yarp/os/Stamp.h>
 #include <yarp/sig/Image.h>
 
 // YARP Camera Interfaces
@@ -39,6 +40,24 @@ bool isValidDimension(const std::pair<std::size_t, std::size_t>& dimensions)
 {
     return dimensions.first > 0 && dimensions.second > 0;
 }
+
+/**
+ * Store the envelope of the image just read. The receive time is updated only for a new frame: the
+ * YARP clients return the last frame received until a new one arrives.
+ */
+void updateReceiveTime(const yarp::os::Stamp& newStamp,
+                       yarp::os::Stamp& stamp,
+                       std::chrono::nanoseconds& time)
+{
+    const bool isSameFrame = newStamp.isValid() && stamp.isValid()
+                             && newStamp.getCount() == stamp.getCount()
+                             && newStamp.getTime() == stamp.getTime();
+    if (!isSameFrame)
+    {
+        time = BipedalLocomotion::clock().now();
+    }
+    stamp = newStamp;
+}
 } // namespace
 
 struct YarpCameraBridge::Impl
@@ -47,6 +66,7 @@ struct YarpCameraBridge::Impl
     {
         yarp::sig::ImageOf<PixelCode> image;
         CameraType* interface{nullptr};
+        yarp::os::Stamp stamp;
         std::chrono::nanoseconds time{0};
 
         /**
@@ -63,6 +83,8 @@ struct YarpCameraBridge::Impl
         bool readCameraImage()
         {
             bool ok{false};
+            // The frame grabber interface does not provide the envelope, it stays invalid.
+            yarp::os::Stamp newStamp;
             if constexpr (std::is_same_v<CameraType, yarp::dev::IFrameGrabberImage>)
             {
                 static_assert(std::is_same_v<PixelCode, yarp::sig::PixelRgb>,
@@ -73,7 +95,7 @@ struct YarpCameraBridge::Impl
                 static_assert(std::is_same_v<CameraType, yarp::dev::IRGBDSensor>
                                   && std::is_same_v<PixelCode, yarp::sig::PixelFloat>,
                               "RGBD sensors provide depth images as PixelFloat.");
-                ok = interface->getDepthImage(image, nullptr);
+                ok = interface->getDepthImage(image, &newStamp);
             }
 
             if (!ok)
@@ -81,7 +103,7 @@ struct YarpCameraBridge::Impl
                 return false;
             }
 
-            time = BipedalLocomotion::clock().now();
+            updateReceiveTime(newStamp, stamp, time);
             return true;
         }
     };
@@ -90,6 +112,7 @@ struct YarpCameraBridge::Impl
     {
         yarp::sig::FlexImage image;
         yarp::dev::IRGBDSensor* interface{nullptr};
+        yarp::os::Stamp stamp;
         std::chrono::nanoseconds time{0};
 
         /**
@@ -106,12 +129,13 @@ struct YarpCameraBridge::Impl
 
         bool readCameraImage()
         {
-            if (!interface->getRgbImage(image, nullptr))
+            yarp::os::Stamp newStamp;
+            if (!interface->getRgbImage(image, &newStamp))
             {
                 return false;
             }
 
-            time = BipedalLocomotion::clock().now();
+            updateReceiveTime(newStamp, stamp, time);
             return true;
         }
     };
