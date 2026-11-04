@@ -269,11 +269,20 @@ bool SE3Task::update()
     }
 
     // update the controller
-    m_SO3Controller.computeControlLaw();
+    if (m_angularTrackingEnabled)
+    {
+        m_SO3Controller.computeControlLaw();
+    }
     m_R3Controller.computeControlLaw();
 
-    // the angular part is always enabled
-    m_b.tail<3>() = getControllerState(m_SO3Controller);
+    // Set the angular target velocity, or a no-op row if tracking is disabled.
+    if (m_angularTrackingEnabled)
+    {
+        m_b.tail<3>() = getControllerState(m_SO3Controller);
+    } else
+    {
+        m_b.tail<3>().setZero();
+    }
 
     // if we want to control all 6 DoF we avoid to lose performances
     if (m_linearDoFs == m_linearVelocitySize)
@@ -285,6 +294,10 @@ bool SE3Task::update()
         {
             log()->error("[SE3Task::update] Unable to get the jacobian.");
             return m_isValid;
+        }
+        if (!m_angularTrackingEnabled)
+        {
+            iDynTree::toEigen(this->subA(m_robotVelocityVariable)).bottomRows<3>().setZero();
         }
     } else
     {
@@ -310,9 +323,15 @@ bool SE3Task::update()
             }
         }
 
-        // take the all angular part
-        iDynTree::toEigen(this->subA(m_robotVelocityVariable)).bottomRows<3>()
-            = m_jacobian.bottomRows<3>();
+        // Keep the angular rows unconstrained when angular tracking is disabled.
+        if (m_angularTrackingEnabled)
+        {
+            iDynTree::toEigen(this->subA(m_robotVelocityVariable)).bottomRows<3>()
+                = m_jacobian.bottomRows<3>();
+        } else
+        {
+            iDynTree::toEigen(this->subA(m_robotVelocityVariable)).bottomRows<3>().setZero();
+        }
     }
 
     m_isValid = true;
@@ -387,4 +406,14 @@ void SE3Task::setTaskControllerMode(Mode mode)
 SE3Task::Mode SE3Task::getTaskControllerMode() const
 {
     return m_controllerMode;
+}
+
+void SE3Task::setAngularTrackingEnabled(bool enabled)
+{
+    m_angularTrackingEnabled = enabled;
+}
+
+iDynTree::FrameIndex SE3Task::getFrameIndex() const
+{
+    return m_frameIndex;
 }

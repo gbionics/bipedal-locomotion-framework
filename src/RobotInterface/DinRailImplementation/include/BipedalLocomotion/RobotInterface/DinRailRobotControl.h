@@ -35,9 +35,10 @@ namespace RobotInterface
  * @note The dinrail::IImpedanceAllSetPointsControl interface uses the same units
  *       as the corresponding YARP interfaces (degrees / degrees per second for
  *       revolute joints).  setImpedanceSetPoints() therefore performs the same
- *       radian-to-degree conversion for position and velocity of revolute joints
- *       that YarpRobotControl applies to the other control modes.
- *       Torque, stiffness and damping are forwarded without unit conversion.
+ *       radian-to-degree conversion for position and velocity of revolute joints,
+ *       stiffness from Nm/rad to Nm/deg, and damping from Nms/rad to Nms/deg.
+ *       Torque is forwarded without conversion. getImpedanceSetPoints() applies
+ *       the inverse conversions.
  *
  * @warning SensorBridge: since DinRailControlBoardNWCYarp already exposes the
  *          standard YARP encoder and sensor interfaces, YarpSensorBridge can be
@@ -105,6 +106,19 @@ public:
                                Eigen::Ref<const Eigen::VectorXd> torque,
                                Eigen::Ref<const Eigen::VectorXd> stiffness,
                                Eigen::Ref<const Eigen::VectorXd> damping);
+
+    /**
+     * Get all impedance control setpoints (MIT mode) for all controlled joints.
+     * Values for revolute joints are converted to SI units: position [rad],
+     * velocity [rad/s], stiffness [Nm/rad], and damping [Nms/rad]. Torque is
+     * returned in Nm. Output vectors must be sized to the controlled joint count.
+     * @return True on success, false otherwise.
+     */
+    bool getImpedanceSetPoints(Eigen::Ref<Eigen::VectorXd> position,
+                               Eigen::Ref<Eigen::VectorXd> velocity,
+                               Eigen::Ref<Eigen::VectorXd> torque,
+                               Eigen::Ref<Eigen::VectorXd> stiffness,
+                               Eigen::Ref<Eigen::VectorXd> damping);
 
     /**
      * Set impedance control setpoints (MIT mode) for a subset of joints.

@@ -132,6 +132,12 @@ public:
      * @return True if the objects are valid, false otherwise.
      */
     bool isValid() const override;
+
+    /**
+     * Get frame name.
+     * @return the name of the frame.
+     */
+    iDynTree::FrameIndex getFrameIndex() const;
 };
 
 BLF_REGISTER_IK_TASK(SO3Task);

@@ -74,6 +74,7 @@ private:
                                                    be provided by the user. */
     bool m_useOrientationExogenousFeedback{false}; /**< True if the feedback of the orientation task
                                                    must be provided by the user. */
+    bool m_angularTrackingEnabled{true}; /**< True if angular tracking is active. */
 
     std::shared_ptr<iDynTree::KinDynComputations> m_kinDyn; /**< Pointer to a KinDynComputations
                                                                object */
@@ -202,6 +203,19 @@ public:
      * @return the state of the controller
      */
     Mode getTaskControllerMode() const override;
+
+    /**
+     * Enable or disable angular tracking. When disabled, the angular task rows are set to zero
+     * while the task size remains unchanged.
+     * @param enabled True to enable angular tracking, false to disable it.
+     */
+    void setAngularTrackingEnabled(bool enabled);
+
+    /**
+     * Get frame name.
+     * @return the name of the frame.
+     */
+    iDynTree::FrameIndex getFrameIndex() const;
 };
 
 BLF_REGISTER_IK_TASK(SE3Task);

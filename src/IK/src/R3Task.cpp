@@ -279,3 +279,8 @@ R3Task::Mode R3Task::getTaskControllerMode() const
 {
     return m_controllerMode;
 }
+
+iDynTree::FrameIndex R3Task::getFrameIndex() const
+{
+    return m_frameIndex;
+}

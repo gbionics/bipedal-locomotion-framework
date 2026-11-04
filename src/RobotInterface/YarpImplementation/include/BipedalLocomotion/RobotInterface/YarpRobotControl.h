@@ -80,6 +80,14 @@ public:
                          std::vector<std::pair<std::string, double>>& info) final;
 
     /**
+     * Get the current control mode for each joint.
+     * @param controlModes vector containing the control mode for each joint.
+     * @return True/False in case of success/failure.
+     */
+    bool getControlMode(std::vector<IRobotControl::ControlMode>& controlModes);
+    
+
+    /**
      * Set the control mode.
      * @param controlModes vector containing the control mode for each joint.
      * @return True/False in case of success/failure.
