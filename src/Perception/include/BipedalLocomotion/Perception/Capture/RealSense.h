@@ -57,29 +57,47 @@ public:
 
     bool getPCLDevicesList(std::vector<std::string>& pclDevList) final;
 
-    bool
-    getColorImage(const std::string& camName,
-                  cv::Mat& colorImg,
-                  std::optional<std::reference_wrapper<double>> receiveTimeInSeconds = {}) final;
+    // Expose the deprecated overloads hidden by the declarations below.
+    using ICameraBridge::getColorImage;
+    using ICameraBridge::getDepthImage;
+    using IPointCloudBridge::getPointCloud;
 
-    bool
-    getDepthImage(const std::string& camName,
-                  cv::Mat& depthImg,
-                  std::optional<std::reference_wrapper<double>> receiveTimeInSeconds = {}) final;
+    bool getColorImage(
+        const std::string& camName,
+        cv::Mat& colorImg,
+        std::optional<std::reference_wrapper<std::chrono::nanoseconds>> receiveTime = {}) final;
 
-    bool
-    getColorizedDepthImage(const std::string& camName,
-                           cv::Mat& depthImg,
-                           std::optional<std::reference_wrapper<double>> receiveTimeInSeconds = {});
+    bool getDepthImage(
+        const std::string& camName,
+        cv::Mat& depthImg,
+        std::optional<std::reference_wrapper<std::chrono::nanoseconds>> receiveTime = {}) final;
 
+    bool getColorizedDepthImage(
+        const std::string& camName,
+        cv::Mat& depthImg,
+        std::optional<std::reference_wrapper<std::chrono::nanoseconds>> receiveTime = {});
+
+    [[deprecated("Use the getColorizedDepthImage overload taking the receive time as "
+                 "std::chrono::nanoseconds.")]]
+    bool getColorizedDepthImage(const std::string& camName,
+                                cv::Mat& depthImg,
+                                std::optional<std::reference_wrapper<double>> receiveTimeInSeconds);
+
+    bool getInfraredImage(
+        const std::string& camName,
+        cv::Mat& irImage,
+        std::optional<std::reference_wrapper<std::chrono::nanoseconds>> receiveTime = {});
+
+    [[deprecated("Use the getInfraredImage overload taking the receive time as "
+                 "std::chrono::nanoseconds.")]]
     bool getInfraredImage(const std::string& camName,
                           cv::Mat& irImage,
-                          std::optional<std::reference_wrapper<double>> receiveTimeInSeconds = {});
+                          std::optional<std::reference_wrapper<double>> receiveTimeInSeconds);
 
-    bool
-    getPointCloud(const std::string& pclDevName,
-                  pcl::PointCloud<pcl::PointXYZRGB>::Ptr coloredPointCloud,
-                  std::optional<std::reference_wrapper<double>> receiveTimeInSeconds = {}) final;
+    bool getPointCloud(
+        const std::string& pclDevName,
+        pcl::PointCloud<pcl::PointXYZRGB>::Ptr coloredPointCloud,
+        std::optional<std::reference_wrapper<std::chrono::nanoseconds>> receiveTime = {}) final;
 
     /**
      * Get the stored metadata.

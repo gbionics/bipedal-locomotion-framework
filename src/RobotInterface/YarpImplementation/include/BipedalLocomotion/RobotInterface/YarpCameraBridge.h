@@ -48,8 +48,9 @@ namespace RobotInterface
  * |                            |rgb_image_width                  | vector of integers |list containing the image width dimensions of RGB cameras. The list must be the same size and order as rgb_list.  If not provided the size of the image is taken from the YarpInterface after calling `YarpCameraBridge::setDriversList` | No |
  * |                            |rgb_image_height                 | vector of integers |list containing the image height dimensions of RGB cameras. The list must be the same size and order as rgb_list.  If not provided the size of the image is taken from the YarpInterface after calling `YarpCameraBridge::setDriversList` | No |
  *
- * @note The image dimensions are only used to preallocate the image buffers. If a received image has
- * a different size, the buffer is resized by YARP and the returned image has the size of the received one.
+ * @note The image dimensions are only used to preallocate the image buffers and must be positive.
+ * If a received image has a different size, the buffer is resized by YARP and the returned image
+ * has the size of the received one.
  */
 class YarpCameraBridge : public BipedalLocomotion::RobotInterface::ICameraBridge
 {
@@ -110,37 +111,48 @@ public:
      */
     bool getRGBDCamerasList(std::vector<std::string>& rgbdCamerasList) final;
 
+    // Expose the deprecated overloads hidden by the declarations below.
+    using ICameraBridge::getColorImage;
+    using ICameraBridge::getDepthImage;
+
     /**
      * Get color image from the camera
      * @param[in] camName name of the camera
      * @param[out] colorImg image as cv Mat object
-     * @param[out] receiveTimeInSeconds time at which the measurement was received
+     * @param[out] receiveTime time at which the image was received by the bridge, according to
+     * BipedalLocomotion::clock(). For RGBD cameras the frame is identified by its YARP envelope:
+     * reading again a frame already read returns its original receive time, hence a new frame is
+     * detected by a change of receiveTime. Frame grabbers do not provide the envelope, so every
+     * read is considered a new frame.
      *
-     * @warning the size is decided at the configuration and remains fixed,
-     * and internal checks must be done at the implementation level by the Derived class.
-     * This means that the user must pass a resized argument "colorImg" to this method
+     * @note colorImg may share memory with an internal buffer. The data remain valid until the
+     * next read from the same camera. Clone colorImg if it must be stored.
      *
      * @return true/false in case of success/failure
      */
     bool getColorImage(const std::string& camName,
                        cv::Mat& colorImg,
-                       std::optional<std::reference_wrapper<double>> receiveTimeInSeconds = {}) final;
+                       std::optional<std::reference_wrapper<std::chrono::nanoseconds>> receiveTime
+                       = {}) final;
 
     /**
      * Get depth image
-     * @param[in] camName name of the gyroscope
+     * @param[in] camName name of the camera
      * @param[out] depthImg depth image as cv Mat object
-     * @param[out] receiveTimeInSeconds time at which the measurement was received
+     * @param[out] receiveTime time at which the image was received by the bridge, according to
+     * BipedalLocomotion::clock(). The frame is identified by its YARP envelope: reading again a
+     * frame already read returns its original receive time, hence a new frame is detected by a
+     * change of receiveTime. Without an envelope every read is considered a new frame.
      *
-     * @warning the size is decided at the configuration and remains fixed,
-     * and internal checks must be done at the implementation level by the Derived class.
-     * This means that the user must pass a resized argument "depthImg" to this method
+     * @note depthImg may share memory with an internal buffer. The data remain valid until the
+     * next depth read from the same camera. Clone depthImg if it must be stored.
      *
      * @return true/false in case of success/failure
      */
     bool getDepthImage(const std::string& camName,
                        cv::Mat& depthImg,
-                       std::optional<std::reference_wrapper<double>> receiveTimeInSeconds = {}) final;
+                       std::optional<std::reference_wrapper<std::chrono::nanoseconds>> receiveTime
+                       = {}) final;
 
 private:
     /** Private implementation */

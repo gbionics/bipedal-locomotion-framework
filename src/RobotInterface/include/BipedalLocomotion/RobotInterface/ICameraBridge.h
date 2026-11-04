@@ -6,6 +6,7 @@
 #ifndef BIPEDAL_LOCOMOTION_ROBOT_INTERFACE_ICAMERA_BRIDGE_H
 #define BIPEDAL_LOCOMOTION_ROBOT_INTERFACE_ICAMERA_BRIDGE_H
 
+#include <chrono>
 #include <functional>
 #include <memory>
 #include <optional>
@@ -104,7 +105,7 @@ public:
      * Get color image from the camera
      * @param[in] camName name of the camera
      * @param[out] colorImg image as cv Mat object
-     * @param[out] receiveTimeInSeconds time at which the measurement was received
+     * @param[out] receiveTime time at which the measurement was received
      *
      * @warning the size is decided at the configuration and remains fixed,
      * and internal checks must be done at the implementation level by the Derived class.
@@ -115,16 +116,41 @@ public:
     virtual bool
     getColorImage(const std::string& camName,
                   cv::Mat& colorImg,
-                  std::optional<std::reference_wrapper<double>> receiveTimeInSeconds = {})
+                  std::optional<std::reference_wrapper<std::chrono::nanoseconds>> receiveTime = {})
     {
         return false;
+    };
+
+    /**
+     * Get color image from the camera
+     * @param[in] camName name of the camera
+     * @param[out] colorImg image as cv Mat object
+     * @param[out] receiveTimeInSeconds time at which the measurement was received in seconds
+     * @return true/false in case of success/failure
+     */
+    [[deprecated("Use the getColorImage overload taking the receive time as "
+                 "std::chrono::nanoseconds.")]]
+    virtual bool getColorImage(const std::string& camName,
+                               cv::Mat& colorImg,
+                               std::optional<std::reference_wrapper<double>> receiveTimeInSeconds)
+    {
+        std::chrono::nanoseconds receiveTime{0};
+        if (!this->getColorImage(camName, colorImg, receiveTime))
+        {
+            return false;
+        }
+        if (receiveTimeInSeconds)
+        {
+            receiveTimeInSeconds->get() = std::chrono::duration<double>(receiveTime).count();
+        }
+        return true;
     };
 
     /**
      * Get depth image
      * @param[in] camName name of the camera
      * @param[out] depthImg depth image as a cv Mat object
-     * @param[out] receiveTimeInSeconds time at which the measurement was received
+     * @param[out] receiveTime time at which the measurement was received
      *
      * @warning the size is decided at the configuration and remains fixed,
      * and internal checks must be done at the implementation level by the Derived class.
@@ -135,9 +161,34 @@ public:
     virtual bool
     getDepthImage(const std::string& camName,
                   cv::Mat& depthImg,
-                  std::optional<std::reference_wrapper<double>> receiveTimeInSeconds = {})
+                  std::optional<std::reference_wrapper<std::chrono::nanoseconds>> receiveTime = {})
     {
         return false;
+    };
+
+    /**
+     * Get depth image
+     * @param[in] camName name of the camera
+     * @param[out] depthImg depth image as a cv Mat object
+     * @param[out] receiveTimeInSeconds time at which the measurement was received in seconds
+     * @return true/false in case of success/failure
+     */
+    [[deprecated("Use the getDepthImage overload taking the receive time as "
+                 "std::chrono::nanoseconds.")]]
+    virtual bool getDepthImage(const std::string& camName,
+                               cv::Mat& depthImg,
+                               std::optional<std::reference_wrapper<double>> receiveTimeInSeconds)
+    {
+        std::chrono::nanoseconds receiveTime{0};
+        if (!this->getDepthImage(camName, depthImg, receiveTime))
+        {
+            return false;
+        }
+        if (receiveTimeInSeconds)
+        {
+            receiveTimeInSeconds->get() = std::chrono::duration<double>(receiveTime).count();
+        }
+        return true;
     };
 
     /**

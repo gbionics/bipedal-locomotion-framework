@@ -8,6 +8,7 @@
 #include <BipedalLocomotion/TextLogging/Logger.h>
 
 // YARP sig
+#include <yarp/os/Stamp.h>
 #include <yarp/sig/Image.h>
 
 // YARP Camera Interfaces
@@ -16,27 +17,57 @@
 #include <yarp/dev/IRGBDSensor.h>
 
 // std
-#include <algorithm>
-#include <cmath>
-#include <set>
+#include <chrono>
+#include <string_view>
+#include <type_traits>
 
 using namespace BipedalLocomotion::RobotInterface;
 using namespace BipedalLocomotion::GenericContainer;
 using namespace BipedalLocomotion::ParametersHandler;
 
+namespace
+{
+void setReceiveTime(std::optional<std::reference_wrapper<std::chrono::nanoseconds>>& receiveTime,
+                    const std::chrono::nanoseconds& time)
+{
+    if (receiveTime)
+    {
+        receiveTime->get() = time;
+    }
+}
+
+bool isValidDimension(const std::pair<std::size_t, std::size_t>& dimensions)
+{
+    return dimensions.first > 0 && dimensions.second > 0;
+}
+
+/**
+ * Store the envelope of the image just read. The receive time is updated only for a new frame: the
+ * YARP clients return the last frame received until a new one arrives.
+ */
+void updateReceiveTime(const yarp::os::Stamp& newStamp,
+                       yarp::os::Stamp& stamp,
+                       std::chrono::nanoseconds& time)
+{
+    const bool isSameFrame = newStamp.isValid() && stamp.isValid()
+                             && newStamp.getCount() == stamp.getCount()
+                             && newStamp.getTime() == stamp.getTime();
+    if (!isSameFrame)
+    {
+        time = BipedalLocomotion::clock().now();
+    }
+    stamp = newStamp;
+}
+} // namespace
+
 struct YarpCameraBridge::Impl
 {
-    template <typename PixelCode> struct StampedYARPImage
+    template <typename PixelCode, typename CameraType> struct StampedYARPImage
     {
         yarp::sig::ImageOf<PixelCode> image;
-        double time;
-
-        StampedYARPImage() = default;
-
-        StampedYARPImage(std::size_t width, std::size_t height)
-        {
-            this->resize({width, height});
-        };
+        CameraType* interface{nullptr};
+        yarp::os::Stamp stamp;
+        std::chrono::nanoseconds time{0};
 
         /**
          * Resize image buffers
@@ -49,43 +80,30 @@ struct YarpCameraBridge::Impl
             }
         }
 
-        template <typename CameraType>
-        bool readCameraImage(const std::string& cameraName, CameraType* interface)
+        bool readCameraImage()
         {
-            bool ok{true};
-            constexpr auto logPrefix = "[StampedYARPImage::readCameraImage]";
-
-            // StampedYARPImage is defined as a pair of yarp::sig::image and double
-            yarp::os::Stamp* txTimestamp{nullptr};
+            bool ok{false};
+            // The frame grabber interface does not provide the envelope, it stays invalid.
+            yarp::os::Stamp newStamp;
             if constexpr (std::is_same_v<CameraType, yarp::dev::IFrameGrabberImage>)
             {
-                // (imageType != "RGB")
-                if constexpr (!std::is_same_v<PixelCode, yarp::sig::PixelRgb>)
-                {
-                    log()->error("{} Frame Grabber {} handles only RGB image.",
-                                 logPrefix,
-                                 cameraName);
-                    return false;
-                }
+                static_assert(std::is_same_v<PixelCode, yarp::sig::PixelRgb>,
+                              "Frame grabbers handle only RGB images.");
                 ok = interface->getImage(image);
-            } else if constexpr (std::is_same_v<CameraType, yarp::dev::IRGBDSensor>)
+            } else
             {
-                // (imageType != "DEPTH")
-                if constexpr (std::is_same_v<PixelCode, yarp::sig::PixelFloat>)
-                {
-                    ok = interface->getDepthImage(image, txTimestamp);
-                }
+                static_assert(std::is_same_v<CameraType, yarp::dev::IRGBDSensor>
+                                  && std::is_same_v<PixelCode, yarp::sig::PixelFloat>,
+                              "RGBD sensors provide depth images as PixelFloat.");
+                ok = interface->getDepthImage(image, &newStamp);
             }
 
             if (!ok)
             {
-                log()->error("{} Unable to read from {}, use previous image.",
-                             logPrefix,
-                             cameraName);
                 return false;
             }
 
-            time = BipedalLocomotion::clock().now().count();
+            updateReceiveTime(newStamp, stamp, time);
             return true;
         }
     };
@@ -93,14 +111,9 @@ struct YarpCameraBridge::Impl
     struct StampedYARPFlexImage
     {
         yarp::sig::FlexImage image;
-        double time;
-
-        StampedYARPFlexImage() = default;
-
-        StampedYARPFlexImage(std::size_t width, std::size_t height)
-        {
-            this->resize({width, height});
-        };
+        yarp::dev::IRGBDSensor* interface{nullptr};
+        yarp::os::Stamp stamp;
+        std::chrono::nanoseconds time{0};
 
         /**
          * Resize image buffers
@@ -114,27 +127,15 @@ struct YarpCameraBridge::Impl
             }
         }
 
-        template <typename CameraType>
-        bool readCameraImage(const std::string& cameraName, CameraType* interface)
+        bool readCameraImage()
         {
-            bool ok{true};
-            constexpr auto logPrefix = "[StampedYARPFlexImage::readCameraImage]";
-
-            yarp::os::Stamp* txTimestamp{nullptr};
-            if constexpr (std::is_same_v<CameraType, yarp::dev::IRGBDSensor>)
+            yarp::os::Stamp newStamp;
+            if (!interface->getRgbImage(image, &newStamp))
             {
-                ok = interface->getRgbImage(image, txTimestamp);
-            }
-
-            if (!ok)
-            {
-                log()->error("{} Unable to read from {}, use previous image.",
-                             logPrefix,
-                             cameraName);
                 return false;
             }
 
-            time = BipedalLocomotion::clock().now().count();
+            updateReceiveTime(newStamp, stamp, time);
             return true;
         }
     };
@@ -154,9 +155,13 @@ struct YarpCameraBridge::Impl
     bool driversAttached{false}; /**< flag set to true if the bridge is successfully attached to
                                     required device drivers */
 
-    std::unordered_map<std::string, StampedYARPImage<yarp::sig::PixelFloat>> depthImages;
+    std::unordered_map<std::string,
+                       StampedYARPImage<yarp::sig::PixelFloat, yarp::dev::IRGBDSensor>>
+        depthImages;
     std::unordered_map<std::string, StampedYARPFlexImage> flexImages;
-    std::unordered_map<std::string, StampedYARPImage<yarp::sig::PixelRgb>> rgbImages;
+    std::unordered_map<std::string,
+                       StampedYARPImage<yarp::sig::PixelRgb, yarp::dev::IFrameGrabberImage>>
+        rgbImages;
 
     /**
      * Check if sensor is available in the relevant sensor map
@@ -251,13 +256,66 @@ struct YarpCameraBridge::Impl
     }
 
     /**
+     * Load optional image dimensions for a camera list
+     */
+    bool loadImageDimensions(
+        const std::shared_ptr<const BipedalLocomotion::ParametersHandler::IParametersHandler>& ptr,
+        const std::string& widthParameter,
+        const std::string& heightParameter,
+        const std::vector<std::string>& cameras,
+        std::unordered_map<std::string, std::pair<std::size_t, std::size_t>>& dimensions)
+    {
+        constexpr std::string_view logPrefix = "[YarpCameraBridge::Impl::loadImageDimensions]";
+
+        std::vector<int> width, height;
+        if (!ptr->getParameter(widthParameter, width)
+            || !ptr->getParameter(heightParameter, height))
+        {
+            log()->info("{} '{}' and / or '{}' are not provided. The image size will be "
+                        "retrieved from the YARP interface.",
+                        logPrefix,
+                        widthParameter,
+                        heightParameter);
+            return true;
+        }
+
+        if (width.size() != cameras.size() || height.size() != cameras.size())
+        {
+            log()->error("{} The size of '{}' and '{}' must match the number of cameras.",
+                         logPrefix,
+                         widthParameter,
+                         heightParameter);
+            return false;
+        }
+
+        for (std::size_t idx = 0; idx < cameras.size(); idx++)
+        {
+            if (width[idx] <= 0 || height[idx] <= 0)
+            {
+                log()->error("{} Invalid image size {}x{} for the camera named {}. The width and "
+                             "the height must be positive.",
+                             logPrefix,
+                             width[idx],
+                             height[idx],
+                             cameras[idx]);
+                return false;
+            }
+
+            dimensions[cameras[idx]] = {static_cast<std::size_t>(width[idx]),
+                                        static_cast<std::size_t>(height[idx])};
+        }
+
+        return true;
+    }
+
+    /**
      * Configure cameras meta data
      */
     bool configureCameras(
         std::weak_ptr<const BipedalLocomotion::ParametersHandler::IParametersHandler> handler,
         CameraBridgeMetaData& metaData)
     {
-        constexpr std::string_view logPrefix = "[YarpCameraBridge::Impl::configureCameras] ";
+        constexpr std::string_view logPrefix = "[YarpCameraBridge::Impl::configureCameras]";
         auto ptr = handler.lock();
         if (ptr == nullptr)
         {
@@ -267,89 +325,31 @@ struct YarpCameraBridge::Impl
         if (ptr->getParameter("rgb_cameras_list", metaData.sensorsList.rgbCamerasList))
         {
             metaData.bridgeOptions.isRGBCameraEnabled = true;
-
-            std::vector<int> rgbWidth, rgbHeight;
-            bool ok = ptr->getParameter("rgb_image_width", rgbWidth);
-            ok = ok && ptr->getParameter("rgb_image_height", rgbHeight);
-
-            if (ok)
+            if (!loadImageDimensions(ptr,
+                                     "rgb_image_width",
+                                     "rgb_image_height",
+                                     metaData.sensorsList.rgbCamerasList,
+                                     metaData.bridgeOptions.rgbImgDimensions))
             {
-                if ((rgbWidth.size() != metaData.sensorsList.rgbCamerasList.size())
-                    || (rgbHeight.size() != metaData.sensorsList.rgbCamerasList.size()))
-                {
-                    log()->error("{} Parameters list size mismatch.", logPrefix);
-                    return false;
-                }
-
-                for (int idx = 0; idx < rgbHeight.size(); idx++)
-                {
-                    std::pair<int, int> imgDimensions(rgbWidth[idx], rgbHeight[idx]);
-                    auto cameraName{metaData.sensorsList.rgbCamerasList[idx]};
-                    metaData.bridgeOptions.rgbImgDimensions[cameraName] = imgDimensions;
-                }
-            } else
-            {
-                log()->info("{} 'rgb_image_width' and / or 'rgb_image_height' are not provided. "
-                            "The image size will be retrieved from the YARP interface.",
-                            logPrefix);
+                return false;
             }
         }
 
         if (ptr->getParameter("rgbd_cameras_list", metaData.sensorsList.rgbdCamerasList))
         {
             metaData.bridgeOptions.isRGBDCameraEnabled = true;
-
-            std::vector<int> rgbdCamWidth, rgbdCamHeight;
-            bool ok = ptr->getParameter("rgbd_image_width", rgbdCamWidth);
-            ok = ok && ptr->getParameter("rgbd_image_height", rgbdCamHeight);
-
-            if (ok)
+            if (!loadImageDimensions(ptr,
+                                     "rgbd_image_width",
+                                     "rgbd_image_height",
+                                     metaData.sensorsList.rgbdCamerasList,
+                                     metaData.bridgeOptions.rgbdImgDimensions)
+                || !loadImageDimensions(ptr,
+                                        "rgbd_depth_image_width",
+                                        "rgbd_depth_image_height",
+                                        metaData.sensorsList.rgbdCamerasList,
+                                        metaData.bridgeOptions.depthImgDimensions))
             {
-                if ((rgbdCamWidth.size() != metaData.sensorsList.rgbdCamerasList.size())
-                    || (rgbdCamHeight.size() != metaData.sensorsList.rgbdCamerasList.size()))
-                {
-                    log()->error("{} Parameters list size mismatch.", logPrefix);
-                    return false;
-                }
-
-                for (int idx = 0; idx < rgbdCamHeight.size(); idx++)
-                {
-                    std::pair<int, int> imgDimensions(rgbdCamWidth[idx], rgbdCamHeight[idx]);
-                    auto cameraName{metaData.sensorsList.rgbdCamerasList[idx]};
-                    metaData.bridgeOptions.rgbdImgDimensions[cameraName] = imgDimensions;
-                }
-            } else
-            {
-                log()->info("{} 'rgbd_image_width' and / or 'rgbd_image_height' are not provided. "
-                            "The image size will be retrieved from the YARP interface.",
-                            logPrefix);
-            }
-
-            std::vector<int> depthWidth, depthHeight;
-            ok = ptr->getParameter("rgbd_depth_image_width", depthWidth);
-            ok = ok && ptr->getParameter("rgbd_depth_image_height", depthHeight);
-
-            if (ok)
-            {
-                if ((depthWidth.size() != metaData.sensorsList.rgbdCamerasList.size())
-                    || (depthHeight.size() != metaData.sensorsList.rgbdCamerasList.size()))
-                {
-                    log()->error("{} Parameters list size mismatch.", logPrefix);
-                    return false;
-                }
-
-                for (int idx = 0; idx < depthHeight.size(); idx++)
-                {
-                    std::pair<int, int> imgDimensions(depthWidth[idx], depthHeight[idx]);
-                    auto cameraName{metaData.sensorsList.rgbdCamerasList[idx]};
-                    metaData.bridgeOptions.depthImgDimensions[cameraName] = imgDimensions;
-                }
-            } else
-            {
-                log()->info("{} 'rgbd_depth_image_width' and / or 'rgbd_depth_image_height' are "
-                            "not provided. The depth image size will be retrieved from the YARP "
-                            "interface.",
-                            logPrefix);
+                return false;
             }
         }
 
@@ -485,6 +485,15 @@ bool YarpCameraBridge::initialize(std::weak_ptr<const IParametersHandler> handle
         return false;
     }
 
+    m_pimpl->bridgeInitialized = false;
+    m_pimpl->driversAttached = false;
+    m_pimpl->metaData = {};
+    m_pimpl->wholeBodyFrameGrabberInterface.clear();
+    m_pimpl->wholeBodyRGBDInterface.clear();
+    m_pimpl->rgbImages.clear();
+    m_pimpl->flexImages.clear();
+    m_pimpl->depthImages.clear();
+
     bool ret{true};
     bool useCameras{false};
     ret = m_pimpl->subConfigLoader("stream_cameras",
@@ -496,9 +505,8 @@ bool YarpCameraBridge::initialize(std::weak_ptr<const IParametersHandler> handle
 
     if (!ret)
     {
-        log()->error("{} Skipping the configuration of Cameras. YarpCameraBridge will not stream "
-                     "relevant measures.",
-                     logPrefix);
+        log()->error("{} Unable to configure the cameras.", logPrefix);
+        return false;
     }
 
     m_pimpl->bridgeInitialized = true;
@@ -525,9 +533,11 @@ bool YarpCameraBridge::setDriversList(const yarp::dev::PolyDriverList& deviceDri
         return false;
     }
 
+    auto& options = m_pimpl->metaData.bridgeOptions;
+
     // in the case the user does not provide the images size the YarpCameraBridge will be retrieve
     // it from the yarp interface
-    if (m_pimpl->metaData.bridgeOptions.rgbImgDimensions.empty())
+    if (options.rgbImgDimensions.empty())
     {
         yarp::sig::ImageOf<yarp::sig::PixelRgb> tmpImg;
         for (const auto& [cameraName, interface] : m_pimpl->wholeBodyFrameGrabberInterface)
@@ -551,42 +561,64 @@ bool YarpCameraBridge::setDriversList(const yarp::dev::PolyDriverList& deviceDri
                 BipedalLocomotion::clock().sleepFor(10ms);
             }
 
-            m_pimpl->metaData.bridgeOptions.rgbImgDimensions[cameraName]
-                = {interface->width(), interface->height()};
+            options.rgbImgDimensions[cameraName] = {tmpImg.width(), tmpImg.height()};
         }
     }
 
-    auto& options = m_pimpl->metaData.bridgeOptions;
+    auto getInterfaceDimensions = [](int width, int height) {
+        if (width <= 0 || height <= 0)
+        {
+            return std::pair<std::size_t, std::size_t>{0, 0};
+        }
+        return std::pair<std::size_t, std::size_t>{static_cast<std::size_t>(width),
+                                                   static_cast<std::size_t>(height)};
+    };
+
     for (const auto& [cameraName, interface] : m_pimpl->wholeBodyRGBDInterface)
     {
         if (options.rgbdImgDimensions.find(cameraName) == options.rgbdImgDimensions.end())
         {
             options.rgbdImgDimensions[cameraName]
-                = {interface->getRgbWidth(), interface->getRgbHeight()};
+                = getInterfaceDimensions(interface->getRgbWidth(), interface->getRgbHeight());
         }
         if (options.depthImgDimensions.find(cameraName) == options.depthImgDimensions.end())
         {
             options.depthImgDimensions[cameraName]
-                = {interface->getDepthWidth(), interface->getDepthHeight()};
+                = getInterfaceDimensions(interface->getDepthWidth(), interface->getDepthHeight());
         }
     }
 
-    // Initialize the images container accordingly to the metadata this is required to make
-    // YarpCameraBridge thread safe
-    // This should speedup also the getColorImage function since the memory is already allocated
-    for (const auto& [cameraName, dimension] : m_pimpl->metaData.bridgeOptions.rgbImgDimensions)
+    // Preallocate the image buffers and cache the interface pointers to avoid allocations and map
+    // lookups while reading images.
+    auto prepareImage = [&logPrefix](const std::string& cameraName,
+                                     auto* interface,
+                                     const auto& dimensions,
+                                     auto& images) {
+        auto& image = images[cameraName];
+        image.interface = interface;
+
+        const auto dimension = dimensions.find(cameraName);
+        if (dimension != dimensions.end() && isValidDimension(dimension->second))
+        {
+            image.resize(dimension->second);
+        } else
+        {
+            log()->warn("{} Unable to preallocate the image buffer for the camera named {}. "
+                        "The buffer will be allocated when the first image is received.",
+                        logPrefix,
+                        cameraName);
+        }
+    };
+
+    for (const auto& [cameraName, interface] : m_pimpl->wholeBodyFrameGrabberInterface)
     {
-        m_pimpl->rgbImages[cameraName].resize(dimension);
+        prepareImage(cameraName, interface, options.rgbImgDimensions, m_pimpl->rgbImages);
     }
 
-    for (const auto& [cameraName, dimension] : options.rgbdImgDimensions)
+    for (const auto& [cameraName, interface] : m_pimpl->wholeBodyRGBDInterface)
     {
-        m_pimpl->flexImages[cameraName].resize(dimension);
-    }
-
-    for (const auto& [cameraName, dimension] : options.depthImgDimensions)
-    {
-        m_pimpl->depthImages[cameraName].resize(dimension);
+        prepareImage(cameraName, interface, options.rgbdImgDimensions, m_pimpl->flexImages);
+        prepareImage(cameraName, interface, options.depthImgDimensions, m_pimpl->depthImages);
     }
 
     m_pimpl->driversAttached = true;
@@ -631,41 +663,44 @@ bool YarpCameraBridge::getRGBDCamerasList(std::vector<std::string>& rgbdCamerasL
 bool YarpCameraBridge::getColorImage(
     const std::string& camName,
     cv::Mat& colorImg,
-    std::optional<std::reference_wrapper<double>> receiveTimeInSeconds)
+    std::optional<std::reference_wrapper<std::chrono::nanoseconds>> receiveTime)
 {
-    if (!m_pimpl->checkValid("YarpCameraBridge::getColorImage "))
+    constexpr auto logPrefix = "[YarpCameraBridge::getColorImage]";
+    if (!m_pimpl->checkValid(logPrefix))
     {
         return false;
     }
+
+    std::chrono::nanoseconds imageTime{0};
 
     // check if the camera name is a standard camera or a depth camera
     auto rgbImage = m_pimpl->rgbImages.find(camName);
     if (rgbImage != m_pimpl->rgbImages.end())
     {
-        //
-        if (!rgbImage->second.readCameraImage(camName,
-                                              m_pimpl->wholeBodyFrameGrabberInterface.at(camName)))
+        if (!rgbImage->second.readCameraImage())
         {
-            log()->error("[YarpCameraBridge::getColorImage] {} could not read image.", camName);
+            log()->error("{} Unable to read the image from the camera named {}.",
+                         logPrefix,
+                         camName);
             return false;
         }
 
         colorImg = yarp::cv::toCvMat(rgbImage->second.image);
-        receiveTimeInSeconds = rgbImage->second.time;
+        imageTime = rgbImage->second.time;
     } else
     {
         auto flexImage = m_pimpl->flexImages.find(camName);
         if (flexImage == m_pimpl->flexImages.end())
         {
-            log()->error("[YarpCameraBridge::getColorImage] Unable to find the camera named {}.",
-                         camName);
+            log()->error("{} Unable to find the camera named {}.", logPrefix, camName);
             return false;
         }
 
-        if (!flexImage->second.readCameraImage(camName,
-                                               m_pimpl->wholeBodyRGBDInterface.at(camName)))
+        if (!flexImage->second.readCameraImage())
         {
-            log()->error("[YarpCameraBridge::getColorImage] {} could not read image.", camName);
+            log()->error("{} Unable to read the image from the camera named {}.",
+                         logPrefix,
+                         camName);
             return false;
         }
 
@@ -678,7 +713,7 @@ bool YarpCameraBridge::getColorImage(
                                yarpImage.getRawImage(),
                                yarpImage.getRowSize());
 
-            if (yarp::cv::convert_code_to_cv<yarp::sig::PixelBgr>::value >= 0)
+            if constexpr (yarp::cv::convert_code_to_cv<yarp::sig::PixelBgr>::value >= 0)
             {
                 ::cv::cvtColor(colorImg,
                                colorImg,
@@ -692,7 +727,7 @@ bool YarpCameraBridge::getColorImage(
                                yarpImage.getRawImage(),
                                yarpImage.getRowSize());
 
-            if (yarp::cv::convert_code_to_cv<yarp::sig::PixelRgb>::value >= 0)
+            if constexpr (yarp::cv::convert_code_to_cv<yarp::sig::PixelRgb>::value >= 0)
             {
                 ::cv::cvtColor(colorImg,
                                colorImg,
@@ -700,58 +735,57 @@ bool YarpCameraBridge::getColorImage(
             }
         } else
         {
-            log()->error("[YarpCameraBridge::getColorImage] Unable he convert the yarp image into "
-                         "opencv for the camera named: {}. Only VOCAB_PIXEL_BGR and "
-                         "VOCAB_PIXEL_RGB are supported.",
+            log()->error("{} Unable to convert the YARP image into OpenCV for the camera named "
+                         "{}. Only VOCAB_PIXEL_BGR and VOCAB_PIXEL_RGB are supported.",
+                         logPrefix,
                          camName);
             return false;
         }
 
-        receiveTimeInSeconds = flexImage->second.time;
+        imageTime = flexImage->second.time;
     }
 
     if (colorImg.rows <= 0 || colorImg.cols <= 0)
     {
-        log()->error("[YarpCameraBridge::getColorImage] {} image with invalid size.", camName);
+        log()->error("{} {} image with invalid size.", logPrefix, camName);
         return false;
     }
 
+    setReceiveTime(receiveTime, imageTime);
     return true;
 }
 
 bool YarpCameraBridge::getDepthImage(
     const std::string& camName,
     cv::Mat& depthImg,
-    std::optional<std::reference_wrapper<double>> receiveTimeInSeconds)
+    std::optional<std::reference_wrapper<std::chrono::nanoseconds>> receiveTime)
 {
-
-    constexpr auto prefix = "[YarpCameraBridge::getDepthImage]";
-    if (!m_pimpl->checkValid(prefix))
+    constexpr auto logPrefix = "[YarpCameraBridge::getDepthImage]";
+    if (!m_pimpl->checkValid(logPrefix))
     {
         return false;
     }
 
-    // check if the camera name is a standard camera or a depth camera
     auto depthImage = m_pimpl->depthImages.find(camName);
-    if (depthImage != m_pimpl->depthImages.end())
+    if (depthImage == m_pimpl->depthImages.end())
     {
-        //
-        if (!depthImage->second.readCameraImage(camName,
-                                                m_pimpl->wholeBodyRGBDInterface.at(camName)))
-        {
-            log()->error("{} {} could not read image.", prefix, camName);
-            return false;
-        }
-
-        depthImg = yarp::cv::toCvMat(depthImage->second.image);
-        receiveTimeInSeconds = depthImage->second.time;
+        log()->error("{} Unable to find the camera named {}.", logPrefix, camName);
+        return false;
     }
 
+    if (!depthImage->second.readCameraImage())
+    {
+        log()->error("{} Unable to read the image from the camera named {}.", logPrefix, camName);
+        return false;
+    }
+
+    depthImg = yarp::cv::toCvMat(depthImage->second.image);
     if (depthImg.rows <= 0 || depthImg.cols <= 0)
     {
-        log()->error("{}  {} image with invalid size.", prefix, camName);
+        log()->error("{} {} image with invalid size.", logPrefix, camName);
         return false;
     }
 
+    setReceiveTime(receiveTime, depthImage->second.time);
     return true;
 }
