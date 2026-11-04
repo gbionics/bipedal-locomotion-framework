@@ -78,6 +78,24 @@ public:
         return false;
     };
 
+    [[deprecated("Use the getPointCloud overload taking the receive time as "
+                 "std::chrono::nanoseconds.")]]
+    virtual bool getPointCloud(const std::string& pclDev,
+                               pcl::PointCloud<pcl::PointXYZRGB>::Ptr coloredPointCloud,
+                               std::optional<std::reference_wrapper<double>> receiveTimeInSeconds)
+    {
+        std::chrono::nanoseconds receiveTime{0};
+        if (!this->getPointCloud(pclDev, coloredPointCloud, receiveTime))
+        {
+            return false;
+        }
+        if (receiveTimeInSeconds)
+        {
+            receiveTimeInSeconds->get() = std::chrono::duration<double>(receiveTime).count();
+        }
+        return true;
+    };
+
     /**
      * Destructor
      */

@@ -337,6 +337,13 @@ bool RealSense::getColorizedDepthImage(
     return true;
 }
 
+bool RealSense::getColorizedDepthImage(const std::string& camName,
+                                       cv::Mat& depthImg,
+                                       std::optional<std::reference_wrapper<double>>)
+{
+    return this->getColorizedDepthImage(camName, depthImg);
+}
+
 bool RealSense::getInfraredImage(const std::string& camName,
                                  cv::Mat& irImage,
                                  std::optional<std::reference_wrapper<std::chrono::nanoseconds>>)
@@ -371,6 +378,13 @@ bool RealSense::getInfraredImage(const std::string& camName,
                       cv::Mat::AUTO_STEP);
 
     return true;
+}
+
+bool RealSense::getInfraredImage(const std::string& camName,
+                                 cv::Mat& irImage,
+                                 std::optional<std::reference_wrapper<double>>)
+{
+    return this->getInfraredImage(camName, irImage);
 }
 
 bool RealSense::getPointCloud(const std::string& pclDevName,

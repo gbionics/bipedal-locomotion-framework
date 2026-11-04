@@ -57,6 +57,11 @@ public:
 
     bool getPCLDevicesList(std::vector<std::string>& pclDevList) final;
 
+    // Expose the deprecated overloads hidden by the declarations below.
+    using ICameraBridge::getColorImage;
+    using ICameraBridge::getDepthImage;
+    using IPointCloudBridge::getPointCloud;
+
     bool getColorImage(
         const std::string& camName,
         cv::Mat& colorImg,
@@ -72,10 +77,22 @@ public:
         cv::Mat& depthImg,
         std::optional<std::reference_wrapper<std::chrono::nanoseconds>> receiveTime = {});
 
+    [[deprecated("Use the getColorizedDepthImage overload taking the receive time as "
+                 "std::chrono::nanoseconds.")]]
+    bool getColorizedDepthImage(const std::string& camName,
+                                cv::Mat& depthImg,
+                                std::optional<std::reference_wrapper<double>> receiveTimeInSeconds);
+
     bool getInfraredImage(
         const std::string& camName,
         cv::Mat& irImage,
         std::optional<std::reference_wrapper<std::chrono::nanoseconds>> receiveTime = {});
+
+    [[deprecated("Use the getInfraredImage overload taking the receive time as "
+                 "std::chrono::nanoseconds.")]]
+    bool getInfraredImage(const std::string& camName,
+                          cv::Mat& irImage,
+                          std::optional<std::reference_wrapper<double>> receiveTimeInSeconds);
 
     bool getPointCloud(
         const std::string& pclDevName,

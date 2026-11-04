@@ -122,6 +122,31 @@ public:
     };
 
     /**
+     * Get color image from the camera
+     * @param[in] camName name of the camera
+     * @param[out] colorImg image as cv Mat object
+     * @param[out] receiveTimeInSeconds time at which the measurement was received in seconds
+     * @return true/false in case of success/failure
+     */
+    [[deprecated("Use the getColorImage overload taking the receive time as "
+                 "std::chrono::nanoseconds.")]]
+    virtual bool getColorImage(const std::string& camName,
+                               cv::Mat& colorImg,
+                               std::optional<std::reference_wrapper<double>> receiveTimeInSeconds)
+    {
+        std::chrono::nanoseconds receiveTime{0};
+        if (!this->getColorImage(camName, colorImg, receiveTime))
+        {
+            return false;
+        }
+        if (receiveTimeInSeconds)
+        {
+            receiveTimeInSeconds->get() = std::chrono::duration<double>(receiveTime).count();
+        }
+        return true;
+    };
+
+    /**
      * Get depth image
      * @param[in] camName name of the camera
      * @param[out] depthImg depth image as a cv Mat object
@@ -139,6 +164,31 @@ public:
                   std::optional<std::reference_wrapper<std::chrono::nanoseconds>> receiveTime = {})
     {
         return false;
+    };
+
+    /**
+     * Get depth image
+     * @param[in] camName name of the camera
+     * @param[out] depthImg depth image as a cv Mat object
+     * @param[out] receiveTimeInSeconds time at which the measurement was received in seconds
+     * @return true/false in case of success/failure
+     */
+    [[deprecated("Use the getDepthImage overload taking the receive time as "
+                 "std::chrono::nanoseconds.")]]
+    virtual bool getDepthImage(const std::string& camName,
+                               cv::Mat& depthImg,
+                               std::optional<std::reference_wrapper<double>> receiveTimeInSeconds)
+    {
+        std::chrono::nanoseconds receiveTime{0};
+        if (!this->getDepthImage(camName, depthImg, receiveTime))
+        {
+            return false;
+        }
+        if (receiveTimeInSeconds)
+        {
+            receiveTimeInSeconds->get() = std::chrono::duration<double>(receiveTime).count();
+        }
+        return true;
     };
 
     /**

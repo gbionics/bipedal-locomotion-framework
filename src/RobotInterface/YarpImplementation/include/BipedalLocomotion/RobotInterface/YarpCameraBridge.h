@@ -111,6 +111,10 @@ public:
      */
     bool getRGBDCamerasList(std::vector<std::string>& rgbdCamerasList) final;
 
+    // Expose the deprecated overloads hidden by the declarations below.
+    using ICameraBridge::getColorImage;
+    using ICameraBridge::getDepthImage;
+
     /**
      * Get color image from the camera
      * @param[in] camName name of the camera
