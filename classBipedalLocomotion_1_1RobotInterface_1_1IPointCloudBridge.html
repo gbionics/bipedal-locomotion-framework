@@ -139,9 +139,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a61669ce43eea213a43405678721baadf"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1RobotInterface_1_1IPointCloudBridge.html#a61669ce43eea213a43405678721baadf">getPCLDevicesList</a> (std::vector&lt; std::string &gt; &amp;pclDevList)</td></tr>
 <tr class="memdesc:a61669ce43eea213a43405678721baadf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get RGBD cameras.  <a href="classBipedalLocomotion_1_1RobotInterface_1_1IPointCloudBridge.html#a61669ce43eea213a43405678721baadf">More...</a><br /></td></tr>
 <tr class="separator:a61669ce43eea213a43405678721baadf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2ce35da8b3671cb9a6d1a51c8a9ce4f7"><td class="memItemLeft" align="right" valign="top"><a id="a2ce35da8b3671cb9a6d1a51c8a9ce4f7"></a>
-virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>getPointCloud</b> (const std::string &amp;pclDev, pcl::PointCloud&lt; pcl::PointXYZRGB &gt;::Ptr coloredPointCloud, std::optional&lt; std::reference_wrapper&lt; double &gt;&gt; receiveTimeInSeconds={})</td></tr>
-<tr class="separator:a2ce35da8b3671cb9a6d1a51c8a9ce4f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6d8489b65c591a3affe942b6ff2ddc0c"><td class="memItemLeft" align="right" valign="top"><a id="a6d8489b65c591a3affe942b6ff2ddc0c"></a>
+virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>getPointCloud</b> (const std::string &amp;pclDev, pcl::PointCloud&lt; pcl::PointXYZRGB &gt;::Ptr coloredPointCloud, std::optional&lt; std::reference_wrapper&lt; std::chrono::nanoseconds &gt;&gt; receiveTime={})</td></tr>
+<tr class="separator:a6d8489b65c591a3affe942b6ff2ddc0c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a66a026a0a12398f229383b2efc8ea2de"><td class="memItemLeft" align="right" valign="top"><a id="a66a026a0a12398f229383b2efc8ea2de"></a>
+virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>getPointCloud</b> (const std::string &amp;pclDev, pcl::PointCloud&lt; pcl::PointXYZRGB &gt;::Ptr coloredPointCloud, std::optional&lt; std::reference_wrapper&lt; double &gt;&gt; receiveTimeInSeconds)</td></tr>
+<tr class="separator:a66a026a0a12398f229383b2efc8ea2de"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa007bed44d5547e1d4b0dd651f151875"><td class="memItemLeft" align="right" valign="top"><a id="aa007bed44d5547e1d4b0dd651f151875"></a>
 virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1RobotInterface_1_1IPointCloudBridge.html#aa007bed44d5547e1d4b0dd651f151875">~IPointCloudBridge</a> ()=default</td></tr>
 <tr class="memdesc:aa007bed44d5547e1d4b0dd651f151875"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor. <br /></td></tr>

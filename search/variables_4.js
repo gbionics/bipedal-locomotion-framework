@@ -1,9 +1,9 @@
 var searchData=
 [
-  ['edgetime_2917',['edgeTime',['../structBipedalLocomotion_1_1Math_1_1SchmittTriggerOutput.html#a5d6ceaf99e9f4746099f983bd9ca381f',1,'BipedalLocomotion::Math::SchmittTriggerOutput']]],
-  ['ekfupdateenabled_2918',['ekfUpdateEnabled',['../structBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimators_1_1Options.html#a0a4d7bb7a59fdaafc52e950807a8dff2',1,'BipedalLocomotion::Estimators::FloatingBaseEstimators::Options']]],
-  ['encodersnoise_2919',['encodersNoise',['../structBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimators_1_1SensorsStdDev.html#a9ec80a18ed8a1387daab367b2815de94',1,'BipedalLocomotion::Estimators::FloatingBaseEstimators::SensorsStdDev']]],
-  ['encodersspeed_2920',['encodersSpeed',['../structBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimators_1_1Measurements.html#acfb4e7a420c871c52b2c6f31beefc3a4',1,'BipedalLocomotion::Estimators::FloatingBaseEstimators::Measurements']]],
-  ['endtime_2921',['endTime',['../structBipedalLocomotion_1_1Contacts_1_1ContactPhase.html#a979ff853067cbeb11a85188d6373c09c',1,'BipedalLocomotion::Contacts::ContactPhase']]],
-  ['expectedvalue_2922',['expectedValue',['../structBipedalLocomotion_1_1Estimators_1_1RecursiveLeastSquareState.html#af7312c61d271858e1f4ef793d21f1517',1,'BipedalLocomotion::Estimators::RecursiveLeastSquareState']]]
+  ['edgetime_2918',['edgeTime',['../structBipedalLocomotion_1_1Math_1_1SchmittTriggerOutput.html#a5d6ceaf99e9f4746099f983bd9ca381f',1,'BipedalLocomotion::Math::SchmittTriggerOutput']]],
+  ['ekfupdateenabled_2919',['ekfUpdateEnabled',['../structBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimators_1_1Options.html#a0a4d7bb7a59fdaafc52e950807a8dff2',1,'BipedalLocomotion::Estimators::FloatingBaseEstimators::Options']]],
+  ['encodersnoise_2920',['encodersNoise',['../structBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimators_1_1SensorsStdDev.html#a9ec80a18ed8a1387daab367b2815de94',1,'BipedalLocomotion::Estimators::FloatingBaseEstimators::SensorsStdDev']]],
+  ['encodersspeed_2921',['encodersSpeed',['../structBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimators_1_1Measurements.html#acfb4e7a420c871c52b2c6f31beefc3a4',1,'BipedalLocomotion::Estimators::FloatingBaseEstimators::Measurements']]],
+  ['endtime_2922',['endTime',['../structBipedalLocomotion_1_1Contacts_1_1ContactPhase.html#a979ff853067cbeb11a85188d6373c09c',1,'BipedalLocomotion::Contacts::ContactPhase']]],
+  ['expectedvalue_2923',['expectedValue',['../structBipedalLocomotion_1_1Estimators_1_1RecursiveLeastSquareState.html#af7312c61d271858e1f4ef793d21f1517',1,'BipedalLocomotion::Estimators::RecursiveLeastSquareState']]]
 ];

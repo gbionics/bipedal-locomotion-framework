@@ -1,7 +1,7 @@
 var searchData=
 [
-  ['qpfixedbaseinversekinematics_2612',['QPFixedBaseInverseKinematics',['../classBipedalLocomotion_1_1IK_1_1QPFixedBaseInverseKinematics.html#ae64b7cd3de130ed389ea83bd1f6e07a0',1,'BipedalLocomotion::IK::QPFixedBaseInverseKinematics']]],
-  ['qpfixedbasetsid_2613',['QPFixedBaseTSID',['../classBipedalLocomotion_1_1TSID_1_1QPFixedBaseTSID.html#a1ad7f2b9704df3d9b736545e31808f56',1,'BipedalLocomotion::TSID::QPFixedBaseTSID']]],
-  ['qpinversekinematics_2614',['QPInverseKinematics',['../classBipedalLocomotion_1_1IK_1_1QPInverseKinematics.html#aa6e9c24404766d5fdbe4bdfccae98aea',1,'BipedalLocomotion::IK::QPInverseKinematics']]],
-  ['qptsid_2615',['QPTSID',['../classBipedalLocomotion_1_1TSID_1_1QPTSID.html#a76c8ba99572adb1d9c0b8ca852b6060a',1,'BipedalLocomotion::TSID::QPTSID']]]
+  ['qpfixedbaseinversekinematics_2613',['QPFixedBaseInverseKinematics',['../classBipedalLocomotion_1_1IK_1_1QPFixedBaseInverseKinematics.html#ae64b7cd3de130ed389ea83bd1f6e07a0',1,'BipedalLocomotion::IK::QPFixedBaseInverseKinematics']]],
+  ['qpfixedbasetsid_2614',['QPFixedBaseTSID',['../classBipedalLocomotion_1_1TSID_1_1QPFixedBaseTSID.html#a1ad7f2b9704df3d9b736545e31808f56',1,'BipedalLocomotion::TSID::QPFixedBaseTSID']]],
+  ['qpinversekinematics_2615',['QPInverseKinematics',['../classBipedalLocomotion_1_1IK_1_1QPInverseKinematics.html#aa6e9c24404766d5fdbe4bdfccae98aea',1,'BipedalLocomotion::IK::QPInverseKinematics']]],
+  ['qptsid_2616',['QPTSID',['../classBipedalLocomotion_1_1TSID_1_1QPTSID.html#a76c8ba99572adb1d9c0b8ca852b6060a',1,'BipedalLocomotion::TSID::QPTSID']]]
 ];

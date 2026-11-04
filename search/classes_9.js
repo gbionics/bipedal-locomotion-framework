@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['kindynwrapper_1751',['KinDynWrapper',['../classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1KinDynWrapper.html',1,'BipedalLocomotion::Estimators::RobotDynamicsEstimator']]]
+  ['kindynwrapper_1752',['KinDynWrapper',['../classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1KinDynWrapper.html',1,'BipedalLocomotion::Estimators::RobotDynamicsEstimator']]]
 ];

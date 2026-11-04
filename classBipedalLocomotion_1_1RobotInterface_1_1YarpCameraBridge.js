@@ -9,6 +9,10 @@ var classBipedalLocomotion_1_1RobotInterface_1_1YarpCameraBridge =
     [ "getMetaData", "classBipedalLocomotion_1_1RobotInterface_1_1YarpCameraBridge.html#a4757c2d66591d0671d1fbdf45821f1b5", null ],
     [ "getRGBCamerasList", "classBipedalLocomotion_1_1RobotInterface_1_1YarpCameraBridge.html#a8bbf86a3d11394b0786bd99b18fca2c7", null ],
     [ "getRGBDCamerasList", "classBipedalLocomotion_1_1RobotInterface_1_1YarpCameraBridge.html#a9c07d30bca7cb9ad49d95166baadb262", null ],
-    [ "getColorImage", "classBipedalLocomotion_1_1RobotInterface_1_1YarpCameraBridge.html#ab92b14c2dbb12fd1a566ce1ad13de101", null ],
-    [ "getDepthImage", "classBipedalLocomotion_1_1RobotInterface_1_1YarpCameraBridge.html#a98b418535a2a47dcf03c12265bbcf254", null ]
+    [ "getColorImage", "classBipedalLocomotion_1_1RobotInterface_1_1YarpCameraBridge.html#a30a51f6e6eb3b9a73eceaae75c14113f", null ],
+    [ "getDepthImage", "classBipedalLocomotion_1_1RobotInterface_1_1YarpCameraBridge.html#a663818e60aa4f44b0afaa8a904421217", null ],
+    [ "getColorImage", "classBipedalLocomotion_1_1RobotInterface_1_1YarpCameraBridge.html#a8c4f5d743c3665cf1a416eab93c8b3b3", null ],
+    [ "getColorImage", "classBipedalLocomotion_1_1RobotInterface_1_1YarpCameraBridge.html#ae5a2ae98c0fd0b0f63c89e86ecebc06b", null ],
+    [ "getDepthImage", "classBipedalLocomotion_1_1RobotInterface_1_1YarpCameraBridge.html#a9d35dbe20aa0288b6c33320fcee867d4", null ],
+    [ "getDepthImage", "classBipedalLocomotion_1_1RobotInterface_1_1YarpCameraBridge.html#acf7797d0a86edc03db9ebbe538568aef", null ]
 ];

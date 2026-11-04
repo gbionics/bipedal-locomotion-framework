@@ -135,30 +135,45 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a0a5f1fdea19cb505b2fee9d1dd49be8d"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1Perception_1_1Capture_1_1RealSense.html#a0a5f1fdea19cb505b2fee9d1dd49be8d">getPCLDevicesList</a> (std::vector&lt; std::string &gt; &amp;pclDevList) final</td></tr>
 <tr class="memdesc:a0a5f1fdea19cb505b2fee9d1dd49be8d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get RGBD cameras.  <a href="classBipedalLocomotion_1_1Perception_1_1Capture_1_1RealSense.html#a0a5f1fdea19cb505b2fee9d1dd49be8d">More...</a><br /></td></tr>
 <tr class="separator:a0a5f1fdea19cb505b2fee9d1dd49be8d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ada0555f7854b7465ca7731f2222c0b64"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1Perception_1_1Capture_1_1RealSense.html#ada0555f7854b7465ca7731f2222c0b64">getColorImage</a> (const std::string &amp;camName, cv::Mat &amp;colorImg, std::optional&lt; std::reference_wrapper&lt; double &gt;&gt; receiveTimeInSeconds={}) final</td></tr>
-<tr class="memdesc:ada0555f7854b7465ca7731f2222c0b64"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get color image from the camera.  <a href="classBipedalLocomotion_1_1Perception_1_1Capture_1_1RealSense.html#ada0555f7854b7465ca7731f2222c0b64">More...</a><br /></td></tr>
-<tr class="separator:ada0555f7854b7465ca7731f2222c0b64"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3ab4aed6fcb4d6109d0e4d3f4bcf9c1a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1Perception_1_1Capture_1_1RealSense.html#a3ab4aed6fcb4d6109d0e4d3f4bcf9c1a">getDepthImage</a> (const std::string &amp;camName, cv::Mat &amp;depthImg, std::optional&lt; std::reference_wrapper&lt; double &gt;&gt; receiveTimeInSeconds={}) final</td></tr>
-<tr class="memdesc:a3ab4aed6fcb4d6109d0e4d3f4bcf9c1a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get depth image.  <a href="classBipedalLocomotion_1_1Perception_1_1Capture_1_1RealSense.html#a3ab4aed6fcb4d6109d0e4d3f4bcf9c1a">More...</a><br /></td></tr>
-<tr class="separator:a3ab4aed6fcb4d6109d0e4d3f4bcf9c1a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad596a7b8a3d7089aa81f8dc6a6f59119"><td class="memItemLeft" align="right" valign="top"><a id="ad596a7b8a3d7089aa81f8dc6a6f59119"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>getColorizedDepthImage</b> (const std::string &amp;camName, cv::Mat &amp;depthImg, std::optional&lt; std::reference_wrapper&lt; double &gt;&gt; receiveTimeInSeconds={})</td></tr>
-<tr class="separator:ad596a7b8a3d7089aa81f8dc6a6f59119"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a88c62614c1972810981b7fca3f23c462"><td class="memItemLeft" align="right" valign="top"><a id="a88c62614c1972810981b7fca3f23c462"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>getInfraredImage</b> (const std::string &amp;camName, cv::Mat &amp;irImage, std::optional&lt; std::reference_wrapper&lt; double &gt;&gt; receiveTimeInSeconds={})</td></tr>
-<tr class="separator:a88c62614c1972810981b7fca3f23c462"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1389e7899a3dbbbfe9c7d552033edd43"><td class="memItemLeft" align="right" valign="top"><a id="a1389e7899a3dbbbfe9c7d552033edd43"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>getPointCloud</b> (const std::string &amp;pclDevName, pcl::PointCloud&lt; pcl::PointXYZRGB &gt;::Ptr coloredPointCloud, std::optional&lt; std::reference_wrapper&lt; double &gt;&gt; receiveTimeInSeconds={}) final</td></tr>
-<tr class="separator:a1389e7899a3dbbbfe9c7d552033edd43"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3f988db4a66051f75f654bafae9f7fbd"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1Perception_1_1Capture_1_1RealSense.html#a3f988db4a66051f75f654bafae9f7fbd">getColorImage</a> (const std::string &amp;camName, cv::Mat &amp;colorImg, std::optional&lt; std::reference_wrapper&lt; std::chrono::nanoseconds &gt;&gt; receiveTime={}) final</td></tr>
+<tr class="memdesc:a3f988db4a66051f75f654bafae9f7fbd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get color image from the camera.  <a href="classBipedalLocomotion_1_1Perception_1_1Capture_1_1RealSense.html#a3f988db4a66051f75f654bafae9f7fbd">More...</a><br /></td></tr>
+<tr class="separator:a3f988db4a66051f75f654bafae9f7fbd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae32effb1efba476ad3a5992f81ea1226"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1Perception_1_1Capture_1_1RealSense.html#ae32effb1efba476ad3a5992f81ea1226">getDepthImage</a> (const std::string &amp;camName, cv::Mat &amp;depthImg, std::optional&lt; std::reference_wrapper&lt; std::chrono::nanoseconds &gt;&gt; receiveTime={}) final</td></tr>
+<tr class="memdesc:ae32effb1efba476ad3a5992f81ea1226"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get depth image.  <a href="classBipedalLocomotion_1_1Perception_1_1Capture_1_1RealSense.html#ae32effb1efba476ad3a5992f81ea1226">More...</a><br /></td></tr>
+<tr class="separator:ae32effb1efba476ad3a5992f81ea1226"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaa0482bc9ac31311e95c614d42217e30"><td class="memItemLeft" align="right" valign="top"><a id="aaa0482bc9ac31311e95c614d42217e30"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>getColorizedDepthImage</b> (const std::string &amp;camName, cv::Mat &amp;depthImg, std::optional&lt; std::reference_wrapper&lt; std::chrono::nanoseconds &gt;&gt; receiveTime={})</td></tr>
+<tr class="separator:aaa0482bc9ac31311e95c614d42217e30"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a96c3c18fc7b117674ed2de45252d1128"><td class="memItemLeft" align="right" valign="top"><a id="a96c3c18fc7b117674ed2de45252d1128"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>getColorizedDepthImage</b> (const std::string &amp;camName, cv::Mat &amp;depthImg, std::optional&lt; std::reference_wrapper&lt; double &gt;&gt; receiveTimeInSeconds)</td></tr>
+<tr class="separator:a96c3c18fc7b117674ed2de45252d1128"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ada4159601b8af8568ae1f2fccd2578a0"><td class="memItemLeft" align="right" valign="top"><a id="ada4159601b8af8568ae1f2fccd2578a0"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>getInfraredImage</b> (const std::string &amp;camName, cv::Mat &amp;irImage, std::optional&lt; std::reference_wrapper&lt; std::chrono::nanoseconds &gt;&gt; receiveTime={})</td></tr>
+<tr class="separator:ada4159601b8af8568ae1f2fccd2578a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a261d41cb860d89d583c06ad40d57a240"><td class="memItemLeft" align="right" valign="top"><a id="a261d41cb860d89d583c06ad40d57a240"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>getInfraredImage</b> (const std::string &amp;camName, cv::Mat &amp;irImage, std::optional&lt; std::reference_wrapper&lt; double &gt;&gt; receiveTimeInSeconds)</td></tr>
+<tr class="separator:a261d41cb860d89d583c06ad40d57a240"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aad4e7ed457727c5564e8633945faedb3"><td class="memItemLeft" align="right" valign="top"><a id="aad4e7ed457727c5564e8633945faedb3"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>getPointCloud</b> (const std::string &amp;pclDevName, pcl::PointCloud&lt; pcl::PointXYZRGB &gt;::Ptr coloredPointCloud, std::optional&lt; std::reference_wrapper&lt; std::chrono::nanoseconds &gt;&gt; receiveTime={}) final</td></tr>
+<tr class="separator:aad4e7ed457727c5564e8633945faedb3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae6a5ebde2bf5dcf758827a72b59c1c44"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="structBipedalLocomotion_1_1RobotInterface_1_1CameraBridgeMetaData.html">BipedalLocomotion::RobotInterface::CameraBridgeMetaData</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1Perception_1_1Capture_1_1RealSense.html#ae6a5ebde2bf5dcf758827a72b59c1c44">getMetaData</a> () const final</td></tr>
 <tr class="memdesc:ae6a5ebde2bf5dcf758827a72b59c1c44"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the stored metadata.  <a href="classBipedalLocomotion_1_1Perception_1_1Capture_1_1RealSense.html#ae6a5ebde2bf5dcf758827a72b59c1c44">More...</a><br /></td></tr>
 <tr class="separator:ae6a5ebde2bf5dcf758827a72b59c1c44"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classBipedalLocomotion_1_1RobotInterface_1_1ICameraBridge"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classBipedalLocomotion_1_1RobotInterface_1_1ICameraBridge')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classBipedalLocomotion_1_1RobotInterface_1_1ICameraBridge.html">BipedalLocomotion::RobotInterface::ICameraBridge</a></td></tr>
+<tr class="memitem:ae5a2ae98c0fd0b0f63c89e86ecebc06b inherit pub_methods_classBipedalLocomotion_1_1RobotInterface_1_1ICameraBridge"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1RobotInterface_1_1ICameraBridge.html#ae5a2ae98c0fd0b0f63c89e86ecebc06b">getColorImage</a> (const std::string &amp;camName, cv::Mat &amp;colorImg, std::optional&lt; std::reference_wrapper&lt; double &gt;&gt; receiveTimeInSeconds)</td></tr>
+<tr class="memdesc:ae5a2ae98c0fd0b0f63c89e86ecebc06b inherit pub_methods_classBipedalLocomotion_1_1RobotInterface_1_1ICameraBridge"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get color image from the camera.  <a href="classBipedalLocomotion_1_1RobotInterface_1_1ICameraBridge.html#ae5a2ae98c0fd0b0f63c89e86ecebc06b">More...</a><br /></td></tr>
+<tr class="separator:ae5a2ae98c0fd0b0f63c89e86ecebc06b inherit pub_methods_classBipedalLocomotion_1_1RobotInterface_1_1ICameraBridge"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acf7797d0a86edc03db9ebbe538568aef inherit pub_methods_classBipedalLocomotion_1_1RobotInterface_1_1ICameraBridge"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1RobotInterface_1_1ICameraBridge.html#acf7797d0a86edc03db9ebbe538568aef">getDepthImage</a> (const std::string &amp;camName, cv::Mat &amp;depthImg, std::optional&lt; std::reference_wrapper&lt; double &gt;&gt; receiveTimeInSeconds)</td></tr>
+<tr class="memdesc:acf7797d0a86edc03db9ebbe538568aef inherit pub_methods_classBipedalLocomotion_1_1RobotInterface_1_1ICameraBridge"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get depth image.  <a href="classBipedalLocomotion_1_1RobotInterface_1_1ICameraBridge.html#acf7797d0a86edc03db9ebbe538568aef">More...</a><br /></td></tr>
+<tr class="separator:acf7797d0a86edc03db9ebbe538568aef inherit pub_methods_classBipedalLocomotion_1_1RobotInterface_1_1ICameraBridge"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af72e9dd0ee0391e93ce4b56733c25757 inherit pub_methods_classBipedalLocomotion_1_1RobotInterface_1_1ICameraBridge"><td class="memItemLeft" align="right" valign="top"><a id="af72e9dd0ee0391e93ce4b56733c25757"></a>
 virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1RobotInterface_1_1ICameraBridge.html#af72e9dd0ee0391e93ce4b56733c25757">~ICameraBridge</a> ()=default</td></tr>
 <tr class="memdesc:af72e9dd0ee0391e93ce4b56733c25757 inherit pub_methods_classBipedalLocomotion_1_1RobotInterface_1_1ICameraBridge"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor. <br /></td></tr>
 <tr class="separator:af72e9dd0ee0391e93ce4b56733c25757 inherit pub_methods_classBipedalLocomotion_1_1RobotInterface_1_1ICameraBridge"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classBipedalLocomotion_1_1RobotInterface_1_1IPointCloudBridge"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classBipedalLocomotion_1_1RobotInterface_1_1IPointCloudBridge')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classBipedalLocomotion_1_1RobotInterface_1_1IPointCloudBridge.html">BipedalLocomotion::RobotInterface::IPointCloudBridge</a></td></tr>
+<tr class="memitem:a66a026a0a12398f229383b2efc8ea2de inherit pub_methods_classBipedalLocomotion_1_1RobotInterface_1_1IPointCloudBridge"><td class="memItemLeft" align="right" valign="top"><a id="a66a026a0a12398f229383b2efc8ea2de"></a>
+virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>getPointCloud</b> (const std::string &amp;pclDev, pcl::PointCloud&lt; pcl::PointXYZRGB &gt;::Ptr coloredPointCloud, std::optional&lt; std::reference_wrapper&lt; double &gt;&gt; receiveTimeInSeconds)</td></tr>
+<tr class="separator:a66a026a0a12398f229383b2efc8ea2de inherit pub_methods_classBipedalLocomotion_1_1RobotInterface_1_1IPointCloudBridge"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa007bed44d5547e1d4b0dd651f151875 inherit pub_methods_classBipedalLocomotion_1_1RobotInterface_1_1IPointCloudBridge"><td class="memItemLeft" align="right" valign="top"><a id="aa007bed44d5547e1d4b0dd651f151875"></a>
 virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1RobotInterface_1_1IPointCloudBridge.html#aa007bed44d5547e1d4b0dd651f151875">~IPointCloudBridge</a> ()=default</td></tr>
 <tr class="memdesc:aa007bed44d5547e1d4b0dd651f151875 inherit pub_methods_classBipedalLocomotion_1_1RobotInterface_1_1IPointCloudBridge"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor. <br /></td></tr>
@@ -400,8 +415,8 @@ using&#160;</td><td class="memItemRight" valign="bottom"><b>weak_ptr</b> = std::
 
 </div>
 </div>
-<a id="ada0555f7854b7465ca7731f2222c0b64"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ada0555f7854b7465ca7731f2222c0b64">&#9670;&nbsp;</a></span>getColorImage()</h2>
+<a id="a3f988db4a66051f75f654bafae9f7fbd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3f988db4a66051f75f654bafae9f7fbd">&#9670;&nbsp;</a></span>getColorImage()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -424,8 +439,8 @@ using&#160;</td><td class="memItemRight" valign="bottom"><b>weak_ptr</b> = std::
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">std::optional&lt; std::reference_wrapper&lt; double &gt;&gt;&#160;</td>
-          <td class="paramname"><em>receiveTimeInSeconds</em> = <code>{}</code>&#160;</td>
+          <td class="paramtype">std::optional&lt; std::reference_wrapper&lt; std::chrono::nanoseconds &gt;&gt;&#160;</td>
+          <td class="paramname"><em>receiveTime</em> = <code>{}</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -445,19 +460,19 @@ using&#160;</td><td class="memItemRight" valign="bottom"><b>weak_ptr</b> = std::
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">camName</td><td>name of the camera </td></tr>
     <tr><td class="paramdir">[out]</td><td class="paramname">colorImg</td><td>image as cv Mat object </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">receiveTimeInSeconds</td><td>time at which the measurement was received</td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">receiveTime</td><td>time at which the measurement was received</td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section warning"><dt>Warning</dt><dd>the size is decided at the configuration and remains fixed, and internal checks must be done at the implementation level by the Derived class. This means that the user must pass a resized argument "colorImg" to this method</dd></dl>
 <dl class="section return"><dt>Returns</dt><dd>true/false in case of success/failure </dd></dl>
 
-<p>Reimplemented from <a class="el" href="classBipedalLocomotion_1_1RobotInterface_1_1ICameraBridge.html#a06408daf35fede203127d24e05a219a9">BipedalLocomotion::RobotInterface::ICameraBridge</a>.</p>
+<p>Reimplemented from <a class="el" href="classBipedalLocomotion_1_1RobotInterface_1_1ICameraBridge.html#a8c4f5d743c3665cf1a416eab93c8b3b3">BipedalLocomotion::RobotInterface::ICameraBridge</a>.</p>
 
 </div>
 </div>
-<a id="a3ab4aed6fcb4d6109d0e4d3f4bcf9c1a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3ab4aed6fcb4d6109d0e4d3f4bcf9c1a">&#9670;&nbsp;</a></span>getDepthImage()</h2>
+<a id="ae32effb1efba476ad3a5992f81ea1226"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae32effb1efba476ad3a5992f81ea1226">&#9670;&nbsp;</a></span>getDepthImage()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -480,8 +495,8 @@ using&#160;</td><td class="memItemRight" valign="bottom"><b>weak_ptr</b> = std::
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">std::optional&lt; std::reference_wrapper&lt; double &gt;&gt;&#160;</td>
-          <td class="paramname"><em>receiveTimeInSeconds</em> = <code>{}</code>&#160;</td>
+          <td class="paramtype">std::optional&lt; std::reference_wrapper&lt; std::chrono::nanoseconds &gt;&gt;&#160;</td>
+          <td class="paramname"><em>receiveTime</em> = <code>{}</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -501,14 +516,14 @@ using&#160;</td><td class="memItemRight" valign="bottom"><b>weak_ptr</b> = std::
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">camName</td><td>name of the camera </td></tr>
     <tr><td class="paramdir">[out]</td><td class="paramname">depthImg</td><td>depth image as a cv Mat object </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">receiveTimeInSeconds</td><td>time at which the measurement was received</td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">receiveTime</td><td>time at which the measurement was received</td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section warning"><dt>Warning</dt><dd>the size is decided at the configuration and remains fixed, and internal checks must be done at the implementation level by the Derived class. This means that the user must pass a resized argument "depthImg" to this method</dd></dl>
 <dl class="section return"><dt>Returns</dt><dd>true/false in case of success/failure </dd></dl>
 
-<p>Reimplemented from <a class="el" href="classBipedalLocomotion_1_1RobotInterface_1_1ICameraBridge.html#ad267af952a3bd668f0b2bf83e72b9396">BipedalLocomotion::RobotInterface::ICameraBridge</a>.</p>
+<p>Reimplemented from <a class="el" href="classBipedalLocomotion_1_1RobotInterface_1_1ICameraBridge.html#a9d35dbe20aa0288b6c33320fcee867d4">BipedalLocomotion::RobotInterface::ICameraBridge</a>.</p>
 
 </div>
 </div>

@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['zeroorderspline_1930',['ZeroOrderSpline',['../classBipedalLocomotion_1_1Math_1_1ZeroOrderSpline.html',1,'BipedalLocomotion::Math']]],
-  ['zerovelocitystatedynamics_1931',['ZeroVelocityStateDynamics',['../classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1ZeroVelocityStateDynamics.html',1,'BipedalLocomotion::Estimators::RobotDynamicsEstimator']]],
-  ['zmptrajectory_1932',['ZMPTrajectory',['../structBipedalLocomotion_1_1Planners_1_1UnicycleTrajectoryPlannerOutput_1_1ZMPTrajectory.html',1,'BipedalLocomotion::Planners::UnicycleTrajectoryPlannerOutput']]]
+  ['zeroorderspline_1931',['ZeroOrderSpline',['../classBipedalLocomotion_1_1Math_1_1ZeroOrderSpline.html',1,'BipedalLocomotion::Math']]],
+  ['zerovelocitystatedynamics_1932',['ZeroVelocityStateDynamics',['../classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1ZeroVelocityStateDynamics.html',1,'BipedalLocomotion::Estimators::RobotDynamicsEstimator']]],
+  ['zmptrajectory_1933',['ZMPTrajectory',['../structBipedalLocomotion_1_1Planners_1_1UnicycleTrajectoryPlannerOutput_1_1ZMPTrajectory.html',1,'BipedalLocomotion::Planners::UnicycleTrajectoryPlannerOutput']]]
 ];

@@ -7,10 +7,12 @@ var classBipedalLocomotion_1_1Perception_1_1Capture_1_1RealSense =
     [ "getRGBCamerasList", "classBipedalLocomotion_1_1Perception_1_1Capture_1_1RealSense.html#a695730c79fe669bc96e2acf3c4581f7d", null ],
     [ "getRGBDCamerasList", "classBipedalLocomotion_1_1Perception_1_1Capture_1_1RealSense.html#a372ff881b653738c47cd3a9a86aaae2e", null ],
     [ "getPCLDevicesList", "classBipedalLocomotion_1_1Perception_1_1Capture_1_1RealSense.html#a0a5f1fdea19cb505b2fee9d1dd49be8d", null ],
-    [ "getColorImage", "classBipedalLocomotion_1_1Perception_1_1Capture_1_1RealSense.html#ada0555f7854b7465ca7731f2222c0b64", null ],
-    [ "getDepthImage", "classBipedalLocomotion_1_1Perception_1_1Capture_1_1RealSense.html#a3ab4aed6fcb4d6109d0e4d3f4bcf9c1a", null ],
-    [ "getColorizedDepthImage", "classBipedalLocomotion_1_1Perception_1_1Capture_1_1RealSense.html#ad596a7b8a3d7089aa81f8dc6a6f59119", null ],
-    [ "getInfraredImage", "classBipedalLocomotion_1_1Perception_1_1Capture_1_1RealSense.html#a88c62614c1972810981b7fca3f23c462", null ],
-    [ "getPointCloud", "classBipedalLocomotion_1_1Perception_1_1Capture_1_1RealSense.html#a1389e7899a3dbbbfe9c7d552033edd43", null ],
+    [ "getColorImage", "classBipedalLocomotion_1_1Perception_1_1Capture_1_1RealSense.html#a3f988db4a66051f75f654bafae9f7fbd", null ],
+    [ "getDepthImage", "classBipedalLocomotion_1_1Perception_1_1Capture_1_1RealSense.html#ae32effb1efba476ad3a5992f81ea1226", null ],
+    [ "getColorizedDepthImage", "classBipedalLocomotion_1_1Perception_1_1Capture_1_1RealSense.html#aaa0482bc9ac31311e95c614d42217e30", null ],
+    [ "getColorizedDepthImage", "classBipedalLocomotion_1_1Perception_1_1Capture_1_1RealSense.html#a96c3c18fc7b117674ed2de45252d1128", null ],
+    [ "getInfraredImage", "classBipedalLocomotion_1_1Perception_1_1Capture_1_1RealSense.html#ada4159601b8af8568ae1f2fccd2578a0", null ],
+    [ "getInfraredImage", "classBipedalLocomotion_1_1Perception_1_1Capture_1_1RealSense.html#a261d41cb860d89d583c06ad40d57a240", null ],
+    [ "getPointCloud", "classBipedalLocomotion_1_1Perception_1_1Capture_1_1RealSense.html#aad4e7ed457727c5564e8633945faedb3", null ],
     [ "getMetaData", "classBipedalLocomotion_1_1Perception_1_1Capture_1_1RealSense.html#ae6a5ebde2bf5dcf758827a72b59c1c44", null ]
 ];
