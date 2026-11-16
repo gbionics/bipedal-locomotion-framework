@@ -38,6 +38,16 @@ class YarpRobotControl : public IRobotControl
 
 public:
     /**
+     * InteractionMode contains the supported interaction modes.
+     */
+    enum class InteractionMode
+    {
+        Stiff,
+        Compliant,
+        Unknown
+    };
+
+    /**
      * Constructor
      */
     YarpRobotControl();
@@ -80,6 +90,21 @@ public:
                          std::vector<std::pair<std::string, double>>& info) final;
 
     /**
+     * Get the current control mode for each joint.
+     * @param controlModes vector containing the control mode for each joint.
+     * @return True/False in case of success/failure.
+     */
+    bool getControlMode(std::vector<IRobotControl::ControlMode>& controlModes);
+
+
+    /**
+     * Get the current interaction mode for each joint.
+     * @param interactionModes vector containing the interaction mode for each joint.
+     * @return True/False in case of success/failure.
+     */
+    bool getInteractionMode(std::vector<InteractionMode>& interactionModes);
+
+    /**
      * Set the control mode.
      * @param controlModes vector containing the control mode for each joint.
      * @return True/False in case of success/failure.
@@ -94,6 +119,21 @@ public:
      * @warning Call this function if you want to control all the joint with the same control mode.
      */
     bool setControlMode(const IRobotControl::ControlMode& mode) final;
+
+    /**
+     * Set the interaction mode.
+     * @param interactionModes vector containing the interaction mode for each joint.
+     * @return True/False in case of success/failure.
+     */
+    bool setInteractionMode(
+        const std::vector<InteractionMode>& interactionModes);
+
+    /**
+     * Set the desired interaction mode.
+     * @param mode an interaction mode for all the joints.
+     * @return True/False in case of success/failure.
+     */
+    bool setInteractionMode(const InteractionMode& mode);
 
     /**
      * Set the control mode in an asynchronous thread.

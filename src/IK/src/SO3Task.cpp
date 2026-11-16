@@ -217,3 +217,8 @@ bool SO3Task::isValid() const
 {
     return m_isValid;
 }
+
+iDynTree::FrameIndex SO3Task::getFrameIndex() const
+{
+    return m_frameIndex;
+}

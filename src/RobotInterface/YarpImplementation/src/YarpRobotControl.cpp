@@ -17,6 +17,7 @@
 #include <yarp/dev/IControlMode.h>
 #include <yarp/dev/ICurrentControl.h>
 #include <yarp/dev/IEncodersTimed.h>
+#include <yarp/dev/IInteractionMode.h>
 #include <yarp/dev/IPWMControl.h>
 #include <yarp/dev/IPositionControl.h>
 #include <yarp/dev/IPositionDirect.h>
@@ -65,6 +66,7 @@ struct YarpRobotControl::Impl
     yarp::dev::IPWMControl* pwmInterface{nullptr}; /**< PWM control interface. */
     yarp::dev::ICurrentControl* currentInterface{nullptr}; /**< Current control interface. */
     yarp::dev::IControlMode* controlModeInterface{nullptr}; /**< Control mode interface. */
+    yarp::dev::IInteractionMode* interactionModeInterface{nullptr}; /**< Interaction mode interface. */
     yarp::dev::IAxisInfo* axisInfoInterface{nullptr}; /**< Axis info interface. */
     yarp::dev::IControlLimits* controlLimitsInterface{nullptr}; /**< Control limits interface. */
 
@@ -82,6 +84,8 @@ struct YarpRobotControl::Impl
     std::vector<yarp::conf::vocab32_t> controlModesYarp; /**< Vector containing the map between the
                                                              joint and the current yarp control mode
                                                           */
+    std::vector<InteractionMode> interactionModes;
+    std::vector<yarp::dev::InteractionModeEnum> interactionModesYarp;
 
     std::vector<std::string> axesName; /**< List containing the mapping between the joints index and
                                           the their name */
@@ -177,6 +181,39 @@ struct YarpRobotControl::Impl
         }
     }
 
+    static InteractionMode
+    YarpInteractionModeToInteractionMode(
+        const yarp::dev::InteractionModeEnum& interactionModeYarp)
+    {
+        switch (interactionModeYarp)
+        {
+        case yarp::dev::VOCAB_IM_STIFF:
+            return InteractionMode::Stiff;
+
+        case yarp::dev::VOCAB_IM_COMPLIANT:
+            return InteractionMode::Compliant;
+
+        default:
+            return InteractionMode::Unknown;
+        }
+    }
+
+    static yarp::dev::InteractionModeEnum
+    InteractionModeToYarpInteractionMode(const InteractionMode& interactionMode)
+    {
+        switch (interactionMode)
+        {
+        case InteractionMode::Stiff:
+            return yarp::dev::VOCAB_IM_STIFF;
+
+        case InteractionMode::Compliant:
+            return yarp::dev::VOCAB_IM_COMPLIANT;
+
+        default:
+            return yarp::dev::VOCAB_IM_UNKNOWN;
+        }
+    }
+
     bool getControlModes()
     {
         constexpr auto errorPrefix = "[YarpRobotControl::Impl::getControlModes]";
@@ -204,6 +241,126 @@ struct YarpRobotControl::Impl
         for (std::size_t i = 0; i < this->actuatedDOFs; i++)
         {
             this->controlModes[i] = YarpControlModeToControlMode(this->controlModesYarp[i]);
+        }
+
+        return true;
+    }
+
+    bool getInteractionModes()
+    {
+        constexpr auto errorPrefix = "[YarpRobotControl::Impl::getInteractionModes]";
+
+        if (this->interactionModeInterface == nullptr)
+        {
+            log()->error("{} The interaction mode I/F is not ready.", errorPrefix);
+            return false;
+        }
+
+        std::size_t counter = 0;
+        while (!this->interactionModeInterface->getInteractionModes(
+            this->interactionModesYarp.data()))
+        {
+            if (++counter == this->maxReadingAttempts)
+            {
+                log()->error("{} Error while reading the interaction modes.", errorPrefix);
+                return false;
+            }
+
+            std::this_thread::sleep_for(std::chrono::microseconds(this->readingTimeout));
+        }
+
+        for (std::size_t i = 0; i < this->actuatedDOFs; i++)
+        {
+            this->interactionModes[i]
+                = YarpInteractionModeToInteractionMode(this->interactionModesYarp[i]);
+        }
+
+        return true;
+    }
+
+    static const char* interactionModeToString(InteractionMode mode)
+    {
+        switch (mode)
+        {
+        case InteractionMode::Stiff:
+            return "Stiff";
+        case InteractionMode::Compliant:
+            return "Compliant";
+        default:
+            return "Unknown";
+        }
+    }
+
+    void logInteractionModeMismatches(const std::vector<InteractionMode>& requestedModes)
+    {
+        constexpr auto errorPrefix = "[YarpRobotControl::Impl::setInteractionModes]";
+
+        if (!this->interactionModeInterface->getInteractionModes(
+                this->interactionModesYarp.data()))
+        {
+            log()->error("{} Unable to read interaction modes after the failed set.", errorPrefix);
+            return;
+        }
+
+        bool mismatchFound = false;
+        for (std::size_t i = 0; i < this->actuatedDOFs; i++)
+        {
+            const auto actualMode
+                = YarpInteractionModeToInteractionMode(this->interactionModesYarp[i]);
+            if (requestedModes[i] == actualMode)
+            {
+                continue;
+            }
+
+            mismatchFound = true;
+            log()->error("{} Desired interaction mode for joint {}: {}, actual: {}",
+                         errorPrefix,
+                         this->axesName[i],
+                         interactionModeToString(requestedModes[i]),
+                         interactionModeToString(actualMode));
+        }
+
+        if (!mismatchFound)
+        {
+            log()->error("{} Readback matches the requested interaction modes, "
+                         "but setting them failed.",
+                         errorPrefix);
+        }
+    }
+
+    bool setInteractionModes(
+        const std::vector<InteractionMode>& interactionModes)
+    {
+        constexpr auto errorPrefix = "[YarpRobotControl::Impl::setInteractionModes]";
+
+        if (this->interactionModeInterface == nullptr)
+        {
+            log()->error("{} The interaction mode I/F is not ready.", errorPrefix);
+            return false;
+        }
+
+        if (interactionModes.size() != this->actuatedDOFs)
+        {
+            log()->error("{} The number of interaction modes ({}) does not match the number of "
+                         "actuated DoFs ({}).",
+                         errorPrefix,
+                         interactionModes.size(),
+                         this->actuatedDOFs);
+            return false;
+        }
+
+        for (std::size_t i = 0; i < this->actuatedDOFs; i++)
+        {
+            this->interactionModesYarp[i]
+                = InteractionModeToYarpInteractionMode(interactionModes[i]);
+        }
+
+        if (!this->interactionModeInterface->setInteractionModes(
+                this->interactionModesYarp.data()))
+        {
+            this->logInteractionModeMismatches(interactionModes);
+            log()->error("{} Error setting the interaction modes.", errorPrefix);
+            return false;
         }
 
         return true;
@@ -361,6 +518,12 @@ struct YarpRobotControl::Impl
             return false;
         }
 
+        if (!robotDevice->view(interactionModeInterface) || interactionModeInterface == nullptr)
+        {
+            log()->error("{} Cannot load the IInteractionMode interface.", errorPrefix);
+            return false;
+        }
+
         if (!robotDevice->view(axisInfoInterface) || axisInfoInterface == nullptr)
         {
             log()->error("{} Cannot load the IAxisInfo interface.", errorPrefix);
@@ -386,6 +549,8 @@ struct YarpRobotControl::Impl
         this->positionFeedback.resize(this->actuatedDOFs);
         this->controlModes.resize(this->actuatedDOFs);
         this->controlModesYarp.resize(this->actuatedDOFs);
+        this->interactionModes.resize(this->actuatedDOFs);
+        this->interactionModesYarp.resize(this->actuatedDOFs);
         this->axesName.resize(this->actuatedDOFs);
 
         // reserve vector for subset control
@@ -406,6 +571,12 @@ struct YarpRobotControl::Impl
         if (!this->getControlModes())
         {
             log()->error("{} Unable to get the control modes.", errorPrefix);
+            return false;
+        }
+
+        if (!this->getInteractionModes())
+        {
+            log()->error("{} Unable to get the interaction modes.", errorPrefix);
             return false;
         }
 
@@ -1014,6 +1185,31 @@ bool YarpRobotControl::initialize(std::weak_ptr<ParametersHandler::IParametersHa
     return ok;
 }
 
+bool YarpRobotControl::getControlMode(std::vector<IRobotControl::ControlMode>& controlModes)
+{
+    constexpr auto errorPrefix = "[YarpRobotControl::getControlMode]";
+    if (!m_pimpl->getControlModes()) {
+        log()->error("{} Unable to get the control modes.", errorPrefix);
+        return false;
+    }
+
+    controlModes = m_pimpl->controlModes;
+    return true;
+}
+
+bool YarpRobotControl::getInteractionMode(
+    std::vector<InteractionMode>& interactionModes)
+{
+    constexpr auto errorPrefix = "[YarpRobotControl::getInteractionMode]";
+    if (!m_pimpl->getInteractionModes()) {
+        log()->error("{} Unable to get the interaction modes.", errorPrefix);
+        return false;
+    }
+
+    interactionModes = m_pimpl->interactionModes;
+    return true;
+}
+
 bool YarpRobotControl::setControlMode(const std::vector<IRobotControl::ControlMode>& controlModes)
 {
     if (!m_pimpl->setControlModes(controlModes))
@@ -1033,6 +1229,25 @@ bool YarpRobotControl::setControlMode(const IRobotControl::ControlMode& mode)
     // create a vector containing the same control mode for all the joints
     const std::vector<IRobotControl::ControlMode> controlModes(m_pimpl->actuatedDOFs, mode);
     return this->setControlMode(controlModes);
+}
+
+bool YarpRobotControl::setInteractionMode(
+    const std::vector<InteractionMode>& interactionModes)
+{
+    if (!m_pimpl->setInteractionModes(interactionModes))
+    {
+        log()->error("[YarpRobotControl::setInteractionMode] Unable to set the interaction modes.");
+        return false;
+    }
+
+    m_pimpl->interactionModes = interactionModes;
+    return true;
+}
+
+bool YarpRobotControl::setInteractionMode(const InteractionMode& mode)
+{
+    const std::vector<InteractionMode> interactionModes(m_pimpl->actuatedDOFs, mode);
+    return this->setInteractionMode(interactionModes);
 }
 
 std::future<bool>

@@ -285,6 +285,60 @@ bool DinRailRobotControl::setImpedanceSetPoints(Eigen::Ref<const Eigen::VectorXd
     return true;
 }
 
+bool DinRailRobotControl::getImpedanceSetPoints(Eigen::Ref<Eigen::VectorXd> position,
+                                               Eigen::Ref<Eigen::VectorXd> velocity,
+                                               Eigen::Ref<Eigen::VectorXd> torque,
+                                               Eigen::Ref<Eigen::VectorXd> stiffness,
+                                               Eigen::Ref<Eigen::VectorXd> damping)
+{
+    constexpr auto errorPrefix = "[DinRailRobotControl::getImpedanceSetPoints]";
+
+    if (m_pimpl->impedanceInterface == nullptr)
+    {
+        log()->error("{} The impedance interface is not ready. Did you call setDriver()?",
+                     errorPrefix);
+        return false;
+    }
+
+    const auto n = static_cast<Eigen::Index>(m_pimpl->actuatedDOFs);
+    if (position.size() != n || velocity.size() != n || torque.size() != n || stiffness.size() != n
+        || damping.size() != n)
+    {
+        log()->error("{} Output vector size mismatch. Expected {} for all outputs. "
+                     "Got position={}, velocity={}, torque={}, stiffness={}, damping={}.",
+                     errorPrefix,
+                     n,
+                     position.size(),
+                     velocity.size(),
+                     torque.size(),
+                     stiffness.size(),
+                     damping.size());
+        return false;
+    }
+
+    if (!m_pimpl->impedanceInterface->getSetPoints(position, velocity, torque, stiffness, damping))
+    {
+        log()->error("{} Failed to get impedance setpoints.", errorPrefix);
+        return false;
+    }
+
+    constexpr double degToRad = M_PI / 180.0;
+    constexpr double radToDeg = 180.0 / M_PI;
+    for (std::size_t i = 0; i < m_pimpl->actuatedDOFs; ++i)
+    {
+        if (m_pimpl->jointTypes[i] == JointType::REVOLUTE)
+        {
+            const auto index = static_cast<Eigen::Index>(i);
+            position[index] *= degToRad;
+            velocity[index] *= degToRad;
+            stiffness[index] *= radToDeg;
+            damping[index] *= radToDeg;
+        }
+    }
+
+    return true;
+}
+
 bool DinRailRobotControl::setImpedanceSetPoints(Eigen::Ref<const Eigen::VectorXd> position,
                                                 Eigen::Ref<const Eigen::VectorXd> velocity,
                                                 Eigen::Ref<const Eigen::VectorXd> torque,
