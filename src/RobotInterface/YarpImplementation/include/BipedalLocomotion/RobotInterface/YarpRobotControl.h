@@ -85,7 +85,6 @@ public:
      * @return True/False in case of success/failure.
      */
     bool getControlMode(std::vector<IRobotControl::ControlMode>& controlModes);
-    
 
     /**
      * Set the control mode.
