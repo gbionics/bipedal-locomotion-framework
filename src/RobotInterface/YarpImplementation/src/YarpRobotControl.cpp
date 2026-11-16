@@ -278,6 +278,56 @@ struct YarpRobotControl::Impl
         return true;
     }
 
+    static const char* interactionModeToString(InteractionMode mode)
+    {
+        switch (mode)
+        {
+        case InteractionMode::Stiff:
+            return "Stiff";
+        case InteractionMode::Compliant:
+            return "Compliant";
+        default:
+            return "Unknown";
+        }
+    }
+
+    void logInteractionModeMismatches(const std::vector<InteractionMode>& requestedModes)
+    {
+        constexpr auto errorPrefix = "[YarpRobotControl::Impl::setInteractionModes]";
+
+        if (!this->interactionModeInterface->getInteractionModes(
+                this->interactionModesYarp.data()))
+        {
+            log()->error("{} Unable to read interaction modes after the failed set.", errorPrefix);
+            return;
+        }
+
+        bool mismatchFound = false;
+        for (std::size_t i = 0; i < this->actuatedDOFs; i++)
+        {
+            const auto actualMode
+                = YarpInteractionModeToInteractionMode(this->interactionModesYarp[i]);
+            if (requestedModes[i] == actualMode)
+            {
+                continue;
+            }
+
+            mismatchFound = true;
+            log()->error("{} Desired interaction mode for joint {}: {}, actual: {}",
+                         errorPrefix,
+                         this->axesName[i],
+                         interactionModeToString(requestedModes[i]),
+                         interactionModeToString(actualMode));
+        }
+
+        if (!mismatchFound)
+        {
+            log()->error("{} Readback matches the requested interaction modes, "
+                         "but setting them failed.",
+                         errorPrefix);
+        }
+    }
+
     bool setInteractionModes(
         const std::vector<InteractionMode>& interactionModes)
     {
@@ -308,6 +358,7 @@ struct YarpRobotControl::Impl
         if (!this->interactionModeInterface->setInteractionModes(
                 this->interactionModesYarp.data()))
         {
+            this->logInteractionModeMismatches(interactionModes);
             log()->error("{} Error setting the interaction modes.", errorPrefix);
             return false;
         }
