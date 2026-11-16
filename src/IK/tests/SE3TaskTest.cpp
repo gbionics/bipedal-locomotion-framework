@@ -141,6 +141,19 @@ TEST_CASE("SE3 Task")
             expectedB.tail<3>() = SO3Controller.getControl().coeffs();
 
             REQUIRE(b.isApprox(expectedB));
+
+            task.setAngularTrackingEnabled(false);
+            REQUIRE(task.update());
+            REQUIRE(task.size() == 6);
+            REQUIRE(task.getA().bottomRows(3).isZero());
+            REQUIRE(task.getB().tail(3).isZero());
+
+            task.setAngularTrackingEnabled(true);
+            REQUIRE(task.update());
+            REQUIRE(task.getA().middleCols(variablesHandler.getVariable(robotVelocity).offset,
+                                           variablesHandler.getVariable(robotVelocity).size)
+                        .bottomRows(3)
+                        .isApprox(jacobian.bottomRows(3)));
         }
 
 
