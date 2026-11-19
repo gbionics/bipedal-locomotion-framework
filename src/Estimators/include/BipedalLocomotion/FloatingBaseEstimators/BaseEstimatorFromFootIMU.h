@@ -16,6 +16,11 @@
 #include <manif/SE3.h>
 #include <manif/SO3.h>
 
+// YARP
+#include <yarp/sig/Vector.h>
+#include <yarp/os/BufferedPort.h>
+#include <yarp/os/Network.h>
+
 #include <memory>
 
 namespace BipedalLocomotion
@@ -30,6 +35,12 @@ struct BaseEstimatorFromFootIMUState
 {
     manif::SE3d basePose; /**< final output of the estimator - pose of the robot
                              root link. */
+    manif::SE3d footPose_L; /**< pose of the left foot */
+    manif::SE3d footPose_R; /**< pose of the right foot */
+    Eigen::Vector3d centerOfMassPosition;
+    std::vector<Eigen::Vector3d> stanceFootShadowCorners;
+    std::vector<Eigen::Vector3d> stanceFootCorners;
+    int supportCornerIndex;
 };
 
 /**
@@ -37,12 +48,16 @@ struct BaseEstimatorFromFootIMUState
  */
 struct BaseEstimatorFromFootIMUInput
 {
+    bool isLeftStance; /**< true if the left foot is in contact with the ground */
+    bool isRightStance; /**< true if the right foot is in contact with the ground */
     Eigen::VectorXd jointPositions; /**< vector of the robot joint positions */
     Eigen::VectorXd jointVelocities; /**< vector of the robot joint velocities */
-    manif::SE3d desiredFootPose; /**< desired orientation and position of the foot
-                                  as per footstep planner output */
-    manif::SO3d measuredRotation; /**< actual orientation of the foot measured by
-                                   on-board IMU */
+    manif::SE3d offsetStanceFootPose; /**< Optional offset orientation and position of the foot.
+                                      E.g. as per footstep planner output */
+    manif::SO3d measuredRotation_L; /**< actual orientation of the left foot measured by
+                                    on-board IMU */
+    manif::SO3d measuredRotation_R; /**< actual orientation of the right foot measured by
+                                    on-board IMU */
 };
 
 /**
@@ -50,13 +65,17 @@ struct BaseEstimatorFromFootIMUInput
  * kinematic chain given by the leg joints positions.
  *
  * This class assumes that the foot has a rectangular shape as shown in the following schematics
- *          +
- *    p2 __|__   p1   __
- *      |  |  |         |
- *   ___|__|__|___+     | FOOT
- *      |  |  |         | LENGTH
- *      |__|__|       __|
- *    p3   |     p4
+ *
+ *       FRONT
+ *          +X
+ *    p1 __|__  p0   __
+ *      |  |  |        |
+ * +Y___|__|__|___     | FOOT
+ *      |  |  |        | LENGTH
+ *      |__|__|      __|
+ *    p2   |    p3
+ *
+ *       HIND
  *
  *      |_____|
  *       FOOT
@@ -77,7 +96,7 @@ public:
     // clang-format off
     /**
      * Initialize the BaseEstimatorFromFootIMU block.
-     * The setModel and setStanceFootRF methods must be called before initialization.
+     * The setModel method must be called before initialization.
      * @param handler pointer to the parameter handler.
      * @note The following parameters are required
      * |   Parameter Name    |   Type   |                Description               | Mandatory |
@@ -132,6 +151,9 @@ private:
     BaseEstimatorFromFootIMUInput m_input; /**< Last input stored in the estimator */
     BaseEstimatorFromFootIMUState m_state; /**< Current state stored in the estimator */
 
+    yarp::os::BufferedPort<yarp::sig::Vector> m_port; /**< Port used to send the output of the
+                                                            estimator to the WalkingModule */
+
     // Geometric quantities of the foot
     double m_footWidth; /**< Lateral dimension of the robot foot */
     double m_footLength; /**< Frontal dimension of the robot foot */
@@ -139,50 +161,71 @@ private:
     /**
      * Define the 4 foot vertices in World reference frame:
      *
-     *        +
-     *  m_p2 __|__ m_p1   __
-     *      |  |  |         |
-     *   ___|__|__|___+     | FOOT
-     *      |  |  |         | LENGTH
-     *      |__|__|       __|
-     *  m_p3   |   m_p4
-     *
-     *      |_____|
-     *       FOOT
-     *       WIDTH
+     *         +x              FRONT
+     *   m_p1 __|__ m_p0   __
+     *       |  |  |         |
+     *  +y___|__|__|___      | FOOT
+     *       |  |  |         | LENGTH
+     *       |__|__|       __|
+     *   m_p2   |   m_p3
+     *                         HIND
+     *       |_____|
+     *        FOOT
+     *        WIDTH
      *
      */
-    std::vector<Eigen::Vector3d> m_cornersInLocalFrame; /**< this implementation is considering
+    std::vector<Eigen::Vector3d> m_cornersInInertialFrame; /**< this implementation is considering
                                                            rectangular feet (4 corners) */
-    std::vector<Eigen::Vector3d> m_transformedFootCorners; /**< vector of the foot corners
+    std::vector<Eigen::Vector3d> m_tiltedFootCorners; /**< vector of the foot corners
                                                               transformed into the inertial frame */
-    Eigen::Vector3d m_desiredTranslation; /**< the position vector extracted from the
-                                             `desiredFootPose` */
-    Eigen::Matrix3d m_desiredRotation; /**< the rotation matrix extracted from the `desiredFootPose`
-                                        */
-    Eigen::Vector3d m_desiredRPY; /**< the rotation matrix extracted from the `desiredFootPose`
+    Eigen::Vector3d m_offsetTranslation; /**< the position vector extracted from the
+                                             `offsetFootPose` */
+    Eigen::Matrix3d m_offsetRotation; /**< the rotation matrix extracted from the `offsetFootPose`
+                                       */
+    Eigen::Vector3d m_offsetRPY; /**< the rotation matrix extracted from the `offsetFootPose`
                                      converted into Euler angles */
     Eigen::Matrix3d m_measuredRotation; /**< the measured foot orientation casted manif::SO3d -->
                                            Eigen::Matrix3d */
     Eigen::Vector3d m_measuredRPY; /**< the measured foot orientation converted into Euler angles */
     manif::SO3d m_measuredRotationCorrected; /**< rotation matrix that employs: measured Roll,
-                                                measured Pitch, desired Yaw */
+                                                measured Pitch, offset Yaw */
+    manif::SO3d m_offsetRotationCasted;
+    manif::SO3d m_measuredTilt;
     manif::SE3d m_measuredFootPose; /**< the final foot pose matrix obtained through measured and
-                                       desired quantities */
-    manif::SE3d m_frame_H_link; /**< coordinate change matrix from foot link frame to foot sole frame
-                                 */
+                                       offset quantities */
+    manif::SE3d m_T_walk;
+    manif::SE3d m_T_yawDrift;
+    double m_yawOld;
+    manif::SE3d m_footFrame_H_link_L; /**< coordinate change matrix from left foot link frame to
+                                       * left foot sole frame
+                                       */
+    manif::SE3d m_footFrame_H_link_R; /**< coordinate change matrix from right foot link frame to
+                                       * right foot sole frame
+                                       */
     Eigen::Vector3d m_gravity;
+    const Eigen::Vector3d m_noTras{0.0, 0.0, 0.0};
     iDynTree::KinDynComputations m_kinDyn;
     iDynTree::Model m_model;
-    iDynTree::LinkIndex m_linkIndex;
-    int m_frameIndex;
-    std::string m_frameName;
-    int m_baseFrame; /**< Index of the frame whose pose needs to be estimated */
-    std::string m_footFrameName; /**< reference frames of the possible stance feet (whose
-                                    orientations are measured)*/
-    bool m_isOutputValid{false};
+    iDynTree::LinkIndex m_stanceLinkIndex;
+
+    std::string m_baseFrameName; /**< Base link of the robot (whose pose must be estimated) */
+    int m_baseFrameIndex; /**< Index of the frame whose pose needs to be estimated */
+
+    std::string m_footFrameName_L; /**< reference frame of the left stance foot (whose
+                                    orientation is measured)*/
+    int m_footFrameIndex_L; /**< Index of the left foot frame */
+
+    std::string m_footFrameName_R; /**< reference frame of the right stance foot (whose
+                                    orientation is measured)*/
+    int m_footFrameIndex_R; /**< Index of the right foot frame */
+
+    bool m_isLastStanceFoot_L{false}; /**< true if the last stance foot was the left one */
+    bool m_isLastStanceFoot_R{false}; /**< true if the last stance foot was the right one */
+
     bool m_isModelSet{false};
     bool m_isInitialized{false};
+    bool m_isInputSet{false};
+    bool m_isOutputValid{false};
 };
 
 } // namespace Estimators
