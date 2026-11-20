@@ -83,6 +83,9 @@ public:
      * Set the control mode.
      * @param controlModes vector containing the control mode for each joint.
      * @return True/False in case of success/failure.
+     * @note The joints that are in hardware fault only accept ForceIdle: any other mode is not
+     * sent to them (a warning is printed) so that they do not prevent the other joints from being
+     * set. The requested mode is stored anyway, hence the references keep being accepted.
      * @warning At the current stage only revolute joints are supported.
      */
     bool setControlMode(const std::vector<IRobotControl::ControlMode>& controlModes) final;
@@ -94,6 +97,36 @@ public:
      * @warning Call this function if you want to control all the joint with the same control mode.
      */
     bool setControlMode(const IRobotControl::ControlMode& mode) final;
+
+    /**
+     * Set the control mode of a subset of joints identified by their indices.
+     * The control mode of all the other joints is not changed and no RPC is sent for them.
+     * @param controlModes control mode of each joint of the subset (size must match jointIndices).
+     * @param jointIndices indices of the joints (into the full joint list).
+     * @return True/False in case of success/failure.
+     * @note IRobotControl::ControlMode::HardwareFault and IRobotControl::ControlMode::Unknown
+     * cannot be set. Use IRobotControl::ControlMode::ForceIdle to acknowledge a hardware fault.
+     * @note The joints that are in hardware fault only accept ForceIdle: any other mode is not
+     * sent to them (a warning is printed) so that they do not prevent the other joints from being
+     * set. The requested mode is stored anyway, hence the references keep being accepted.
+     */
+    bool setControlMode(const std::vector<IRobotControl::ControlMode>& controlModes,
+                        const std::vector<int>& jointIndices) final;
+
+    /**
+     * Set the control mode of a subset of joints identified by their names.
+     * The control mode of all the other joints is not changed and no RPC is sent for them.
+     * @param controlModes control mode of each joint of the subset (size must match jointNames).
+     * @param jointNames names of the joints.
+     * @return True/False in case of success/failure.
+     * @note IRobotControl::ControlMode::HardwareFault and IRobotControl::ControlMode::Unknown
+     * cannot be set. Use IRobotControl::ControlMode::ForceIdle to acknowledge a hardware fault.
+     * @note The joints that are in hardware fault only accept ForceIdle: any other mode is not
+     * sent to them (a warning is printed) so that they do not prevent the other joints from being
+     * set. The requested mode is stored anyway, hence the references keep being accepted.
+     */
+    bool setControlMode(const std::vector<IRobotControl::ControlMode>& controlModes,
+                        const std::vector<std::string>& jointNames) final;
 
     /**
      * Set the control mode in an asynchronous thread.

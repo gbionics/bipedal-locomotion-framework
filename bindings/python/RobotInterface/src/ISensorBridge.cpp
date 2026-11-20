@@ -42,6 +42,8 @@ void CreateISensorBridge(pybind11::module& module)
         .def_readwrite("is_cartesian_wrench_enabled",
                        &SensorBridgeOptions::isCartesianWrenchEnabled)
         .def_readwrite("is_battery_enabled", &SensorBridgeOptions::isBatteryEnabled)
+        .def_readwrite("is_joint_control_mode_enabled",
+                       &SensorBridgeOptions::isJointControlModeEnabled)
         .def_readwrite("nr_joints", &SensorBridgeOptions::nrJoints);
 
     py::class_<SensorLists>(module, "SensorLists")

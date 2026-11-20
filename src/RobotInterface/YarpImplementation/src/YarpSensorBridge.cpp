@@ -58,6 +58,13 @@ bool YarpSensorBridge::initialize(std::weak_ptr<const IParametersHandler> handle
         log()->info("{} Motor temperature sensors will not be streamed.", logPrefix);
     }
 
+    if (!ptr->getParameter("stream_joint_control_modes",
+                           m_pimpl->metaData.bridgeOptions.isJointControlModeEnabled))
+    {
+        log()->info("{} Unable to get stream_joint_control_modes. Set to false by default",
+                    logPrefix);
+    }
+
     bool ret{true};
     ret = m_pimpl->subConfigLoader("stream_joint_states",
                                    "RemoteControlBoardRemapper",
@@ -179,6 +186,14 @@ bool YarpSensorBridge::initialize(std::weak_ptr<const IParametersHandler> handle
         log()->info("{} Skipping the configuration of Batteries. YarpSensorBridge "
                     "will not stream battery measures.",
                     logPrefix);
+    }
+
+    if (m_pimpl->metaData.bridgeOptions.isJointControlModeEnabled
+        && !m_pimpl->metaData.bridgeOptions.isJointSensorsEnabled)
+    {
+        log()->error("{} 'stream_joint_control_modes' requires 'stream_joint_states' to be true.",
+                     logPrefix);
+        return false;
     }
 
     m_pimpl->bridgeInitialized = true;
@@ -1231,6 +1246,76 @@ bool YarpSensorBridge::getMotorTemperatures(Eigen::Ref<Eigen::VectorXd> motorTem
     if (receiveTimeInSeconds)
         receiveTimeInSeconds.value().get()
             = m_pimpl->controlBoardRemapperMeasures.receivedTimeInSeconds;
+
+    return true;
+}
+
+bool YarpSensorBridge::getJointControlModes(std::vector<ControlMode>& controlModes,
+                                            OptionalDoubleRef receiveTimeInSeconds)
+{
+    constexpr auto logPrefix = "[YarpSensorBridge::getJointControlModes]";
+    if (!m_pimpl->checkValid(logPrefix))
+    {
+        return false;
+    }
+
+    if (!m_pimpl->metaData.bridgeOptions.isJointControlModeEnabled)
+    {
+        log()->error("{} Please set 'stream_joint_control_modes' to true before calling this "
+                     "method.",
+                     logPrefix);
+        return false;
+    }
+
+    const auto& measures = m_pimpl->controlBoardRemapperMeasures;
+    if (!measures.jointControlModesValid)
+    {
+        return false;
+    }
+
+    controlModes = measures.jointControlModes;
+    if (receiveTimeInSeconds)
+        receiveTimeInSeconds.value().get() = measures.receivedTimeInSeconds;
+
+    return true;
+}
+
+bool YarpSensorBridge::getJointControlMode(const std::string& jointName,
+                                           ControlMode& controlMode,
+                                           OptionalDoubleRef receiveTimeInSeconds)
+{
+    constexpr auto logPrefix = "[YarpSensorBridge::getJointControlMode]";
+    if (!m_pimpl->checkValid(logPrefix))
+    {
+        return false;
+    }
+
+    if (!m_pimpl->metaData.bridgeOptions.isJointControlModeEnabled)
+    {
+        log()->error("{} Please set 'stream_joint_control_modes' to true before calling this "
+                     "method.",
+                     logPrefix);
+        return false;
+    }
+
+    const auto& measures = m_pimpl->controlBoardRemapperMeasures;
+    if (!measures.jointControlModesValid)
+    {
+        return false;
+    }
+
+    int idx;
+    if (!m_pimpl->getIndexFromVector(m_pimpl->metaData.sensorsList.jointsList, jointName, idx))
+    {
+        log()->error("{} {} could not be found in the configured list of joints.",
+                     logPrefix,
+                     jointName);
+        return false;
+    }
+
+    controlMode = measures.jointControlModes[idx];
+    if (receiveTimeInSeconds)
+        receiveTimeInSeconds.value().get() = measures.receivedTimeInSeconds;
 
     return true;
 }

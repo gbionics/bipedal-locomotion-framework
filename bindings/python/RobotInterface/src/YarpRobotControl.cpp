@@ -92,6 +92,16 @@ void CreateYarpRobotControl(pybind11::module& module)
              py::overload_cast<const IRobotControl::ControlMode&>(
                  &YarpRobotControl::setControlMode),
              py::arg("control_mode"))
+        .def("set_control_mode",
+             py::overload_cast<const std::vector<IRobotControl::ControlMode>&,
+                               const std::vector<int>&>(&YarpRobotControl::setControlMode),
+             py::arg("control_modes"),
+             py::arg("joint_indices"))
+        .def("set_control_mode",
+             py::overload_cast<const std::vector<IRobotControl::ControlMode>&,
+                               const std::vector<std::string>&>(&YarpRobotControl::setControlMode),
+             py::arg("control_modes"),
+             py::arg("joint_names"))
         .def("get_joint_list", &YarpRobotControl::getJointList)
         .def("is_valid", &YarpRobotControl::isValid)
         .def("get_joint_limits", [](YarpRobotControl& impl) {

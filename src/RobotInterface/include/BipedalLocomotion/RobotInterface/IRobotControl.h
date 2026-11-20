@@ -11,11 +11,13 @@
 #include <future>
 #include <memory>
 #include <optional>
+#include <string>
 #include <vector>
 
 #include <Eigen/Dense>
 
 #include <BipedalLocomotion/ParametersHandler/IParametersHandler.h>
+#include <BipedalLocomotion/RobotInterface/ControlMode.h>
 
 namespace BipedalLocomotion
 {
@@ -30,18 +32,10 @@ class IRobotControl
 public:
     /**
      * ControlMode contains the supported control mode.
+     * @note It is an alias of BipedalLocomotion::RobotInterface::ControlMode, kept for backward
+     * compatibility.
      */
-    enum class ControlMode
-    {
-        Position,
-        PositionDirect,
-        Velocity,
-        Torque,
-        PWM,
-        Current,
-        Idle,
-        Unknown
-    };
+    using ControlMode = ::BipedalLocomotion::RobotInterface::ControlMode;
 
     using unique_ptr = std::unique_ptr<IRobotControl>;
 
@@ -158,6 +152,26 @@ public:
      * @warning Call this function if you want to control all the joint with the same control mode.
      */
     virtual bool setControlMode(const IRobotControl::ControlMode& mode) = 0;
+
+    /**
+     * Set the control mode of a subset of joints identified by their indices.
+     * The control mode of all the other joints is not changed.
+     * @param controlModes control mode of each joint of the subset (size must match jointIndices).
+     * @param jointIndices indices of the joints (into the full joint list).
+     * @return True/False in case of success/failure.
+     */
+    virtual bool setControlMode(const std::vector<IRobotControl::ControlMode>& controlModes,
+                                const std::vector<int>& jointIndices) = 0;
+
+    /**
+     * Set the control mode of a subset of joints identified by their names.
+     * The control mode of all the other joints is not changed.
+     * @param controlModes control mode of each joint of the subset (size must match jointNames).
+     * @param jointNames names of the joints.
+     * @return True/False in case of success/failure.
+     */
+    virtual bool setControlMode(const std::vector<IRobotControl::ControlMode>& controlModes,
+                                const std::vector<std::string>& jointNames) = 0;
 
     /**
      * Set the control mode in an asynchronous thread.

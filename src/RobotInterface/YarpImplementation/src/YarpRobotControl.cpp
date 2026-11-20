@@ -6,9 +6,14 @@
  */
 
 #include <algorithm>
+#include <atomic>
 #include <cmath>
 #include <future>
+#include <limits>
 #include <mutex>
+#include <numeric>
+#include <string>
+#include <string_view>
 #include <thread>
 #include <unordered_map>
 
@@ -24,10 +29,11 @@
 #include <yarp/dev/IVelocityControl.h>
 #include <yarp/dev/PolyDriver.h>
 
+#include <BipedalLocomotion/RobotInterface/JointType.h>
+#include <BipedalLocomotion/RobotInterface/YarpHelper.h>
 #include <BipedalLocomotion/RobotInterface/YarpRobotControl.h>
 #include <BipedalLocomotion/System/Clock.h>
 #include <BipedalLocomotion/TextLogging/Logger.h>
-#include <BipedalLocomotion/RobotInterface/JointType.h>
 
 using namespace BipedalLocomotion::RobotInterface;
 
@@ -115,67 +121,9 @@ struct YarpRobotControl::Impl
     Eigen::VectorXd subsetRefs; /**< Scratch: converted reference values for subset calls. */
     std::vector<int> subsetJointIndices; /**< Scratch: joint indices for name-based subset calls. */
 
-    static IRobotControl::ControlMode
-    YarpControlModeToControlMode(const yarp::conf::vocab32_t& controlModeYarp)
-    {
-        switch (controlModeYarp)
-        {
-        case VOCAB_CM_POSITION:
-            return IRobotControl::ControlMode::Position;
-
-        case VOCAB_CM_POSITION_DIRECT:
-            return IRobotControl::ControlMode::PositionDirect;
-
-        case VOCAB_CM_VELOCITY:
-            return IRobotControl::ControlMode::Velocity;
-
-        case VOCAB_CM_TORQUE:
-            return IRobotControl::ControlMode::Torque;
-
-        case VOCAB_CM_PWM:
-            return IRobotControl::ControlMode::PWM;
-
-        case VOCAB_CM_CURRENT:
-            return IRobotControl::ControlMode::Current;
-
-        case VOCAB_CM_IDLE:
-            return IRobotControl::ControlMode::Idle;
-
-        default:
-            return IRobotControl::ControlMode::Unknown;
-        }
-    }
-
-    static yarp::conf::vocab32_t
-    ControlModeToYarpControlMode(const IRobotControl::ControlMode& controlMode)
-    {
-        switch (controlMode)
-        {
-        case IRobotControl::ControlMode::Position:
-            return VOCAB_CM_POSITION;
-
-        case IRobotControl::ControlMode::PositionDirect:
-            return VOCAB_CM_POSITION_DIRECT;
-
-        case IRobotControl::ControlMode::Velocity:
-            return VOCAB_CM_VELOCITY;
-
-        case IRobotControl::ControlMode::Torque:
-            return VOCAB_CM_TORQUE;
-
-        case IRobotControl::ControlMode::PWM:
-            return VOCAB_CM_PWM;
-
-        case IRobotControl::ControlMode::Current:
-            return VOCAB_CM_CURRENT;
-
-        case IRobotControl::ControlMode::Idle:
-            return VOCAB_CM_IDLE;
-
-        default:
-            return VOCAB_CM_UNKNOWN;
-        }
-    }
+    /** Time of the last warning about the joints in hardware fault [ns]. */
+    std::atomic<std::chrono::nanoseconds::rep> lastHardwareFaultWarning{
+        std::numeric_limits<std::chrono::nanoseconds::rep>::min()};
 
     bool getControlModes()
     {
@@ -203,13 +151,170 @@ struct YarpRobotControl::Impl
 
         for (std::size_t i = 0; i < this->actuatedDOFs; i++)
         {
-            this->controlModes[i] = YarpControlModeToControlMode(this->controlModesYarp[i]);
+            this->controlModes[i] = fromYarpControlMode(this->controlModesYarp[i]);
         }
 
         return true;
     }
 
+    /**
+     * Return true if the control mode can be set to a joint. HardwareFault can only be read.
+     */
+    static bool canBeSet(const IRobotControl::ControlMode& mode)
+    {
+        return mode != IRobotControl::ControlMode::HardwareFault;
+    }
+
+    /**
+     * Rebuild the indices of the joints associated to each control mode from controlModes.
+     */
+    void updateControlModeIndices()
+    {
+        for (auto& [mode, indices] : this->desiredJointValuesAndMode.index)
+        {
+            indices.clear();
+        }
+
+        for (std::size_t i = 0; i < this->actuatedDOFs; i++)
+        {
+            this->desiredJointValuesAndMode.index[this->controlModes[i]].push_back(i);
+        }
+
+        for (const auto& [mode, indices] : this->desiredJointValuesAndMode.index)
+        {
+            this->desiredJointValuesAndMode.value[mode].resize(indices.size());
+        }
+
+        this->positionControlRefSpeeds.resize(
+            this->desiredJointValuesAndMode.index[IRobotControl::ControlMode::Position].size());
+    }
+
+    /**
+     * Return the names of the joints of jointIndices that are in hardware fault. The control modes
+     * are read from the device, which for the network clients means from the state stream, i.e.
+     * no RPC is performed. An empty string is returned if the control modes cannot be read.
+     */
+    std::string jointsInHardwareFault(const std::vector<int>& jointIndices)
+    {
+        std::string joints;
+        std::vector<yarp::conf::vocab32_t> measuredModes(this->actuatedDOFs);
+        if (this->controlModeInterface == nullptr
+            || !this->controlModeInterface->getControlModes(measuredModes.data()))
+        {
+            return joints;
+        }
+
+        for (const int idx : jointIndices)
+        {
+            if (measuredModes[idx] == VOCAB_CM_HW_FAULT)
+            {
+                joints += " '" + this->axesName[idx] + "'";
+            }
+        }
+        return joints;
+    }
+
+    /**
+     * Warn that the references of the joints in hardware fault are ignored. The warning is
+     * throttled since it is raised at every control cycle while the joints are in fault.
+     */
+    void warnReferencesIgnored(std::string_view errorPrefix, const std::string& joints)
+    {
+        constexpr auto period = std::chrono::nanoseconds(std::chrono::seconds(1)).count();
+        const auto now = BipedalLocomotion::clock().now().count();
+        auto last = this->lastHardwareFaultWarning.load();
+        if ((last != std::numeric_limits<std::chrono::nanoseconds::rep>::min()
+             && now - last < period)
+            || !this->lastHardwareFaultWarning.compare_exchange_strong(last, now))
+        {
+            return;
+        }
+        log()->warn("{} The following joints are in hardware fault:{}. Their references are "
+                    "ignored, the other joints are controlled.",
+                    errorPrefix,
+                    joints);
+    }
+
+    /**
+     * Set the control mode of the joints of jointIndices. A joint in hardware fault only accepts
+     * ForceIdle, hence it is skipped with a warning so that it does not prevent the other joints
+     * from being set.
+     */
+    bool sendControlModes(const std::vector<int>& jointIndices,
+                          const std::vector<IRobotControl::ControlMode>& controlModes,
+                          std::string_view errorPrefix)
+    {
+        // For the network clients the control modes are read from the state stream, hence this
+        // is not an RPC. If they cannot be read, all the joints are set.
+        std::vector<yarp::conf::vocab32_t> measuredModes(this->actuatedDOFs);
+        const bool measured = this->controlModeInterface->getControlModes(measuredModes.data());
+
+        std::vector<int> joints;
+        std::vector<yarp::conf::vocab32_t> modes;
+        joints.reserve(jointIndices.size());
+        modes.reserve(jointIndices.size());
+        std::string faultedJoints;
+        for (std::size_t i = 0; i < jointIndices.size(); i++)
+        {
+            const int idx = jointIndices[i];
+            const auto mode = toYarpControlMode(controlModes[i]);
+            if (measured && measuredModes[idx] == VOCAB_CM_HW_FAULT && mode != VOCAB_CM_FORCE_IDLE)
+            {
+                faultedJoints += " '" + this->axesName[idx] + "'";
+                continue;
+            }
+            joints.push_back(idx);
+            modes.push_back(mode);
+        }
+
+        if (!faultedJoints.empty())
+        {
+            log()->warn("{} The following joints are in hardware fault:{}. Their control mode is "
+                        "not changed since they only accept ForceIdle, the other joints are set.",
+                        errorPrefix,
+                        faultedJoints);
+        }
+
+        if (joints.empty())
+        {
+            return true;
+        }
+
+        const bool ok
+            = joints.size() == this->actuatedDOFs
+                  ? this->controlModeInterface->setControlModes(modes.data())
+                  : this->controlModeInterface->setControlModes(static_cast<int>(joints.size()),
+                                                                joints.data(),
+                                                                modes.data());
+        if (!ok)
+        {
+            log()->error("{} Error settings the control mode.", errorPrefix);
+            return false;
+        }
+        return true;
+    }
+
     bool setControlModes(const std::vector<IRobotControl::ControlMode>& controlModes)
+    {
+        constexpr auto errorPrefix = "[YarpRobotControl::Impl::setControlModes]";
+
+        if (controlModes.size() != this->actuatedDOFs)
+        {
+            log()->error("{} The size of the control modes ({}) does not match the number of "
+                         "actuated DoFs ({}).",
+                         errorPrefix,
+                         controlModes.size(),
+                         this->actuatedDOFs);
+            return false;
+        }
+
+        std::vector<int> jointIndices(this->actuatedDOFs);
+        std::iota(jointIndices.begin(), jointIndices.end(), 0);
+        return this->setControlModesSubset(controlModes, jointIndices);
+    }
+
+    bool setControlModesSubset(const std::vector<IRobotControl::ControlMode>& controlModes,
+                               const std::vector<int>& jointIndices)
     {
         constexpr auto errorPrefix = "[YarpRobotControl::Impl::setControlModes]";
 
@@ -219,40 +324,51 @@ struct YarpRobotControl::Impl
             return false;
         }
 
-        // clear all the stored control modes
-        this->desiredJointValuesAndMode.index[IRobotControl::ControlMode::Position].clear();
-        this->desiredJointValuesAndMode.index[IRobotControl::ControlMode::PositionDirect].clear();
-        this->desiredJointValuesAndMode.index[IRobotControl::ControlMode::Velocity].clear();
-        this->desiredJointValuesAndMode.index[IRobotControl::ControlMode::Torque].clear();
-        this->desiredJointValuesAndMode.index[IRobotControl::ControlMode::PWM].clear();
-        this->desiredJointValuesAndMode.index[IRobotControl::ControlMode::Current].clear();
-        this->desiredJointValuesAndMode.index[IRobotControl::ControlMode::Idle].clear();
-
-        for (std::size_t i = 0; i < this->actuatedDOFs; i++)
+        if (controlModes.size() != jointIndices.size())
         {
-            // convert the control mode into Yarp control mode
-            this->controlModesYarp[i] = ControlModeToYarpControlMode(controlModes[i]);
-
-            // store the joint associated to a specific control mode
-            this->desiredJointValuesAndMode.index[controlModes[i]].push_back(i);
-        }
-
-        // set the control mode
-        if (!this->controlModeInterface->setControlModes(this->controlModesYarp.data()))
-        {
-            log()->error("{} Error settings the control mode.", errorPrefix);
+            log()->error("{} The size of the control modes ({}) does not match the size of the "
+                         "joint indices ({}).",
+                         errorPrefix,
+                         controlModes.size(),
+                         jointIndices.size());
             return false;
         }
 
-        // resize the desired joint value vector associated to each control mode
-        for (const auto& [mode, indices] : this->desiredJointValuesAndMode.index)
+        for (std::size_t i = 0; i < jointIndices.size(); i++)
         {
-            this->desiredJointValuesAndMode.value[mode].resize(indices.size());
+            const int idx = jointIndices[i];
+            if (idx < 0 || static_cast<std::size_t>(idx) >= this->actuatedDOFs)
+            {
+                log()->error("{} Joint index {} is out of range [0, {}).",
+                             errorPrefix,
+                             idx,
+                             this->actuatedDOFs);
+                return false;
+            }
+
+            if (!canBeSet(controlModes[i]))
+            {
+                log()->error("{} The HardwareFault control mode cannot be set (joint '{}'). Use "
+                             "ForceIdle to acknowledge a hardware fault.",
+                             errorPrefix,
+                             this->axesName[idx]);
+                return false;
+            }
         }
 
-        // resize the position control reference speed vector
-        this->positionControlRefSpeeds.resize(
-            this->desiredJointValuesAndMode.index[IRobotControl::ControlMode::Position].size());
+        if (!this->sendControlModes(jointIndices, controlModes, errorPrefix))
+        {
+            return false;
+        }
+
+        // The requested mode is stored also for the joints in hardware fault, so that the
+        // references keep being accepted for the other joints and they are used as soon as the
+        // joint is recovered in that control mode.
+        for (std::size_t i = 0; i < jointIndices.size(); i++)
+        {
+            this->controlModes[jointIndices[i]] = controlModes[i];
+        }
+        this->updateControlModeIndices();
 
         return true;
     }
@@ -633,12 +749,25 @@ struct YarpRobotControl::Impl
                 continue;
             }
 
-            if (mode == IRobotControl::ControlMode::Idle)
+            if (mode == IRobotControl::ControlMode::Idle
+                || mode == IRobotControl::ControlMode::ForceIdle)
             {
                 continue;
             }
 
-            else if (mode == IRobotControl::ControlMode::Unknown)
+            else if (mode == IRobotControl::ControlMode::HardwareFault)
+            {
+                // the joints were already in hardware fault when the driver was set: they cannot
+                // be controlled, but this must not prevent the other joints from being controlled
+                std::string joints = "";
+                for (const auto& index : indices)
+                {
+                    joints += " '" + this->axesName[index] + "'";
+                }
+                this->warnReferencesIgnored(errorPrefix, joints);
+                continue;
+
+            } else if (mode == IRobotControl::ControlMode::Unknown)
             {
                 std::string joints = "";
                 for (const auto& index : indices)
@@ -721,8 +850,15 @@ struct YarpRobotControl::Impl
                                      this->desiredJointValuesAndMode.value[mode].data()))
 
             {
-                log()->error("{} Unable to set the desired joint values.", errorPrefix);
-                return false;
+                // The devices skip the joints in hardware fault and apply the references to the
+                // other ones, but they report a failure.
+                const auto faultedJoints = this->jointsInHardwareFault(indices);
+                if (faultedJoints.empty())
+                {
+                    log()->error("{} Unable to set the desired joint values.", errorPrefix);
+                    return false;
+                }
+                this->warnReferencesIgnored(errorPrefix, faultedJoints);
             }
         }
         return true;
@@ -759,9 +895,13 @@ struct YarpRobotControl::Impl
         }
 
         if (controlMode == IRobotControl::ControlMode::Unknown
-            || controlMode == IRobotControl::ControlMode::Idle)
+            || controlMode == IRobotControl::ControlMode::Idle
+            || controlMode == IRobotControl::ControlMode::ForceIdle
+            || controlMode == IRobotControl::ControlMode::HardwareFault)
         {
-            log()->error("{} Cannot set references for Idle or Unknown control mode.", errorPrefix);
+            log()->error("{} Cannot set references for Idle, ForceIdle, HardwareFault or Unknown "
+                         "control mode.",
+                         errorPrefix);
             return false;
         }
 
@@ -940,8 +1080,15 @@ struct YarpRobotControl::Impl
 
         if (!this->control(controlMode)(n, jointIndices.data(), this->subsetRefs.data()))
         {
-            log()->error("{} Unable to set the desired joint values.", errorPrefix);
-            return false;
+            // The devices skip the joints in hardware fault and apply the references to the
+            // other ones, but they report a failure.
+            const auto faultedJoints = this->jointsInHardwareFault(jointIndices);
+            if (faultedJoints.empty())
+            {
+                log()->error("{} Unable to set the desired joint values.", errorPrefix);
+                return false;
+            }
+            this->warnReferencesIgnored(errorPrefix, faultedJoints);
         }
 
         return true;
@@ -1022,9 +1169,6 @@ bool YarpRobotControl::setControlMode(const std::vector<IRobotControl::ControlMo
         return false;
     }
 
-    // if the control mode is set for all the joints, we can store it
-    m_pimpl->controlModes = controlModes;
-
     return true;
 }
 
@@ -1033,6 +1177,33 @@ bool YarpRobotControl::setControlMode(const IRobotControl::ControlMode& mode)
     // create a vector containing the same control mode for all the joints
     const std::vector<IRobotControl::ControlMode> controlModes(m_pimpl->actuatedDOFs, mode);
     return this->setControlMode(controlModes);
+}
+
+bool YarpRobotControl::setControlMode(const std::vector<IRobotControl::ControlMode>& controlModes,
+                                      const std::vector<int>& jointIndices)
+{
+    return m_pimpl->setControlModesSubset(controlModes, jointIndices);
+}
+
+bool YarpRobotControl::setControlMode(const std::vector<IRobotControl::ControlMode>& controlModes,
+                                      const std::vector<std::string>& jointNames)
+{
+    constexpr auto errorPrefix = "[YarpRobotControl::setControlMode]";
+
+    std::vector<int> jointIndices;
+    jointIndices.reserve(jointNames.size());
+    for (const auto& name : jointNames)
+    {
+        const auto it = std::find(m_pimpl->axesName.begin(), m_pimpl->axesName.end(), name);
+        if (it == m_pimpl->axesName.end())
+        {
+            log()->error("{} Joint '{}' not found in the joint list.", errorPrefix, name);
+            return false;
+        }
+        jointIndices.push_back(static_cast<int>(std::distance(m_pimpl->axesName.begin(), it)));
+    }
+
+    return m_pimpl->setControlModesSubset(controlModes, jointIndices);
 }
 
 std::future<bool>
