@@ -50,7 +50,7 @@ void CreateYarpRobotControl(pybind11::module& module)
              })
         .def("set_references",
              py::overload_cast<Eigen::Ref<const Eigen::VectorXd>,
-                               const std::vector<IRobotControl::ControlMode>&,
+                               const std::vector<ControlMode>&,
                                std::optional<Eigen::Ref<const Eigen::VectorXd>>>(
                  &YarpRobotControl::setReferences),
              py::arg("desired_joints_value"),
@@ -58,7 +58,7 @@ void CreateYarpRobotControl(pybind11::module& module)
              py::arg("current_joint_values") = std::nullopt)
         .def("set_references",
              py::overload_cast<Eigen::Ref<const Eigen::VectorXd>,
-                               const IRobotControl::ControlMode&,
+                               const ControlMode&,
                                std::optional<Eigen::Ref<const Eigen::VectorXd>>>(
                  &YarpRobotControl::setReferences),
              py::arg("desired_joints_value"),
@@ -67,7 +67,7 @@ void CreateYarpRobotControl(pybind11::module& module)
         .def("set_references",
              py::overload_cast<Eigen::Ref<const Eigen::VectorXd>,
                                const std::vector<int>&,
-                               const IRobotControl::ControlMode&,
+                               const ControlMode&,
                                std::optional<Eigen::Ref<const Eigen::VectorXd>>>(
                  &YarpRobotControl::setReferences),
              py::arg("desired_joints_value"),
@@ -77,7 +77,7 @@ void CreateYarpRobotControl(pybind11::module& module)
         .def("set_references",
              py::overload_cast<Eigen::Ref<const Eigen::VectorXd>,
                                const std::vector<std::string>&,
-                               const IRobotControl::ControlMode&,
+                               const ControlMode&,
                                std::optional<Eigen::Ref<const Eigen::VectorXd>>>(
                  &YarpRobotControl::setReferences),
              py::arg("desired_joints_value"),
@@ -85,21 +85,19 @@ void CreateYarpRobotControl(pybind11::module& module)
              py::arg("control_mode"),
              py::arg("current_joint_values") = std::nullopt)
         .def("set_control_mode",
-             py::overload_cast<const std::vector<IRobotControl::ControlMode>&>(
-                 &YarpRobotControl::setControlMode),
+             py::overload_cast<const std::vector<ControlMode>&>(&YarpRobotControl::setControlMode),
              py::arg("control_modes"))
         .def("set_control_mode",
-             py::overload_cast<const IRobotControl::ControlMode&>(
-                 &YarpRobotControl::setControlMode),
+             py::overload_cast<const ControlMode&>(&YarpRobotControl::setControlMode),
              py::arg("control_mode"))
         .def("set_control_mode",
-             py::overload_cast<const std::vector<IRobotControl::ControlMode>&,
-                               const std::vector<int>&>(&YarpRobotControl::setControlMode),
+             py::overload_cast<const std::vector<ControlMode>&, const std::vector<int>&>(
+                 &YarpRobotControl::setControlMode),
              py::arg("control_modes"),
              py::arg("joint_indices"))
         .def("set_control_mode",
-             py::overload_cast<const std::vector<IRobotControl::ControlMode>&,
-                               const std::vector<std::string>&>(&YarpRobotControl::setControlMode),
+             py::overload_cast<const std::vector<ControlMode>&, const std::vector<std::string>&>(
+                 &YarpRobotControl::setControlMode),
              py::arg("control_modes"),
              py::arg("joint_names"))
         .def("get_joint_list", &YarpRobotControl::getJointList)

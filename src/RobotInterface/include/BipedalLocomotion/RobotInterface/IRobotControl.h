@@ -32,10 +32,12 @@ class IRobotControl
 public:
     /**
      * ControlMode contains the supported control mode.
-     * @note It is an alias of BipedalLocomotion::RobotInterface::ControlMode, kept for backward
-     * compatibility.
+     * @deprecated Use BipedalLocomotion::RobotInterface::ControlMode, defined in
+     * BipedalLocomotion/RobotInterface/ControlMode.h. This alias is kept for backward
+     * compatibility and it will be removed in a future release.
      */
-    using ControlMode = ::BipedalLocomotion::RobotInterface::ControlMode;
+    using ControlMode [[deprecated("Use BipedalLocomotion::RobotInterface::ControlMode instead.")]]
+    = ::BipedalLocomotion::RobotInterface::ControlMode;
 
     using unique_ptr = std::unique_ptr<IRobotControl>;
 
@@ -76,9 +78,8 @@ public:
      */
     virtual bool
     setReferences(Eigen::Ref<const Eigen::VectorXd> desiredJointValues,
-                  const std::vector<IRobotControl::ControlMode>& controlModes,
-                  std::optional<Eigen::Ref<const Eigen::VectorXd>> currentJointValues = {})
-        = 0;
+                  const std::vector<RobotInterface::ControlMode>& controlModes,
+                  std::optional<Eigen::Ref<const Eigen::VectorXd>> currentJointValues = {}) = 0;
 
     /**
      * Set the desired reference.
@@ -91,13 +92,12 @@ public:
      * expressed in Nm.
      * @warining Call this function if you want to control all the joint with the same control mode.
      * Otherwise call setReferences(Eigen::Ref<const Eigen::VectorXd>, const
-     * std::vector<IRobotControl::ControlMode>&).
+     * std::vector<RobotInterface::ControlMode>&).
      */
     virtual bool
     setReferences(Eigen::Ref<const Eigen::VectorXd> desiredJointValues,
-                  const IRobotControl::ControlMode& controlMode,
-                  std::optional<Eigen::Ref<const Eigen::VectorXd>> currentJointValues = {})
-        = 0;
+                  const RobotInterface::ControlMode& controlMode,
+                  std::optional<Eigen::Ref<const Eigen::VectorXd>> currentJointValues = {}) = 0;
 
     /**
      * Set the desired reference for a subset of joints identified by their indices.
@@ -114,9 +114,8 @@ public:
     virtual bool
     setReferences(Eigen::Ref<const Eigen::VectorXd> desiredJointValues,
                   const std::vector<int>& jointIndices,
-                  const IRobotControl::ControlMode& controlMode,
-                  std::optional<Eigen::Ref<const Eigen::VectorXd>> currentJointValues = {})
-        = 0;
+                  const RobotInterface::ControlMode& controlMode,
+                  std::optional<Eigen::Ref<const Eigen::VectorXd>> currentJointValues = {}) = 0;
 
     /**
      * Set the desired reference for a subset of joints identified by their names.
@@ -133,9 +132,8 @@ public:
     virtual bool
     setReferences(Eigen::Ref<const Eigen::VectorXd> desiredJointValues,
                   const std::vector<std::string>& jointNames,
-                  const IRobotControl::ControlMode& controlMode,
-                  std::optional<Eigen::Ref<const Eigen::VectorXd>> currentJointValues = {})
-        = 0;
+                  const RobotInterface::ControlMode& controlMode,
+                  std::optional<Eigen::Ref<const Eigen::VectorXd>> currentJointValues = {}) = 0;
 
     /**
      * Set the control mode.
@@ -143,7 +141,7 @@ public:
      * @return True/False in case of success/failure.
      * @warning At the current stage only revolute joints are supported.
      */
-    virtual bool setControlMode(const std::vector<IRobotControl::ControlMode>& controlModes) = 0;
+    virtual bool setControlMode(const std::vector<RobotInterface::ControlMode>& controlModes) = 0;
 
     /**
      * Set the desired control mode.
@@ -151,7 +149,7 @@ public:
      * @return True/False in case of success/failure.
      * @warning Call this function if you want to control all the joint with the same control mode.
      */
-    virtual bool setControlMode(const IRobotControl::ControlMode& mode) = 0;
+    virtual bool setControlMode(const RobotInterface::ControlMode& mode) = 0;
 
     /**
      * Set the control mode of a subset of joints identified by their indices.
@@ -159,9 +157,10 @@ public:
      * @param controlModes control mode of each joint of the subset (size must match jointIndices).
      * @param jointIndices indices of the joints (into the full joint list).
      * @return True/False in case of success/failure.
+     * @note The default implementation does not support it and returns false.
      */
-    virtual bool setControlMode(const std::vector<IRobotControl::ControlMode>& controlModes,
-                                const std::vector<int>& jointIndices) = 0;
+    virtual bool setControlMode(const std::vector<RobotInterface::ControlMode>& controlModes,
+                                const std::vector<int>& jointIndices);
 
     /**
      * Set the control mode of a subset of joints identified by their names.
@@ -169,9 +168,10 @@ public:
      * @param controlModes control mode of each joint of the subset (size must match jointNames).
      * @param jointNames names of the joints.
      * @return True/False in case of success/failure.
+     * @note The default implementation does not support it and returns false.
      */
-    virtual bool setControlMode(const std::vector<IRobotControl::ControlMode>& controlModes,
-                                const std::vector<std::string>& jointNames) = 0;
+    virtual bool setControlMode(const std::vector<RobotInterface::ControlMode>& controlModes,
+                                const std::vector<std::string>& jointNames);
 
     /**
      * Set the control mode in an asynchronous thread.
@@ -181,7 +181,7 @@ public:
      * Since this function spawns a new thread, the invoking thread is not blocked.
      */
     virtual std::future<bool>
-    setControlModeAsync(const std::vector<IRobotControl::ControlMode>& controlModes) = 0;
+    setControlModeAsync(const std::vector<RobotInterface::ControlMode>& controlModes) = 0;
 
     /**
      * Set the desired control mode in an asynchronous thread.
@@ -190,7 +190,7 @@ public:
      * @warning Call this function if you want to control all the joint with the same control mode.
      * Since this function spawns a new thread, the invoking thread is not blocked.
      */
-    virtual std::future<bool> setControlModeAsync(const IRobotControl::ControlMode& mode) = 0;
+    virtual std::future<bool> setControlModeAsync(const RobotInterface::ControlMode& mode) = 0;
 
     /**
      * Get the list of the controlled joints

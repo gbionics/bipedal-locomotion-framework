@@ -41,8 +41,14 @@ void CreateIRobotControl(pybind11::module& module)
         .value("Unknown", ControlMode::Unknown);
 
     py::class_<IRobotControl> iRobotControl(module, "IRobotControl");
-    // kept for backward compatibility
-    iRobotControl.attr("ControlMode") = module.attr("ControlMode");
+    // Kept for backward compatibility: ControlMode used to be defined inside IRobotControl, with
+    // its values exported in the IRobotControl scope (e.g. IRobotControl.Position).
+    py::object controlMode = module.attr("ControlMode");
+    iRobotControl.attr("ControlMode") = controlMode;
+    for (const auto& [name, value] : controlMode.attr("__members__").cast<py::dict>())
+    {
+        iRobotControl.attr(name) = value;
+    }
 }
 
 } // namespace RobotInterface
