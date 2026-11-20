@@ -28,6 +28,7 @@ BSD-3-Clause license. -->
   <group name="RobotSensorBridge">
     <param name="check_for_nan">false</param>
     <param name="stream_joint_states">true</param>
+    <param name="stream_joint_control_modes">true</param>
     <param name="stream_motor_states">true</param>
     <param name="stream_inertials">true</param>
     <param name="stream_cartesian_wrenches">false</param>

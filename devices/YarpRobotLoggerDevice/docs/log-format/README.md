@@ -6,7 +6,8 @@ The format is versioned independently of `bipedal-locomotion-framework`, so that
 
 | Format version | Specification | `version` variable | Written by |
 |:---:|:---:|:---:|:---|
-| `v0.1.0` | [v0.1.0.md](./v0.1.0.md) | `"0.1.0"` | `bipedal-locomotion-framework` `v0.29.0` or newer |
+| `v0.1.1` | [v0.1.1.md](./v0.1.1.md) | `"0.1.1"` | `bipedal-locomotion-framework` `v0.31.0` or newer |
+| `v0.1.0` | [v0.1.0.md](./v0.1.0.md) | `"0.1.0"` | `bipedal-locomotion-framework` `v0.29.0` to `v0.30.0` |
 | `v0.0.1` | [v0.0.1.md](./v0.0.1.md) | missing | `bipedal-locomotion-framework` up to `v0.28.0` |
 
 ## How to get the version of a log
