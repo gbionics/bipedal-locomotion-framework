@@ -28,17 +28,27 @@ void CreateIRobotControl(pybind11::module& module)
     namespace py = ::pybind11;
     using namespace BipedalLocomotion::RobotInterface;
 
+    py::enum_<ControlMode>(module, "ControlMode")
+        .value("Position", ControlMode::Position)
+        .value("PositionDirect", ControlMode::PositionDirect)
+        .value("Velocity", ControlMode::Velocity)
+        .value("Torque", ControlMode::Torque)
+        .value("PWM", ControlMode::PWM)
+        .value("Current", ControlMode::Current)
+        .value("Idle", ControlMode::Idle)
+        .value("ForceIdle", ControlMode::ForceIdle)
+        .value("HardwareFault", ControlMode::HardwareFault)
+        .value("Unknown", ControlMode::Unknown);
+
     py::class_<IRobotControl> iRobotControl(module, "IRobotControl");
-    py::enum_<IRobotControl::ControlMode>(iRobotControl, "ControlMode")
-        .value("Position", IRobotControl::ControlMode::Position)
-        .value("PositionDirect", IRobotControl::ControlMode::PositionDirect)
-        .value("Velocity", IRobotControl::ControlMode::Velocity)
-        .value("Torque", IRobotControl::ControlMode::Torque)
-        .value("PWM", IRobotControl::ControlMode::PWM)
-        .value("Current", IRobotControl::ControlMode::Current)
-        .value("Idle", IRobotControl::ControlMode::Idle)
-        .value("Unknown", IRobotControl::ControlMode::Unknown)
-        .export_values();
+    // Kept for backward compatibility: ControlMode used to be defined inside IRobotControl, with
+    // its values exported in the IRobotControl scope (e.g. IRobotControl.Position).
+    py::object controlMode = module.attr("ControlMode");
+    iRobotControl.attr("ControlMode") = controlMode;
+    for (const auto& [name, value] : controlMode.attr("__members__").cast<py::dict>())
+    {
+        iRobotControl.attr(name) = value;
+    }
 }
 
 } // namespace RobotInterface

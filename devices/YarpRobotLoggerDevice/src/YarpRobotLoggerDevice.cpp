@@ -24,6 +24,7 @@
 
 #include <BipedalLocomotion/ParametersHandler/StdImplementation.h>
 #include <BipedalLocomotion/ParametersHandler/YarpImplementation.h>
+#include <BipedalLocomotion/RobotInterface/ControlMode.h>
 #include <BipedalLocomotion/System/Clock.h>
 #include <BipedalLocomotion/System/YarpClock.h>
 #include <BipedalLocomotion/TextLogging/Logger.h>
@@ -401,6 +402,7 @@ bool YarpRobotLoggerDevice::setupRobotSensorBridge(
 
     std::unordered_map<std::string, bool> stream = {{"stream_joint_states", false},
                                                     {"stream_joint_accelerations", true},
+                                                    {"stream_joint_control_modes", false},
                                                     {"stream_motor_states", false},
                                                     {"stream_motor_temperature", false},
                                                     {"stream_motor_PWM", false},
@@ -437,6 +439,23 @@ bool YarpRobotLoggerDevice::setupRobotSensorBridge(
         }
         addJointSignal("joints_state::torques",
                        [&bridge](auto v) { return bridge.getJointTorques(v); });
+        if (stream["stream_joint_control_modes"])
+        {
+            // The control modes are logged as the integer value of RobotInterface::ControlMode
+            auto modes = std::make_shared<std::vector<RobotInterface::ControlMode>>();
+            addJointSignal("joints_state::control_modes", [&bridge, modes](auto v) {
+                if (!bridge.getJointControlModes(*modes)
+                    || modes->size() != static_cast<std::size_t>(v.size()))
+                {
+                    return false;
+                }
+                for (std::size_t i = 0; i < modes->size(); i++)
+                {
+                    v[i] = static_cast<double>((*modes)[i]);
+                }
+                return true;
+            });
+        }
     }
 
     if (stream["stream_motor_states"])

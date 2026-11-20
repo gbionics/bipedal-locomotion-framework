@@ -8,6 +8,7 @@
 #include <BipedalLocomotion/RobotInterface/YarpHelper.h>
 #include <BipedalLocomotion/TextLogging/Logger.h>
 
+#include <yarp/dev/IControlMode.h>
 #include <yarp/dev/IMultipleWrapper.h>
 #include <yarp/dev/PolyDriverList.h>
 
@@ -454,4 +455,60 @@ PolyDriverDescriptor BipedalLocomotion::RobotInterface::constructBatteryClient(
     }
 
     return device;
+}
+
+ControlMode
+BipedalLocomotion::RobotInterface::fromYarpControlMode(yarp::conf::vocab32_t controlMode)
+{
+    switch (controlMode)
+    {
+    case VOCAB_CM_POSITION:
+        return ControlMode::Position;
+    case VOCAB_CM_POSITION_DIRECT:
+        return ControlMode::PositionDirect;
+    case VOCAB_CM_VELOCITY:
+        return ControlMode::Velocity;
+    case VOCAB_CM_TORQUE:
+        return ControlMode::Torque;
+    case VOCAB_CM_PWM:
+        return ControlMode::PWM;
+    case VOCAB_CM_CURRENT:
+        return ControlMode::Current;
+    case VOCAB_CM_IDLE:
+        return ControlMode::Idle;
+    case VOCAB_CM_FORCE_IDLE:
+        return ControlMode::ForceIdle;
+    case VOCAB_CM_HW_FAULT:
+        return ControlMode::HardwareFault;
+    default:
+        return ControlMode::Unknown;
+    }
+}
+
+yarp::conf::vocab32_t
+BipedalLocomotion::RobotInterface::toYarpControlMode(ControlMode controlMode)
+{
+    switch (controlMode)
+    {
+    case ControlMode::Position:
+        return VOCAB_CM_POSITION;
+    case ControlMode::PositionDirect:
+        return VOCAB_CM_POSITION_DIRECT;
+    case ControlMode::Velocity:
+        return VOCAB_CM_VELOCITY;
+    case ControlMode::Torque:
+        return VOCAB_CM_TORQUE;
+    case ControlMode::PWM:
+        return VOCAB_CM_PWM;
+    case ControlMode::Current:
+        return VOCAB_CM_CURRENT;
+    case ControlMode::Idle:
+        return VOCAB_CM_IDLE;
+    case ControlMode::ForceIdle:
+        return VOCAB_CM_FORCE_IDLE;
+    case ControlMode::HardwareFault:
+        return VOCAB_CM_HW_FAULT;
+    default:
+        return VOCAB_CM_UNKNOWN;
+    }
 }

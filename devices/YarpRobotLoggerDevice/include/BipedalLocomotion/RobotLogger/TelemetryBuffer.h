@@ -40,7 +40,7 @@ public:
      * Version of the format of the saved files, stored in the top-level `version` variable. It is
      * independent of the version of the framework. See docs/log-format/README.md.
      */
-    static constexpr auto logFormatVersion = "0.1.0";
+    static constexpr auto logFormatVersion = "0.1.1";
 
     /**
      * Function called after each successful save.
