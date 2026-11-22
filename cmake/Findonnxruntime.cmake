@@ -17,14 +17,27 @@ include(FindPackageHandleStandardArgs)
 # and imported target for the installed version of ONNX Runtime.
 find_package(onnxruntime CONFIG QUIET)
 if(onnxruntime_FOUND)
-  find_package_handle_standard_args(onnxruntime CONFIG_MODE)
-  return()
+  get_target_property(_onnxruntime_include_dirs onnxruntime::onnxruntime INTERFACE_INCLUDE_DIRECTORIES)
 endif()
 
 find_path(onnxruntime_INCLUDE_DIR
   NAMES onnxruntime_cxx_api.h
-  PATH_SUFFIXES onnxruntime onnxruntime/core/session)
+  HINTS ${_onnxruntime_include_dirs}
+  PATH_SUFFIXES onnxruntime onnxruntime/core/session core/session)
 mark_as_advanced(onnxruntime_INCLUDE_DIR)
+
+if(onnxruntime_FOUND)
+  find_package_handle_standard_args(onnxruntime CONFIG_MODE REQUIRED_VARS onnxruntime_INCLUDE_DIR)
+  # Older config packages export include/onnxruntime, but install the headers
+  # under core/session. Preserve their target and add the directory for bare includes.
+  if(onnxruntime_FOUND AND NOT onnxruntime_INCLUDE_DIR IN_LIST _onnxruntime_include_dirs)
+    set_property(TARGET onnxruntime::onnxruntime APPEND PROPERTY
+      INTERFACE_INCLUDE_DIRECTORIES "${onnxruntime_INCLUDE_DIR}")
+  endif()
+  unset(_onnxruntime_include_dirs)
+  return()
+endif()
+unset(_onnxruntime_include_dirs)
 find_library(onnxruntime_LIBRARY
   NAMES onnxruntime onnxruntime_conda)
 mark_as_advanced(onnxruntime_LIBRARY)
