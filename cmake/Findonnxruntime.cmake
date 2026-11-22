@@ -11,6 +11,13 @@ onnxruntime::onnxruntime
 
 #]=======================================================================]
 
+# Prefer the config package when available, as it defines the include paths
+# and imported target for the installed version of ONNX Runtime.
+find_package(onnxruntime CONFIG QUIET)
+if(onnxruntime_FOUND)
+  return()
+endif()
+
 include(FindPackageHandleStandardArgs)
 
 find_path(onnxruntime_INCLUDE_DIR
