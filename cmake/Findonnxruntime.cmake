@@ -11,18 +11,19 @@ onnxruntime::onnxruntime
 
 #]=======================================================================]
 
+include(FindPackageHandleStandardArgs)
+
 # Prefer the config package when available, as it defines the include paths
 # and imported target for the installed version of ONNX Runtime.
 find_package(onnxruntime CONFIG QUIET)
 if(onnxruntime_FOUND)
+  find_package_handle_standard_args(onnxruntime CONFIG_MODE)
   return()
 endif()
 
-include(FindPackageHandleStandardArgs)
-
 find_path(onnxruntime_INCLUDE_DIR
   NAMES onnxruntime_cxx_api.h
-  PATH_SUFFIXES onnxruntime/core/session)
+  PATH_SUFFIXES onnxruntime onnxruntime/core/session)
 mark_as_advanced(onnxruntime_INCLUDE_DIR)
 find_library(onnxruntime_LIBRARY
   NAMES onnxruntime onnxruntime_conda)
