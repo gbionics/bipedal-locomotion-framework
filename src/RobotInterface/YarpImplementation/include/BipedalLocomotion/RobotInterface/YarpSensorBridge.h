@@ -63,6 +63,7 @@ namespace RobotInterface
  * |                            |stream_joint_accelerations       | boolean           |Flag to activate the attachment to joint accelerations from encoders      |
  * |                            |stream_motor_temperature         | boolean           |Flag to activate the attachment to motor temperature sensors      |
  * |                            |stream_battery                   | boolean           |Flag to activate the attachment to battery devices      |
+ * |                            |stream_joint_control_modes       | boolean           |Flag to activate the reading of the joint control modes through the IControlMode interface of the remapped control board. It requires `stream_joint_states`. Default false |
  * |RemoteControlBoardRemapper  |                                 |                   |Expects only one remapped remotecontrolboard device attached to it, if there multiple remote control boards, then  use a remapper to create a single remotecontrolboard |
  * |                            |joints_list                      | vector of strings |This parameter is **optional**. The joints list used to open the remote control board remapper. If the list is not passed, the order of the joint stored in the PolyDriver is used       |
  * |InertialSensors             |                                 |                   |Expects inertials to be opened as a part of the multiple analog sensors remapper ("multipleanalogsensorsremapper"). If the group is not provided, all the sensors of the first attached device exposing each interface are used |
@@ -408,6 +409,31 @@ public:
      */
     bool getMotorTemperature(const std::string& jointName,
                              double& motorTemperature,
+                             OptionalDoubleRef receiveTimeInSeconds = {}) final;
+
+    /**
+     * Get the control mode of all the joints
+     * @param[out] controlModes control mode of each joint, ordered as the joints list
+     * @param[out] receiveTimeInSeconds time at which the measurement was received
+     * @note The vector is resized by the method.
+     * @note With a network client (e.g. remotecontrolboardremapper) the control modes are read from
+     * the state port streamed by the server, so no RPC is performed.
+     * @return true/false in case of success/failure. False is also returned if the control modes
+     * could not be read in the last call of advance().
+     */
+    bool getJointControlModes(std::vector<ControlMode>& controlModes,
+                              OptionalDoubleRef receiveTimeInSeconds = {}) final;
+
+    /**
+     * Get the control mode of a joint
+     * @param[in] jointName name of the joint
+     * @param[out] controlMode control mode of the joint
+     * @param[out] receiveTimeInSeconds time at which the measurement was received
+     * @return true/false in case of success/failure. False is also returned if the control modes
+     * could not be read in the last call of advance().
+     */
+    bool getJointControlMode(const std::string& jointName,
+                             ControlMode& controlMode,
                              OptionalDoubleRef receiveTimeInSeconds = {}) final;
 
     /**

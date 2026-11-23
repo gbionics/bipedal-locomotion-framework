@@ -6,6 +6,7 @@
  */
 
 #include <BipedalLocomotion/RobotInterface/IRobotControl.h>
+#include <BipedalLocomotion/TextLogging/Logger.h>
 
 using namespace BipedalLocomotion::RobotInterface;
 
@@ -14,4 +15,18 @@ bool IRobotControl::initialize(std::weak_ptr<ParametersHandler::IParametersHandl
     return true;
 }
 
+bool IRobotControl::setControlMode(const std::vector<RobotInterface::ControlMode>& controlModes,
+                                   const std::vector<int>& jointIndices)
+{
+    log()->error("[IRobotControl::setControlMode] Setting the control mode of a subset of joints "
+                 "is not supported by this implementation.");
+    return false;
+}
 
+bool IRobotControl::setControlMode(const std::vector<RobotInterface::ControlMode>& controlModes,
+                                   const std::vector<std::string>& jointNames)
+{
+    log()->error("[IRobotControl::setControlMode] Setting the control mode of a subset of joints "
+                 "is not supported by this implementation.");
+    return false;
+}

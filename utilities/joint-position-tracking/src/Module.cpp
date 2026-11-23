@@ -185,7 +185,7 @@ bool Module::configure(yarp::os::ResourceFinder& rf)
     m_initTrajectoryTime = yarp::os::Time::now();
 
     // switch in position direct control
-    if (!m_robotControl.setControlMode(RobotInterface::IRobotControl::ControlMode::PositionDirect))
+    if (!m_robotControl.setControlMode(RobotInterface::ControlMode::PositionDirect))
     {
         log()->error("[Module::configure] Unable to switch in position direct control.");
         return false;
@@ -237,7 +237,7 @@ bool Module::updateModule()
 
     // set the reference
     if (!m_robotControl.setReferences(m_spline.getOutput().position,
-                                      RobotInterface::IRobotControl::ControlMode::PositionDirect,
+                                      RobotInterface::ControlMode::PositionDirect,
                                       m_currentJointPos))
     {
         log()->error("{} Unable to set the reference.", logPrefix);
@@ -295,7 +295,7 @@ bool Module::close()
     log()->info("[Module::close] Dataset stored in {}", fileName.str());
 
     // switch back in position control
-    if (!m_robotControl.setControlMode(RobotInterface::IRobotControl::ControlMode::Position))
+    if (!m_robotControl.setControlMode(RobotInterface::ControlMode::Position))
     {
         log()->error("[Module::close] Unable to switch back in position control.");
         return false;

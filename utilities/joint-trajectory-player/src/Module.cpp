@@ -174,7 +174,7 @@ bool Module::configure(yarp::os::ResourceFinder& rf)
     log()->info("{} Module configured.", logPrefix);
 
     // switch to position control
-    if (!m_robotControl.setControlMode(RobotInterface::IRobotControl::ControlMode::Position))
+    if (!m_robotControl.setControlMode(RobotInterface::ControlMode::Position))
     {
         log()->error("{} Unable to set the control mode to position.", logPrefix);
         return false;
@@ -182,7 +182,7 @@ bool Module::configure(yarp::os::ResourceFinder& rf)
 
     // Reach the first position of the desired trajectory in position control
     if (!m_robotControl.setReferences(Conversions::toEigen(m_traj).row(m_idxTraj),
-                                      RobotInterface::IRobotControl::ControlMode::Position))
+                                      RobotInterface::ControlMode::Position))
     {
         log()->error("{} Error while setting the reference position.", logPrefix);
         return false;
@@ -225,8 +225,7 @@ bool Module::updateModule()
             log()->info("{} Positioning done.", logPrefix);
 
             // switch in position direct control
-            if (!m_robotControl.setControlMode(
-                    RobotInterface::IRobotControl::ControlMode::PositionDirect))
+            if (!m_robotControl.setControlMode(RobotInterface::ControlMode::PositionDirect))
             {
                 log()->error("{} Unable to switch in position direct control.", logPrefix);
                 return false;
@@ -287,9 +286,8 @@ bool Module::updateModule()
         }
 
         // set the reference
-        if (!m_robotControl
-                 .setReferences(Conversions::toEigen(m_traj).row(m_idxTraj),
-                                RobotInterface::IRobotControl::ControlMode::PositionDirect))
+        if (!m_robotControl.setReferences(Conversions::toEigen(m_traj).row(m_idxTraj),
+                                          RobotInterface::ControlMode::PositionDirect))
         {
             log()->error("{} Unable to set the reference.", logPrefix);
             return false;
@@ -330,7 +328,7 @@ bool Module::close()
     log()->info("[Module::close] Dataset stored in {}.", fileName.str());
 
     // switch back in position control
-    if (!m_robotControl.setControlMode(RobotInterface::IRobotControl::ControlMode::Position))
+    if (!m_robotControl.setControlMode(RobotInterface::ControlMode::Position))
     {
         log()->error("[Module::close] Unable to switch back in position control.");
         return false;

@@ -28,6 +28,10 @@ namespace RobotInterface
 
 /**
  * YarpRobotControl Yarp implementation of the IRobotControl interface
+ * @note The control modes and the references are sent in a best effort way: if the device does not
+ * accept them for some joints (e.g. joints in hardware fault), a warning is printed, the other
+ * joints are set anyway and false is returned. YarpRobotControl never reads the control modes of
+ * the joints, except once in setDriver(): to monitor them use YarpSensorBridge.
  * @warning At the current stage only revolute joints are supported.
  */
 class YarpRobotControl : public IRobotControl
@@ -83,9 +87,14 @@ public:
      * Set the control mode.
      * @param controlModes vector containing the control mode for each joint.
      * @return True/False in case of success/failure.
+     * @note The request is sent for all the joints and the device sets the ones that accept it
+     * (e.g. a joint in hardware fault only accepts ForceIdle). If some joints are not set, a
+     * warning is printed and false is returned, but the requested modes are stored anyway, so the
+     * references of the other joints keep being accepted. The control modes are not read: use
+     * YarpSensorBridge to know them, e.g. to leave out the joints in hardware fault.
      * @warning At the current stage only revolute joints are supported.
      */
-    bool setControlMode(const std::vector<IRobotControl::ControlMode>& controlModes) final;
+    bool setControlMode(const std::vector<RobotInterface::ControlMode>& controlModes) final;
 
     /**
      * Set the desired control mode.
@@ -93,7 +102,41 @@ public:
      * @return True/False in case of success/failure.
      * @warning Call this function if you want to control all the joint with the same control mode.
      */
-    bool setControlMode(const IRobotControl::ControlMode& mode) final;
+    bool setControlMode(const RobotInterface::ControlMode& mode) final;
+
+    /**
+     * Set the control mode of a subset of joints identified by their indices.
+     * The control mode of all the other joints is not changed and no RPC is sent for them.
+     * @param controlModes control mode of each joint of the subset (size must match jointIndices).
+     * @param jointIndices indices of the joints (into the full joint list).
+     * @return True/False in case of success/failure.
+     * @note RobotInterface::ControlMode::HardwareFault and RobotInterface::ControlMode::Unknown
+     * cannot be set. Use RobotInterface::ControlMode::ForceIdle to acknowledge a hardware fault.
+     * @note The request is sent for all the joints and the device sets the ones that accept it
+     * (e.g. a joint in hardware fault only accepts ForceIdle). If some joints are not set, a
+     * warning is printed and false is returned, but the requested modes are stored anyway, so the
+     * references of the other joints keep being accepted. The control modes are not read: use
+     * YarpSensorBridge to know them, e.g. to leave out the joints in hardware fault.
+     */
+    bool setControlMode(const std::vector<RobotInterface::ControlMode>& controlModes,
+                        const std::vector<int>& jointIndices) final;
+
+    /**
+     * Set the control mode of a subset of joints identified by their names.
+     * The control mode of all the other joints is not changed and no RPC is sent for them.
+     * @param controlModes control mode of each joint of the subset (size must match jointNames).
+     * @param jointNames names of the joints.
+     * @return True/False in case of success/failure.
+     * @note RobotInterface::ControlMode::HardwareFault and RobotInterface::ControlMode::Unknown
+     * cannot be set. Use RobotInterface::ControlMode::ForceIdle to acknowledge a hardware fault.
+     * @note The request is sent for all the joints and the device sets the ones that accept it
+     * (e.g. a joint in hardware fault only accepts ForceIdle). If some joints are not set, a
+     * warning is printed and false is returned, but the requested modes are stored anyway, so the
+     * references of the other joints keep being accepted. The control modes are not read: use
+     * YarpSensorBridge to know them, e.g. to leave out the joints in hardware fault.
+     */
+    bool setControlMode(const std::vector<RobotInterface::ControlMode>& controlModes,
+                        const std::vector<std::string>& jointNames) final;
 
     /**
      * Set the control mode in an asynchronous thread.
@@ -105,7 +148,7 @@ public:
      * calling other functions like setReferences().
      */
     std::future<bool>
-    setControlModeAsync(const std::vector<IRobotControl::ControlMode>& controlModes) final;
+    setControlModeAsync(const std::vector<RobotInterface::ControlMode>& controlModes) final;
 
     /**
      * Set the desired control mode in an asynchronous thread.
@@ -116,7 +159,7 @@ public:
      * Note that this function is not thread safe. You should check the future object status before
      * calling other functions like setReferences().
      */
-    std::future<bool> setControlModeAsync(const IRobotControl::ControlMode& mode) final;
+    std::future<bool> setControlModeAsync(const RobotInterface::ControlMode& mode) final;
 
     /**
      * Set the desired reference.
@@ -131,7 +174,7 @@ public:
      */
     bool
     setReferences(Eigen::Ref<const Eigen::VectorXd> desiredJointValues,
-                  const std::vector<IRobotControl::ControlMode>& controlModes,
+                  const std::vector<RobotInterface::ControlMode>& controlModes,
                   std::optional<Eigen::Ref<const Eigen::VectorXd>> currentJointValues = {}) final;
 
     /**
@@ -145,11 +188,11 @@ public:
      * between -100 and 100.
      * @warning Call this function if you want to control all the joint with the same control mode.
      * Otherwise call setReferences(Eigen::Ref<const Eigen::VectorXd>, const
-     * std::vector<IRobotControl::ControlMode>&).
+     * std::vector<RobotInterface::ControlMode>&).
      */
     bool
     setReferences(Eigen::Ref<const Eigen::VectorXd> desiredJointValues,
-                  const IRobotControl::ControlMode& mode,
+                  const RobotInterface::ControlMode& mode,
                   std::optional<Eigen::Ref<const Eigen::VectorXd>> currentJointValues = {}) final;
 
     /**
@@ -167,7 +210,7 @@ public:
     bool
     setReferences(Eigen::Ref<const Eigen::VectorXd> desiredJointValues,
                   const std::vector<int>& jointIndices,
-                  const IRobotControl::ControlMode& controlMode,
+                  const RobotInterface::ControlMode& controlMode,
                   std::optional<Eigen::Ref<const Eigen::VectorXd>> currentJointValues = {}) final;
 
     /**
@@ -185,7 +228,7 @@ public:
     bool
     setReferences(Eigen::Ref<const Eigen::VectorXd> desiredJointValues,
                   const std::vector<std::string>& jointNames,
-                  const IRobotControl::ControlMode& controlMode,
+                  const RobotInterface::ControlMode& controlMode,
                   std::optional<Eigen::Ref<const Eigen::VectorXd>> currentJointValues = {}) final;
 
     /**

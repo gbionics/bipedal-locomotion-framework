@@ -18,6 +18,7 @@
 #include <Eigen/Dense>
 
 #include <BipedalLocomotion/ParametersHandler/IParametersHandler.h>
+#include <BipedalLocomotion/RobotInterface/ControlMode.h>
 #include <BipedalLocomotion/RobotInterface/JointType.h>
 
 namespace BipedalLocomotion
@@ -46,6 +47,7 @@ struct SensorBridgeOptions
     bool isMotorSensorsEnabled{false}; /** flag to connect motor measurement sources */
     bool isPWMControlEnabled{false}; /** flag to connect PWM measurement sources */
     bool isMotorTemperatureSensorEnabled{false}; /** flag to connect motor temperature measurement sources */
+    bool isJointControlModeEnabled{false}; /** flag to connect joint control mode sources */
 
     bool isTemperatureSensorEnabled{false}; /** flag to connect temperature measurement sources */
     bool isBatteryEnabled{false}; /** flag to connect battery measurement sources */
@@ -748,6 +750,33 @@ public:
      */
     virtual bool getMotorTemperature(const std::string& jointName,
                                      double& motorTemperature,
+                                     OptionalDoubleRef receiveTimeInSeconds = {})
+    {
+        return false;
+    };
+
+    /**
+     * Get the control mode of all the joints
+     * @param[out] controlModes control mode of each joint, ordered as the joints list
+     * @param[out] receiveTimeInSeconds time at which the measurement was received
+     * @note The vector is resized by the method.
+     * @return true/false in case of success/failure
+     */
+    virtual bool getJointControlModes(std::vector<ControlMode>& controlModes,
+                                      OptionalDoubleRef receiveTimeInSeconds = {})
+    {
+        return false;
+    };
+
+    /**
+     * Get the control mode of a joint
+     * @param[in] jointName name of the joint
+     * @param[out] controlMode control mode of the joint
+     * @param[out] receiveTimeInSeconds time at which the measurement was received
+     * @return true/false in case of success/failure
+     */
+    virtual bool getJointControlMode(const std::string& jointName,
+                                     ControlMode& controlMode,
                                      OptionalDoubleRef receiveTimeInSeconds = {})
     {
         return false;

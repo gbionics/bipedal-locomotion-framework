@@ -31,6 +31,7 @@
 #include <yarp/os/Port.h>
 #include <yarp/os/PortWriter.h>
 #include <yarp/robotinterface/XMLReader.h>
+#include <yarp/dev/IControlMode.h>
 #include <yarp/dev/IEncoders.h>
 #include <yarp/dev/MultipleAnalogSensorsInterfaces.h>
 #include <yarp/dev/PolyDriver.h>
@@ -144,6 +145,13 @@ TEST_CASE("Launch simple logger")
 
     BipedalLocomotion::log()->info("yarprobotinterface successfully loaded and started.");
 
+    // Put a joint in hardware fault, to check that the control modes are logged
+    yarp::dev::IControlMode* icm = nullptr;
+    REQUIRE(yarprobotinterfaceInstance.robot.device("sim_controlboard").driver()->view(icm));
+    REQUIRE(icm != nullptr);
+    constexpr int faultedJoint = 1;
+    REQUIRE(icm->setControlMode(faultedJoint, VOCAB_CM_HW_FAULT));
+
     // Sleep 0.2 second to collect some data
     std::this_thread::sleep_for(std::chrono::milliseconds(200));
 
@@ -211,7 +219,7 @@ TEST_CASE("Launch simple logger")
     REQUIRE(version.isValid());
     // in MAT 7.3 files the strings are read as UTF-16
     const auto versionData = version.asVector<char16_t>();
-    REQUIRE(std::u16string(versionData.data(), versionData.size()) == u"0.1.0");
+    REQUIRE(std::u16string(versionData.data(), versionData.size()) == u"0.1.1");
 
     matioCpp::Struct robotLoggerDeviceStruct = savedLog.read("robot_logger_device").asStruct();
 
@@ -241,6 +249,24 @@ TEST_CASE("Launch simple logger")
 
     // The z component should be near to -9.8
     CHECK(std::abs(accelerometerLogged(2) - (-9.8)) <= 1.0);
+
+    // The control modes are logged as the value of RobotInterface::ControlMode: the last sample
+    // contains the joint in hardware fault (8) while the others are in position (0)
+    matioCpp::MultiDimensionalArray<double> controlModesLoggedData
+        = robotLoggerDeviceStruct["joints_state"]
+              .asStruct()["control_modes"]
+              .asStruct()["data"]
+              .asMultiDimensionalArray<double>();
+    REQUIRE(controlModesLoggedData.isValid());
+    const auto dimensions = controlModesLoggedData.dimensions();
+    REQUIRE(dimensions.size() == 3);
+    REQUIRE(dimensions[0] == nrOfJoints);
+    REQUIRE(dimensions[2] > 0);
+    const std::size_t lastSample = dimensions[2] - 1;
+    for (std::size_t i = 0; i < nrOfJoints; i++)
+    {
+        CHECK(controlModesLoggedData({i, 0, lastSample}) == (i == faultedJoint ? 8.0 : 0.0));
+    }
 }
 
 /** Stream the signal and return the maximum time spent to send the data. */

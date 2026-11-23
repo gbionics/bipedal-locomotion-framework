@@ -13,9 +13,11 @@
 #include <string>
 
 // YARP
+#include <yarp/conf/numeric.h>
 #include <yarp/dev/PolyDriver.h>
 
 #include <BipedalLocomotion/ParametersHandler/IParametersHandler.h>
+#include <BipedalLocomotion/RobotInterface/ControlMode.h>
 #include <yarp/dev/PolyDriverList.h>
 
 namespace BipedalLocomotion
@@ -197,6 +199,21 @@ PolyDriverDescriptor constructRDGBSensorClient(
  */
 PolyDriverDescriptor constructBatteryClient(
     std::weak_ptr<const BipedalLocomotion::ParametersHandler::IParametersHandler> handler);
+
+/**
+ * Convert a YARP control mode (VOCAB_CM_*) into a ControlMode.
+ * @param controlMode YARP control mode.
+ * @return The corresponding ControlMode, ControlMode::Unknown if the YARP control mode is not
+ * supported.
+ */
+ControlMode fromYarpControlMode(yarp::conf::vocab32_t controlMode);
+
+/**
+ * Convert a ControlMode into a YARP control mode (VOCAB_CM_*).
+ * @param controlMode control mode.
+ * @return The corresponding YARP control mode, VOCAB_CM_UNKNOWN for ControlMode::Unknown.
+ */
+yarp::conf::vocab32_t toYarpControlMode(ControlMode controlMode);
 
 } // namespace RobotInterface
 } // namespace BipedalLocomotion
