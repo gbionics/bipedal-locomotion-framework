@@ -202,6 +202,12 @@ public:
      * @return the state of the controller
      */
     Mode getTaskControllerMode() const override;
+
+    /**
+     * Get frame index.
+     * @return the index of the frame.
+     */
+    iDynTree::FrameIndex getFrameIndex() const;
 };
 
 BLF_REGISTER_IK_TASK(SE3Task);

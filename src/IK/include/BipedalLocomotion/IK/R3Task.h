@@ -158,6 +158,12 @@ public:
      * @return the state of the controller
      */
     Mode getTaskControllerMode() const override;
+
+    /**
+     * Get frame name.
+     * @return the name of the frame.
+     */
+    iDynTree::FrameIndex getFrameIndex() const;
 };
 
 BLF_REGISTER_IK_TASK(R3Task);
@@ -165,4 +171,4 @@ BLF_REGISTER_IK_TASK(R3Task);
 } // namespace IK
 } // namespace BipedalLocomotion
 
-#endif // BIPEDAL_LOCOMOTION_IK_SE3_TASK_H
+#endif // BIPEDAL_LOCOMOTION_IK_R3_TASK_H
