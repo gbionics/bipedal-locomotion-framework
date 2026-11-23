@@ -6,6 +6,7 @@
  */
 
 #include <optional>
+#include <string>
 
 #include <pybind11/eigen.h>
 #include <pybind11/pybind11.h>
@@ -41,13 +42,38 @@ void CreateIRobotControl(pybind11::module& module)
         .value("Unknown", ControlMode::Unknown);
 
     py::class_<IRobotControl> iRobotControl(module, "IRobotControl");
-    // Kept for backward compatibility: ControlMode used to be defined inside IRobotControl, with
-    // its values exported in the IRobotControl scope (e.g. IRobotControl.Position).
+    // Deprecated, kept for backward compatibility and it will be removed in a future release:
+    // ControlMode used to be defined inside IRobotControl, with its values exported in the
+    // IRobotControl scope (e.g. IRobotControl.Position). Accessing them raises a
+    // DeprecationWarning.
+    auto addDeprecatedAlias = [&iRobotControl](const std::string& name,
+                                               py::object value,
+                                               const std::string& replacement) {
+        const std::string message = "IRobotControl." + name
+                                    + " is deprecated and it will be removed in a future "
+                                      "release. Use "
+                                    + replacement + " instead.";
+        iRobotControl.def_property_readonly_static(name.c_str(),
+                                                   [value, message](py::object) {
+                                                       if (PyErr_WarnEx(PyExc_DeprecationWarning,
+                                                                        message.c_str(),
+                                                                        1)
+                                                           != 0)
+                                                       {
+                                                           throw py::error_already_set();
+                                                       }
+                                                       return value;
+                                                   });
+    };
+
     py::object controlMode = module.attr("ControlMode");
-    iRobotControl.attr("ControlMode") = controlMode;
+    addDeprecatedAlias("ControlMode", controlMode, "ControlMode");
     for (const auto& [name, value] : controlMode.attr("__members__").cast<py::dict>())
     {
-        iRobotControl.attr(name) = value;
+        const auto valueName = name.cast<std::string>();
+        addDeprecatedAlias(valueName,
+                           py::reinterpret_borrow<py::object>(value),
+                           "ControlMode." + valueName);
     }
 }
 
