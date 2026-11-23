@@ -111,9 +111,11 @@ struct YarpRobotControl::Impl
 
     Eigen::VectorXd positionFeedback; /**< Current joint position [rad]. */
 
-    std::vector<RobotInterface::ControlMode> controlModes; /**< Vector containing the map between
-                                                             the joint and the current control mode
-                                                           */
+    /** Control mode requested for each joint, initialized with the control modes read in
+     * setDriver(). It is the desired control mode and not the actual one: it is updated also if
+     * the device does not accept the request (e.g. a joint in hardware fault). Use
+     * YarpSensorBridge to read the actual control modes. */
+    std::vector<RobotInterface::ControlMode> desiredControlModes;
     std::vector<yarp::conf::vocab32_t> controlModesYarp; /**< Vector containing the map between the
                                                              joint and the current yarp control mode
                                                           */
@@ -180,7 +182,7 @@ struct YarpRobotControl::Impl
 
         for (std::size_t i = 0; i < this->actuatedDOFs; i++)
         {
-            this->controlModes[i] = fromYarpControlMode(this->controlModesYarp[i]);
+            this->desiredControlModes[i] = fromYarpControlMode(this->controlModesYarp[i]);
         }
 
         return true;
@@ -195,7 +197,7 @@ struct YarpRobotControl::Impl
     }
 
     /**
-     * Rebuild the indices of the joints associated to each control mode from controlModes.
+     * Rebuild the indices of the joints associated to each control mode from desiredControlModes.
      */
     void updateControlModeIndices()
     {
@@ -206,7 +208,7 @@ struct YarpRobotControl::Impl
 
         for (std::size_t i = 0; i < this->actuatedDOFs; i++)
         {
-            this->desiredJointValuesAndMode.index[this->controlModes[i]].push_back(i);
+            this->desiredJointValuesAndMode.index[this->desiredControlModes[i]].push_back(i);
         }
 
         for (const auto& [mode, indices] : this->desiredJointValuesAndMode.index)
@@ -324,11 +326,11 @@ struct YarpRobotControl::Impl
                                                                           jointIndices.data(),
                                                                           modes.data());
 
-        // The requested control modes are stored also if the device did not accept some of them,
+        // The desired control modes are stored also if the device did not accept some of them,
         // so that the references of the other joints keep being accepted.
         for (std::size_t i = 0; i < jointIndices.size(); i++)
         {
-            this->controlModes[jointIndices[i]] = controlModes[i];
+            this->desiredControlModes[jointIndices[i]] = controlModes[i];
         }
         this->updateControlModeIndices();
 
@@ -471,7 +473,7 @@ struct YarpRobotControl::Impl
 
         // resize vector
         this->positionFeedback.resize(this->actuatedDOFs);
-        this->controlModes.resize(this->actuatedDOFs);
+        this->desiredControlModes.resize(this->actuatedDOFs);
         this->controlModesYarp.resize(this->actuatedDOFs);
         this->axesName.resize(this->actuatedDOFs);
 
@@ -507,7 +509,7 @@ struct YarpRobotControl::Impl
         // store the joint associated to a specific control mode
         for (std::size_t i = 0; i < this->actuatedDOFs; i++)
         {
-            this->desiredJointValuesAndMode.index[this->controlModes[i]].push_back(i);
+            this->desiredJointValuesAndMode.index[this->desiredControlModes[i]].push_back(i);
         }
 
         // resize the desired joint value vector associated to each control mode
@@ -574,7 +576,7 @@ struct YarpRobotControl::Impl
         for (int i = 0; i < this->actuatedDOFs; i++)
         {
             // we are interested only if the joint is in PositionDirect
-            if (this->controlModes[i] == RobotInterface::ControlMode::PositionDirect)
+            if (this->desiredControlModes[i] == RobotInterface::ControlMode::PositionDirect)
             {
                 const double jointError = std::abs(jointPositions[i] - desiredJointValues[i]);
 
@@ -827,13 +829,13 @@ struct YarpRobotControl::Impl
 
     bool checkControlMode(const std::vector<RobotInterface::ControlMode>& controlModes) const
     {
-        return controlModes == this->controlModes;
+        return controlModes == this->desiredControlModes;
     }
 
     bool checkControlMode(const RobotInterface::ControlMode& mode) const
     {
-        return std::all_of(this->controlModes.begin(),
-                           this->controlModes.end(),
+        return std::all_of(this->desiredControlModes.begin(),
+                           this->desiredControlModes.end(),
                            [&mode](const auto& m) { return m == mode; });
     }
 
