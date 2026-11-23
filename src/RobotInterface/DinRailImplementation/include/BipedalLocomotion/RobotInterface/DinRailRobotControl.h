@@ -121,6 +121,25 @@ public:
                                Eigen::Ref<Eigen::VectorXd> damping);
 
     /**
+     * Get impedance control setpoints for a subset of joints in jointIndices order.
+     * Output vectors must be sized to jointIndices.size(). The same unit
+     * conversions as the full overload apply.
+     * @param position Position setpoints for the subset joints.
+     * @param velocity Velocity setpoints for the subset joints.
+     * @param torque Torque feedforward setpoints for the subset joints.
+     * @param stiffness Stiffness setpoints for the subset joints.
+     * @param damping Damping setpoints for the subset joints.
+     * @param jointIndices Indices into the full control-board joint list.
+     * @return True on success, false otherwise.
+     */
+    bool getImpedanceSetPoints(Eigen::Ref<Eigen::VectorXd> position,
+                               Eigen::Ref<Eigen::VectorXd> velocity,
+                               Eigen::Ref<Eigen::VectorXd> torque,
+                               Eigen::Ref<Eigen::VectorXd> stiffness,
+                               Eigen::Ref<Eigen::VectorXd> damping,
+                               const std::vector<int>& jointIndices);
+
+    /**
      * Set impedance control setpoints (MIT mode) for a subset of joints.
      *
      * Mirrors the behaviour of IRobotControl::setReferences() with joint indices:

@@ -212,6 +212,67 @@ bool DinRailRobotControl::setDriver(std::shared_ptr<yarp::dev::PolyDriver> robot
     return true;
 }
 
+bool DinRailRobotControl::getImpedanceSetPoints(Eigen::Ref<Eigen::VectorXd> position,
+                                               Eigen::Ref<Eigen::VectorXd> velocity,
+                                               Eigen::Ref<Eigen::VectorXd> torque,
+                                               Eigen::Ref<Eigen::VectorXd> stiffness,
+                                               Eigen::Ref<Eigen::VectorXd> damping,
+                                               const std::vector<int>& jointIndices)
+{
+    constexpr auto errorPrefix = "[DinRailRobotControl::getImpedanceSetPoints (subset)]";
+
+    if (m_pimpl->impedanceInterface == nullptr)
+    {
+        log()->error("{} The impedance interface is not ready. Did you call setDriver()?",
+                     errorPrefix);
+        return false;
+    }
+
+    const auto n = static_cast<Eigen::Index>(jointIndices.size());
+    if (position.size() != n || velocity.size() != n || torque.size() != n || stiffness.size() != n
+        || damping.size() != n)
+    {
+        log()->error("{} Output vector size mismatch. Expected {} for all outputs.", errorPrefix, n);
+        return false;
+    }
+
+    for (const int jointIndex : jointIndices)
+    {
+        if (jointIndex < 0 || static_cast<std::size_t>(jointIndex) >= m_pimpl->actuatedDOFs)
+        {
+            log()->error("{} Invalid joint index {}.", errorPrefix, jointIndex);
+            return false;
+        }
+    }
+
+    if (!m_pimpl->impedanceInterface->getSetPoints(jointIndices,
+                                                  position,
+                                                  velocity,
+                                                  torque,
+                                                  stiffness,
+                                                  damping))
+    {
+        log()->error("{} Failed to get impedance setpoints.", errorPrefix);
+        return false;
+    }
+
+    constexpr double degToRad = M_PI / 180.0;
+    constexpr double radToDeg = 180.0 / M_PI;
+    for (Eigen::Index i = 0; i < n; ++i)
+    {
+        if (m_pimpl->jointTypes[static_cast<std::size_t>(jointIndices[static_cast<std::size_t>(i)])]
+            == JointType::REVOLUTE)
+        {
+            position[i] *= degToRad;
+            velocity[i] *= degToRad;
+            stiffness[i] *= radToDeg;
+            damping[i] *= radToDeg;
+        }
+    }
+
+    return true;
+}
+
 bool DinRailRobotControl::setImpedanceSetPoints(Eigen::Ref<const Eigen::VectorXd> position,
                                                 Eigen::Ref<const Eigen::VectorXd> velocity,
                                                 Eigen::Ref<const Eigen::VectorXd> torque,
