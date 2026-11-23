@@ -1016,6 +1016,12 @@ bool YarpRobotControl::initialize(std::weak_ptr<ParametersHandler::IParametersHa
 
 bool YarpRobotControl::getControlMode(std::vector<IRobotControl::ControlMode>& controlModes)
 {
+    constexpr auto errorPrefix = "[YarpRobotControl::getControlMode]";
+    if (!m_pimpl->getControlModes()) {
+        log()->error("{} Unable to get the control modes.", errorPrefix);
+        return false;
+    }
+
     controlModes = m_pimpl->controlModes;
     return true;
 }
