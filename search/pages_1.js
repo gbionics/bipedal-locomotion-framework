@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['🐍_20python_20bindings_3265',['🐍 Python bindings',['../python-additional-info.html',1,'']]]
+  ['deprecated_20list_3302',['Deprecated List',['../deprecated.html',1,'']]]
 ];

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['full_3238',['FULL',['../Contact_8h.html#a34ae1b101a919e7e1b42ddf2193c51b0aba7de5bc6888294e5884b024a4c894f1',1,'BipedalLocomotion::Contacts']]]
+  ['current_3266',['Current',['../ControlMode_8h.html#a8dc067a557a734ecd2ebba68a1188f82a222a267cc5778206b253be35ee3ddab5',1,'BipedalLocomotion::RobotInterface']]]
 ];

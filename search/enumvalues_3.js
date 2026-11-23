@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['multiframeaverage_3243',['multiFrameAverage',['../LeggedOdometry_8cpp.html#ac16d74a10978fbde67463fe914cd97f0a6787e4f92cab8e6a85b86ee4d6ab6673',1,'BipedalLocomotion::Estimators']]],
-  ['multiframeleastsquare_3244',['multiFrameLeastSquare',['../LeggedOdometry_8cpp.html#ac16d74a10978fbde67463fe914cd97f0a2aa24196634eff843988cf121376f53b',1,'BipedalLocomotion::Estimators']]],
-  ['multiframeleastsquarewithjvel_3245',['multiFrameLeastSquareWithJVel',['../LeggedOdometry_8cpp.html#ac16d74a10978fbde67463fe914cd97f0a81d95be127999e4e3b0a1bd0a1a1b591',1,'BipedalLocomotion::Estimators']]]
+  ['idle_3270',['Idle',['../ControlMode_8h.html#a8dc067a557a734ecd2ebba68a1188f82ae599161956d626eda4cb0a5ffb85271c',1,'BipedalLocomotion::RobotInterface']]],
+  ['initialized_3271',['Initialized',['../classBipedalLocomotion_1_1Contacts_1_1ContactDetector.html#a2d43086e84e475eaec9adeb9575dea84a59d87a4758a9d35fbaf6b204341bb399',1,'BipedalLocomotion::Contacts::ContactDetector::Initialized()'],['../classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator.html#ac94d11332538be5c0ae96761645b74f1a59d87a4758a9d35fbaf6b204341bb399',1,'BipedalLocomotion::Estimators::FloatingBaseEstimator::Initialized()']]]
 ];

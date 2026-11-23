@@ -276,6 +276,12 @@ virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="c
 <tr class="memitem:a975c3d127759bf2a5a6a86eb17b54907"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1RobotInterface_1_1ISensorBridge.html#a975c3d127759bf2a5a6a86eb17b54907">getMotorTemperature</a> (const std::string &amp;jointName, double &amp;motorTemperature, OptionalDoubleRef receiveTimeInSeconds={})</td></tr>
 <tr class="memdesc:a975c3d127759bf2a5a6a86eb17b54907"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get motor temperature in degrees celsius.  <a href="classBipedalLocomotion_1_1RobotInterface_1_1ISensorBridge.html#a975c3d127759bf2a5a6a86eb17b54907">More...</a><br /></td></tr>
 <tr class="separator:a975c3d127759bf2a5a6a86eb17b54907"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a09ce1f824cb5c3591cfddfd643be7957"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1RobotInterface_1_1ISensorBridge.html#a09ce1f824cb5c3591cfddfd643be7957">getJointControlModes</a> (std::vector&lt; <a class="el" href="ControlMode_8h.html#a8dc067a557a734ecd2ebba68a1188f82">ControlMode</a> &gt; &amp;controlModes, OptionalDoubleRef receiveTimeInSeconds={})</td></tr>
+<tr class="memdesc:a09ce1f824cb5c3591cfddfd643be7957"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the control mode of all the joints.  <a href="classBipedalLocomotion_1_1RobotInterface_1_1ISensorBridge.html#a09ce1f824cb5c3591cfddfd643be7957">More...</a><br /></td></tr>
+<tr class="separator:a09ce1f824cb5c3591cfddfd643be7957"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9675f3f30c56c40014b1c8dfea8c5404"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1RobotInterface_1_1ISensorBridge.html#a9675f3f30c56c40014b1c8dfea8c5404">getJointControlMode</a> (const std::string &amp;jointName, <a class="el" href="ControlMode_8h.html#a8dc067a557a734ecd2ebba68a1188f82">ControlMode</a> &amp;controlMode, OptionalDoubleRef receiveTimeInSeconds={})</td></tr>
+<tr class="memdesc:a9675f3f30c56c40014b1c8dfea8c5404"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the control mode of a joint.  <a href="classBipedalLocomotion_1_1RobotInterface_1_1ISensorBridge.html#a9675f3f30c56c40014b1c8dfea8c5404">More...</a><br /></td></tr>
+<tr class="separator:a9675f3f30c56c40014b1c8dfea8c5404"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
@@ -2552,6 +2558,110 @@ Protected Member Functions</h2></td></tr>
 <dl class="section return"><dt>Returns</dt><dd>true/false in case of success/failure </dd></dl>
 
 <p>Reimplemented in <a class="el" href="classBipedalLocomotion_1_1RobotInterface_1_1YarpSensorBridge.html#a4e98f52ba5ff8613f8377a35364de6ce">BipedalLocomotion::RobotInterface::YarpSensorBridge</a>.</p>
+
+</div>
+</div>
+<a id="a09ce1f824cb5c3591cfddfd643be7957"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a09ce1f824cb5c3591cfddfd643be7957">&#9670;&nbsp;</a></span>getJointControlModes()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual bool BipedalLocomotion::RobotInterface::ISensorBridge::getJointControlModes </td>
+          <td>(</td>
+          <td class="paramtype">std::vector&lt; <a class="el" href="ControlMode_8h.html#a8dc067a557a734ecd2ebba68a1188f82">ControlMode</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>controlModes</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">OptionalDoubleRef&#160;</td>
+          <td class="paramname"><em>receiveTimeInSeconds</em> = <code>{}</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get the control mode of all the joints. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[out]</td><td class="paramname">controlModes</td><td>control mode of each joint, ordered as the joints list </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">receiveTimeInSeconds</td><td>time at which the measurement was received </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section note"><dt>Note</dt><dd>The vector is resized by the method. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>true/false in case of success/failure </dd></dl>
+
+<p>Reimplemented in <a class="el" href="classBipedalLocomotion_1_1RobotInterface_1_1YarpSensorBridge.html#ac467aac42df97f30ae37fb3e798e2bd2">BipedalLocomotion::RobotInterface::YarpSensorBridge</a>.</p>
+
+</div>
+</div>
+<a id="a9675f3f30c56c40014b1c8dfea8c5404"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9675f3f30c56c40014b1c8dfea8c5404">&#9670;&nbsp;</a></span>getJointControlMode()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual bool BipedalLocomotion::RobotInterface::ISensorBridge::getJointControlMode </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>jointName</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="ControlMode_8h.html#a8dc067a557a734ecd2ebba68a1188f82">ControlMode</a> &amp;&#160;</td>
+          <td class="paramname"><em>controlMode</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">OptionalDoubleRef&#160;</td>
+          <td class="paramname"><em>receiveTimeInSeconds</em> = <code>{}</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get the control mode of a joint. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">jointName</td><td>name of the joint </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">controlMode</td><td>control mode of the joint </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">receiveTimeInSeconds</td><td>time at which the measurement was received </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true/false in case of success/failure </dd></dl>
+
+<p>Reimplemented in <a class="el" href="classBipedalLocomotion_1_1RobotInterface_1_1YarpSensorBridge.html#abe38169e25ce35146c03e586bc501caf">BipedalLocomotion::RobotInterface::YarpSensorBridge</a>.</p>
 
 </div>
 </div>

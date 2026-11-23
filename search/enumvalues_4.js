@@ -1,4 +1,6 @@
 var searchData=
 [
-  ['notinitialized_3246',['NotInitialized',['../classBipedalLocomotion_1_1Contacts_1_1ContactDetector.html#a2d43086e84e475eaec9adeb9575dea84a9646ad3a1c3e708b4fa8b4b4270fbab6',1,'BipedalLocomotion::Contacts::ContactDetector::NotInitialized()'],['../classBipedalLocomotion_1_1Estimators_1_1FloatingBaseEstimator.html#ac94d11332538be5c0ae96761645b74f1a9646ad3a1c3e708b4fa8b4b4270fbab6',1,'BipedalLocomotion::Estimators::FloatingBaseEstimator::NotInitialized()']]]
+  ['lastactive_3272',['lastActive',['../LeggedOdometry_8cpp.html#aa158846adb26e6785251ba98a606e648a398e161cc60d62421215fa24a1beb6d0',1,'BipedalLocomotion::Estimators']]],
+  ['latest_3273',['latest',['../LeggedOdometry_8cpp.html#aa158846adb26e6785251ba98a606e648a71ccb7a35a452ea8153b6d920f9f190e',1,'BipedalLocomotion::Estimators']]],
+  ['left_3274',['Left',['../classBipedalLocomotion_1_1ML_1_1MANNAutoregressive.html#a04a682d07c84fbff9238e6f26f262afba945d5e233cf7d6240f6b783b36a374ff',1,'BipedalLocomotion::ML::MANNAutoregressive::Left()'],['../classBipedalLocomotion_1_1ML_1_1VelMANNAutoregressive.html#a297af9c7d91f415cdc00d2c820a20ea4a945d5e233cf7d6240f6b783b36a374ff',1,'BipedalLocomotion::ML::VelMANNAutoregressive::Left()']]]
 ];

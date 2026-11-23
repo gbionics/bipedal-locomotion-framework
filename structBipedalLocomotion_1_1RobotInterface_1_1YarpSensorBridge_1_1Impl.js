@@ -45,6 +45,7 @@ var structBipedalLocomotion_1_1RobotInterface_1_1YarpSensorBridge_1_1Impl =
     [ "readAllJointSensors", "structBipedalLocomotion_1_1RobotInterface_1_1YarpSensorBridge_1_1Impl.html#a9310f53e5851feff3e5e87620ae7df38", null ],
     [ "readAllMotorSensors", "structBipedalLocomotion_1_1RobotInterface_1_1YarpSensorBridge_1_1Impl.html#ad4b1e5b50d0da2141fe44e93da941e19", null ],
     [ "readAllMotorPWMs", "structBipedalLocomotion_1_1RobotInterface_1_1YarpSensorBridge_1_1Impl.html#ad72bcad393af9a6a373faecbd37bb548", null ],
+    [ "readAllJointControlModes", "structBipedalLocomotion_1_1RobotInterface_1_1YarpSensorBridge_1_1Impl.html#a8bb5df7518c3254d512868ff29d0e58e", null ],
     [ "readAllPIDs", "structBipedalLocomotion_1_1RobotInterface_1_1YarpSensorBridge_1_1Impl.html#a4409c543182d5bb405ef005c6ceeb7a4", null ],
     [ "readAllCartesianWrenches", "structBipedalLocomotion_1_1RobotInterface_1_1YarpSensorBridge_1_1Impl.html#a816e32aeabd4d463336adbcf125254df", null ],
     [ "readAllMASLinearAccelerometers", "structBipedalLocomotion_1_1RobotInterface_1_1YarpSensorBridge_1_1Impl.html#a5058da8da784edc580c5624b659849ff", null ],

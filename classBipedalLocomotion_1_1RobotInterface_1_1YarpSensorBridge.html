@@ -257,6 +257,12 @@ const std::vector&lt; std::string &gt; &amp;&#160;</td><td class="memItemRight" 
 <tr class="memitem:a4e98f52ba5ff8613f8377a35364de6ce"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1RobotInterface_1_1YarpSensorBridge.html#a4e98f52ba5ff8613f8377a35364de6ce">getMotorTemperature</a> (const std::string &amp;jointName, double &amp;motorTemperature, OptionalDoubleRef receiveTimeInSeconds={}) final</td></tr>
 <tr class="memdesc:a4e98f52ba5ff8613f8377a35364de6ce"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get motor temperature in degrees celsius.  <a href="classBipedalLocomotion_1_1RobotInterface_1_1YarpSensorBridge.html#a4e98f52ba5ff8613f8377a35364de6ce">More...</a><br /></td></tr>
 <tr class="separator:a4e98f52ba5ff8613f8377a35364de6ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac467aac42df97f30ae37fb3e798e2bd2"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1RobotInterface_1_1YarpSensorBridge.html#ac467aac42df97f30ae37fb3e798e2bd2">getJointControlModes</a> (std::vector&lt; <a class="el" href="ControlMode_8h.html#a8dc067a557a734ecd2ebba68a1188f82">ControlMode</a> &gt; &amp;controlModes, OptionalDoubleRef receiveTimeInSeconds={}) final</td></tr>
+<tr class="memdesc:ac467aac42df97f30ae37fb3e798e2bd2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the control mode of all the joints.  <a href="classBipedalLocomotion_1_1RobotInterface_1_1YarpSensorBridge.html#ac467aac42df97f30ae37fb3e798e2bd2">More...</a><br /></td></tr>
+<tr class="separator:ac467aac42df97f30ae37fb3e798e2bd2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abe38169e25ce35146c03e586bc501caf"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1RobotInterface_1_1YarpSensorBridge.html#abe38169e25ce35146c03e586bc501caf">getJointControlMode</a> (const std::string &amp;jointName, <a class="el" href="ControlMode_8h.html#a8dc067a557a734ecd2ebba68a1188f82">ControlMode</a> &amp;controlMode, OptionalDoubleRef receiveTimeInSeconds={}) final</td></tr>
+<tr class="memdesc:abe38169e25ce35146c03e586bc501caf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the control mode of a joint.  <a href="classBipedalLocomotion_1_1RobotInterface_1_1YarpSensorBridge.html#abe38169e25ce35146c03e586bc501caf">More...</a><br /></td></tr>
+<tr class="separator:abe38169e25ce35146c03e586bc501caf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac592ef0e4b5ec65d65181f67c45b4fec"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1RobotInterface_1_1YarpSensorBridge.html#ac592ef0e4b5ec65d65181f67c45b4fec">getMotorPWM</a> (const std::string &amp;jointName, double &amp;motorPWM, OptionalDoubleRef receiveTimeInSeconds={}) final</td></tr>
 <tr class="memdesc:ac592ef0e4b5ec65d65181f67c45b4fec"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get motor PWM.  <a href="classBipedalLocomotion_1_1RobotInterface_1_1YarpSensorBridge.html#ac592ef0e4b5ec65d65181f67c45b4fec">More...</a><br /></td></tr>
 <tr class="separator:ac592ef0e4b5ec65d65181f67c45b4fec"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -472,34 +478,36 @@ using&#160;</td><td class="memItemRight" valign="bottom"><b>Output</b> = _Output
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter">stream_battery   </td><td class="markdownTableBodyCenter">boolean   </td><td class="markdownTableBodyCenter">Flag to activate the attachment to battery devices    </td></tr>
 <tr class="markdownTableRowEven">
+<td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter">stream_joint_control_modes   </td><td class="markdownTableBodyCenter">boolean   </td><td class="markdownTableBodyCenter">Flag to activate the reading of the joint control modes through the IControlMode interface of the remapped control board. It requires <code>stream_joint_states</code>. Default false    </td></tr>
+<tr class="markdownTableRowOdd">
 <td class="markdownTableBodyCenter">RemoteControlBoardRemapper   </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter">Expects only one remapped remotecontrolboard device attached to it, if there multiple remote control boards, then use a remapper to create a single remotecontrolboard    </td></tr>
-<tr class="markdownTableRowOdd">
+<tr class="markdownTableRowEven">
 <td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter">joints_list   </td><td class="markdownTableBodyCenter">vector of strings   </td><td class="markdownTableBodyCenter">This parameter is <b>optional</b>. The joints list used to open the remote control board remapper. If the list is not passed, the order of the joint stored in the PolyDriver is used    </td></tr>
-<tr class="markdownTableRowEven">
+<tr class="markdownTableRowOdd">
 <td class="markdownTableBodyCenter">InertialSensors   </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter">Expects inertials to be opened as a part of the multiple analog sensors remapper ("multipleanalogsensorsremapper"). If the group is not provided, all the sensors of the first attached device exposing each interface are used    </td></tr>
-<tr class="markdownTableRowOdd">
+<tr class="markdownTableRowEven">
 <td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter">gyroscopes_list   </td><td class="markdownTableBodyCenter">vector of strings   </td><td class="markdownTableBodyCenter">list of the names of devices opened with ThreeAxisGyroscope interface remapped through the "multipleanalogsensorsremapper" interfaces and having a channel dimension of 3    </td></tr>
-<tr class="markdownTableRowEven">
+<tr class="markdownTableRowOdd">
 <td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter">accelerometers_list   </td><td class="markdownTableBodyCenter">vector of strings   </td><td class="markdownTableBodyCenter">list of the names of devices opened with ThreeAxisLinearAccelerometers interface remapped through the "multipleanalogsensorsremapper" interfaces and having a channel dimension of 3    </td></tr>
-<tr class="markdownTableRowOdd">
+<tr class="markdownTableRowEven">
 <td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter">orientation_sensors_list   </td><td class="markdownTableBodyCenter">vector of strings   </td><td class="markdownTableBodyCenter">list of the names of devices opened with OrientationSensors interface remapped through the "multipleanalogsensorsremapper" interfaces and having a channel dimension of 3    </td></tr>
-<tr class="markdownTableRowEven">
+<tr class="markdownTableRowOdd">
 <td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter">magnetometers_list   </td><td class="markdownTableBodyCenter">vector of strings   </td><td class="markdownTableBodyCenter">list of the names of devices opened with ThreeAxisMagnetometer interface remapped through the "multipleanalogsensorsremapper" interfaces and having a channel dimension of 3    </td></tr>
-<tr class="markdownTableRowOdd">
+<tr class="markdownTableRowEven">
 <td class="markdownTableBodyCenter">CartesianWrenches   </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter">Expects the devices wrapping the cartesian wrenches ports to be opened as "genericSensorClient" device and have a channel dimension of 6    </td></tr>
-<tr class="markdownTableRowEven">
+<tr class="markdownTableRowOdd">
 <td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter">cartesian_wrenches_list   </td><td class="markdownTableBodyCenter">vector of strings   </td><td class="markdownTableBodyCenter">list of the names of devices opened as genericSensorClient device and having a channel dimension of 6    </td></tr>
-<tr class="markdownTableRowOdd">
+<tr class="markdownTableRowEven">
 <td class="markdownTableBodyCenter">SixAxisForceTorqueSensors   </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter">Expects the Six axis FT sensors to be opened with SixAxisForceTorqueSensors interface remapped through multiple analog sensors remapper ("multipleanalogsensorsremapper")    </td></tr>
-<tr class="markdownTableRowEven">
+<tr class="markdownTableRowOdd">
 <td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter">sixaxis_forcetorque_sensors_list   </td><td class="markdownTableBodyCenter">vector of strings   </td><td class="markdownTableBodyCenter">list of six axis FT sensors    </td></tr>
-<tr class="markdownTableRowOdd">
+<tr class="markdownTableRowEven">
 <td class="markdownTableBodyCenter">TemperatureSensors   </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter">Expects the temperature sensors to be opened with TemperatureSensors interface remapped through multiple analog sensors remapper    </td></tr>
-<tr class="markdownTableRowEven">
-<td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter">temperature_sensors_list   </td><td class="markdownTableBodyCenter">vector of strings   </td><td class="markdownTableBodyCenter">list containing the devices opened with TemperatureSensors interface    </td></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyCenter">Batteries   </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter">Expects the batteries to be opened with the IBattery interface. If the group is not provided, all the attached devices exposing the IBattery interface are used    </td></tr>
+<td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter">temperature_sensors_list   </td><td class="markdownTableBodyCenter">vector of strings   </td><td class="markdownTableBodyCenter">list containing the devices opened with TemperatureSensors interface    </td></tr>
 <tr class="markdownTableRowEven">
+<td class="markdownTableBodyCenter">Batteries   </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter">Expects the batteries to be opened with the IBattery interface. If the group is not provided, all the attached devices exposing the IBattery interface are used    </td></tr>
+<tr class="markdownTableRowOdd">
 <td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter">batteries_list   </td><td class="markdownTableBodyCenter">vector of strings   </td><td class="markdownTableBodyCenter">list containing the names of the attached devices exposing the IBattery interface   </td></tr>
 </table>
 </div><h2 class="groupheader">Member Function Documentation</h2>
@@ -1968,6 +1976,112 @@ using&#160;</td><td class="memItemRight" valign="bottom"><b>Output</b> = _Output
 true/false in case of success/failure </dd></dl>
 
 <p>Reimplemented from <a class="el" href="classBipedalLocomotion_1_1RobotInterface_1_1ISensorBridge.html#a975c3d127759bf2a5a6a86eb17b54907">BipedalLocomotion::RobotInterface::ISensorBridge</a>.</p>
+
+</div>
+</div>
+<a id="ac467aac42df97f30ae37fb3e798e2bd2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac467aac42df97f30ae37fb3e798e2bd2">&#9670;&nbsp;</a></span>getJointControlModes()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool YarpSensorBridge::getJointControlModes </td>
+          <td>(</td>
+          <td class="paramtype">std::vector&lt; <a class="el" href="ControlMode_8h.html#a8dc067a557a734ecd2ebba68a1188f82">ControlMode</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>controlModes</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">OptionalDoubleRef&#160;</td>
+          <td class="paramname"><em>receiveTimeInSeconds</em> = <code>{}</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">final</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get the control mode of all the joints. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[out]</td><td class="paramname">controlModes</td><td>control mode of each joint, ordered as the joints list </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">receiveTimeInSeconds</td><td>time at which the measurement was received </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section note"><dt>Note</dt><dd>The vector is resized by the method. </dd>
+<dd>
+With a network client (e.g. remotecontrolboardremapper) the control modes are read from the state port streamed by the server, so no RPC is performed. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>true/false in case of success/failure. False is also returned if the control modes could not be read in the last call of <a class="el" href="classBipedalLocomotion_1_1RobotInterface_1_1YarpSensorBridge.html#af075090fb2b9195ddb06ebd25f108147" title="Advance the internal state.">advance()</a>. </dd></dl>
+
+<p>Reimplemented from <a class="el" href="classBipedalLocomotion_1_1RobotInterface_1_1ISensorBridge.html#a09ce1f824cb5c3591cfddfd643be7957">BipedalLocomotion::RobotInterface::ISensorBridge</a>.</p>
+
+</div>
+</div>
+<a id="abe38169e25ce35146c03e586bc501caf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abe38169e25ce35146c03e586bc501caf">&#9670;&nbsp;</a></span>getJointControlMode()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool YarpSensorBridge::getJointControlMode </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>jointName</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="ControlMode_8h.html#a8dc067a557a734ecd2ebba68a1188f82">ControlMode</a> &amp;&#160;</td>
+          <td class="paramname"><em>controlMode</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">OptionalDoubleRef&#160;</td>
+          <td class="paramname"><em>receiveTimeInSeconds</em> = <code>{}</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">final</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get the control mode of a joint. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">jointName</td><td>name of the joint </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">controlMode</td><td>control mode of the joint </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">receiveTimeInSeconds</td><td>time at which the measurement was received </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true/false in case of success/failure. False is also returned if the control modes could not be read in the last call of <a class="el" href="classBipedalLocomotion_1_1RobotInterface_1_1YarpSensorBridge.html#af075090fb2b9195ddb06ebd25f108147" title="Advance the internal state.">advance()</a>. </dd></dl>
+
+<p>Reimplemented from <a class="el" href="classBipedalLocomotion_1_1RobotInterface_1_1ISensorBridge.html#a9675f3f30c56c40014b1c8dfea8c5404">BipedalLocomotion::RobotInterface::ISensorBridge</a>.</p>
 
 </div>
 </div>

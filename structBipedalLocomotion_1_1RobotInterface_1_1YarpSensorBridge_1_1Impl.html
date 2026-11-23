@@ -302,6 +302,9 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="stru
 bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structBipedalLocomotion_1_1RobotInterface_1_1YarpSensorBridge_1_1Impl.html#ad72bcad393af9a6a373faecbd37bb548">readAllMotorPWMs</a> (bool checkForNan=false)</td></tr>
 <tr class="memdesc:ad72bcad393af9a6a373faecbd37bb548"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read motor encoders measurements. <br /></td></tr>
 <tr class="separator:ad72bcad393af9a6a373faecbd37bb548"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8bb5df7518c3254d512868ff29d0e58e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structBipedalLocomotion_1_1RobotInterface_1_1YarpSensorBridge_1_1Impl.html#a8bb5df7518c3254d512868ff29d0e58e">readAllJointControlModes</a> ()</td></tr>
+<tr class="memdesc:a8bb5df7518c3254d512868ff29d0e58e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read the joint control modes.  <a href="structBipedalLocomotion_1_1RobotInterface_1_1YarpSensorBridge_1_1Impl.html#a8bb5df7518c3254d512868ff29d0e58e">More...</a><br /></td></tr>
+<tr class="separator:a8bb5df7518c3254d512868ff29d0e58e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4409c543182d5bb405ef005c6ceeb7a4"><td class="memItemLeft" align="right" valign="top"><a id="a4409c543182d5bb405ef005c6ceeb7a4"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structBipedalLocomotion_1_1RobotInterface_1_1YarpSensorBridge_1_1Impl.html#a4409c543182d5bb405ef005c6ceeb7a4">readAllPIDs</a> (bool checkForNan=false)</td></tr>
 <tr class="memdesc:a4409c543182d5bb405ef005c6ceeb7a4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read pid references. <br /></td></tr>
@@ -534,6 +537,34 @@ template&lt;typename MASSensorType &gt; </div>
 
 <p>Fill the sensors list with the sensors of the first attached device exposing the MAS interface. </p>
 <p>The sensor type is enabled if at least a sensor is found. </p>
+
+</div>
+</div>
+<a id="a8bb5df7518c3254d512868ff29d0e58e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8bb5df7518c3254d512868ff29d0e58e">&#9670;&nbsp;</a></span>readAllJointControlModes()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void BipedalLocomotion::RobotInterface::YarpSensorBridge::Impl::readAllJointControlModes </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Read the joint control modes. </p>
+<p>A failure does not invalidate the other measurements: it only marks the control modes as not valid until the next successful read. </p>
 
 </div>
 </div>

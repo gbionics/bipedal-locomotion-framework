@@ -12,6 +12,7 @@ var structBipedalLocomotion_1_1RobotInterface_1_1SensorBridgeOptions =
     [ "isMotorSensorsEnabled", "structBipedalLocomotion_1_1RobotInterface_1_1SensorBridgeOptions.html#a89a49fe4085abfec7529e5257e7191ef", null ],
     [ "isPWMControlEnabled", "structBipedalLocomotion_1_1RobotInterface_1_1SensorBridgeOptions.html#a0f81c5a2b2e5b264377357e1e0a79747", null ],
     [ "isMotorTemperatureSensorEnabled", "structBipedalLocomotion_1_1RobotInterface_1_1SensorBridgeOptions.html#af20503f7ea0c45d994adbc6720ae7531", null ],
+    [ "isJointControlModeEnabled", "structBipedalLocomotion_1_1RobotInterface_1_1SensorBridgeOptions.html#a579692263019ad07a0472b2a67b9c24f", null ],
     [ "isTemperatureSensorEnabled", "structBipedalLocomotion_1_1RobotInterface_1_1SensorBridgeOptions.html#ac165eee2794add881f0773c3de59d96b", null ],
     [ "isBatteryEnabled", "structBipedalLocomotion_1_1RobotInterface_1_1SensorBridgeOptions.html#a0d50eca4e63092dd445e1ba8272046f7", null ],
     [ "nrJoints", "structBipedalLocomotion_1_1RobotInterface_1_1SensorBridgeOptions.html#a4570c2a27e0c3288f690d35070ace64f", null ]

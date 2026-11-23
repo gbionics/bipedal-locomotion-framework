@@ -110,9 +110,14 @@ $(document).ready(function(){initNavTree('YarpRobotControl_8cpp.html',''); initR
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><code>#include &lt;algorithm&gt;</code><br />
+<code>#include &lt;atomic&gt;</code><br />
 <code>#include &lt;cmath&gt;</code><br />
 <code>#include &lt;future&gt;</code><br />
+<code>#include &lt;limits&gt;</code><br />
 <code>#include &lt;mutex&gt;</code><br />
+<code>#include &lt;numeric&gt;</code><br />
+<code>#include &lt;string&gt;</code><br />
+<code>#include &lt;string_view&gt;</code><br />
 <code>#include &lt;thread&gt;</code><br />
 <code>#include &lt;unordered_map&gt;</code><br />
 <code>#include &lt;yarp/dev/IAxisInfo.h&gt;</code><br />
@@ -126,10 +131,11 @@ $(document).ready(function(){initNavTree('YarpRobotControl_8cpp.html',''); initR
 <code>#include &lt;yarp/dev/ITorqueControl.h&gt;</code><br />
 <code>#include &lt;yarp/dev/IVelocityControl.h&gt;</code><br />
 <code>#include &lt;yarp/dev/PolyDriver.h&gt;</code><br />
+<code>#include &lt;<a class="el" href="JointType_8h.html">BipedalLocomotion/RobotInterface/JointType.h</a>&gt;</code><br />
+<code>#include &lt;<a class="el" href="YarpHelper_8h.html">BipedalLocomotion/RobotInterface/YarpHelper.h</a>&gt;</code><br />
 <code>#include &lt;<a class="el" href="YarpRobotControl_8h.html">BipedalLocomotion/RobotInterface/YarpRobotControl.h</a>&gt;</code><br />
 <code>#include &lt;<a class="el" href="Clock_8h.html">BipedalLocomotion/System/Clock.h</a>&gt;</code><br />
 <code>#include &lt;<a class="el" href="Logger_8h.html">BipedalLocomotion/TextLogging/Logger.h</a>&gt;</code><br />
-<code>#include &lt;<a class="el" href="JointType_8h.html">BipedalLocomotion/RobotInterface/JointType.h</a>&gt;</code><br />
 </div><a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><dl class="section author"><dt>Authors</dt><dd>Giulio Romualdi </dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>2020 Istituto Italiano di Tecnologia (IIT). This software may be modified and distributed under the terms of the BSD-3-Clause license. </dd></dl>

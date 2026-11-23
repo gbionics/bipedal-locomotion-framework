@@ -341,6 +341,18 @@ var namespaceBipedalLocomotion =
       [ "PolyDriverDescriptor", "structBipedalLocomotion_1_1RobotInterface_1_1PolyDriverDescriptor.html", "structBipedalLocomotion_1_1RobotInterface_1_1PolyDriverDescriptor" ],
       [ "YarpRobotControl", "classBipedalLocomotion_1_1RobotInterface_1_1YarpRobotControl.html", "classBipedalLocomotion_1_1RobotInterface_1_1YarpRobotControl" ],
       [ "YarpSensorBridge", "classBipedalLocomotion_1_1RobotInterface_1_1YarpSensorBridge.html", "classBipedalLocomotion_1_1RobotInterface_1_1YarpSensorBridge" ],
+      [ "ControlMode", "ControlMode_8h.html#a8dc067a557a734ecd2ebba68a1188f82", [
+        [ "Position", "ControlMode_8h.html#a8dc067a557a734ecd2ebba68a1188f82a52f5e0bc3859bc5f5e25130b6c7e8881", null ],
+        [ "PositionDirect", "ControlMode_8h.html#a8dc067a557a734ecd2ebba68a1188f82aa72edba28a392d1e46a021cdc04a4536", null ],
+        [ "Velocity", "ControlMode_8h.html#a8dc067a557a734ecd2ebba68a1188f82a88156d46910a2d733443c339a9231d12", null ],
+        [ "Torque", "ControlMode_8h.html#a8dc067a557a734ecd2ebba68a1188f82a1aaf5a08dfe16d89a8ca6f8de4cfb0ca", null ],
+        [ "PWM", "ControlMode_8h.html#a8dc067a557a734ecd2ebba68a1188f82a8449bc264b69c3a0fe8b60361eaf7aeb", null ],
+        [ "Current", "ControlMode_8h.html#a8dc067a557a734ecd2ebba68a1188f82a222a267cc5778206b253be35ee3ddab5", null ],
+        [ "Idle", "ControlMode_8h.html#a8dc067a557a734ecd2ebba68a1188f82ae599161956d626eda4cb0a5ffb85271c", null ],
+        [ "ForceIdle", "ControlMode_8h.html#a8dc067a557a734ecd2ebba68a1188f82a0a3732b5ae21cbcfddc4450681fb6771", null ],
+        [ "HardwareFault", "ControlMode_8h.html#a8dc067a557a734ecd2ebba68a1188f82a5244c8608d582d05f15f03dcab8ca91b", null ],
+        [ "Unknown", "ControlMode_8h.html#a8dc067a557a734ecd2ebba68a1188f82a88183b946cc5f0e8c96b2e66e1c74a7e", null ]
+      ] ],
       [ "JointType", "JointType_8h.html#a8f819ea6be000a2661aed417ea33e47f", [
         [ "REVOLUTE", "JointType_8h.html#a8f819ea6be000a2661aed417ea33e47fa06ec593fa63e118e8d2d0fd58c223acf", null ],
         [ "PRISMATIC", "JointType_8h.html#a8f819ea6be000a2661aed417ea33e47faace8e17dd1560c692929800de207e902", null ]
@@ -352,7 +364,9 @@ var namespaceBipedalLocomotion =
       [ "constructMultipleAnalogSensorsRemapper", "YarpHelper_8h.html#abc32625d98993ca36028defbabe9dc62", null ],
       [ "constructMultipleAnalogSensorsRemapper", "YarpHelper_8h.html#ad992949f2120fc211c0af9d296631ec5", null ],
       [ "constructRDGBSensorClient", "YarpHelper_8h.html#a90efd8763c28720edded7499b94b9753", null ],
-      [ "constructBatteryClient", "YarpHelper_8h.html#ab9e4417668007269fe7388bcd88f63c4", null ]
+      [ "constructBatteryClient", "YarpHelper_8h.html#ab9e4417668007269fe7388bcd88f63c4", null ],
+      [ "fromYarpControlMode", "YarpHelper_8h.html#ab1bd2a252e3849515a8e7008b615e1fb", null ],
+      [ "toYarpControlMode", "YarpHelper_8h.html#aba188e4fef924bede2a0da8e19952092", null ]
     ] ],
     [ "SimplifiedModelControllers", null, [
       [ "CoMZMPControllerInput", "structBipedalLocomotion_1_1SimplifiedModelControllers_1_1CoMZMPControllerInput.html", "structBipedalLocomotion_1_1SimplifiedModelControllers_1_1CoMZMPControllerInput" ],

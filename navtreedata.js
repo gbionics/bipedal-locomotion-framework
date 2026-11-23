@@ -50,6 +50,7 @@ var NAVTREE =
       [ "💻 How to use the planner", "so3-minjerk.html#autotoc_md6", null ],
       [ "📖 Interesting readings", "so3-minjerk.html#autotoc_md7", null ]
     ] ],
+    [ "Deprecated List", "deprecated.html", null ],
     [ "Namespaces", "namespaces.html", [
       [ "Namespace List", "namespaces.html", "namespaces_dup" ],
       [ "Namespace Members", "namespacemembers.html", [
@@ -82,22 +83,22 @@ var NAVTREE =
 
 var NAVTREEINDEX =
 [
-"",
-"GenericContainerTest_8cpp.html#acdeb12ef2d91979cbf962cfc8ace20dd",
-"MANN_8h.html",
-"TSID_2include_2BipedalLocomotion_2TSID_2SO3Task_8h.html",
-"classBipedalLocomotion_1_1Contacts_1_1ContactList.html#ae37ba5ccb9b1f932fd524d3b1f0787a1",
-"classBipedalLocomotion_1_1Estimators_1_1InvariantEKFBaseEstimator.html#a72f71e6e82091d1d7b588870e1e881bf",
-"classBipedalLocomotion_1_1GenericContainer_1_1Vector.html#a57f6d86dc70039a4399369f060d508ae",
-"classBipedalLocomotion_1_1ML_1_1VelMANNAutoregressive.html#a297af9c7d91f415cdc00d2c820a20ea4",
-"classBipedalLocomotion_1_1Perception_1_1Capture_1_1RealSense.html#af6bb568fa7345058683d62fc70dd0617",
-"classBipedalLocomotion_1_1RobotInterface_1_1YarpRobotControl.html",
-"classBipedalLocomotion_1_1System_1_1Timer.html#aea870f9e1a9f61ab4560d8711b4b20f0",
-"dir_4118ae531ffdde861fee1c6efaa3009d.html",
-"matioCppConversions_8h.html#a585706043cef191172d7d84e32be5f63",
-"structBipedalLocomotion_1_1GenericContainer_1_1named__tuple.html#aab715eb5e81fbe7a8eb30b74767e2c3b",
-"structBipedalLocomotion_1_1Planners_1_1UnicycleTrajectoryPlannerOutput_1_1FootTrajectory.html#ac60b8206af1ae05b1822cb43b1d065e2",
-"structstd_1_1tuple__element_3_01Index_00_01_1_1BipedalLocomotion_1_1IK_1_1IntegrationBasedIKProblem_01_4.html"
+"AccelerometerMeasurementDynamicsTest_8cpp.html",
+"GyroscopeMeasurementDynamicsTest_8cpp.html#a49e47a7d29454a8c50a8a1a8849666bb",
+"ManifConversions_8h.html#a2ee026f68afc3402f6b722614d595136",
+"TSID_2tests_2AngularMomentumTaskTest_8cpp.html#a6403e3e058593a478469ccf6569ab732",
+"classBipedalLocomotion_1_1Contacts_1_1ContactPhaseList.html#a20151e302308c783e10151067ea312ac",
+"classBipedalLocomotion_1_1Estimators_1_1LeggedOdometry.html#a0cb8161646417b31220b5e22763f0afe",
+"classBipedalLocomotion_1_1GenericContainer_1_1Vector.html#a833502c7670d8b5d56b8e2702e567c56",
+"classBipedalLocomotion_1_1ML_1_1VelMANNAutoregressive.html#a6d7d0670024f001168d7d02729e23a7a",
+"classBipedalLocomotion_1_1Perception_1_1Features_1_1PointCloudProcessor.html#a8d7c4a96effbc0839da467c89405ca9e",
+"classBipedalLocomotion_1_1RobotInterface_1_1YarpRobotControl.html#a79a26fa0a2282c5f623b6ad762d39495",
+"classBipedalLocomotion_1_1System_1_1VariablesHandler.html#a7a084bba50af2de6ff2d049f5f8d4d53",
+"dir_48be3292c12d75f2d1cf5432ea7189e9.html",
+"matioCppConversions_8h.html#aae6f5c5ef40cef9da3444106f7e0255d",
+"structBipedalLocomotion_1_1IK_1_1IKLinearTask.html#a02d7415f1150550f2d9b5396ca4521b9",
+"structBipedalLocomotion_1_1Planners_1_1UnicycleTrajectoryPlannerOutput_1_1Steps.html#a8789b27a07e29c6b65c2eeffe6b88b9d",
+"structEigen_1_1internal_1_1cast__impl_3_01CppAD_1_1AD_3_01Scalar_01_4_00_01Scalar_01_4.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['point_3247',['POINT',['../Contact_8h.html#a34ae1b101a919e7e1b42ddf2193c51b0aaebdbcb765394d25d6a604589a890f82',1,'BipedalLocomotion::Contacts']]],
-  ['prismatic_3248',['PRISMATIC',['../JointType_8h.html#a8f819ea6be000a2661aed417ea33e47faace8e17dd1560c692929800de207e902',1,'BipedalLocomotion::RobotInterface']]]
+  ['multiframeaverage_3275',['multiFrameAverage',['../LeggedOdometry_8cpp.html#ac16d74a10978fbde67463fe914cd97f0a6787e4f92cab8e6a85b86ee4d6ab6673',1,'BipedalLocomotion::Estimators']]],
+  ['multiframeleastsquare_3276',['multiFrameLeastSquare',['../LeggedOdometry_8cpp.html#ac16d74a10978fbde67463fe914cd97f0a2aa24196634eff843988cf121376f53b',1,'BipedalLocomotion::Estimators']]],
+  ['multiframeleastsquarewithjvel_3277',['multiFrameLeastSquareWithJVel',['../LeggedOdometry_8cpp.html#ac16d74a10978fbde67463fe914cd97f0a81d95be127999e4e3b0a1bd0a1a1b591',1,'BipedalLocomotion::Estimators']]]
 ];

@@ -1,5 +1,6 @@
 var dir_0508a58ae2d23521ceabe770d09ae119 =
 [
+    [ "ControlMode.h", "ControlMode_8h.html", "ControlMode_8h" ],
     [ "IRobotControl.h", "IRobotControl_8h.html", [
       [ "IRobotControl", "classBipedalLocomotion_1_1RobotInterface_1_1IRobotControl.html", "classBipedalLocomotion_1_1RobotInterface_1_1IRobotControl" ]
     ] ],

@@ -121,20 +121,9 @@ $(document).ready(function(){initNavTree('classBipedalLocomotion_1_1RobotInterfa
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
 Public Types</h2></td></tr>
-<tr class="memitem:a4d0ff64a201bf8ed884da1c41e3497bc"><td class="memItemLeft" align="right" valign="top"><a id="a4d0ff64a201bf8ed884da1c41e3497bc"></a>enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1RobotInterface_1_1IRobotControl.html#a4d0ff64a201bf8ed884da1c41e3497bc">ControlMode</a> { <br />
-&#160;&#160;<b>Position</b>
-, <b>PositionDirect</b>
-, <b>Velocity</b>
-, <b>Torque</b>
-, <br />
-&#160;&#160;<b>PWM</b>
-, <b>Current</b>
-, <b>Idle</b>
-, <b>Unknown</b>
-<br />
- }</td></tr>
-<tr class="memdesc:a4d0ff64a201bf8ed884da1c41e3497bc"><td class="mdescLeft">&#160;</td><td class="mdescRight">ControlMode contains the supported control mode. <br /></td></tr>
-<tr class="separator:a4d0ff64a201bf8ed884da1c41e3497bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a99794eaf6def22ab5d5ee406524a0862"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1RobotInterface_1_1IRobotControl.html#a99794eaf6def22ab5d5ee406524a0862">ControlMode</a> = ::<a class="el" href="ControlMode_8h.html#a8dc067a557a734ecd2ebba68a1188f82">BipedalLocomotion::RobotInterface::ControlMode</a></td></tr>
+<tr class="memdesc:a99794eaf6def22ab5d5ee406524a0862"><td class="mdescLeft">&#160;</td><td class="mdescRight">ControlMode contains the supported control mode.  <a href="classBipedalLocomotion_1_1RobotInterface_1_1IRobotControl.html#a99794eaf6def22ab5d5ee406524a0862">More...</a><br /></td></tr>
+<tr class="separator:a99794eaf6def22ab5d5ee406524a0862"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a83a31cc243335220b2c218b8534f6851"><td class="memItemLeft" align="right" valign="top"><a id="a83a31cc243335220b2c218b8534f6851"></a>
 using&#160;</td><td class="memItemRight" valign="bottom"><b>unique_ptr</b> = std::unique_ptr&lt; <a class="el" href="classBipedalLocomotion_1_1RobotInterface_1_1IRobotControl.html">IRobotControl</a> &gt;</td></tr>
 <tr class="separator:a83a31cc243335220b2c218b8534f6851"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -153,30 +142,36 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a1d8c631649d6111f17a9ba821f550497"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1RobotInterface_1_1IRobotControl.html#a1d8c631649d6111f17a9ba821f550497">checkMotionDone</a> (bool &amp;motionDone, bool &amp;isTimerExpired, std::vector&lt; std::pair&lt; std::string, double &gt;&gt; &amp;info)=0</td></tr>
 <tr class="memdesc:a1d8c631649d6111f17a9ba821f550497"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if the motion set through the position control mode ended.  <a href="classBipedalLocomotion_1_1RobotInterface_1_1IRobotControl.html#a1d8c631649d6111f17a9ba821f550497">More...</a><br /></td></tr>
 <tr class="separator:a1d8c631649d6111f17a9ba821f550497"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ade3791093f875c8a242c0e84dcc5a40b"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1RobotInterface_1_1IRobotControl.html#ade3791093f875c8a242c0e84dcc5a40b">setReferences</a> (Eigen::Ref&lt; const Eigen::VectorXd &gt; desiredJointValues, const std::vector&lt; <a class="el" href="classBipedalLocomotion_1_1RobotInterface_1_1IRobotControl.html#a4d0ff64a201bf8ed884da1c41e3497bc">IRobotControl::ControlMode</a> &gt; &amp;controlModes, std::optional&lt; Eigen::Ref&lt; const Eigen::VectorXd &gt;&gt; currentJointValues={})=0</td></tr>
-<tr class="memdesc:ade3791093f875c8a242c0e84dcc5a40b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the desired reference.  <a href="classBipedalLocomotion_1_1RobotInterface_1_1IRobotControl.html#ade3791093f875c8a242c0e84dcc5a40b">More...</a><br /></td></tr>
-<tr class="separator:ade3791093f875c8a242c0e84dcc5a40b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad8e86bfcea12e99fa5c077d4f01d7ef1"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1RobotInterface_1_1IRobotControl.html#ad8e86bfcea12e99fa5c077d4f01d7ef1">setReferences</a> (Eigen::Ref&lt; const Eigen::VectorXd &gt; desiredJointValues, const <a class="el" href="classBipedalLocomotion_1_1RobotInterface_1_1IRobotControl.html#a4d0ff64a201bf8ed884da1c41e3497bc">IRobotControl::ControlMode</a> &amp;controlMode, std::optional&lt; Eigen::Ref&lt; const Eigen::VectorXd &gt;&gt; currentJointValues={})=0</td></tr>
-<tr class="memdesc:ad8e86bfcea12e99fa5c077d4f01d7ef1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the desired reference.  <a href="classBipedalLocomotion_1_1RobotInterface_1_1IRobotControl.html#ad8e86bfcea12e99fa5c077d4f01d7ef1">More...</a><br /></td></tr>
-<tr class="separator:ad8e86bfcea12e99fa5c077d4f01d7ef1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a20e20f0702fe134b286ecfe87e6dd167"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1RobotInterface_1_1IRobotControl.html#a20e20f0702fe134b286ecfe87e6dd167">setReferences</a> (Eigen::Ref&lt; const Eigen::VectorXd &gt; desiredJointValues, const std::vector&lt; int &gt; &amp;jointIndices, const <a class="el" href="classBipedalLocomotion_1_1RobotInterface_1_1IRobotControl.html#a4d0ff64a201bf8ed884da1c41e3497bc">IRobotControl::ControlMode</a> &amp;controlMode, std::optional&lt; Eigen::Ref&lt; const Eigen::VectorXd &gt;&gt; currentJointValues={})=0</td></tr>
-<tr class="memdesc:a20e20f0702fe134b286ecfe87e6dd167"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the desired reference for a subset of joints identified by their indices.  <a href="classBipedalLocomotion_1_1RobotInterface_1_1IRobotControl.html#a20e20f0702fe134b286ecfe87e6dd167">More...</a><br /></td></tr>
-<tr class="separator:a20e20f0702fe134b286ecfe87e6dd167"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae504eb1c9e8d21a58e0ae5d66a49e4cb"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1RobotInterface_1_1IRobotControl.html#ae504eb1c9e8d21a58e0ae5d66a49e4cb">setReferences</a> (Eigen::Ref&lt; const Eigen::VectorXd &gt; desiredJointValues, const std::vector&lt; std::string &gt; &amp;jointNames, const <a class="el" href="classBipedalLocomotion_1_1RobotInterface_1_1IRobotControl.html#a4d0ff64a201bf8ed884da1c41e3497bc">IRobotControl::ControlMode</a> &amp;controlMode, std::optional&lt; Eigen::Ref&lt; const Eigen::VectorXd &gt;&gt; currentJointValues={})=0</td></tr>
-<tr class="memdesc:ae504eb1c9e8d21a58e0ae5d66a49e4cb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the desired reference for a subset of joints identified by their names.  <a href="classBipedalLocomotion_1_1RobotInterface_1_1IRobotControl.html#ae504eb1c9e8d21a58e0ae5d66a49e4cb">More...</a><br /></td></tr>
-<tr class="separator:ae504eb1c9e8d21a58e0ae5d66a49e4cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1510d2b72ba39e075a078b2275c7a988"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1RobotInterface_1_1IRobotControl.html#a1510d2b72ba39e075a078b2275c7a988">setControlMode</a> (const std::vector&lt; <a class="el" href="classBipedalLocomotion_1_1RobotInterface_1_1IRobotControl.html#a4d0ff64a201bf8ed884da1c41e3497bc">IRobotControl::ControlMode</a> &gt; &amp;controlModes)=0</td></tr>
-<tr class="memdesc:a1510d2b72ba39e075a078b2275c7a988"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the control mode.  <a href="classBipedalLocomotion_1_1RobotInterface_1_1IRobotControl.html#a1510d2b72ba39e075a078b2275c7a988">More...</a><br /></td></tr>
-<tr class="separator:a1510d2b72ba39e075a078b2275c7a988"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5ae1dad766c79a234c67b53823bbd77a"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1RobotInterface_1_1IRobotControl.html#a5ae1dad766c79a234c67b53823bbd77a">setControlMode</a> (const <a class="el" href="classBipedalLocomotion_1_1RobotInterface_1_1IRobotControl.html#a4d0ff64a201bf8ed884da1c41e3497bc">IRobotControl::ControlMode</a> &amp;mode)=0</td></tr>
-<tr class="memdesc:a5ae1dad766c79a234c67b53823bbd77a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the desired control mode.  <a href="classBipedalLocomotion_1_1RobotInterface_1_1IRobotControl.html#a5ae1dad766c79a234c67b53823bbd77a">More...</a><br /></td></tr>
-<tr class="separator:a5ae1dad766c79a234c67b53823bbd77a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1970510914cde2aca6afde023c57692e"><td class="memItemLeft" align="right" valign="top">virtual std::future&lt; bool &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1RobotInterface_1_1IRobotControl.html#a1970510914cde2aca6afde023c57692e">setControlModeAsync</a> (const std::vector&lt; <a class="el" href="classBipedalLocomotion_1_1RobotInterface_1_1IRobotControl.html#a4d0ff64a201bf8ed884da1c41e3497bc">IRobotControl::ControlMode</a> &gt; &amp;controlModes)=0</td></tr>
-<tr class="memdesc:a1970510914cde2aca6afde023c57692e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the control mode in an asynchronous thread.  <a href="classBipedalLocomotion_1_1RobotInterface_1_1IRobotControl.html#a1970510914cde2aca6afde023c57692e">More...</a><br /></td></tr>
-<tr class="separator:a1970510914cde2aca6afde023c57692e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1a80321643730fb837ca1373e241dcd8"><td class="memItemLeft" align="right" valign="top">virtual std::future&lt; bool &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1RobotInterface_1_1IRobotControl.html#a1a80321643730fb837ca1373e241dcd8">setControlModeAsync</a> (const <a class="el" href="classBipedalLocomotion_1_1RobotInterface_1_1IRobotControl.html#a4d0ff64a201bf8ed884da1c41e3497bc">IRobotControl::ControlMode</a> &amp;mode)=0</td></tr>
-<tr class="memdesc:a1a80321643730fb837ca1373e241dcd8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the desired control mode in an asynchronous thread.  <a href="classBipedalLocomotion_1_1RobotInterface_1_1IRobotControl.html#a1a80321643730fb837ca1373e241dcd8">More...</a><br /></td></tr>
-<tr class="separator:a1a80321643730fb837ca1373e241dcd8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0a563c31ac7c183402a7a14a9f2a9c51"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1RobotInterface_1_1IRobotControl.html#a0a563c31ac7c183402a7a14a9f2a9c51">setReferences</a> (Eigen::Ref&lt; const Eigen::VectorXd &gt; desiredJointValues, const std::vector&lt; <a class="el" href="ControlMode_8h.html#a8dc067a557a734ecd2ebba68a1188f82">RobotInterface::ControlMode</a> &gt; &amp;controlModes, std::optional&lt; Eigen::Ref&lt; const Eigen::VectorXd &gt;&gt; currentJointValues={})=0</td></tr>
+<tr class="memdesc:a0a563c31ac7c183402a7a14a9f2a9c51"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the desired reference.  <a href="classBipedalLocomotion_1_1RobotInterface_1_1IRobotControl.html#a0a563c31ac7c183402a7a14a9f2a9c51">More...</a><br /></td></tr>
+<tr class="separator:a0a563c31ac7c183402a7a14a9f2a9c51"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5938f1948a2abcd41a335925c469d06d"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1RobotInterface_1_1IRobotControl.html#a5938f1948a2abcd41a335925c469d06d">setReferences</a> (Eigen::Ref&lt; const Eigen::VectorXd &gt; desiredJointValues, const <a class="el" href="ControlMode_8h.html#a8dc067a557a734ecd2ebba68a1188f82">RobotInterface::ControlMode</a> &amp;controlMode, std::optional&lt; Eigen::Ref&lt; const Eigen::VectorXd &gt;&gt; currentJointValues={})=0</td></tr>
+<tr class="memdesc:a5938f1948a2abcd41a335925c469d06d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the desired reference.  <a href="classBipedalLocomotion_1_1RobotInterface_1_1IRobotControl.html#a5938f1948a2abcd41a335925c469d06d">More...</a><br /></td></tr>
+<tr class="separator:a5938f1948a2abcd41a335925c469d06d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a52a26d6532ba2dbb9edca6cae9453ad8"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1RobotInterface_1_1IRobotControl.html#a52a26d6532ba2dbb9edca6cae9453ad8">setReferences</a> (Eigen::Ref&lt; const Eigen::VectorXd &gt; desiredJointValues, const std::vector&lt; int &gt; &amp;jointIndices, const <a class="el" href="ControlMode_8h.html#a8dc067a557a734ecd2ebba68a1188f82">RobotInterface::ControlMode</a> &amp;controlMode, std::optional&lt; Eigen::Ref&lt; const Eigen::VectorXd &gt;&gt; currentJointValues={})=0</td></tr>
+<tr class="memdesc:a52a26d6532ba2dbb9edca6cae9453ad8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the desired reference for a subset of joints identified by their indices.  <a href="classBipedalLocomotion_1_1RobotInterface_1_1IRobotControl.html#a52a26d6532ba2dbb9edca6cae9453ad8">More...</a><br /></td></tr>
+<tr class="separator:a52a26d6532ba2dbb9edca6cae9453ad8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aec1f87f1b731beee9948af003faec5ae"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1RobotInterface_1_1IRobotControl.html#aec1f87f1b731beee9948af003faec5ae">setReferences</a> (Eigen::Ref&lt; const Eigen::VectorXd &gt; desiredJointValues, const std::vector&lt; std::string &gt; &amp;jointNames, const <a class="el" href="ControlMode_8h.html#a8dc067a557a734ecd2ebba68a1188f82">RobotInterface::ControlMode</a> &amp;controlMode, std::optional&lt; Eigen::Ref&lt; const Eigen::VectorXd &gt;&gt; currentJointValues={})=0</td></tr>
+<tr class="memdesc:aec1f87f1b731beee9948af003faec5ae"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the desired reference for a subset of joints identified by their names.  <a href="classBipedalLocomotion_1_1RobotInterface_1_1IRobotControl.html#aec1f87f1b731beee9948af003faec5ae">More...</a><br /></td></tr>
+<tr class="separator:aec1f87f1b731beee9948af003faec5ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af4648d53360d93f4d6cb97ca22c11448"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1RobotInterface_1_1IRobotControl.html#af4648d53360d93f4d6cb97ca22c11448">setControlMode</a> (const std::vector&lt; <a class="el" href="ControlMode_8h.html#a8dc067a557a734ecd2ebba68a1188f82">RobotInterface::ControlMode</a> &gt; &amp;controlModes)=0</td></tr>
+<tr class="memdesc:af4648d53360d93f4d6cb97ca22c11448"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the control mode.  <a href="classBipedalLocomotion_1_1RobotInterface_1_1IRobotControl.html#af4648d53360d93f4d6cb97ca22c11448">More...</a><br /></td></tr>
+<tr class="separator:af4648d53360d93f4d6cb97ca22c11448"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9a90dbd5fa5173e8860edb6cad59a046"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1RobotInterface_1_1IRobotControl.html#a9a90dbd5fa5173e8860edb6cad59a046">setControlMode</a> (const <a class="el" href="ControlMode_8h.html#a8dc067a557a734ecd2ebba68a1188f82">RobotInterface::ControlMode</a> &amp;mode)=0</td></tr>
+<tr class="memdesc:a9a90dbd5fa5173e8860edb6cad59a046"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the desired control mode.  <a href="classBipedalLocomotion_1_1RobotInterface_1_1IRobotControl.html#a9a90dbd5fa5173e8860edb6cad59a046">More...</a><br /></td></tr>
+<tr class="separator:a9a90dbd5fa5173e8860edb6cad59a046"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeffb7b2164078e3e14a9612d2b7c952e"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1RobotInterface_1_1IRobotControl.html#aeffb7b2164078e3e14a9612d2b7c952e">setControlMode</a> (const std::vector&lt; <a class="el" href="ControlMode_8h.html#a8dc067a557a734ecd2ebba68a1188f82">RobotInterface::ControlMode</a> &gt; &amp;controlModes, const std::vector&lt; int &gt; &amp;jointIndices)</td></tr>
+<tr class="memdesc:aeffb7b2164078e3e14a9612d2b7c952e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the control mode of a subset of joints identified by their indices.  <a href="classBipedalLocomotion_1_1RobotInterface_1_1IRobotControl.html#aeffb7b2164078e3e14a9612d2b7c952e">More...</a><br /></td></tr>
+<tr class="separator:aeffb7b2164078e3e14a9612d2b7c952e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac2f09ddca66190e077c8cf4cd6020f0f"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1RobotInterface_1_1IRobotControl.html#ac2f09ddca66190e077c8cf4cd6020f0f">setControlMode</a> (const std::vector&lt; <a class="el" href="ControlMode_8h.html#a8dc067a557a734ecd2ebba68a1188f82">RobotInterface::ControlMode</a> &gt; &amp;controlModes, const std::vector&lt; std::string &gt; &amp;jointNames)</td></tr>
+<tr class="memdesc:ac2f09ddca66190e077c8cf4cd6020f0f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the control mode of a subset of joints identified by their names.  <a href="classBipedalLocomotion_1_1RobotInterface_1_1IRobotControl.html#ac2f09ddca66190e077c8cf4cd6020f0f">More...</a><br /></td></tr>
+<tr class="separator:ac2f09ddca66190e077c8cf4cd6020f0f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa6db35e943744d25c907f9f79bb819df"><td class="memItemLeft" align="right" valign="top">virtual std::future&lt; bool &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1RobotInterface_1_1IRobotControl.html#aa6db35e943744d25c907f9f79bb819df">setControlModeAsync</a> (const std::vector&lt; <a class="el" href="ControlMode_8h.html#a8dc067a557a734ecd2ebba68a1188f82">RobotInterface::ControlMode</a> &gt; &amp;controlModes)=0</td></tr>
+<tr class="memdesc:aa6db35e943744d25c907f9f79bb819df"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the control mode in an asynchronous thread.  <a href="classBipedalLocomotion_1_1RobotInterface_1_1IRobotControl.html#aa6db35e943744d25c907f9f79bb819df">More...</a><br /></td></tr>
+<tr class="separator:aa6db35e943744d25c907f9f79bb819df"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3053938aa5a5db24ac068e4f700a236c"><td class="memItemLeft" align="right" valign="top">virtual std::future&lt; bool &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1RobotInterface_1_1IRobotControl.html#a3053938aa5a5db24ac068e4f700a236c">setControlModeAsync</a> (const <a class="el" href="ControlMode_8h.html#a8dc067a557a734ecd2ebba68a1188f82">RobotInterface::ControlMode</a> &amp;mode)=0</td></tr>
+<tr class="memdesc:a3053938aa5a5db24ac068e4f700a236c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the desired control mode in an asynchronous thread.  <a href="classBipedalLocomotion_1_1RobotInterface_1_1IRobotControl.html#a3053938aa5a5db24ac068e4f700a236c">More...</a><br /></td></tr>
+<tr class="separator:a3053938aa5a5db24ac068e4f700a236c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a039679ebcb7f4317aebdc1218410639c"><td class="memItemLeft" align="right" valign="top">virtual std::vector&lt; std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBipedalLocomotion_1_1RobotInterface_1_1IRobotControl.html#a039679ebcb7f4317aebdc1218410639c">getJointList</a> () const =0</td></tr>
 <tr class="memdesc:a039679ebcb7f4317aebdc1218410639c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the list of the controlled joints.  <a href="classBipedalLocomotion_1_1RobotInterface_1_1IRobotControl.html#a039679ebcb7f4317aebdc1218410639c">More...</a><br /></td></tr>
 <tr class="separator:a039679ebcb7f4317aebdc1218410639c"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -193,7 +188,25 @@ virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="c
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Robot control interface. </p>
-</div><h2 class="groupheader">Member Function Documentation</h2>
+</div><h2 class="groupheader">Member Typedef Documentation</h2>
+<a id="a99794eaf6def22ab5d5ee406524a0862"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a99794eaf6def22ab5d5ee406524a0862">&#9670;&nbsp;</a></span>ControlMode</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="ControlMode_8h.html#a8dc067a557a734ecd2ebba68a1188f82">BipedalLocomotion::RobotInterface::IRobotControl::ControlMode</a> =  ::<a class="el" href="ControlMode_8h.html#a8dc067a557a734ecd2ebba68a1188f82">BipedalLocomotion::RobotInterface::ControlMode</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>ControlMode contains the supported control mode. </p>
+<dl class="deprecated"><dt><b><a class="el" href="deprecated.html#_deprecated000001">Deprecated:</a></b></dt><dd>Use BipedalLocomotion::RobotInterface::ControlMode, defined in <a class="el" href="ControlMode_8h.html">BipedalLocomotion/RobotInterface/ControlMode.h</a>. This alias is kept for backward compatibility and it will be removed in a future release. </dd></dl>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
 <a id="aa913844cf441bfe08803ac53b0c39f6b"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aa913844cf441bfe08803ac53b0c39f6b">&#9670;&nbsp;</a></span>initialize()</h2>
 
@@ -287,8 +300,8 @@ virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="c
 
 </div>
 </div>
-<a id="ade3791093f875c8a242c0e84dcc5a40b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ade3791093f875c8a242c0e84dcc5a40b">&#9670;&nbsp;</a></span>setReferences() <span class="overload">[1/4]</span></h2>
+<a id="a0a563c31ac7c183402a7a14a9f2a9c51"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0a563c31ac7c183402a7a14a9f2a9c51">&#9670;&nbsp;</a></span>setReferences() <span class="overload">[1/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -305,7 +318,7 @@ virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="c
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const std::vector&lt; <a class="el" href="classBipedalLocomotion_1_1RobotInterface_1_1IRobotControl.html#a4d0ff64a201bf8ed884da1c41e3497bc">IRobotControl::ControlMode</a> &gt; &amp;&#160;</td>
+          <td class="paramtype">const std::vector&lt; <a class="el" href="ControlMode_8h.html#a8dc067a557a734ecd2ebba68a1188f82">RobotInterface::ControlMode</a> &gt; &amp;&#160;</td>
           <td class="paramname"><em>controlModes</em>, </td>
         </tr>
         <tr>
@@ -339,12 +352,12 @@ virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="c
 <dl class="section return"><dt>Returns</dt><dd>True/False in case of success/failure. </dd></dl>
 <dl class="section note"><dt>Note</dt><dd>In case of position control the values has to be expressed in rad, in case of velocity control in rad/s. If the robot is controlled in torques, the desired joint values are expressed in Nm. </dd></dl>
 
-<p>Implemented in <a class="el" href="classBipedalLocomotion_1_1RobotInterface_1_1YarpRobotControl.html#a46fe5ecd2b47d3be7e43d1fa5473635e">BipedalLocomotion::RobotInterface::YarpRobotControl</a>.</p>
+<p>Implemented in <a class="el" href="classBipedalLocomotion_1_1RobotInterface_1_1YarpRobotControl.html#a0a599fac692d072cb031c097b26d65f3">BipedalLocomotion::RobotInterface::YarpRobotControl</a>.</p>
 
 </div>
 </div>
-<a id="ad8e86bfcea12e99fa5c077d4f01d7ef1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad8e86bfcea12e99fa5c077d4f01d7ef1">&#9670;&nbsp;</a></span>setReferences() <span class="overload">[2/4]</span></h2>
+<a id="a5938f1948a2abcd41a335925c469d06d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5938f1948a2abcd41a335925c469d06d">&#9670;&nbsp;</a></span>setReferences() <span class="overload">[2/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -361,7 +374,7 @@ virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="c
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="classBipedalLocomotion_1_1RobotInterface_1_1IRobotControl.html#a4d0ff64a201bf8ed884da1c41e3497bc">IRobotControl::ControlMode</a> &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="ControlMode_8h.html#a8dc067a557a734ecd2ebba68a1188f82">RobotInterface::ControlMode</a> &amp;&#160;</td>
           <td class="paramname"><em>controlMode</em>, </td>
         </tr>
         <tr>
@@ -393,14 +406,14 @@ virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="c
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>True/False in case of success/failure. </dd></dl>
-<dl class="section note"><dt>Note</dt><dd>In case of position control the values has to be expressed in rad, in case of velocity control in rad/s. If the robot is controlled in torques, the desired joint values are expressed in Nm. @warining Call this function if you want to control all the joint with the same control mode. Otherwise call setReferences(Eigen::Ref&lt;const Eigen::VectorXd&gt;, const std::vector&lt;IRobotControl::ControlMode&gt;&amp;). </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>In case of position control the values has to be expressed in rad, in case of velocity control in rad/s. If the robot is controlled in torques, the desired joint values are expressed in Nm. @warining Call this function if you want to control all the joint with the same control mode. Otherwise call setReferences(Eigen::Ref&lt;const Eigen::VectorXd&gt;, const std::vector&lt;RobotInterface::ControlMode&gt;&amp;). </dd></dl>
 
-<p>Implemented in <a class="el" href="classBipedalLocomotion_1_1RobotInterface_1_1YarpRobotControl.html#a9c850b967e0442ef72c30797365e004b">BipedalLocomotion::RobotInterface::YarpRobotControl</a>.</p>
+<p>Implemented in <a class="el" href="classBipedalLocomotion_1_1RobotInterface_1_1YarpRobotControl.html#a96d65d7ae141dbf371bbb31994be7564">BipedalLocomotion::RobotInterface::YarpRobotControl</a>.</p>
 
 </div>
 </div>
-<a id="a20e20f0702fe134b286ecfe87e6dd167"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a20e20f0702fe134b286ecfe87e6dd167">&#9670;&nbsp;</a></span>setReferences() <span class="overload">[3/4]</span></h2>
+<a id="a52a26d6532ba2dbb9edca6cae9453ad8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a52a26d6532ba2dbb9edca6cae9453ad8">&#9670;&nbsp;</a></span>setReferences() <span class="overload">[3/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -423,7 +436,7 @@ virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="c
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="classBipedalLocomotion_1_1RobotInterface_1_1IRobotControl.html#a4d0ff64a201bf8ed884da1c41e3497bc">IRobotControl::ControlMode</a> &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="ControlMode_8h.html#a8dc067a557a734ecd2ebba68a1188f82">RobotInterface::ControlMode</a> &amp;&#160;</td>
           <td class="paramname"><em>controlMode</em>, </td>
         </tr>
         <tr>
@@ -458,12 +471,12 @@ virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="c
 <dl class="section return"><dt>Returns</dt><dd>True/False in case of success/failure. </dd></dl>
 <dl class="section note"><dt>Note</dt><dd>In case of position control the values have to be expressed in rad, in case of velocity control in rad/s. If the robot is controlled in torques, the desired joint values are expressed in Nm. </dd></dl>
 
-<p>Implemented in <a class="el" href="classBipedalLocomotion_1_1RobotInterface_1_1YarpRobotControl.html#aaeb79d3f9df3031ff1fcf35eb50fb651">BipedalLocomotion::RobotInterface::YarpRobotControl</a>.</p>
+<p>Implemented in <a class="el" href="classBipedalLocomotion_1_1RobotInterface_1_1YarpRobotControl.html#ad12f797e0734d785367499d4aac5fd98">BipedalLocomotion::RobotInterface::YarpRobotControl</a>.</p>
 
 </div>
 </div>
-<a id="ae504eb1c9e8d21a58e0ae5d66a49e4cb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae504eb1c9e8d21a58e0ae5d66a49e4cb">&#9670;&nbsp;</a></span>setReferences() <span class="overload">[4/4]</span></h2>
+<a id="aec1f87f1b731beee9948af003faec5ae"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aec1f87f1b731beee9948af003faec5ae">&#9670;&nbsp;</a></span>setReferences() <span class="overload">[4/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -486,7 +499,7 @@ virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="c
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="classBipedalLocomotion_1_1RobotInterface_1_1IRobotControl.html#a4d0ff64a201bf8ed884da1c41e3497bc">IRobotControl::ControlMode</a> &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="ControlMode_8h.html#a8dc067a557a734ecd2ebba68a1188f82">RobotInterface::ControlMode</a> &amp;&#160;</td>
           <td class="paramname"><em>controlMode</em>, </td>
         </tr>
         <tr>
@@ -521,12 +534,12 @@ virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="c
 <dl class="section return"><dt>Returns</dt><dd>True/False in case of success/failure. </dd></dl>
 <dl class="section note"><dt>Note</dt><dd>In case of position control the values have to be expressed in rad, in case of velocity control in rad/s. If the robot is controlled in torques, the desired joint values are expressed in Nm. </dd></dl>
 
-<p>Implemented in <a class="el" href="classBipedalLocomotion_1_1RobotInterface_1_1YarpRobotControl.html#a87640a0d723f5d806a8405cc5efde1f1">BipedalLocomotion::RobotInterface::YarpRobotControl</a>.</p>
+<p>Implemented in <a class="el" href="classBipedalLocomotion_1_1RobotInterface_1_1YarpRobotControl.html#a2ee40eb68c52500bbfe6e2a9b1087ef2">BipedalLocomotion::RobotInterface::YarpRobotControl</a>.</p>
 
 </div>
 </div>
-<a id="a1510d2b72ba39e075a078b2275c7a988"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1510d2b72ba39e075a078b2275c7a988">&#9670;&nbsp;</a></span>setControlMode() <span class="overload">[1/2]</span></h2>
+<a id="af4648d53360d93f4d6cb97ca22c11448"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af4648d53360d93f4d6cb97ca22c11448">&#9670;&nbsp;</a></span>setControlMode() <span class="overload">[1/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -537,7 +550,7 @@ virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="c
         <tr>
           <td class="memname">virtual bool BipedalLocomotion::RobotInterface::IRobotControl::setControlMode </td>
           <td>(</td>
-          <td class="paramtype">const std::vector&lt; <a class="el" href="classBipedalLocomotion_1_1RobotInterface_1_1IRobotControl.html#a4d0ff64a201bf8ed884da1c41e3497bc">IRobotControl::ControlMode</a> &gt; &amp;&#160;</td>
+          <td class="paramtype">const std::vector&lt; <a class="el" href="ControlMode_8h.html#a8dc067a557a734ecd2ebba68a1188f82">RobotInterface::ControlMode</a> &gt; &amp;&#160;</td>
           <td class="paramname"><em>controlModes</em></td><td>)</td>
           <td></td>
         </tr>
@@ -559,12 +572,12 @@ virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="c
 <dl class="section return"><dt>Returns</dt><dd>True/False in case of success/failure. </dd></dl>
 <dl class="section warning"><dt>Warning</dt><dd>At the current stage only revolute joints are supported. </dd></dl>
 
-<p>Implemented in <a class="el" href="classBipedalLocomotion_1_1RobotInterface_1_1YarpRobotControl.html#af971965a74bb35998140f8c71083c863">BipedalLocomotion::RobotInterface::YarpRobotControl</a>.</p>
+<p>Implemented in <a class="el" href="classBipedalLocomotion_1_1RobotInterface_1_1YarpRobotControl.html#a7cb492d9fc1481b5cb30ba30d563365a">BipedalLocomotion::RobotInterface::YarpRobotControl</a>.</p>
 
 </div>
 </div>
-<a id="a5ae1dad766c79a234c67b53823bbd77a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5ae1dad766c79a234c67b53823bbd77a">&#9670;&nbsp;</a></span>setControlMode() <span class="overload">[2/2]</span></h2>
+<a id="a9a90dbd5fa5173e8860edb6cad59a046"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9a90dbd5fa5173e8860edb6cad59a046">&#9670;&nbsp;</a></span>setControlMode() <span class="overload">[2/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -575,7 +588,7 @@ virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="c
         <tr>
           <td class="memname">virtual bool BipedalLocomotion::RobotInterface::IRobotControl::setControlMode </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="classBipedalLocomotion_1_1RobotInterface_1_1IRobotControl.html#a4d0ff64a201bf8ed884da1c41e3497bc">IRobotControl::ControlMode</a> &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="ControlMode_8h.html#a8dc067a557a734ecd2ebba68a1188f82">RobotInterface::ControlMode</a> &amp;&#160;</td>
           <td class="paramname"><em>mode</em></td><td>)</td>
           <td></td>
         </tr>
@@ -597,12 +610,110 @@ virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="c
 <dl class="section return"><dt>Returns</dt><dd>True/False in case of success/failure. </dd></dl>
 <dl class="section warning"><dt>Warning</dt><dd>Call this function if you want to control all the joint with the same control mode. </dd></dl>
 
-<p>Implemented in <a class="el" href="classBipedalLocomotion_1_1RobotInterface_1_1YarpRobotControl.html#ac53dd456fa7de604b4a26d3e530e2b05">BipedalLocomotion::RobotInterface::YarpRobotControl</a>.</p>
+<p>Implemented in <a class="el" href="classBipedalLocomotion_1_1RobotInterface_1_1YarpRobotControl.html#a6cd641e1293f0b5f3c48e4efd1d3530d">BipedalLocomotion::RobotInterface::YarpRobotControl</a>.</p>
 
 </div>
 </div>
-<a id="a1970510914cde2aca6afde023c57692e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1970510914cde2aca6afde023c57692e">&#9670;&nbsp;</a></span>setControlModeAsync() <span class="overload">[1/2]</span></h2>
+<a id="aeffb7b2164078e3e14a9612d2b7c952e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeffb7b2164078e3e14a9612d2b7c952e">&#9670;&nbsp;</a></span>setControlMode() <span class="overload">[3/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool IRobotControl::setControlMode </td>
+          <td>(</td>
+          <td class="paramtype">const std::vector&lt; <a class="el" href="ControlMode_8h.html#a8dc067a557a734ecd2ebba68a1188f82">RobotInterface::ControlMode</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>controlModes</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::vector&lt; int &gt; &amp;&#160;</td>
+          <td class="paramname"><em>jointIndices</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Set the control mode of a subset of joints identified by their indices. </p>
+<p>The control mode of all the other joints is not changed. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">controlModes</td><td>control mode of each joint of the subset (size must match jointIndices). </td></tr>
+    <tr><td class="paramname">jointIndices</td><td>indices of the joints (into the full joint list). </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>True/False in case of success/failure. </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>The default implementation does not support it and returns false. </dd></dl>
+
+<p>Reimplemented in <a class="el" href="classBipedalLocomotion_1_1RobotInterface_1_1YarpRobotControl.html#aa55b104f015ecd1be493f9f6c5d0a38f">BipedalLocomotion::RobotInterface::YarpRobotControl</a>.</p>
+
+</div>
+</div>
+<a id="ac2f09ddca66190e077c8cf4cd6020f0f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac2f09ddca66190e077c8cf4cd6020f0f">&#9670;&nbsp;</a></span>setControlMode() <span class="overload">[4/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool IRobotControl::setControlMode </td>
+          <td>(</td>
+          <td class="paramtype">const std::vector&lt; <a class="el" href="ControlMode_8h.html#a8dc067a557a734ecd2ebba68a1188f82">RobotInterface::ControlMode</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>controlModes</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::vector&lt; std::string &gt; &amp;&#160;</td>
+          <td class="paramname"><em>jointNames</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Set the control mode of a subset of joints identified by their names. </p>
+<p>The control mode of all the other joints is not changed. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">controlModes</td><td>control mode of each joint of the subset (size must match jointNames). </td></tr>
+    <tr><td class="paramname">jointNames</td><td>names of the joints. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>True/False in case of success/failure. </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>The default implementation does not support it and returns false. </dd></dl>
+
+<p>Reimplemented in <a class="el" href="classBipedalLocomotion_1_1RobotInterface_1_1YarpRobotControl.html#acabb7e7269a5fe54f60f41eb7bcff4da">BipedalLocomotion::RobotInterface::YarpRobotControl</a>.</p>
+
+</div>
+</div>
+<a id="aa6db35e943744d25c907f9f79bb819df"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa6db35e943744d25c907f9f79bb819df">&#9670;&nbsp;</a></span>setControlModeAsync() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -613,7 +724,7 @@ virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="c
         <tr>
           <td class="memname">virtual std::future&lt;bool&gt; BipedalLocomotion::RobotInterface::IRobotControl::setControlModeAsync </td>
           <td>(</td>
-          <td class="paramtype">const std::vector&lt; <a class="el" href="classBipedalLocomotion_1_1RobotInterface_1_1IRobotControl.html#a4d0ff64a201bf8ed884da1c41e3497bc">IRobotControl::ControlMode</a> &gt; &amp;&#160;</td>
+          <td class="paramtype">const std::vector&lt; <a class="el" href="ControlMode_8h.html#a8dc067a557a734ecd2ebba68a1188f82">RobotInterface::ControlMode</a> &gt; &amp;&#160;</td>
           <td class="paramname"><em>controlModes</em></td><td>)</td>
           <td></td>
         </tr>
@@ -635,12 +746,12 @@ virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="c
 <dl class="section return"><dt>Returns</dt><dd>An std::future object to a boolean True/False in case of success/failure. </dd></dl>
 <dl class="section warning"><dt>Warning</dt><dd>At the current stage only revolute joints are supported. Since this function spawns a new thread, the invoking thread is not blocked. </dd></dl>
 
-<p>Implemented in <a class="el" href="classBipedalLocomotion_1_1RobotInterface_1_1YarpRobotControl.html#a965be2733f48781855ba4138fadc5795">BipedalLocomotion::RobotInterface::YarpRobotControl</a>.</p>
+<p>Implemented in <a class="el" href="classBipedalLocomotion_1_1RobotInterface_1_1YarpRobotControl.html#a63716d422c8370a9eac8b80ad04314d8">BipedalLocomotion::RobotInterface::YarpRobotControl</a>.</p>
 
 </div>
 </div>
-<a id="a1a80321643730fb837ca1373e241dcd8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1a80321643730fb837ca1373e241dcd8">&#9670;&nbsp;</a></span>setControlModeAsync() <span class="overload">[2/2]</span></h2>
+<a id="a3053938aa5a5db24ac068e4f700a236c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3053938aa5a5db24ac068e4f700a236c">&#9670;&nbsp;</a></span>setControlModeAsync() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -651,7 +762,7 @@ virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="c
         <tr>
           <td class="memname">virtual std::future&lt;bool&gt; BipedalLocomotion::RobotInterface::IRobotControl::setControlModeAsync </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="classBipedalLocomotion_1_1RobotInterface_1_1IRobotControl.html#a4d0ff64a201bf8ed884da1c41e3497bc">IRobotControl::ControlMode</a> &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="ControlMode_8h.html#a8dc067a557a734ecd2ebba68a1188f82">RobotInterface::ControlMode</a> &amp;&#160;</td>
           <td class="paramname"><em>mode</em></td><td>)</td>
           <td></td>
         </tr>
@@ -673,7 +784,7 @@ virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="c
 <dl class="section return"><dt>Returns</dt><dd>An std::future object to a boolean True/False in case of success/failure. </dd></dl>
 <dl class="section warning"><dt>Warning</dt><dd>Call this function if you want to control all the joint with the same control mode. Since this function spawns a new thread, the invoking thread is not blocked. </dd></dl>
 
-<p>Implemented in <a class="el" href="classBipedalLocomotion_1_1RobotInterface_1_1YarpRobotControl.html#ae99d9ae79276011d9e3b15f139719172">BipedalLocomotion::RobotInterface::YarpRobotControl</a>.</p>
+<p>Implemented in <a class="el" href="classBipedalLocomotion_1_1RobotInterface_1_1YarpRobotControl.html#a66336b59dd038dc9197c669b9799b6e9">BipedalLocomotion::RobotInterface::YarpRobotControl</a>.</p>
 
 </div>
 </div>

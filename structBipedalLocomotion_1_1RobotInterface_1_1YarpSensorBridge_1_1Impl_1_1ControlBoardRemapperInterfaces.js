@@ -7,5 +7,6 @@ var structBipedalLocomotion_1_1RobotInterface_1_1YarpSensorBridge_1_1Impl_1_1Con
     [ "motorEncoders", "structBipedalLocomotion_1_1RobotInterface_1_1YarpSensorBridge_1_1Impl_1_1ControlBoardRemapperInterfaces.html#ac5bdf95dd2782fa9579923b8a12e60bc", null ],
     [ "motor", "structBipedalLocomotion_1_1RobotInterface_1_1YarpSensorBridge_1_1Impl_1_1ControlBoardRemapperInterfaces.html#ade5253432d5f202665e7f223bb044807", null ],
     [ "pids", "structBipedalLocomotion_1_1RobotInterface_1_1YarpSensorBridge_1_1Impl_1_1ControlBoardRemapperInterfaces.html#a038ab72099605364ce5aa474ddaa5770", null ],
-    [ "amp", "structBipedalLocomotion_1_1RobotInterface_1_1YarpSensorBridge_1_1Impl_1_1ControlBoardRemapperInterfaces.html#a6049afc295d0c40f20eb0de8482e8d4e", null ]
+    [ "amp", "structBipedalLocomotion_1_1RobotInterface_1_1YarpSensorBridge_1_1Impl_1_1ControlBoardRemapperInterfaces.html#a6049afc295d0c40f20eb0de8482e8d4e", null ],
+    [ "controlMode", "structBipedalLocomotion_1_1RobotInterface_1_1YarpSensorBridge_1_1Impl_1_1ControlBoardRemapperInterfaces.html#a9e0f7b60c6cd3563e1d1ffa37a8507a9", null ]
 ];

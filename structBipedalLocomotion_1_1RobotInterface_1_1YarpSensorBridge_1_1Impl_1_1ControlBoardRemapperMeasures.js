@@ -26,5 +26,9 @@ var structBipedalLocomotion_1_1RobotInterface_1_1YarpSensorBridge_1_1Impl_1_1Con
     [ "pidPositionsUnordered", "structBipedalLocomotion_1_1RobotInterface_1_1YarpSensorBridge_1_1Impl_1_1ControlBoardRemapperMeasures.html#ab53823f4a8fc0e15311b3456587bf91a", null ],
     [ "pidPositionErrorsUnordered", "structBipedalLocomotion_1_1RobotInterface_1_1YarpSensorBridge_1_1Impl_1_1ControlBoardRemapperMeasures.html#aebc9681cfed20e5513169551ece71ee6", null ],
     [ "motorPWMsUnordered", "structBipedalLocomotion_1_1RobotInterface_1_1YarpSensorBridge_1_1Impl_1_1ControlBoardRemapperMeasures.html#acae6ab3b921b5fc28c4ab0cae98463bc", null ],
+    [ "jointControlModes", "structBipedalLocomotion_1_1RobotInterface_1_1YarpSensorBridge_1_1Impl_1_1ControlBoardRemapperMeasures.html#a8bf9bcfc9607a8435c59d192afc25057", null ],
+    [ "jointControlModesUnordered", "structBipedalLocomotion_1_1RobotInterface_1_1YarpSensorBridge_1_1Impl_1_1ControlBoardRemapperMeasures.html#a2b2eff6520d5b373bddfc18bc1f53ae1", null ],
+    [ "jointControlModesValid", "structBipedalLocomotion_1_1RobotInterface_1_1YarpSensorBridge_1_1Impl_1_1ControlBoardRemapperMeasures.html#a021e21a8c200602402ee9a39f251f3b6", null ],
+    [ "jointControlModesErrorLogged", "structBipedalLocomotion_1_1RobotInterface_1_1YarpSensorBridge_1_1Impl_1_1ControlBoardRemapperMeasures.html#a19b7b4a1a506d91e5560257d63b76171", null ],
     [ "receivedTimeInSeconds", "structBipedalLocomotion_1_1RobotInterface_1_1YarpSensorBridge_1_1Impl_1_1ControlBoardRemapperMeasures.html#af6a0903af92a02bfd8cce4b700e7b98f", null ]
 ];

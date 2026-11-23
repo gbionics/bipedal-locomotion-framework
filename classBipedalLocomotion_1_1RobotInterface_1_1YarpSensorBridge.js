@@ -44,6 +44,8 @@ var classBipedalLocomotion_1_1RobotInterface_1_1YarpSensorBridge =
     [ "getMotorCurrents", "classBipedalLocomotion_1_1RobotInterface_1_1YarpSensorBridge.html#a0e5f2a3a496ba2f8b9fe47e3935b21ea", null ],
     [ "getMotorTemperatures", "classBipedalLocomotion_1_1RobotInterface_1_1YarpSensorBridge.html#aa737a5fefb8bd0e9a2c948209a9784e2", null ],
     [ "getMotorTemperature", "classBipedalLocomotion_1_1RobotInterface_1_1YarpSensorBridge.html#a4e98f52ba5ff8613f8377a35364de6ce", null ],
+    [ "getJointControlModes", "classBipedalLocomotion_1_1RobotInterface_1_1YarpSensorBridge.html#ac467aac42df97f30ae37fb3e798e2bd2", null ],
+    [ "getJointControlMode", "classBipedalLocomotion_1_1RobotInterface_1_1YarpSensorBridge.html#abe38169e25ce35146c03e586bc501caf", null ],
     [ "getMotorPWM", "classBipedalLocomotion_1_1RobotInterface_1_1YarpSensorBridge.html#ac592ef0e4b5ec65d65181f67c45b4fec", null ],
     [ "getMotorPWMs", "classBipedalLocomotion_1_1RobotInterface_1_1YarpSensorBridge.html#aaefa588fedf0090eefac9dbecfee0169", null ],
     [ "getJointTorque", "classBipedalLocomotion_1_1RobotInterface_1_1YarpSensorBridge.html#a249960c0c822b5e0244978483b418fc5", null ],

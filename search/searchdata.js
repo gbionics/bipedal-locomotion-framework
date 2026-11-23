@@ -8,9 +8,9 @@ var indexSectionsWithContent =
   5: "abcdefgijklmnoprstuvwz",
   6: "bceiqrsuvw",
   7: "cdjlmst",
-  8: "filmnprsu",
+  8: "cfhilmnprstuv",
   9: "b",
-  10: "b🐍🧮"
+  10: "bd🐍🧮"
 };
 
 var indexSectionNames =

@@ -52,5 +52,7 @@ var classBipedalLocomotion_1_1RobotInterface_1_1ISensorBridge =
     [ "getMotorAcceleration", "classBipedalLocomotion_1_1RobotInterface_1_1ISensorBridge.html#aeef893871d9e1f2e7fb87215acf804c6", null ],
     [ "getMotorAccelerations", "classBipedalLocomotion_1_1RobotInterface_1_1ISensorBridge.html#a371ce08830f823788cf4d9ca96c15dbe", null ],
     [ "getMotorTemperatures", "classBipedalLocomotion_1_1RobotInterface_1_1ISensorBridge.html#a27442cebc43a2d0e81e75103f82990b0", null ],
-    [ "getMotorTemperature", "classBipedalLocomotion_1_1RobotInterface_1_1ISensorBridge.html#a975c3d127759bf2a5a6a86eb17b54907", null ]
+    [ "getMotorTemperature", "classBipedalLocomotion_1_1RobotInterface_1_1ISensorBridge.html#a975c3d127759bf2a5a6a86eb17b54907", null ],
+    [ "getJointControlModes", "classBipedalLocomotion_1_1RobotInterface_1_1ISensorBridge.html#a09ce1f824cb5c3591cfddfd643be7957", null ],
+    [ "getJointControlMode", "classBipedalLocomotion_1_1RobotInterface_1_1ISensorBridge.html#a9675f3f30c56c40014b1c8dfea8c5404", null ]
 ];

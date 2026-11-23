@@ -115,8 +115,10 @@ $(document).ready(function(){initNavTree('YarpHelper_8h.html',''); initResizable
 <div class="contents">
 <div class="textblock"><code>#include &lt;memory&gt;</code><br />
 <code>#include &lt;string&gt;</code><br />
+<code>#include &lt;yarp/conf/numeric.h&gt;</code><br />
 <code>#include &lt;yarp/dev/PolyDriver.h&gt;</code><br />
 <code>#include &lt;<a class="el" href="IParametersHandler_8h.html">BipedalLocomotion/ParametersHandler/IParametersHandler.h</a>&gt;</code><br />
+<code>#include &lt;<a class="el" href="ControlMode_8h.html">BipedalLocomotion/RobotInterface/ControlMode.h</a>&gt;</code><br />
 <code>#include &lt;yarp/dev/PolyDriverList.h&gt;</code><br />
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
@@ -156,6 +158,12 @@ Functions</h2></td></tr>
 <tr class="memitem:ab9e4417668007269fe7388bcd88f63c4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structBipedalLocomotion_1_1RobotInterface_1_1PolyDriverDescriptor.html">PolyDriverDescriptor</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="YarpHelper_8h.html#ab9e4417668007269fe7388bcd88f63c4">BipedalLocomotion::RobotInterface::constructBatteryClient</a> (std::weak_ptr&lt; const <a class="el" href="classBipedalLocomotion_1_1ParametersHandler_1_1IParametersHandler.html">BipedalLocomotion::ParametersHandler::IParametersHandler</a> &gt; handler)</td></tr>
 <tr class="memdesc:ab9e4417668007269fe7388bcd88f63c4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function that can be used to build a <code>battery_nwc_yarp</code> device.  <a href="YarpHelper_8h.html#ab9e4417668007269fe7388bcd88f63c4">More...</a><br /></td></tr>
 <tr class="separator:ab9e4417668007269fe7388bcd88f63c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab1bd2a252e3849515a8e7008b615e1fb"><td class="memItemLeft" align="right" valign="top"><a class="el" href="ControlMode_8h.html#a8dc067a557a734ecd2ebba68a1188f82">ControlMode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="YarpHelper_8h.html#ab1bd2a252e3849515a8e7008b615e1fb">BipedalLocomotion::RobotInterface::fromYarpControlMode</a> (yarp::conf::vocab32_t controlMode)</td></tr>
+<tr class="memdesc:ab1bd2a252e3849515a8e7008b615e1fb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert a YARP control mode (VOCAB_CM_*) into a ControlMode.  <a href="YarpHelper_8h.html#ab1bd2a252e3849515a8e7008b615e1fb">More...</a><br /></td></tr>
+<tr class="separator:ab1bd2a252e3849515a8e7008b615e1fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aba188e4fef924bede2a0da8e19952092"><td class="memItemLeft" align="right" valign="top">yarp::conf::vocab32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="YarpHelper_8h.html#aba188e4fef924bede2a0da8e19952092">BipedalLocomotion::RobotInterface::toYarpControlMode</a> (<a class="el" href="ControlMode_8h.html#a8dc067a557a734ecd2ebba68a1188f82">ControlMode</a> controlMode)</td></tr>
+<tr class="memdesc:aba188e4fef924bede2a0da8e19952092"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert a ControlMode into a YARP control mode (VOCAB_CM_*).  <a href="YarpHelper_8h.html#aba188e4fef924bede2a0da8e19952092">More...</a><br /></td></tr>
+<tr class="separator:aba188e4fef924bede2a0da8e19952092"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><dl class="section author"><dt>Authors</dt><dd>Giulio Romualdi </dd></dl>
@@ -548,6 +556,60 @@ The <code>RGBDSensorClient</code> device is implement in <a href="https://yarp.i
 </table>
 </dd></dl>
 <dl class="section return"><dt>Returns</dt><dd>A PolyDriverDescriptor. In case of error an invalid <code>PolyDriverDescriptor</code> is returned. </dd></dl>
+
+</div>
+</div>
+<a id="ab1bd2a252e3849515a8e7008b615e1fb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab1bd2a252e3849515a8e7008b615e1fb">&#9670;&nbsp;</a></span>fromYarpControlMode()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="ControlMode_8h.html#a8dc067a557a734ecd2ebba68a1188f82">ControlMode</a> BipedalLocomotion::RobotInterface::fromYarpControlMode </td>
+          <td>(</td>
+          <td class="paramtype">yarp::conf::vocab32_t&#160;</td>
+          <td class="paramname"><em>controlMode</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Convert a YARP control mode (VOCAB_CM_*) into a ControlMode. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">controlMode</td><td>YARP control mode. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The corresponding ControlMode, ControlMode::Unknown if the YARP control mode is not supported. </dd></dl>
+
+</div>
+</div>
+<a id="aba188e4fef924bede2a0da8e19952092"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aba188e4fef924bede2a0da8e19952092">&#9670;&nbsp;</a></span>toYarpControlMode()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">yarp::conf::vocab32_t BipedalLocomotion::RobotInterface::toYarpControlMode </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="ControlMode_8h.html#a8dc067a557a734ecd2ebba68a1188f82">ControlMode</a>&#160;</td>
+          <td class="paramname"><em>controlMode</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Convert a ControlMode into a YARP control mode (VOCAB_CM_*). </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">controlMode</td><td>control mode. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The corresponding YARP control mode, VOCAB_CM_UNKNOWN for ControlMode::Unknown. </dd></dl>
 
 </div>
 </div>
