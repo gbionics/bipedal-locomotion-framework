@@ -160,8 +160,8 @@ public:
     Mode getTaskControllerMode() const override;
 
     /**
-     * Get frame name.
-     * @return the name of the frame.
+     * Get frame index.
+     * @return the index of the frame.
      */
     iDynTree::FrameIndex getFrameIndex() const;
 };
