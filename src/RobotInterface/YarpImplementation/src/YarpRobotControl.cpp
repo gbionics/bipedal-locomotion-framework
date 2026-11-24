@@ -156,7 +156,7 @@ struct YarpRobotControl::Impl
     std::atomic<std::chrono::nanoseconds::rep> lastReferencesWarning{
         std::numeric_limits<std::chrono::nanoseconds::rep>::min()};
 
-    bool getControlModes(std::vector<RobotInterface::ControlMode>& controlModes)
+    bool getControlModes()
     {
         constexpr auto errorPrefix = "[YarpRobotControl::Impl::getControlModes]";
 
@@ -180,10 +180,9 @@ struct YarpRobotControl::Impl
             std::this_thread::sleep_for(std::chrono::microseconds(this->readingTimeout));
         }
 
-        controlModes.resize(this->actuatedDOFs);
         for (std::size_t i = 0; i < this->actuatedDOFs; i++)
         {
-            controlModes[i] = fromYarpControlMode(this->controlModesYarp[i]);
+            this->desiredControlModes[i] = fromYarpControlMode(this->controlModesYarp[i]);
         }
 
         return true;
@@ -493,7 +492,7 @@ struct YarpRobotControl::Impl
         // store the polydriver
         this->robotDevice = robotDevice;
 
-        if (!this->getControlModes(this->desiredControlModes))
+        if (!this->getControlModes())
         {
             log()->error("{} Unable to get the control modes.", errorPrefix);
             return false;
