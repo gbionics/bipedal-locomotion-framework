@@ -388,3 +388,8 @@ SE3Task::Mode SE3Task::getTaskControllerMode() const
 {
     return m_controllerMode;
 }
+
+iDynTree::FrameIndex SE3Task::getFrameIndex() const
+{
+    return m_frameIndex;
+}
