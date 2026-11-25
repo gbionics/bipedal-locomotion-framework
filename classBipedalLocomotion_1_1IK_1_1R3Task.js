@@ -10,5 +10,6 @@ var classBipedalLocomotion_1_1IK_1_1R3Task =
     [ "type", "classBipedalLocomotion_1_1IK_1_1R3Task.html#a3552a449e851e8e7cb3c4da16e4edd62", null ],
     [ "isValid", "classBipedalLocomotion_1_1IK_1_1R3Task.html#ab9a3b513723d1496106e48103a9498aa", null ],
     [ "setTaskControllerMode", "classBipedalLocomotion_1_1IK_1_1R3Task.html#a531b6002572c56c85c3d583f06702610", null ],
-    [ "getTaskControllerMode", "classBipedalLocomotion_1_1IK_1_1R3Task.html#ae88beccec85641130cdfbcb2b7e056f1", null ]
+    [ "getTaskControllerMode", "classBipedalLocomotion_1_1IK_1_1R3Task.html#ae88beccec85641130cdfbcb2b7e056f1", null ],
+    [ "getFrameIndex", "classBipedalLocomotion_1_1IK_1_1R3Task.html#a5da27e0246c1243d9985d073180a021d", null ]
 ];

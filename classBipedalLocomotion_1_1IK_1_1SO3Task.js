@@ -7,5 +7,6 @@ var classBipedalLocomotion_1_1IK_1_1SO3Task =
     [ "setSetPoint", "classBipedalLocomotion_1_1IK_1_1SO3Task.html#a112c8f6b32c23347572fc3a9b1dcee72", null ],
     [ "size", "classBipedalLocomotion_1_1IK_1_1SO3Task.html#ae08ab37d2da9952e427550999ec6c626", null ],
     [ "type", "classBipedalLocomotion_1_1IK_1_1SO3Task.html#a6d927c62aea37cf7e2939de858924858", null ],
-    [ "isValid", "classBipedalLocomotion_1_1IK_1_1SO3Task.html#ac240118f83251c25d86e4f1b1d176fa8", null ]
+    [ "isValid", "classBipedalLocomotion_1_1IK_1_1SO3Task.html#ac240118f83251c25d86e4f1b1d176fa8", null ],
+    [ "getFrameIndex", "classBipedalLocomotion_1_1IK_1_1SO3Task.html#af992a6a70d423cfd7fa533cdad8ac90a", null ]
 ];

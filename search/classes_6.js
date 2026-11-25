@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['globalcopevaluator_1737',['GlobalCoPEvaluator',['../classBipedalLocomotion_1_1Contacts_1_1GlobalCoPEvaluator.html',1,'BipedalLocomotion::Contacts']]],
-  ['gravitytask_1738',['GravityTask',['../classBipedalLocomotion_1_1IK_1_1GravityTask.html',1,'BipedalLocomotion::IK']]],
-  ['gyroscopemeasurementdynamics_1739',['GyroscopeMeasurementDynamics',['../classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1GyroscopeMeasurementDynamics.html',1,'BipedalLocomotion::Estimators::RobotDynamicsEstimator']]]
+  ['globalcopevaluator_1736',['GlobalCoPEvaluator',['../classBipedalLocomotion_1_1Contacts_1_1GlobalCoPEvaluator.html',1,'BipedalLocomotion::Contacts']]],
+  ['gravitytask_1737',['GravityTask',['../classBipedalLocomotion_1_1IK_1_1GravityTask.html',1,'BipedalLocomotion::IK']]],
+  ['gyroscopemeasurementdynamics_1738',['GyroscopeMeasurementDynamics',['../classBipedalLocomotion_1_1Estimators_1_1RobotDynamicsEstimator_1_1GyroscopeMeasurementDynamics.html',1,'BipedalLocomotion::Estimators::RobotDynamicsEstimator']]]
 ];
