@@ -49,7 +49,7 @@ class DinRailRobotControl : public YarpRobotControl
     std::unique_ptr<Impl> m_pimpl;
 
 public:
-    using YarpRobotControl::setReferences;
+    // using YarpRobotControl::setReferences;
 
     /**
      * Constructor.
@@ -176,6 +176,7 @@ public:
      * @param stiffness  Stiffness setpoints for the joints [Nm/rad].
      * @param damping    Damping setpoints for the joints [Nms/rad].
      * @param interactionModes Interaction modes of the joints to update (must be in the controlled joint list).
+     * @param controlMode Control mode to be applied to the stiff joints.
      * @return True on success, false if any interaction mode is not found or inputs are inconsistent.
      */
     bool setReferences(Eigen::Ref<const Eigen::VectorXd> position,
@@ -183,7 +184,8 @@ public:
                        Eigen::Ref<const Eigen::VectorXd> torque,
                        Eigen::Ref<const Eigen::VectorXd> stiffness,
                        Eigen::Ref<const Eigen::VectorXd> damping,
-                       const std::vector<RobotInterface::InteractionMode> interactionModes);  
+                       const std::vector<RobotInterface::InteractionMode> interactionModes,
+                       const RobotInterface::ControlMode& controlMode);  
 
 };
 

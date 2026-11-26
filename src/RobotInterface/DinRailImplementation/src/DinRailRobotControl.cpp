@@ -331,7 +331,8 @@ bool DinRailRobotControl::setReferences(Eigen::Ref<const Eigen::VectorXd> positi
                                         Eigen::Ref<const Eigen::VectorXd> torque,
                                         Eigen::Ref<const Eigen::VectorXd> stiffness,
                                         Eigen::Ref<const Eigen::VectorXd> damping,
-                                        const std::vector<RobotInterface::InteractionMode> interactionModes)
+                                        const std::vector<RobotInterface::InteractionMode> interactionModes,
+                                        const RobotInterface::ControlMode& controlMode)
 {
     constexpr auto errorPrefix = "[DinRailRobotControl::setReferences (interaction modes)]";
     const auto size = static_cast<Eigen::Index>(interactionModes.size());
@@ -387,7 +388,7 @@ bool DinRailRobotControl::setReferences(Eigen::Ref<const Eigen::VectorXd> positi
     if (stiffSize > 0 && !YarpRobotControl::setReferences(
                Eigen::Map<const Eigen::VectorXd>(stiffSubsetPosition.data(), stiffSize),
                stiffSubsetIndices,
-               RobotInterface::ControlMode::PositionDirect))
+               controlMode))
     {
         BipedalLocomotion::log()->error("{} Failed to set references for stiff joints.", errorPrefix);
         return false;
