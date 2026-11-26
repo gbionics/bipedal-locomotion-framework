@@ -14,10 +14,12 @@
 
 // YARP
 #include <yarp/conf/numeric.h>
+#include <yarp/dev/IInteractionMode.h>
 #include <yarp/dev/PolyDriver.h>
 
 #include <BipedalLocomotion/ParametersHandler/IParametersHandler.h>
 #include <BipedalLocomotion/RobotInterface/ControlMode.h>
+#include <BipedalLocomotion/RobotInterface/InteractionMode.h>
 #include <yarp/dev/PolyDriverList.h>
 
 namespace BipedalLocomotion
@@ -214,6 +216,21 @@ ControlMode fromYarpControlMode(yarp::conf::vocab32_t controlMode);
  * @return The corresponding YARP control mode, VOCAB_CM_UNKNOWN for ControlMode::Unknown.
  */
 yarp::conf::vocab32_t toYarpControlMode(ControlMode controlMode);
+
+/**
+ * Convert a YARP interaction mode (VOCAB_IM_*) into an InteractionMode.
+ * @param interactionMode YARP interaction mode.
+ * @return The corresponding InteractionMode, InteractionMode::Unknown if the YARP interaction
+ * mode is not supported.
+ */
+InteractionMode fromYarpInteractionMode(yarp::dev::InteractionModeEnum interactionMode);
+
+/**
+ * Convert an InteractionMode into a YARP interaction mode (VOCAB_IM_*).
+ * @param interactionMode interaction mode.
+ * @return The corresponding YARP interaction mode, VOCAB_IM_UNKNOWN for InteractionMode::Unknown.
+ */
+yarp::dev::InteractionModeEnum toYarpInteractionMode(InteractionMode interactionMode);
 
 } // namespace RobotInterface
 } // namespace BipedalLocomotion

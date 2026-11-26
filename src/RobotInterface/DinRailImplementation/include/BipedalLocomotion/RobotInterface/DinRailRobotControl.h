@@ -49,6 +49,8 @@ class DinRailRobotControl : public YarpRobotControl
     std::unique_ptr<Impl> m_pimpl;
 
 public:
+    using YarpRobotControl::setReferences;
+
     /**
      * Constructor.
      */
@@ -159,6 +161,30 @@ public:
                                Eigen::Ref<const Eigen::VectorXd> stiffness,
                                Eigen::Ref<const Eigen::VectorXd> damping,
                                const std::vector<std::string>& jointNames);
+
+    
+    /**
+     * Set joint references for all controlled joints identified by their InteractionMode.
+     * 
+     * Resolves each interaction mode in @p interactionModes to the corresponding joints in the controlled joint list and
+     * updates their references accordingly. All other joints retain their last commanded setpoints. Each input vector must have exactly `interactionModes.size()` elements.
+     * The same unit-conversion rules as the full overload apply.
+     *
+     * @param position   Position setpoints for the joints [rad].
+     * @param velocity   Velocity setpoints for the joints [rad/s].
+     * @param torque     Torque feedforward setpoints for the joints [Nm].
+     * @param stiffness  Stiffness setpoints for the joints [Nm/rad].
+     * @param damping    Damping setpoints for the joints [Nms/rad].
+     * @param interactionModes Interaction modes of the joints to update (must be in the controlled joint list).
+     * @return True on success, false if any interaction mode is not found or inputs are inconsistent.
+     */
+    bool setReferences(Eigen::Ref<const Eigen::VectorXd> position,
+                       Eigen::Ref<const Eigen::VectorXd> velocity,
+                       Eigen::Ref<const Eigen::VectorXd> torque,
+                       Eigen::Ref<const Eigen::VectorXd> stiffness,
+                       Eigen::Ref<const Eigen::VectorXd> damping,
+                       const std::vector<RobotInterface::InteractionMode> interactionModes);  
+
 };
 
 } // namespace RobotInterface

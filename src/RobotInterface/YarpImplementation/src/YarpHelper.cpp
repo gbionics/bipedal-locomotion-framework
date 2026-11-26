@@ -512,3 +512,32 @@ BipedalLocomotion::RobotInterface::toYarpControlMode(ControlMode controlMode)
         return VOCAB_CM_UNKNOWN;
     }
 }
+
+InteractionMode
+BipedalLocomotion::RobotInterface::fromYarpInteractionMode(
+    yarp::dev::InteractionModeEnum interactionMode)
+{
+    switch (interactionMode)
+    {
+    case yarp::dev::VOCAB_IM_STIFF:
+        return InteractionMode::Stiff;
+    case yarp::dev::VOCAB_IM_COMPLIANT:
+        return InteractionMode::Compliant;
+    default:
+        return InteractionMode::Unknown;
+    }
+}
+
+yarp::dev::InteractionModeEnum
+BipedalLocomotion::RobotInterface::toYarpInteractionMode(InteractionMode interactionMode)
+{
+    switch (interactionMode)
+    {
+    case InteractionMode::Stiff:
+        return yarp::dev::VOCAB_IM_STIFF;
+    case InteractionMode::Compliant:
+        return yarp::dev::VOCAB_IM_COMPLIANT;
+    default:
+        return yarp::dev::VOCAB_IM_UNKNOWN;
+    }
+}

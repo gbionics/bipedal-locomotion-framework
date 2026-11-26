@@ -139,6 +139,41 @@ public:
                         const std::vector<std::string>& jointNames) final;
 
     /**
+     * Set the interaction mode for each controlled joint.
+     * @param interactionModes interaction modes ordered as the joint list.
+     * @return True on success, false if the request is invalid or the device cannot set it.
+     */
+    bool setInteractionMode(
+        const std::vector<RobotInterface::InteractionMode>& interactionModes) final;
+
+    /**
+     * Set the same interaction mode for all controlled joints.
+     * @param interactionMode interaction mode to set.
+     * @return True on success, false otherwise.
+     */
+    bool setInteractionMode(const RobotInterface::InteractionMode& interactionMode) final;
+
+    /**
+     * Set interaction modes for a subset of joints identified by indices.
+     * @param interactionModes interaction mode for each selected joint.
+     * @param jointIndices indices into the controlled joint list.
+     * @return True on success, false otherwise.
+     */
+    bool setInteractionMode(
+        const std::vector<RobotInterface::InteractionMode>& interactionModes,
+        const std::vector<int>& jointIndices) final;
+
+    /**
+     * Set interaction modes for a subset of joints identified by names.
+     * @param interactionModes interaction mode for each selected joint.
+     * @param jointNames names of the selected joints.
+     * @return True on success, false otherwise.
+     */
+    bool setInteractionMode(
+        const std::vector<RobotInterface::InteractionMode>& interactionModes,
+        const std::vector<std::string>& jointNames) final;
+
+    /**
      * Set the control mode in an asynchronous thread.
      * @param controlModes vector containing the control mode for each joint.
      * @return An std::future object to a boolean True/False in case of success/failure.

@@ -18,6 +18,7 @@
 
 #include <BipedalLocomotion/ParametersHandler/IParametersHandler.h>
 #include <BipedalLocomotion/RobotInterface/ControlMode.h>
+#include <BipedalLocomotion/RobotInterface/InteractionMode.h>
 
 namespace BipedalLocomotion
 {
@@ -191,6 +192,49 @@ public:
      * Since this function spawns a new thread, the invoking thread is not blocked.
      */
     virtual std::future<bool> setControlModeAsync(const RobotInterface::ControlMode& mode) = 0;
+
+    /**
+     * Set the interaction mode.
+     * @param interactionModes vector containing the interaction mode for each joint.
+     * @return True/False in case of success/failure.
+     */
+    virtual bool
+    setInteractionMode(const std::vector<RobotInterface::InteractionMode>& interactionModes);
+
+    /**
+     * Set the desired interaction mode.
+     * @param interactionMode an interaction mode for all the joints.
+     * @return True/False in case of success/failure.
+     * @warning Call this function if you want to set the same interaction mode for all joints.
+     */
+    virtual bool
+    setInteractionMode(const RobotInterface::InteractionMode& interactionMode);
+
+    /**
+     * Set the interaction mode of a subset of joints identified by their indices.
+     * The interaction mode of all the other joints is not changed.
+     * @param interactionModes interaction mode of each joint of the subset (size must match
+     * jointIndices).
+     * @param jointIndices indices of the joints (into the full joint list).
+     * @return True/False in case of success/failure.
+     * @note The default implementation does not support it and returns false.
+     */
+    virtual bool
+    setInteractionMode(const std::vector<RobotInterface::InteractionMode>& interactionModes,
+                       const std::vector<int>& jointIndices);
+
+    /**
+     * Set the interaction mode of a subset of joints identified by their names.
+     * The interaction mode of all the other joints is not changed.
+     * @param interactionModes interaction mode of each joint of the subset (size must match
+     * jointNames).
+     * @param jointNames names of the joints.
+     * @return True/False in case of success/failure.
+     * @note The default implementation does not support it and returns false.
+     */
+    virtual bool setInteractionMode(
+        const std::vector<RobotInterface::InteractionMode>& interactionModes,
+        const std::vector<std::string>& jointNames);
 
     /**
      * Get the list of the controlled joints

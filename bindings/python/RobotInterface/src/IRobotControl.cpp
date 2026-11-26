@@ -41,6 +41,11 @@ void CreateIRobotControl(pybind11::module& module)
         .value("HardwareFault", ControlMode::HardwareFault)
         .value("Unknown", ControlMode::Unknown);
 
+    py::enum_<InteractionMode>(module, "InteractionMode")
+        .value("Stiff", InteractionMode::Stiff)
+        .value("Compliant", InteractionMode::Compliant)
+        .value("Unknown", InteractionMode::Unknown);
+
     py::class_<IRobotControl> iRobotControl(module, "IRobotControl");
     // Deprecated, kept for backward compatibility and it will be removed in a future release:
     // ControlMode used to be defined inside IRobotControl, with its values exported in the

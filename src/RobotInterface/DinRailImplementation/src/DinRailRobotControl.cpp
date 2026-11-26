@@ -325,3 +325,73 @@ bool DinRailRobotControl::setImpedanceSetPoints(Eigen::Ref<const Eigen::VectorXd
 
     return m_pimpl->setSetPointsSubset(position, velocity, torque, stiffness, damping, m_pimpl->subsetIndices);
 }
+
+bool DinRailRobotControl::setReferences(Eigen::Ref<const Eigen::VectorXd> position,
+                                        Eigen::Ref<const Eigen::VectorXd> velocity,
+                                        Eigen::Ref<const Eigen::VectorXd> torque,
+                                        Eigen::Ref<const Eigen::VectorXd> stiffness,
+                                        Eigen::Ref<const Eigen::VectorXd> damping,
+                                        const std::vector<RobotInterface::InteractionMode> interactionModes)
+{
+    constexpr auto errorPrefix = "[DinRailRobotControl::setReferences (interaction modes)]";
+    const auto size = static_cast<Eigen::Index>(interactionModes.size());
+    if (interactionModes.size() != m_pimpl->actuatedDOFs || position.size() != size
+        || velocity.size() != size || torque.size() != size || stiffness.size() != size
+        || damping.size() != size)
+    {
+        log()->error("{} Input sizes must match the number of controlled joints.",
+                     errorPrefix);
+        return false;
+    }
+    const std::vector<std::string> controlledJoints = getJointList();
+    std::vector<int> stiffSubsetIndices, compliantSubsetIndices;
+    std::vector<double> stiffSubsetPosition, compliantSubsetPosition, compliantSubsetVelocity, compliantSubsetStiffness, compliantSubsetDamping, compliantSubsetTorque;
+    for (size_t i = 0; i < interactionModes.size(); ++i)
+    {
+        const auto& mode = interactionModes[i];
+        if (mode == RobotInterface::InteractionMode::Stiff)
+        {
+            stiffSubsetIndices.push_back(static_cast<int>(i));
+            stiffSubsetPosition.push_back(position[i]);
+        }
+        else if (mode == RobotInterface::InteractionMode::Compliant)
+        {
+            compliantSubsetIndices.push_back(static_cast<int>(i));
+            compliantSubsetPosition.push_back(position[i]);
+            compliantSubsetVelocity.push_back(velocity[i]);
+            compliantSubsetStiffness.push_back(stiffness[i]);
+            compliantSubsetDamping.push_back(damping[i]);
+            compliantSubsetTorque.push_back(torque[i]);
+        }
+        else
+        {
+            log()->error("{} Interaction mode for joint '{}' is not supported.",
+                         errorPrefix, controlledJoints[i]);
+            return false;
+        }
+    }
+
+    const auto compliantSize = static_cast<Eigen::Index>(compliantSubsetIndices.size());
+    if (compliantSize > 0 && !setImpedanceSetPoints(Eigen::Map<const Eigen::VectorXd>(compliantSubsetPosition.data(), compliantSize),
+                                  Eigen::Map<const Eigen::VectorXd>(compliantSubsetVelocity.data(), compliantSize),
+                                  Eigen::Map<const Eigen::VectorXd>(compliantSubsetTorque.data(), compliantSize),
+                                  Eigen::Map<const Eigen::VectorXd>(compliantSubsetStiffness.data(), compliantSize),
+                                  Eigen::Map<const Eigen::VectorXd>(compliantSubsetDamping.data(), compliantSize),
+                                  compliantSubsetIndices))
+    {
+        BipedalLocomotion::log()->error("{} Failed to set impedance set points for compliant joints.", errorPrefix);
+        return false;
+    }
+
+    const auto stiffSize = static_cast<Eigen::Index>(stiffSubsetIndices.size());
+    if (stiffSize > 0 && !YarpRobotControl::setReferences(
+               Eigen::Map<const Eigen::VectorXd>(stiffSubsetPosition.data(), stiffSize),
+               stiffSubsetIndices,
+               RobotInterface::ControlMode::PositionDirect))
+    {
+        BipedalLocomotion::log()->error("{} Failed to set references for stiff joints.", errorPrefix);
+        return false;
+    }
+    return true;
+}
+
