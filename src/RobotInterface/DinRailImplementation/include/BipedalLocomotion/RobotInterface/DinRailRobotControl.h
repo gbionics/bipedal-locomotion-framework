@@ -162,10 +162,10 @@ public:
                                Eigen::Ref<const Eigen::VectorXd> damping,
                                const std::vector<std::string>& jointNames);
 
-    
+
     /**
      * Set joint references for all controlled joints identified by their InteractionMode.
-     * 
+     *
      * Resolves each interaction mode in @p interactionModes to the corresponding joints in the controlled joint list and
      * updates their references accordingly. All other joints retain their last commanded setpoints. Each input vector must have exactly `interactionModes.size()` elements.
      * The same unit-conversion rules as the full overload apply.
@@ -185,7 +185,7 @@ public:
                        Eigen::Ref<const Eigen::VectorXd> stiffness,
                        Eigen::Ref<const Eigen::VectorXd> damping,
                        const std::vector<RobotInterface::InteractionMode> interactionModes,
-                       const RobotInterface::ControlMode& controlMode);  
+                       const RobotInterface::ControlMode& controlMode);
 
 };
 
