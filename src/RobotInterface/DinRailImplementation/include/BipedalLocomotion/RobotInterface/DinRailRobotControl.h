@@ -184,8 +184,8 @@ public:
                        Eigen::Ref<const Eigen::VectorXd> torque,
                        Eigen::Ref<const Eigen::VectorXd> stiffness,
                        Eigen::Ref<const Eigen::VectorXd> damping,
-                       const std::vector<RobotInterface::InteractionMode> interactionModes,
-                       const RobotInterface::ControlMode& controlMode);
+                       const RobotInterface::ControlMode& controlMode,
+                       const std::vector<RobotInterface::InteractionMode>& interactionModes);
 
 };
 

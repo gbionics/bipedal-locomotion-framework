@@ -331,8 +331,8 @@ bool DinRailRobotControl::setReferences(Eigen::Ref<const Eigen::VectorXd> positi
                                         Eigen::Ref<const Eigen::VectorXd> torque,
                                         Eigen::Ref<const Eigen::VectorXd> stiffness,
                                         Eigen::Ref<const Eigen::VectorXd> damping,
-                                        const std::vector<RobotInterface::InteractionMode> interactionModes,
-                                        const RobotInterface::ControlMode& controlMode)
+                                        const RobotInterface::ControlMode& controlMode,
+                                        const std::vector<RobotInterface::InteractionMode>& interactionModes)
 {
     constexpr auto errorPrefix = "[DinRailRobotControl::setReferences (interaction modes)]";
     const auto size = static_cast<Eigen::Index>(interactionModes.size());
