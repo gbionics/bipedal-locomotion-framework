@@ -22,6 +22,7 @@
 #include <yarp/dev/IControlMode.h>
 #include <yarp/dev/ICurrentControl.h>
 #include <yarp/dev/IEncodersTimed.h>
+#include <yarp/dev/IInteractionMode.h>
 #include <yarp/dev/IPWMControl.h>
 #include <yarp/dev/IPositionControl.h>
 #include <yarp/dev/IPositionDirect.h>
@@ -99,6 +100,7 @@ struct YarpRobotControl::Impl
     yarp::dev::IPWMControl* pwmInterface{nullptr}; /**< PWM control interface. */
     yarp::dev::ICurrentControl* currentInterface{nullptr}; /**< Current control interface. */
     yarp::dev::IControlMode* controlModeInterface{nullptr}; /**< Control mode interface. */
+    yarp::dev::IInteractionMode* interactionModeInterface{nullptr};
     yarp::dev::IAxisInfo* axisInfoInterface{nullptr}; /**< Axis info interface. */
     yarp::dev::IControlLimits* controlLimitsInterface{nullptr}; /**< Control limits interface. */
 
@@ -107,7 +109,8 @@ struct YarpRobotControl::Impl
     bool allJointsArePrismatics{false}; /**< flag to indicate if all the joints are prismatic */
 
 
-    std::size_t actuatedDOFs; /**< Number of the actuated DoFs. */
+    std::size_t actuatedDOFs{0}; /**< Number of the actuated DoFs. */
+    std::vector<int> allJointsIndicesOrdered;
 
     Eigen::VectorXd positionFeedback; /**< Current joint position [rad]. */
 
@@ -119,9 +122,15 @@ struct YarpRobotControl::Impl
     std::vector<yarp::conf::vocab32_t> controlModesYarp; /**< Vector containing the map between the
                                                              joint and the current yarp control mode
                                                           */
+    std::mutex interactionModesMutex;
+    std::vector<yarp::dev::InteractionModeEnum> desiredInteractionModes;
+    std::vector<int> interactionModeJointIndices;
 
     std::vector<std::string> axesName; /**< List containing the mapping between the joints index and
                                           the their name */
+    std::unordered_map<std::string, int> jointNameToIndex;
+    std::mutex desiredJointIndicesMutex;
+    std::vector<int> desiredJointIndices;
 
     JointsControlValuesAndMode desiredJointValuesAndMode; /**< Struct containing the information
                                                              regarding the desired joint value and
@@ -155,6 +164,23 @@ struct YarpRobotControl::Impl
     /** Time of the last warning about the references not accepted by the device [ns]. */
     std::atomic<std::chrono::nanoseconds::rep> lastReferencesWarning{
         std::numeric_limits<std::chrono::nanoseconds::rep>::min()};
+
+    bool resolveDesiredJointIndices(const std::vector<std::string>& jointNames,
+                                    std::string_view errorPrefix)
+    {
+        this->desiredJointIndices.clear();
+        for (const auto& name : jointNames)
+        {
+            const auto it = this->jointNameToIndex.find(name);
+            if (it == this->jointNameToIndex.end())
+            {
+                log()->error("{} Joint '{}' not found in the joint list.", errorPrefix, name);
+                return false;
+            }
+            this->desiredJointIndices.push_back(it->second);
+        }
+        return true;
+    }
 
     bool getControlModes()
     {
@@ -257,9 +283,7 @@ struct YarpRobotControl::Impl
             return false;
         }
 
-        std::vector<int> jointIndices(this->actuatedDOFs);
-        std::iota(jointIndices.begin(), jointIndices.end(), 0);
-        return this->setControlModesSubset(controlModes, jointIndices);
+        return this->setControlModesSubset(controlModes, this->allJointsIndicesOrdered);
     }
 
     bool setControlModesSubset(const std::vector<RobotInterface::ControlMode>& controlModes,
@@ -346,6 +370,76 @@ struct YarpRobotControl::Impl
         return true;
     }
 
+    bool setInteractionModesSubset(
+        const std::vector<RobotInterface::InteractionMode>& interactionModes,
+        const std::vector<int>& jointIndices)
+    {
+        constexpr auto errorPrefix = "[YarpRobotControl::setInteractionMode]";
+        if (this->interactionModeInterface == nullptr)
+        {
+            log()->error("{} The interaction mode interface is not ready.", errorPrefix);
+            return false;
+        }
+        if (interactionModes.size() != jointIndices.size())
+        {
+            log()->error("{} The number of interaction modes ({}) does not match the number of "
+                         "joint indices ({}).",
+                         errorPrefix, interactionModes.size(), jointIndices.size());
+            return false;
+        }
+
+        std::lock_guard<std::mutex> lock(this->interactionModesMutex);
+        this->desiredInteractionModes.clear();
+        for (std::size_t i = 0; i < jointIndices.size(); ++i)
+        {
+            const int idx = jointIndices[i];
+            if (idx < 0 || static_cast<std::size_t>(idx) >= this->actuatedDOFs)
+            {
+                log()->error("{} Joint index {} is out of range [0, {}).",
+                             errorPrefix, idx, this->actuatedDOFs);
+                return false;
+            }
+            const auto mode = toYarpInteractionMode(interactionModes[i]);
+            if (mode == yarp::dev::VOCAB_IM_UNKNOWN)
+            {
+                log()->error("{} Unknown interaction mode cannot be set for joint '{}'.",
+                             errorPrefix, this->axesName[idx]);
+                return false;
+            }
+            this->desiredInteractionModes.push_back(mode);
+        }
+
+        if (jointIndices.empty())
+        {
+            return true;
+        }
+
+        bool allJoints = jointIndices.size() == this->actuatedDOFs;
+        for (std::size_t i = 0; allJoints && i < jointIndices.size(); ++i)
+        {
+            allJoints = jointIndices[i] == static_cast<int>(i);
+        }
+        bool ok;
+        if (allJoints)
+        {
+            ok = this->interactionModeInterface->setInteractionModes(
+                this->desiredInteractionModes.data());
+        }
+        else
+        {
+            this->interactionModeJointIndices.assign(jointIndices.begin(), jointIndices.end());
+            ok = this->interactionModeInterface->setInteractionModes(
+                static_cast<int>(this->interactionModeJointIndices.size()),
+                this->interactionModeJointIndices.data(),
+                this->desiredInteractionModes.data());
+        }
+        if (!ok)
+        {
+            log()->error("{} Failed to set interaction modes for all joints.", errorPrefix);
+        }
+        return ok;
+    }
+
     bool getJointPos()
     {
         constexpr auto errorPrefix = "[YarpRobotControl::Impl::getJointPos]";
@@ -394,6 +488,7 @@ struct YarpRobotControl::Impl
     {
         constexpr auto errorPrefix = "[YarpRobotControl::Impl::setDriver]";
 
+        this->interactionModeInterface = nullptr;
         if (robotDevice == nullptr)
         {
             log()->error("{} The robotDevice is pointing to an non initialized memory.",
@@ -450,6 +545,14 @@ struct YarpRobotControl::Impl
             return false;
         }
 
+        yarp::dev::IInteractionMode* interactionMode{nullptr};
+        if (!robotDevice->view(interactionMode) || interactionMode == nullptr)
+        {
+            interactionMode = nullptr;
+            log()->warn("{} IInteractionMode is unavailable; interaction modes cannot be set.",
+                        errorPrefix);
+        }
+
         if (!robotDevice->view(axisInfoInterface) || axisInfoInterface == nullptr)
         {
             log()->error("{} Cannot load the IAxisInfo interface.", errorPrefix);
@@ -470,12 +573,19 @@ struct YarpRobotControl::Impl
             return false;
         }
         this->actuatedDOFs = dofs;
+        this->allJointsIndicesOrdered.resize(this->actuatedDOFs);
+        std::iota(this->allJointsIndicesOrdered.begin(), this->allJointsIndicesOrdered.end(), 0);
 
         // resize vector
         this->positionFeedback.resize(this->actuatedDOFs);
         this->desiredControlModes.resize(this->actuatedDOFs);
+        this->desiredInteractionModes.reserve(this->actuatedDOFs);
+        this->interactionModeJointIndices.reserve(this->actuatedDOFs);
         this->controlModesYarp.resize(this->actuatedDOFs);
         this->axesName.resize(this->actuatedDOFs);
+        this->desiredJointIndices.reserve(this->actuatedDOFs);
+        this->jointNameToIndex.clear();
+        this->jointNameToIndex.reserve(this->actuatedDOFs);
 
         // reserve vector for subset control
         this->subsetCurrentPos.resize(this->actuatedDOFs);
@@ -487,6 +597,7 @@ struct YarpRobotControl::Impl
         for (int i = 0; i < this->actuatedDOFs; i++)
         {
             this->axisInfoInterface->getAxisName(i, this->axesName[i]);
+            this->jointNameToIndex.emplace(this->axesName[i], i);
         }
 
         // store the polydriver
@@ -559,6 +670,7 @@ struct YarpRobotControl::Impl
                           controlBoardJointTypes.end(), //
                           [](const auto& jointType) { return jointType == JointType::REVOLUTE; });
 
+        this->interactionModeInterface = interactionMode;
         return true;
     }
 
@@ -1147,20 +1259,64 @@ bool YarpRobotControl::setControlMode(const std::vector<RobotInterface::ControlM
 {
     constexpr auto errorPrefix = "[YarpRobotControl::setControlMode]";
 
-    std::vector<int> jointIndices;
-    jointIndices.reserve(jointNames.size());
-    for (const auto& name : jointNames)
+    std::lock_guard<std::mutex> lock(m_pimpl->desiredJointIndicesMutex);
+    if (!m_pimpl->resolveDesiredJointIndices(jointNames, errorPrefix))
     {
-        const auto it = std::find(m_pimpl->axesName.begin(), m_pimpl->axesName.end(), name);
-        if (it == m_pimpl->axesName.end())
-        {
-            log()->error("{} Joint '{}' not found in the joint list.", errorPrefix, name);
-            return false;
-        }
-        jointIndices.push_back(static_cast<int>(std::distance(m_pimpl->axesName.begin(), it)));
+        return false;
     }
 
-    return m_pimpl->setControlModesSubset(controlModes, jointIndices);
+    return m_pimpl->setControlModesSubset(controlModes, m_pimpl->desiredJointIndices);
+}
+
+bool YarpRobotControl::setInteractionMode(
+    const std::vector<RobotInterface::InteractionMode>& interactionModes)
+{
+    if (m_pimpl->interactionModeInterface == nullptr)
+    {
+        log()->error("[YarpRobotControl::setInteractionMode] The interaction mode interface is "
+                     "not ready.");
+        return false;
+    }
+    if (interactionModes.size() != m_pimpl->actuatedDOFs)
+    {
+        log()->error("[YarpRobotControl::setInteractionMode] The number of interaction modes ({}) "
+                     "does not match the number of joints ({}).",
+                     interactionModes.size(), m_pimpl->actuatedDOFs);
+        return false;
+    }
+    return m_pimpl->setInteractionModesSubset(interactionModes, m_pimpl->allJointsIndicesOrdered);
+}
+
+bool YarpRobotControl::setInteractionMode(const RobotInterface::InteractionMode& interactionMode)
+{
+    if (m_pimpl->interactionModeInterface == nullptr)
+    {
+        log()->error("[YarpRobotControl::setInteractionMode] The interaction mode interface is "
+                     "not ready.");
+        return false;
+    }
+    return setInteractionMode(
+        std::vector<RobotInterface::InteractionMode>(m_pimpl->actuatedDOFs, interactionMode));
+}
+
+bool YarpRobotControl::setInteractionMode(
+    const std::vector<RobotInterface::InteractionMode>& interactionModes,
+    const std::vector<int>& jointIndices)
+{
+    return m_pimpl->setInteractionModesSubset(interactionModes, jointIndices);
+}
+
+bool YarpRobotControl::setInteractionMode(
+    const std::vector<RobotInterface::InteractionMode>& interactionModes,
+    const std::vector<std::string>& jointNames)
+{
+    constexpr auto errorPrefix = "[YarpRobotControl::setInteractionMode]";
+    std::lock_guard<std::mutex> lock(m_pimpl->desiredJointIndicesMutex);
+    if (!m_pimpl->resolveDesiredJointIndices(jointNames, errorPrefix))
+    {
+        return false;
+    }
+    return m_pimpl->setInteractionModesSubset(interactionModes, m_pimpl->desiredJointIndices);
 }
 
 std::future<bool>

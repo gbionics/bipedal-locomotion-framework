@@ -19,6 +19,7 @@
 
 #include <BipedalLocomotion/ParametersHandler/IParametersHandler.h>
 #include <BipedalLocomotion/RobotInterface/ControlMode.h>
+#include <BipedalLocomotion/RobotInterface/InteractionMode.h>
 #include <BipedalLocomotion/RobotInterface/JointType.h>
 
 namespace BipedalLocomotion
@@ -48,6 +49,7 @@ struct SensorBridgeOptions
     bool isPWMControlEnabled{false}; /** flag to connect PWM measurement sources */
     bool isMotorTemperatureSensorEnabled{false}; /** flag to connect motor temperature measurement sources */
     bool isJointControlModeEnabled{false}; /** flag to connect joint control mode sources */
+    bool isJointInteractionModeEnabled{false}; /** flag to connect joint interaction mode sources */
 
     bool isTemperatureSensorEnabled{false}; /** flag to connect temperature measurement sources */
     bool isBatteryEnabled{false}; /** flag to connect battery measurement sources */
@@ -781,6 +783,35 @@ public:
     {
         return false;
     };
+
+    /**
+     * Get the interaction mode of all the joints
+     * @param[out] interactionModes interaction mode of each joint, ordered as the joints list
+     * @param[out] receiveTimeInSeconds time at which the measurement was received
+     * @note The vector is resized by the method.
+     * @return true/false in case of success/failure
+     */
+    virtual bool getJointInteractionModes(
+        std::vector<InteractionMode>& interactionModes,
+        OptionalDoubleRef receiveTimeInSeconds = {})
+    {
+        return false;
+    };
+
+    /**
+     * Get the interaction mode of a joint
+     * @param[in] jointName name of the joint
+     * @param[out] interactionMode interaction mode of the joint
+     * @param[out] receiveTimeInSeconds time at which the measurement was received
+     * @return true/false in case of success/failure
+     */
+    virtual bool getJointInteractionMode(const std::string& jointName,
+                                         InteractionMode& interactionMode,
+                                         OptionalDoubleRef receiveTimeInSeconds = {})
+    {
+        return false;
+    };
+
 };
 } // namespace RobotInterface
 } // namespace BipedalLocomotion

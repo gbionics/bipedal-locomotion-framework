@@ -26,6 +26,7 @@
 #include <yarp/dev/IControlMode.h>
 #include <yarp/dev/ICurrentControl.h>
 #include <yarp/dev/IGenericSensor.h>
+#include <yarp/dev/IInteractionMode.h>
 #include <yarp/dev/IMotor.h>
 #include <yarp/dev/IMotorEncoders.h>
 #include <yarp/dev/IPidControl.h>
@@ -73,6 +74,7 @@ struct YarpSensorBridge::Impl
         yarp::dev::IPidControl* pids{nullptr};
         yarp::dev::IAmplifierControl* amp{nullptr};
         yarp::dev::IControlMode* controlMode{nullptr};
+        yarp::dev::IInteractionMode* interactionMode{nullptr};
     };
 
     ControlBoardRemapperInterfaces controlBoardRemapperInterfaces;
@@ -150,6 +152,12 @@ struct YarpSensorBridge::Impl
         bool jointControlModesValid{false}; /**< true if the last read of the control modes
                                                succeeded */
         bool jointControlModesErrorLogged{false}; /**< true if the read failure was logged */
+
+        std::vector<InteractionMode> jointInteractionModes;
+        std::vector<yarp::dev::InteractionModeEnum> jointInteractionModesUnordered;
+        bool jointInteractionModesValid{false}; /**< true if the last read of the interaction modes
+                                                   succeeded */
+        bool jointInteractionModesErrorLogged{false}; /**< true if the read failure was logged */
 
         double receivedTimeInSeconds;
     };
@@ -999,6 +1007,7 @@ struct YarpSensorBridge::Impl
         bool okPID = !metaData.bridgeOptions.isPIDsEnabled;
         bool okMotorTemperature = !metaData.bridgeOptions.isMotorTemperatureSensorEnabled;
         bool okControlMode = !metaData.bridgeOptions.isJointControlModeEnabled;
+        bool okInteractionMode = !metaData.bridgeOptions.isJointInteractionModeEnabled;
 
         for (int devIdx = 0; devIdx < devList.size(); devIdx++)
         {
@@ -1041,8 +1050,14 @@ struct YarpSensorBridge::Impl
                     = devList[devIdx]->poly->view(controlBoardRemapperInterfaces.controlMode);
             }
 
+            if (!okInteractionMode && metaData.bridgeOptions.isJointInteractionModeEnabled)
+            {
+                okInteractionMode
+                    = devList[devIdx]->poly->view(controlBoardRemapperInterfaces.interactionMode);
+            }
+
             if (okPID && okJointsSensor && okMotorsSensor && okPWM && okMotorTemperature
-                && okControlMode)
+                && okControlMode && okInteractionMode)
             {
                 if (!compareControlBoardJointsList())
                 {
@@ -1069,14 +1084,17 @@ struct YarpSensorBridge::Impl
                      "Motor sensors: {}, "
                      "PID sensors: {}, "
                      "PWM sensors: {}, "
-                     "Control modes: {}.",
+                     "Control modes: {}, "
+                     "Interaction modes: {}.",
                      logPrefix,
                      getSensorStatus(metaData.bridgeOptions.isJointSensorsEnabled, okJointsSensor),
                      getSensorStatus(metaData.bridgeOptions.isMotorSensorsEnabled, okMotorsSensor),
                      getSensorStatus(metaData.bridgeOptions.isPIDsEnabled, okPID),
                      getSensorStatus(metaData.bridgeOptions.isPWMControlEnabled, okPWM),
                      getSensorStatus(metaData.bridgeOptions.isJointControlModeEnabled,
-                                     okControlMode));
+                                     okControlMode),
+                     getSensorStatus(metaData.bridgeOptions.isJointInteractionModeEnabled,
+                                     okInteractionMode));
 
         return false;
     }
@@ -1136,6 +1154,16 @@ struct YarpSensorBridge::Impl
                 metaData.bridgeOptions.nrJoints);
             controlBoardRemapperMeasures.jointControlModesValid = false;
             controlBoardRemapperMeasures.jointControlModesErrorLogged = false;
+        }
+
+        if (metaData.bridgeOptions.isJointInteractionModeEnabled)
+        {
+            controlBoardRemapperMeasures.jointInteractionModes
+                .assign(metaData.bridgeOptions.nrJoints, InteractionMode::Unknown);
+            controlBoardRemapperMeasures.jointInteractionModesUnordered.resize(
+                metaData.bridgeOptions.nrJoints);
+            controlBoardRemapperMeasures.jointInteractionModesValid = false;
+            controlBoardRemapperMeasures.jointInteractionModesErrorLogged = false;
         }
 
         if (metaData.bridgeOptions.isMotorTemperatureSensorEnabled)
@@ -1247,6 +1275,10 @@ struct YarpSensorBridge::Impl
 
         // reset the control board buffers
         this->resetControlBoardBuffers();
+        if (metaData.bridgeOptions.isJointInteractionModeEnabled)
+        {
+            controlBoardRemapperMeasures.jointInteractionModesUnordered.resize(controlBoardDOFs);
+        }
 
         // check if the joints in the desired joint list are available in the controlboard joints
         // list if available get the control board index at which the desired joint is available
@@ -1600,6 +1632,7 @@ struct YarpSensorBridge::Impl
         ok = ok && readAllPIDs(checkForNan);
         ok = ok && readAllMotorPWMs(checkForNan);
         readAllJointControlModes();
+        readAllJointInteractionModes();
 
         if (!ok)
         {
@@ -1976,6 +2009,37 @@ struct YarpSensorBridge::Impl
         {
             measures.jointControlModes[i] = fromYarpControlMode(
                 measures.jointControlModesUnordered[measures.remappedJointIndices[i]]);
+        }
+    }
+
+    void readAllJointInteractionModes()
+    {
+        if (!metaData.bridgeOptions.isJointInteractionModeEnabled
+            || controlBoardRemapperInterfaces.interactionMode == nullptr)
+        {
+            return;
+        }
+
+        constexpr auto logPrefix = "[YarpSensorBridge::Impl::readAllJointInteractionModes]";
+        auto& measures = controlBoardRemapperMeasures;
+        measures.jointInteractionModesValid
+            = controlBoardRemapperInterfaces.interactionMode->getInteractionModes(
+                measures.jointInteractionModesUnordered.data());
+        if (!measures.jointInteractionModesValid)
+        {
+            if (!measures.jointInteractionModesErrorLogged)
+            {
+                log()->error("{} Unable to read from IInteractionMode interface. The interaction "
+                             "modes are not valid until the next successful read.", logPrefix);
+                measures.jointInteractionModesErrorLogged = true;
+            }
+            return;
+        }
+        measures.jointInteractionModesErrorLogged = false;
+        for (std::size_t i = 0; i < measures.jointInteractionModes.size(); ++i)
+        {
+            measures.jointInteractionModes[i] = fromYarpInteractionMode(
+                measures.jointInteractionModesUnordered[measures.remappedJointIndices[i]]);
         }
     }
 

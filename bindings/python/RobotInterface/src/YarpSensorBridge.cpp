@@ -244,6 +244,22 @@ void CreateYarpSensorBridge(pybind11::module& module)
                  bool ok = impl.getJointControlModes(modes, receiveTimeInSeconds);
                  return std::make_tuple(ok, modes, receiveTimeInSeconds);
              })
+        .def(
+            "get_joint_interaction_mode",
+            [](YarpSensorBridge& impl, const std::string& jointName) {
+                InteractionMode mode{InteractionMode::Unknown};
+                double receiveTimeInSeconds{0.0};
+                bool ok = impl.getJointInteractionMode(jointName, mode, receiveTimeInSeconds);
+                return std::make_tuple(ok, mode, receiveTimeInSeconds);
+            },
+            py::arg("joint_name"))
+        .def("get_joint_interaction_modes",
+             [](YarpSensorBridge& impl) {
+                 std::vector<InteractionMode> modes;
+                 double receiveTimeInSeconds{0.0};
+                 bool ok = impl.getJointInteractionModes(modes, receiveTimeInSeconds);
+                 return std::make_tuple(ok, modes, receiveTimeInSeconds);
+             })
         .def("get_batteries_list",
              [](YarpSensorBridge& impl) {
                  std::vector<std::string> list;

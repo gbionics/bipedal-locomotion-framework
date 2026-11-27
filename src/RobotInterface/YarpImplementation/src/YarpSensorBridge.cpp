@@ -65,6 +65,14 @@ bool YarpSensorBridge::initialize(std::weak_ptr<const IParametersHandler> handle
                     logPrefix);
     }
 
+    m_pimpl->metaData.bridgeOptions.isJointInteractionModeEnabled = false;
+    if (!ptr->getParameter("stream_joint_interaction_modes",
+                           m_pimpl->metaData.bridgeOptions.isJointInteractionModeEnabled))
+    {
+        log()->info("{} Unable to get stream_joint_interaction_modes. Set to false by default",
+                    logPrefix);
+    }
+
     bool ret{true};
     ret = m_pimpl->subConfigLoader("stream_joint_states",
                                    "RemoteControlBoardRemapper",
@@ -192,6 +200,14 @@ bool YarpSensorBridge::initialize(std::weak_ptr<const IParametersHandler> handle
         && !m_pimpl->metaData.bridgeOptions.isJointSensorsEnabled)
     {
         log()->error("{} 'stream_joint_control_modes' requires 'stream_joint_states' to be true.",
+                     logPrefix);
+        return false;
+    }
+
+    if (m_pimpl->metaData.bridgeOptions.isJointInteractionModeEnabled
+        && !m_pimpl->metaData.bridgeOptions.isJointSensorsEnabled)
+    {
+        log()->error("{} 'stream_joint_interaction_modes' requires 'stream_joint_states' to be true.",
                      logPrefix);
         return false;
     }
@@ -1317,5 +1333,63 @@ bool YarpSensorBridge::getJointControlMode(const std::string& jointName,
     if (receiveTimeInSeconds)
         receiveTimeInSeconds.value().get() = measures.receivedTimeInSeconds;
 
+    return true;
+}
+
+bool YarpSensorBridge::getJointInteractionModes(std::vector<InteractionMode>& interactionModes,
+                                                OptionalDoubleRef receiveTimeInSeconds)
+{
+    constexpr auto logPrefix = "[YarpSensorBridge::getJointInteractionModes]";
+    if (!m_pimpl->checkValid(logPrefix))
+    {
+        return false;
+    }
+    if (!m_pimpl->metaData.bridgeOptions.isJointInteractionModeEnabled)
+    {
+        log()->error("{} Please set 'stream_joint_interaction_modes' to true before calling this "
+                     "method.", logPrefix);
+        return false;
+    }
+    const auto& measures = m_pimpl->controlBoardRemapperMeasures;
+    if (!measures.jointInteractionModesValid)
+    {
+        return false;
+    }
+    interactionModes = measures.jointInteractionModes;
+    if (receiveTimeInSeconds)
+        receiveTimeInSeconds.value().get() = measures.receivedTimeInSeconds;
+    return true;
+}
+
+bool YarpSensorBridge::getJointInteractionMode(const std::string& jointName,
+                                               InteractionMode& interactionMode,
+                                               OptionalDoubleRef receiveTimeInSeconds)
+{
+    constexpr auto logPrefix = "[YarpSensorBridge::getJointInteractionMode]";
+    if (!m_pimpl->checkValid(logPrefix))
+    {
+        return false;
+    }
+    if (!m_pimpl->metaData.bridgeOptions.isJointInteractionModeEnabled)
+    {
+        log()->error("{} Please set 'stream_joint_interaction_modes' to true before calling this "
+                     "method.", logPrefix);
+        return false;
+    }
+    const auto& measures = m_pimpl->controlBoardRemapperMeasures;
+    if (!measures.jointInteractionModesValid)
+    {
+        return false;
+    }
+    int idx;
+    if (!m_pimpl->getIndexFromVector(m_pimpl->metaData.sensorsList.jointsList, jointName, idx))
+    {
+        log()->error("{} {} could not be found in the configured list of joints.",
+                     logPrefix, jointName);
+        return false;
+    }
+    interactionMode = measures.jointInteractionModes[idx];
+    if (receiveTimeInSeconds)
+        receiveTimeInSeconds.value().get() = measures.receivedTimeInSeconds;
     return true;
 }

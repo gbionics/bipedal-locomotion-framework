@@ -9,7 +9,7 @@ if (FRAMEWORK_COMPILE_RobotInterface)
 add_bipedal_locomotion_library(
     NAME                   RobotInterface
     SOURCES                src/IRobotControl.cpp
-    PUBLIC_HEADERS         ${H_PREFIX}/ISensorBridge.h ${H_PREFIX}/IRobotControl.h ${H_PREFIX}/JointType.h ${H_PREFIX}/ControlMode.h
+    PUBLIC_HEADERS         ${H_PREFIX}/ISensorBridge.h ${H_PREFIX}/IRobotControl.h ${H_PREFIX}/JointType.h ${H_PREFIX}/ControlMode.h ${H_PREFIX}/InteractionMode.h
     PUBLIC_LINK_LIBRARIES  BipedalLocomotion::ParametersHandler Eigen3::Eigen
     PRIVATE_LINK_LIBRARIES BipedalLocomotion::TextLogging
     SUBDIRECTORIES         YarpImplementation DinRailImplementation tests)

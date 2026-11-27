@@ -64,6 +64,7 @@ namespace RobotInterface
  * |                            |stream_motor_temperature         | boolean           |Flag to activate the attachment to motor temperature sensors      |
  * |                            |stream_battery                   | boolean           |Flag to activate the attachment to battery devices      |
  * |                            |stream_joint_control_modes       | boolean           |Flag to activate the reading of the joint control modes through the IControlMode interface of the remapped control board. It requires `stream_joint_states`. Default false |
+ * |                            |stream_joint_interaction_modes   | boolean           |Flag to read joint interaction modes through IInteractionMode. Requires `stream_joint_states`. Default false |
  * |RemoteControlBoardRemapper  |                                 |                   |Expects only one remapped remotecontrolboard device attached to it, if there multiple remote control boards, then  use a remapper to create a single remotecontrolboard |
  * |                            |joints_list                      | vector of strings |This parameter is **optional**. The joints list used to open the remote control board remapper. If the list is not passed, the order of the joint stored in the PolyDriver is used       |
  * |InertialSensors             |                                 |                   |Expects inertials to be opened as a part of the multiple analog sensors remapper ("multipleanalogsensorsremapper"). If the group is not provided, all the sensors of the first attached device exposing each interface are used |
@@ -435,6 +436,26 @@ public:
     bool getJointControlMode(const std::string& jointName,
                              ControlMode& controlMode,
                              OptionalDoubleRef receiveTimeInSeconds = {}) final;
+
+    /**
+     * Get cached interaction modes in the configured joint order.
+     * @param[out] interactionModes interaction mode of each joint.
+     * @param[out] receiveTimeInSeconds time at which the measurement was received.
+     * @return False if the stream is disabled or the last read failed.
+     */
+    bool getJointInteractionModes(std::vector<InteractionMode>& interactionModes,
+                                  OptionalDoubleRef receiveTimeInSeconds = {}) final;
+
+    /**
+     * Get the cached interaction mode of a joint.
+     * @param[in] jointName name of the joint.
+     * @param[out] interactionMode interaction mode of the joint.
+     * @param[out] receiveTimeInSeconds time at which the measurement was received.
+     * @return False if the joint is unknown, the stream is disabled, or the last read failed.
+     */
+    bool getJointInteractionMode(const std::string& jointName,
+                                 InteractionMode& interactionMode,
+                                 OptionalDoubleRef receiveTimeInSeconds = {}) final;
 
     /**
      * Get motor PWM

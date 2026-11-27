@@ -30,3 +30,36 @@ bool IRobotControl::setControlMode(const std::vector<RobotInterface::ControlMode
                  "is not supported by this implementation.");
     return false;
 }
+
+bool IRobotControl::setInteractionMode(
+    const std::vector<RobotInterface::InteractionMode>& interactionModes)
+{
+    log()->error("[IRobotControl::setInteractionMode] Setting the interaction mode is not "
+                 "supported by this implementation.");
+    return false;
+}
+
+bool IRobotControl::setInteractionMode(const RobotInterface::InteractionMode& interactionMode)
+{
+    log()->error("[IRobotControl::setInteractionMode] Setting the interaction mode is not "
+                 "supported by this implementation.");
+    return false;
+}
+
+bool IRobotControl::setInteractionMode(
+    const std::vector<RobotInterface::InteractionMode>& interactionModes,
+    const std::vector<int>& jointIndices)
+{
+    log()->error("[IRobotControl::setInteractionMode] Setting the interaction mode of a subset of "
+                 "joints is not supported by this implementation.");
+    return false;
+}
+
+bool IRobotControl::setInteractionMode(
+    const std::vector<RobotInterface::InteractionMode>& interactionModes,
+    const std::vector<std::string>& jointNames)
+{
+    log()->error("[IRobotControl::setInteractionMode] Setting the interaction mode of a subset of "
+                 "joints is not supported by this implementation.");
+    return false;
+}
