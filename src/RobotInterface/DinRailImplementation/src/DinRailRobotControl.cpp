@@ -56,6 +56,17 @@ struct DinRailRobotControl::Impl
     std::vector<double> subsetDamping;
     std::vector<int> subsetIndices;
 
+    /** Scratch buffers for setReferences() interaction-mode partitioning. */
+    std::mutex interactionModeMutex;
+    std::vector<int> stiffSubsetIndices;
+    std::vector<int> compliantSubsetIndices;
+    std::vector<double> stiffSubsetPosition;
+    std::vector<double> compliantSubsetPosition;
+    std::vector<double> compliantSubsetVelocity;
+    std::vector<double> compliantSubsetStiffness;
+    std::vector<double> compliantSubsetDamping;
+    std::vector<double> compliantSubsetTorque;
+
     /**
      * Internal (non-locking) implementation of the subset impedance setpoint call.
      * Caller must hold subsetMutex before invoking this method.
@@ -209,6 +220,15 @@ bool DinRailRobotControl::setDriver(std::shared_ptr<yarp::dev::PolyDriver> robot
     m_pimpl->subsetStiffness.reserve(m_pimpl->actuatedDOFs);
     m_pimpl->subsetDamping.reserve(m_pimpl->actuatedDOFs);
 
+    m_pimpl->stiffSubsetIndices.reserve(m_pimpl->actuatedDOFs);
+    m_pimpl->compliantSubsetIndices.reserve(m_pimpl->actuatedDOFs);
+    m_pimpl->stiffSubsetPosition.reserve(m_pimpl->actuatedDOFs);
+    m_pimpl->compliantSubsetPosition.reserve(m_pimpl->actuatedDOFs);
+    m_pimpl->compliantSubsetVelocity.reserve(m_pimpl->actuatedDOFs);
+    m_pimpl->compliantSubsetStiffness.reserve(m_pimpl->actuatedDOFs);
+    m_pimpl->compliantSubsetDamping.reserve(m_pimpl->actuatedDOFs);
+    m_pimpl->compliantSubsetTorque.reserve(m_pimpl->actuatedDOFs);
+
     return true;
 }
 
@@ -345,24 +365,31 @@ bool DinRailRobotControl::setReferences(Eigen::Ref<const Eigen::VectorXd> positi
         return false;
     }
     const std::vector<std::string> controlledJoints = getJointList();
-    std::vector<int> stiffSubsetIndices, compliantSubsetIndices;
-    std::vector<double> stiffSubsetPosition, compliantSubsetPosition, compliantSubsetVelocity, compliantSubsetStiffness, compliantSubsetDamping, compliantSubsetTorque;
+    std::lock_guard<std::mutex> interactionModeLock(m_pimpl->interactionModeMutex);
+    m_pimpl->stiffSubsetIndices.clear();
+    m_pimpl->compliantSubsetIndices.clear();
+    m_pimpl->stiffSubsetPosition.clear();
+    m_pimpl->compliantSubsetPosition.clear();
+    m_pimpl->compliantSubsetVelocity.clear();
+    m_pimpl->compliantSubsetStiffness.clear();
+    m_pimpl->compliantSubsetDamping.clear();
+    m_pimpl->compliantSubsetTorque.clear();
     for (size_t i = 0; i < interactionModes.size(); ++i)
     {
         const auto& mode = interactionModes[i];
         if (mode == RobotInterface::InteractionMode::Stiff)
         {
-            stiffSubsetIndices.push_back(static_cast<int>(i));
-            stiffSubsetPosition.push_back(position[i]);
+            m_pimpl->stiffSubsetIndices.push_back(static_cast<int>(i));
+            m_pimpl->stiffSubsetPosition.push_back(position[i]);
         }
         else if (mode == RobotInterface::InteractionMode::Compliant)
         {
-            compliantSubsetIndices.push_back(static_cast<int>(i));
-            compliantSubsetPosition.push_back(position[i]);
-            compliantSubsetVelocity.push_back(velocity[i]);
-            compliantSubsetStiffness.push_back(stiffness[i]);
-            compliantSubsetDamping.push_back(damping[i]);
-            compliantSubsetTorque.push_back(torque[i]);
+            m_pimpl->compliantSubsetIndices.push_back(static_cast<int>(i));
+            m_pimpl->compliantSubsetPosition.push_back(position[i]);
+            m_pimpl->compliantSubsetVelocity.push_back(velocity[i]);
+            m_pimpl->compliantSubsetStiffness.push_back(stiffness[i]);
+            m_pimpl->compliantSubsetDamping.push_back(damping[i]);
+            m_pimpl->compliantSubsetTorque.push_back(torque[i]);
         }
         else
         {
@@ -372,22 +399,22 @@ bool DinRailRobotControl::setReferences(Eigen::Ref<const Eigen::VectorXd> positi
         }
     }
 
-    const auto compliantSize = static_cast<Eigen::Index>(compliantSubsetIndices.size());
-    if (compliantSize > 0 && !setImpedanceSetPoints(Eigen::Map<const Eigen::VectorXd>(compliantSubsetPosition.data(), compliantSize),
-                                  Eigen::Map<const Eigen::VectorXd>(compliantSubsetVelocity.data(), compliantSize),
-                                  Eigen::Map<const Eigen::VectorXd>(compliantSubsetTorque.data(), compliantSize),
-                                  Eigen::Map<const Eigen::VectorXd>(compliantSubsetStiffness.data(), compliantSize),
-                                  Eigen::Map<const Eigen::VectorXd>(compliantSubsetDamping.data(), compliantSize),
-                                  compliantSubsetIndices))
+    const auto compliantSize = static_cast<Eigen::Index>(m_pimpl->compliantSubsetIndices.size());
+    if (compliantSize > 0 && !setImpedanceSetPoints(Eigen::Map<const Eigen::VectorXd>(m_pimpl->compliantSubsetPosition.data(), compliantSize),
+                                  Eigen::Map<const Eigen::VectorXd>(m_pimpl->compliantSubsetVelocity.data(), compliantSize),
+                                  Eigen::Map<const Eigen::VectorXd>(m_pimpl->compliantSubsetTorque.data(), compliantSize),
+                                  Eigen::Map<const Eigen::VectorXd>(m_pimpl->compliantSubsetStiffness.data(), compliantSize),
+                                  Eigen::Map<const Eigen::VectorXd>(m_pimpl->compliantSubsetDamping.data(), compliantSize),
+                                  m_pimpl->compliantSubsetIndices))
     {
         BipedalLocomotion::log()->error("{} Failed to set impedance set points for compliant joints.", errorPrefix);
         return false;
     }
 
-    const auto stiffSize = static_cast<Eigen::Index>(stiffSubsetIndices.size());
+    const auto stiffSize = static_cast<Eigen::Index>(m_pimpl->stiffSubsetIndices.size());
     if (stiffSize > 0 && !YarpRobotControl::setReferences(
-               Eigen::Map<const Eigen::VectorXd>(stiffSubsetPosition.data(), stiffSize),
-               stiffSubsetIndices,
+               Eigen::Map<const Eigen::VectorXd>(m_pimpl->stiffSubsetPosition.data(), stiffSize),
+               m_pimpl->stiffSubsetIndices,
                controlMode))
     {
         BipedalLocomotion::log()->error("{} Failed to set references for stiff joints.", errorPrefix);
