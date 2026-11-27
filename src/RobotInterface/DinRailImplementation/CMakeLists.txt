@@ -14,4 +14,15 @@ if(FRAMEWORK_COMPILE_DinRailImplementation)
     PRIVATE_LINK_LIBRARIES BipedalLocomotion::TextLogging
     INSTALLATION_FOLDER    RobotInterface)
 
+  if(FRAMEWORK_COMPILE_Camera)
+    add_bipedal_locomotion_library(
+      NAME                   CameraInterfaceDinrailImplementation
+      SOURCES                src/DinrailCameraBridge.cpp src/DinrailHelper.cpp
+      PUBLIC_HEADERS         include/BipedalLocomotion/RobotInterface/DinrailCameraBridge.h include/BipedalLocomotion/RobotInterface/DinrailHelper.h
+      PUBLIC_LINK_LIBRARIES  BipedalLocomotion::CameraInterface BipedalLocomotion::ParametersHandler dinrail::dinrail
+      PRIVATE_LINK_LIBRARIES BipedalLocomotion::TextLogging BipedalLocomotion::System
+      SUBDIRECTORIES         tests
+      INSTALLATION_FOLDER    RobotInterface)
+  endif()
+
 endif()
